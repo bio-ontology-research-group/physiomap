@@ -1,0 +1,23 @@
+{
+  "title": "PhysioMap v1.1.1: an ontology-grounded causal knowledge graph of human physiology",
+  "upload_type": "dataset",
+  "description": "PhysioMap 1.1.1 canonical OWL-to-SCM release dataset.",
+  "creators": [
+    {
+      "name": "Hoehndorf, Robert",
+      "affiliation": "King Abdullah University of Science and Technology (KAUST)",
+      "orcid": "0000-0001-8149-5890"
+    },
+    {
+      "name": "Schofield, Paul N.",
+      "affiliation": "University of Cambridge"
+    },
+    {
+      "name": "Gkoutos, Georgios V.",
+      "affiliation": "University of Birmingham"
+    }
+  ],
+  "license": "cc-by-4.0",
+  "version": "1.1.1",
+  "publication_date": "2026-07-31"
+}

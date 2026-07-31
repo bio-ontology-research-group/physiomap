@@ -1,0 +1,111 @@
+# =============================================================================
+# Cellular scale: innate-adaptive immune paracrine loop   *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Cell-cell (cytokine) communication among three immune cell populations, lifted onto
+# the EXISTING systemic-inflammation nodes (tnf_alpha, il6).
+#
+#   CELL TYPES (cellular-scale nodes):
+#     dendritic_cell_activation        CL:0000451  conventional dendritic cell
+#     th1_cell_activation              CL:0000545  T-helper 1 cell
+#     th17_cell_activation             CL:0000899  T-helper 17 cell
+#     macrophage_activation            CL:0000235  macrophage (M1 / classical)
+#     treg_il10_secretion              CL:0000815  regulatory T cell (IL-10 source)
+#
+#   CELL-CELL CYTOKINE SIGNALS (within-cellular CausalEdges; sign = d(target cell
+#   quality)/d(source cell signal) at steady state). Ligand->receptor verified in
+#   OmniPath intercell (consensus_stimulation=True for the receptor engagement):
+#     dendritic IL-12 (IL12A/IL12B -> IL12RB1/IL12RB2)  -> Th1 activation        (+)
+#     Th1 IFN-gamma  (IFNG -> IFNGR1/IFNGR2)            -> macrophage classical  (+)
+#     macrophage IL-6 (IL6 -> IL6R/IL6ST)              -> Th17 activation        (+)
+#     macrophage IL-1/TNF (TNF -> TNFRSF1A)            -> dendritic activation   (+)  (feed-forward / amplification)
+#     Treg IL-10 (IL10 -> IL10RA/IL10RB)               -> macrophage activation  (-)  (anti-inflammatory)
+#   This forms a positive amplification loop (DC -> Th1 -> Mphi -> DC) restrained by
+#   the IL-10 negative arm.
+#
+#   UPWARD CONSTITUTIVE LIFT (part_of + determination; cellular -> EXISTING organ_system):
+#     macrophage_activation  >> tnf_alpha (+)
+#     macrophage_activation  >> il6       (+)
+#   (M1 macrophages are the principal tissue source of secreted TNF-alpha and IL-6.)
+#
+#   SOURCES:
+#     - OmniPath intercell / ligand-receptor (is_stimulation/consensus signs):
+#       IL12A-IL12RB1/RB2, IFNG-IFNGR1/IFNGR2, TNF-TNFRSF1A, IL6-IL6R/IL6ST,
+#       IL10-IL10RA/IL10RB  (https://omnipathdb.org/interactions).
+#     - Murray PJ & Wynn TA, Nat Rev Immunol 2011;11:723-737 (PMID:21997792) macrophage activation.
+#     - Janeway's Immunobiology (Murphy & Weaver), 9th ed., ch. 9 & 11 (Th differentiation, macrophage activation).
+# =============================================================================
+
+name: immune_paracrine_multiscale
+
+nodes:
+- id: dendritic_cell_activation
+  label: dendritic cell activation / IL-12 secretion rate
+  scale: cellular
+  entity_iri: GO:0001773                # myeloid dendritic cell activation
+  quality_iri: PATO:0000161
+  bearer_entity_iri: CL:0000451  # dendritic cell
+- id: th1_cell_activation
+  label: Th1 cell activation / IFN-gamma secretion rate
+  scale: cellular
+  entity_iri: CL:0000545                # T-helper 1 cell
+  quality_iri: PATO:0002354             # activated
+- id: th17_cell_activation
+  label: Th17 cell activation / IL-17 secretion rate
+  scale: cellular
+  entity_iri: CL:0000899                # T-helper 17 cell
+  quality_iri: PATO:0002354             # activated
+- id: macrophage_activation
+  label: macrophage classical (M1) activation / pro-inflammatory cytokine secretion
+  scale: cellular
+  entity_iri: GO:0042116                # macrophage activation
+  quality_iri: PATO:0000161
+  bearer_entity_iri: CL:0000235  # macrophage
+- id: treg_il10_secretion
+  label: regulatory T cell IL-10 secretion rate
+  scale: cellular
+  entity_iri: GO:0032613                # interleukin-10 production
+  quality_iri: PATO:0000161
+  bearer_entity_iri: CL:0000815  # regulatory T cell
+
+causal_edges:
+  # --- innate -> adaptive priming -----------------------------------------------
+- source: dendritic_cell_activation
+  target: th1_cell_activation
+  sign: "+"
+  causal_evidence: curated_mechanistic
+  mechanism: dendritic-cell IL-12 (IL12A/IL12B heterodimer) -> IL-12 receptor (IL12RB1/IL12RB2) on naive CD4 T cell -> STAT4 -> T-bet -> Th1 differentiation/activation (GO:0035722 IL-12-mediated signaling)
+  evidence: "OmniPath ligrec IL12A->IL12RB1/IL12RB2 consensus_stimulation=True (refs SIGNOR:12023369; Guide2Pharma); Janeway's Immunobiology 9th ed. | textbook corroboration: OpenStax Biology 2e §bio-42.2 (42.2: Adaptive Immune Response): 'Whether a TH1 or a TH2 immune response develops depends on the specific types of cytokines secreted by cells of the innate immune system' — dendritic cells are the principal innate APCs driving TH1 polarisation. Opened primary confirms IL-12 initiates differentiation of naive CD4 T cells into Th1 cells via selective STAT4 activation (Jacobson et al. 1995, J Exp Med, PMID 7722452 / PMC2191986). NB the YAML-cited SIGNOR:12023369 identifier was not verified"
+  # --- adaptive -> innate (classical macrophage activation) ---------------------
+- source: th1_cell_activation
+  target: macrophage_activation
+  sign: "+"
+  mechanism: Th1 IFN-gamma -> IFNGR1/IFNGR2 on macrophage -> JAK1/JAK2 -> STAT1 -> classical (M1) activation (GO:0060333 IFN-gamma-mediated signaling pathway)
+  evidence: "OmniPath ligrec IFNG->IFNGR1/IFNGR2 consensus_stimulation=True (refs SIGNOR:10986460; Macrophage:7617032) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-119 (21.4: The Adaptive Immune Response - T Lymphocytes and Their Functional Types): 'Th1 cells secrete cytokines that regulate the immunological activity and development of a variety of cells, including macrophages and other types of T cells.'; OpenStax Anatomy & Physiology 2e §anp-121 (21.6: The Immune Response Against Pathogens): 'infected macrophages receiving cytokine signals from Th1 cells turn on special metabolic pathways' including oxidative killing of intracellular bacteria.; OpenStax Biology 2e §bio-42.2 (42.2: Adaptive Immune Response): 'TH1 cells secrete cytokines to enhance the activities of macrophages and other T cells' and 'stimulated T cells secrete specific cytokines that send feedback to the macrophage to stimulate its digestive capabilities' [citations PubMed-verified]"
+  # --- macrophage -> Th17 (IL-6 arm) --------------------------------------------
+- source: macrophage_activation
+  target: th17_cell_activation
+  sign: "+"
+  mechanism: macrophage IL-6 -> IL6R/IL6ST(gp130) on CD4 T cell -> STAT3 (with TGF-beta) -> RORgt -> Th17 differentiation/activation (GO:0070102 IL-6-mediated signaling)
+  evidence: "OmniPath ligrec IL6->IL6R / IL6R_IL6ST consensus_stimulation=True (refs SIGNOR:8676083; ICELLNET:9143707); Janeway's Immunobiology 9th ed."
+  # --- macrophage -> dendritic (TNF feed-forward amplification) -----------------
+- source: macrophage_activation
+  target: dendritic_cell_activation
+  sign: "+"
+  mechanism: macrophage TNF-alpha -> TNFRSF1A (TNFR1) on dendritic cell -> NF-kB -> DC maturation and further IL-12 output (GO:0033209 TNF-mediated signaling)
+  evidence: "OmniPath ligrec TNF->TNFRSF1A consensus_stimulation=True (refs SIGNOR:17151142; NetPath:10634209) [citations PubMed-verified]"
+  # --- regulatory negative arm (IL-10) ------------------------------------------
+- source: treg_il10_secretion
+  target: macrophage_activation
+  sign: "-"
+  mechanism: Treg IL-10 -> IL10RA/IL10RB on macrophage -> STAT3 -> suppression of NF-kB-driven pro-inflammatory cytokine (TNF/IL-6/IL-12) transcription (GO:0032613 IL-10 production / GO:0050728 negative regulation of inflammatory response)
+  evidence: "OmniPath ligrec IL10->IL10RA/IL10RB consensus_stimulation=True for receptor binding; functional inhibition of macrophage activation; Janeway's Immunobiology 9th ed. | textbook corroboration: OpenStax Biology 2e §bio-42.2 (42.2: Adaptive Immune Response): 'regulatory T (Treg) cells, specialized lymphocytes that suppress local inflammation and inhibit the secretion of stimulatory immune factors' — Treg IL-10 suppresses macrophage pro-inflammatory activity [citations PubMed-verified]"
+
+production_edges:
+- source: macrophage_activation
+  target: tnf_alpha
+  sign: "+"
+  production_evidence: legacy-evidence-unclassified
+- source: macrophage_activation
+  target: il6
+  sign: "+"
+  production_evidence: legacy-evidence-unclassified

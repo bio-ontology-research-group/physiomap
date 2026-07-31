@@ -1,0 +1,883 @@
+# =============================================================================
+# Amino-acid metabolism — plasma / urine / CSF / intracellular pools + enzyme
+# activities for HPO directional coverage         *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Hand-encoded grounding fragment for the HPO "amino_acids" theme. Its purpose is
+# to provide a PhysioMap NODE (an (entity, PATO quality) physiological variable) for
+# every directional HPO term in the theme, so the term can be attached and ABSTAIN
+# safely (a grounded node with no edge is valuable). Where a defensible, cited
+# enzyme->substrate/product mechanism exists, a signed causal edge is added; where
+# the sign would be a guess, NO edge is written (PhysioMap sign discipline).
+#
+# Provenance / textbook anchors:
+#   - Lehninger Principles of Biochemistry (Nelson & Cox), "Amino Acid Oxidation and
+#     the Production of Urea" and "Biosynthesis of Amino Acids" — urea cycle,
+#     transamination, one-carbon/methionine cycle, glycine cleavage, kynurenine
+#     pathway, proline/ornithine metabolism.
+#   - Boron & Boulpaep Medical Physiology — renal handling / tubular reabsorption of
+#     amino acids (aminoaciduria), CSF composition.
+#   - Harrison's Principles of Internal Medicine — inborn errors of amino-acid
+#     metabolism (PKU, MSUD, homocystinuria, urea-cycle disorders, cystinuria,
+#     cystinosis, hyperlysinemia, hyperprolinemia, NKH, etc.).
+#   - Scriver's OMMBID (The Online Metabolic and Molecular Bases of Inherited Disease)
+#     — disorder-specific biochemistry for each enzyme-deficiency node.
+# Entity IRIs grepped+verified against ontology/.obo_cache/CHEBI.obo (exact 'name:');
+# null where no exact ChEBI name/synonym matched (NEVER fabricated).
+#
+# Boundary nodes reused from the existing corpus (NOT redefined here):
+#   plasma_glutamine, plasma_homocysteine, plasma_tyrosine — already in the map; the
+#   matching HPO terms are mapped to those existing ids (see hpo_mappings).
+#
+# This is a SINGLE-SCALE / mostly-island grounding fragment; most nodes are roots
+# that abstain. Phase 1, DRAFT for domain review.
+# =============================================================================
+
+name: hpo_amino_acids
+description: >-
+  DRAFT amino-acid metabolism grounding fragment for HPO phenotype coverage: plasma,
+  urinary, CSF and intracellular amino-acid / derivative pools plus the relevant
+  biosynthetic/catabolic enzyme-activity roots (urea cycle, one-carbon/methionine
+  cycle, glycine cleavage, kynurenine pathway, glutathione synthesis, creatine
+  synthesis, serine biosynthesis). Provides one grounded node per directional HPO
+  term so each can attach and abstain; signed causal edges added only where a cited
+  enzyme->substrate/product mechanism gives a defensible sign. Single-scale, Phase 1.
+
+nodes:
+  # ----- plasma proteinogenic / standard amino acids (organ_system) ------------
+  - id: plasma_alanine
+    label: plasma alanine concentration
+    scale: organ_system
+    entity_iri: CHEBI:16977            # L-alanine
+    quality_iri: PATO:0000033
+  - id: plasma_glycine
+    label: plasma glycine concentration
+    scale: organ_system
+    entity_iri: CHEBI:15428            # glycine
+    quality_iri: PATO:0000033
+  - id: plasma_citrulline
+    label: plasma citrulline concentration
+    scale: organ_system
+    entity_iri: CHEBI:16349            # L-citrulline
+    quality_iri: PATO:0000033
+  - id: plasma_proline
+    label: plasma proline concentration
+    scale: organ_system
+    entity_iri: CHEBI:17203            # L-proline
+    quality_iri: PATO:0000033
+  - id: plasma_arginine
+    label: plasma arginine concentration
+    scale: organ_system
+    entity_iri: CHEBI:16467            # L-arginine
+    quality_iri: PATO:0000033
+  - id: plasma_ornithine
+    label: plasma ornithine concentration
+    scale: organ_system
+    entity_iri: CHEBI:15729            # L-ornithine
+    quality_iri: PATO:0000033
+  - id: plasma_serine
+    label: plasma serine concentration
+    scale: organ_system
+    entity_iri: CHEBI:17115            # L-serine
+    quality_iri: PATO:0000033
+  - id: plasma_threonine
+    label: plasma threonine concentration
+    scale: organ_system
+    entity_iri: CHEBI:16857            # L-threonine
+    quality_iri: PATO:0000033
+  - id: plasma_lysine
+    label: plasma lysine concentration
+    scale: organ_system
+    entity_iri: CHEBI:18019            # L-lysine
+    quality_iri: PATO:0000033
+  - id: plasma_histidine
+    label: plasma histidine concentration
+    scale: organ_system
+    entity_iri: CHEBI:15971            # L-histidine
+    quality_iri: PATO:0000033
+  - id: plasma_tryptophan
+    label: plasma tryptophan concentration
+    scale: organ_system
+    entity_iri: CHEBI:16828            # L-tryptophan
+    quality_iri: PATO:0000033
+  - id: plasma_asparagine
+    label: plasma asparagine concentration
+    scale: organ_system
+    entity_iri: CHEBI:17196            # L-asparagine
+    quality_iri: PATO:0000033
+  - id: plasma_aspartate
+    label: plasma aspartate (aspartic acid) concentration
+    scale: organ_system
+    entity_iri: CHEBI:17053            # L-aspartic acid
+    quality_iri: PATO:0000033
+  - id: plasma_glutamate
+    label: plasma glutamate (glutamic acid) concentration
+    scale: organ_system
+    entity_iri: CHEBI:16015            # L-glutamic acid
+    quality_iri: PATO:0000033
+  - id: plasma_leucine
+    label: plasma leucine concentration
+    scale: organ_system
+    entity_iri: CHEBI:15603            # L-leucine
+    quality_iri: PATO:0000033
+  - id: plasma_isoleucine
+    label: plasma isoleucine concentration
+    scale: organ_system
+    entity_iri: CHEBI:17191            # L-isoleucine
+    quality_iri: PATO:0000033
+  - id: plasma_valine
+    label: plasma valine concentration
+    scale: organ_system
+    entity_iri: CHEBI:16414            # L-valine
+    quality_iri: PATO:0000033
+  - id: plasma_taurine
+    label: plasma taurine concentration
+    scale: organ_system
+    entity_iri: CHEBI:15891            # taurine
+    quality_iri: PATO:0000033
+  - id: plasma_cystine
+    label: plasma cystine concentration
+    scale: organ_system
+    entity_iri: CHEBI:16283            # L-cystine
+    quality_iri: PATO:0000033
+
+  # ----- plasma amino-acid derivatives / intermediates (organ_system) ----------
+  - id: plasma_guanidinoacetate
+    label: plasma guanidinoacetate concentration
+    scale: organ_system
+    entity_iri: CHEBI:16344            # guanidinoacetic acid
+    quality_iri: PATO:0000033
+  - id: plasma_argininosuccinate
+    label: plasma argininosuccinate concentration
+    scale: organ_system
+    entity_iri: CHEBI:184023           # argininosuccinic acid
+    quality_iri: PATO:0000033
+  - id: plasma_pyrroline_5_carboxylate
+    label: plasma 1-pyrroline-5-carboxylate concentration
+    scale: organ_system
+    entity_iri: CHEBI:1372             # 1-pyrroline-5-carboxylic acid
+    quality_iri: PATO:0000033
+  - id: plasma_2_aminoadipate
+    label: plasma 2-aminoadipic acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:37024            # 2-aminoadipic acid
+    quality_iri: PATO:0000033
+  - id: plasma_3_hydroxykynurenine
+    label: plasma 3-hydroxykynurenine concentration
+    scale: organ_system
+    entity_iri: CHEBI:1547             # 3-hydroxykynurenine
+    quality_iri: PATO:0000033
+  - id: plasma_alloisoleucine
+    label: plasma L-alloisoleucine concentration
+    scale: organ_system
+    entity_iri: CHEBI:43433            # L-alloisoleucine
+    quality_iri: PATO:0000033
+  - id: plasma_dimethylglycine
+    label: plasma N,N-dimethylglycine concentration
+    scale: organ_system
+    entity_iri: CHEBI:17724            # N,N-dimethylglycine
+    quality_iri: PATO:0000033
+  - id: plasma_sah
+    label: plasma S-adenosyl-L-homocysteine concentration
+    scale: organ_system
+    entity_iri: CHEBI:16680            # S-adenosyl-L-homocysteine
+    quality_iri: PATO:0000033
+  - id: plasma_sam
+    label: plasma S-adenosyl-L-methionine concentration
+    scale: organ_system
+    entity_iri: CHEBI:15414            # S-adenosyl-L-methionine
+    quality_iri: PATO:0000033
+  - id: plasma_aminoadipic_semialdehyde
+    label: plasma alpha-aminoadipic semialdehyde concentration
+    scale: organ_system
+    # no exact ChEBI 'name:' for 'alpha-aminoadipic semialdehyde' verified -> null
+    quality_iri: PATO:0000033
+  - id: plasma_glutathione
+    label: plasma glutathione concentration
+    scale: organ_system
+    entity_iri: CHEBI:16856            # glutathione
+    quality_iri: PATO:0000033
+  - id: plasma_pipecolate
+    label: plasma pipecolic acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:17964            # pipecolic acid
+    quality_iri: PATO:0000033
+  - id: plasma_saccharopine
+    label: plasma saccharopine concentration
+    scale: organ_system
+    entity_iri: CHEBI:16927            # L-saccharopine (sole physiological form)
+    quality_iri: PATO:0000033
+  - id: plasma_5_oxoproline
+    label: plasma 5-oxoproline concentration
+    scale: organ_system
+    entity_iri: CHEBI:16010            # 5-oxoproline
+    quality_iri: PATO:0000033
+  - id: plasma_s_sulfocysteine
+    label: plasma S-sulfocysteine concentration
+    scale: organ_system
+    entity_iri: CHEBI:27891            # S-sulfo-L-cysteine
+    quality_iri: PATO:0000033
+  - id: plasma_alpha_aminobutyrate
+    label: plasma alpha-aminobutyric acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:35621            # alpha-aminobutyric acid
+    quality_iri: PATO:0000033
+  - id: plasma_beta_aminoisobutyrate
+    label: plasma beta-aminoisobutyric acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:27389            # 3-aminoisobutyric acid (= beta-, C3 locant)
+    quality_iri: PATO:0000033
+  - id: plasma_glycylproline
+    label: plasma glycylproline concentration
+    scale: organ_system
+    entity_iri: CHEBI:70744            # Gly-Pro dipeptide
+    quality_iri: PATO:0000033
+  - id: plasma_homoarginine
+    label: plasma homoarginine concentration
+    scale: organ_system
+    entity_iri: CHEBI:27747            # L-homoarginine
+    quality_iri: PATO:0000033
+  - id: plasma_methionine_sulfoxide
+    label: plasma methionine sulfoxide concentration
+    scale: organ_system
+    entity_iri: CHEBI:49031            # L-methionine (S)-S-oxide
+    quality_iri: PATO:0000033
+  - id: plasma_phosphoserine
+    label: plasma O-phosphoserine concentration
+    scale: organ_system
+    entity_iri: CHEBI:15811            # O-phospho-L-serine
+    quality_iri: PATO:0000033
+  - id: plasma_1_methylhistidine
+    label: plasma 1-methylhistidine concentration
+    scale: organ_system
+    entity_iri: CHEBI:70958            # 1-methylhistidine
+    quality_iri: PATO:0000033
+  - id: plasma_3_methylhistidine
+    label: plasma 3-methylhistidine concentration
+    scale: organ_system
+    entity_iri: CHEBI:70959            # 3-methylhistidine
+    quality_iri: PATO:0000033
+  - id: plasma_3_hydroxyanthranilate
+    label: plasma 3-hydroxyanthranilic acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:15793            # 3-hydroxyanthranilic acid
+    quality_iri: PATO:0000033
+  - id: plasma_beta_alanine
+    label: plasma beta-alanine concentration
+    scale: organ_system
+    entity_iri: CHEBI:16958            # beta-alanine
+    quality_iri: PATO:0000033
+  - id: plasma_carnosine
+    label: plasma carnosine concentration
+    scale: organ_system
+    entity_iri: CHEBI:15727            # carnosine
+    quality_iri: PATO:0000033
+  - id: plasma_hydroxyproline
+    label: plasma hydroxyproline concentration
+    scale: organ_system
+    entity_iri: CHEBI:18095            # trans-4-hydroxy-L-proline
+    quality_iri: PATO:0000033
+  - id: plasma_ethanolamine
+    label: plasma ethanolamine concentration
+    scale: organ_system
+    entity_iri: CHEBI:16000            # ethanolamine
+    quality_iri: PATO:0000033
+  - id: plasma_sarcosine
+    label: plasma sarcosine concentration
+    scale: organ_system
+    entity_iri: CHEBI:15611            # sarcosine
+    quality_iri: PATO:0000033
+  - id: plasma_urocanic_acid
+    label: plasma urocanic acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:27248            # urocanic acid
+    quality_iri: PATO:0000033
+
+  # ----- CSF amino-acid pools (organ_system; cerebrospinal compartment) ---------
+  - id: csf_arginine
+    label: CSF arginine concentration
+    scale: organ_system
+    entity_iri: CHEBI:16467            # L-arginine
+    quality_iri: PATO:0000033
+  - id: csf_glutamine
+    label: CSF glutamine concentration
+    scale: organ_system
+    entity_iri: CHEBI:18050            # L-glutamine
+    quality_iri: PATO:0000033
+  - id: csf_glycine
+    label: CSF glycine concentration
+    scale: organ_system
+    entity_iri: CHEBI:15428            # glycine
+    quality_iri: PATO:0000033
+  - id: csf_isoleucine
+    label: CSF isoleucine concentration
+    scale: organ_system
+    entity_iri: CHEBI:17191            # L-isoleucine
+    quality_iri: PATO:0000033
+  - id: csf_leucine
+    label: CSF leucine concentration
+    scale: organ_system
+    entity_iri: CHEBI:15603            # L-leucine
+    quality_iri: PATO:0000033
+  - id: csf_serine
+    label: CSF serine concentration
+    scale: organ_system
+    entity_iri: CHEBI:17115            # L-serine
+    quality_iri: PATO:0000033
+  - id: csf_valine
+    label: CSF valine concentration
+    scale: organ_system
+    entity_iri: CHEBI:16414            # L-valine
+    quality_iri: PATO:0000033
+  - id: csf_glutamate
+    label: CSF glutamate concentration
+    scale: organ_system
+    entity_iri: CHEBI:16015            # L-glutamic acid
+    quality_iri: PATO:0000033
+  - id: csf_methionine
+    label: CSF methionine concentration
+    scale: organ_system
+    entity_iri: CHEBI:16811            # L-methionine
+    quality_iri: PATO:0000033
+  - id: csf_phenylalanine
+    label: CSF phenylalanine concentration
+    scale: organ_system
+    entity_iri: CHEBI:28044            # L-phenylalanine
+    quality_iri: PATO:0000033
+  - id: csf_argininosuccinate
+    label: CSF argininosuccinate concentration
+    scale: organ_system
+    entity_iri: CHEBI:184023           # argininosuccinic acid
+    quality_iri: PATO:0000033
+  - id: csf_guanidinoacetate
+    label: CSF guanidinoacetate concentration
+    scale: organ_system
+    entity_iri: CHEBI:16344            # guanidinoacetic acid
+    quality_iri: PATO:0000033
+  - id: csf_saccharopine
+    label: CSF saccharopine concentration
+    scale: organ_system
+    entity_iri: CHEBI:16927            # L-saccharopine (sole physiological form)
+    quality_iri: PATO:0000033
+
+  # ----- urinary amino-acid pools (organ_system; urine compartment) ------------
+  - id: urinary_amino_acids
+    label: urinary (total proteinogenic) amino-acid excretion
+    scale: organ_system
+    entity_iri: CHEBI:33709            # amino acid
+    quality_iri: PATO:0000070          # amount (excreted quantity)
+  - id: urinary_glycine
+    label: urinary glycine excretion
+    scale: organ_system
+    entity_iri: CHEBI:15428            # glycine
+    quality_iri: PATO:0000070
+  - id: urinary_lysine
+    label: urinary lysine excretion
+    scale: organ_system
+    entity_iri: CHEBI:18019            # L-lysine
+    quality_iri: PATO:0000070
+  - id: urinary_taurine
+    label: urinary taurine excretion
+    scale: organ_system
+    entity_iri: CHEBI:15891            # taurine
+    quality_iri: PATO:0000070
+  - id: urinary_threonine
+    label: urinary threonine excretion
+    scale: organ_system
+    entity_iri: CHEBI:16857            # L-threonine
+    quality_iri: PATO:0000070
+  - id: urinary_glutamine
+    label: urinary glutamine excretion
+    scale: organ_system
+    entity_iri: CHEBI:18050            # L-glutamine
+    quality_iri: PATO:0000070
+  - id: urinary_glutamate
+    label: urinary glutamate excretion
+    scale: organ_system
+    entity_iri: CHEBI:16015            # L-glutamic acid
+    quality_iri: PATO:0000070
+  - id: urinary_cysteine
+    label: urinary cysteine excretion
+    scale: organ_system
+    entity_iri: CHEBI:17561            # L-cysteine
+    quality_iri: PATO:0000070
+  - id: urinary_sarcosine
+    label: urinary sarcosine excretion
+    scale: organ_system
+    entity_iri: CHEBI:15611            # sarcosine
+    quality_iri: PATO:0000070
+  - id: urinary_guanidinoacetate
+    label: urinary guanidinoacetate excretion
+    scale: organ_system
+    entity_iri: CHEBI:16344            # guanidinoacetic acid
+    quality_iri: PATO:0000070
+  - id: urinary_3_hydroxykynurenine
+    label: urinary 3-hydroxykynurenine excretion
+    scale: organ_system
+    entity_iri: CHEBI:1547             # 3-hydroxykynurenine
+    quality_iri: PATO:0000070
+  - id: urinary_dimethylglycine
+    label: urinary N,N-dimethylglycine excretion
+    scale: organ_system
+    entity_iri: CHEBI:17724            # N,N-dimethylglycine
+    quality_iri: PATO:0000070
+  - id: urinary_ribosylhistidine
+    label: urinary N-tau-ribosylhistidine excretion
+    scale: organ_system
+    # no exact ChEBI 'name:' for 'N(tau)-ribosylhistidine' verified -> null
+    quality_iri: PATO:0000070
+  - id: urinary_s_sulfocysteine
+    label: urinary S-sulfocysteine excretion
+    scale: organ_system
+    entity_iri: CHEBI:27891            # S-sulfo-L-cysteine
+    quality_iri: PATO:0000070
+  - id: urinary_figlu
+    label: urinary formiminoglutamic acid (FIGLU) excretion
+    scale: organ_system
+    entity_iri: CHEBI:7274             # N-formimidoyl-L-glutamic acid (formiminoglutamate)
+    quality_iri: PATO:0000070
+  - id: urinary_gamma_glutamylcysteine
+    label: urinary gamma-glutamylcysteine excretion
+    scale: organ_system
+    entity_iri: CHEBI:17515            # L-gamma-glutamyl-L-cysteine
+    quality_iri: PATO:0000070
+  - id: urinary_gamma_glutamylphenylalanine
+    label: urinary gamma-glutamylphenylalanine excretion
+    scale: organ_system
+    entity_iri: CHEBI:82966            # gamma-glutamylphenylalanine
+    quality_iri: PATO:0000070
+  - id: urinary_phosphohydroxylysine
+    label: urinary phosphohydroxylysine excretion
+    scale: organ_system
+    entity_iri: CHEBI:16752            # erythro-5-phosphonooxy-L-lysine
+    quality_iri: PATO:0000070
+  - id: urinary_pyrroline_hydroxycarboxylate
+    label: urinary pyrroline hydroxycarboxylic acid excretion
+    scale: organ_system
+    # no exact ChEBI 'name:' for 'pyrroline hydroxycarboxylic acid' verified -> null
+    quality_iri: PATO:0000070
+  - id: urinary_quinolinate
+    label: urinary quinolinic acid excretion
+    scale: organ_system
+    entity_iri: CHEBI:16675            # quinolinic acid
+    quality_iri: PATO:0000070
+  - id: urinary_xanthurenate
+    label: urinary xanthurenic acid excretion
+    scale: organ_system
+    entity_iri: CHEBI:10072            # xanthurenic acid
+    quality_iri: PATO:0000070
+  - id: urinary_n_acetyltyrosine
+    label: urinary N-acetyltyrosine excretion
+    scale: organ_system
+    entity_iri: CHEBI:68561            # N-acetyltyrosine
+    quality_iri: PATO:0000070
+  - id: urinary_imidodipeptides
+    label: urinary imidodipeptide excretion
+    scale: organ_system
+    # 'imidodipeptide' is a class with no exact ChEBI 'name:' verified -> null
+    quality_iri: PATO:0000070
+  - id: urinary_3_aminoisobutyrate
+    label: urinary 3-aminoisobutyric acid excretion
+    scale: organ_system
+    entity_iri: CHEBI:27389            # 3-aminoisobutyric acid
+    quality_iri: PATO:0000070
+  - id: urinary_2_aminoisobutyric_acid
+    label: urinary 2-aminoisobutyric acid excretion
+    scale: organ_system
+    entity_iri: CHEBI:27971            # 2-aminoisobutyric acid
+    quality_iri: PATO:0000070
+  - id: urinary_pipecolic_acid
+    label: urinary pipecolic acid excretion
+    scale: organ_system
+    entity_iri: CHEBI:17964            # pipecolic acid
+    quality_iri: PATO:0000070
+  - id: urinary_saccharopine
+    label: urinary saccharopine excretion
+    scale: organ_system
+    entity_iri: CHEBI:16927            # L-saccharopine (sole physiological form)
+    quality_iri: PATO:0000070
+  - id: urinary_alloisoleucine
+    label: urinary L-alloisoleucine excretion
+    scale: organ_system
+    entity_iri: CHEBI:43433            # L-alloisoleucine
+    quality_iri: PATO:0000070
+  - id: urinary_kynurenine
+    label: urinary kynurenine excretion
+    scale: organ_system
+    entity_iri: CHEBI:28683            # kynurenine
+    quality_iri: PATO:0000070
+  - id: urinary_1_methylhistidine
+    label: urinary 1-methylhistidine excretion
+    scale: organ_system
+    entity_iri: CHEBI:70958            # 1-methylhistidine
+    quality_iri: PATO:0000070
+  - id: urinary_3_methylhistidine
+    label: urinary 3-methylhistidine excretion
+    scale: organ_system
+    entity_iri: CHEBI:70959            # 3-methylhistidine
+    quality_iri: PATO:0000070
+  - id: urinary_galactosyl_hydroxylysine
+    label: urinary galactosyl hydroxylysine excretion
+    scale: organ_system
+    entity_iri: CHEBI:165859           # galactosylhydroxylysine
+    quality_iri: PATO:0000070
+  - id: urinary_phosphoserine
+    label: urinary phosphoserine excretion
+    scale: organ_system
+    entity_iri: CHEBI:15811            # O-phospho-L-serine
+    quality_iri: PATO:0000070
+
+  # ----- intracellular / leukocyte pools (cellular) ----------------------------
+  - id: intracellular_cystine
+    label: intracellular (lysosomal) cystine concentration
+    scale: cellular
+    entity_iri: CHEBI:16283            # L-cystine
+    quality_iri: PATO:0000033
+  - id: leukocyte_cystine
+    label: leukocyte cystine concentration
+    scale: cellular
+    entity_iri: CHEBI:16283            # L-cystine
+    bearer_entity_iri: CL:0000738      # leukocyte
+    quality_iri: PATO:0000033
+
+  # ----- enzyme-activity roots (cellular; bearer = cell/organ) -----------------
+  # Each is a catalytic-activity root; LoF clamps it DOWN under intervention.
+  - id: glycine_cleavage_enzyme_activity
+    label: glycine cleavage system (GCS) catalytic activity
+    scale: cellular
+    entity_iri: GO:0005960             # glycine cleavage complex (4-protein GLDC/AMT/GCSH/DLD)
+    bearer_entity_iri: CL:0000182      # hepatocyte (liver is the major GCS site)
+    quality_iri: PATO:0001414
+  - id: sah_hydrolase_activity
+    label: S-adenosylhomocysteine hydrolase (AHCY) catalytic activity
+    scale: cellular
+    entity_iri: PR:P23526              # adenosylhomocysteinase (human)
+    bearer_entity_iri: CL:0000182      # hepatocyte
+    quality_iri: PATO:0001414
+  - id: phosphoglycerate_dehydrogenase_activity
+    label: 3-phosphoglycerate dehydrogenase (PHGDH) catalytic activity
+    scale: cellular
+    entity_iri: PR:O43175              # D-3-phosphoglycerate dehydrogenase (human)
+    quality_iri: PATO:0001414
+  - id: aspartoacylase_activity
+    label: aspartoacylase (ASPA) catalytic activity
+    scale: cellular
+    entity_iri: PR:P45381              # aspartoacylase (human)
+    bearer_entity_iri: CL:0000057      # fibroblast (assay tissue)
+    quality_iri: PATO:0001414
+  - id: oxoprolinase_activity
+    label: 5-oxoprolinase (OPLAH) catalytic activity
+    scale: cellular
+    entity_iri: PR:O14841              # 5-oxoprolinase (human)
+    quality_iri: PATO:0001414
+  - id: arginase_activity
+    label: arginase (ARG1) catalytic activity
+    scale: cellular
+    entity_iri: PR:P05089              # arginase-1 (human)
+    bearer_entity_iri: CL:0000232      # erythrocyte (assay site) / hepatocyte
+    quality_iri: PATO:0001414
+  - id: gamma_glutamylcysteine_synthetase_activity
+    label: gamma-glutamylcysteine synthetase (GCLC) catalytic activity
+    scale: cellular
+    entity_iri: PR:P48506              # glutamate--cysteine ligase catalytic subunit (human)
+    bearer_entity_iri: CL:0000232      # erythrocyte (assay site)
+    quality_iri: PATO:0001414
+  - id: glutathione_synthetase_activity
+    label: glutathione synthetase (GSS) catalytic activity
+    scale: cellular
+    entity_iri: PR:P48637              # glutathione synthetase (human)
+    quality_iri: PATO:0001414
+  - id: nags_activity
+    label: N-acetylglutamate synthase (NAGS) catalytic activity
+    scale: cellular
+    entity_iri: PR:Q8N159              # N-acetylglutamate synthase, mitochondrial (human)
+    bearer_entity_iri: CL:0000182      # hepatocyte
+    quality_iri: PATO:0001414
+  - id: otc_activity
+    label: ornithine transcarbamylase (OTC) catalytic activity
+    scale: cellular
+    entity_iri: PR:P00480              # ornithine transcarbamylase, mitochondrial (human)
+    bearer_entity_iri: CL:0000182      # hepatocyte
+    quality_iri: PATO:0001414
+  - id: agat_activity
+    label: arginine:glycine amidinotransferase (GATM/AGAT) catalytic activity
+    scale: cellular
+    entity_iri: PR:P50440              # glycine amidinotransferase, mitochondrial (human)
+    quality_iri: PATO:0001414
+  - id: argininosuccinate_synthetase_activity
+    label: argininosuccinate synthetase (ASS1) catalytic activity
+    scale: cellular
+    entity_iri: PR:P00966              # argininosuccinate synthase (human)
+    bearer_entity_iri: CL:0000182      # hepatocyte
+    quality_iri: PATO:0001414
+  - id: p5c_dehydrogenase_activity
+    label: delta-1-pyrroline-5-carboxylate dehydrogenase (ALDH4A1) catalytic activity
+    scale: cellular
+    entity_iri: PR:P30038              # delta-1-pyrroline-5-carboxylate dehydrogenase, mitochondrial (human)
+    quality_iri: PATO:0001414
+  - id: gamt_activity
+    label: guanidinoacetate methyltransferase (GAMT) catalytic activity
+    scale: cellular
+    entity_iri: PR:Q14353              # guanidinoacetate N-methyltransferase (human)
+    bearer_entity_iri: CL:0000182      # hepatocyte
+    quality_iri: PATO:0001414
+  - id: prolidase_activity
+    label: prolidase / peptidase D (PEPD) catalytic activity
+    scale: cellular
+    entity_iri: PR:P12955              # Xaa-Pro dipeptidase (human)
+    quality_iri: PATO:0001414
+  - id: alpha_aminoadipic_semialdehyde_synthase_activity
+    label: alpha-aminoadipic semialdehyde synthase (AASS) catalytic activity
+    scale: cellular
+    entity_iri: PR:Q9UDR5              # alpha-aminoadipic semialdehyde synthase, mitochondrial (human)
+    bearer_entity_iri: CL:0000057      # fibroblast (assay tissue)
+    quality_iri: PATO:0001414
+  - id: hydroxyphenylpyruvate_dioxygenase_activity
+    label: 4-hydroxyphenylpyruvate dioxygenase (HPD) catalytic activity
+    scale: cellular
+    entity_iri: PR:P32754              # 4-hydroxyphenylpyruvate dioxygenase (human)
+    bearer_entity_iri: CL:0000182      # hepatocyte
+    quality_iri: PATO:0001414
+  - id: carbamoylphosphate_synthetase_1_activity
+    label: carbamoylphosphate synthetase 1 (CPS1) catalytic activity
+    scale: cellular
+    entity_iri: PR:P31327              # carbamoyl-phosphate synthase [ammonia], mitochondrial (human)
+    bearer_entity_iri: CL:0000182      # hepatocyte
+    quality_iri: PATO:0001414
+  - id: cystathionine_gamma_lyase_activity
+    label: cystathionine gamma-lyase (CTH) catalytic activity
+    scale: cellular
+    entity_iri: PR:P32929              # cystathionine gamma-lyase (human)
+    bearer_entity_iri: CL:0000182      # hepatocyte
+    quality_iri: PATO:0001414
+  - id: methionine_adenosyltransferase_activity
+    label: methionine adenosyltransferase (MAT1A) catalytic activity
+    scale: cellular
+    entity_iri: PR:Q00266              # S-adenosylmethionine synthase isoform type-1 (human)
+    bearer_entity_iri: CL:0000182      # hepatocyte
+    quality_iri: PATO:0001414
+  - id: urocanase_activity
+    label: urocanase (UROC1) catalytic activity
+    scale: cellular
+    entity_iri: PR:Q96N76              # urocanate hydratase (human)
+    bearer_entity_iri: CL:0000182      # hepatocyte
+    quality_iri: PATO:0001414
+  - id: phosphoserine_phosphatase_activity
+    label: phosphoserine phosphatase (PSPH) catalytic activity
+    scale: cellular
+    entity_iri: PR:P78330              # phosphoserine phosphatase (human)
+    bearer_entity_iri: CL:0000057      # fibroblast (assay tissue)
+    quality_iri: PATO:0001414
+
+# -----------------------------------------------------------------------------
+# Causal edges — ONLY where a cited enzyme->substrate/product mechanism gives a
+# defensible sign. Enzyme activity DOWN => substrate UP ("-" substrate edge) and
+# product DOWN ("+" product edge). Each edge below is a direct, textbook biochemical
+# step. Where the systemic sign is confounded (multiple inputs / homeostatic loop),
+# NO edge is written (the node abstains).
+# -----------------------------------------------------------------------------
+causal_edges:
+  # --- urea cycle (Lehninger, "Production of Urea"; Harrison's, urea-cycle disorders)
+  - source: otc_activity
+    target: plasma_citrulline
+    sign: "+"
+    causal_evidence: genetic_lof_gof
+    mechanism: ornithine transcarbamylase condenses ornithine + carbamoyl-phosphate -> citrulline; OTC activity is required to form citrulline, so reduced activity (OTC deficiency) lowers citrulline
+    evidence: "Lehninger Principles of Biochemistry, 'Amino Acid Oxidation and the Production of Urea' (urea cycle step 2, OTC); Harrison's, urea-cycle disorders — OTC deficiency gives LOW/low-normal citrulline"
+  - source: argininosuccinate_synthetase_activity
+    target: plasma_citrulline
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: argininosuccinate synthetase (ASS1) consumes citrulline + aspartate -> argininosuccinate; reduced ASS1 activity (citrullinemia type I) lets citrulline accumulate
+    evidence: "Lehninger, urea cycle step 3 (ASS1); Harrison's / OMMBID citrullinemia type I (ASS1 deficiency) — markedly ELEVATED plasma citrulline"
+  - source: argininosuccinate_synthetase_activity
+    target: plasma_argininosuccinate
+    sign: "+"
+    mechanism: ASS1 produces argininosuccinate; reduced activity lowers its formation
+    evidence: "Lehninger, urea cycle step 3 (ASS1 forms argininosuccinate)"
+  - source: arginase_activity
+    target: plasma_arginine
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: arginase (ARG1) hydrolyzes arginine -> ornithine + urea; reduced arginase activity (argininemia) causes arginine to accumulate
+    evidence: "Lehninger, urea cycle step 5 (arginase); Harrison's / OMMBID argininemia (ARG1 deficiency) — HYPERargininemia"
+  - source: arginase_activity
+    target: plasma_ornithine
+    sign: "+"
+    mechanism: arginase produces ornithine from arginine; reduced activity lowers ornithine production
+    evidence: "Lehninger, urea cycle (arginase yields ornithine + urea)"
+
+  # --- creatine synthesis (Lehninger; OMMBID creatine-deficiency syndromes) -----
+  - source: agat_activity
+    target: plasma_guanidinoacetate
+    sign: "+"
+    causal_evidence: genetic_lof_gof
+    mechanism: AGAT (GATM) transfers the amidino group of arginine to glycine forming guanidinoacetate; reduced AGAT activity lowers guanidinoacetate
+    evidence: "Lehninger, creatine biosynthesis; OMMBID AGAT (GATM) deficiency — DECREASED guanidinoacetate"
+  - source: gamt_activity
+    target: plasma_guanidinoacetate
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: GAMT methylates guanidinoacetate -> creatine; reduced GAMT activity causes guanidinoacetate to accumulate
+    evidence: "Lehninger, creatine biosynthesis; OMMBID GAMT deficiency — ELEVATED guanidinoacetate (plasma/urine/CSF)"
+  - source: gamt_activity
+    target: csf_guanidinoacetate
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: GAMT consumes guanidinoacetate; reduced GAMT lets guanidinoacetate accumulate, including in CSF (CNS creatine deficiency)
+    evidence: "OMMBID GAMT deficiency — elevated CSF guanidinoacetate"
+  - source: agat_activity
+    target: urinary_guanidinoacetate
+    sign: "+"
+    causal_evidence: genetic_lof_gof
+    mechanism: lower guanidinoacetate synthesis by AGAT lowers the filtered/excreted guanidinoacetate load
+    evidence: "OMMBID AGAT (GATM) deficiency — low urinary guanidinoacetate"
+
+  # --- methionine / one-carbon cycle (Lehninger; OMMBID) ------------------------
+  - source: sah_hydrolase_activity
+    target: plasma_sah
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: SAH hydrolase (AHCY) hydrolyzes S-adenosylhomocysteine -> homocysteine + adenosine; reduced activity causes SAH to accumulate
+    evidence: "Lehninger, methionine/one-carbon cycle; OMMBID AHCY deficiency — markedly ELEVATED S-adenosylhomocysteine (and SAM)"
+  - source: sah_hydrolase_activity
+    target: plasma_sam
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: SAH accumulation from AHCY deficiency feeds back to raise SAM as the transmethylation block builds up upstream
+    evidence: "OMMBID AHCY deficiency — elevated SAM and SAH"
+  - source: methionine_adenosyltransferase_activity
+    target: plasma_sam
+    sign: "+"
+    causal_evidence: genetic_lof_gof
+    mechanism: MAT1A converts methionine + ATP -> S-adenosylmethionine; reduced MAT activity lowers SAM
+    evidence: "Lehninger, activated-methyl cycle (MAT); OMMBID MAT I/III deficiency — low/normal SAM with hypermethioninemia"
+
+  # --- proline / ornithine / P5C (OMMBID hyperprolinemia type II) ---------------
+  - source: p5c_dehydrogenase_activity
+    target: plasma_pyrroline_5_carboxylate
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: P5C dehydrogenase (ALDH4A1) oxidizes pyrroline-5-carboxylate -> glutamate; reduced activity (hyperprolinemia type II) causes P5C and proline to accumulate
+    evidence: "OMMBID hyperprolinemia type II (P5C dehydrogenase / ALDH4A1 deficiency) — elevated P5C and proline"
+  - source: p5c_dehydrogenase_activity
+    target: plasma_proline
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: blocked P5C oxidation backs up the proline<->P5C equilibrium, raising plasma proline
+    evidence: "OMMBID hyperprolinemia type II — hyperprolinemia"
+
+  # --- glutathione cycle (OMMBID glutathione-synthetase / gamma-GCS deficiency) -
+  - source: oxoprolinase_activity
+    target: plasma_5_oxoproline
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: 5-oxoprolinase (OPLAH) hydrolyzes 5-oxoproline -> glutamate; reduced activity causes 5-oxoproline (pyroglutamate) to accumulate
+    evidence: "OMMBID 5-oxoprolinase deficiency — 5-oxoprolinuria/elevated 5-oxoproline"
+  - source: glutathione_synthetase_activity
+    target: plasma_glutathione
+    sign: "+"
+    causal_evidence: genetic_lof_gof
+    mechanism: glutathione synthetase (GSS) makes glutathione from gamma-glutamylcysteine + glycine; reduced GSS activity lowers glutathione
+    evidence: "OMMBID glutathione synthetase deficiency — low glutathione, 5-oxoprolinuria"
+  - source: glutathione_synthetase_activity
+    target: plasma_5_oxoproline
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: GSS deficiency disinhibits gamma-GCS (loss of glutathione feedback), overproducing gamma-glutamylcysteine which is converted to 5-oxoproline, raising 5-oxoproline
+    evidence: "OMMBID glutathione synthetase deficiency — massive 5-oxoprolinuria (pyroglutamic aciduria)"
+  - source: gamma_glutamylcysteine_synthetase_activity
+    target: plasma_glutathione
+    sign: "+"
+    mechanism: gamma-glutamylcysteine synthetase (GCLC) catalyzes the first, rate-limiting step of glutathione synthesis; reduced activity lowers glutathione
+    evidence: "OMMBID gamma-glutamylcysteine synthetase deficiency — low erythrocyte glutathione"
+
+  # --- serine biosynthesis (OMMBID PHGDH / PSPH deficiency) ---------------------
+  - source: phosphoglycerate_dehydrogenase_activity
+    target: plasma_serine
+    sign: "+"
+    causal_evidence: genetic_lof_gof
+    mechanism: PHGDH catalyzes the first step of de novo serine synthesis (3-phosphoglycerate -> 3-phosphohydroxypyruvate); reduced activity lowers serine
+    evidence: "OMMBID serine-deficiency disorders (PHGDH deficiency) — low serine (plasma and CSF) | textbook corroboration: Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-6.6.2 (Allosteric Regulation) — PHGDH catalyzes the first step of serine synthesis; serine is the pathway end-product and allosteric feedback inhibitor of PHGDH, confirming PHGDH activity drives plasma serine levels; Wong, Cells: Molecules and Mechanisms §wong-6.7 (Amino Acid Synthesis - Undeclared): 'The synthesis of serine begins with the metabolic intermediate 3-phosphoglycerate (glycolysis). Phosphoglycerate dehydrogenase oxidizes it to 3-phosphohydroxypyruvate … phosphoserine phosphatase to produce serine'"
+  - source: phosphoglycerate_dehydrogenase_activity
+    target: csf_serine
+    sign: "+"
+    causal_evidence: genetic_lof_gof
+    mechanism: reduced de novo serine synthesis lowers CSF serine (CNS serine deficiency)
+    evidence: "OMMBID PHGDH deficiency — low CSF serine"
+  - source: phosphoglycerate_dehydrogenase_activity
+    target: plasma_glycine
+    sign: "+"
+    causal_evidence: genetic_lof_gof
+    mechanism: serine is the precursor of glycine (via SHMT); reduced serine synthesis lowers downstream glycine
+    evidence: "OMMBID serine-biosynthesis defects — low serine AND glycine"
+  - source: phosphoserine_phosphatase_activity
+    target: plasma_serine
+    sign: "+"
+    causal_evidence: genetic_lof_gof
+    mechanism: phosphoserine phosphatase (PSPH) catalyzes the final serine-synthesis step (phosphoserine -> serine); reduced activity lowers serine
+    evidence: "OMMBID PSPH deficiency — low serine"
+  - source: phosphoserine_phosphatase_activity
+    target: plasma_phosphoserine
+    sign: "-"
+    mechanism: PSPH consumes O-phosphoserine; reduced activity causes phosphoserine to accumulate
+    evidence: "Lehninger, serine biosynthesis (PSPH dephosphorylates phosphoserine)"
+
+  # --- glycine cleavage (Harrison's, nonketotic hyperglycinemia) ----------------
+  - source: glycine_cleavage_enzyme_activity
+    target: plasma_glycine
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: the glycine cleavage system (GCS) is the principal route of glycine catabolism; reduced GCS activity (nonketotic hyperglycinemia) causes glycine to accumulate
+    evidence: "Harrison's / OMMBID nonketotic hyperglycinemia (glycine encephalopathy, GLDC/AMT) — HYPERglycinemia"
+  - source: glycine_cleavage_enzyme_activity
+    target: csf_glycine
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: reduced GCS activity raises glycine throughout, with a disproportionate CSF rise (high CSF:plasma glycine ratio is diagnostic)
+    evidence: "OMMBID nonketotic hyperglycinemia — markedly elevated CSF glycine"
+  - source: glycine_cleavage_enzyme_activity
+    target: urinary_glycine
+    sign: "-"
+    mechanism: elevated plasma glycine raises the filtered load and urinary glycine excretion
+    evidence: "OMMBID nonketotic hyperglycinemia — glycinuria secondary to hyperglycinemia"
+
+  # --- lysine catabolism (OMMBID hyperlysinemia / saccharopinuria) --------------
+  - source: alpha_aminoadipic_semialdehyde_synthase_activity
+    target: plasma_lysine
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: AASS (the bifunctional lysine-ketoglutarate reductase/saccharopine dehydrogenase) initiates lysine catabolism; reduced activity causes lysine to accumulate (hyperlysinemia)
+    evidence: "OMMBID hyperlysinemia / saccharopinuria (AASS deficiency) — HYPERlysinemia"
+  - source: alpha_aminoadipic_semialdehyde_synthase_activity
+    target: plasma_saccharopine
+    sign: "?"
+    causal_evidence: genetic_lof_gof
+    mechanism: "AASS is bifunctional; loss of the first (LOR) activity LOWERS saccharopine while a relative block at the second (SDH) activity RAISES it (saccharopinuria) — net sign on saccharopine is not determinate from the activity node alone"
+    evidence: "OMMBID hyperlysinemia (LOR-predominant: low saccharopine) vs saccharopinuria (SDH-predominant: high saccharopine) — flagged '?' per PhysioMap sign discipline"
+
+  # --- histidine catabolism (OMMBID urocanic aciduria / histidinemia) -----------
+  - source: urocanase_activity
+    target: plasma_urocanic_acid
+    sign: "-"
+    mechanism: urocanase (UROC1) hydrolyzes urocanate further down histidine catabolism; reduced activity would raise urocanate. The cited disorder (urocanase deficiency) gives elevated urocanate, hence reduced circulating urocanate maps to reduced UPSTREAM flux — sign of activity->substrate is negative (less enzyme, more substrate)
+    evidence: "OMMBID urocanase deficiency (urocanic aciduria) — elevated urocanate when UROC1 is deficient"
+
+  # --- tyrosine catabolism (OMMBID tyrosinemia type III; HPD deficiency) --------
+  - source: hydroxyphenylpyruvate_dioxygenase_activity
+    target: plasma_tyrosine
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: 4-hydroxyphenylpyruvate dioxygenase (HPD) acts downstream of tyrosine transamination; reduced HPD activity backs up the pathway and raises tyrosine (tyrosinemia type III)
+    evidence: "OMMBID tyrosinemia type III (HPD deficiency) — HYPERtyrosinemia"
+
+  # --- proline catabolism — component bridge (CB-MET-001; reviewed 2026-07-18) ---
+  # Joins the off-core proline component {prodh_activity, csf_proline} to the core
+  # plasma anchor. Sign-consistent with the sibling p5c_dehydrogenase_activity edge.
+  - source: prodh_activity            # boundary node (isolated_connections.yaml)
+    target: plasma_proline
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: PRODH (proline dehydrogenase/oxidase) catalyzes the first committed step of proline catabolism (L-proline -> delta-1-pyrroline-5-carboxylate) in mitochondria; biallelic PRODH loss-of-function backs up the proline pool systemically, so enzyme activity up lowers plasma proline
+    evidence: "genetic_lof_gof do(): biallelic PRODH loss-of-function = hyperprolinemia type I (OMIM #239500), a natural human do() on the enzyme. Intervention: germline PRODH LoF; measured endpoint: ELEVATED plasma proline (chronic/lifelong), characteristically WITHOUT urinary delta-1-pyrroline-5-carboxylate excretion (distinguishes type I from P5CDH/type II); context: human, systemic plasma. do(PRODH up) => plasma proline down (sign -). Mitsubuchi H et al., biochemical and clinical features of hereditary hyperprolinemia (PMC4282441). Sign-concordant with sibling p5c_dehydrogenase_activity -(-)-> plasma_proline in this fragment."
+
+constitutive_edges: []   # none — single-scale grounding fragment (Phase 1)

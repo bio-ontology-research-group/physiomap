@@ -1,0 +1,33 @@
+// Reproducible ontology validation toolchain.  Versions are deliberately pinned:
+// ontology releases record these coordinates in their build provenance.
+
+plugins {
+    id 'groovy'
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.apache.groovy:groovy:4.0.21'
+
+    // OWL API parsing/profile/rendering + EL and bounded DL reasoners.
+    implementation 'net.sourceforge.owlapi:owlapi-distribution:5.5.0'
+    implementation 'io.github.liveontologies:elk-distribution-owlapi:0.6.0'
+    implementation 'net.sourceforge.owlapi:org.semanticweb.hermit:1.4.5.519'
+    implementation 'org.slf4j:slf4j-simple:2.0.13'
+
+    testImplementation 'org.spockframework:spock-core:2.3-groovy-4.0'
+}
+
+application {
+    mainClass = 'PhysioMapOntology'
+    applicationDefaultJvmArgs = ['-Dorg.slf4j.simpleLogger.defaultLogLevel=warn']
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}

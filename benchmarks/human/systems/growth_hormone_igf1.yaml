@@ -1,0 +1,324 @@
+# =============================================================================
+# Growth hormone / IGF-1 somatotropic axis — PhysioMap fragment
+# *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Hand-encoded canonical endocrine physiology. Every causal edge sign is the
+# sign of the partial derivative of the target w.r.t. the source at steady
+# state, all else equal (the interventionist partial: pushing source UP pushes
+# target up (+) or down (-)).
+#
+# Scope: hypothalamic GHRH + somatostatin (SRIF), pituitary GH, gastric
+# ghrelin, hepatic IGF-1, and the GH/IGF-1 negative-feedback loops. GH is a
+# counter-regulatory hormone: it raises hepatic glucose production, opposes
+# peripheral (insulin-mediated) glucose uptake, and raises whole-body
+# metabolic rate (lipolytic/diabetogenic actions).
+#
+# FEEDBACK LOOPS encoded (closed within / across this fragment):
+#   1. Long-loop IGF-1 feedback (negative):
+#        GH -> hepatic_igf1 (+); hepatic_igf1 -> somatostatin (+) and
+#        hepatic_igf1 -| ghrh (-) and hepatic_igf1 -| pituitary_gh (-)
+#        => rising GH raises IGF-1, which restrains GH. Net negative.
+#   2. Short-loop GH autofeedback (negative):
+#        GH -> somatostatin (+); somatostatin -| GH (-).
+#   3. GHRH <-> somatostatin reciprocal hypothalamic coupling. The load-bearing
+#      arm is somatostatin -| ghrh (-) (firmly supported: Osterstock 2016).
+#      The forward arm ghrh -> somatostatin is marked '?' (sign undetermined):
+#      anatomical evidence is mixed and the previously-cited MacGregor & Leng
+#      2005 model encodes only SRIF -| GHRH, not a GHRH -> SRIF drive.
+#   4. Counter-regulatory glucose coupling closes a loop with the existing
+#      glucose/insulin fragment (boundary nodes).
+#
+# Reference models (verified, curated BioModels):
+#   - Farhy2007_hGHregulation, BioModels MODEL0912096133:
+#       Farhy LS, Bowers CY, Veldhuis JD. "Model-projected mechanistic bases
+#       for sex differences in growth hormone regulation in humans."
+#       Am J Physiol Regul Integr Comp Physiol. 2007. PMID 17185408.
+#       (GHRH/somatostatin/ghrelin -> pituitary GH with GH/IGF feedback.)
+#   - MacGregor2005_HypothalamicSystems, BioModels MODEL9811206584:
+#       MacGregor DJ, Leng G. "Modelling the hypothalamic control of growth
+#       hormone secretion." J Neuroendocrinol. 2005. PMID 16280026.
+#       (GHRH/SRIF reciprocal control of pulsatile GH; GH short-loop feedback.)
+# Primary / review anchors (checkable PMIDs; replaced the un-paginated textbook
+# names the reviewer flagged):
+#   - Moller & Jorgensen 2009, Endocr Rev 30(2):152-77 (PMID 19240267): GH
+#     glucose/lipid/protein metabolism (diabetogenic, lipolysis, energy expend.).
+#   - Kim & Park 2017, Ann Pediatr Endocrinol Metab 22(3):145 (PMID 29025199):
+#     GH effects on glucose metabolism / insulin resistance.
+#   - Aguila, Boggaram & McCann 1993, Brain Res (PMID 7903898): IGF-I increases
+#     hypothalamic somatostatin release + mRNA.
+#   - Al-Samerria & Radovick 2021, Cells 10(10):2664 (PMID 34685644): IGF-1
+#     neuroendocrine feedback (inhibits GHRH, stimulates SRIF).
+#   - Osterstock et al. 2016, Sci Rep 6:24394 (PMID 27072430): somatostatin
+#     suppresses GHRH-neuron firing (somatostatin -| ghrh arm).
+#   - Shibasaki et al. 1989, Life Sci (PMID 2563893): hyperglycaemia stimulates
+#     hypothalamic SRIF, suppressing GH.
+#   - Yuen et al. 2024, Front Endocrinol 15:1456195 (PMID 39665021): intra-portal
+#     insulin permissive for hepatic GH-receptor / IGF-1 generation.
+#
+# Boundary nodes (REFERENCED, not redefined here; owned by existing map):
+#   plasma_glucose, plasma_insulin, hepatic_glucose_production,
+#   peripheral_glucose_uptake, metabolic_rate
+#
+# ROBERT: please correct signs/edges.
+# =============================================================================
+
+name: growth_hormone_igf1
+description: >-
+  DRAFT growth hormone / IGF-1 somatotropic axis as a PhysioMap signed cyclic
+  causal graph. Hypothalamic GHRH + somatostatin, pituitary GH, gastric
+  ghrelin, hepatic IGF-1, with the IGF-1 long-loop and GH short-loop negative
+  feedbacks, plus GH counter-regulatory coupling to glucose homeostasis and
+  metabolic rate. Sources: Farhy 2007 (BioModels MODEL0912096133); MacGregor &
+  Leng 2005 (BioModels MODEL9811206584); plus per-edge primary/review PMIDs
+  (Moller & Jorgensen 2009; Aguila 1993; Osterstock 2016; Shibasaki 1989; Yuen
+  2024; Al-Samerria & Radovick 2021). Single-scale (organ_system / organ).
+
+nodes:
+- id: ghrh
+  label: hypothalamic growth-hormone-releasing hormone (secretion rate)
+  scale: organ_system
+  entity_iri: CL:0002373      # growth hormone releasing hormone secreting cell (bearer of secretion rate)
+  quality_iri: PATO:0000161            # rate
+  quality_kind: rate
+- id: somatostatin
+  label: hypothalamic somatostatin (SRIF) secretion rate
+  scale: organ_system
+  entity_iri: GO:0070253               # somatostatin secretion (process bearer)
+  quality_iri: PATO:0000161            # rate
+  quality_kind: rate
+- id: ghrelin                          # shared boundary node — canonical definition in energy_balance_appetite.yaml
+  label: plasma ghrelin concentration
+  scale: organ_system
+  entity_iri: PR:000007973             # appetite-regulating hormone (GHRL/ghrelin)
+  quality_iri: PATO:0000033
+  quality_kind: ratio
+- id: pituitary_gh_secretion
+  label: anterior-pituitary growth-hormone secretory output (rate)
+  scale: organ_system
+  entity_iri: GO:0030252               # growth hormone secretion
+  quality_iri: PATO:0000161
+  bearer_entity_iri: UBERON:0002196  # adenohypophysis
+- id: pituitary_gh
+  label: plasma growth hormone (somatotropin) concentration
+  scale: organ_system
+  entity_iri: CHEBI:37845              # growth hormone
+  quality_iri: PATO:0000033            # concentration
+- id: hepatic_igf1
+  label: circulating hepatic insulin-like growth factor 1 concentration
+  scale: organ_system
+  entity_iri: PR:000009182    # insulin-like growth factor 1
+  quality_iri: PATO:0000033            # concentration
+
+  # --- cellular producers (cross-scale grounding of the secreted hormones) ---
+- id: somatotroph_gh_secretion
+  label: anterior-pituitary somatotroph growth-hormone secretion rate
+  scale: cellular
+  entity_iri: GO:0030252              # growth hormone secretion
+  quality_iri: PATO:0000161
+  bearer_entity_iri: CL:0002312  # somatotroph
+- id: hepatocyte_igf1_secretion
+  label: hepatocyte IGF-1 secretion rate
+  scale: cellular
+  entity_iri: CL:0000182              # hepatocyte (GH-induced IGF-1 synthesis/secretion)
+  quality_iri: PATO:0000161
+- id: ghrh_neuron_ghrh_secretion
+  label: hypothalamic GHRH-secreting neuron GHRH secretion rate
+  scale: cellular
+  entity_iri: GO:0030072              # peptide hormone secretion
+  quality_iri: PATO:0000161
+  bearer_entity_iri: CL:0002373  # growth hormone releasing hormone secreting cell
+
+causal_edges:
+  # --- hypothalamic drive onto pituitary GH --------------------------------
+- source: ghrh
+  target: pituitary_gh_secretion
+  sign: "+"
+  causal_evidence: mechanistic_model
+  mechanism: >-
+    GHRH binds somatotroph GHRH receptor (Gs/cAMP), stimulating GH synthesis
+    and pulsatile release — raising the pituitary's GH secretory output.
+  evidence: 'Farhy 2007 BioModels MODEL0912096133 (PMID 17185408); MacGregor & Leng 2005 BioModels MODEL9811206584 (PMID 16280026); Williams Endocrinology | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-091 (17.4: The Pituitary Gland and Hypothalamus): ''GH levels are controlled by the release of GHRH and GHIH (also known as somatostatin) from the hypothalamus.'' [citations PubMed-verified]'
+- source: somatostatin
+  target: pituitary_gh_secretion
+  sign: "-"
+  causal_evidence: mechanistic_model
+  mechanism: >-
+    Somatostatin (SRIF) binds somatotroph SST receptors (Gi), inhibiting
+    cAMP and suppressing the pituitary's GH secretory output.
+  evidence: 'Farhy 2007 BioModels MODEL0912096133 (PMID 17185408); MacGregor & Leng 2005 BioModels MODEL9811206584 (PMID 16280026); Williams Endocrinology | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-090 (17.3: Hormones): ''when growth hormone-inhibiting hormone (GHIH), also known as somatostatin, binds to its receptors in the pituitary gland, the level of cAMP decreases, thereby inhibiting the secretion of human growth hormone''; OpenStax Anatomy & Physiology 2e §anp-091 (17.4: The Pituitary Gland and Hypothalamus): ''GH levels are controlled by the release of GHRH and GHIH (also known as somatostatin) from the hypothalamus.'' [citations PubMed-verified]'
+- source: ghrelin
+  target: pituitary_gh_secretion
+  sign: "+"
+  causal_evidence: mechanistic_model
+  mechanism: >-
+    Ghrelin acts on somatotroph GHS-R1a to amplify GH secretory output,
+    synergistic with GHRH.
+  evidence: 'Farhy 2007 BioModels MODEL0912096133 (PMID 17185408); Williams Endocrinology (ghrelin/GHS-R) [citations PubMed-verified]'
+- source: ghrelin
+  target: ghrh
+  sign: "+"
+  causal_evidence: mechanistic_model
+  mechanism: >-
+    Ghrelin stimulates hypothalamic GHRH neurons, increasing GHRH output.
+  evidence: 'Farhy 2007 BioModels MODEL0912096133 (PMID 17185408); Williams Endocrinology [citations PubMed-verified]'
+
+  # --- pituitary GH output sets the plasma GH level (within-scale mediation) ---
+  # Curatorial correction (Paul N. Schofield, 2026-06-11): the hypothalamic GHRH→plasma-GH link is
+  # correct but should be INDIRECT — the hypothalamus signals the pituitary, which makes the growth
+  # hormone. So GHRH/SRIF/ghrelin/IGF-1/glucose/FFA/cortisol/sex-steroids now act on the pituitary's
+  # GH *secretory output* (`pituitary_gh_secretion`), which then sets plasma GH (secretion vs
+  # metabolic clearance). A typed production relation links the somatotroph output below. Routed
+  # at the macro scale rather than into the cellular somatotroph, which would be
+  # an unsupported direct macro-to-cell causal shortcut.
+- source: pituitary_gh_secretion
+  target: pituitary_gh
+  sign: "+"
+  causal_evidence: mechanistic_model
+  mechanism: >-
+    Anterior-pituitary GH secretory output sets the circulating GH
+    concentration (mass balance: plasma [GH] = secretion − metabolic clearance).
+  evidence: 'Farhy 2007 BioModels MODEL0912096133 (PMID 17185408) and MacGregor & Leng 2005 BioModels MODEL9811206584 (PMID 16280026) both model plasma GH as the pituitary secretory output into the circulation (secretion vs clearance). Curated by Paul N. Schofield. *** DRAFT FOR REVIEW ***'
+
+  # --- hypothalamic reciprocal coupling (GHRH <-> SRIF) --------------------
+- source: ghrh
+  target: somatostatin
+  sign: "?"
+  mechanism: >-
+    Forward arm of the reciprocal GHRH/SRIF hypothalamic coupling. Anatomical
+    evidence is genuinely mixed: GHRH terminals have been reported to contact
+    periventricular somatostatin neurons (rat), but in the human hypothalamus
+    GHRH fibres commonly avoid somatostatinergic perikarya, arguing against a
+    strong direct GHRH->SRIF drive. Sign undetermined; flagged '?' rather than
+    guessing. The well-established, load-bearing arm of the coupling is the
+    reverse edge somatostatin -| ghrh.
+  evidence: 'Horvath et al. 1992 (intrahypothalamic GHRH/SRIF interactions, PMID 1358561) report GHRH terminals contacting periventricular SRIF neurons, but Kovacs et al. 2015 (Neuroscience, GHRH/SST juxtapositions in human hypothalamus, doi:10.1016/j.neuroscience.2015.04.006) find GHRH fibres avoid SRIF perikarya — direction of the forward arm is unsettled, sign ''?''. [citations PubMed-verified]'
+- source: somatostatin
+  target: ghrh
+  sign: "-"
+  causal_evidence: perturbation
+  mechanism: >-
+    Somatostatin reciprocally inhibits GHRH neuron activity within the
+    hypothalamic oscillator (initial K+-channel-mediated suppression of GHRH
+    neuron firing).
+  evidence: 'Osterstock et al. 2016, Sci Rep 6:24394 ''Somatostatin triggers rhythmic electrical firing in hypothalamic GHRH neurons'' (PMID 27072430) — direct demonstration somatostatin suppresses GHRH neuron activity; MacGregor & Leng 2005 BioModels MODEL9811206584 (PMID 16280026, reciprocal coupling encoded as SRIF -| GHRH) [citations PubMed-verified]'
+
+  # --- short-loop GH autofeedback (negative) -------------------------------
+- source: pituitary_gh
+  target: somatostatin
+  sign: "+"
+  causal_evidence: mechanistic_model
+  mechanism: >-
+    GH short-loop feedback: GH stimulates hypothalamic somatostatin release,
+    restraining further GH secretion.
+  evidence: 'MacGregor & Leng 2005 BioModels MODEL9811206584 (PMID 16280026); Farhy 2007 BioModels MODEL0912096133; Williams Endocrinology [citations PubMed-verified]'
+
+  # --- GH -> hepatic IGF-1 -------------------------------------------------
+- source: pituitary_gh
+  target: hepatic_igf1
+  sign: "+"
+  causal_evidence: mechanistic_model
+  mechanism: >-
+    GH binds hepatic GH receptor (JAK2/STAT5), inducing IGF-1 gene
+    transcription and secretion of circulating IGF-1.
+  evidence: 'Farhy 2007 BioModels MODEL0912096133; Williams Endocrinology; Boron & Boulpaep | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-091 (17.4: The Pituitary Gland and Hypothalamus): ''GH indirectly mediates growth and protein synthesis by triggering the liver and other tissues to produce a group of proteins called insulin-like growth factors (IGFs).''; OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): ''The indirect mechanism of GH action is mediated by insulin-like growth factors (IGFs) or somatomedins, which are a family of growth-promoting proteins produced by the liver.'' [citations PubMed-verified]'
+
+  # --- long-loop IGF-1 negative feedback -----------------------------------
+- source: hepatic_igf1
+  target: pituitary_gh_secretion
+  sign: "-"
+  causal_evidence: mechanistic_model
+  mechanism: >-
+    IGF-1 acts directly on somatotrophs to inhibit GH gene expression and
+    secretory output (pituitary arm of long-loop feedback).
+  evidence: 'Farhy 2007 BioModels MODEL0912096133; Williams Endocrinology (IGF-1 negative feedback) [citations PubMed-verified]'
+- source: hepatic_igf1
+  target: somatostatin
+  sign: "+"
+  causal_evidence: perturbation
+  mechanism: >-
+    IGF-1 stimulates hypothalamic somatostatin release, indirectly
+    suppressing GH (hypothalamic arm of long-loop feedback).
+  evidence: 'Aguila, Boggaram & McCann 1993, Brain Res (PMID 7903898) ''IGF-I modulates hypothalamic somatostatin... increased somatostatin release and mRNA levels'' — direct demonstration IGF-I raises median-eminence/periventricular SRIF release and SRIF mRNA [citations PubMed-verified]'
+- source: hepatic_igf1
+  target: ghrh
+  sign: "-"
+  mechanism: >-
+    IGF-1 inhibits hypothalamic GHRH neurons / lowers GHRH (Ghrh mRNA) drive
+    (hypothalamic arm of long-loop feedback).
+  evidence: "Al-Samerria & Radovick 2021, Cells 10(10):2664 — review of IGF-1 neuroendocrine control of growth: IGF-1 negative feedback alters hypothalamic Ghrh/Sst mRNA (inhibits GHRH, stimulates SRIF); functional support Obal et al. 1999, Brain Res (PMID 10082812, IGF-1 suppression of the somatotropic axis attributed in part to suppression of GHRH) [citations PubMed-verified]"
+
+  # --- counter-regulatory metabolic actions of GH (cross-fragment) ---------
+- source: pituitary_gh
+  target: hepatic_glucose_production
+  sign: "+"
+  causal_evidence: pharmacological
+  mechanism: >-
+    GH is diabetogenic: it promotes hepatic gluconeogenesis/glycogenolysis
+    (lipolysis-driven hepatic acetyl-CoA), raising hepatic glucose output.
+  evidence: 'Moller & Jorgensen 2009, Endocr Rev 30(2):152-77 (PMID 19240267) ''Effects of growth hormone on glucose, lipid, and protein metabolism in human subjects'' — GH raises hepatic glucose production; Kim & Park 2017, Ann Pediatr Endocrinol Metab 22(3):145 (PMID 29025199) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-091 (17.4: The Pituitary Gland and Hypothalamus): ''GH stimulates the liver to break down glycogen to glucose, which is then deposited into the blood (diabetogenic effect).''; OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): ''GH stimulates glycogen breakdown in the liver; the glycogen is then released into the blood as glucose.'' [citations PubMed-verified]'
+- source: pituitary_gh
+  target: peripheral_glucose_uptake
+  sign: "-"
+  mechanism: >-
+    GH induces peripheral insulin resistance (FFA-mediated, post-receptor),
+    opposing insulin-mediated glucose uptake in muscle/adipose.
+  evidence: 'Moller & Jorgensen 2009, Endocr Rev 30(2):152-77 (PMID 19240267) — GH antagonises insulin-stimulated peripheral glucose uptake via lipolysis/FFA flux; Kim & Park 2017, Ann Pediatr Endocrinol Metab 22(3):145 (PMID 29025199) ''Effects of growth hormone on glucose metabolism and insulin resistance in human'' [citations PubMed-verified]'
+- source: pituitary_gh
+  target: metabolic_rate
+  sign: "+"
+  causal_evidence: pharmacological
+  mechanism: >-
+    GH stimulates lipolysis and increases whole-body energy expenditure /
+    oxygen consumption.
+  evidence: 'Moller & Jorgensen 2009, Endocr Rev 30(2):152-77 (PMID 19240267) — GH activates hormone-sensitive lipase, raising lipolysis, FFA oxidation and resting energy expenditure [citations PubMed-verified]'
+
+  # --- glucose / insulin permissive inputs onto the axis (loop closure) ----
+- source: plasma_glucose
+  target: pituitary_gh_secretion
+  sign: "-"
+  causal_evidence: perturbation
+  mechanism: >-
+    Hyperglycaemia suppresses pituitary GH secretory output (via increased
+    hypothalamic somatostatin tone); hypoglycaemia is a potent GH secretagogue.
+  evidence: 'Shibasaki et al. 1989, Life Sci 44(7):431-6 (PMID 2563893) — glucose ingestion / acute hyperglycaemia stimulates hypothalamic somatostatin release, suppressing GH (and TSH) in normal man; mechanism review Sorkina et al. 2021, Probl Endokrinol 67(1) (PMID 33586392) [citations PubMed-verified]'
+- source: plasma_insulin
+  target: hepatic_igf1
+  sign: "+"
+  causal_evidence: perturbation
+  mechanism: >-
+    Insulin is permissive for hepatic GH-receptor expression and IGF-1
+    generation; intra-portal insulin supports GH-induced hepatic IGF-1
+    production.
+  evidence: 'Yuen, Hjortebjerg, Ganeshalingam, Clemmons & Frystyk 2024, Front Endocrinol 15:1456195 (PMID 39665021) — intra-portal insulin upregulates hepatic GH receptor and is an essential co-player permissive for GH-induced hepatic IGF-I synthesis [citations PubMed-verified]'
+
+# --- cross-scale CONSTITUTIVE grounding: secreting cell ▷ macro hormone level ---
+# Production edges: the cell of origin synthesises/secretes the hormone, so its secretion
+# rate sets the macro plasma/hypothalamic level (micro is NOT part_of the substance —
+# production is exempt from the part_of check). Schema = {micro, macro, relation, sign};
+# provenance is recorded here as comments. The hypothalamic `somatostatin` node is LEFT
+# UNGROUNDED: the Cell Ontology has no hypothalamus-specific somatostatinergic neuron
+# (only the generic CL:0000172 'somatostatin secreting cell', whose other child is the
+# pancreatic delta cell), so grounding it would conflate it with the pancreatic source —
+# not asserted rather than fabricate specificity. *** DRAFT FOR REVIEW ***
+production_edges:
+  # Anterior-pituitary somatotrophs synthesise/secrete growth hormone; the aggregate of their
+  # secretion constitutes the pituitary's GH secretory output (the macro mediator that then sets
+  # plasma GH via the within-scale edge above). Williams Textbook of Endocrinology (somatotroph
+  # GH secretion).
+- source: somatotroph_gh_secretion
+  target: pituitary_gh_secretion
+  sign: "+"
+  production_evidence: legacy-evidence-unclassified
+  # Hepatocytes synthesise/secrete circulating IGF-1 (GH-induced, JAK2/STAT5); their secretion
+  # rate sets plasma IGF-1. Williams Textbook of Endocrinology (hepatic IGF-1 generation).
+- source: hepatocyte_igf1_secretion
+  target: hepatic_igf1
+  sign: "+"
+  production_evidence: legacy-evidence-unclassified
+  # Hypothalamic GHRH neurons synthesise/secrete GHRH into the hypophyseal portal system;
+  # their secretion rate sets hypothalamic GHRH. Williams Textbook of Endocrinology
+  # (hypothalamic GHRH neurons / somatotropic axis).
+- source: ghrh_neuron_ghrh_secretion
+  target: ghrh
+  sign: "+"
+  production_evidence: legacy-evidence-unclassified

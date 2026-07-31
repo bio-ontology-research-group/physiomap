@@ -1,0 +1,403 @@
+# =============================================================================
+# Carbohydrate metabolites, polyols & carbohydrate-pathway enzyme activities
+#                                    — PhysioMap fragment  *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Hand-encoded HPO directional-gap coverage for the "carbohydrate_metabolites"
+# theme. Each node is a measurable physiological VARIABLE (entity, PATO
+# determinable-quality) at a named scale. Three physiological families:
+#
+#  (A) CARBOHYDRATE / POLYOL POOLS in a body fluid or tissue (scale organ_system,
+#      except muscle glycogen = tissue). These are the small-molecule biomarkers of
+#      the disorders of galactose metabolism (galactosemia: galactose, galactitol,
+#      galactonate, gal-1-P), fructose metabolism (HFI/essential fructosuria:
+#      fructose), the polyol pathway (sorbitol, in diabetic/galactose flux), the
+#      pentitol/tetritol disorders (ribitol/D-arabinitol/erythritol/threitol in
+#      transaldolase deficiency & ribose-5-P-isomerase / RFT1-CDG; CSF polyols in
+#      the polyol-pathway leukodystrophies), 1,5-anhydroglucitol (a short-term
+#      glycemic marker that FALLS with glycosuria), L-xylulose (essential
+#      pentosuria / DCXR), L-fucose (fucosidosis), N-acetylneuraminic acid (sialuria
+#      / Salla), sedoheptulose (SHPK / sedoheptulokinase), and the urinary
+#      oligo/di-saccharide patterns of the oligosaccharidoses & Pompe (Glc4),
+#      sucrase-isomaltase / lactase deficiency, etc.
+#      Refs: Lehninger Principles of Biochemistry (galactose, fructose, pentose-
+#      phosphate & polyol pathways); Scriver's OMMBID / Saudubray "Inborn Metabolic
+#      Diseases" (galactosemia, HFI, pentosuria, polyol disorders, oligosaccharidoses);
+#      Boron & Boulpaep Medical Physiology (intestinal disaccharidases, renal
+#      glucose/polyol handling); Harrison's (inborn errors of carbohydrate metabolism).
+#
+#  (B) INTRACELLULAR / MEMBRANE ENZYME & TRANSPORTER ACTIVITIES (scale cellular),
+#      each borne by a named cell/organ. These are the lesion loci of the
+#      glycogenoses (phosphorylase kinase PHK, liver/muscle glycogen phosphorylase,
+#      glycogen debrancher AGL, muscle PFK [Tarui], G6P-translocase SLC37A4 [GSD-Ib]),
+#      galactosemias (GALT/GALK/GALE), the glycolytic erythroenzymopathies
+#      (G6PD, hexokinase, glucose-phosphate isomerase, aldolase B, pyruvate kinase,
+#      bisphosphoglycerate mutase), gluconeogenic defects (FBPase, PEPCK, aldolase B),
+#      the CDGs (PMM2 [CDG-Ia], MPI [CDG-Ib], FUT [LAD-II/FUT-CDG]), glycerol-kinase
+#      deficiency, and the disaccharidase deficiencies (sucrase-isomaltase, lactase).
+#      Refs: Lehninger (glycolysis, glycogen, gluconeogenesis, PPP, N-glycosylation);
+#      Williams Hematology (G6PD / HK / GPI / PK / aldolase / BPGM erythroenzymopathies);
+#      Scriver's OMMBID (GSDs, CDGs, galactosemias); Harrison's "Glycogen-storage
+#      diseases & glycolytic defects".
+#
+# SIGN POLICY / EDGES: this is deliberately an ISLAND fragment with NO causal edges.
+#   Each enzyme-activity node is a do()-clampable molecular root; each metabolite
+#   pool is the downstream readout of one (often disease-specific) lesion. A single
+#   defensible signed driver per analyte across the corpus does not exist without a
+#   per-disorder flux node that is not modelled here, so per PhysioMap policy we
+#   prefer NO edge over a guessed one. Every node is grounded and abstains; the HPO
+#   directional terms map onto these grounded variables (the comparative-statics
+#   value for these leaf markers is the do()-clamp itself).
+#
+#   NOTE — all nodes are defined here; none of these analytes pre-exist in the
+#   corpus (checked vs ontology/.obo_cache/node_inventory.tsv). The many G6PD HPO
+#   terms (tissue/blood/RBC/leukocyte/dried-blood-spot, increased & decreased) all
+#   collapse to the single `g6pd_activity` node (same enzyme, opposite signs); the
+#   GALE terms (circulating/erythrocyte, increased & decreased) collapse to
+#   `udp_glucose_4_epimerase_activity`; phosphorylase-kinase terms (hepatic/muscle/
+#   tissue) collapse to `phosphorylase_kinase_activity`.
+#
+# ENTITY IRIs: verified by grep against ontology/.obo_cache (CHEBI/PR/GO/CL/UBERON).
+#   Small molecules -> CHEBI; protein enzymes -> PR; multi-subunit complexes -> GO;
+#   bearer cells -> CL; tissue/organ -> UBERON. IRIs left null where no exact OBO
+#   'name:' match (oligosaccharide mixtures, isoenzyme-pool activities).
+# =============================================================================
+
+name: hpo_carbohydrate_metabolites
+description: >-
+  DRAFT carbohydrate-metabolite HPO coverage fragment. Carbohydrate/polyol pools in
+  plasma/serum, urine, CSF, and red cells (galactose, galactitol, galactonate,
+  sorbitol, fructose, L-fucose, L-xylulose, N-acetylneuraminate, sedoheptulose,
+  ribitol/ribose, arabinitol/arabitol, erythritol, threitol, xylitol, 1,5-
+  anhydroglucitol, disaccharides & oligosaccharides) plus muscle glycogen content,
+  and the carbohydrate-pathway enzyme/transporter activities of the glycogenoses,
+  galactosemias, glycolytic erythroenzymopathies, gluconeogenic defects, CDGs and
+  disaccharidase deficiencies. Island fragment (no causal edges) — grounded leaf
+  variables that abstain pending defensible per-disorder flux mechanism nodes.
+
+nodes:
+  # === (A) carbohydrate / polyol pools ========================================
+  # --- galactose pathway ------------------------------------------------------
+  - id: plasma_galactose
+    label: plasma galactose concentration
+    scale: organ_system
+    entity_iri: CHEBI:28260            # galactose (verified CHEBI.obo)
+    quality_iri: PATO:0000033          # concentration
+  - id: plasma_galactitol
+    label: plasma galactitol concentration
+    scale: organ_system
+    entity_iri: CHEBI:16813            # galactitol (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: urinary_galactitol
+    label: urinary galactitol excretion (concentration)
+    scale: organ_system
+    entity_iri: CHEBI:16813            # galactitol (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: erythrocyte_galactitol
+    label: erythrocyte galactitol concentration
+    scale: cellular
+    entity_iri: CHEBI:16813            # galactitol (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+    bearer_entity_iri: CL:0000232      # erythrocyte (verified CL.obo)
+  - id: erythrocyte_galactonate
+    label: erythrocyte galactonate concentration
+    scale: cellular
+    entity_iri: CHEBI:24148            # galactonate (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+    bearer_entity_iri: CL:0000232      # erythrocyte (verified CL.obo)
+
+  # --- polyol pathway / glycemic markers --------------------------------------
+  - id: plasma_sorbitol
+    label: serum sorbitol concentration
+    scale: organ_system
+    entity_iri: CHEBI:17924            # D-glucitol (= D-sorbitol; verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_anhydroglucitol
+    label: serum 1,5-anhydroglucitol concentration
+    scale: organ_system
+    entity_iri: CHEBI:16070            # 1,5-anhydro-D-glucitol (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+
+  # --- fructose / fucose / sialic acid ----------------------------------------
+  - id: urinary_fructose
+    label: urine fructose concentration
+    scale: organ_system
+    entity_iri: CHEBI:28757            # fructose (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: urinary_fucose
+    label: urinary L-fucose concentration
+    scale: organ_system
+    entity_iri: CHEBI:18287            # L-fucose (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: urinary_n_acetylneuraminate
+    label: urinary N-acetylneuraminic acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:17012            # N-acetylneuraminic acid (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+
+  # --- pentose / pentitol / tetritol pools ------------------------------------
+  - id: urinary_l_xylulose
+    label: urine L-xylulose concentration
+    scale: organ_system
+    entity_iri: CHEBI:17399            # L-xylulose (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: urinary_ribose
+    label: urine ribose concentration
+    scale: organ_system
+    entity_iri: CHEBI:33942            # ribose (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: csf_ribose
+    label: CSF ribose concentration
+    scale: organ_system
+    entity_iri: CHEBI:33942            # ribose (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_ribitol
+    label: circulating ribitol concentration
+    scale: organ_system
+    entity_iri: CHEBI:15963            # ribitol (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: urinary_ribitol
+    label: urine ribitol concentration
+    scale: organ_system
+    entity_iri: CHEBI:15963            # ribitol (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: csf_ribitol
+    label: CSF ribitol concentration
+    scale: organ_system
+    entity_iri: CHEBI:15963            # ribitol (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_arabinitol
+    label: circulating arabinitol concentration
+    scale: organ_system
+    entity_iri: CHEBI:22605            # arabinitol (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: urinary_arabitol
+    label: urine arabitol concentration
+    scale: organ_system
+    entity_iri: CHEBI:22605            # arabinitol (= arabitol; verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: urinary_xylitol
+    label: urine xylitol concentration
+    scale: organ_system
+    entity_iri: CHEBI:17151            # xylitol (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: csf_xylitol
+    label: CSF xylitol concentration
+    scale: organ_system
+    entity_iri: CHEBI:17151            # xylitol (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_erythritol
+    label: circulating erythritol concentration
+    scale: organ_system
+    entity_iri: CHEBI:17113            # erythritol (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: urinary_erythritol
+    label: urine erythritol concentration
+    scale: organ_system
+    entity_iri: CHEBI:17113            # erythritol (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: csf_erythritol
+    label: CSF erythritol concentration
+    scale: organ_system
+    entity_iri: CHEBI:17113            # erythritol (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_d_threitol
+    label: plasma D-threitol concentration
+    scale: organ_system
+    entity_iri: CHEBI:48300            # D-threitol (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: urinary_d_threitol
+    label: urine D-threitol concentration
+    scale: organ_system
+    entity_iri: CHEBI:48300            # D-threitol (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: csf_d_threitol
+    label: CSF D-threitol concentration
+    scale: organ_system
+    entity_iri: CHEBI:48300            # D-threitol (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: urinary_sedoheptulose
+    label: urinary sedoheptulose concentration
+    scale: organ_system
+    entity_iri: CHEBI:16802            # sedoheptulose (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+
+  # --- oligo/di-saccharide urinary patterns -----------------------------------
+  - id: urinary_disaccharides
+    label: urinary disaccharide excretion (concentration)
+    scale: organ_system
+    entity_iri: CHEBI:36233            # disaccharide (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: urinary_glucose_tetrasaccharide
+    label: urine glucose tetrasaccharide (Glc4) concentration
+    scale: organ_system
+    entity_iri: CHEBI:50126            # tetrasaccharide (generic; verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: urinary_glcnac_oligosaccharide
+    label: urinary N-acetylglucosamine-rich oligosaccharide concentration
+    scale: organ_system
+    # GlcNAc-rich oligosaccharide mixture — no exact CHEBI single-compound match -> null
+    quality_iri: PATO:0000033
+  - id: urinary_galactosylated_oligosaccharide
+    label: urinary galactosylated oligosaccharide concentration
+    scale: organ_system
+    # galactosylated oligosaccharide mixture — no exact CHEBI single-compound match -> null
+    quality_iri: PATO:0000033
+
+  # --- muscle glycogen storage pool -------------------------------------------
+  - id: muscle_glycogen_content
+    label: skeletal-muscle glycogen content
+    scale: tissue
+    entity_iri: CHEBI:28087            # glycogen (verified below)
+    quality_iri: PATO:0000070          # amount
+    bearer_entity_iri: UBERON:0001134  # skeletal muscle tissue (verified UBERON.obo)
+
+  # === (B) enzyme / transporter activities (cellular) =========================
+  # --- glycogenoses -----------------------------------------------------------
+  - id: phosphorylase_kinase_activity
+    label: phosphorylase kinase (PHK) catalytic activity
+    scale: cellular
+    entity_iri: GO:0005964             # phosphorylase kinase complex (verified GO.obo)
+    quality_iri: PATO:0001414          # catalytic activity
+    # hepatic & muscle isoforms collapse to one PHK-activity node (tissue-agnostic)
+  - id: glycogen_phosphorylase_activity
+    label: hepatic glycogen phosphorylase (PYGL) catalytic activity
+    scale: cellular
+    entity_iri: PR:000013521           # glycogen phosphorylase, liver form (verified PR.obo)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000182      # hepatocyte (verified CL.obo)
+  - id: myophosphorylase_activity
+    label: skeletal-muscle glycogen phosphorylase (PYGM, myophosphorylase) catalytic activity
+    scale: cellular
+    entity_iri: PR:000013522           # glycogen phosphorylase, muscle form (verified PR.obo)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0008002      # skeletal muscle fiber (verified CL.obo)
+  - id: glycogen_debrancher_activity
+    label: glycogen debranching enzyme (AGL) catalytic activity
+    scale: cellular
+    entity_iri: PR:000003832           # glycogen debranching enzyme (verified PR.obo)
+    quality_iri: PATO:0001414
+  - id: glucose_6_phosphate_translocase_activity
+    label: hepatic glucose-6-phosphate translocase (SLC37A4) transport activity
+    scale: cellular
+    entity_iri: PR:000015117           # glucose-6-phosphate exchanger SLC37A4 (verified PR.obo)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000182      # hepatocyte (verified CL.obo)
+  - id: phosphofructokinase_activity
+    label: skeletal-muscle 6-phosphofructokinase (PFKM) catalytic activity
+    scale: cellular
+    entity_iri: PR:000012583           # ATP-dependent 6-phosphofructokinase, muscle type (verified PR.obo)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0008002      # skeletal muscle fiber (verified CL.obo)
+
+  # --- galactosemia enzymes ---------------------------------------------------
+  - id: galt_activity
+    label: galactose-1-phosphate uridylyltransferase (GALT) catalytic activity
+    scale: cellular
+    entity_iri: PR:000007834           # galactose-1-phosphate uridylyltransferase (verified PR.obo)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000232      # erythrocyte (RBC GALT assay; verified CL.obo)
+  - id: galactokinase_activity
+    label: galactokinase (GALK1) catalytic activity
+    scale: cellular
+    entity_iri: PR:000007813           # galactokinase (verified PR.obo)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000232      # erythrocyte (verified CL.obo)
+  - id: udp_glucose_4_epimerase_activity
+    label: UDP-glucose 4-epimerase (GALE) catalytic activity
+    scale: cellular
+    entity_iri: PR:000007812           # UDP-glucose 4-epimerase (verified PR.obo)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000232      # erythrocyte (verified CL.obo)
+
+  # --- glycolytic erythroenzymopathies ----------------------------------------
+  - id: hexokinase_activity
+    label: erythrocyte hexokinase-1 (HK1) catalytic activity
+    scale: cellular
+    entity_iri: PR:000008608           # hexokinase-1 (verified PR.obo)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000232      # erythrocyte (verified CL.obo)
+  - id: glucose_phosphate_isomerase_activity
+    label: glucose-6-phosphate isomerase (GPI) catalytic activity
+    scale: cellular
+    entity_iri: PR:000008175           # glucose-6-phosphate isomerase (verified PR.obo)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000232      # erythrocyte (verified CL.obo)
+  - id: aldolase_b_activity
+    label: fructose-bisphosphate aldolase B (ALDOB) catalytic activity
+    scale: cellular
+    entity_iri: PR:000003935           # fructose-bisphosphate aldolase B (verified PR.obo)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000182      # hepatocyte (verified CL.obo)
+  - id: bisphosphoglycerate_mutase_activity
+    label: erythrocyte bisphosphoglycerate mutase (BPGM) catalytic activity
+    scale: cellular
+    entity_iri: PR:000004792           # bisphosphoglycerate mutase (verified PR.obo)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000232      # erythrocyte (verified CL.obo)
+  - id: pyruvate_kinase_activity
+    label: erythrocyte pyruvate kinase (PKLR) catalytic activity
+    scale: cellular
+    entity_iri: PR:000012782           # pyruvate kinase PKLR (verified PR.obo)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000232      # erythrocyte (verified CL.obo)
+  - id: g6pd_activity
+    label: glucose-6-phosphate dehydrogenase (G6PD) catalytic activity
+    scale: cellular
+    entity_iri: PR:000007749           # glucose-6-phosphate 1-dehydrogenase (verified PR.obo)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000232      # erythrocyte (RBC G6PD assay; verified CL.obo)
+
+  # --- gluconeogenesis defects ------------------------------------------------
+  - id: fructose_1_6_bisphosphatase_activity
+    label: fructose-1,6-bisphosphatase 1 (FBP1) catalytic activity
+    scale: cellular
+    entity_iri: PR:000007365           # fructose-1,6-bisphosphatase 1 (verified PR.obo)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000182      # hepatocyte (verified CL.obo)
+  - id: pepck_activity
+    label: cytosolic phosphoenolpyruvate carboxykinase (PCK1) catalytic activity
+    scale: cellular
+    entity_iri: PR:000012416           # phosphoenolpyruvate carboxykinase, cytosolic [GTP] (verified PR.obo)
+    quality_iri: PATO:0001414
+
+  # --- congenital disorders of glycosylation (CDG) ----------------------------
+  - id: phosphomannomutase_activity
+    label: phosphomannomutase 2 (PMM2) catalytic activity
+    scale: cellular
+    entity_iri: PR:000012908           # phosphomannomutase 2 (verified PR.obo)
+    quality_iri: PATO:0001414
+  - id: phosphomannose_isomerase_activity
+    label: mannose-6-phosphate isomerase (MPI, phosphomannose isomerase) catalytic activity
+    scale: cellular
+    entity_iri: PR:000010540           # mannose-6-phosphate isomerase (verified PR.obo)
+    quality_iri: PATO:0001414
+  - id: alpha_1_3_fucosyltransferase_activity
+    label: alpha-(1,3)-fucosyltransferase catalytic activity
+    scale: cellular
+    entity_iri: PR:000001320           # alpha-(1,3)-fucosyltransferase (verified PR.obo)
+    quality_iri: PATO:0001414
+
+  # --- glycerol kinase --------------------------------------------------------
+  - id: glycerol_kinase_activity
+    label: glycerol kinase (GK) catalytic activity
+    scale: cellular
+    entity_iri: PR:000008010           # glycerol kinase (verified PR.obo)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000057      # fibroblast (cultured-fibroblast assay; verified CL.obo)
+
+  # --- intestinal disaccharidases ---------------------------------------------
+  - id: intestinal_lactase_activity
+    label: small-intestinal mucosal lactase (lactase-phlorizin hydrolase, LCT) activity
+    scale: cellular
+    entity_iri: PR:000009734           # lactase/phlorizin hydrolase (verified PR.obo)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000584      # enterocyte (verified CL.obo)
+  - id: sucrase_isomaltase_activity
+    label: small-intestinal mucosal sucrase-isomaltase (SI) activity
+    scale: cellular
+    entity_iri: PR:000014858           # sucrase-isomaltase, intestinal (verified PR.obo)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000584      # enterocyte (verified CL.obo)
+
+causal_edges: []          # island fragment — no defensible single-sign mechanism (see header)
+constitutive_edges: []

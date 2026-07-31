@@ -1,0 +1,59 @@
+# =============================================================================
+# Human-scale map WITH a molecular vertical attached      *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Composes the whole-body human map with the subcellular vascular-tone vertical
+# (benchmarks/multiscale/vascular_tone.yaml), whose top constitutive edge attaches under
+# the organ-system node `total_peripheral_resistance`. Scored with the UNIFIED multi-scale
+# solver (`multiscale: true`): causal comparative statics + upward constitutive
+# determination, interleaved.
+#
+# What this demonstrates: a MOLECULAR drug intervention (acting on a receptor / channel)
+# propagates *up a scale* by determination to the cellular tone, which a single-scale
+# causal solve cannot reach. The organ target (`total_peripheral_resistance`) and its
+# downstream consequences sit in the ~31-node whole-body feedback SCC, so their net sign
+# is loop-magnitude-dependent and is honestly returned as '?' (never a wrong sign) — the
+# same frontier seen for organ-level interventions, now shown to be scale-agnostic.
+# =============================================================================
+
+multiscale: true
+
+systems:
+  - ../guyton/guyton_cv_core.yaml
+  - ../human/systems/glucose_insulin.yaml
+  - ../human/systems/thyroid.yaml
+  - ../human/systems/adrenal_cortisol.yaml
+  - ../human/systems/calcium_pth.yaml
+  - ../human/systems/respiratory_acidbase.yaml
+  - ../human/systems/thermoregulation.yaml
+  - ../human/systems/george_heart_rate.yaml
+  - ../human/systems/hematology_epo.yaml
+  - ../human/systems/body_fluids_osmolality.yaml
+  - ../multiscale/vascular_tone.yaml
+
+interventions:
+  - id: arb_angiotensin_receptor_blocker
+    label: ARB — block vascular AT1 receptor (molecular drug)
+    description: >-
+      A molecular-scale intervention (do at1_receptor_activity = -). The subcellular
+      signalling chain falls (Ca2+ -, MLC-phosphorylation -); determination lifts this to
+      the cellular vascular smooth-muscle tone (-). The organ-system resistance it
+      constitutes is embedded in the whole-body feedback SCC, so its net sign is '?'.
+    do: {at1_receptor_activity: "-"}
+    expected:
+      intracellular_calcium: "-"
+      mlc_phosphorylation: "-"
+      vascular_smooth_muscle_tone: "-"   # cross-scale determinate win (causal-only: unreachable)
+      total_peripheral_resistance: "-"   # physiological expectation; loop-trapped -> '?' (honest)
+    loop_critical: []
+
+  - id: calcium_channel_blocker
+    label: Calcium-channel blocker — lower VSMC cytosolic Ca2+ (molecular drug)
+    description: >-
+      do intracellular_calcium = -. Lowers MLC-phosphorylation and, by determination,
+      cellular vascular tone; organ resistance is loop-trapped -> '?'.
+    do: {intracellular_calcium: "-"}
+    expected:
+      mlc_phosphorylation: "-"
+      vascular_smooth_muscle_tone: "-"   # cross-scale determinate win
+      total_peripheral_resistance: "-"   # loop-trapped -> '?'
+    loop_critical: []

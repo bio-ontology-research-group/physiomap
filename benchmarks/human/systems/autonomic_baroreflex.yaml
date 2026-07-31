@@ -1,0 +1,197 @@
+# =============================================================================
+# Autonomic baroreflex detail — PhysioMap fragment      *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Hand-encoded arterial (high-pressure) baroreflex arc, refining the lumped
+# Guyton baroreflex. Every edge sign is sign(d target*/d source) at steady state,
+# all else equal (the interventionist partial).
+#
+# The reflex is a NEGATIVE-FEEDBACK loop that buffers mean arterial pressure (MAP):
+#   MAP up -> carotid/aortic baroreceptor_firing_rate up
+#     -> sympathetic_tone down  AND  parasympathetic_tone (vagal) up
+#   sympathetic_tone -> norepinephrine up, epinephrine up (adrenal medulla),
+#                       heart_rate up, total_peripheral_resistance up
+#   parasympathetic_tone -> heart_rate down
+#   (heart_rate, TPR) -> MAP  ... closing the loop with net negative sign.
+# Getting the NET sign right under this loop is the whole point: naive forward
+# propagation mis-signs it; the comparative-statics solver must close the loop.
+#
+# Scale: ORGAN_SYSTEM (neural + circulatory). No cross-scale constitutive edges.
+#
+# Sources (all verified):
+#   - BioModels MODEL2101280001 — Schölzel et al. 2015, "Modeling Biology in
+#     Modelica: The Human Baroreflex", Proc. 11th Int. Modelica Conf.,
+#     doi:10.3384/ecp15118367 — a Modelica implementation of the Seidel-Herzel
+#     baroreflex model (Seidel & Herzel 1998, Physica D 115:145-160).
+#   - Guyton & Hall, Textbook of Medical Physiology — "Nervous Regulation of the
+#     Circulation" / baroreceptor (pressoreceptor) reflex chapter.
+#   - Boron & Boulpaep, Medical Physiology — Regulation of Arterial Pressure and
+#     Cardiac Output (arterial baroreflex; sympathetic/parasympathetic control).
+#
+# Boundary nodes (owned by sibling fragments / Guyton core; do NOT redefine):
+#   mean_arterial_pressure, sympathetic_tone, heart_rate, total_peripheral_resistance
+# These are EXPECTED to be unresolved when this file is loaded standalone.
+# ROBERT: please correct any signs.
+# =============================================================================
+
+name: autonomic_baroreflex
+description: >-
+  DRAFT arterial baroreflex fragment as a PhysioMap signed cyclic causal graph.
+  Owns baroreceptor_firing_rate, parasympathetic_tone, norepinephrine, epinephrine;
+  encodes the negative-feedback arc buffering mean arterial pressure via reciprocal
+  sympathetic/parasympathetic control of heart rate and peripheral resistance.
+  Single-scale (Phase 1). Sources: BioModels MODEL2101280001 (Schölzel 2015,
+  Seidel-Herzel human baroreflex); Guyton & Hall; Boron & Boulpaep.
+
+nodes:
+  - id: baroreceptor_firing_rate
+    label: arterial (carotid sinus + aortic arch) baroreceptor afferent firing rate
+    scale: organ_system
+    entity_iri: GO:0001981             # baroreceptor detection of arterial stretch
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0003708  # carotid sinus
+  - id: parasympathetic_tone
+    label: cardiac parasympathetic (vagal) efferent tone
+    scale: organ_system
+    entity_iri: UBERON:0001759         # vagus nerve
+    quality_iri: PATO:0000161          # rate (efferent activity)
+  - id: norepinephrine
+    label: plasma / sympathetic-synaptic norepinephrine concentration
+    scale: organ_system
+    entity_iri: CHEBI:18357            # noradrenaline / norepinephrine
+    quality_iri: PATO:0000033          # concentration
+  - id: epinephrine
+    label: plasma epinephrine (adrenal medullary) concentration
+    scale: organ_system
+    entity_iri: CHEBI:28918            # adrenaline / epinephrine
+    quality_iri: PATO:0000033          # concentration
+
+  # --- cellular producers (cross-scale grounding of secreted catecholamines) ---
+  - id: adrenal_chromaffin_cell_epinephrine_secretion
+    label: adrenal medulla chromaffin cell epinephrine secretion rate
+    scale: cellular
+    entity_iri: GO:0048242             # epinephrine secretion
+    quality_iri: PATO:0000161
+    bearer_entity_iri: CL:0000336  # adrenal medulla chromaffin cell
+  - id: sympathetic_noradrenergic_neuron_norepinephrine_secretion
+    label: sympathetic postganglionic noradrenergic neuron norepinephrine secretion rate
+    scale: cellular
+    entity_iri: GO:0048243             # norepinephrine secretion
+    quality_iri: PATO:0000161
+    bearer_entity_iri: CL:3000002  # sympathetic noradrenergic neuron
+
+causal_edges:
+  # --- afferent limb: pressure sensed by mechanoreceptors ---------------------
+  - source: mean_arterial_pressure
+    target: baroreceptor_firing_rate
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: >-
+      rising arterial pressure stretches the carotid-sinus / aortic-arch vessel wall;
+      mechanosensitive baroreceptor disposition -> increased afferent action-potential
+      firing carried via glossopharyngeal/vagal afferents to the NTS.
+    evidence: "Guyton & Hall — baroreceptor reflex (stretch raises afferent firing); BioModels MODEL2101280001 (Schölzel 2015 / Seidel-Herzel 1998) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-075 (13.4: Circulation and the Central Nervous System): 'The bases of the common carotids contain stretch receptors that immediately respond to the drop in blood pressure upon standing... Heart rate increases—a reflex of the sympathetic division of the autonomic nervous system—and this raises blood pressure.' Confirms carotid baroreceptors respond to arterial pressure changes, raising baroreceptor firing.; OpenStax Anatomy & Physiology 2e §anp-109 (19.5: Cardiac Physiology): 'baroreceptors are stretch receptors … Rates of firing from the baroreceptors represent blood pressure … With increased pressure and stretch, the rate of baroreceptor firing increases.'; OpenStax Anatomy & Physiology 2e §anp-114 (20.5: Homeostatic Regulation of the Vascular System): 'When blood pressure increases, the baroreceptors are stretched more tightly and initiate action potentials at a higher rate.'; OpenStax Anatomy & Physiology 2e §anp-153 (Regulation of Fluid Volume and Composition): 'blood pressure can be measured... measured by baroreceptors in the aorta and carotid sinuses. When blood pressure increases, baroreceptors send more frequent action potentials'; OpenStax Biology 2e §bio-36.2 (36.2: Somatosensation): 'Baroreceptors detect pressure changes in an organ. They are found in the walls of the carotid artery and the aorta where they monitor blood pressure'"
+
+  # --- central efferent limb: reciprocal autonomic outflow --------------------
+  - source: baroreceptor_firing_rate
+    target: sympathetic_tone
+    sign: "-"
+    causal_evidence: mechanistic_model
+    mechanism: >-
+      baroreceptor afferents excite NTS -> caudal VLM inhibition of the rostral VLM
+      vasomotor centre, withdrawing sympathetic vasoconstrictor/cardiac outflow.
+    evidence: "Guyton & Hall — baroreceptor inhibition of vasomotor centre; Boron & Boulpaep — arterial baroreflex; BioModels MODEL2101280001 (Schölzel 2015) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-075 (13.4: Circulation and the Central Nervous System): 'Heart rate increases—a reflex of the sympathetic division of the autonomic nervous system'—corroborates that baroreceptor activation (in response to pressure drop) leads to sympathetic activation of heart rate; when pressure drops, baroreceptors fire less, sympathetic tone rises.; OpenStax Anatomy & Physiology 2e §anp-114 (20.5: Homeostatic Regulation of the Vascular System): 'When blood pressure rises too high, the baroreceptors fire at a higher rate...Sympathetic stimulation of the peripheral arterioles will also decrease, resulting in vasodilation.'; OpenStax Anatomy & Physiology 2e §anp-153 (Regulation of Fluid Volume and Composition): 'If pressure decreases, fewer action potentials travel to the central nervous system, resulting in more sympathetic stimulation-producing vasoconstriction'"
+  - source: baroreceptor_firing_rate
+    target: parasympathetic_tone
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: >-
+      baroreceptor afferents via NTS excite the nucleus ambiguus / dorsal vagal motor
+      neurons, increasing vagal efferent (cardioinhibitory) tone.
+    evidence: "Guyton & Hall — baroreceptor activation of vagal centre; Boron & Boulpaep — parasympathetic cardiac control; BioModels MODEL2101280001 (Schölzel 2015) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-114 (20.5: Homeostatic Regulation of the Vascular System): 'When blood pressure rises too high, the baroreceptors fire at a higher rate and trigger parasympathetic stimulation of the heart.'"
+
+  # --- sympathetic effector chain --------------------------------------------
+  - source: sympathetic_tone
+    target: norepinephrine
+    sign: "+"
+    causal_evidence: curated_mechanistic
+    mechanism: >-
+      postganglionic sympathetic nerve activity drives noradrenaline release at
+      cardiac and vascular adrenergic terminals (raising synaptic/plasma NE).
+    evidence: "Boron & Boulpaep — sympathetic norepinephrine release; Guyton & Hall — autonomic transmitters | textbook corroboration: OpenStax Biology 2e §bio-37.4 (37.4: Regulation of Hormone Production): neuronal signaling from sympathetic nervous system directly stimulates adrenal medulla to release epinephrine and norepinephrine; StatPearls NBK507716 (Physiology, Catecholamines, opened): NE is secreted by sympathetic nerve endings, with a2-autoreceptor feedback modulating its release"
+  - source: sympathetic_tone
+    target: epinephrine
+    sign: "+"
+    causal_evidence: curated_mechanistic
+    mechanism: >-
+      preganglionic sympathetic drive to the adrenal medulla evokes chromaffin-cell
+      catecholamine secretion, raising circulating epinephrine.
+    evidence: "Guyton & Hall — adrenal medullary secretion by sympathetic stimulation; Boron & Boulpaep | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-080 (15.2: Divisions of the Autonomic Nervous System): sympathetic preganglionic fibers project to adrenal medulla chromaffin cells, which 'release signaling molecules into the bloodstream' (epinephrine and norepinephrine).; OpenStax Biology 2e §bio-37.4 (37.4: Regulation of Hormone Production): sympathetic nervous system directly stimulates adrenal medulla to release epinephrine and norepinephrine in response to stress (neural stimulus example); StatPearls NBK507716 (Physiology, Catecholamines, opened): epinephrine is synthesized in adrenal-medulla chromaffin cells and released into the bloodstream, rapidly under sympathetic/stress drive"
+  - source: norepinephrine
+    target: total_peripheral_resistance
+    sign: "+"
+    causal_evidence: pharmacological
+    mechanism: >-
+      norepinephrine activates arteriolar alpha-1 adrenoceptors -> vascular smooth
+      muscle contraction -> vasoconstriction raising systemic resistance.
+    evidence: "Guyton & Hall — alpha-adrenergic vasoconstriction; Boron & Boulpaep — adrenergic vascular tone | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-081 (15.3: Autonomic Reflexes and Homeostasis): norepinephrine from sympathetic postganglionic fibers binds adrenergic receptors on systemic blood vessels causing constriction and increased blood pressure.; OpenStax Anatomy & Physiology 2e §anp-094 (17.7: The Adrenal Glands): 'it triggers vasoconstriction to blood vessels serving less essential organs such as the gastrointestinal tract, kidneys, and skin.'; OpenStax Biology 2e §bio-35.4 (35.4: The Peripheral Nervous System): sympathetic norepinephrine release causes vasoconstriction, moving blood from skin to heart/muscles/brain, increasing peripheral resistance.; OpenStax Biology 2e §bio-41.5 (41.5: Hormonal Control of Osmoregulatory Functions): 'These hormones [epinephrine and norepinephrine] function by acting directly on the smooth muscles of blood vessels to constrict them.'"
+  - source: norepinephrine
+    target: heart_rate
+    sign: "+"
+    causal_evidence: pharmacological
+    mechanism: >-
+      norepinephrine at SA-node beta-1 adrenoceptors increases pacemaker If/Ca current,
+      raising the rate of spontaneous depolarisation (positive chronotropy).
+    evidence: "Boron & Boulpaep — beta-1 chronotropy; Guyton & Hall — sympathetic cardiac stimulation | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-081 (15.3: Autonomic Reflexes and Homeostasis): norepinephrine binds adrenergic receptors on SA-node cells, causing faster depolarization and increased heart rate.; OpenStax Anatomy & Physiology 2e §anp-094 (17.7: The Adrenal Glands): 'These hormones increase the heart rate, pulse, and blood pressure.'; OpenStax Anatomy & Physiology 2e §anp-109 (19.5: Cardiac Physiology): 'NE shortens the repolarization period, thus speeding the rate of depolarization and contraction, which results in an increase in HR.'; OpenStax Biology 2e §bio-35.4 (35.4: The Peripheral Nervous System): 'The physiological effects of this norepinephrine release include...increasing heart rate'."
+  - source: epinephrine
+    target: heart_rate
+    sign: "+"
+    causal_evidence: pharmacological
+    mechanism: >-
+      circulating epinephrine acts on SA-node beta-1 (and beta-2) adrenoceptors,
+      reinforcing positive chronotropy.
+    evidence: "Guyton & Hall — adrenal medullary catecholamines augment heart rate; Boron & Boulpaep | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-081 (15.3: Autonomic Reflexes and Homeostasis): adrenal medullary epinephrine (and norepinephrine) binds adrenergic receptors; referenced in the same passage as the sympathetic control of heart rate pacemaker cells.; OpenStax Anatomy & Physiology 2e §anp-094 (17.7: The Adrenal Glands): 'These hormones increase the heart rate, pulse, and blood pressure to prepare the body to fight the perceived threat or flee from it.'; OpenStax Anatomy & Physiology 2e §anp-109 (19.5: Cardiac Physiology): 'The catecholamines, epinephrine and NE … binding to the beta-1 receptors … The rate of depolarization is increased by this additional influx of positively charged ions, so the threshold is reached more quickly.'; OpenStax Anatomy & Physiology 2e §anp-138 (24.2: Overview of Metabolic Reactions): 'adrenaline/epinephrine... increases heart rate'; OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): 'Epinephrine and norepinephrine increase heart rate, breathing rate, cardiac muscle contractions, blood pressure, and blood glucose levels.'"
+
+  # --- parasympathetic effector ----------------------------------------------
+  - source: parasympathetic_tone
+    target: heart_rate
+    sign: "-"
+    causal_evidence: pharmacological
+    mechanism: >-
+      vagal acetylcholine at SA-node M2 muscarinic receptors opens GIRK K+ channels and
+      slows pacemaker depolarisation (negative chronotropy), lowering heart rate.
+    evidence: "Guyton & Hall — vagal slowing of heart rate; Boron & Boulpaep — muscarinic SA-node control; BioModels MODEL2101280001 (Schölzel 2015) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-059 (10.8: Cardiac Muscle Tissue): pacemaker cells respond to ANS signals to slow down heart rate; OpenStax Anatomy & Physiology 2e §anp-080 (15.2: Divisions of the Autonomic Nervous System): 'the other causes heart rate to decrease' (parasympathetic division).; OpenStax Anatomy & Physiology 2e §anp-081 (15.3: Autonomic Reflexes and Homeostasis): ACh on muscarinic receptors causes SA-node hyperpolarization, slowing heart rate to 60–80 bpm; parasympathetic system is the basis of resting (parasympathetic) cardiac tone.; OpenStax Anatomy & Physiology 2e §anp-082 (15.4: Central Control): dorsal motor nucleus of vagus nerve decreases heart rate; parasympathetic system slows heart rate from ~100 bpm to resting ~70 bpm via vagal M2 muscarinic signalling at the SA node; OpenStax Anatomy & Physiology 2e §anp-083 (15.5: Drugs that Affect the Autonomic System): 'the autonomic system does not cause the heart to beat, it just speeds it up (sympathetic) or slows it down (parasympathetic)'; also confirmed in review: 'sympathetic system increases heart rate, whereas the parasympathetic system decreases heart rate'; OpenStax Anatomy & Physiology 2e §anp-109 (19.5: Cardiac Physiology): 'ACh slows HR by opening chemical- or ligand-gated potassium ion channels to slow the rate of spontaneous depolarization … parasympathetic stimulation normally slows HR.'; OpenStax Anatomy & Physiology 2e §anp-114 (20.5: Homeostatic Regulation of the Vascular System): 'When blood pressure rises too high...trigger parasympathetic stimulation of the heart. As a result, cardiac output falls.'; OpenStax Biology 2e §bio-33.2 (33.2: Animal Primary Tissues): 'Cardiac muscle is not under voluntary control but can be influenced by the autonomic nervous system to speed up or slow down' — parasympathetic stimulation slows heart rate; OpenStax Biology 2e §bio-35.4 (35.4: The Peripheral Nervous System): 'Effects of acetylcholine release on target organs include slowing of heart rate'."
+
+  # --- direct central sympathetic chronotropy (loop closure to HR) -----------
+  - source: sympathetic_tone
+    target: heart_rate
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: >-
+      direct cardiac sympathetic nerve activity (in addition to humoral NE) raises
+      SA-node firing; lumps the fast neural chronotropic limb of the reflex.
+    evidence: "Guyton & Hall — sympathetic cardiac nerves increase rate; BioModels MODEL2101280001 (Schölzel 2015) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-059 (10.8: Cardiac Muscle Tissue): pacemaker cells respond to ANS signals to speed up heart rate; OpenStax Anatomy & Physiology 2e §anp-075 (13.4: Circulation and the Central Nervous System): orthostatic reflex — 'Heart rate increases—a reflex of the sympathetic division of the autonomic nervous system—and this raises blood pressure.' Directly confirms sympathetic activation raises heart rate.; OpenStax Anatomy & Physiology 2e §anp-080 (15.2: Divisions of the Autonomic Nervous System): 'One causes heart rate to increase' (sympathetic division); 'the sympathetic system would increase heart rate.'; OpenStax Anatomy & Physiology 2e §anp-081 (15.3: Autonomic Reflexes and Homeostasis): norepinephrine on SA-node adrenergic receptors causes faster depolarization, increasing heart rate; sympathetic speeds heart from ~100 bpm to 120–140 bpm.; OpenStax Anatomy & Physiology 2e §anp-082 (15.4: Central Control): preganglionic sympathetic cardiac accelerator nerves increase heart rate; sympathetic activation during exercise raises heart rate to 120-140 bpm; OpenStax Anatomy & Physiology 2e §anp-083 (15.5: Drugs that Affect the Autonomic System): 'the autonomic system does not cause the heart to beat, it just speeds it up (sympathetic) or slows it down (parasympathetic)'; OpenStax Anatomy & Physiology 2e §anp-109 (19.5: Cardiac Physiology): 'The cardioaccelerator regions stimulate activity via sympathetic stimulation … increases in physical activity … increase sympathetic stimulation as needed in order to increase blood flow [and HR].'; OpenStax Anatomy & Physiology 2e §anp-114 (20.5: Homeostatic Regulation of the Vascular System): 'When blood pressure drops too low...trigger an increase in sympathetic stimulation of the heart, causing cardiac output to increase.'; OpenStax Biology 2e §bio-33.2 (33.2: Animal Primary Tissues): 'Cardiac muscle is not under voluntary control but can be influenced by the autonomic nervous system to speed up or slow down' — sympathetic stimulation increases heart rate; OpenStax Biology 2e §bio-35.4 (35.4: The Peripheral Nervous System): 'Examples of functions controlled by the sympathetic nervous system include an accelerated heart rate'."
+
+production_edges:
+  # --- cross-scale grounding of secreted catecholamines in their cell of origin ---
+  # CONSTITUTIVE production edges (NOT causal): the cellular secretion rate sets the macro
+  # plasma level. The producing cell is not part_of the catecholamine, so production is
+  # exempt from the part_of check. No downward macro->micro causal edges added.
+  #
+  # Adrenal medulla chromaffin cells secrete epinephrine (the dominant adrenomedullary
+  # catecholamine, ~80%); their secretion rate sets plasma epinephrine. (Guyton & Hall,
+  # Textbook of Medical Physiology — "The Adrenal Medulla"; Boron & Boulpaep, Medical
+  # Physiology — chromaffin-cell catecholamine secretion.)
+  - source: adrenal_chromaffin_cell_epinephrine_secretion
+    target: epinephrine
+    sign: "+"
+    production_evidence: legacy-evidence-unclassified
+  # Norepinephrine has a DUAL origin: it is released both by sympathetic postganglionic
+  # noradrenergic neurons at their nerve terminals (the dominant source of synaptic/plasma
+  # NE) and by adrenal medulla chromaffin cells (~20% of adrenomedullary output). Per the
+  # task we ground the verifiable dominant neuronal source. (Guyton & Hall — autonomic
+  # transmitters / sympathetic norepinephrine release; Boron & Boulpaep — noradrenergic
+  # postganglionic neurotransmission.)
+  - source: sympathetic_noradrenergic_neuron_norepinephrine_secretion
+    target: norepinephrine
+    sign: "+"
+    production_evidence: legacy-evidence-unclassified

@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0.0",
+  "review": {
+    "description": "Stratified expert review of released PhysioMap content",
+    "reviewer": "Paul N. Schofield",
+    "sample_sent_on": "2026-07-28",
+    "review_returned_on": "2026-07-30",
+    "sampling_seed": 20260728,
+    "email_message_id": "290B9FDD-7683-4E05-A9F0-32AB06C3A10A@cam.ac.uk"
+  },
+  "normalization": {
+    "TRUE": "accepted",
+    "FALSE?": "flagged for further review or investigation",
+    "FALSE": "rejected"
+  },
+  "sampling_frame": {
+    "path": "benchmarks/data/physiomap-scm-expert-review-2026-07-28.json.gz",
+    "archive_sha256": "5a3d55fd1934b694cc9b8555be194b4e19ddc77afcc285bd20573d4a048b8d68",
+    "content_sha256": "9e4ff3dba9c9c5754c38f4cf7c71188c6c628ccdc5fbe10a5514e7fa6d165afa"
+  },
+  "sample": {
+    "json_path": "benchmarks/results/expert_gold_sample.json",
+    "json_sha256": "1672875e3ee6b8f224dc411e69b52cdc3531353b70ef94f68f034ce8f9f5284b",
+    "tsv_path": "benchmarks/results/expert_gold_sample.tsv",
+    "tsv_sha256": "29a02b1188a9d9becf79b59ea197ab14c567e5596d1ed70eaa5864f9ed7a88c2"
+  },
+  "template": {
+    "path": "docs/physiomap_expert_gold_review_2026-07-28.xlsx",
+    "sha256": "dcd85e0d02cd3ddeb570d50eaaa5b6aa479d16fcac46774b9696c80266e4e06f",
+    "creator": "openpyxl",
+    "last_modified_by": null,
+    "created": "2026-07-28T13:33:49Z",
+    "modified": "2026-07-28T13:33:49Z"
+  },
+  "returned_workbook": {
+    "path": "docs/physiomap_expert_gold_review_returned_2026-07-30.xlsx",
+    "sha256": "21a629623ad21d54964d42265270241ef49910ab4df17af89fdd6c63aecb9a05",
+    "creator": "openpyxl",
+    "last_modified_by": "Paul Schofield",
+    "created": "2026-07-28T13:33:49Z",
+    "modified": "2026-07-30T23:00:57Z"
+  },
+  "integrity": {
+    "items": 83,
+    "identity_columns_unchanged": true,
+    "completed_verdicts": 83,
+    "comments": 39
+  },
+  "counts": {
+    "overall": {
+      "accepted": 69,
+      "flagged": 12,
+      "rejected": 2,
+      "reviewed": 83
+    },
+    "by_relation_type": {
+      "causal": {
+        "accepted": 42,
+        "flagged": 6,
+        "rejected": 2,
+        "reviewed": 50
+      },
+      "production": {
+        "accepted": 8,
+        "flagged": 2,
+        "rejected": 0,
+        "reviewed": 10
+      },
+      "constitution": {
+        "accepted": 4,
+        "flagged": 0,
+        "rejected": 0,
+        "reviewed": 4
+      },
+      "quantitative": {
+        "accepted": 8,
+        "flagged": 1,
+        "rejected": 0,
+        "reviewed": 9
+      },
+      "modulation": {
+        "accepted": 7,
+        "flagged": 3,
+        "rejected": 0,
+        "reviewed": 10
+      }
+    },
+    "comments": 39
+  }
+}

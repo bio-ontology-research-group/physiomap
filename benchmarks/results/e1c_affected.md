@@ -1,0 +1,243 @@
+# E1c — Affected-with-indeterminate-direction class vs HPOA
+
+HPO release: **hp/releases/2026-02-16**; gene set: **184** IEM lesions (same as E1b).
+
+PhysioMap grades a variable under `do(lesion)` into *unaffected* / *affected with a determinate direction* (`+`/`−`, scored by E1b) / **affected with an indeterminate direction** (`?`, this eval): reached, but the net comparative-statics sign is magnitude-dependent inside a feedback core — an "abnormality of X" asserted without a committed sign.
+
+## Gold-anchored soundness on direction-variable phenotypes (the load-bearing result)
+
+HPOA annotates some (gene, trait) pairs in **both** directions across affected individuals; E1b must discard these as conflicts. On such a trait the only sound prediction is `?` — any committed single sign is contradicted by half the records. Of the **27** direction-variable gold pairs (excluding the clamp), **17** are reached and PhysioMap calls:
+
+- affected (`?`, correctly indeterminate): **16**
+- determinate (`+`/`−`, a sign committed against ambiguous gold): **1**
+- unreached (no route; not an affected prediction): 10
+
+**Soundness on reached direction-variable traits: 16/17 = 94% correctly indeterminate.** The sign-indeterminate region coincides with exactly the annotations HPOA itself cannot commit to a direction.
+
+Determinate calls on direction-variable gold (for inspection):
+- TSHR: tsh pred=+ (HPOA ↑ and ↓)
+
+## Breadth and coverage of the affected class
+
+- Affected (`?`) predictions: **13454** across 94 genes (≈143/gene); 4630 lie in the whole-body SCC. The class is intentionally broad — a lesion perturbs the entire homeostatic core — so it is a soundness device, not a high-specificity localiser.
+- Subsumption: **212/13454 = 1.6%** of affected predictions fall on a trait the gene is annotated for in HPOA (any direction).
+- Direction-variable among affected predictions: **16** land on a trait HPOA records as both ↑ and ↓ for that gene.
+- Neutral-term coverage: **1177** affected predictions match a gene annotation carrying the node's non-directional "Abnormality of X" HP term itself.
+
+## Affected predictions on direction-variable HPOA traits
+
+- CYP11B2: mean arterial pressure | HPOA=+/− | Abnormal systemic blood pressure
+- CYP11B2: plasma potassium concentration | HPOA=+/− | Abnormal circulating potassium concentration
+- GCK: plasma glucose concentration | HPOA=+/− | Abnormal blood glucose concentration
+- GCK: plasma insulin concentration | HPOA=+/− | Abnormal circulating insulin concentration
+- GYS2: plasma glucose concentration | HPOA=+/− | Abnormal blood glucose concentration
+- HSD3B2: plasma androgen concentration (total androgenic steroids) | HPOA=+/− | Abnormal circulating androgen level
+- HSD3B2: plasma testosterone concentration | HPOA=+/− | Abnormal circulating testosterone concentration
+- SCNN1B: mean arterial pressure | HPOA=+/− | Abnormal systemic blood pressure
+- SCNN1B: plasma aldosterone concentration | HPOA=+/− | Abnormal circulating aldosterone concentration
+- SCNN1B: plasma potassium concentration | HPOA=+/− | Abnormal circulating potassium concentration
+- SCNN1B: plasma renin activity | HPOA=+/− | Abnormal circulating renin concentration
+- SCNN1G: plasma aldosterone concentration | HPOA=+/− | Abnormal circulating aldosterone concentration
+- SCNN1G: plasma potassium concentration | HPOA=+/− | Abnormal circulating potassium concentration
+- SCNN1G: plasma renin activity | HPOA=+/− | Abnormal circulating renin concentration
+- SMPD1: plasma (total) lipoprotein particle concentration | HPOA=+/− | Abnormality of lipoprotein cholesterol concentration
+- TSHR: heart rate | HPOA=+/− | Abnormality of cardiovascular system electrophysiology
+
+## Affected predictions on single-direction HPOA traits (subsumption)
+
+- ABCD1: plasma cortisol concentration | HPOA=- | Abnormality of circulating cortisol level
+- ACADVL: body core temperature | HPOA=- | Abnormality of temperature regulation
+- ACADVL: heart rate | HPOA=+ | Abnormality of cardiovascular system electrophysiology
+- ACADVL: left-ventricular ejection fraction (EF = SV / EDV) | HPOA=- | Abnormal left ventricular ejection fraction
+- ACADVL: plasma (ionised) calcium concentration | HPOA=- | Abnormal circulating calcium concentration
+- ACADVL: plasma (non-esterified) free fatty acid concentration | HPOA=+ | Abnormal circulating free fatty acid concentration
+- ACADVL: plasma glucose concentration | HPOA=- | Abnormal blood glucose concentration
+- ALDH7A1: plasma glucose concentration | HPOA=- | Abnormal blood glucose concentration
+- ALDOB: plasma glucose concentration | HPOA=- | Abnormal blood glucose concentration
+- ALDOB: plasma phosphate concentration | HPOA=- | Abnormal blood phosphate concentration
+- ALDOB: urinary phosphate excretion rate | HPOA=+ | Abnormal urine phosphate concentration
+- ALPL: plasma (ionised) calcium concentration | HPOA=+ | Abnormal circulating calcium concentration
+- ALPL: urinary calcium excretion rate | HPOA=+ | Abnormality of urine calcium concentration
+- APRT: mean arterial pressure | HPOA=+ | Abnormal systemic blood pressure
+- APRT: plasma (serum) creatinine concentration | HPOA=+ | Abnormal circulating creatinine concentration
+- ARSA: mean arterial pressure | HPOA=- | Abnormal systemic blood pressure
+- ASL: mean arterial pressure | HPOA=+ | Abnormal systemic blood pressure
+- ASL: plasma potassium concentration | HPOA=- | Abnormal circulating potassium concentration
+- ASL: plasma total lipid concentration | HPOA=+ | Abnormal circulating lipid concentration
+- ASL: plasma triglyceride concentration | HPOA=+ | Abnormal circulating lipid concentration
+- ATP7B: plasma (predominantly ceruloplasmin-bound) copper concentration | HPOA=+ | Abnormal circulating copper concentration
+- ATP7B: plasma ceruloplasmin (holo-ceruloplasmin) concentration | HPOA=- | Abnormal circulating ceruloplasmin concentration
+- ATP7B: urinary calcium excretion rate | HPOA=+ | Abnormality of urine calcium concentration
+- ATP7B: urinary copper concentration (cupriuria / 24 h copper excretion) | HPOA=+ | Abnormal urinary copper concentration
+- ATP7B: urinary phosphate excretion rate | HPOA=+ | Abnormal urine phosphate concentration
+- BCKDHA: plasma glucose concentration | HPOA=- | Abnormal blood glucose concentration
+- BCKDHA: plasma ketone body concentration (acetoacetate + 3-hydroxybutyrate) | HPOA=+ | Abnormality of metabolism/homeostasis
+- BTD: plasma ketone body concentration (acetoacetate + 3-hydroxybutyrate) | HPOA=+ | Abnormality of metabolism/homeostasis
+- CBS: mean arterial pressure | HPOA=+ | Abnormal systemic blood pressure
+- CFTR: urinary calcium excretion rate | HPOA=+ | Abnormality of urine calcium concentration
+- COMT: mean arterial pressure | HPOA=+ | Abnormal systemic blood pressure
+- COMT: plasma (ionised) calcium concentration | HPOA=- | Abnormal circulating calcium concentration
+- CPOX: heart rate | HPOA=+ | Abnormality of cardiovascular system electrophysiology
+- CPOX: mean arterial pressure | HPOA=+ | Abnormal systemic blood pressure
+- CPOX: plasma sodium concentration | HPOA=- | Abnormal blood sodium concentration
+- CPOX: tissue (hepatic/macrophage) ferritin iron stores | HPOA=+ | Abnormal circulating ferritin concentration
+- CPT2: heart rate | HPOA=+ | Abnormality of cardiovascular system electrophysiology
+- CPT2: plasma (serum) creatinine concentration | HPOA=+ | Abnormal circulating creatinine concentration
+- CPT2: plasma bicarbonate concentration | HPOA=- | Abnormal serum bicarbonate concentration
+- CPT2: plasma glucose concentration | HPOA=- | Abnormal blood glucose concentration
+- CPT2: plasma total lipid concentration | HPOA=+ | Abnormal circulating lipid concentration
+- CTNS: blood (plasma) urea nitrogen concentration | HPOA=- | Abnormal blood urea nitrogen concentration
+- CTNS: plasma (ionised) calcium concentration | HPOA=- | Abnormal circulating calcium concentration
+- CTNS: plasma (serum) creatinine concentration | HPOA=+ | Abnormal circulating creatinine concentration
+- CTNS: plasma phosphate concentration | HPOA=- | Abnormal blood phosphate concentration
+- CTNS: plasma potassium concentration | HPOA=- | Abnormal circulating potassium concentration
+- CTNS: plasma sodium concentration | HPOA=- | Abnormal blood sodium concentration
+- CTNS: urinary phosphate excretion rate | HPOA=+ | Abnormal urine phosphate concentration
+- CYP11B2: plasma corticosterone concentration | HPOA=+ | Abnormal circulating corticosterone level
+- CYP11B2: plasma renin activity | HPOA=+ | Abnormal circulating renin concentration
+- CYP11B2: plasma sodium concentration | HPOA=- | Abnormal blood sodium concentration
+- CYP17A1: mean arterial pressure | HPOA=+ | Abnormal systemic blood pressure
+- CYP17A1: plasma 17-beta-estradiol concentration | HPOA=- | Abnormal serum estradiol
+- CYP17A1: plasma aldosterone concentration | HPOA=- | Abnormal circulating aldosterone concentration
+- CYP17A1: plasma androgen concentration (total androgenic steroids) | HPOA=- | Abnormal circulating androgen level
+- CYP17A1: plasma corticosterone concentration | HPOA=+ | Abnormal circulating corticosterone level
+- CYP17A1: plasma cortisol concentration | HPOA=- | Abnormality of circulating cortisol level
+- CYP17A1: plasma follicle-stimulating hormone concentration | HPOA=+ | Abnormal circulating follicle-stimulating hormone concentration
+- CYP17A1: plasma luteinizing hormone concentration | HPOA=+ | Abnormal circulating luteinizing hormone concentration
+- CYP17A1: plasma potassium concentration | HPOA=- | Abnormal circulating potassium concentration
+- CYP17A1: plasma progesterone concentration | HPOA=+ | Abnormal circulating progesterone level
+- CYP17A1: plasma renin activity | HPOA=- | Abnormal circulating renin concentration
+- CYP17A1: plasma testosterone concentration | HPOA=- | Abnormal circulating testosterone concentration
+- CYP19A1: plasma 17-beta-estradiol concentration | HPOA=+ | Abnormal serum estradiol
+- CYP19A1: plasma androgen concentration (total androgenic steroids) | HPOA=- | Abnormal circulating androgen level
+- CYP19A1: plasma estrone concentration | HPOA=+ | Abnormal serum estrone
+- CYP19A1: plasma follicle-stimulating hormone concentration | HPOA=- | Abnormal circulating follicle-stimulating hormone concentration
+- CYP19A1: plasma testosterone concentration | HPOA=- | Abnormal circulating testosterone concentration
+- CYP19A1: plasma total lipid concentration | HPOA=+ | Abnormal circulating lipid concentration
+- CYP21A2: mean arterial pressure | HPOA=+ | Abnormal systemic blood pressure
+- CYP21A2: plasma glucose concentration | HPOA=- | Abnormal blood glucose concentration
+- DBH: blood (plasma) urea nitrogen concentration | HPOA=+ | Abnormal blood urea nitrogen concentration
+- DBH: body core temperature | HPOA=- | Abnormality of temperature regulation
+- DBH: mean arterial pressure | HPOA=- | Abnormal systemic blood pressure
+- DBH: plasma (serum) creatinine concentration | HPOA=+ | Abnormal circulating creatinine concentration
+- DBH: plasma glucose concentration | HPOA=- | Abnormal blood glucose concentration
+- DBH: plasma insulin concentration | HPOA=+ | Abnormal circulating insulin concentration
+- DDC: body core temperature | HPOA=- | Abnormality of temperature regulation
+- DDC: mean arterial pressure | HPOA=- | Abnormal systemic blood pressure
+- DDC: plasma glucose concentration | HPOA=- | Abnormal blood glucose concentration
+- DHCR7: mean arterial pressure | HPOA=+ | Abnormal systemic blood pressure
+- ETFDH: plasma glucose concentration | HPOA=- | Abnormal blood glucose concentration
+- FAH: plasma glucose concentration | HPOA=- | Abnormal blood glucose concentration
+- FAH: plasma phosphate concentration | HPOA=- | Abnormal blood phosphate concentration
+- FBP1: heart rate | HPOA=+ | Abnormality of cardiovascular system electrophysiology
+- FBP1: plasma glucose concentration | HPOA=- | Abnormal blood glucose concentration
+- FBP1: plasma ketone body concentration (acetoacetate + 3-hydroxybutyrate) | HPOA=+ | Abnormality of metabolism/homeostasis
+- GCK: plasma ketone body concentration (acetoacetate + 3-hydroxybutyrate) | HPOA=+ | Abnormality of metabolism/homeostasis
+- GLUD1: plasma ammonia concentration | HPOA=+ | Abnormal circulating nitrogen compound concentration
+- GLUD1: plasma glucose concentration | HPOA=- | Abnormal blood glucose concentration
+- GLUD1: plasma insulin concentration | HPOA=+ | Abnormal circulating insulin concentration
+- GLUL: plasma glutamine concentration | HPOA=- | Abnormal circulating glutamine concentration
+- GYS2: plasma ketone body concentration (acetoacetate + 3-hydroxybutyrate) | HPOA=+ | Abnormality of metabolism/homeostasis
+- GYS2: plasma total lipid concentration | HPOA=+ | Abnormal circulating lipid concentration
+- HAMP: tissue (hepatic/macrophage) ferritin iron stores | HPOA=+ | Abnormal circulating ferritin concentration
+- HFE: jugular venous pressure | HPOA=+ | Abnormal jugular venous pressure
+- HFE: plasma androgen concentration (total androgenic steroids) | HPOA=- | Abnormal circulating androgen level
+- HFE: plasma glucose concentration | HPOA=+ | Abnormal blood glucose concentration
+- HFE: plasma testosterone concentration | HPOA=- | Abnormal circulating testosterone concentration
+- HFE: tissue (hepatic/macrophage) ferritin iron stores | HPOA=+ | Abnormal circulating ferritin concentration
+- HMBS: heart rate | HPOA=+ | Abnormality of cardiovascular system electrophysiology
+- HMBS: mean arterial pressure | HPOA=+ | Abnormal systemic blood pressure
+- HMBS: plasma sodium concentration | HPOA=- | Abnormal blood sodium concentration
+- HPRT1: plasma (serum) creatinine concentration | HPOA=+ | Abnormal circulating creatinine concentration
+- HSD11B2: mean arterial pressure | HPOA=+ | Abnormal systemic blood pressure
+- HSD11B2: plasma aldosterone concentration | HPOA=- | Abnormal circulating aldosterone concentration
+- HSD11B2: plasma potassium concentration | HPOA=- | Abnormal circulating potassium concentration
+- HSD11B2: plasma renin activity | HPOA=- | Abnormal circulating renin concentration
+- HSD17B3: plasma androgen concentration (total androgenic steroids) | HPOA=+ | Abnormal circulating androgen level
+- HSD17B3: plasma androstenedione concentration | HPOA=+ | Abnormal circulating androstenedione concentration
+- HSD3B2: mean arterial pressure | HPOA=- | Abnormal systemic blood pressure
+- HSD3B2: plasma aldosterone concentration | HPOA=- | Abnormal circulating aldosterone concentration
+- HSD3B2: plasma androstenedione concentration | HPOA=+ | Abnormal circulating androstenedione concentration
+- HSD3B2: plasma cortisol concentration | HPOA=- | Abnormality of circulating cortisol level
+- HSD3B2: plasma dehydroepiandrosterone-sulfate (DHEA-S) concentration | HPOA=+ | Abnormal circulating dehydroepiandrosterone concentration
+- HSD3B2: plasma glucose concentration | HPOA=- | Abnormal blood glucose concentration
+- HSD3B2: plasma potassium concentration | HPOA=+ | Abnormal circulating potassium concentration
+- HSD3B2: plasma progesterone concentration | HPOA=+ | Abnormal circulating progesterone level
+- HSD3B2: plasma renin activity | HPOA=+ | Abnormal circulating renin concentration
+- HSD3B2: plasma sodium concentration | HPOA=- | Abnormal blood sodium concentration
+- LDHA: plasma (ionised) calcium concentration | HPOA=+ | Abnormal circulating calcium concentration
+- LEPR: mean arterial pressure | HPOA=- | Abnormal systemic blood pressure
+- LEPR: plasma 17-beta-estradiol concentration | HPOA=- | Abnormal serum estradiol
+- LEPR: plasma androgen concentration (total androgenic steroids) | HPOA=- | Abnormal circulating androgen level
+- LEPR: plasma insulin concentration | HPOA=+ | Abnormal circulating insulin concentration
+- LEPR: plasma testosterone concentration | HPOA=- | Abnormal circulating testosterone concentration
+- LEPR: plasma total lipid concentration | HPOA=+ | Abnormal circulating lipid concentration
+- LEPR: plasma triglyceride concentration | HPOA=+ | Abnormal circulating lipid concentration
+- LIPE: mean arterial pressure | HPOA=+ | Abnormal systemic blood pressure
+- LIPE: plasma adiponectin concentration | HPOA=- | Abnormal adiponectin level
+- LIPE: plasma total lipid concentration | HPOA=+ | Abnormal circulating lipid concentration
+- LIPE: plasma triglyceride concentration | HPOA=+ | Abnormal circulating lipid concentration
+- MCCC1: plasma glucose concentration | HPOA=- | Abnormal blood glucose concentration
+- MLYCD: plasma glucose concentration | HPOA=- | Abnormal blood glucose concentration
+- MLYCD: plasma ketone body concentration (acetoacetate + 3-hydroxybutyrate) | HPOA=+ | Abnormality of metabolism/homeostasis
+- MTR: plasma methionine concentration | HPOA=- | Abnormal circulating methionine concentration
+- PCK1: plasma glucose concentration | HPOA=- | Abnormal blood glucose concentration
+- PHEX: plasma parathyroid hormone concentration | HPOA=+ | Abnormal circulating calcium-phosphate regulating hormone concentration
+- PKLR: plasma (transferrin-bound) iron concentration | HPOA=+ | Abnormal circulating iron concentration
+- PKLR: plasma haptoglobin concentration | HPOA=- | Abnormal circulating haptoglobin concentration
+- PKLR: tissue (hepatic/macrophage) ferritin iron stores | HPOA=+ | Abnormal circulating ferritin concentration
+- PKLR: transferrin saturation (TSAT) | HPOA=+ | Abnormal transferrin saturation
+- PNPO: plasma glucose concentration | HPOA=- | Abnormal blood glucose concentration
+- PYGL: plasma LDL-cholesterol concentration | HPOA=+ | Abnormal LDL cholesterol concentration
+- PYGL: plasma glucose concentration | HPOA=- | Abnormal blood glucose concentration
+- PYGL: plasma ketone body concentration (acetoacetate + 3-hydroxybutyrate) | HPOA=+ | Abnormality of metabolism/homeostasis
+- PYGL: plasma total lipid concentration | HPOA=+ | Abnormal circulating lipid concentration
+- PYGL: plasma triglyceride concentration | HPOA=+ | Abnormal circulating lipid concentration
+- SCNN1B: plasma sodium concentration | HPOA=- | Abnormal blood sodium concentration
+- SCNN1G: mean arterial pressure | HPOA=+ | Abnormal systemic blood pressure
+- SCNN1G: plasma sodium concentration | HPOA=- | Abnormal blood sodium concentration
+- SECISBP2: plasma glucose concentration | HPOA=- | Abnormal blood glucose concentration
+- SLC12A1: mean arterial pressure | HPOA=- | Abnormal systemic blood pressure
+- SLC12A1: plasma (ionised) calcium concentration | HPOA=+ | Abnormal circulating calcium concentration
+- SLC12A1: plasma aldosterone concentration | HPOA=+ | Abnormal circulating aldosterone concentration
+- SLC12A1: plasma potassium concentration | HPOA=- | Abnormal circulating potassium concentration
+- SLC12A1: plasma renin activity | HPOA=+ | Abnormal circulating renin concentration
+- SLC12A1: urinary calcium excretion rate | HPOA=+ | Abnormality of urine calcium concentration
+- SLC12A1: urinary potassium excretion rate | HPOA=+ | Abnormal urine potassium concentration
+- SLC12A1: urine osmolality | HPOA=- | Abnormal urine osmolality
+- SLC12A3: heart rate | HPOA=+ | Abnormality of cardiovascular system electrophysiology
+- SLC12A3: mean arterial pressure | HPOA=- | Abnormal systemic blood pressure
+- SLC12A3: plasma (ionised) calcium concentration | HPOA=- | Abnormal circulating calcium concentration
+- SLC12A3: plasma aldosterone concentration | HPOA=+ | Abnormal circulating aldosterone concentration
+- SLC12A3: plasma ketone body concentration (acetoacetate + 3-hydroxybutyrate) | HPOA=+ | Abnormality of metabolism/homeostasis
+- SLC12A3: plasma potassium concentration | HPOA=- | Abnormal circulating potassium concentration
+- SLC12A3: plasma renin activity | HPOA=+ | Abnormal circulating renin concentration
+- SLC12A3: urinary potassium excretion rate | HPOA=- | Abnormal urine potassium concentration
+- SLC22A5: plasma glucose concentration | HPOA=- | Abnormal blood glucose concentration
+- SLC22A5: plasma ketone body concentration (acetoacetate + 3-hydroxybutyrate) | HPOA=+ | Abnormality of metabolism/homeostasis
+- SLC26A3: plasma aldosterone concentration | HPOA=+ | Abnormal circulating aldosterone concentration
+- SLC26A3: plasma bicarbonate concentration | HPOA=+ | Abnormal serum bicarbonate concentration
+- SLC26A3: plasma potassium concentration | HPOA=- | Abnormal circulating potassium concentration
+- SLC26A3: plasma renin activity | HPOA=+ | Abnormal circulating renin concentration
+- SLC26A3: plasma sodium concentration | HPOA=- | Abnormal blood sodium concentration
+- SLC37A4: mean arterial pressure | HPOA=+ | Abnormal systemic blood pressure
+- SLC37A4: plasma LDL-cholesterol concentration | HPOA=+ | Abnormal LDL cholesterol concentration
+- SLC37A4: plasma glucose concentration | HPOA=- | Abnormal blood glucose concentration
+- SLC37A4: plasma ketone body concentration (acetoacetate + 3-hydroxybutyrate) | HPOA=+ | Abnormality of metabolism/homeostasis
+- SLC37A4: plasma total lipid concentration | HPOA=+ | Abnormal circulating lipid concentration
+- SLC37A4: plasma triglyceride concentration | HPOA=+ | Abnormal circulating lipid concentration
+- SLC37A4: pulmonary artery pressure | HPOA=+ | Abnormality of pulmonary circulation
+- SLC3A1: plasma (ionised) calcium concentration | HPOA=- | Abnormal circulating calcium concentration
+- SLC3A1: plasma glucose concentration | HPOA=- | Abnormal blood glucose concentration
+- SLC5A5: body core temperature | HPOA=- | Abnormality of temperature regulation
+- SLC5A5: heart rate | HPOA=- | Abnormality of cardiovascular system electrophysiology
+- SMPD1: circulating hepatic insulin-like growth factor 1 concentration | HPOA=- | Abnormal circulating insulin-like growth factor 1 concentration
+- SMPD1: plasma HDL-cholesterol concentration | HPOA=- | Abnormal HDL cholesterol concentration
+- SMPD1: plasma LDL-cholesterol concentration | HPOA=+ | Abnormal LDL cholesterol concentration
+- SMPD1: plasma total lipid concentration | HPOA=+ | Abnormal circulating lipid concentration
+- SMPD1: plasma triglyceride concentration | HPOA=+ | Abnormal circulating lipid concentration
+- TPO: body core temperature | HPOA=- | Abnormality of temperature regulation
+- TPO: heart rate | HPOA=- | Abnormality of cardiovascular system electrophysiology
+- TRPM6: plasma (ionised) calcium concentration | HPOA=- | Abnormal circulating calcium concentration
+- TSHR: body core temperature | HPOA=- | Abnormality of temperature regulation
+- UROS: plasma haptoglobin concentration | HPOA=- | Abnormal circulating haptoglobin concentration

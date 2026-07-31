@@ -1,0 +1,199 @@
+# =============================================================================
+# Amino-acid & urea-cycle metabolism (inborn errors of metabolism)
+#   PhysioMap fragment  *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Hand-encoded, single-scale (ORGAN_SYSTEM / ORGAN). Each edge sign is the sign of
+# the partial derivative of the target w.r.t. the source at steady state, all else
+# equal (interventionist partial). ROBERT: please correct signs/edges.
+#
+# SIGN CONVENTION FOR ENZYME -> METABOLITE EDGES (comparative-statics, ∂target/∂source):
+#   The enzyme nodes are *enzyme-activity* variables; an inborn error is modelled as a
+#   do() clamping that activity DOWN (LoF). Edge signs follow the canonical flux reading:
+#     - enzyme_activity -(-)-> SUBSTRATE  : ∂[substrate]/∂(activity) < 0 (more enzyme clears
+#       it), so LoF (activity DOWN) => substrate ACCUMULATES.
+#     - enzyme_activity -(+)-> PRODUCT    : ∂[product]/∂(activity) > 0, so LoF => product FALLS.
+#   Verified: do(PAH-) => Phe+, Tyr-;  do(CBS-) => homocysteine+, methionine+ (remethylation);
+#   do(BCKDH-) => branched-chain AA+;  do(urea-cycle enzyme-) => urea synthesis-, ammonia+.
+#   For each disorder the canonical biochemical phenotype under LoF is stated in a comment.
+#
+# Sources for canonical signs / mechanisms / disease numbers:
+#   - Lehninger Principles of Biochemistry (Nelson & Cox), Ch. 18 "Amino Acid
+#     Oxidation and the Production of Urea" and Ch. 22 (amino-acid biosynthesis):
+#     PAH (Phe -> Tyr), the urea cycle (NH3/aspartate -> urea via OTC/CPS1/ASS1/ASL/ARG1),
+#     transsulfuration (CBS: homocysteine + serine -> cystathionine), BCAA catabolism
+#     (BCKDH oxidative decarboxylation of branched-chain alpha-keto acids).
+#   - Boron & Boulpaep, Medical Physiology (hepatic nitrogen handling; glutamine as
+#     the major non-toxic ammonia carrier; ammonia detoxification to urea).
+#   - OMIM disease numbers (real, as supplied in the fragment spec):
+#       PKU (PAH deficiency)                  OMIM 261600
+#       Classic homocystinuria (CBS def.)     OMIM 236200
+#       Maple syrup urine disease (BCKDH def.) OMIM 248600
+#       OTC deficiency (urea-cycle disorder)  OMIM 311250
+#
+# DISORDER MAP (phenotype under loss-of-function = enzyme activity DOWN):
+#   PKU            : PAH down   -> phenylalanine UP, tyrosine DOWN
+#   Homocystinuria : CBS down   -> homocysteine UP, methionine UP
+#   MSUD           : BCKDH down  -> branched-chain amino acids UP
+#   OTC def. / UCD : urea-cycle enzyme down -> ammonia UP, glutamine UP, urea synthesis DOWN
+#
+# Boundary: this is a SELF-CONTAINED subsystem (hepatic amino-acid metabolism).
+# It is intentionally NOT forced to link to the cardiovascular/renal core; no
+# defensible single-scale causal edge to an existing boundary node was available
+# without fabrication. validate_fragment will WARN "island" — that is acceptable
+# per the fragment spec (a WARN, not an error).
+# =============================================================================
+
+name: aminoacid_metabolism
+description: >-
+  DRAFT amino-acid & urea-cycle metabolism (inborn errors of metabolism) as a
+  PhysioMap signed causal graph. Covers four classic enzyme-deficiency disorders —
+  PKU (PAH), classic homocystinuria (CBS), maple syrup urine disease (BCKDH), and
+  OTC deficiency / urea-cycle disorders — and the hepatic ammonia -> glutamine /
+  urea detoxification axis. Single-scale (organ_system / organ), Phase 1. DRAFT
+  FOR REVIEW.
+
+nodes:
+  # --- deficient-enzyme activity variables (LoF inborn-error drivers) ---------
+  - id: pah_enzyme_activity
+    label: phenylalanine hydroxylase (PAH) catalytic activity
+    scale: organ
+    entity_iri: PR:P00439             # phenylalanine-4-hydroxylase (human), UniProtKB:P00439
+    quality_iri: PATO:0001414         # catalytic activity
+  - id: cbs_enzyme_activity
+    label: cystathionine beta-synthase (CBS) catalytic activity
+    scale: organ
+    entity_iri: PR:P35520             # cystathionine beta-synthase (human), UniProtKB:P35520
+    quality_iri: PATO:0001414         # catalytic activity
+  - id: bckdh_enzyme_activity
+    label: branched-chain alpha-keto acid dehydrogenase (BCKDH) catalytic activity
+    scale: organ
+    quality_iri: PATO:0001414         # catalytic activity
+  - id: urea_cycle_enzyme_activity
+    label: urea-cycle enzyme catalytic activity (e.g. ornithine transcarbamylase, OTC)
+    scale: organ
+    quality_iri: PATO:0001414         # catalytic activity
+
+  # --- plasma metabolite concentrations --------------------------------------
+  - id: plasma_phenylalanine
+    label: plasma phenylalanine concentration
+    scale: organ_system
+    entity_iri: CHEBI:28044           # phenylalanine
+    quality_iri: PATO:0000033         # concentration of
+  - id: plasma_tyrosine
+    label: plasma tyrosine concentration
+    scale: organ_system
+    entity_iri: CHEBI:18186           # tyrosine
+    quality_iri: PATO:0000033         # concentration of
+  - id: plasma_methionine
+    label: plasma methionine concentration
+    scale: organ_system
+    entity_iri: CHEBI:16811           # methionine
+    quality_iri: PATO:0000033         # concentration of
+  - id: plasma_homocysteine
+    label: plasma homocysteine concentration
+    scale: organ_system
+    entity_iri: CHEBI:17230           # homocysteine
+    quality_iri: PATO:0000033         # concentration of
+  - id: plasma_branched_chain_amino_acids
+    label: plasma branched-chain amino acids (leucine / isoleucine / valine)
+    scale: organ_system
+    entity_iri: CHEBI:22918           # branched-chain amino acid
+    quality_iri: PATO:0000033         # concentration of
+  - id: plasma_ammonia
+    label: plasma ammonia concentration
+    scale: organ_system
+    entity_iri: CHEBI:16134           # ammonia
+    quality_iri: PATO:0000033         # concentration of
+  - id: plasma_glutamine
+    label: plasma glutamine concentration
+    scale: organ_system
+    entity_iri: CHEBI:28300           # glutamine
+    quality_iri: PATO:0000033         # concentration of
+
+  # --- hepatic flux variable --------------------------------------------------
+  - id: hepatic_urea_synthesis
+    label: hepatic urea synthesis rate (urea-cycle flux)
+    scale: organ
+    entity_iri: GO:0000050            # urea cycle
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0002107  # liver
+
+causal_edges:
+  # ===========================================================================
+  # PKU — PAH deficiency (OMIM 261600)
+  #   Phenotype under LoF (PAH activity DOWN): phenylalanine UP, tyrosine DOWN.
+  # ===========================================================================
+  - source: pah_enzyme_activity
+    target: plasma_phenylalanine
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: PAH hydroxylates phenylalanine to tyrosine; phenylalanine is the SUBSTRATE, so ∂[Phe]/∂(PAH activity) < 0 — more enzyme clears Phe, LoF (activity DOWN) => Phe accumulates (PKU).
+    evidence: "Lehninger Principles of Biochemistry (Nelson & Cox) Ch. 18 (Phe -> Tyr by phenylalanine hydroxylase); PKU / PAH deficiency OMIM 261600; Boron & Boulpaep Medical Physiology | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-141 (24.5: Protein Metabolism): 'People afflicted with PKU lack sufficient activity of the enzyme phenylalanine hydroxylase and are therefore unable to break down phenylalanine into tyrosine adequately. Because of this, levels of phenylalanine rise to toxic levels in the body'; Wong, Cells: Molecules and Mechanisms §wong-6.7 (Amino Acid Synthesis - Undeclared): 'phenylalanine oxygenase reduces phenylalanine to produce the tyrosine' (phenylalanine consumed as substrate)"
+  - source: pah_enzyme_activity
+    target: plasma_tyrosine
+    sign: "+"
+    causal_evidence: genetic_lof_gof
+    mechanism: tyrosine is the product of PAH; loss of PAH activity lowers tyrosine production, so product co-varies with enzyme activity (LoF => Tyr falls).
+    evidence: "Lehninger Principles of Biochemistry Ch. 18 (tyrosine is the PAH product; becomes dietarily essential in PKU); PKU OMIM 261600 | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-141 (24.5: Protein Metabolism): 'People afflicted with PKU lack sufficient activity of the enzyme phenylalanine hydroxylase and are therefore unable to break down phenylalanine into tyrosine adequately' — PAH converts Phe to Tyr, so reduced PAH lowers plasma tyrosine; Wong, Cells: Molecules and Mechanisms §wong-6.7 (Amino Acid Synthesis - Undeclared): 'phenylalanine oxygenase reduces phenylalanine to produce the tyrosine' (tyrosine is the product)"
+
+  # ===========================================================================
+  # Classic homocystinuria — CBS deficiency (OMIM 236200)
+  #   Phenotype under LoF (CBS activity DOWN): homocysteine UP, methionine UP.
+  #   CBS catalyzes the first transsulfuration step (homocysteine + serine ->
+  #   cystathionine). Its loss accumulates homocysteine; the excess homocysteine
+  #   is remethylated back to methionine, so methionine ALSO rises.
+  # ===========================================================================
+  - source: cbs_enzyme_activity
+    target: plasma_homocysteine
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: CBS condenses homocysteine with serine to cystathionine (first transsulfuration step); homocysteine is the SUBSTRATE, so ∂[Hcy]/∂(CBS activity) < 0 — LoF (activity DOWN) => homocysteine accumulates.
+    evidence: "Lehninger Principles of Biochemistry Ch. 22 (transsulfuration: cystathionine beta-synthase, homocysteine + serine -> cystathionine); classic homocystinuria OMIM 236200"
+  - source: plasma_homocysteine
+    target: plasma_methionine
+    sign: "+"
+    mechanism: accumulated homocysteine is salvaged by remethylation (methionine synthase / betaine-homocysteine methyltransferase) back to methionine; higher homocysteine drives higher methionine remethylation flux, so plasma methionine rises (the characteristic high-methionine signature of CBS deficiency).
+    evidence: "Lehninger Principles of Biochemistry Ch. 22 (homocysteine remethylation to methionine via the methionine cycle); classic homocystinuria OMIM 236200 (hypermethioninemia); Boron & Boulpaep Medical Physiology"
+
+  # ===========================================================================
+  # Maple syrup urine disease — BCKDH deficiency (OMIM 248600)
+  #   Phenotype under LoF (BCKDH activity DOWN): branched-chain amino acids UP.
+  # ===========================================================================
+  - source: bckdh_enzyme_activity
+    target: plasma_branched_chain_amino_acids
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: the branched-chain alpha-keto acid dehydrogenase complex irreversibly decarboxylates the branched-chain alpha-keto acids; the upstream branched-chain amino acids are the SUBSTRATE pool, so ∂[BCAA]/∂(BCKDH activity) < 0 — LoF (activity DOWN) => BCAA accumulate (MSUD).
+    evidence: "Lehninger Principles of Biochemistry Ch. 18 (branched-chain amino-acid catabolism; BCKDH oxidative decarboxylation); maple syrup urine disease OMIM 248600"
+
+  # ===========================================================================
+  # Urea-cycle disorders / OTC deficiency (OMIM 311250)
+  #   Phenotype under LoF (urea-cycle enzyme activity DOWN): urea synthesis DOWN,
+  #   ammonia UP, glutamine UP. The liver normally detoxifies ammonia to urea;
+  #   when blocked, ammonia accumulates and is buffered into glutamine.
+  # ===========================================================================
+  - source: urea_cycle_enzyme_activity
+    target: hepatic_urea_synthesis
+    sign: "+"
+    causal_evidence: genetic_lof_gof
+    mechanism: the urea cycle (CPS1, ornithine transcarbamylase OTC, ASS1, ASL, arginase) converts ammonia + aspartate nitrogen to urea; urea-cycle enzyme activity sets the urea synthesis flux (LoF => urea synthesis falls).
+    evidence: "Lehninger Principles of Biochemistry Ch. 18 (the urea cycle; OTC catalyzes carbamoyl-phosphate + ornithine -> citrulline); OTC deficiency OMIM 311250 | textbook corroboration: OpenStax Biology 2e §bio-41.4 (Nitrogenous Wastes): urea cycle enzymes catalyze the conversion of ammonia to urea in the liver, so higher enzyme activity drives higher urea synthesis"
+  - source: hepatic_urea_synthesis
+    target: plasma_ammonia
+    sign: "-"
+    mechanism: urea synthesis is the principal route of ammonia disposal; higher hepatic ureagenesis lowers the circulating ammonia load, so reduced urea synthesis raises plasma ammonia (hyperammonemia of urea-cycle disorders).
+    evidence: "Lehninger Principles of Biochemistry Ch. 18 (ureagenesis as ammonia detoxification); Boron & Boulpaep Medical Physiology (hepatic ammonia clearance); OTC deficiency OMIM 311250 | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-141 (24.5: Protein Metabolism): 'In the urea cycle, ammonium is combined with CO2, resulting in urea and water. The urea is eliminated through the kidneys in the urine' — urea synthesis removes ammonia from circulation"
+  - source: plasma_ammonia
+    target: plasma_glutamine
+    sign: "+"
+    mechanism: excess ammonia is buffered by glutamine synthetase amidation of glutamate to glutamine (the major non-toxic ammonia carrier); rising ammonia raises plasma glutamine (elevated glutamine is an early marker of hyperammonemia).
+    evidence: "Boron & Boulpaep Medical Physiology (glutamine as the principal circulating ammonia carrier); Lehninger Principles of Biochemistry Ch. 18 (glutamine synthetase ammonia fixation); urea-cycle disorders OMIM 311250"
+
+  # --- coupling of plasma ammonia to the urea cycle (substrate availability) ---
+  - source: plasma_ammonia
+    target: hepatic_urea_synthesis
+    sign: "+"
+    mechanism: ammonia (as carbamoyl phosphate via CPS1) is the entry substrate of the urea cycle; higher ammonia load drives higher ureagenesis when urea-cycle capacity is intact (substrate-driven flux). This closes a negative-feedback loop with hepatic_urea_synthesis -(-)-> plasma_ammonia.
+    evidence: "Lehninger Principles of Biochemistry Ch. 18 (ammonia/carbamoyl phosphate is the first urea-cycle substrate; flux responds to nitrogen load); Boron & Boulpaep Medical Physiology | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-141 (24.5: Protein Metabolism): 'The urea cycle is a set of biochemical reactions that produces urea from ammonium ions in order to prevent a toxic level of ammonium in the body... ammonium ions are produced from the breakdown of amino acids... enters into the urea cycle to be eliminated'"
+
+constitutive_edges: []   # none — self-contained single-scale subsystem (Phase 1)

@@ -1,0 +1,194 @@
+# =============================================================================
+# Mitochondrial / TCA / respiratory-chain / peroxisomal & related enzyme ACTIVITIES
+#                                    — PhysioMap fragment  *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Theme: mitochondrial_enzymes.  Each node is an ENZYME (or enzyme-complex)
+# CATALYTIC ACTIVITY — a cellular/subcellular physiological VARIABLE — that an HPO
+# directional gap term measures directly (e.g. "Decreased activity of mitochondrial
+# complex I"). These are clamp targets for a monogenic LoF do(): a defect in the
+# encoding gene (or its assembly factor) lowers the activity node.
+#
+# This is a deliberately SELF-CONTAINED "island" fragment of grounded enzyme-activity
+# ROOTS (no causal edges). Rationale (PhysioMap policy: prefer NO edge over a guess):
+#   - A reduced respiratory-chain/TCA/PDH/pyruvate-carboxylase activity does feed
+#     systemic metabolic phenotypes (lactic acidosis, hypoglycemia), but the corpus
+#     has no clean single boundary node for "blood lactate" / "ATP yield" that these
+#     map onto without a multi-step, multiply-confounded chain; the activity node by
+#     itself is the assayed quantity and abstains correctly when ungrounded.
+#   - The peroxisomal acyltransferases (DHAPAT, alkyl-DHAP synthase) and the
+#     ketogenesis/BCAA enzymes (HMG-CoA lyase, T2 thiolase) are likewise grounded as
+#     activity roots; their downstream plasmalogen / ketone / organic-acid markers are
+#     not yet nodes in the corpus, so no edge is defensible here.
+# A grounded activity root with NO edge is valuable and safe (it abstains).
+#
+# ENTITY-IRI provenance (all VERIFIED by grep against ontology/.obo_cache/*.obo;
+# enzyme/complex activities grounded in GO molecular-function / cellular-component
+# classes; bearer cells in CL):
+#   - GO:0045271 respiratory chain complex I        (CC)
+#   - GO:0008177 succinate dehydrogenase (quinone) activity = complex II (MF)
+#   - GO:0045275 respiratory chain complex III      (CC)
+#   - GO:0045277 respiratory chain complex IV       (CC)
+#   - GO:0098803 respiratory chain complex          (CC; whole chain)
+#   - GO:0046933 proton-transporting ATP synthase activity, rotational mechanism (MF) = complex V
+#   - GO:0004739 pyruvate dehydrogenase (acetyl-transferring) activity (MF) = PDH complex E1
+#   - GO:0004333 fumarate hydratase activity        (MF)
+#   - GO:0004736 pyruvate carboxylase activity      (MF)
+#   - GO:0036440 citrate synthase activity          (MF)
+#   - GO:0004325 protoporphyrin ferrochelatase activity (MF; "ferrochelatase activity" syn)
+#   - GO:0004470 malic enzyme activity              (MF)
+#   - GO:0016287 glycerone-phosphate O-acyltransferase activity (MF) = DHAPAT/GNPAT
+#   - GO:0008609 alkylglycerone-phosphate synthase activity (MF) = alkyl-DHAP synthase
+#   - GO:0004419 hydroxymethylglutaryl-CoA lyase activity (MF) = HMG-CoA lyase
+#   - GO:0003985 acetyl-CoA C-acetyltransferase activity (MF) = T2 / mito acetoacetyl-CoA thiolase
+#   - PR:P07203 glutathione peroxidase 1 (human) = GPX1  (organism-gene; erythrocyte GPx node, specific over generic MF GO:0004602)
+#   - GO:0070224 sulfide:quinone oxidoreductase activity (MF) = SQOR
+#   Bearer cells (CL): CL:0000737 striated muscle cell (resp-chain assay tissue),
+#     CL:0000057 fibroblast (HPO "cultured fibroblasts" terms), CL:0000232 erythrocyte.
+#
+# Physiology refs: Lehninger Principles of Biochemistry (oxidative phosphorylation,
+#   citric-acid cycle, fatty-acid/ketone & BCAA catabolism, heme synthesis); Harrison's
+#   Principles of Internal Medicine (mitochondrial disorders; porphyrias — EPP from
+#   ferrochelatase deficiency); IEMbase / OMIM for the individual enzymopathies.
+#
+# NOTE: bckdh_enzyme_activity (HP:4000207, BCKDH) ALREADY EXISTS in the corpus
+#   (benchmarks/human/systems/aminoacid_metabolism.yaml). It is NOT redefined here;
+#   the HPO term is mapped to the existing node id.
+# Scale: cellular for the enzyme activities (each carries a bearer_entity_iri).
+# =============================================================================
+
+name: hpo_mitochondrial_enzymes
+description: >-
+  DRAFT grounded enzyme-activity nodes for mitochondrial respiratory-chain complexes
+  (I-V), TCA-cycle and anaplerotic/cataplerotic enzymes (citrate synthase, fumarate
+  hydratase, pyruvate carboxylase, malic enzyme), the pyruvate dehydrogenase complex,
+  peroxisomal ether-lipid acyltransferases (DHAPAT, alkyl-DHAP synthase), the
+  ketogenesis/BCAA enzymes (HMG-CoA lyase, T2 thiolase), heme-synthesis ferrochelatase,
+  erythrocyte glutathione peroxidase, and sulfide:quinone oxidoreductase. Each node is
+  the catalytic-activity quantity an HPO directional term measures; clamp targets for a
+  monogenic enzymopathy do(). Self-contained island of activity roots (cellular scale).
+
+nodes:
+  # ---- mitochondrial respiratory chain / oxidative phosphorylation ----
+  - id: mitochondrial_respiratory_chain_activity
+    label: mitochondrial respiratory (electron-transport) chain activity
+    scale: cellular
+    entity_iri: GO:0098803             # respiratory chain complex (whole chain, CC)
+    quality_iri: PATO:0001414          # catalytic activity
+    bearer_entity_iri: CL:0000737      # striated muscle cell (clinical resp-chain assay tissue)
+  - id: mitochondrial_complex_i_activity
+    label: mitochondrial respiratory chain complex I (NADH:ubiquinone oxidoreductase) activity
+    scale: cellular
+    entity_iri: GO:0045271             # respiratory chain complex I (CC)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000737
+  - id: mitochondrial_complex_ii_activity
+    label: mitochondrial respiratory chain complex II (succinate:ubiquinone oxidoreductase, SDH) activity
+    scale: cellular
+    entity_iri: GO:0008177             # succinate dehydrogenase (quinone) activity (MF) = complex II
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000737
+  - id: mitochondrial_complex_iii_activity
+    label: mitochondrial respiratory chain complex III (ubiquinol:cytochrome c oxidoreductase) activity
+    scale: cellular
+    entity_iri: GO:0045275             # respiratory chain complex III (CC)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000737
+  - id: mitochondrial_complex_iv_activity
+    label: mitochondrial respiratory chain complex IV (cytochrome c oxidase, COX) activity
+    scale: cellular
+    entity_iri: GO:0045277             # respiratory chain complex IV (CC)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000737
+  - id: mitochondrial_atp_synthase_activity
+    label: mitochondrial ATP synthase complex (complex V) activity
+    scale: cellular
+    entity_iri: GO:0046933             # proton-transporting ATP synthase activity, rotational mechanism (MF)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000737
+
+  # ---- pyruvate metabolism / TCA cycle / anaplerosis ----
+  - id: pyruvate_dehydrogenase_activity
+    label: pyruvate dehydrogenase complex (PDH) activity
+    scale: cellular
+    entity_iri: GO:0004739             # pyruvate dehydrogenase (acetyl-transferring) activity (MF)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000737
+  - id: fumarate_hydratase_activity
+    label: fumarate hydratase (fumarase) activity
+    scale: cellular
+    entity_iri: GO:0004333             # fumarate hydratase activity (MF)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000057      # fibroblast (typical enzyme-assay tissue)
+  - id: pyruvate_carboxylase_activity
+    label: pyruvate carboxylase activity
+    scale: cellular
+    entity_iri: GO:0004736             # pyruvate carboxylase activity (MF)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000057
+  - id: citrate_synthase_activity
+    label: mitochondrial citrate synthase activity
+    scale: cellular
+    entity_iri: GO:0036440             # citrate synthase activity (MF)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000737
+  - id: malic_enzyme_activity
+    label: mitochondrial malic enzyme (malate dehydrogenase, decarboxylating) activity
+    scale: cellular
+    entity_iri: GO:0004470             # malic enzyme activity (MF)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000057
+
+  # ---- heme synthesis ----
+  - id: ferrochelatase_activity
+    label: ferrochelatase (protoheme ferro-lyase) activity
+    scale: cellular
+    entity_iri: GO:0004325             # protoporphyrin ferrochelatase activity (MF; syn "ferrochelatase activity")
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000057      # tissue assay (bone-marrow/erythroid + fibroblast); generic bearer
+
+  # ---- peroxisomal ether-phospholipid (plasmalogen) synthesis ----
+  - id: dhapat_activity
+    label: dihydroxyacetone-phosphate acyltransferase (DHAPAT, glyceronephosphate O-acyltransferase / GNPAT) activity
+    scale: cellular
+    entity_iri: GO:0016287             # glycerone-phosphate O-acyltransferase activity (MF) = DHAPAT
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000057      # cultured fibroblasts (per HPO term)
+  - id: alkyl_dhap_synthase_activity
+    label: alkyl-dihydroxyacetonephosphate synthase (alkylglycerone-phosphate synthase, AGPS) activity
+    scale: cellular
+    entity_iri: GO:0008609             # alkylglycerone-phosphate synthase activity (MF)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000057      # cultured fibroblasts (per HPO term)
+
+  # ---- ketone-body / BCAA / lipid catabolism ----
+  - id: hmg_coa_lyase_activity
+    label: 3-hydroxy-3-methylglutaryl-CoA (HMG-CoA) lyase activity
+    scale: cellular
+    entity_iri: GO:0004419             # hydroxymethylglutaryl-CoA lyase activity (MF)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000057      # cultured fibroblasts (per HPO term)
+  - id: t2_thiolase_activity
+    label: mitochondrial acetoacetyl-CoA thiolase (T2 / acetyl-CoA C-acetyltransferase, ACAT1) activity
+    scale: cellular
+    entity_iri: GO:0003985             # acetyl-CoA C-acetyltransferase activity (MF)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000057      # cultured fibroblasts (per HPO term)
+
+  # ---- redox / sulfide detoxification ----
+  - id: erythrocyte_glutathione_peroxidase_activity
+    label: erythrocyte glutathione peroxidase activity
+    scale: cellular
+    entity_iri: PR:P07203              # glutathione peroxidase 1 (human) = GPX1 (organism-gene; specific over generic MF GO:0004602)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000232      # erythrocyte
+  - id: sulfide_quinone_oxidoreductase_activity
+    label: sulfide:quinone oxidoreductase (SQOR) activity
+    scale: cellular
+    entity_iri: GO:0070224             # sulfide:quinone oxidoreductase activity (MF)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000737
+
+# No causal_edges and no constitutive_edges: self-contained island of grounded
+# enzyme-activity roots. Prefer NO edge over a guessed sign (PhysioMap policy).
+causal_edges: []
+constitutive_edges: []

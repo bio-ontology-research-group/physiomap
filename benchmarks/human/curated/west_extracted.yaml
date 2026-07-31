@@ -1,0 +1,1126 @@
+name: west_extracted
+description: DRAFT within-scale signed causal edges + variables extracted from West's Respiratory Physiology, 11th ed. via
+  per-chapter multi-agent fan-out. Signs adversarially verified; every edge carries a verbatim quote + chapter/page anchor.
+  New nodes de-duplicated against the existing map (physiomap_core.reconcile). DRAFT for domain review.
+nodes:
+- id: blood_gas_barrier_thickness
+  label: blood-gas barrier (alveolar-capillary membrane) thickness
+  scale: organ
+  entity_iri: UBERON:0003948
+  quality_iri: PATO:0000915
+- id: pulmonary_gas_diffusion_rate
+  label: rate of respiratory gas (O2/CO2) diffusion across the blood-gas barrier
+  scale: organ
+  entity_iri: GO:0007585
+  quality_iri: PATO:0000161
+- id: alveolar_stability
+  label: alveolar (air sac) stability against collapse
+  scale: organ
+  entity_iri: UBERON:0002299
+  quality_iri: PATO:0015026
+- id: total_ventilation
+  label: total (minute) ventilation (volume of air leaving the lung per minute, VE)
+  scale: organ_system
+  entity_iri: UBERON:0002048
+  quality_iri: PATO:0001574
+- id: dead_space_ventilation
+  label: dead space ventilation (portion of ventilation not participating in gas exchange, VD per minute)
+  scale: organ_system
+  entity_iri: UBERON:0001558
+  quality_iri: PATO:0001574
+- id: anatomic_dead_space_volume
+  label: anatomic dead space volume (volume of the conducting airways, ~150 ml)
+  scale: organ
+  entity_iri: UBERON:0001558
+  quality_iri: PATO:0000918
+- id: physiologic_dead_space_volume
+  label: physiologic dead space volume (volume of lung that does not eliminate CO2)
+  scale: organ
+  entity_iri: UBERON:0002048
+  quality_iri: PATO:0000918
+- id: dead_space_fraction
+  label: dead space fraction (ratio of dead space volume to tidal volume, VD/VT)
+  scale: organ_system
+  entity_iri: UBERON:0001558
+  quality_iri: PATO:0001470
+- id: co2_production
+  label: whole-body carbon dioxide production rate (metabolic CO2 output, VCO2)
+  scale: organ_system
+  entity_iri: CHEBI:16526
+  quality_iri: PATO:0001574
+- id: o2_transfer_rate
+  label: rate of O2 transfer across the blood-gas barrier (pulmonary capillary)
+  scale: organ
+  entity_iri: GO:0015671  # oxygen transport
+  quality_iri: PATO:0000161
+  bearer_entity_iri: UBERON:0004894  # alveolar wall
+- id: pulmonary_diffusing_capacity_co
+  label: diffusing capacity of the lung for carbon monoxide (DLCO / transfer factor)
+  scale: organ
+  entity_iri: UBERON:0002048
+- id: pulmonary_capillary_blood_volume
+  label: pulmonary capillary blood volume (Vc)
+  scale: organ
+  entity_iri: UBERON:0016405
+  quality_iri: PATO:0000918
+- id: pulmonary_capillary_transit_time
+  label: red blood cell transit time in the pulmonary capillary
+  scale: organ
+  entity_iri: GO:0008015  # blood circulation
+  quality_iri: PATO:0001309
+  bearer_entity_iri: UBERON:0016405  # pulmonary capillary
+- id: blood_hemoglobin_concentration
+  label: blood hemoglobin concentration
+  scale: organ_system
+  entity_iri: CHEBI:35143
+  quality_iri: PATO:0000033
+  bearer_entity_iri: UBERON:0000178
+- id: pulmonary_venous_pressure
+  label: pulmonary venous pressure
+  scale: organ
+  entity_iri: UBERON:0002016
+  quality_iri: PATO:0001025
+- id: lung_volume
+  label: lung volume
+  scale: organ
+  entity_iri: UBERON:0002048
+  quality_iri: PATO:0000918
+- id: pulmonary_blood_volume
+  label: pulmonary (lung) blood volume
+  scale: organ
+  entity_iri: UBERON:0002048
+  quality_iri: PATO:0000918
+- id: angiotensin_I
+  label: plasma angiotensin I concentration
+  scale: organ_system
+  entity_iri: CHEBI:2718
+  quality_iri: PATO:0000033
+- id: ventilation_perfusion_ratio
+  label: ventilation-perfusion ratio (V/Q) of a lung unit
+  scale: organ
+  entity_iri: UBERON:0002048
+  quality_iri: PATO:0001470
+- id: pulmonary_shunt_fraction
+  label: pulmonary shunt fraction (fraction of blood entering arterial system without passing ventilated lung)
+  scale: organ_system
+  entity_iri: UBERON:0002048
+  quality_iri: PATO:0001470
+- id: tissue_po2
+  label: systemic tissue oxygen tension (tissue PO2 at mitochondria)
+  scale: tissue
+  entity_iri: UBERON:0000479
+  quality_iri: PATO:0002284
+- id: hemoglobin_o2_affinity
+  label: hemoglobin oxygen affinity (position of O2 dissociation curve; high affinity = left shift, low affinity = right shift)
+  scale: organ_system
+  entity_iri: GO:0005833
+  quality_iri: PATO:0002070
+- id: peripheral_o2_unloading
+  label: unloading of O2 from hemoglobin to peripheral tissue capillary blood
+  scale: organ_system
+  entity_iri: GO:0015671
+  quality_iri: PATO:0000161
+- id: carboxyhemoglobin
+  label: blood carboxyhemoglobin (COHb) concentration
+  scale: organ_system
+  quality_iri: PATO:0000033
+- id: blood_co2_content
+  label: total blood carbon dioxide content
+  scale: organ_system
+  entity_iri: CHEBI:16526
+  quality_iri: PATO:0000033
+- id: mixed_venous_po2
+  label: mixed venous partial pressure of oxygen (P-vO2) / mixed venous O2 content
+  scale: organ_system
+  entity_iri: CHEBI:15379
+  quality_iri: PATO:0001025
+  quality_kind: intensive
+  bearer_entity_iri: UBERON:0013756
+- id: lung_compliance
+  label: lung compliance (volume change per unit transpulmonary pressure change)
+  scale: organ
+  entity_iri: UBERON:0002048
+  quality_iri: PATO:0015008
+- id: pulmonary_fibrous_tissue_amount
+  label: amount of fibrous (connective) tissue in the lung (pulmonary fibrosis)
+  scale: organ
+  entity_iri: UBERON:0011824
+  quality_iri: PATO:0000070
+  bearer_entity_iri: UBERON:0002048
+- id: work_of_breathing
+  label: work of breathing (pressure x volume work to move lung and chest wall)
+  scale: organ_system
+  entity_iri: UBERON:0001004
+  quality_iri: PATO:0001026
+- id: csf_ph
+  label: cerebrospinal fluid (brain extracellular fluid) pH
+  scale: organ
+  entity_iri: UBERON:0001359
+  quality_iri: PATO:0001842
+- id: csf_bicarbonate
+  label: cerebrospinal fluid bicarbonate concentration
+  scale: organ
+  entity_iri: UBERON:0001359
+  quality_iri: PATO:0000033
+- id: pulmonary_diffusing_capacity
+  label: pulmonary diffusing capacity (DL for O2/CO across the blood-gas barrier)
+  scale: organ
+  entity_iri: UBERON:0002048
+- id: ductus_arteriosus_patency
+  label: ductus arteriosus patency (luminal diameter / openness)
+  scale: organ
+  entity_iri: UBERON:0005440
+  quality_iri: PATO:0001334
+- id: foramen_ovale_patency
+  label: foramen ovale of heart patency (openness of the interatrial flap valve)
+  scale: organ
+  entity_iri: UBERON:0004754
+  quality_iri: PATO:0000610
+- id: forced_expiratory_volume
+  label: forced expiratory volume in 1 s (FEV1.0) / maximal expiratory flow
+  scale: organ_system
+  entity_iri: UBERON:0002048
+  quality_iri: PATO:0001574
+- id: lung_elastic_recoil_pressure
+  label: lung elastic recoil pressure (static elastic recoil of the lung)
+  scale: organ
+  entity_iri: UBERON:0002048
+  quality_iri: PATO:0001031
+- id: inspired_po2
+  label: partial pressure of inspired oxygen (PIO2 = FIO2 x (PB - PH2O))
+  scale: organ
+  entity_iri: CHEBI:15379
+  quality_iri: PATO:0001025
+  quality_kind: intensive
+causal_edges:
+- source: alveolar_surfactant_concentration
+  target: alveolar_surface_tension
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: secreted surfactant lowers the surface tension of the alveolar lining layer
+  evidence: '"some of the cells lining the alveoli secrete a material called surfactant that dramatically lowers the surface
+    tension of the alveolar lining layer" (West''s Respiratory Physiology, 11th ed., ch 1)'
+- source: alveolar_surface_tension
+  target: alveolar_stability
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: surface tension generates forces that tend to collapse alveoli, reducing their stability
+  evidence: '"Because of the surface tension of the liquid lining the alveoli, relatively large forces develop that tend to
+    collapse alveoli" (West''s Respiratory Physiology, 11th ed., ch 1)'
+- source: alveolar_surfactant_concentration
+  target: alveolar_stability
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: surfactant lowers surface tension and thereby increases alveolar stability
+  evidence: '"surfactant that dramatically lowers the surface tension of the alveolar lining layer and markedly increases
+    the stability of the alveoli" (West''s Respiratory Physiology, 11th ed., ch 1)'
+- source: blood_gas_barrier_thickness
+  target: pulmonary_gas_diffusion_rate
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'Fick''s law: gas flux across the barrier is inversely proportional to barrier thickness'
+  evidence: '"the amount of gas that moves across a sheet of tissue is proportional to the area of the sheet but inversely
+    proportional to its thickness" (West''s Respiratory Physiology, 11th ed., ch 1)'
+- source: pulmonary_capillary_pressure
+  target: pulmonary_interstitial_fluid_volume
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: raising capillary pressure raises capillary wall stress to a point where the barrier leaks plasma and red cells
+    into the alveolar spaces
+  evidence: '"Increasing the pressure in the capillaries to high levels ... can raise the wall stresses of the capillaries
+    to a point at which ultrastructural changes can occur. The capillaries then leak plasma and even red blood cells into
+    the alveolar spaces." (West''s Respiratory Physiology, 11th ed., ch 1)  ||  Fluid exchange across the capillary endothelium
+    obeys Starling''s law. The force tending to push fluid out of the capillary is the capillary hydrostatic pressure ...
+    The earliest form of pulmonary edema ... The rate of lymph flow from the lung increases considerably if the capillary
+    pressure is raised'
+- source: tidal_volume
+  target: total_ventilation
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: minute ventilation = tidal volume x respiratory frequency; raising volume per breath raises total volume leaving
+    the lung per minute
+  evidence: '"Total ventilation is tidal volume × respiratory frequency" (West''s Respiratory Physiology, 11th ed., ch 2)'
+- source: respiratory_rate
+  target: total_ventilation
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: minute ventilation = tidal volume x respiratory frequency; raising breaths per minute raises total volume leaving
+    the lung per minute
+  evidence: '"If the volume exhaled with each breath is 500 ml ... and there are 12 breaths·min−1, the total volume leaving
+    the lung each minute is 500 × 12 = 6,000 ml·min−1. This is known as the total ventilation" (West''s Respiratory Physiology,
+    11th ed., ch 2)'
+- source: total_ventilation
+  target: alveolar_ventilation
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: alveolar ventilation = total ventilation - dead space ventilation; raising total ventilation (holding dead space
+    ventilation fixed) raises alveolar ventilation
+  evidence: '"alveolar ventilation—that portion of ventilation which participates in gas exchanges—is determined by the balance
+    between total and dead space ventilation" (West''s Respiratory Physiology, 11th ed., ch 2)'
+- source: dead_space_ventilation
+  target: alveolar_ventilation
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: alveolar ventilation = total ventilation - dead space ventilation; raising dead space ventilation (holding total
+    ventilation fixed) lowers fresh gas reaching the alveoli
+  evidence: '"The larger the volume of the dead space, the smaller the volume of fresh gas entering the alveoli" (West''s
+    Respiratory Physiology, 11th ed., ch 2)'
+- source: anatomic_dead_space_volume
+  target: dead_space_ventilation
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: dead space ventilation = dead space volume x respiratory frequency; a larger dead space volume increases the
+    per-minute dead space ventilation
+  evidence: '"calculate the dead space ventilation (dead space volume × respiratory frequency)" (West''s Respiratory Physiology,
+    11th ed., ch 2)'
+- source: tidal_volume
+  target: anatomic_dead_space_volume
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: a large inspiration exerts radial traction/pull of lung parenchyma on the bronchi, widening the conducting airways
+    and enlarging the anatomic dead space
+  evidence: '"it increases with large inspirations because of the traction or pull exerted on the bronchi by the surrounding
+    lung parenchyma" (West''s Respiratory Physiology, 11th ed., ch 2)'
+- source: tidal_volume
+  target: dead_space_fraction
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: with the anatomic dead space volume roughly fixed, raising tidal volume reduces the fraction of each breath occupied
+    by the dead space (VD/VT)
+  evidence: '"Increasing tidal volume is often more effective because this reduces the fraction of each breath occupied by
+    the anatomic dead space, which is referred to as the dead space fraction" (West''s Respiratory Physiology, 11th ed., ch
+    2)'
+- source: alveolar_ventilation
+  target: alveolar_pco2
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: alveolar ventilation equation PACO2 = (VCO2/VA)·K; raising alveolar ventilation washes out CO2 and lowers alveolar
+    PCO2 (halving VA doubles PACO2)
+  evidence: '"If the alveolar ventilation is halved (and CO2 production remains unchanged), for example, the alveolar and
+    arterial PCO2 will double" (West''s Respiratory Physiology, 11th ed., ch 2)  ||  "if the alveolar ventilation is halved,
+    the P 2 is doubled, once a steady state has been established." — West''s Respiratory Physiology, 11th ed., ch 5'
+- source: alveolar_ventilation
+  target: arterial_pco2
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: alveolar and arterial PCO2 are virtually identical, so the inverse alveolar-ventilation relation carries through;
+    halving alveolar ventilation doubles arterial PCO2
+  evidence: '"If the alveolar ventilation is halved (and CO2 production remains unchanged) ... the alveolar and arterial PCO2
+    will double" (West''s Respiratory Physiology, 11th ed., ch 2)  ||  The resulting hyperventilation reduces the PCO2 in
+    the blood and therefore in the CSF'
+- source: co2_production
+  target: alveolar_pco2
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: alveolar ventilation equation PACO2 = (VCO2/VA)·K; with alveolar ventilation fixed, raising CO2 output raises
+    alveolar PCO2
+  evidence: '"the alveolar ventilation can be obtained by dividing the CO2 output by the alveolar fractional concentration
+    of this gas" ... "PCO2 ... is proportional to the fractional concentration of the gas in the alveoli" (West''s Respiratory
+    Physiology, 11th ed., ch 2)'
+- source: co2_production
+  target: arterial_pco2
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: with alveolar ventilation held constant, raising metabolic CO2 production raises arterial PCO2 (alveolar ventilation
+    equation, arterial = alveolar PCO2)
+  evidence: '"CO2 production ... is increased by factors such as exercise, fever, infection, nutritional intake, and seizures
+    and decreased by hypothermia and fasting" combined with the alveolar ventilation equation relating PCO2 to CO2 output
+    (West''s Respiratory Physiology, 11th ed., ch 2)'
+- source: core_temperature
+  target: co2_production
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: fever raises metabolic activity, increasing whole-body CO2 production; hypothermia lowers it
+  evidence: '"It [CO2 production] is increased by factors such as exercise, fever, infection ... and decreased by hypothermia
+    and fasting" (West''s Respiratory Physiology, 11th ed., ch 2)'
+- source: metabolic_rate
+  target: co2_production
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: CO2 is the product of aerobic metabolism; raising whole-body metabolic (O2 consumption) rate increases CO2 production
+  evidence: '"CO2 production at rest is usually constant, but it is affected by metabolic activity. It is increased by factors
+    such as exercise ..." (West''s Respiratory Physiology, 11th ed., ch 2)'
+- source: blood_gas_barrier_thickness
+  target: o2_transfer_rate
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'Fick''s law: diffusion rate inversely proportional to membrane thickness; thickening impedes O2 diffusion'
+  evidence: '"if the blood-gas barrier is markedly thickened by disease so that oxygen diffusion is impeded, the rate of rise
+    of P O2 in the red blood cells is correspondingly slow" (West''s Respiratory Physiology, 11th ed., ch 3)'
+- source: blood_gas_barrier_thickness
+  target: pulmonary_diffusing_capacity_co
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: DL includes thickness in the denominator (Fick's law); thicker barrier lowers measured diffusing capacity
+  evidence: '"the measured diffusing capacity of the lung for CO depends not only on the area and thickness of the blood-gas
+    barrier" and "inversely proportional to the thickness (T)" (West''s Respiratory Physiology, 11th ed., ch 3)'
+- source: alveolar_po2
+  target: o2_transfer_rate
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: alveolar PO2 sets the partial-pressure difference driving O2 across the barrier; lowering it slows transfer
+  evidence: '"the partial pressure difference responsible for driving the O2 across the blood-gas barrier has been reduced
+    from 60 mm Hg ... to only 30 mm Hg, thereby slowing movement of O2 across the blood gas barrier" (West''s Respiratory
+    Physiology, 11th ed., ch 3)'
+- source: o2_transfer_rate
+  target: arterial_po2
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: faster O2 transfer raises rate of rise of capillary PO2, so end-capillary/arterial PO2 reaches the alveolar value
+    before the cell exits
+  evidence: '"the P O2 may not reach that of alveolar gas before the red blood cell leaves the pulmonary capillary. In this
+    case, a measurable difference between alveolar gas and end-capillary blood for P O2 may occur" (West''s Respiratory Physiology,
+    11th ed., ch 3)'
+- source: pulmonary_perfusion
+  target: pulmonary_capillary_transit_time
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: increased pulmonary blood flow reduces the time a red cell spends in the capillary
+  evidence: '"With heavy exercise, the pulmonary blood flow is greatly increased, and the time normally spent by the red cell
+    in the capillary, about 0.75 s, may be reduced to as little as one-third of this" (West''s Respiratory Physiology, 11th
+    ed., ch 3)'
+- source: pulmonary_capillary_transit_time
+  target: arterial_po2
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: more transit time allows fuller equilibration of capillary PO2 with alveolar gas (matters when diffusion-limited)
+  evidence: '"Although the time for diffusion is decreased ... the P O2 may not reach that of alveolar gas before the red
+    blood cell leaves the pulmonary capillary" (West''s Respiratory Physiology, 11th ed., ch 3)'
+- source: pulmonary_capillary_blood_volume
+  target: pulmonary_diffusing_capacity_co
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: more capillary blood volume provides more hemoglobin to take up CO, raising effective diffusing capacity (1/(theta*Vc)
+    resistance falls)
+  evidence: '"a reduction of capillary blood volume or concentration of hemoglobin by disease can reduce the measured diffusing
+    capacity of the lung" (West''s Respiratory Physiology, 11th ed., ch 3)'
+- source: blood_hemoglobin_concentration
+  target: pulmonary_diffusing_capacity_co
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: hemoglobin binds CO in the capillary; lower Hb raises the reaction-rate resistance 1/(theta*Vc), lowering measured
+    DLCO
+  evidence: '"a reduction of capillary blood volume or concentration of hemoglobin by disease can reduce the measured diffusing
+    capacity of the lung" (West''s Respiratory Physiology, 11th ed., ch 3)'
+- source: alveolar_po2
+  target: pulmonary_diffusing_capacity_co
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: high alveolar O2 competes with CO for hemoglobin, reducing theta for CO and the measured diffusing capacity
+  evidence: '"theta for CO is reduced if a subject breathes a high O2 mixture, because the O2 competes with the CO for hemoglobin.
+    As a result, the measured diffusing capacity is reduced by O2 breathing" (West''s Respiratory Physiology, 11th ed., ch
+    3)'
+- source: pulmonary_artery_pressure
+  target: pulmonary_vascular_resistance
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: raising arterial perfusing pressure recruits closed capillaries and distends open ones, lowering resistance
+  evidence: Figure 4.4 shows that an increase in either pulmonary arterial or venous pressure causes pulmonary vascular resistance
+    to fall. ... As the pressure rises, these vessels begin to conduct blood, thus lowering the overall resistance. This is
+    termed recruitment
+- source: pulmonary_venous_pressure
+  target: pulmonary_vascular_resistance
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: raising venous (downstream) pressure raises intravascular pressure, recruiting and distending capillaries, lowering
+    resistance
+  evidence: an increase in either pulmonary arterial or venous pressure causes pulmonary vascular resistance to fall
+- source: lung_volume
+  target: pulmonary_vascular_resistance
+  sign: '?'
+  causal_evidence: curated_mechanistic
+  mechanism: 'biphasic: at low volume extra-alveolar vessels narrow (resistance high); at high volume capillaries are stretched/squashed
+    (resistance high); least at normal volume'
+  evidence: resistance is high when lung volume is low because their walls contain smooth muscle and elastic tissue ... even
+    if the transmural pressure of the capillaries is not changed with large lung inflations, their vascular resistance increases
+    ... the resistance is least at normal breathing volumes
+- source: plasma_serotonin
+  target: pulmonary_vascular_resistance
+  sign: +
+  causal_evidence: pharmacological
+  mechanism: serotonin contracts pulmonary vascular smooth muscle, narrowing extra-alveolar vessels
+  evidence: substances that cause smooth muscle contraction increase pulmonary vascular resistance. These include serotonin,
+    histamine, norepinephrine, and endothelin
+- source: plasma_histamine
+  target: pulmonary_vascular_resistance
+  sign: +
+  causal_evidence: pharmacological
+  mechanism: histamine contracts pulmonary vascular smooth muscle
+  evidence: substances that cause smooth muscle contraction increase pulmonary vascular resistance. These include serotonin,
+    histamine, norepinephrine, and endothelin
+- source: norepinephrine
+  target: pulmonary_vascular_resistance
+  sign: +
+  causal_evidence: pharmacological
+  mechanism: norepinephrine contracts pulmonary vascular smooth muscle
+  evidence: substances that cause smooth muscle contraction increase pulmonary vascular resistance. These include serotonin,
+    histamine, norepinephrine, and endothelin
+- source: plasma_thromboxane_b2
+  target: pulmonary_vascular_resistance
+  sign: +
+  causal_evidence: pharmacological
+  mechanism: thromboxane A2 contracts pulmonary vascular smooth muscle
+  evidence: Increases due to alveolar hypoxia, as well as endothelin, histamine, serotonin, thromboxane A2
+- source: endothelial_pgi2_production
+  target: pulmonary_vascular_resistance
+  sign: '-'
+  causal_evidence: pharmacological
+  mechanism: prostacyclin (PGI2) relaxes pulmonary vascular smooth muscle
+  evidence: Substances that can relax smooth muscle in the pulmonary circulation include acetylcholine, calcium channel blockers,
+    nitric oxide, phosphodiesterase-5 inhibitors, and prostacyclin (PGI2)
+- source: endothelial_no_production
+  target: pulmonary_vascular_resistance
+  sign: '-'
+  causal_evidence: pharmacological
+  mechanism: NO activates soluble guanylate cyclase, raising cGMP, inhibiting Ca channels, relaxing pulmonary vascular smooth
+    muscle
+  evidence: administration of NO in low concentrations (10 to 40 ppm) by the inhalational route reduces hypoxic pulmonary
+    vasoconstriction in humans. ... NO synthase inhibitors augment hypoxic pulmonary vasoconstriction
+- source: alveolar_po2
+  target: pulmonary_arteriole_diameter
+  sign: +
+  causal_evidence: perturbation
+  mechanism: low alveolar PO2 acts directly on the small pulmonary arteriole smooth muscle, causing contraction and narrowing;
+    high PO2 dilates
+  evidence: This is known as hypoxic pulmonary vasoconstriction and consists of contraction of smooth muscle in the walls
+    of the small arterioles in the hypoxic region. ... excised segments of pulmonary artery constrict if their environment
+    is made hypoxic
+- source: alveolar_po2
+  target: pulmonary_vascular_resistance
+  sign: '-'
+  causal_evidence: perturbation
+  mechanism: low alveolar PO2 constricts small pulmonary arterioles, raising resistance (nonlinear, marked below ~70 mm Hg)
+  evidence: when the alveolar PO2 is reduced below approximately 70 mm Hg, marked vasoconstriction may occur ... Increases
+    due to alveolar hypoxia
+- source: alveolar_po2
+  target: pulmonary_perfusion
+  sign: +
+  causal_evidence: perturbation
+  mechanism: low alveolar PO2 constricts arterioles in the hypoxic region, diverting/reducing local blood flow
+  evidence: at a very low PO2, the local blood flow may be almost abolished ... Hypoxic vasoconstriction has the effect of
+    directing blood flow away from hypoxic regions of lung
+- source: endothelial_no_production
+  target: vsm_cgmp_level
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: NO activates soluble guanylate cyclase, increasing synthesis of cGMP in smooth muscle
+  evidence: NO activates soluble guanylate cyclase and increases the synthesis of guanosine 3',5'-cyclic monophosphate (cyclic
+    GMP)
+- source: vsm_cgmp_level
+  target: intracellular_calcium
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: cGMP inhibits calcium channels, preventing a rise in intracellular calcium concentration
+  evidence: cGMP subsequently inhibits calcium channels, preventing a rise in intracellular calcium concentrations and promoting
+    vasodilation
+- source: intracellular_calcium
+  target: vascular_smooth_muscle_tone
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: a rise in cytoplasmic Ca2+ is the major trigger for smooth muscle contraction
+  evidence: An increase in cytoplasmic calcium ion concentration is the major trigger for smooth muscle contraction
+- source: arterial_ph
+  target: pulmonary_vascular_resistance
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: low blood pH (acidemia) causes pulmonary vasoconstriction, especially with alveolar hypoxia
+  evidence: A low blood pH (acidemia) causes vasoconstriction, especially when alveolar hypoxia is present
+- source: sympathetic_tone
+  target: pulmonary_vascular_resistance
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: increased sympathetic outflow stiffens pulmonary artery walls and causes vasoconstriction
+  evidence: an increase in sympathetic outflow causing stiffening of the walls of the pulmonary arteries and vasoconstriction
+- source: pulmonary_vascular_resistance
+  target: pulmonary_artery_pressure
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: generalized pulmonary vasoconstriction (raised resistance) raises pulmonary arterial pressure at fixed flow
+  evidence: the PO2 is reduced throughout the lung with the result that generalized pulmonary vasoconstriction occurs, leading
+    to a rise in pulmonary arterial pressure
+- source: pulmonary_artery_pressure
+  target: pulmonary_blood_volume
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: raising pulmonary arterial/venous pressure recruits and distends vessels, increasing lung blood volume
+  evidence: the same mechanisms allow the lung to increase its blood volume with relatively small rises in pulmonary arterial
+    or venous pressures
+- source: pulmonary_capillary_pressure
+  target: pulmonary_lymph_flow
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: raised capillary pressure increases filtration and thereby lung lymph flow
+  evidence: The rate of lymph flow from the lung increases considerably if the capillary pressure is raised over a long period
+- source: pulmonary_lymph_flow
+  target: pulmonary_interstitial_fluid_volume
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: lymphatics drain filtered interstitial fluid, removing it from the interstitial/perivascular space
+  evidence: Numerous lymphatics run in the perivascular spaces, and these help to transport the fluid to the hilar lymph nodes
+    ... forming a natural sump for the drainage of fluid
+- source: angiotensin_I
+  target: angiotensin_II
+  sign: +
+  causal_evidence: pharmacological
+  mechanism: pulmonary capillary endothelial ACE catalyzes conversion of angiotensin I to angiotensin II
+  evidence: the conversion of the relatively inactive polypeptide angiotensin I to the potent vasoconstrictor angiotensin
+    II ... is catalyzed by angiotensin-converting enzyme, or ACE
+- source: plasma_ace
+  target: angiotensin_II
+  sign: +
+  causal_evidence: pharmacological
+  mechanism: ACE converts angiotensin I to angiotensin II in the lung; ACE inhibitors decrease this conversion
+  evidence: The conversion of angiotensin I is catalyzed by angiotensin-converting enzyme, or ACE ... Administration of an
+    angiotensin converting enzyme (ACE) inhibitor
+- source: plasma_ace
+  target: plasma_bradykinin
+  sign: '-'
+  causal_evidence: pharmacological
+  mechanism: ACE inactivates bradykinin; inhibiting ACE decreases bradykinin inactivation (raises bradykinin)
+  evidence: ACE inactivates up to 80% of bradykinin. ... Administration of an angiotensin converting enzyme (ACE) inhibitor
+    would be expected to have ... Decreased inactivation of bradykinin
+- source: alveolar_ventilation
+  target: alveolar_po2
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: alveolar PO2 set by balance of O2 removal by blood vs replenishment by ventilation; raising ventilation raises
+    alveolar PO2
+  evidence: '"if the alveolar ventilation is abnormally low, the alveolar P 2 falls. ... In practice, therefore, the alveolar
+    P 2 is largely determined by the level of alveolar ventilation." — West''s Respiratory Physiology, 11th ed., ch 5'
+- source: alveolar_pco2
+  target: arterial_pco2
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: arterial PCO2 equilibrates with alveolar PCO2 across the blood-gas barrier; a rise in alveolar PCO2 raises arterial
+    PCO2
+  evidence: '"Hypoventilation always causes an increased alveolar and, therefore, arterial P 2." — West''s Respiratory Physiology,
+    11th ed., ch 5'
+- source: alveolar_po2
+  target: arterial_po2
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: end-capillary/arterial PO2 equilibrates with alveolar PO2; lowering alveolar PO2 lowers arterial PO2
+  evidence: '"Hypoventilation always reduces the alveolar and arterial P 2 except when the subject breathes an enriched O2
+    mixture." — West''s Respiratory Physiology, 11th ed., ch 5'
+- source: arterial_po2
+  target: tissue_po2
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: the lung is a link in the O2 transport chain; arterial PO2 sets the gradient driving O2 diffusion to mitochondria,
+    so lower arterial PO2 lowers tissue PO2
+  evidence: '"any decrease of P 2 in arterial blood must result in a lower tissue P 2 other things being equal. For the same
+    reasons, impaired pulmonary gas exchange causes a rise in tissue P 2." — West''s Respiratory Physiology, 11th ed., ch
+    5'
+- source: ventilation_perfusion_ratio
+  target: alveolar_po2
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: alveolar PO2 of a unit is set by its V/Q ratio; reducing V/Q (obstructing ventilation, flow fixed) lowers O2;
+    raising V/Q raises O2 toward inspired gas
+  evidence: '"Now suppose that the ventilation-perfusion ratio of the unit is gradually reduced by obstructing its ventilation,
+    leaving its blood flow unchanged ... It is clear that the O2 in the unit will fall ... Suppose instead that the ventilation-perfusion
+    ratio is increased by decreasing blood flow ... Now the O2 rises" — West''s Respiratory Physiology, 11th ed., ch 5'
+- source: ventilation_perfusion_ratio
+  target: alveolar_pco2
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: alveolar PCO2 of a unit is set by its V/Q ratio; reducing V/Q raises CO2 toward mixed venous, raising V/Q lowers
+    CO2 toward inspired gas
+  evidence: '"the ventilation-perfusion ratio of the unit is gradually reduced ... the CO2 will rise ... the ventilation-perfusion
+    ratio is increased by decreasing blood flow ... the O2 rises and the CO2 falls" — West''s Respiratory Physiology, 11th
+    ed., ch 5'
+- source: pulmonary_shunt_fraction
+  target: arterial_po2
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: shunted poorly-oxygenated blood mixes into arterial blood without exposure to alveolar gas, depressing arterial
+    PO2; effect grows with shunt fraction and is not abolished by 100% O2
+  evidence: '"The effect of the addition of this poorly oxygenated blood is to depress the arterial P 2. ... the shunted blood
+    that bypasses ventilated alveoli is never exposed to the higher alveolar P 2, so it continues to depress the arterial
+    P 2." — West''s Respiratory Physiology, 11th ed., ch 5'
+- source: arterial_pco2
+  target: chemoreceptor_drive
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: chemoreceptors sense a rise in arterial PCO2 and increase the integrated drive to breathe
+  evidence: '"the chemoreceptors sense any elevation of arterial P 2 and respond by increasing ventilation." — West''s Respiratory
+    Physiology, 11th ed., ch 5'
+- source: arterial_po2
+  target: chemoreceptor_drive
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: hypoxemia (low arterial PO2) is sensed by peripheral chemoreceptors and increases respiratory drive
+  evidence: '"in some patients with a shunt, the arterial P 2 is low because the hypoxemia increases respiratory drive" —
+    West''s Respiratory Physiology, 11th ed., ch 5'
+- source: chemoreceptor_drive
+  target: alveolar_ventilation
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: increased chemoreceptor/ventilatory drive increases ventilation to the alveoli
+  evidence: '"whenever the chemoreceptors sense a rising P 2, there is an increase in ventilatory drive ... The consequent
+    increase in ventilation to the alveoli is usually effective in returning the arterial P 2 to normal." — West''s Respiratory
+    Physiology, 11th ed., ch 5'
+- source: arterial_po2
+  target: hemoglobin_o2_saturation
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: O2 binds Hb reversibly; fractional saturation rises with PO2 along the dissociation curve
+  evidence: The amount bound at any given time is a function of the P O2 ... the amount of O2 carried by the Hb increases
+    rapidly up to a P O2 of about 60 mm Hg
+- source: arterial_ph
+  target: hemoglobin_o2_affinity
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'Bohr effect: an increase in H+ (lower pH) reduces O2 affinity (right shift); higher pH/lower H+ raises affinity'
+  evidence: The O2 dissociation curve is shifted to the right, that is, the O2 affinity of Hb is reduced, by an increase in
+    H+ concentration  ||  "The oxygen dissociation curve moves to the right in exercising muscles because of the increase
+    in PCO2, H+ concentration, and temperature." (West's Respiratory Physiology, 11th ed., ch 9)
+- source: arterial_pco2
+  target: hemoglobin_o2_affinity
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'Bohr effect: a rise in PCO2 (largely via its action on H+) reduces hemoglobin O2 affinity, right-shifting the
+    curve'
+  evidence: The O2 dissociation curve is shifted to the right ... by an increase in H+ concentration, P CO2, temperature ...
+    Most of the effect of P CO2, which is known as the Bohr effect, can be attributed to its action on H+ concentration  ||  "The
+    oxygen dissociation curve moves to the right in exercising muscles because of the increase in PCO2, H+ concentration,
+    and temperature." (West's Respiratory Physiology, 11th ed., ch 9)
+- source: core_temperature
+  target: hemoglobin_o2_affinity
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: a rise in temperature reduces hemoglobin O2 affinity (right shift)
+  evidence: The O2 dissociation curve is shifted to the right, that is, the O2 affinity of Hb is reduced, by an increase in
+    H+ concentration, P CO2, temperature, and the concentration of 2,3-diphosphoglycerate  ||  "The oxygen dissociation curve
+    moves to the right in exercising muscles because of the increase in PCO2, H+ concentration, and temperature. This assists
+    the unloading of oxygen to the muscles." (West's Respiratory Physiology, 11th ed., ch 9)
+- source: erythrocyte_23_bpg
+  target: hemoglobin_o2_affinity
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: increased red-cell 2,3-DPG reduces hemoglobin O2 affinity (right shift), assisting unloading
+  evidence: An increase in 2,3-DPG, which is an end product of red cell metabolism, shifts the curve to the right ... the
+    unloading of O2 to peripheral tissues is assisted  ||  "There is a rightward shift of the O2 dissociation curve at moderate
+    altitudes that results in a better unloading of O2 in venous blood at a given PO2. The cause of the shift is an increase
+    in concentration of 2,3-diphosphoglycerate..." (West's Respiratory Physiology, 11th ed., ch 9)
+- source: hemoglobin_o2_affinity
+  target: peripheral_o2_unloading
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: lower O2 affinity (right-shifted curve) increases O2 unloading at a given tissue capillary PO2; higher affinity
+    impairs unloading
+  evidence: A rightward shift means more unloading of O2 at a given P O2 in a tissue capillary ... By contrast, stored blood
+    in a blood bank may be depleted of 2,3-DPG, which impairs unloading of O2
+- source: blood_carbon_monoxide
+  target: carboxyhemoglobin
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: CO combines with hemoglobin (240x O2 affinity) to form carboxyhemoglobin
+  evidence: Carbon monoxide ... interferes with the O2 transport function of blood by combining with Hb to form carboxyhemoglobin
+    (COHb). CO has about 240 times the affinity of O2 for Hb
+- source: carboxyhemoglobin
+  target: arterial_o2_content
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: COHb occupies Hb binding sites, making Hb unavailable for O2 carriage so O2 content falls despite normal Hb and
+    PO2
+  evidence: small amounts of CO can tie up a large proportion of the Hb in the blood, thus making it unavailable for O2 carriage.
+    If this happens, the Hb concentration and P O2 of blood may be normal, but its O2 concentration is grossly reduced
+- source: carboxyhemoglobin
+  target: hemoglobin_o2_affinity
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: COHb left-shifts the O2 dissociation curve (raises affinity of remaining sites), impairing unloading
+  evidence: The presence of COHb also shifts the O2 dissociation curve to the left (Figure 6.2), thus interfering with the
+    unloading of O2
+- source: erythrocyte_methemoglobin
+  target: arterial_o2_content
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: ferric methemoglobin binds O2 poorly, reducing O2 carriage
+  evidence: Methemoglobin is poor at binding oxygen as well as releasing any bound oxygen to the peripheral tissues
+- source: erythrocyte_methemoglobin
+  target: peripheral_o2_unloading
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: methemoglobin releases bound O2 poorly, impairing tissue unloading
+  evidence: Methemoglobin is poor at binding oxygen as well as releasing any bound oxygen to the peripheral tissues
+- source: blood_hemoglobin_concentration
+  target: arterial_o2_content
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: O2 capacity is set by Hb concentration; lowering Hb (anemia) lowers O2 capacity and content at fixed PO2/saturation
+  evidence: suppose this person develops anemia and the Hb concentration falls to 10 g per 100 ml of blood while the P O2
+    remains the same. The O2 saturation will not change, but the O2 carrying capacity and O2 concentration will both decrease
+- source: hemoglobin_o2_saturation
+  target: blood_co2_content
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'Haldane effect: deoxygenation (lower O2 saturation) increases CO2 carriage via better H+ buffering and carbamino
+    formation by reduced Hb'
+  evidence: the lower the saturation of Hb with O2, the larger the CO2 concentration for a given P CO2 ... The fact that deoxygenation
+    of the blood increases its ability to carry CO2 is known as the Haldane effect
+- source: arterial_pco2
+  target: plasma_bicarbonate
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: a rise in PCO2 drives dissociation of carbonic acid, increasing plasma bicarbonate (in vitro buffer-line slope)
+  evidence: Whenever the P CO2 rises, the bicarbonate must also increase to some extent because of dissociation of the carbonic
+    acid produced
+- source: arterial_ph
+  target: chemoreceptor_drive
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: H+ ions (lower pH) stimulate the peripheral chemoreceptors, raising ventilatory drive (respiratory compensation
+    for metabolic acidosis)
+  evidence: The stimulus to raise the ventilation is chiefly the action of H+ ions on the peripheral chemoreceptors
+- source: oxygen_delivery
+  target: tissue_o2_extraction
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: when O2 delivery falls at constant tissue utilization, O2 extraction from blood must rise to meet metabolic needs
+  evidence: If, for example, O2 delivery declines, while tissue O2 utilization remains constant, oxygen extraction from the
+    blood must increase to meet the metabolic needs
+- source: tissue_o2_extraction
+  target: mixed_venous_po2
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: increased O2 extraction lowers mixed venous PO2 and O2 content
+  evidence: oxygen extraction from the blood must increase to meet the metabolic needs, thereby decreasing the mixed venous
+    P O2 and O2 concentration
+- source: oxygen_delivery
+  target: muscle_tissue_oxygen
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: the balance of O2 delivery (capillary PO2) against consumption sets tissue PO2; falling delivery lowers tissue
+    PO2 toward critical/anoxic levels
+  evidence: the balance between O2 consumption and delivery (determined by the capillary P O2 and the intercapillary distance)
+    results in an adequate P O2 in all the tissue ... in C, there is an anoxic region
+- source: arterial_po2
+  target: muscle_tissue_oxygen
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: a low arterial PO2 lowers capillary PO2 and hence tissue PO2 (hypoxic hypoxia)
+  evidence: Tissue hypoxia can be due to (1) a low P O2 in arterial blood caused, for example, by pulmonary disease (hypoxic
+    hypoxia)
+- source: metabolic_rate
+  target: muscle_tissue_oxygen
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: increased tissue O2 consumption, at fixed delivery, lowers tissue PO2 (can reach a critical/anoxic core)
+  evidence: In B, the intercapillary distance or the O2 consumption has been increased until the P O2 at one point in the
+    tissue falls to zero
+- source: metabolic_rate
+  target: mixed_venous_po2
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: at constant O2 delivery, higher tissue O2 utilization raises extraction and lowers mixed venous PO2/content;
+    conversely impaired mitochondrial utilization raises mixed venous PO2
+  evidence: In some cases, such as severe sepsis or cyanide intoxication, mitochondrial O2 utilization is impaired, in which
+    case the mixed venous P O2 and O2 concentration increase
+- source: alveolar_surface_tension
+  target: lung_compliance
+  sign: '-'
+  causal_evidence: perturbation
+  mechanism: surface tension of the alveolar lining film adds a recoil/collapsing force; lowering it (e.g. saline-filling
+    abolishes surface tension) makes the lung easier to distend, raising compliance
+  evidence: '"lungs inflated with saline have a much larger compliance (are easier to distend) than do air-filled lungs ...
+    the saline abolished the surface tension forces but presumably did not affect the tissue forces"; "a low surface tension
+    in the alveoli increases the compliance of the lung" (West''s Respiratory Physiology, 11th ed., ch 7)'
+- source: alveolar_surface_tension
+  target: pulmonary_interstitial_fluid_volume
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: surface tension of the curved alveolar surface lowers hydrostatic pressure in peri-capillary tissue, sucking
+    fluid out of the capillaries; surfactant (low surface tension) prevents transudation, so high surface tension promotes
+    alveolar/interstitial fluid accumulation
+  evidence: '"the surface tension forces ... also tend to suck fluid out of the capillaries. In effect, the surface tension
+    of the curved alveolar surface reduces the hydrostatic pressure in the tissue outside the capillaries. By reducing these
+    surface forces, surfactant prevents the transudation of fluid" (West''s Respiratory Physiology, 11th ed., ch 7)'
+- source: lung_volume
+  target: airway_resistance
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: bronchi are held open by radial traction of surrounding lung parenchyma; expanding the lung increases airway
+    caliber, lowering resistance; reducing lung volume narrows airways and raises resistance
+  evidence: '"the bronchi are supported by the radial traction of the surrounding lung tissue, and their caliber is increased
+    as the lung expands ... as lung volume is reduced, airway resistance rises rapidly" (West''s Respiratory Physiology, 11th
+    ed., ch 7)'
+- source: alveolar_po2
+  target: airway_resistance
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: a fall in alveolar PO2 acts directly on bronchiolar smooth muscle to contract it, increasing airway resistance
+    (so resistance varies inversely with alveolar PO2)
+  evidence: '"A fall of P[O]2 in alveolar gas causes an increase in airway resistance, apparently as a result of a direct
+    action on bronchiolar smooth muscle" (West''s Respiratory Physiology, 11th ed., ch 7)'
+- source: synaptic_acetylcholine_concentration
+  target: bronchiole_smooth_muscle_tone
+  sign: +
+  causal_evidence: pharmacological
+  mechanism: acetylcholine (parasympathetic transmitter) activates airway smooth-muscle muscarinic receptors, causing bronchoconstriction
+    (increased contractile tone); antimuscarinic agents block this
+  evidence: '"Parasympathetic activity causes bronchoconstriction, as does acetylcholine. Antimuscarinic agents are used in
+    COPD" (West''s Respiratory Physiology, 11th ed., ch 7)'
+- source: pulmonary_fibrous_tissue_amount
+  target: lung_compliance
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: an increase of fibrous tissue (pulmonary fibrosis) stiffens the lung, reducing its volume change per unit pressure
+    (compliance)
+  evidence: '"A reduced compliance is caused by an increase of fibrous tissue in the lung (pulmonary fibrosis)" (West''s Respiratory
+    Physiology, 11th ed., ch 7)'
+- source: pulmonary_interstitial_fluid_volume
+  target: lung_compliance
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: alveolar edema fills/prevents inflation of alveolar units, lowering lung compliance
+  evidence: '"A reduced compliance is caused by ... alveolar edema, which prevents the inflation of some alveoli" (West''s
+    Respiratory Physiology, 11th ed., ch 7)'
+- source: lung_compliance
+  target: work_of_breathing
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: lowering surface tension raises compliance and reduces the work of expanding the lung each breath; reduced compliance
+    (stiff lungs) increases elastic work of breathing
+  evidence: '"a low surface tension in the alveoli increases the compliance of the lung and reduces the work of expanding
+    it with each breath" (West''s Respiratory Physiology, 11th ed., ch 7)'
+- source: airway_resistance
+  target: work_of_breathing
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: higher airway resistance enlarges the viscous (resistive) work area of the breathing-cycle pressure-volume loop,
+    increasing work of breathing
+  evidence: '"The higher the airway resistance or the inspiratory flow rate, the more negative (rightward) would be the intrapleural
+    pressure excursion ... and the larger the area" (West''s Respiratory Physiology, 11th ed., ch 7)'
+- source: arterial_pco2
+  target: csf_ph
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: rising blood PCO2 -> CO2 diffuses across blood-brain barrier into CSF -> liberates H+ -> CSF pH falls
+  evidence: When the blood PCO2 rises, CO2 diffuses into the CSF from the cerebral blood vessels, liberating H+ ions that
+    stimulate the chemoreceptors
+- source: csf_bicarbonate
+  target: csf_ph
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: bicarbonate buffers H+ -> raises CSF pH (compensatory transport across blood-brain barrier)
+  evidence: If the CSF pH is displaced over a prolonged period, a compensatory change in [bicarbonate] occurs as a result
+    of transport across the blood-brain barrier... Alterations in the bicarbonate concentration of the CSF modulate the pH
+- source: csf_ph
+  target: alveolar_ventilation
+  sign: '-'
+  causal_evidence: perturbation
+  mechanism: central chemoreceptors sense brain ECF/CSF H+ -> drive respiratory center; lower pH (higher H+) stimulates breathing
+  evidence: local application of H+ or dissolved CO2 to this area stimulates breathing within a few seconds... An increase
+    in H+ concentration stimulates ventilation, whereas a decrease inhibits it
+- source: arterial_pco2
+  target: cerebral_blood_flow
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: raised arterial PCO2 -> cerebral vasodilation -> increased cerebral blood flow
+  evidence: The cerebral vasodilation that accompanies an increased arterial PCO2 enhances diffusion of CO2 into the CSF and
+    the brain extracellular fluid
+- source: arterial_pco2
+  target: alveolar_ventilation
+  sign: +
+  causal_evidence: perturbation
+  mechanism: raised arterial PCO2 -> central (CSF H+) + peripheral chemoreceptor drive -> increased ventilation
+  evidence: with a normal PO2, the ventilation increases by about 2 to 3 liters per min for each 1 mm Hg rise in PCO2
+- source: arterial_po2
+  target: alveolar_ventilation
+  sign: '-'
+  causal_evidence: perturbation
+  mechanism: falling arterial PO2 -> carotid/aortic body peripheral chemoreceptor discharge -> increased ventilation
+  evidence: hypoxemia reflexly stimulates ventilation by its action on the carotid and aortic body chemoreceptors
+- source: arterial_ph
+  target: alveolar_ventilation
+  sign: '-'
+  causal_evidence: perturbation
+  mechanism: falling arterial pH -> carotid body peripheral chemoreceptor stimulation -> increased ventilation (pH and ventilation
+    move oppositely)
+  evidence: A reduction in arterial blood pH stimulates ventilation... in experimental animals in which it is possible to
+    reduce the pH at a constant PCO2, the stimulus to ventilation can be convincingly demonstrated
+- source: mean_arterial_pressure
+  target: alveolar_ventilation
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: raised arterial pressure -> aortic/carotid sinus baroreceptor stimulation -> reflex hypoventilation/apnea
+  evidence: An increase in arterial blood pressure can cause reflex hypoventilation or apnea through stimulation of the aortic
+    and carotid sinus baroreceptors. Conversely, a decrease in blood pressure may result in hyperventilation
+- source: core_temperature
+  target: alveolar_ventilation
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: increased body temperature -> stimulation of ventilation
+  evidence: the increase in body temperature during exercise, which stimulates ventilation... Heating of the skin may result
+    in hyperventilation
+- source: pulmonary_interstitial_fluid_volume
+  target: respiratory_rate
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: engorged pulmonary capillaries / increased alveolar-wall interstitial fluid -> activate juxtacapillary (J) C-fiber
+    receptors -> rapid shallow breathing
+  evidence: engorgement of pulmonary capillaries and increases in the interstitial fluid volume of the alveolar wall activate
+    these receptors... can result in rapid, shallow breathing
+- source: tidal_volume
+  target: respiratory_rate
+  sign: '-'
+  causal_evidence: perturbation
+  mechanism: lung distension/inflation -> slowly adapting pulmonary stretch receptors via vagus -> switch off inspiration
+    -> slowed respiratory frequency (Hering-Breuer)
+  evidence: The main reflex effect of stimulating these receptors is a slowing of respiratory frequency due to an increase
+    in expiratory time... bilateral vagotomy, which removes the input of these receptors, causes slow, deep breathing in most
+    animals
+- source: venous_return
+  target: stroke_volume
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: increased venous return raises end-diastolic filling (Frank-Starling), augmenting stroke volume
+  evidence: '"Cardiac output increases approximately linearly with work level as a result of increases in both heart rate
+    and stroke volume, with the latter increasing due to increases in venous return and cardiac inotropy." (West''s Respiratory
+    Physiology, 11th ed., ch 9)'
+- source: pulmonary_capillary_blood_volume
+  target: pulmonary_diffusing_capacity
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: more blood in pulmonary capillaries provides more hemoglobin/surface for gas uptake, raising diffusing capacity
+  evidence: '"The diffusing capacity of the lung increases because of increases in both the diffusing capacity of the membrane,
+    DM, and the volume of blood in the pulmonary capillaries, Vc." and "This raises pulmonary capillary blood volume and diffusing
+    capacity." (West''s Respiratory Physiology, 11th ed., ch 9)'
+- source: cardiac_output
+  target: pulmonary_artery_pressure
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: greater flow through the pulmonary vascular bed raises pulmonary arterial pressure
+  evidence: '"The increase in cardiac output is associated with elevations of both the pulmonary arterial and pulmonary venous
+    pressures..." (West''s Respiratory Physiology, 11th ed., ch 9)'
+- source: blood_viscosity
+  target: pulmonary_vascular_resistance
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: higher blood viscosity increases resistance to flow through the pulmonary circulation, raising pulmonary vascular
+    resistance/pressure
+  evidence: '"The hypertension is exaggerated by the polycythemia, which raises the viscosity of the blood." (West''s Respiratory
+    Physiology, 11th ed., ch 9)'
+- source: hemoglobin_o2_affinity
+  target: hemoglobin_o2_saturation
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: higher O2 affinity (leftward shift) increases hemoglobin saturation at a given PO2, assisting O2 loading
+  evidence: '"At higher altitudes, there is a leftward shift in the dissociation curve caused by the respiratory alkalosis,
+    and this assists in the loading of O2 in the pulmonary capillaries." (West''s Respiratory Physiology, 11th ed., ch 9)'
+- source: alveolar_po2
+  target: ductus_arteriosus_patency
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: a rise in PO2 acts directly on ductal smooth muscle to constrict it, reducing patency
+  evidence: '"The ductus arteriosus begins to constrict a few minutes later in response to the direct action of the increased
+    PO2 on its smooth muscle." (West''s Respiratory Physiology, 11th ed., ch 9)'
+- source: plasma_prostaglandin_e2
+  target: ductus_arteriosus_patency
+  sign: +
+  causal_evidence: pharmacological
+  mechanism: prostaglandins relax/maintain ductal smooth muscle keeping it open; lowering prostaglandins (e.g. NSAID prostaglandin-synthesis
+    inhibition) promotes closure
+  evidence: '"This constriction is aided by reductions in the levels of local and circulating prostaglandins. Nonsteroidal
+    anti-inflammatory drugs can be given to inhibit prostaglandin synthesis and promote closure... prostaglandins are actually
+    administered to infants... to keep the ductus open." (West''s Respiratory Physiology, 11th ed., ch 9)'
+- source: pulmonary_perfusion
+  target: left_atrial_pressure
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: increased pulmonary blood flow returning to the left atrium raises left atrial pressure
+  evidence: '"With the resulting increase in pulmonary blood flow, left atrial pressure rises and the flaplike foramen ovale
+    quickly closes." (West''s Respiratory Physiology, 11th ed., ch 9)'
+- source: left_atrial_pressure
+  target: foramen_ovale_patency
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: raised left atrial pressure presses the flap valve of the foramen ovale shut, reducing patency
+  evidence: '"left atrial pressure rises and the flaplike foramen ovale quickly closes. A rise in aortic pressure... also
+    increases left atrial pressure." (West''s Respiratory Physiology, 11th ed., ch 9)'
+- source: capillary_permeability
+  target: pulmonary_interstitial_fluid_volume
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: increased pulmonary capillary permeability allows protein-rich fluid to leak into the interstitium, producing
+    edema
+  evidence: '"The probable mechanism is that the arteriolar vasoconstriction is uneven, and leakage occurs in unprotected,
+    damaged capillaries. The edema fluid has a high protein concentration, indicating that the permeability of the capillaries
+    is increased." (West''s Respiratory Physiology, 11th ed., ch 9)'
+- source: airway_resistance
+  target: forced_expiratory_volume
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: increased airway resistance reduces maximal expiratory flow / FEV1.0 (flow = recoil pressure / upstream-segment
+    resistance)
+  evidence: '"The FEV1.0 (or FEF25%–75%) is reduced by an increase in airway resistance or a reduction in elastic recoil of
+    the lung" (West''s Respiratory Physiology, 11th ed., ch 10)'
+- source: lung_elastic_recoil_pressure
+  target: forced_expiratory_volume
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: during dynamic compression the flow-limited expiratory flow (FEV1.0) is set by the lung elastic recoil pressure
+    driving gas through airways upstream of the collapse point; reduced recoil lowers FEV1.0
+  evidence: '"The FEV1.0 ... is reduced by an increase in airway resistance or a reduction in elastic recoil of the lung";
+    "flow is limited by airway compression and is determined by the elastic recoil force of the lung and the resistance of
+    the airways upstream of the collapse point" (West''s Respiratory Physiology, 11th ed., ch 10)'
+- source: lung_elastic_recoil_pressure
+  target: airway_resistance
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: increased lung elastic recoil exerts radial traction on the surrounding airways, holding them open (larger calibre)
+    and thereby lowering airway resistance
+  evidence: '"This can be explained by the increased lung recoil and the increased radial traction holding the airways open"
+    (West''s Respiratory Physiology, 11th ed., ch 10)'
+- source: endothelial_et1_secretion
+  target: pulmonary_vascular_resistance
+  sign: +
+  causal_evidence: pharmacological
+  mechanism: 'ET-1 secretion -> ETA/ETB receptor activation on pulmonary arterial smooth muscle -> rise in cytoplasmic Ca2+ -> vasoconstriction -> increased pulmonary vascular resistance'
+  evidence: '"Pulmonary vascular endothelial cells also release potent vasoconstrictors such as endothelin-1 (ET-1) ... Endothelin receptor antagonists are now part of treatment regimens for many patients with pulmonary hypertension." (West''s Respiratory Physiology, 11th ed., ch 4, Active Control of the Circulation)'
+- source: arterial_ph
+  target: erythrocyte_23_bpg
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'respiratory alkalosis (raised arterial pH) stimulates red-cell glycolysis and bisphosphoglycerate-mutase flux -> increased 2,3-BPG (2,3-DPG) synthesis'
+  evidence: '"The cause of the shift is an increase in concentration of 2,3-diphosphoglycerate, which develops primarily because of the respiratory alkalosis." (West''s Respiratory Physiology, 11th ed., ch 9, Other Physiological Changes at High Altitude)'
+- source: arterial_pco2
+  target: csf_bicarbonate
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'sustained rise in PaCO2 -> raised CSF PCO2 and lowered CSF pH -> compensatory bicarbonate transport across the blood-brain barrier raising CSF HCO3- toward restoring CSF pH (slow, days)'
+  evidence: '"If the CSF pH is displaced over a prolonged period, a compensatory change in [bicarbonate] occurs as a result of transport across the blood-brain barrier." (West''s Respiratory Physiology, 11th ed., ch 8, Central Chemoreceptors)'
+- source: pulmonary_interstitial_fluid_volume
+  target: pulmonary_gas_diffusion_rate
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'accumulated interstitial/alveolar fluid (edema) widens the effective blood-gas barrier -> longer diffusion path -> slower O2/CO2 diffusion (Fick: transfer inversely proportional to barrier thickness)'
+  evidence: '"the amount of gas that moves across a sheet of tissue is ... inversely proportional to its thickness" and "when the diffusion properties of the lung are impaired, for example, because of thickening of the blood-gas barrier, the blood PO2 does not reach the alveolar value ..." (West''s Respiratory Physiology, 11th ed., ch 3 Diffusion / ch 4 Water Balance in the Lung)'
+- source: arterial_pco2
+  target: blood_co2_content
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'higher PCO2 -> more dissolved CO2, more carbonic-anhydrase-catalyzed bicarbonate formation, and more carbaminohemoglobin -> higher total blood CO2 content (CO2 dissociation curve, near-linear in-range)'
+  evidence: '"The relationship between the PCO2 and the total CO2 concentration of blood is shown in Figure 6.5 ... the CO2 dissociation curve, and it is much more linear than is the O2 dissociation curve." (West''s Respiratory Physiology, 11th ed., ch 6, CO2 Dissociation Curve)'
+quantitative_definitions:
+- kind: structural-function
+  result: alveolar_po2
+  arguments:
+  - node: inspired_po2
+    role: argument
+    derivative_sign: "+"
+  - node: alveolar_pco2
+    role: argument
+    derivative_sign: "-"
+  mechanism: 'Alveolar gas equation (steady state): PAO2 = PIO2 - PACO2/R (+ small correction F). For fixed inspired PO2 and respiratory exchange ratio R: d(PAO2)/d(PIO2) = +1 and d(PAO2)/d(PACO2) = -1/R < 0.'
+  evidence: '"A simplified form of the alveolar gas equation is [PAO2 = PIO2 - PACO2/R] where F is a small correction factor ... which we can ignore." (West''s Respiratory Physiology, 11th ed., ch 5, Hypoventilation)'
+modulation_edges:
+- modulator: plasma_iron
+  influence_id: influence:alveolar_po2:negative:pulmonary_vascular_resistance
+  sign: +
+  can_flip_sign: false
+  causal_evidence: curated_mechanistic
+  mechanism: 'iron availability modulates HIF-dependent hypoxic signalling in pulmonary arterial smooth muscle: higher iron weakens hypoxic pulmonary vasoconstriction, making the negative alveolar_po2->pulmonary_vascular_resistance coupling k less negative, so d(k)/d(iron) > 0 (dampening the gain).'
+  evidence: '"Iron deficiency causes increased vasoconstriction in response to alveolar hypoxia." (West''s Respiratory Physiology, 11th ed., ch 4, Active Control of the Circulation) -- a two-factor (iron status x alveolar hypoxia) interaction.'

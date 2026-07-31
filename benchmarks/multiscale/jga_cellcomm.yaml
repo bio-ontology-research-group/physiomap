@@ -1,0 +1,152 @@
+# =============================================================================
+# Cellular scale: Juxtaglomerular apparatus cell-cell communication
+#                                                       *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Cell-cell communication within the juxtaglomerular apparatus (JGA): the
+# tubuloglomerular feedback (TGF) loop + macula-densa control of renin.
+#
+# CELL TYPES (cellular-scale nodes):
+#   - macula densa cell                (CL:1000850 macula densa epithelial cell)
+#   - juxtaglomerular granular cell    (CL:0000648 renin-secreting JG cell)
+#   - extraglomerular mesangial cell   (Goormaghtigh / lacis cell)
+#   - afferent-arteriolar smooth muscle (single-nephron, LOCAL) is its own cellular
+#     node `afferent_arteriolar_tone`. We do NOT reuse the systemic
+#     `vascular_smooth_muscle_tone` node (which lifts to systemic TPR): the JGA
+#     mesangial->afferent signal is anatomically local single-nephron GFR control,
+#     not a systemic-TPR effector. The GFR consequence is carried by the
+#     macula_densa_nacl_signal >> gfr constitutive lift (no double-count).
+#
+# LIGAND -> RECEPTOR SIGNALS (cell-cell communication):
+#   - macula densa --ATP (P2 / pannexin-1 release)--> extraglomerular mesangial cell
+#   - macula densa --adenosine (ecto-5'-NT, ADO) --A1 receptor (ADORA1)-->
+#         (a) JG granular cell  : Gi -> down cAMP -> SUPPRESS renin secretion (-)
+#         (b) extraglomerular mesangial cell : Gi/PLC -> Ca2+ -> contraction (+)
+#   - mesangial Ca2+ wave --Cx40 gap junction--> afferent arteriolar smooth muscle
+#         tone (+) [LOCAL afferent_arteriolar_tone node], and --Cx40--> JG granular
+#         cell (couples renin to vascular signal)
+#
+# UPWARD CONSTITUTIVE LIFTS (cellular -> organ_system; part_of+determination):
+#   - JG granular-cell renin secretion  >>  renin                  (+)
+#   - macula-densa TGF signal lowers GFR via afferent tone; lift macula-densa
+#     signal as a negative determinant of the organ quality `gfr`  (-)
+#
+# ROOTS exercised by interventions: macula_densa_nacl_signal (luminal NaCl is a
+# downward tubular input, NOT modeled as a causal edge -> this node is a ROOT).
+#
+# SOURCES (verified):
+#   - Sun, Samuelson, Yang, Huang, Paliege, Saunders, Briggs, Schnermann (2001)
+#     "Mediation of tubuloglomerular feedback by adenosine: evidence from mice
+#     lacking adenosine 1 receptors." PNAS 98(17):9983-9988. PMID:11504952.
+#     (A1AR-KO: TGF abolished AND plasma renin increased -> ADO/A1 mediates TGF
+#      vasoconstriction and tonically SUPPRESSES renin.)
+#   - Schnermann & Briggs, "Tubuloglomerular feedback: mechanistic insights from
+#     gene-manipulated mice." Kidney Int. 2008 / Boron & Boulpaep, Medical
+#     Physiology (renal chapters): macula densa NaCl -> ATP -> adenosine -> A1R
+#     -> afferent vasoconstriction; high distal NaCl suppresses renin.
+#   - Wagner et al., "Connexin40 is essential for the pressure control of renin
+#     synthesis and secretion." Circ Res 2007;100:556-563 (Cx40 couples JG/
+#     mesangial cells; gap-junction propagation of the TGF Ca2+ signal).
+#   - OmniPath intercell: ADO/ADORA1 (adenosine A1 receptor) is an inhibitory
+#     Gi-coupled receptor (consensus is_inhibition for cAMP-driven secretion).
+# =============================================================================
+
+name: jga_cellcomm_multiscale
+
+nodes:
+- id: macula_densa_nacl_signal
+  label: macula densa luminal-NaCl sensing signal (ATP/adenosine output)
+  scale: cellular
+  entity_iri: CL:1000850                # macula densa epithelial cell
+  quality_iri: PATO:0000161             # secretion (rate) -- paracrine output
+- id: jg_granular_renin_secretion
+  label: juxtaglomerular granular cell renin secretion rate
+  scale: cellular
+  entity_iri: GO:0002001                # renin secretion into blood stream
+  quality_iri: PATO:0000161
+  bearer_entity_iri: CL:0000648  # kidney granular cell
+- id: eg_mesangial_contraction
+  label: extraglomerular mesangial cell contractile activation
+  scale: cellular
+  entity_iri: CL:0002173    # extraglomerular mesangial cell
+  quality_iri: PATO:0001543             # contractile activity
+- id: afferent_arteriolar_tone
+  label: afferent arteriolar smooth muscle tone (single nephron, LOCAL)
+  scale: cellular
+  entity_iri: CL:0000359                # vascular associated smooth muscle cell
+  quality_iri: PATO:0001543             # contractile activity
+
+causal_edges:
+  # --- macula densa -> JG granular cell: ATP/adenosine A1R SUPPRESSES renin -----
+- source: macula_densa_nacl_signal
+  target: jg_granular_renin_secretion
+  sign: "-"
+  causal_evidence: genetic_lof_gof
+  mechanism: >-
+    macula densa basolateral ATP release (pannexin-1/P2) -> ecto-5'-nucleotidase
+    -> adenosine -> ADORA1 (A1 adenosine receptor, Gi) on JG granular cell ->
+    down-regulates cAMP/PKA -> inhibits renin exocytosis (GO:0002001 renin
+    secretion into blood, negatively regulated)
+  evidence: >-
+    A1 adenosine receptor (ADORA1) knockout mice show significantly increased plasma renin activity with abolished tubuloglomerular feedback (Brown, Ollerstam, Persson, Skott, Persson et al. 2001, Am J Physiol Regul Integr Comp Physiol, PMID:11641103, opened): germline loss-of-function of the required receptor disinhibits renin, demonstrating that the adenosine/ADORA1 arm of the macula-densa signal tonically suppresses renin secretion (a natural do() supporting the negative sign). Adenosine/A1 is a required constituent of JGA/tubuloglomerular-feedback signaling (Sun, Samuelson, Yang, Huang, Paliege, Saunders, Briggs & Schnermann, PNAS 2001;98(17):9983-9988, PMID:11504952, opened; note: Sun 2001 establishes the adenosine/A1-dependence of TGF, the elevated-plasma-renin result is Brown 2001). Boron & Boulpaep Medical Physiology (high distal NaCl suppresses renin); OmniPath ADORA1 Gi-coupled is_inhibition. | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-148 (25.5: Microscopic Anatomy of the Kidney): 'A second function of the macula densa cells is to regulate renin release from the juxtaglomerular cells of the afferent arteriole.'; OpenStax Biology 2e §bio-41.2 (41.2: The Kidneys and Osmoregulatory Organs): 'The JGC is an endocrine structure that secretes the enzyme renin and the hormone erythropoietin. When hormones trigger the macula densa cells in the DCT due to variations in blood volume, blood pressure, or electrolyte balance, these cells can immediately communicate the problem to the capillaries in the afferent and efferent arterioles.' Macula densa senses luminal NaCl and signals JG granular cells to regulate renin secretion. [citations PubMed-verified]
+  # --- macula densa -> extraglomerular mesangial cell: ATP/adenosine contraction -
+- source: macula_densa_nacl_signal
+  target: eg_mesangial_contraction
+  sign: "+"
+  causal_evidence: genetic_lof_gof
+  mechanism: >-
+    macula densa ATP -> P2X/P2Y and adenosine -> ADORA1 on extraglomerular
+    mesangial cell -> Gi/Go-PLC -> IP3 -> intracellular Ca2+ rise ->
+    mesangial/contractile activation (GO:0006816 calcium ion transport)
+  evidence: 'Sun et al. 2001 PNAS PMID:11504952 (TGF vasoconstriction abolished in A1AR-KO); Schnermann & Briggs, Kidney Int 2008 (macula densa ATP/adenosine TGF signal); Boron & Boulpaep Medical Physiology (renal). | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-148 (25.5: Microscopic Anatomy of the Kidney): ''In response to the concentration of Na+ in the fluid flowing past them, these cells release paracrine signals [ATP and adenosine]... juxtaglomerular cell... can contract or relax in response to ATP or adenosine released by the macula densa.'' [citations PubMed-verified]'
+  # --- mesangial contraction -> afferent arteriolar smooth muscle tone (Cx40) ----
+  # LOCAL single-nephron afferent tone (NOT the systemic vascular_smooth_muscle_tone
+  # node, which lifts to systemic TPR); GFR consequence carried by the
+  # macula_densa_nacl_signal >> gfr constitutive lift.
+- source: eg_mesangial_contraction
+  target: afferent_arteriolar_tone
+  sign: "+"
+  causal_evidence: genetic_lof_gof
+  mechanism: >-
+    extraglomerular mesangial Ca2+ wave propagates via connexin-40 (Cx40/GJA5)
+    gap junctions to afferent arteriolar smooth muscle -> contraction
+    (GO:0007267 cell-cell signaling; juxtacrine/gap-junction)
+  evidence: >-
+    Moller, Jacobsen, Holstein-Rathlou & Sorensen, Front Physiol 2020;11:961,
+    PMID:32848881: connexin40 (and connexin45) knockout mice show significantly
+    reduced local and conducted vasoconstrictor responses in afferent
+    arterioles, demonstrating that Cx40/Cx45 gap-junction coupling is required
+    for propagating a contractile signal to afferent arteriolar smooth muscle
+    (genetic loss-of-function of the gap-junction connexin blunts the target
+    response; stimulus was electrical in the isolated perfused nephron
+    preparation, not mesangial-cell-specific). Wagner et al. Circ Res
+    2007;100:556-563 (Cx40 essential for pressure control of renin; couples
+    JG/mesangial/vascular cells); Schnermann & Briggs Kidney Int 2008 (TGF
+    Ca2+ wave -> afferent vasoconstriction).
+  # --- mesangial -> JG granular cell coupling (Cx40 gap junction) ----------------
+- source: eg_mesangial_contraction
+  target: jg_granular_renin_secretion
+  sign: "-"
+  causal_evidence: genetic_lof_gof
+  mechanism: >-
+    Cx40 (GJA5) gap-junction coupling of extraglomerular mesangial cells to JG
+    granular cells transmits the contractile/Ca2+ signal; rising Ca2+ in renin
+    cells is inhibitory ("calcium paradox" of renin secretion), reducing renin
+    exocytosis (GO:0002001 renin secretion into blood)
+  evidence: >-
+    Wagner et al. Circ Res 2007;100:556-563 (Cx40 couples mesangial & renin
+    cells; required for pressure control of renin); calcium paradox of renin
+    secretion, Boron & Boulpaep Medical Physiology.
+- source: macula_densa_nacl_signal
+  target: gfr
+  sign: "-"
+  causal_evidence: curated_mechanistic
+  mechanism: increased macula-densa NaCl delivery activates tubuloglomerular feedback, causing afferent arteriolar vasoconstriction and lowering GFR
+  evidence: Boron & Boulpaep, Medical Physiology (macula-densa tubuloglomerular feedback and afferent arteriolar control of GFR).
+
+production_edges:
+- source: jg_granular_renin_secretion
+  target: renin
+  sign: "+"
+  production_evidence: curated_source_statement
+  mechanism: juxtaglomerular granular-cell secretion releases renin into the circulation
+  evidence: Boron & Boulpaep, Medical Physiology (juxtaglomerular granular cells and renin secretion).

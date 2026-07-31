@@ -1,0 +1,225 @@
+# =============================================================================
+# Renal function markers (urinary solute excretion, GFR estimators, tubular handling)
+#                                    — PhysioMap fragment  *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Hand-encoded to give PhysioMap groundable NODES for the HPO "renal_function_markers"
+# directional gap terms (urinary electrolyte/solute excretion, plasma & urinary
+# creatinine, BUN, cystatin C, urine osmolality, urinary tubular-injury / -secreted
+# proteins, the serum osmolal gap, and PTH-independent tubular Ca reabsorption).
+#
+# Provenance (standard physiology + clinical chemistry):
+#   - Boron & Boulpaep, Medical Physiology — renal handling of Na/K/Cl/Ca/Mg/PO4,
+#     urine concentration (countercurrent multiplier / ADH / urea recycling),
+#     glomerular filtration & creatinine clearance.
+#   - Harrison's Principles of Internal Medicine — "Azotemia and Urinary Abnormalities",
+#     biomarkers of GFR (creatinine, cystatin C, BUN) and acute kidney injury (NGAL).
+#   - Rose & Post, Clinical Physiology of Acid-Base and Electrolyte Disorders —
+#     urinary electrolyte excretion, osmolal gap.
+#   - Brenner & Rector's The Kidney — uromodulin (Tamm-Horsfall protein), tubular
+#     biomarkers (NGAL/LCN2, orosomucoid/AGP), proximal-tubule injury markers.
+#
+# Sign convention: each causal edge sign is the sign of the partial derivative of the
+# target w.r.t. the source at steady state, all else equal (interventionist partial).
+# More tubular REABSORPTION of a solute => LESS of that solute in the urine ("-"); the
+# filtered load (plasma concentration x GFR) raises urinary excretion ("+").
+#
+# Boundary nodes referenced (owned by sibling fragments; verified present in the
+# corpus node_inventory): gfr, plasma_calcium, plasma_phosphate, plasma_urate,
+# plasma_sodium_concentration, plasma_potassium, plasma_magnesium,
+# renal_phosphate_reabsorption, renal_magnesium_reabsorption, renal_urate_excretion,
+# renal_potassium_excretion, sodium_excretion, sodium_water_reabsorption,
+# plasma_bicarbonate, plasma_osmolality, anp/adh-related (NOT referenced unless verified).
+#
+# This fragment is INTENTIONALLY conservative on edges: most urinary-excretion nodes are
+# grounded with ONLY the well-established "plasma filtered-load (+)" and/or
+# "tubular-reabsorption (-)" edges that have an unambiguous textbook sign. Where a clean
+# determinate mechanism/sign is not defensible (osmolal gap, secreted/injury proteins,
+# urinary creatine), the node is left as a grounded island (it abstains) rather than
+# fabricating an edge. Single/multi-scale (ORGAN_SYSTEM / ORGAN / CELLULAR).
+# =============================================================================
+
+name: hpo_renal_function_markers
+description: >-
+  DRAFT renal-function-marker fragment: urinary excretion of Na/K/Cl/Ca/Mg/PO4/urate,
+  plasma & urinary creatinine, blood urea nitrogen, plasma cystatin C, urine osmolality,
+  urine bicarbonate, the serum osmolal gap, urinary tubular proteins (uromodulin, NGAL,
+  orosomucoid), urinary creatine, and PTH-independent renal tubular calcium reabsorption.
+  Provides groundable PhysioMap nodes for the HPO renal_function_markers directional
+  terms, with conservative, textbook-signed causal edges only where defensible.
+
+nodes:
+  # --- urinary solute excretion (organ_system; the measured 24h/spot urine quantity) ---
+  - id: urinary_calcium
+    label: urinary calcium excretion rate
+    scale: organ_system
+    entity_iri: CHEBI:29108            # calcium(2+) (OBO name "calcium(2+)")
+    quality_iri: PATO:0000161          # rate
+  - id: urinary_phosphate
+    label: urinary phosphate excretion rate
+    scale: organ_system
+    entity_iri: GO:0044722             # renal phosphate excretion
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0002113  # kidney
+  - id: urinary_urate
+    label: urinary urate (uric acid) excretion rate
+    scale: organ_system
+    entity_iri: GO:0015747             # urate transport
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0002113  # kidney
+  - id: urinary_sodium
+    label: urinary sodium excretion rate
+    scale: organ_system
+    entity_iri: GO:0035812             # renal sodium excretion
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0002113  # kidney
+  - id: urinary_potassium
+    label: urinary potassium excretion rate
+    scale: organ_system
+    entity_iri: GO:0036359             # renal potassium excretion
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0002113  # kidney
+  - id: urinary_chloride
+    label: urinary chloride excretion rate
+    scale: organ_system
+    entity_iri: CHEBI:17996            # chloride
+    quality_iri: PATO:0000161
+  - id: urinary_magnesium
+    label: urinary magnesium excretion rate
+    scale: organ_system
+    entity_iri: GO:0015693             # magnesium ion transport
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0002113  # kidney
+
+  # --- GFR estimators / nitrogen retention (organ_system plasma analytes) ---
+  - id: plasma_creatinine
+    label: plasma (serum) creatinine concentration
+    scale: organ_system
+    entity_iri: CHEBI:16737            # creatinine
+    quality_iri: PATO:0000033          # concentration
+  - id: urinary_creatinine
+    label: urinary creatinine excretion (concentration)
+    scale: organ_system
+    entity_iri: CHEBI:16737            # creatinine
+    quality_iri: PATO:0000033          # concentration (spot urine creatinine level)
+  - id: blood_urea_nitrogen
+    label: blood (plasma) urea nitrogen concentration
+    scale: organ_system
+    entity_iri: CHEBI:16199            # urea
+    quality_iri: PATO:0000033
+  - id: plasma_cystatin_c
+    label: plasma (serum) cystatin C concentration
+    scale: organ_system
+    entity_iri: PR:000005965           # cystatin-C (PRO generic protein class)
+    quality_iri: PATO:0000033
+
+  # --- urine concentrating ability / acid-base ---
+  - id: urine_osmolality
+    label: urine osmolality
+    scale: organ_system
+    entity_iri: UBERON:0001088         # urine (bearer of the osmolality quality)
+    quality_iri: PATO:0001655          # osmolality (as used by plasma_osmolality)
+  - id: urine_bicarbonate
+    label: urine bicarbonate concentration
+    scale: organ_system
+    entity_iri: CHEBI:17544            # hydrogencarbonate (bicarbonate)
+    quality_iri: PATO:0000033
+  - id: serum_osmolal_gap
+    label: serum osmolal gap (measured minus calculated osmolality)
+    scale: organ_system
+    quality_iri: PATO:0001655          # osmolality (a difference of osmolalities)
+
+  # --- urinary tubular / injury proteins (organ_system measured urine concentration) ---
+  - id: urinary_uromodulin
+    label: urinary uromodulin (Tamm-Horsfall protein) concentration
+    scale: organ_system
+    entity_iri: PR:000017081           # uromodulin
+    quality_iri: PATO:0000033
+  - id: urinary_ngal
+    label: urinary neutrophil gelatinase-associated lipocalin (NGAL/LCN2) concentration
+    scale: organ_system
+    entity_iri: PR:000009725           # neutrophil gelatinase-associated lipocalin
+    quality_iri: PATO:0000033
+  - id: urinary_orosomucoid
+    label: urinary orosomucoid (alpha-1-acid glycoprotein) concentration
+    scale: organ_system
+    # entity_iri omitted: orosomucoid is a 3-paralog family (AGP1/2/3, PR:000012037 etc.);
+    # no single generic "orosomucoid" PRO class verified, so left null (not fabricated).
+    quality_iri: PATO:0000033
+
+  # --- tubular handling (organ; rate) ---
+  - id: renal_calcium_reabsorption
+    label: renal tubular calcium reabsorption rate
+    scale: organ
+    entity_iri: CHEBI:29108            # calcium(2+)
+    quality_iri: PATO:0000161          # rate
+
+causal_edges:
+  # ---- filtered load raises urinary excretion (plasma conc x GFR) ----
+  - source: plasma_calcium
+    target: urinary_calcium
+    sign: "+"
+    mechanism: urinary calcium excretion = filtered load (plasma [Ca] x GFR) minus tubular reabsorption; raising plasma calcium raises the filtered load and thus calcium excretion (e.g. hypercalcemia -> hypercalciuria)
+    evidence: "Boron & Boulpaep Medical Physiology (renal handling of calcium; filtered load); Rose & Post, Clinical Physiology of Acid-Base and Electrolyte Disorders (hypercalcemia -> hypercalciuria)"
+  - source: plasma_phosphate
+    target: urinary_phosphate
+    sign: "+"
+    mechanism: filtered phosphate load = plasma [PO4] x GFR; higher plasma phosphate raises filtered load and urinary phosphate excretion
+    evidence: "Boron & Boulpaep Medical Physiology (renal phosphate handling); Brenner & Rector's The Kidney (phosphate excretion)"
+  - source: plasma_urate
+    target: urinary_urate
+    sign: "+"
+    mechanism: filtered urate load = plasma [urate] x GFR; higher plasma urate raises filtered load and (net of reabsorption) urinary urate excretion
+    evidence: "Boron & Boulpaep Medical Physiology (renal urate handling); Harrison's (uric acid excretion) | textbook corroboration: OpenStax Biology 2e §bio-41.4 (Nitrogenous Wastes): uric acid is formed from purine breakdown; excess plasma urate is excreted in urine"
+  - source: plasma_sodium_concentration
+    target: urinary_sodium
+    sign: "+"
+    mechanism: filtered sodium load = plasma [Na] x GFR; higher filtered Na (all else equal) raises distal Na delivery and urinary sodium excretion
+    evidence: "Boron & Boulpaep Medical Physiology (renal sodium handling; filtered load)"
+  - source: plasma_potassium
+    target: urinary_potassium
+    sign: "+"
+    mechanism: hyperkalemia stimulates aldosterone-independent and aldosterone-dependent distal K secretion; higher plasma potassium raises renal potassium excretion
+    evidence: "Boron & Boulpaep Medical Physiology (renal potassium secretion; plasma K as a primary driver of distal K secretion)"
+  - source: plasma_magnesium
+    target: urinary_magnesium
+    sign: "+"
+    mechanism: filtered magnesium load = plasma [Mg] x GFR; higher plasma magnesium raises filtered load and urinary magnesium excretion (and reduces TAL paracellular reabsorption)
+    evidence: "Boron & Boulpaep Medical Physiology (renal magnesium handling); Rose & Post (Mg excretion)"
+
+  # ---- GFR clears creatinine/urea/cystatin C: higher GFR lowers the plasma marker ----
+  - source: gfr
+    target: plasma_creatinine
+    sign: "-"
+    mechanism: creatinine is produced at a near-constant rate and cleared almost entirely by glomerular filtration; at steady state plasma [creatinine] is inversely related to GFR (falling GFR raises plasma creatinine)
+    evidence: "Harrison's Principles of Internal Medicine, 'Azotemia and Urinary Abnormalities' (creatinine as an inverse GFR marker); Boron & Boulpaep Medical Physiology (creatinine clearance ~ GFR)"
+  - source: gfr
+    target: blood_urea_nitrogen
+    sign: "-"
+    mechanism: urea is filtered and partially reabsorbed; at steady state with constant urea production, plasma urea nitrogen rises as GFR falls (azotemia)
+    evidence: "Harrison's, 'Azotemia and Urinary Abnormalities' (BUN rises with falling GFR); Boron & Boulpaep Medical Physiology (renal urea handling) | textbook corroboration: OpenStax Biology 2e §bio-41.4 (Nitrogenous Wastes): BUN is used as an indicator of kidney function; impaired GFR reduces urea clearance and raises BUN"
+  - source: gfr
+    target: plasma_cystatin_c
+    sign: "-"
+    mechanism: cystatin C is produced at a constant rate by all nucleated cells, freely filtered, and catabolized by the proximal tubule; plasma cystatin C is inversely related to GFR (an endogenous GFR marker)
+    evidence: "Harrison's Principles of Internal Medicine (cystatin C as a GFR estimator); Brenner & Rector's The Kidney (cystatin C and GFR)"
+  - source: gfr
+    target: urinary_creatinine
+    sign: "+"
+    mechanism: at steady state urinary creatinine excretion equals near-constant creatinine production; the spot urine creatinine level is filtration-driven and falls when GFR is very low (oliguric AKI), so higher GFR supports higher urine creatinine output
+    evidence: "Boron & Boulpaep Medical Physiology (creatinine filtered and excreted; clearance ~ GFR); Harrison's (urine creatinine in clearance estimation)"
+
+  # ---- urea recycling contributes to the inner-medullary osmotic gradient ----
+  - source: blood_urea_nitrogen
+    target: urine_osmolality
+    sign: "+"
+    mechanism: urea recycling into the inner medulla contributes substantially to the medullary osmotic gradient that drives maximal urine concentration; higher delivered urea raises achievable urine osmolality
+    evidence: "Boron & Boulpaep Medical Physiology (urea recycling and the countercurrent multiplier; contribution of urea to maximal urine concentration)"
+
+  # ---- tubular calcium reabsorption removes Ca from the urine ----
+  - source: renal_calcium_reabsorption
+    target: urinary_calcium
+    sign: "-"
+    mechanism: tubular reabsorption returns filtered calcium to the blood; higher reabsorption lowers urinary calcium (PTH-independent gain-of-function of CaSR/TRPV5-type reabsorption -> hypocalciuria; loss -> hypercalciuria)
+    evidence: "Boron & Boulpaep Medical Physiology (renal calcium reabsorption: TAL paracellular + DCT TRPV5); Brenner & Rector's The Kidney (tubular Ca handling)"
+
+constitutive_edges: []   # none — within/cross-scale lifts deferred (Phase 1)

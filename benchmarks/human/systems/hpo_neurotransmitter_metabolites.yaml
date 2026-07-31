@@ -1,0 +1,222 @@
+# =============================================================================
+# Neurotransmitter metabolites — catecholamine / serotonin / GABA analytes
+#                                    — PhysioMap fragment  *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Hand-encoded grounding nodes for the HPO "neurotransmitter_metabolites" gap terms:
+# directional abnormal-quantity terms for monoamine (catecholamine + serotonin) and
+# GABA precursors, neurotransmitters, and degradation products, measured in URINE,
+# PLASMA/SERUM, and CSF; plus three catabolic/biosynthetic ENZYME-ACTIVITY roots
+# (SSADH, AADC, DBH). ROBERT: please correct signs / edges / IRIs.
+#
+# Compartment matters: the same molecule measured in urine vs plasma vs CSF is a
+# DIFFERENT physiological variable (different clearance, blood-brain-barrier, renal
+# handling), so each gets its own node. The corpus already owns plasma EPINEPHRINE
+# (`epinephrine`, CHEBI:28918) and plasma NOREPINEPHRINE (`norepinephrine`,
+# CHEBI:18357) and their secretion cells — these are NOT redefined here; the DBH
+# edge below references the existing `norepinephrine` node as a boundary ref.
+#
+# Physiology / biochemistry provenance (standard textbooks + DBs):
+#   - Lehninger Principles of Biochemistry / Voet — catecholamine biosynthesis:
+#       L-tyrosine --(TH)--> L-DOPA --(AADC/DOPA-decarboxylase)--> dopamine
+#       --(DBH, dopamine beta-hydroxylase)--> norepinephrine --(PNMT)--> epinephrine.
+#     Catabolism (MAO + COMT): dopamine -> DOPAC / homovanillic acid (HVA);
+#     norepinephrine/epinephrine -> normetanephrine/metanephrine -> vanillylmandelic
+#     acid (VMA); serotonin --(MAO)--> 5-hydroxyindoleacetic acid (5-HIAA).
+#   - Boron & Boulpaep Medical Physiology — adrenal medulla & sympathetic
+#     catecholamines; urinary catecholamine/metanephrine/VMA/HVA as clinical assays.
+#   - Williams Textbook of Endocrinology — pheochromocytoma/paraganglioma diagnosis
+#     by plasma & urinary fractionated metanephrines and catecholamines (elevated).
+#   - Harrison's Principles of Internal Medicine — carcinoid (elevated urinary 5-HIAA,
+#     serotonin); DOPA-decarboxylase (AADC) deficiency; dopamine-beta-hydroxylase
+#     deficiency; SSADH deficiency (4-hydroxybutyric aciduria).
+#   - SSADH deficiency (ALDH5A1 LoF, OMIM 271980): blocks GABA -> succinate, so the
+#     "tissue SSADH activity" enzyme root is the lesion node (decreased activity).
+#   - AADC deficiency (DDC LoF, OMIM 608643): low dopamine/serotonin synthesis ->
+#     elevated upstream L-DOPA and vanillactic acid (a 3-methoxytyrosine/DOPA shunt
+#     metabolite), reduced HVA/5-HIAA. AADC is the enzyme root.
+#   - DBH deficiency (DBH LoF, OMIM 223360): dopamine accumulates, norepinephrine/
+#     epinephrine fall; DBH is the enzyme root.
+#
+# IRIs verified against ontology/.obo_cache OBO files (exact 'name:' match) on
+# 2026-06-04:
+#   CHEBI:33567 catecholamine; CHEBI:18243 dopamine; CHEBI:33569 noradrenaline;
+#   CHEBI:33568 adrenaline; CHEBI:28790 serotonin; CHEBI:16865 gamma-aminobutyric
+#   acid; CHEBI:545959 homovanillic acid; CHEBI:20106 vanillylmandelic acid;
+#   CHEBI:27823 (5-hydroxyindol-3-yl)acetic acid (= 5-HIAA); CHEBI:89633 Metanephrine;
+#   CHEBI:15765 L-dopa; CHEBI:15760 tyramine; CHEBI:88526 Vanillactic acid.
+#   PR:P20711 aromatic-L-amino-acid decarboxylase (human) = AADC/DDC;
+#   PR:P09172 dopamine beta-hydroxylase (human) = DBH;
+#   PR:P51649 succinate-semialdehyde dehydrogenase, mitochondrial (human) = ALDH5A1.
+#   CL:0000540 neuron; CL:0000617 GABAergic neuron; CL:0000166 chromaffin cell.
+#   DOPAC (3,4-dihydroxyphenylacetic acid): the cache only has the GENERIC
+#   "dihydroxyphenylacetic acid" (CHEBI:61409, no positional 3,4- locant) — left
+#   null rather than mis-ground to the unlocanted parent.
+#
+# Most edges are deliberately OMITTED: the giant homeostatic SCC, MAO/COMT branch
+# points, and renal/BBB clearance make most cross-analyte signs ambiguous. Only the
+# three enzyme-root edges whose substrate-consumption / product-formation sign is a
+# clean textbook 1-step relation are encoded. Per PhysioMap policy: prefer NO edge
+# over a guessed sign. This fragment is essentially a set of grounded analyte nodes
+# (an "island"; validate_fragment will WARN — not an error) that abstain safely.
+# =============================================================================
+
+name: hpo_neurotransmitter_metabolites
+description: >-
+  DRAFT grounding nodes for HPO neurotransmitter-metabolite abnormal-quantity terms:
+  catecholamines (dopamine, norepinephrine, epinephrine, metanephrine), their
+  precursors (L-DOPA) and degradation products (DOPAC, HVA, VMA, vanillactate),
+  serotonin and 5-HIAA, GABA, and the trace amine tyramine — measured in urine,
+  plasma/serum, and CSF — plus the SSADH, AADC, and DBH enzyme-activity roots.
+  Compartment-specific analyte nodes (urine vs plasma vs CSF are distinct variables).
+  Three textbook 1-step enzyme->substrate/product edges; otherwise grounded
+  abstaining nodes. Single/cross-scale (ORGAN_SYSTEM analytes; CELLULAR enzymes).
+
+nodes:
+  # ---- URINARY analytes (organ_system; renal-excreted assay) ------------------
+  - id: urinary_catecholamines
+    label: urinary catecholamine concentration
+    scale: organ_system
+    entity_iri: CHEBI:33567            # catecholamine (class)
+    quality_iri: PATO:0000033          # concentration
+  - id: urinary_dopamine
+    label: urinary dopamine concentration
+    scale: organ_system
+    entity_iri: CHEBI:18243            # dopamine
+    quality_iri: PATO:0000033
+  - id: urinary_norepinephrine
+    label: urinary norepinephrine concentration
+    scale: organ_system
+    entity_iri: CHEBI:33569            # noradrenaline
+    quality_iri: PATO:0000033
+  - id: urinary_epinephrine
+    label: urinary epinephrine concentration
+    scale: organ_system
+    entity_iri: CHEBI:33568            # adrenaline
+    quality_iri: PATO:0000033
+  - id: urinary_metanephrine
+    label: urinary metanephrine concentration
+    scale: organ_system
+    entity_iri: CHEBI:89633            # Metanephrine
+    quality_iri: PATO:0000033
+  - id: urinary_homovanillic_acid
+    label: urinary homovanillic acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:545959           # homovanillic acid
+    quality_iri: PATO:0000033
+  - id: urinary_vanillylmandelic_acid
+    label: urinary vanillylmandelic acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:20106            # vanillylmandelic acid
+    quality_iri: PATO:0000033
+  - id: urinary_5hiaa
+    label: urinary 5-hydroxyindoleacetic acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:27823            # (5-hydroxyindol-3-yl)acetic acid = 5-HIAA
+    quality_iri: PATO:0000033
+  - id: urinary_gaba
+    label: urinary gamma-aminobutyric acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:16865            # gamma-aminobutyric acid
+    quality_iri: PATO:0000033
+  - id: urinary_tyramine
+    label: urinary tyramine concentration
+    scale: organ_system
+    entity_iri: CHEBI:15760            # tyramine
+    quality_iri: PATO:0000033
+  - id: urinary_vanillactate
+    label: urinary vanillactic acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:88526            # Vanillactic acid
+    quality_iri: PATO:0000033
+
+  # ---- PLASMA / SERUM analytes (organ_system) ---------------------------------
+  - id: plasma_catecholamines
+    label: plasma catecholamine concentration
+    scale: organ_system
+    entity_iri: CHEBI:33567            # catecholamine (class)
+    quality_iri: PATO:0000033
+  - id: plasma_serotonin
+    label: plasma (serum) serotonin concentration
+    scale: organ_system
+    entity_iri: CHEBI:28790            # serotonin
+    quality_iri: PATO:0000033
+  - id: plasma_gaba
+    label: plasma gamma-aminobutyric acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:16865            # gamma-aminobutyric acid
+    quality_iri: PATO:0000033
+  - id: plasma_dopac
+    label: plasma 3,4-dihydroxyphenylacetic acid (DOPAC) concentration
+    scale: organ_system
+    # entity_iri null: cache has only generic unlocanted "dihydroxyphenylacetic acid"
+    # (CHEBI:61409); not mis-grounded to the non-3,4 parent.
+    quality_iri: PATO:0000033
+  - id: plasma_dopa
+    label: plasma DOPA (L-3,4-dihydroxyphenylalanine) concentration
+    scale: organ_system
+    entity_iri: CHEBI:15765            # L-dopa
+    quality_iri: PATO:0000033
+  - id: plasma_homovanillate
+    label: plasma homovanillic acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:545959           # homovanillic acid
+    quality_iri: PATO:0000033
+  - id: plasma_metanephrine
+    label: plasma metanephrine concentration
+    scale: organ_system
+    entity_iri: CHEBI:89633            # Metanephrine
+    quality_iri: PATO:0000033
+
+  - id: csf_hva
+    label: CSF homovanillic acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:545959           # homovanillic acid
+    quality_iri: PATO:0000033
+  - id: ssadh_activity
+    label: succinic semialdehyde dehydrogenase (ALDH5A1) activity
+    scale: cellular
+    entity_iri: PR:P51649              # succinate-semialdehyde dehydrogenase, mitochondrial (human)
+    bearer_entity_iri: CL:0000617      # GABAergic neuron (GABA catabolism)
+    quality_iri: PATO:0001414          # catalytic activity
+  - id: aadc_activity
+    label: aromatic L-amino acid decarboxylase (DDC/AADC) activity
+    scale: cellular
+    entity_iri: PR:P20711              # aromatic-L-amino-acid decarboxylase (human)
+    bearer_entity_iri: CL:0000540      # neuron
+    quality_iri: PATO:0001414          # catalytic activity
+  - id: dbh_activity
+    label: dopamine beta-hydroxylase (DBH) activity
+    scale: cellular
+    entity_iri: PR:P09172              # dopamine beta-hydroxylase (human)
+    bearer_entity_iri: CL:0000166      # chromaffin cell
+    quality_iri: PATO:0001414          # catalytic activity
+
+causal_edges:
+  # AADC (DOPA decarboxylase) consumes L-DOPA -> produces dopamine.
+  - source: aadc_activity
+    target: plasma_dopa
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: aromatic L-amino acid decarboxylase decarboxylates L-DOPA to dopamine; higher enzyme activity consumes L-DOPA, lowering it (AADC deficiency therefore RAISES circulating L-DOPA, the diagnostic marker)
+    evidence: "Lehninger Principles of Biochemistry (catecholamine biosynthesis: L-DOPA --DOPA decarboxylase--> dopamine); Harrison's Principles of Internal Medicine (aromatic L-amino acid decarboxylase / DDC deficiency, OMIM 608643: elevated L-DOPA); natural human LoF (AADC/DDC deficiency) elevates L-DOPA and its shunt product 3-O-methyldopa, confirming do(AADC)->[L-DOPA] sign '-' (PMC10530573, AADC-deficiency 3-OMD screening study; OMIM 608643)"
+  - source: aadc_activity
+    target: csf_dopamine
+    sign: "+"
+    causal_evidence: genetic_lof_gof
+    mechanism: aromatic L-amino acid decarboxylase produces dopamine from L-DOPA; higher enzyme activity raises CNS dopamine synthesis (AADC deficiency lowers CSF dopamine/HVA)
+    evidence: "Lehninger Principles of Biochemistry (L-DOPA --DOPA decarboxylase--> dopamine); Harrison's Principles of Internal Medicine (AADC/DDC deficiency: reduced dopamine and its CSF metabolite HVA); natural human LoF (AADC deficiency) causes combined dopamine/serotonin deficiency with reduced CSF dopamine/HVA, confirming do(AADC)->CSF dopamine sign '+' (PMC10530573; OMIM 608643)"
+  # DBH consumes dopamine -> produces norepinephrine (existing corpus node).
+  - source: dbh_activity
+    target: csf_dopamine
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: dopamine beta-hydroxylase hydroxylates dopamine to norepinephrine; higher enzyme activity consumes dopamine (DBH deficiency therefore lets dopamine ACCUMULATE)
+    evidence: "Lehninger Principles of Biochemistry (dopamine --dopamine beta-hydroxylase--> norepinephrine); Harrison's Principles of Internal Medicine (dopamine-beta-hydroxylase deficiency, OMIM 223360: dopamine accumulation, absent norepinephrine/epinephrine); natural human LoF (DBH deficiency) raises dopamine 5- to 10-fold (plasma; concordant CSF elevation), confirming do(DBH)->dopamine sign '-' (GeneReviews NBK1474, DBH Deficiency; OMIM 223360)"
+  - source: dbh_activity
+    target: norepinephrine
+    sign: "+"
+    causal_evidence: genetic_lof_gof
+    mechanism: dopamine beta-hydroxylase produces norepinephrine from dopamine; higher enzyme activity raises norepinephrine synthesis (DBH deficiency abolishes norepinephrine and epinephrine)
+    evidence: "Lehninger Principles of Biochemistry (dopamine --DBH--> norepinephrine); Harrison's Principles of Internal Medicine (dopamine-beta-hydroxylase deficiency, OMIM 223360: undetectable plasma norepinephrine/epinephrine); pathognomonic natural human LoF: plasma NE undetectable (<25 pg/mL) and restored by droxidopa (a NE precursor bypassing DBH), confirming do(DBH)->norepinephrine sign '+' (GeneReviews NBK1474, DBH Deficiency; OMIM 223360)"
+
+constitutive_edges: []   # none — analytes are organ_system; enzymes are cellular roots (lift omitted this phase)

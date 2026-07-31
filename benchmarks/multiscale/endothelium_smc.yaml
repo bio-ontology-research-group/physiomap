@@ -1,0 +1,146 @@
+# =============================================================================
+# Cellular-scale module: Endothelium -> vascular smooth muscle paracrine
+#                                                       *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Makes the vascular endothelial cell a first-class CELLULAR layer of PhysioMap.
+# Three classic endothelium-derived paracrine signals act on the EXISTING cellular
+# node `vascular_smooth_muscle_tone` (owned by vascular_tone.yaml), which already
+# lifts constitutively onto `total_peripheral_resistance` (organ_system). No new
+# lift is added here; the integration is the within-cellular paracrine causal edges
+# into that existing fine-scale node.
+#
+# CELL TYPE:
+#   vascular endothelial cell (CL:0000115)
+#
+# CELLULAR NODES (endothelial outputs; all ROOTS, exercised by interventions):
+#   endothelial_no_production      NO  (eNOS / NOS3 product)
+#   endothelial_et1_secretion      ET-1 (EDN1 peptide)
+#   endothelial_pgi2_production    prostacyclin / PGI2 (PTGIS product)
+#   endothelial_shear_stress       laminar shear sensed by endothelium (upstream agonist root)
+#
+# LIGAND -> RECEPTOR signals (cell-cell, paracrine) onto vascular_smooth_muscle_tone:
+#   NO   -> soluble guanylyl cyclase (GUCY1) -> cGMP/PKG -> MLCP        (-, relaxation)
+#   ET-1 -> EDNRA (Gq/PLC) -> IP3/Ca2+ -> MLCK                          (+, contraction)
+#   PGI2 -> IP prostacyclin receptor PTGIR (Gs) -> cAMP/PKA            (-, relaxation)
+#
+#   Shear stress modulates the endothelial outputs (laterally, within cellular scale):
+#     shear -> NO up (+), shear -> PGI2 up (+), shear -> ET-1 down (-).
+#
+# LIFT TARGET: none new — connects laterally into existing cellular
+#   `vascular_smooth_muscle_tone` >> total_peripheral_resistance.
+#
+# SOURCES:
+#   OmniPath intercell: EDN1 -> EDNRA / EDNRB is_stimulation=True (consensus),
+#     refs incl. Yanagisawa 1988 (Nature 332:411, PMID 2451132).
+#   Furchgott & Zawadzki 1980 (Nature 288:373, PMID 6253831) EDRF=NO;
+#     Ignarro/Furchgott Nobel 1998 NO as endothelial relaxing factor.
+#   Moncada & Vane prostacyclin (PGI2) vasodilation (Moncada et al. 1976,
+#     Nature 263:663, PMID 802670).
+#   Boron & Boulpaep, Medical Physiology (vascular control: NO/ET-1/PGI2).
+# =============================================================================
+
+name: endothelium_smc_paracrine
+
+nodes:
+  - id: endothelial_shear_stress
+    label: laminar shear stress sensed by vascular endothelium
+    scale: cellular
+    entity_iri: CL:0000115              # endothelial cell
+    quality_iri: PATO:0001035          # mechanical force / stress (illustrative)
+  - id: plasma_bradykinin
+    label: "plasma bradykinin concentration"
+    scale: organ_system
+    entity_iri: CHEBI:3165
+    quality_iri: PATO:0000033
+  - id: endothelial_no_production
+    label: endothelial nitric oxide (NO) production rate (eNOS/NOS3)
+    scale: cellular
+    entity_iri: GO:0006809             # nitric oxide biosynthetic process
+    quality_iri: PATO:0000161
+    bearer_entity_iri: CL:0000115  # endothelial cell
+  - id: endothelial_et1_secretion
+    label: endothelial endothelin-1 (ET-1) secretion rate
+    scale: cellular
+    entity_iri: GO:1990775  # endothelin production
+    quality_iri: PATO:0000161
+    bearer_entity_iri: CL:0000115  # endothelial cell
+  - id: endothelial_pgi2_production
+    label: endothelial prostacyclin (PGI2) production rate
+    scale: cellular
+    entity_iri: GO:0032310  # prostaglandin secretion
+    quality_iri: PATO:0000161
+    bearer_entity_iri: CL:0000115  # endothelial cell
+
+causal_edges:
+  - source: plasma_bradykinin
+    target: endothelial_no_production
+    sign: "+"
+    causal_evidence: curated_mechanistic
+    mechanism: bradykinin B2 receptor -> eNOS activation -> NO production
+    evidence: "Bradykinin activates endothelial B2 receptors, raising eNOS/NO. Curated by P. Schofield (2026-07-22)."
+  # --- paracrine onto the EXISTING cellular node vascular_smooth_muscle_tone ---
+  - source: endothelial_no_production
+    target: vascular_smooth_muscle_tone
+    sign: "-"
+    causal_evidence: pharmacological
+    mechanism: >-
+      NO diffuses to smooth muscle, activates soluble guanylyl cyclase (GUCY1) ->
+      cGMP -> PKG -> myosin light-chain phosphatase activation / Ca2+ desensitization
+      (GO:0006182 cGMP biosynthesis); relaxation
+    evidence: 'Furchgott & Zawadzki 1980 Nature 288:373 (PMID 6253831) endothelium-derived relaxing factor = NO; Boron & Boulpaep Medical Physiology (vascular control) | textbook corroboration: Wong, Cells: Molecules and Mechanisms §wong-14.5 (Calcium Ion Signaling): ''Perhaps the best studied example of NO signaling is vasodilation, in which the NOS-expressing endothelial cells of a blood vessel release NO to the smooth muscle cells surrounding them.''; OpenStax Biology 2e §bio-40.2 (Components of the Blood): ''NO is a vasodilator that relaxes the blood vessels and capillaries and may help with gas exchange and the passage of red blood cells through narrow vessels.''; OpenStax Biology 2e §bio-9.1 (9.1: Signaling Molecules and Cellular Receptors): ''one of its [NO] roles is to interact with receptors in smooth muscle and induce relaxation of the tissue … Nitroglycerin … acts by triggering the release of NO, which causes blood vessels to dilate (expand)'' [citations PubMed-verified]'
+  - source: endothelial_et1_secretion
+    target: vascular_smooth_muscle_tone
+    sign: "+"
+    causal_evidence: pharmacological
+    mechanism: >-
+      ET-1 binds EDNRA on smooth muscle (Gq/PLC-beta -> IP3 -> SR Ca2+ release) ->
+      Ca2+/calmodulin -> MLCK -> MLC phosphorylation; sustained contraction
+    evidence: 'OmniPath intercell EDN1->EDNRA is_stimulation=True (consensus; refs incl. Yanagisawa 1988 Nature 332:411, PMID 2451132); Boron & Boulpaep | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-106 (19.2: Heart Anatomy): ''Endothelins are potent vasoconstrictors and, in a normal individual, establish a homeostatic balance with other vasoconstrictors and vasodilators.''; OpenStax Anatomy & Physiology 2e §anp-111 (20.2: Structure and Function of Blood Vessels): endothelins constrict smooth muscle in vessel walls [citations PubMed-verified]'
+  - source: endothelial_pgi2_production
+    target: vascular_smooth_muscle_tone
+    sign: "-"
+    causal_evidence: pharmacological
+    mechanism: >-
+      PGI2 binds IP receptor PTGIR (Gs) on smooth muscle -> adenylyl cyclase ->
+      cAMP -> PKA -> reduced MLCK activity / Ca2+ lowering; relaxation
+    evidence: 'Moncada et al. 1976 Nature 263:663 (PMID 802670) prostacyclin relaxes vascular smooth muscle; Boron & Boulpaep Medical Physiology [citations PubMed-verified]'
+  # --- lateral within-cellular: shear stress modulates endothelial outputs ---
+  - source: endothelial_shear_stress
+    target: endothelial_no_production
+    sign: "+"
+    causal_evidence: curated_mechanistic
+    mechanism: >-
+      laminar shear activates mechanosensors -> PI3K/Akt -> eNOS (NOS3) Ser1177
+      phosphorylation and Ca2+-calmodulin binding (GO:0006809 NO biosynthesis)
+    evidence: >-
+      Boron & Boulpaep Medical Physiology (flow-mediated dilation); shear-induced
+      eNOS activation, Furchgott NO axis. An opened biophysical mechanistic model
+      predicts endothelial NO production rises with a step increase in wall shear
+      stress, validated against experimental data (PMC4944664, 'Shear-Induced Nitric
+      Oxide Production by Endothelial Cells').
+  - source: endothelial_shear_stress
+    target: endothelial_pgi2_production
+    sign: "+"
+    mechanism: >-
+      shear stress upregulates COX/PTGIS-mediated prostacyclin synthesis in
+      endothelium (GO:0001516 prostaglandin biosynthesis)
+    evidence: >-
+      Boron & Boulpaep Medical Physiology (shear-induced prostacyclin release)
+  - source: endothelial_shear_stress
+    target: endothelial_et1_secretion
+    sign: "-"
+    causal_evidence: perturbation
+    mechanism: >-
+      sustained laminar shear suppresses EDN1 transcription/secretion (KLF2-mediated
+      repression of preproendothelin)
+    evidence: >-
+      Boron & Boulpaep Medical Physiology (laminar flow downregulates endothelin-1).
+      Opened primary: HUVEC under controlled laminar shear (1, 15, 30 dyn/cm2,
+      cone-and-plate viscometer) show dose-dependent downregulation of
+      preproendothelin-1 mRNA and ET-1 peptide release (~31% of static at 30 dyn/cm2)
+      -- do(apply shear) lowers ET-1 (PMC2269966, 'Regulation of the endothelin system
+      by shear stress in human endothelial cells').
+
+# No new constitutive edges: vascular_smooth_muscle_tone (cellular) already lifts
+# onto total_peripheral_resistance in vascular_tone.yaml.
+constitutive_edges: []

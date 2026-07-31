@@ -1,0 +1,70 @@
+# =============================================================================
+# Multi-scale GRN import: SREBP-2 -> LDLR / HMGCR / PCSK9 (hepatic cholesterol homeostasis)
+#                                                       *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Causal-evidence-gated import. Sterol-regulated transcription of cholesterol-handling genes
+# in hepatocytes. The molecular regulator (nuclear SREBP-2) is a ROOT exercised by sterol
+# status / statins; it lifts to the existing macro enzyme/receptor nodes by determination, and
+# PCSK9 (itself an SREBP-2 target) negatively determines LDL-receptor activity.
+#
+#   er_cholesterol_level  --(-)--> nuclear_srebp2_activity   (low ER sterol releases SREBP-2)
+#   nuclear_srebp2_activity --(+)--> pcsk9_concentration     (PCSK9 is an SREBP-2 target gene)
+#   nuclear_srebp2_activity ▷(+) hepatic_ldl_receptor_activity   (LDLR transcription)
+#   nuclear_srebp2_activity ▷(+) hmg_coa_reductase_activity      (HMGCR transcription)
+#   pcsk9_concentration     ▷(-) hepatic_ldl_receptor_activity   (PCSK9 degrades LDLR)
+#
+# INTERVENTIONAL GROUNDING:
+#   - statins inhibit HMG-CoA reductase -> deplete sterol -> activate SREBP-2 -> up LDLR (pharmacological)
+#   - PCSK9 inhibitors (evolocumab/alirocumab) RAISE hepatic LDLR / lower LDL (pharmacological do() on PCSK9)
+#   - PCSK9 gain-of-function -> autosomal-dominant hypercholesterolemia; PCSK9 LoF -> low LDL (genetic)
+#   - LDLR loss-of-function -> familial hypercholesterolemia (genetic)
+# (Disease names without OMIM numbers by design; DRAFT for domain review.)
+#
+# BOUNDARY NODES (exist; not redefined): hepatic_ldl_receptor_activity, hmg_coa_reductase_activity
+# =============================================================================
+name: srebp_ldlr_pcsk9_axis
+nodes:
+- id: er_cholesterol_level
+  label: hepatocyte ER membrane cholesterol level (sterol sensor input)
+  scale: subcellular
+  entity_iri: CHEBI:16113       # cholesterol
+  quality_iri: PATO:0000033     # concentration
+  bearer_entity_iri: CL:0000182 # hepatocyte
+- id: nuclear_srebp2_activity
+  label: nuclear SREBP-2 transcription-factor activity (hepatocyte)
+  scale: molecular
+  entity_iri: PR:000015612      # sterol regulatory element-binding protein 2
+  quality_iri: PATO:0001414     # catalytic activity (TF activity convention)
+  bearer_entity_iri: CL:0000182
+- id: pcsk9_concentration
+  label: hepatic PCSK9 concentration
+  scale: molecular
+  entity_iri: PR:000012440      # proprotein convertase subtilisin/kexin type 9
+  quality_iri: PATO:0000033     # concentration
+  bearer_entity_iri: CL:0000182
+causal_edges:
+- source: er_cholesterol_level
+  target: nuclear_srebp2_activity
+  sign: '-'
+  causal_evidence: pharmacological
+  mechanism: 'low ER cholesterol releases SCAP/SREBP-2 from INSIG, permitting Golgi cleavage and
+    nuclear SREBP-2 accumulation (quality: ER sterol level -> disposition: SCAP escort competence
+    -> process: regulated intramembrane proteolysis -> quality: nuclear SREBP-2 activity)'
+  evidence: 'INTERVENTIONAL (pharmacological). Statins inhibit HMG-CoA reductase and deplete
+    hepatic sterol, which ACTIVATES SREBP-2 and raises LDLR/HMGCR transcription (the feedback
+    that statins exploit). DRAFT for domain review.'
+- source: nuclear_srebp2_activity
+  target: pcsk9_concentration
+  sign: +
+  causal_evidence: genetic_lof_gof
+  mechanism: 'PCSK9 is a direct SREBP-2 transcriptional target (quality: nuclear SREBP-2 activity
+    -> disposition: SRE occupancy at the PCSK9 promoter -> process: PCSK9 transcription -> quality:
+    PCSK9 concentration)'
+  evidence: 'INTERVENTIONAL. PCSK9 gain-of-function -> autosomal-dominant hypercholesterolemia;
+    PCSK9 loss-of-function -> low LDL (genetic do()); statin-driven SREBP-2 activation co-induces
+    PCSK9 (the rationale for combining statins with PCSK9 inhibitors). DRAFT for domain review.'
+production_edges:
+- source: nuclear_srebp2_activity
+  target: hmg_coa_reductase_activity
+  sign: +
+  production_evidence: legacy-evidence-unclassified

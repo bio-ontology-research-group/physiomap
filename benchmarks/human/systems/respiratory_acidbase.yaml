@@ -1,0 +1,140 @@
+# =============================================================================
+# Respiratory control + acid-base balance — PhysioMap fragment  *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Hand-encoded canonical respiratory physiology. Every edge sign is the sign of
+# the partial derivative of the target w.r.t. the source at steady state, all
+# else equal. Cross-fragment boundary nodes (sympathetic_tone, metabolic_rate,
+# mean_arterial_pressure) are REFERENCED by id, not redefined here, so this
+# fragment will not load standalone (expected); it composes via PhysioMap.merge.
+# ROBERT: please correct signs/edges.
+#
+# Scope: ORGAN / ORGAN_SYSTEM scale. Within-scale signed cyclic causal edges.
+#
+# Key negative-feedback loop (peripheral + central chemoreflex):
+#   arterial_pco2 -> chemoreceptor_drive (+) -> alveolar_ventilation (+)
+#   -> arterial_pco2 (-)   => net NEGATIVE feedback (CO2 set-point regulation).
+# Parallel hypoxic and pH arms also feed chemoreceptor_drive. Slow renal arm
+# (arterial_ph -> plasma_bicarbonate, -) provides metabolic compensation.
+#
+# Reference models / sources: Grodins et al. 1967 (respiratory control model);
+# Ursino & Magosso 2003 (chemoreflex control of breathing); HumMod respiratory /
+# acid-base modules; Henderson-Hasselbalch (pH = pKa + log10([HCO3-]/(0.03*PCO2))),
+# so pH falls with PCO2 and rises with [HCO3-]. Standard respiratory physiology.
+# =============================================================================
+
+name: respiratory_acidbase
+description: >-
+  DRAFT respiratory control and acid-base balance as a PhysioMap signed cyclic
+  causal graph. Canonical physiology (Grodins 1967; Ursino & Magosso 2003;
+  HumMod; Henderson-Hasselbalch). Single-scale (Phase 1). Includes the
+  chemoreflex negative-feedback loop and the slow renal bicarbonate
+  compensation arm, plus chemoreflex coupling to sympathetic tone.
+
+nodes:
+  - id: alveolar_ventilation
+    label: alveolar ventilation (effective gas-exchanging ventilation)
+    scale: organ_system
+    entity_iri: GO:0007585             # respiratory gaseous exchange by respiratory system
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0002048  # lung
+  - id: arterial_pco2
+    label: arterial partial pressure of carbon dioxide (PaCO2)
+    scale: organ_system
+    entity_iri: CHEBI:16526            # carbon dioxide
+    quality_iri: PATO:0001025          # pressure (partial)
+    quality_kind: intensive
+  - id: arterial_po2
+    label: arterial partial pressure of oxygen (PaO2)
+    scale: organ_system
+    entity_iri: CHEBI:15379            # dioxygen
+    quality_iri: PATO:0001025          # pressure (partial)
+    quality_kind: intensive
+  - id: arterial_ph
+    label: arterial blood pH
+    scale: organ_system
+    entity_iri: UBERON:0013755         # arterial blood (bearer of the acidity quality)
+    quality_iri: PATO:0001842          # acidity
+  - id: plasma_bicarbonate
+    label: plasma bicarbonate concentration
+    scale: organ_system
+    entity_iri: CHEBI:17544            # hydrogencarbonate (bicarbonate)
+    quality_iri: PATO:0000033          # concentration
+  - id: chemoreceptor_drive
+    label: integrated central + peripheral chemoreceptor drive to breathe
+    scale: organ_system
+    quality_iri: PATO:0000161          # rate (firing/drive)
+
+causal_edges:
+  # --- ventilation gas exchange --------------------------------------------
+  - source: alveolar_ventilation
+    target: arterial_pco2
+    sign: "-"
+    mechanism: increased ventilation washes out CO2, lowering PaCO2 (PaCO2 ∝ VCO2/VA)
+    evidence: "Grodins 1967 alveolar CO2 mass balance; HumMod respiratory; standard physiology | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-126 (22.4: The Process of Breathing): increased ventilation expels more CO2, reducing blood levels of carbon dioxide; OpenStax Anatomy & Physiology 2e §anp-127 (22.5: Gas Exchange): increased ventilation washes out CO2, lowering PaCO2; 'Both deep and forced breathing cause the alveolar air composition to be changed more rapidly … CO2 … leave the blood more quickly'; OpenStax Anatomy & Physiology 2e §anp-129 (22.7: Modifications in Respiratory Functions): 'hyperventilation is an increased ventilation rate... leads to abnormally low blood carbon dioxide levels'; OpenStax Anatomy & Physiology 2e §anp-158 (26.5: Acid-Base Balance): exhaling more CO2 (via increased ventilation rate/depth) reduces blood CO2 levels and raises pH toward normal.; OpenStax Anatomy & Physiology 2e §anp-159 (26.6: Disorders of Acid-Base Balance): 'Respiratory compensation for metabolic acidosis increases the respiratory rate to drive off CO2 and readjust the bicarbonate to carbonic acid ratio.'; Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-2.3.1 (Introduction): hyperventilation removes CO2, driving equilibrium left and raising pH; decreased respiratory rate/lung disease raises CO2 causing acidosis — confirms alveolar ventilation negatively determines arterial PaCO2.; OpenStax Biology 2e §bio-39.2 (39.2: Gas Exchange across Respiratory Surfaces): alveolar CO2 partial pressure (40 mmHg) is lower than venous blood CO2 (45 mmHg); CO2 diffuses down its pressure gradient from blood into alveoli and is expelled by ventilation, lowering arterial PCO2; OpenStax Biology 2e §bio-39.3 (39.3: Breathing): 'Alveolar ventilation prevents carbon dioxide buildup in the alveoli.' — confirming that higher alveolar ventilation reduces alveolar and thus arterial CO2."
+  - source: alveolar_ventilation
+    target: arterial_po2
+    sign: "+"
+    mechanism: increased ventilation raises alveolar/arterial O2 (alveolar gas equation)
+    causal_evidence: mechanistic_model
+    evidence: "Grodins 1967 alveolar O2 mass balance; HumMod respiratory; alveolar gas equation | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-127 (22.5: Gas Exchange): increased ventilation raises alveolar O2, driving diffusion into blood; 'Both deep and forced breathing cause the alveolar air composition to be changed more rapidly … oxygen to enter … the blood more quickly'; OpenStax Biology 2e §bio-39.2 (39.2: Gas Exchange across Respiratory Surfaces): residual air in lungs mixes with inspired air, affecting alveolar PO2; increased ventilation raises alveolar PO2 (alveolar gas equation), driving O2 into blood"
+
+  # --- acid-base (Henderson-Hasselbalch) -----------------------------------
+  - source: arterial_pco2
+    target: chemoreceptor_drive
+    sign: "+"
+    mechanism: central (medullary) + peripheral chemoreceptors increase drive as PaCO2/CSF [H+] rises
+    evidence: "Grodins 1967; Ursino & Magosso 2003 central+peripheral chemoreflex; HumMod | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-126 (22.4: The Process of Breathing): 'as the concentration of CO2 in the blood increases... the rate and depth of respiration increase'; OpenStax Anatomy & Physiology 2e §anp-158 (26.5: Acid-Base Balance): 'The body regulates the respiratory rate by the use of chemoreceptors, which primarily use CO2 as a signal. Peripheral blood sensors... signal the brain to provide immediate adjustments to the respiratory rate if CO2 levels rise or fall.'; OpenStax Anatomy & Physiology 2e §anp-167 (28.6: Adjustments of the Infant at Birth and Postnatal Stages): 'High carbon dioxide levels cause acidosis and stimulate the respiratory center in the brain, triggering the newborn to take a breath.'"
+  - source: arterial_po2
+    target: chemoreceptor_drive
+    sign: "-"
+    mechanism: hypoxic drive — carotid body firing rises as PaO2 falls (hyperbolic, steep <60 mmHg)
+    evidence: "Ursino & Magosso 2003 peripheral chemoreflex; HumMod carotid body; standard physiology | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-126 (22.4: The Process of Breathing): 'If blood oxygen levels become quite low—about 60 mm Hg or less—then peripheral chemoreceptors stimulate an increase in respiratory activity'"
+  - source: arterial_ph
+    target: chemoreceptor_drive
+    sign: "-"
+    mechanism: acidosis (low pH) stimulates peripheral chemoreceptors, raising drive
+    evidence: "Ursino & Magosso 2003 peripheral chemoreflex pH/H+ sensitivity; standard physiology | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-126 (22.4: The Process of Breathing): 'When peripheral chemoreceptors sense decreasing, or more acidic, pH levels, they stimulate an increase in ventilation'; OpenStax Anatomy & Physiology 2e §anp-158 (26.5: Acid-Base Balance): 'Changes in the pH of CSF affect the respiratory center in the medulla oblongata, which can directly modulate breathing rate to bring the pH back into the normal range.'; OpenStax Anatomy & Physiology 2e §anp-159 (26.6: Disorders of Acid-Base Balance): respiratory compensation adjusts ventilation via chemoreceptors in response to pH changes (metabolic acidosis/alkalosis compensation described).; OpenStax Anatomy & Physiology 2e §anp-167 (28.6: Adjustments of the Infant at Birth and Postnatal Stages): 'High carbon dioxide levels cause acidosis and stimulate the respiratory center in the brain' — acidosis (low pH) stimulates chemoreceptors driving ventilation."
+
+  # --- drive -> ventilation (loop closure) ---------------------------------
+  - source: chemoreceptor_drive
+    target: alveolar_ventilation
+    sign: "+"
+    mechanism: chemoreceptor drive increases respiratory motor output and alveolar ventilation
+    evidence: "Grodins 1967; Ursino & Magosso 2003 controller; HumMod respiratory controller | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-126 (22.4: The Process of Breathing): chemoreceptor stimulation signals respiratory centers to contract diaphragm and intercostal muscles, increasing rate and depth of respiration; OpenStax Anatomy & Physiology 2e §anp-158 (26.5: Acid-Base Balance): chemoreceptors signal the brain to adjust respiratory rate; increasing rate/depth of respiration allows more CO2 to be exhaled.; OpenStax Anatomy & Physiology 2e §anp-159 (26.6: Disorders of Acid-Base Balance): 'Respiratory compensation for metabolic acidosis increases the respiratory rate to drive off CO2'; respiratory rate changes compensate for both acidosis and alkalosis."
+
+  # --- slow renal compensation arm -----------------------------------------
+  - source: arterial_ph
+    target: plasma_bicarbonate
+    sign: "-"
+    mechanism: renal compensation — acidosis (low pH) increases tubular H+ secretion / HCO3- regeneration, raising [HCO3-]
+    evidence: "Renal acid-base handling (slow); HumMod kidney acid-base; standard physiology | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-158 (26.5: Acid-Base Balance): 'the renal system controls the blood levels of bicarbonate'; renal tubular H+ secretion and HCO3- conservation increase in acidosis to restore blood pH.; OpenStax Anatomy & Physiology 2e §anp-159 (26.6: Disorders of Acid-Base Balance): 'In cases of respiratory acidosis, the kidney increases the conservation of bicarbonate and secretion of H+...These processes increase the concentration of bicarbonate in the blood'; 'In cases of respiratory alkalosis, the kidneys decrease the production of bicarbonate and reabsorb H+ from the tubular fluid.'"
+
+  # --- metabolic CO2 load (boundary) ---------------------------------------
+  - source: metabolic_rate
+    target: arterial_pco2
+    sign: "+"
+    mechanism: tissue CO2 production (VCO2) scales with metabolic rate, raising PaCO2 at fixed ventilation
+    evidence: "Grodins 1967 metabolic CO2 source term; HumMod metabolism; PaCO2 ∝ VCO2/VA"
+
+  # --- chemoreflex sympathetic coupling (boundary) -------------------------
+  - source: chemoreceptor_drive
+    target: sympathetic_tone
+    sign: "+"
+    mechanism: peripheral chemoreflex increases central sympathetic outflow (chemoreflex-sympathetic activation)
+    causal_evidence: mechanistic_model
+    evidence: "Ursino & Magosso 2003; chemoreflex-mediated sympathoexcitation; standard physiology | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-114 (20.5: Homeostatic Regulation of the Vascular System): 'The chemoreceptors respond to increasing carbon dioxide and hydrogen ion levels (falling pH) by stimulating the cardioaccelerator and vasomotor centers, increasing cardiac output and constricting peripheral vessels.'"
+
+quantitative_definitions:
+  - kind: structural-function
+    result: arterial_ph
+    arguments:
+      - node: arterial_pco2
+        role: argument
+        derivative_sign: "-"
+      - node: plasma_bicarbonate
+        role: argument
+        derivative_sign: "+"
+    mechanism: "Henderson–Hasselbalch: pH = pKa + log10([HCO3−] / (0.03 × PaCO2))"
+    evidence: "Henderson–Hasselbalch equation; Grodins 1967; West, Boron & Boulpaep, and OpenStax acid-base physiology"
+
+constitutive_edges: []   # none yet — multi-scale expansion is the next step

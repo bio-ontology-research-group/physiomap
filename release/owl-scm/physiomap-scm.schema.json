@@ -1,0 +1,771 @@
+{
+  "$defs": {
+    "ConstitutiveConstraint": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "macro": {
+          "title": "Macro",
+          "type": "string"
+        },
+        "micro": {
+          "title": "Micro",
+          "type": "string"
+        },
+        "relation": {
+          "title": "Relation",
+          "type": "string"
+        },
+        "sign": {
+          "enum": [
+            "+",
+            "-",
+            "?"
+          ],
+          "title": "Sign",
+          "type": "string"
+        },
+        "trace_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Trace Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "micro",
+        "macro",
+        "relation",
+        "sign",
+        "trace_ids"
+      ],
+      "title": "ConstitutiveConstraint",
+      "type": "object"
+    },
+    "ContextKind": {
+      "description": "Kind of steady-state regime in which a causal influence is active.\n\nDynamic contexts are recorded explicitly so curators can surface relationships that\ndepend on pulse frequency, duration, phase, or another non-steady-state quantity. Such\nrecords must abstain rather than pretending that a fixed signed edge is available.",
+      "enum": [
+        "physiological-regime",
+        "life-stage",
+        "modulator-regime",
+        "source-regime",
+        "dynamic"
+      ],
+      "title": "ContextKind",
+      "type": "string"
+    },
+    "Influence": {
+      "additionalProperties": false,
+      "properties": {
+        "causal_evidence": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Causal Evidence"
+        },
+        "context": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/InfluenceContext"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "definitional": {
+          "default": false,
+          "title": "Definitional",
+          "type": "boolean"
+        },
+        "evidence": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Evidence"
+        },
+        "evidence_status": {
+          "enum": [
+            "controlled",
+            "legacy-evidence-unclassified"
+          ],
+          "title": "Evidence Status",
+          "type": "string"
+        },
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "mechanism": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Mechanism"
+        },
+        "sign": {
+          "enum": [
+            "+",
+            "-",
+            "?"
+          ],
+          "title": "Sign",
+          "type": "string"
+        },
+        "source": {
+          "title": "Source",
+          "type": "string"
+        },
+        "target": {
+          "title": "Target",
+          "type": "string"
+        },
+        "trace_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Trace Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "source",
+        "target",
+        "sign",
+        "evidence_status",
+        "trace_ids"
+      ],
+      "title": "Influence",
+      "type": "object"
+    },
+    "InfluenceContext": {
+      "additionalProperties": false,
+      "description": "Stable, selectable context attached to a causal influence.\n\n``id`` is the runtime selector; ``label`` is explanatory text. A legacy plain string is\naccepted and upgraded deterministically, but new authored data should provide both fields.",
+      "properties": {
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/$defs/ContextKind",
+          "default": "physiological-regime"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "label"
+      ],
+      "title": "InfluenceContext",
+      "type": "object"
+    },
+    "Modulation": {
+      "additionalProperties": false,
+      "properties": {
+        "can_flip_sign": {
+          "default": false,
+          "title": "Can Flip Sign",
+          "type": "boolean"
+        },
+        "causal_evidence": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Causal Evidence"
+        },
+        "evidence": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Evidence"
+        },
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "influence_id": {
+          "title": "Influence Id",
+          "type": "string"
+        },
+        "mechanism": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Mechanism"
+        },
+        "modulator": {
+          "title": "Modulator",
+          "type": "string"
+        },
+        "sign": {
+          "enum": [
+            "+",
+            "-"
+          ],
+          "title": "Sign",
+          "type": "string"
+        },
+        "trace_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Trace Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "modulator",
+        "influence_id",
+        "sign",
+        "trace_ids"
+      ],
+      "title": "Modulation",
+      "type": "object"
+    },
+    "Node": {
+      "additionalProperties": false,
+      "description": "A physiological variable: an entity's PATO determinable-quality at a scale.",
+      "properties": {
+        "bearer_entity_iri": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "OPTIONAL anatomical bearer (Uberon/CL) of a molecular/process quality. Most molecular/subcellular nodes record a *molecular* entity (GO/PR/ChEBI) in ``entity_iri``, so their structural ``part_of`` to a macro entity is unverifiable. Recording the cell/organ that *bears* the quality here lets the constitution validator check the structural part_of path via the bearer (``cardiomyocyte`` Ca\u00b2\u207a \u25b7 cardiac output: bearer = CL:0000746).",
+          "title": "Bearer Entity Iri"
+        },
+        "bearer_kind": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "OPTIONAL override of the BFO category of the quality's bearer (``continuant`` = material entity | ``occurrent`` = process). Normally derived (``physiomap_core.bfo``): a process quality (rate/flux) or GO-process entity is an occurrent, else a continuant. Determines constitution admissibility \u2014 constitution is material (continuant\u2194continuant); a process quality relates to a material one only through a typed process-output relation (a ``production_edges`` record).",
+          "title": "Bearer Kind"
+        },
+        "entity_iri": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Entity IRI (Uberon/GO/CL/ChEBI). Optional in Phase 1.",
+          "title": "Entity Iri"
+        },
+        "exogenous": {
+          "default": false,
+          "description": "If True, this node is a **forcing / boundary input** whose value is set outside the modelled system (e.g. dietary ``water_intake`` / ``food_intake``, ambient challenge). Such a node is legitimately *not* constituted by micro configuration, so it is excluded from the free-floating-macro grounding gap.",
+          "title": "Exogenous",
+          "type": "boolean"
+        },
+        "id": {
+          "description": "Unique node identifier (stable key).",
+          "title": "Id",
+          "type": "string"
+        },
+        "label": {
+          "description": "Human-readable label.",
+          "title": "Label",
+          "type": "string"
+        },
+        "quality_iri": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Quality determinable IRI (PATO). Optional in Phase 1.",
+          "title": "Quality Iri"
+        },
+        "quality_kind": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "OPTIONAL override of the quality's MEASUREMENT TYPE (``extensive`` | ``ratio`` | ``rate`` | ``intensive``) used to *derive* the composition rule of constitutive determination edges into this node (``physiomap_core.quantity``). Normally left None: the kind is looked up from the PATO ``quality_iri`` via ``ontology/quality_kinds.yaml`` (default ``intensive``). Set this only for a misused/ambiguous PATO IRI whose true kind differs.",
+          "title": "Quality Kind"
+        },
+        "scale": {
+          "$ref": "#/$defs/Scale"
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "scale"
+      ],
+      "title": "Node",
+      "type": "object"
+    },
+    "ProductionRelation": {
+      "additionalProperties": false,
+      "description": "Projected typed process-output / consumption relation (not an influence).",
+      "properties": {
+        "evidence": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Evidence"
+        },
+        "evidence_status": {
+          "enum": [
+            "controlled",
+            "legacy-evidence-unclassified"
+          ],
+          "title": "Evidence Status",
+          "type": "string"
+        },
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "mechanism": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Mechanism"
+        },
+        "production_evidence": {
+          "enum": [
+            "curated_source_statement",
+            "experimental_perturbation",
+            "mechanistic_model",
+            "legacy-evidence-unclassified"
+          ],
+          "title": "Production Evidence",
+          "type": "string"
+        },
+        "sign": {
+          "enum": [
+            "+",
+            "-",
+            "?"
+          ],
+          "title": "Sign",
+          "type": "string"
+        },
+        "source": {
+          "title": "Source",
+          "type": "string"
+        },
+        "target": {
+          "title": "Target",
+          "type": "string"
+        },
+        "trace_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Trace Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "source",
+        "target",
+        "sign",
+        "production_evidence",
+        "evidence_status",
+        "trace_ids"
+      ],
+      "title": "ProductionRelation",
+      "type": "object"
+    },
+    "ProjectionTrace": {
+      "additionalProperties": false,
+      "properties": {
+        "entailment": {
+          "title": "Entailment",
+          "type": "string"
+        },
+        "output_id": {
+          "title": "Output Id",
+          "type": "string"
+        },
+        "pattern_id": {
+          "title": "Pattern Id",
+          "type": "string"
+        },
+        "pattern_version": {
+          "title": "Pattern Version",
+          "type": "string"
+        },
+        "reasoner": {
+          "title": "Reasoner",
+          "type": "string"
+        },
+        "reasoning_mode": {
+          "enum": [
+            "elk",
+            "hermit-module",
+            "asserted-only",
+            "structural-validator"
+          ],
+          "title": "Reasoning Mode",
+          "type": "string"
+        },
+        "source_ontology_versions": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Source Ontology Versions",
+          "type": "object"
+        },
+        "supporting_source_axioms": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Supporting Source Axioms",
+          "type": "array"
+        },
+        "trace_id": {
+          "title": "Trace Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "trace_id",
+        "output_id",
+        "pattern_id",
+        "pattern_version",
+        "reasoning_mode",
+        "reasoner",
+        "entailment",
+        "supporting_source_axioms"
+      ],
+      "title": "ProjectionTrace",
+      "type": "object"
+    },
+    "QuantitativeArgument": {
+      "additionalProperties": false,
+      "properties": {
+        "derivative_sign": {
+          "enum": [
+            "+",
+            "-",
+            "?"
+          ],
+          "title": "Derivative Sign",
+          "type": "string"
+        },
+        "node": {
+          "title": "Node",
+          "type": "string"
+        },
+        "role": {
+          "title": "Role",
+          "type": "string"
+        }
+      },
+      "required": [
+        "node",
+        "role",
+        "derivative_sign"
+      ],
+      "title": "QuantitativeArgument",
+      "type": "object"
+    },
+    "QuantitativeExpression": {
+      "additionalProperties": false,
+      "properties": {
+        "arguments": {
+          "items": {
+            "$ref": "#/$defs/QuantitativeArgument"
+          },
+          "title": "Arguments",
+          "type": "array"
+        },
+        "evidence": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Evidence"
+        },
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "ratio",
+            "sum",
+            "product",
+            "rate",
+            "aggregation",
+            "structural-function"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "mechanism": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Mechanism"
+        },
+        "origin": {
+          "enum": [
+            "authored",
+            "derived"
+          ],
+          "title": "Origin",
+          "type": "string"
+        },
+        "result": {
+          "title": "Result",
+          "type": "string"
+        },
+        "trace_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Trace Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "origin",
+        "result",
+        "arguments",
+        "trace_ids"
+      ],
+      "title": "QuantitativeExpression",
+      "type": "object"
+    },
+    "Scale": {
+      "description": "Biological scale of a variable (coarse-grained, ordered fine -> coarse).",
+      "enum": [
+        "molecular",
+        "subcellular",
+        "cellular",
+        "tissue",
+        "organ",
+        "organ_system",
+        "organism"
+      ],
+      "title": "Scale",
+      "type": "string"
+    }
+  },
+  "$id": "https://w3id.org/physiomap/schema/scm-1.0.0.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Canonical generated representation of ``M=(V,E,H,F,tau)``.",
+  "properties": {
+    "constitutive_constraints": {
+      "items": {
+        "$ref": "#/$defs/ConstitutiveConstraint"
+      },
+      "title": "Constitutive Constraints",
+      "type": "array"
+    },
+    "description": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Description"
+    },
+    "generator_version": {
+      "title": "Generator Version",
+      "type": "string"
+    },
+    "influences": {
+      "items": {
+        "$ref": "#/$defs/Influence"
+      },
+      "title": "Influences",
+      "type": "array"
+    },
+    "modulation": {
+      "items": {
+        "$ref": "#/$defs/Modulation"
+      },
+      "title": "Modulation",
+      "type": "array"
+    },
+    "name": {
+      "title": "Name",
+      "type": "string"
+    },
+    "nodes": {
+      "items": {
+        "$ref": "#/$defs/Node"
+      },
+      "title": "Nodes",
+      "type": "array"
+    },
+    "ontology_provenance": {
+      "additionalProperties": true,
+      "title": "Ontology Provenance",
+      "type": "object"
+    },
+    "physiomap_version": {
+      "title": "Physiomap Version",
+      "type": "string"
+    },
+    "production_relations": {
+      "items": {
+        "$ref": "#/$defs/ProductionRelation"
+      },
+      "title": "Production Relations",
+      "type": "array"
+    },
+    "projection_traces": {
+      "items": {
+        "$ref": "#/$defs/ProjectionTrace"
+      },
+      "title": "Projection Traces",
+      "type": "array"
+    },
+    "projection_version": {
+      "title": "Projection Version",
+      "type": "string"
+    },
+    "quantitative_expressions": {
+      "items": {
+        "$ref": "#/$defs/QuantitativeExpression"
+      },
+      "title": "Quantitative Expressions",
+      "type": "array"
+    },
+    "reasoning_configuration": {
+      "additionalProperties": true,
+      "title": "Reasoning Configuration",
+      "type": "object"
+    },
+    "schema_version": {
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "physiomap_version",
+    "name",
+    "generator_version",
+    "projection_version",
+    "ontology_provenance",
+    "reasoning_configuration",
+    "nodes",
+    "influences",
+    "constitutive_constraints",
+    "quantitative_expressions",
+    "modulation",
+    "projection_traces"
+  ],
+  "title": "PhysioMap SCM manifest",
+  "type": "object"
+}

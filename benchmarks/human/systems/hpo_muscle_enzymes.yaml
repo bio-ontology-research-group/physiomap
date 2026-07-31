@@ -1,0 +1,165 @@
+# =============================================================================
+# Muscle enzymes / sarcoplasmic-leakage markers + glycolytic-enzyme activities
+#                                    — PhysioMap fragment  *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Hand-encoded HPO directional-gap coverage for the "muscle_enzymes" theme.
+# Each node is a measurable physiological VARIABLE (entity, PATO determinable).
+#
+# Two physiological families are covered:
+#
+#  (A) PLASMA / SERUM "muscle enzyme" leakage markers (scale organ_system).
+#      When the sarcolemma is damaged (muscular dystrophies, rhabdomyolysis,
+#      inflammatory myopathies, myocardial infarction) cytosolic muscle proteins
+#      leak into plasma and their serum concentration RISES. The classic markers
+#      are creatine kinase (CK / CPK), its isoenzymes CK-MM (skeletal), CK-MB
+#      (cardiac), CK-BB (brain/smooth), lactate dehydrogenase (LDH), aldolase
+#      (ALD), and myoglobin. Creatine and creatinine handling is altered when
+#      muscle mass / creatine-kinase flux falls.
+#      Refs: Harrison's Principles of Internal Medicine, "Approach to the patient
+#      with muscle disease" / "Polymyositis & dermatomyositis" (serum CK, aldolase,
+#      LDH, myoglobin as muscle-injury markers); Boron & Boulpaep Medical Physiology,
+#      "Cellular physiology of skeletal muscle" (creatine/phosphocreatine shuttle);
+#      Lehninger Principles of Biochemistry (creatine kinase, glycolysis).
+#
+#  (B) Intracellular MUSCLE / ERYTHROCYTE ENZYME ACTIVITIES (scale cellular),
+#      each borne by a named cell. These are the loci of the glycogenoses /
+#      glycolytic enzymopathies (GSD): muscle phosphoglycerate kinase (GSD IX-like,
+#      PGK1), phosphoglycerate mutase (GSD X, PGAM2 / Tarui-spectrum), beta-enolase
+#      (GSD XIII, ENO3), muscle LDH-A (GSD XI), and erythrocyte pyruvate kinase
+#      (PKLR — hereditary nonspherocytic hemolytic anemia; activity can be high or
+#      low depending on the variant and reticulocytosis). Caveolin-3 (CAV3, LGMD1C /
+#      rippling-muscle disease) is a sarcolemmal structural protein whose muscle
+#      level falls with LoF.
+#      Refs: Harrison's, "Glycogen-storage diseases & other inborn errors of
+#      metabolism" / "Metabolic myopathies"; Williams Hematology (pyruvate-kinase
+#      deficiency); Lehninger (glycolytic pathway enzymes).
+#
+# SIGN POLICY / EDGES: this is deliberately an ISLAND fragment with NO causal edges.
+#   The plasma markers rise as a non-specific consequence of myocyte membrane
+#   damage (a structural lesion not represented as a single signed driver in the
+#   current corpus); writing "muscle_damage -> CK +" edges would require a
+#   muscle-integrity node that does not exist and would be a guess. Per PhysioMap
+#   policy we prefer NO edge over a fabricated one. Each node is grounded and
+#   abstains until a defensible mechanism node is added. The HPO directional terms
+#   map cleanly onto these grounded variables (the comparative-statics value is the
+#   do()-clamp itself for these leaf markers).
+#
+# ENTITY IRIs: verified by grep against ontology/.obo_cache (CHEBI/PR/GO/CL/UBERON).
+#   Protein enzymes -> PR; small molecules -> CHEBI; multi-subunit CK -> GO complex;
+#   bearer cells -> CL; tissue -> UBERON. IRIs left null where no exact match.
+# =============================================================================
+
+name: hpo_muscle_enzymes
+description: >-
+  DRAFT muscle-enzyme HPO coverage fragment. Plasma/serum sarcoplasmic-leakage
+  markers (creatine kinase total + CK-MM/CK-MB/CK-BB isoenzymes, lactate
+  dehydrogenase, aldolase, myoglobin) and creatine handling at organ-system scale,
+  plus intracellular muscle/erythrocyte glycolytic and structural enzyme/protein
+  activities (phosphoglycerate kinase, phosphoglycerate mutase, enolase, muscle
+  LDH-A, erythrocyte pyruvate kinase, creatine kinase, caveolin-3) at cellular
+  scale with named bearer cells. Island fragment (no causal edges) — grounded leaf
+  markers that abstain pending a muscle-integrity / glycolytic-flux mechanism node.
+
+nodes:
+  # --- (A) plasma / serum leakage markers (organ_system) -------------------------
+  - id: plasma_creatine_kinase
+    label: plasma (serum) total creatine kinase concentration
+    scale: organ_system
+    entity_iri: GO:0002185             # creatine kinase complex (verified GO.obo)
+    quality_iri: PATO:0000033          # concentration
+  - id: plasma_ck_mm
+    label: plasma creatine kinase MM isoform concentration
+    scale: organ_system
+    entity_iri: PR:000005515           # creatine kinase M-type (CK-MM homodimer; verified PR.obo)
+    quality_iri: PATO:0000033          # concentration
+  - id: plasma_ck_mb
+    label: plasma creatine kinase MB isoform concentration
+    scale: organ_system
+    # CK-MB is the M:B heterodimer; no single exact PR/GO class for the heterodimer
+    # verified -> entity_iri left null (not fabricated).
+    quality_iri: PATO:0000033          # concentration
+  - id: plasma_creatine_kinase_bb
+    label: plasma creatine kinase BB isoform concentration
+    scale: organ_system
+    entity_iri: PR:000005513           # creatine kinase B-type (CK-BB homodimer; verified PR.obo)
+    quality_iri: PATO:0000033          # concentration
+  - id: plasma_ldh
+    label: plasma (serum) lactate dehydrogenase concentration
+    scale: organ_system
+    # multi-subunit LDH (LDH-A/LDH-B tetramers); no single exact whole-enzyme PR
+    # class for serum total LDH verified -> null.
+    quality_iri: PATO:0000033          # concentration
+  - id: lactate_dehydrogenase_activity
+    label: circulating (serum) lactate dehydrogenase activity
+    scale: organ_system
+    # "Reduced circulating LDH concentration" maps here (opposite-sign partner of
+    # the elevated-LDH term). Catalytic-activity quality.
+    quality_iri: PATO:0001414          # catalytic (enzyme) activity
+  - id: plasma_aldolase
+    label: plasma (serum) aldolase concentration
+    scale: organ_system
+    entity_iri: PR:000003934           # fructose-bisphosphate aldolase A (muscle ALDOA; verified PR.obo)
+    quality_iri: PATO:0000033          # concentration
+  - id: plasma_myoglobin
+    label: plasma (serum) myoglobin concentration
+    scale: organ_system
+    entity_iri: PR:000010213           # myoglobin (verified PR.obo)
+    quality_iri: PATO:0000033          # concentration
+  - id: creatine_kinase_activity
+    label: circulating (serum) creatine kinase activity
+    scale: organ_system
+    entity_iri: GO:0002185             # creatine kinase complex (total CK: CK-MM/MB/BB)
+    # "Decreased circulating creatine kinase concentration" maps here (opposite-sign
+    # partner of elevated CK). Catalytic-activity quality.
+    quality_iri: PATO:0001414          # catalytic (enzyme) activity
+  - id: plasma_creatine
+    label: plasma (serum) creatine concentration
+    scale: organ_system
+    entity_iri: CHEBI:16919            # creatine (verified CHEBI.obo)
+    quality_iri: PATO:0000033          # concentration
+  - id: urinary_creatine
+    label: urinary creatine excretion (concentration)
+    scale: organ_system
+    entity_iri: CHEBI:16919            # creatine (verified CHEBI.obo)
+    quality_iri: PATO:0000033          # concentration
+
+  # --- (B) intracellular enzyme / structural-protein activities (cellular) -------
+  - id: enolase_activity
+    label: skeletal-muscle beta-enolase (ENO3) catalytic activity
+    scale: cellular
+    entity_iri: PR:000007082           # beta-enolase (muscle ENO3; verified PR.obo)
+    quality_iri: PATO:0001414          # catalytic activity
+    bearer_entity_iri: CL:0008002      # skeletal muscle fiber (verified CL.obo)
+  - id: muscle_lactate_dehydrogenase_activity
+    label: skeletal-muscle lactate dehydrogenase A (LDHA) catalytic activity
+    scale: cellular
+    entity_iri: PR:000009739           # L-lactate dehydrogenase A chain (verified PR.obo)
+    quality_iri: PATO:0001414          # catalytic activity
+    bearer_entity_iri: CL:0008002      # skeletal muscle fiber (verified CL.obo)
+  - id: phosphoglycerate_kinase_activity
+    label: skeletal-muscle phosphoglycerate kinase 1 (PGK1) catalytic activity
+    scale: cellular
+    entity_iri: PR:000012607           # phosphoglycerate kinase 1 (verified PR.obo)
+    quality_iri: PATO:0001414          # catalytic activity
+    bearer_entity_iri: CL:0008002      # skeletal muscle fiber (verified CL.obo)
+  - id: phosphoglycerate_mutase_activity
+    label: skeletal-muscle phosphoglycerate mutase 2 (PGAM2) catalytic activity
+    scale: cellular
+    entity_iri: PR:000012593           # phosphoglycerate mutase 2 (muscle PGAM2; verified PR.obo)
+    quality_iri: PATO:0001414          # catalytic activity
+    bearer_entity_iri: CL:0008002      # skeletal muscle fiber (verified CL.obo)
+  - id: erythrocyte_pyruvate_kinase_activity
+    label: erythrocyte pyruvate kinase (PKLR) catalytic activity
+    scale: cellular
+    entity_iri: PR:000012782           # pyruvate kinase PKLR (verified PR.obo)
+    quality_iri: PATO:0001414          # catalytic activity
+    bearer_entity_iri: CL:0000232      # erythrocyte (verified CL.obo)
+  - id: muscle_caveolin_3
+    label: skeletal-muscle caveolin-3 (CAV3) level
+    scale: cellular
+    entity_iri: PR:000005065           # caveolin-3 (verified PR.obo)
+    quality_iri: PATO:0000033          # concentration (sarcolemmal protein level)
+    bearer_entity_iri: CL:0008002      # skeletal muscle fiber (verified CL.obo)
+
+causal_edges: []          # island fragment — no defensible single-sign mechanism (see header)
+constitutive_edges: []

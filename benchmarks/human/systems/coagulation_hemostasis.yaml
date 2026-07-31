@@ -1,0 +1,204 @@
+# =============================================================================
+# Coagulation / hemostasis & fibrinolysis — PhysioMap fragment  *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Hand-encoded, single-scale (TISSUE / ORGAN_SYSTEM). Each causal edge sign is the
+# sign of the partial derivative of the target w.r.t. the source at steady state,
+# all else equal (interventionist partial: push source UP -> target up(+)/down(-)).
+# ROBERT: please correct signs/edges.
+#
+# Sources for canonical signs / mechanisms:
+#   - Wajima T, Isbister GK, Duffull SB (2009) "A comprehensive model for the humoral
+#     coagulation network in humans." Clin Pharmacol Ther 86(3):290-298. PubMed 19516255.
+#     BioModels: BIOMD0000000338 (aPTT), BIOMD0000000339 (PT), BIOMD0000000340 (warfarin/
+#     heparin). The reference mechanistic model for the human coagulation network: TF
+#     initiation, thrombin generation, fibrin formation, AT / protein-C / plasmin.
+#   - Panteleev MA et al. 2010 "Blood Coagulation: Full Model." BioModels BIOMD0000000740.
+#   - Nayak S et al. 2015 "Blood Coagulation Network." BioModels BIOMD0000000611.
+#   - Boron & Boulpaep, Medical Physiology (Hemostasis chapter): TF-initiated extrinsic
+#     pathway, thrombin positive-feedback amplification (FV/FVIII/FXI, platelet activation),
+#     antithrombin and the protein C / thrombomodulin anticoagulant system, plasmin
+#     fibrinolysis.
+#
+# FEEDBACK LOOPS encoded:
+#   (1) Thrombin POSITIVE-FEEDBACK amplification (net positive):
+#       thrombin --(+)--> platelet_activation --(+)--> thrombin   (procoagulant surface +
+#       cofactor activation FV/FVIII) ; an explicit thrombin self-activation edge is also
+#       included (thrombin activates FXI/FV/FVIII -> more thrombin).
+#   (2) Protein-C NEGATIVE regulation (net negative):
+#       thrombin --(+)--> activated_protein_C --(-)--> thrombin   (thrombin-thrombomodulin
+#       activates protein C, which proteolyses FVa/FVIIIa, damping thrombin).
+#
+# CONNECTIVITY to existing map: light, defensible coupling via blood_viscosity
+#   (a large fibrin clot burden / activated-platelet aggregation raises local blood
+#   viscosity / impedes flow). The system is otherwise a coherent self-contained
+#   subsystem (its own SCC), as noted in the assignment scope.
+#
+# Boundary node (defined in sibling fragment hematology_epo.yaml; referenced, NOT
+# redefined here):
+#   blood_viscosity   (hematology / rheology)
+# A standalone load of this file alone will flag it as a boundary ref — EXPECTED; it
+# resolves on merge() with the hematology fragment.
+# =============================================================================
+
+name: coagulation_hemostasis
+description: >-
+  DRAFT coagulation / hemostasis and fibrinolysis as a PhysioMap signed cyclic causal
+  graph. Tissue-factor-initiated thrombin generation, fibrin clot formation and platelet
+  activation, the thrombin positive-feedback amplification loop, the antithrombin and
+  activated-protein-C negative regulation, and plasmin-mediated clot breakdown. Single
+  scale (Phase 1); coupled lightly to blood rheology via blood_viscosity.
+
+nodes:
+  - id: vessel_injury
+    label: vascular endothelial / wall injury (exposure stimulus)
+    scale: tissue
+    entity_iri: UBERON:0002049        # vasculature
+    quality_iri: PATO:0001167         # damaged (severity of injury)
+  - id: tissue_factor
+    label: exposed/active tissue factor (FIII) activity
+    scale: tissue
+    entity_iri: PR:000016602          # tissue factor (coagulation factor III)
+    quality_iri: PATO:0001414         # activity
+  - id: thrombin
+    label: thrombin (activated factor II, FIIa) activity
+    scale: organ_system
+    entity_iri: PR:000036932          # prothrombin / thrombin
+    quality_iri: PATO:0001414         # activity
+  - id: fibrin_clot
+    label: cross-linked fibrin clot burden
+    scale: tissue
+    entity_iri: UBERON:0010210        # blood clot (fibrin clot)
+    quality_iri: PATO:0000070         # amount (of clot)
+    quality_kind: extensive
+  - id: platelet_activation
+    label: activated platelet level / procoagulant surface
+    scale: cellular
+    entity_iri: CL:0000233            # platelet
+    quality_iri: PATO:0001414         # activity (activation state)
+  - id: antithrombin
+    label: antithrombin (AT III) anticoagulant activity
+    scale: organ_system
+    entity_iri: PR:000004599          # antithrombin-III (SERPINC1)
+    quality_iri: PATO:0001414         # activity
+  - id: activated_protein_C
+    label: activated protein C (APC) activity
+    scale: organ_system
+    entity_iri: PR:000013261  # vitamin K-dependent protein C
+    quality_iri: PATO:0001414         # activity
+  - id: plasmin_fibrinolysis
+    label: plasmin / fibrinolytic activity
+    scale: organ_system
+    entity_iri: PR:000013480          # plasminogen / plasmin
+    quality_iri: PATO:0001414         # activity
+
+  # --- cellular producer node (constitutive grounding of a secreted substance) ---
+  - id: hepatocyte_antithrombin_secretion
+    label: hepatocyte antithrombin (SERPINC1) synthesis/secretion rate
+    scale: cellular
+    entity_iri: GO:0009306            # protein secretion
+    quality_iri: PATO:0000161
+    bearer_entity_iri: CL:0000182  # hepatocyte
+
+causal_edges:
+  # --- initiation: injury -> tissue factor -> thrombin ----------------------
+  - source: vessel_injury
+    target: tissue_factor
+    sign: "+"
+    mechanism: vascular wall injury exposes subendothelial tissue factor (FIII) to plasma, increasing active TF available to bind FVIIa
+    evidence: "Boron & Boulpaep, Medical Physiology (hemostasis: TF exposure on injury); Wajima 2009 (TF-initiated extrinsic pathway), BioModels BIOMD0000000339"
+  - source: tissue_factor
+    target: thrombin
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: "TF:FVIIa complex activates FX -> FXa, which with FVa (prothrombinase) cleaves prothrombin (FII) to thrombin (FIIa)"
+    evidence: "Wajima 2009, Clin Pharmacol Ther 86:290 (extrinsic-pathway thrombin generation), BioModels BIOMD0000000338/339; Boron & Boulpaep | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-104 (18.6: Hemostasis): 'factor III (thromboplastin) ... This enzyme complex leads to activation of factor X ... the enzyme prothrombinase converts factor II, the inactive enzyme prothrombin, into the active enzyme thrombin'"
+
+  # --- thrombin POSITIVE-FEEDBACK amplification loop -------------------------
+  - source: thrombin
+    target: platelet_activation
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: thrombin cleaves platelet PAR-1/PAR-4 receptors, activating platelets and exposing procoagulant phosphatidylserine surface for assembly of tenase/prothrombinase complexes
+    evidence: "Boron & Boulpaep (thrombin-induced platelet activation, PAR receptors); Panteleev 2010 BioModels BIOMD0000000740 (platelet/surface-dependent thrombin generation) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-005 (1.6: Homeostasis): 'As each step of clotting occurs, it stimulates the release of more clotting substances' — positive feedback amplification of clotting cascade; OpenStax Anatomy & Physiology 2e §anp-104 (18.6: Hemostasis): 'activated platelet level / procoagulant surface ... thrombin [activates] platelets (via PAR receptors)'; Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-11.1.3 (Peripheral Proteins): '…or when thrombin activates platelet receptors' — thrombin-mediated platelet receptor activation corroborated; Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-7.2.5 (Glycosaminoglycans - Heteropolysaccharides with Disaccharide Repeating Units): 'thrombin, which cleaves fibrinogen and activates platelets to form clots' — corroborates thrombin activating platelets"
+  - source: platelet_activation
+    target: thrombin
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: activated platelet procoagulant surface localizes and accelerates tenase (FIXa:FVIIIa) and prothrombinase (FXa:FVa) complex assembly, amplifying thrombin generation
+    evidence: "Panteleev 2010 BioModels BIOMD0000000740; Xu 2002 BioModels MODEL1806130001 (activated-factor model with platelet activation); Boron & Boulpaep | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-104 (18.6: Hemostasis): 'chemicals released by the platelets increase the rate of these activation reactions ... factor VIII ... from the platelets and endothelial cells combines with factor IX ... to form an enzyme complex that activates factor X ... leading to the common pathway'; OpenStax Biology 2e §bio-40.2 (Components of the Blood): platelet contents 'activate other platelets and also interact with other coagulation factors' to drive coagulation cascade amplification."
+  - source: thrombin
+    target: thrombin
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: thrombin feedback-activates cofactors FV->FVa and FVIII->FVIIIa and FXI->FXIa, accelerating its own further generation (intrinsic-tenase amplification)
+    evidence: "Wajima 2009 (FV/FVIII/FXI activation by thrombin), BioModels BIOMD0000000338; Boron & Boulpaep (thrombin amplification)"
+
+  # --- fibrin clot formation -------------------------------------------------
+  - source: thrombin
+    target: fibrin_clot
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: thrombin cleaves fibrinogen to fibrin monomers and activates FXIII, which cross-links fibrin into a stable clot
+    evidence: "Wajima 2009 (fibrinogen->fibrin, FXIII), BioModels BIOMD0000000339; Naski 1991 BioModels MODEL1808210002 (thrombin-catalyzed fibrinogen conversion) | textbook corroboration: Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-5.03.3 (Allostery within monomeric protein): thrombin is described as cleaving circulating fibrinogen into fibrin, which self-associates to form a fibrin clot; OpenStax Anatomy & Physiology 2e §anp-104 (18.6: Hemostasis): 'thrombin converts factor I, the soluble fibrinogen, into the insoluble fibrin protein strands. Factor XIII then stabilizes the fibrin clot'; Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-11.1.3 (Peripheral Proteins): 'Clotting is initiated when the serine protease thrombin cleaves fibrinogen to form fibrin, which self-associates to form a fibrin clot'; Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-4.7.6 (Fibrinogen): thrombin cleaves fibrinopeptides A and B from fibrinogen alpha and beta chains, exposing knob-A and knob-B sequences that bind holes on adjacent fibrinogen to drive polymerization into fibrin clots; Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-7.2.5 (Glycosaminoglycans - Heteropolysaccharides with Disaccharide Repeating Units): 'thrombin, which cleaves fibrinogen and activates platelets to form clots' — corroborates thrombin promoting fibrin clot formation; OpenStax Biology 2e §bio-33.3 (Homeostasis): 'The final factor, a protein called thrombin, converts inactive fibrinogen to fibrin' — thrombin drives clot formation.; OpenStax Biology 2e §bio-40.2 (Components of the Blood): 'coagulation factors...convert fibrinogen, a water-soluble protein present in blood serum into fibrin (a non-water soluble protein), causing the blood to clot.'"
+
+  # --- NEGATIVE regulation: antithrombin -------------------------------------
+  # NOTE: the thrombin -> antithrombin(-) edge (TAT-complex substrate consumption) was
+  # REMOVED on review. Encoding inhibitor depletion as a signed regulatory edge paired
+  # with antithrombin -> thrombin(-) manufactured a spurious net-POSITIVE 2-cycle
+  # [(-)·(-)=+] (thrombin auto-amplifying by depleting its own inhibitor) that was not
+  # declared in the FEEDBACK LOOPS header and contradicts AT's role. Antithrombin is a
+  # buffered, hepatically replenished serpin pool; its causal control role is inhibiting
+  # thrombin, not being a thrombin-driven amplifier (Boron & Boulpaep, anticoagulant
+  # systems; Wajima 2009 treats AT-III as a fixed inhibitor pool, BIOMD0000000340).
+  - source: antithrombin
+    target: thrombin
+    sign: "-"
+    causal_evidence: mechanistic_model
+    mechanism: antithrombin forms 1:1 inhibitory complexes with thrombin (and FXa, FIXa), neutralizing thrombin activity (heparin-accelerated serpin inhibition)
+    evidence: "Wajima 2009 (antithrombin inhibition), BioModels BIOMD0000000340; Boron & Boulpaep (antithrombin anticoagulant system) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-104 (18.6: Hemostasis): 'Antithrombin inactivates factor X and opposes the conversion of prothrombin (factor II) to thrombin in the common pathway'; Wong, Cells: Molecules and Mechanisms §wong-13.14 (Gap Junctions - Undeclared): 'Heparin... activating antithrombin III, which inhibits clotting' — corroborates antithrombin anticoagulant activity inhibiting thrombin; Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-7.2.5 (Glycosaminoglycans - Heteropolysaccharides with Disaccharide Repeating Units): 'Heparin acts as a catalyst to accelerate the inhibition of the enzyme thrombin... antithrombin III [inhibits thrombin]' — corroborates antithrombin inhibiting thrombin activity"
+
+  # --- NEGATIVE regulation: protein C feedback loop --------------------------
+  - source: thrombin
+    target: activated_protein_C
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: thrombin bound to endothelial thrombomodulin activates protein C to APC; APC generation rises with thrombin
+    evidence: "Boron & Boulpaep (thrombin-thrombomodulin -> protein C activation); Wajima 2009 (protein C / APC pathway), BioModels BIOMD0000000340 | textbook corroboration: Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-5.03.3 (Allostery within monomeric protein): thrombin binding to endothelial thrombomodulin enables it to cleave protein C, generating activated protein C with anticoagulant properties"
+  - source: activated_protein_C
+    target: thrombin
+    sign: "-"
+    causal_evidence: mechanistic_model
+    mechanism: "APC (with protein S) proteolytically inactivates FVa and FVIIIa, the cofactors of prothrombinase/tenase, reducing thrombin generation"
+    evidence: "Wajima 2009 (APC inactivation of FVa/FVIIIa), BioModels BIOMD0000000340; Nayak 2015 BioModels BIOMD0000000611; Boron & Boulpaep"
+
+  # --- fibrinolysis: plasmin clot breakdown ----------------------------------
+  - source: fibrin_clot
+    target: plasmin_fibrinolysis
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: fibrin provides the surface co-localizing tPA and plasminogen, accelerating plasmin generation (fibrin-enhanced fibrinolysis)
+    evidence: "Boron & Boulpaep (fibrin-stimulated tPA/plasminogen activation); Wajima 2009 (plasmin/fibrinolysis sub-network), BioModels BIOMD0000000340"
+  - source: plasmin_fibrinolysis
+    target: fibrin_clot
+    sign: "-"
+    causal_evidence: mechanistic_model
+    mechanism: plasmin proteolytically degrades cross-linked fibrin into fibrin-degradation products (D-dimer), dissolving the clot
+    evidence: "Wajima 2009 (plasmin degradation of fibrin), BioModels BIOMD0000000340; Boron & Boulpaep (plasmin fibrinolysis) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-104 (18.6: Hemostasis): 'the inactive protein plasminogen is converted into the active plasmin, which gradually breaks down the fibrin of the clot'; Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-4.7.6 (Fibrinogen): plasmin cleaves fibrin clots, facilitating their removal; the long flexible domain structure of fibrinogen is required to be accessible to plasmin"
+
+  # --- light coupling into blood rheology (existing map) ---------------------
+  - source: fibrin_clot
+    target: blood_viscosity
+    sign: "+"
+    mechanism: a fibrin/platelet clot burden raises local effective whole-blood viscosity and impedes flow within the affected vessel segment
+    evidence: "Boron & Boulpaep / Guyton & Hall (clot impeding flow); rheology of fibrin networks (clot raises apparent viscosity)"
+
+production_edges:
+  # --- PRODUCTION (cell of origin grounds a secreted substance) ----------------
+  # Antithrombin (SERPINC1) is synthesised and secreted by hepatocytes; the hepatic
+  # synthesis/secretion rate sets the circulating antithrombin anticoagulant pool.
+  # Boron & Boulpaep, Medical Physiology (hepatic synthesis of plasma coagulation/
+  # anticoagulant proteins).
+  - source: hepatocyte_antithrombin_secretion
+    target: antithrombin
+    sign: "+"
+    production_evidence: legacy-evidence-unclassified

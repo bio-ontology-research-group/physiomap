@@ -1,0 +1,8 @@
+digraph G {
+          graph [rankdir=LR, bgcolor="transparent", pad=.2]; node [shape=box, style="rounded,filled", fontname="Helvetica"];
+          G [label="causal graph\n1699 variables / 2270 influences", fillcolor="#dbeafe"];
+          B [label="largest feedback SCC\n213 variables", fillcolor="#fee2e2"];
+          R [label="remaining SCCs\n1447", fillcolor="#dcfce7"];
+          H [label="benchmarks\n93 cases / 0 wrong determinate", fillcolor="#fef3c7"];
+          G -> B; G -> R; B -> H; R -> H;
+        }

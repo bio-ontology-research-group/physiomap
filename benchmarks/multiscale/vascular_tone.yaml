@@ -1,0 +1,81 @@
+# =============================================================================
+# Multi-scale proof-of-concept: vascular tone           *** DRAFT FOR REVIEW ***
+# =============================================================================
+# A single causal chain from a circulating signal through molecular signalling to an
+# organ-system quality.
+#
+#   CAUSAL:
+#       angiotensin_II -> at1_receptor_activity -> intracellular_calcium
+#       -> mlc_phosphorylation -> vascular_smooth_muscle_tone
+#       -> total_peripheral_resistance
+#
+# The last two relations were reclassified from constitution to causation in v1.1.1:
+# phosphorylation drives contraction, and contraction raises resistance.
+# =============================================================================
+
+name: vascular_tone_multiscale
+
+nodes:
+  - id: angiotensin_II
+    label: plasma angiotensin II concentration
+    scale: organ_system
+    entity_iri: CHEBI:2719
+    quality_iri: PATO:0000033
+  - id: at1_receptor_activity
+    label: angiotensin II type-1 receptor activation (vascular smooth muscle)
+    scale: subcellular
+    entity_iri: PR:000001399            # type-1 angiotensin II receptor (illustrative)
+    quality_iri: PATO:0002354           # activated (illustrative)
+  - id: intracellular_calcium
+    label: cytosolic free calcium concentration
+    scale: subcellular
+    entity_iri: CHEBI:29108             # calcium(2+)
+    quality_iri: PATO:0000033           # concentration
+  - id: mlc_phosphorylation
+    label: myosin regulatory light-chain phosphorylation level
+    scale: subcellular
+    entity_iri: PR:P24844           # myosin regulatory light polypeptide 9 (MYL9, human) — the phosphorylated protein
+    quality_iri: PATO:0000033
+    bearer_entity_iri: CL:0000359   # vascular associated smooth muscle cell — bearer of the MLC-phosphorylation quality
+  - id: vascular_smooth_muscle_tone
+    label: vascular smooth muscle contractile tone
+    scale: cellular
+    entity_iri: CL:0000359              # vascular associated smooth muscle cell
+    quality_iri: PATO:0001579           # contractility (nearest exact PATO determinable; 'tone' terms obsolete)
+  - id: total_peripheral_resistance
+    label: total peripheral resistance
+    scale: organ_system
+    entity_iri: UBERON:0002049
+    quality_iri: PATO:0001470
+
+causal_edges:
+  - source: at1_receptor_activity
+    target: intracellular_calcium
+    sign: "+"
+    mechanism: Gq/PLC-beta -> IP3 -> SR Ca2+ release + influx
+    evidence: "GO:0007200 phospholipase C-activating GPCR signaling; textbook"
+  - source: intracellular_calcium
+    target: mlc_phosphorylation
+    sign: "+"
+    mechanism: Ca2+/calmodulin activates myosin light-chain kinase (MLCK)
+    evidence: "GO:0004687 MLCK activity; textbook | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-060 (10.9: Smooth Muscle): 'Ca++-calmodulin complex then activates an enzyme called myosin (light chain) kinase, which, in turn, activates the myosin heads by phosphorylating them'; Wong, Cells: Molecules and Mechanisms §wong-12.7 (Actin - Myosin Structures in Muscle): 'G-protein signaling cascade...can lead to activation of PLC and subsequent cleavage of PIP2 and increase in cytosolic Ca2+. These changes...can also activate myosin II' (p. 193-194).; Wong, Cells: Molecules and Mechanisms §wong-14.5 (Calcium Ion Signaling): 'Ca2+ release in muscle cells is required to allow contraction of each sarcomere'; calmodulin conformational change upon Ca2+ binding allows interaction with CaMKII and downstream kinases including MLCK.; Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-11.3.4 (Lipid-Gated Ion Channels): Ca2+ influx via TRPC3/TRPC6 channels in vascular smooth muscle cells leads to smooth muscle contraction and vasoconstriction, consistent with the Ca2+/calmodulin-MLCK activation mechanism"
+  - source: angiotensin_II
+    target: at1_receptor_activity
+    sign: "+"
+    causal_evidence: curated_mechanistic
+    mechanism: angiotensin II binds and activates the AT1 receptor (AT1R)
+    evidence: "Angiotensin II is the endogenous AT1 agonist; connects the AT1/Ca/MLC vasoconstriction chain to angiotensin II. Curated by P. Schofield (2026-07-22)."
+  - source: mlc_phosphorylation
+    target: vascular_smooth_muscle_tone
+    sign: "+"
+    causal_evidence: curated_mechanistic
+    mechanism: MLC phosphorylation drives smooth muscle contraction (tone)
+    evidence: "Reclassified constitution -> causal (P. Schofield, 2026-07-23): 'MLC phosphorylation -> contraction (+)'."
+  - source: vascular_smooth_muscle_tone
+    target: total_peripheral_resistance
+    sign: "+"
+    causal_evidence: curated_mechanistic
+    mechanism: increased vascular tone raises total peripheral resistance
+    evidence: "Reclassified constitution -> causal (P. Schofield, 2026-07-23): 'contraction (+) -> TPR (+)'."
+
+# (vascular-tone constitutive edges reclassified to causal in 1.1.1; see causal_edges above)

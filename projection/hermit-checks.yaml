@@ -1,0 +1,11 @@
+version: 1.0.0
+checks: []
+
+# Every future non-EL check must be registered here with:
+# - id
+# - signature (class/property IRIs)
+# - maximum_module_axioms
+# - timeout_seconds
+# - maximum_memory_mb
+# - contradiction_fixture
+# An empty registry is deliberate: the current generated release is wholly OWL 2 EL.

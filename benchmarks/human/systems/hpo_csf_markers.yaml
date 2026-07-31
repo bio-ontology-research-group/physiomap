@@ -1,0 +1,482 @@
+# =============================================================================
+# Cerebrospinal-fluid (CSF) analyte markers  — PhysioMap fragment
+#                                              *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Coverage target: the HPO directional "Abnormal CSF <analyte> concentration/level"
+# gap terms (theme = csf_markers). Each such HPO term denotes the CONCENTRATION (or
+# protein/amount) of a defined substance in cerebrospinal fluid, with a direction
+# (Increased/Elevated/High/Hyper- => "+"; Decreased/Reduced/Low/Hypo- => "-").
+#
+# MODELLING DECISION
+# ------------------
+# A CSF analyte is a measurable physiological quantity = an (entity, PATO quality)
+# variable in the cerebrospinal-fluid compartment. CSF is a body fluid that bathes
+# the CNS; in PhysioMap terms each analyte is a fluid-compartment CONCENTRATION node.
+# These are biomarkers read out clinically (lumbar puncture); they sit at the
+# ORGAN_SYSTEM scale (the CSF / central-nervous-fluid compartment), exactly as
+# plasma/serum analytes are organ_system in the existing corpus.
+#
+# This is a deliberately SELF-CONTAINED ISLAND fragment: it adds grounded
+# CONCENTRATION nodes (each abstains safely — a grounded node with no edges is
+# valuable) and a SMALL number of WITHIN-CSF causal edges only where a cited
+# enzymatic/precursor-product mechanism gives a defensible sign. CSF analyte levels
+# are downstream readouts of CNS / blood-CSF-barrier metabolism that the current
+# corpus does not yet model, so we do NOT fabricate edges to existing systemic
+# nodes. validate_fragment will WARN "island; will not integrate" (NOT an error).
+#
+# ENTITY IRIs: verified by grepping ontology/.obo_cache/{CHEBI,PR}.obo for an exact
+# `name:` (or exact synonym) match. Where no exact class matched, entity_iri is left
+# OUT (null) rather than fabricated. Small molecules -> CHEBI; proteins -> PR.
+#
+# PATO qualities: concentration PATO:0000033 (substance-in-fluid level). The protein
+# "concentration" terms also use PATO:0000033 (mass-per-volume concentration).
+#
+# Provenance for the physiology / sign logic:
+#   - Lehninger Principles of Biochemistry (amino-acid, purine/pyrimidine, folate,
+#     pterin, creatine, one-carbon, neurotransmitter biosynthesis).
+#   - Blau, Duran, Gibson, Dionisi-Vici (eds.), "Physician's Guide to the Diagnosis,
+#     Treatment, and Follow-Up of Inherited Metabolic Diseases" (Springer) — the
+#     standard reference for CSF neurotransmitter-metabolite & pterin patterns.
+#   - Harrison's Principles of Internal Medicine ("CSF analysis"; neurodegeneration
+#     biomarkers; CNS infection — hypoglycorrhachia / elevated CSF protein/lactate).
+#   - Boron & Boulpaep Medical Physiology (CSF formation, blood-CSF barrier).
+#   - HPO (human-phenotype-ontology) term definitions for each marker.
+# Disorders these markers come from (cited for context, NOT encoded as nodes):
+#   AADC deficiency (DDC; OMIM 608643), tyrosine hydroxylase deficiency (TH; 605407),
+#   BH4-synthesis defects (GCH1/PTS/QDPR/SPR), cerebral folate deficiency (FOLR1),
+#   D-2-hydroxyglutaric aciduria (D2HGDH/IDH2; 600721), nonketotic hyperglycinemia
+#   (GLDC/AMT; 605899), GABA-transaminase deficiency (ABAT; 613163), Canavan disease
+#   (ASPA; 271900 — elevated NAA), Alzheimer disease (low CSF Abeta42, high t-tau),
+#   Creutzfeldt-Jakob (14-3-3+), maple-syrup-urine disease (alloisoleucine+),
+#   urea-cycle / hyperammonemia, neurosarcoidosis (CSF ACE+), CNS infection.
+# =============================================================================
+
+name: hpo_csf_markers
+description: >-
+  DRAFT cerebrospinal-fluid (CSF) analyte markers as PhysioMap concentration/amount
+  nodes (ORGAN_SYSTEM scale: the CSF compartment). Covers the HPO directional
+  "Abnormal CSF <analyte> level" gap terms — neurotransmitter metabolites (HVA, 5-HIAA,
+  dopamine, DOPA, MHPG-aldehyde, epinephrine, metanephrine), pterins (biopterin, BH4,
+  BH2, neopterin, sepiapterin), amino acids and their derivatives, purine/pyrimidine
+  intermediates, folate (5-MTHF), and CNS protein biomarkers (Abeta40/42, t-tau-class
+  14-3-3, NfL, GFAP, MBP, CHI3L1, chitotriosidase, ACE, ApoB, albumin, total protein).
+  Self-contained island fragment; nodes abstain unless a cited within-CSF
+  precursor->product mechanism fixes an edge sign. DRAFT for domain review.
+
+nodes:
+  # --- small-molecule energy / general chemistry ---
+  - id: csf_lactate
+    label: CSF lactate concentration
+    scale: organ_system
+    entity_iri: CHEBI:422              # (S)-lactic acid (L-lactate)
+    quality_iri: PATO:0000033
+  - id: csf_glucose
+    label: CSF glucose concentration
+    scale: organ_system
+    entity_iri: CHEBI:17234            # glucose
+    quality_iri: PATO:0000033
+  - id: csf_ammonia
+    label: CSF ammonia concentration
+    scale: organ_system
+    entity_iri: CHEBI:16134            # ammonia
+    quality_iri: PATO:0000033
+  - id: csf_urate
+    label: CSF urate concentration
+    scale: organ_system
+    entity_iri: CHEBI:17145            # urate
+    quality_iri: PATO:0000033
+  - id: csf_creatinine
+    label: CSF creatinine concentration
+    scale: organ_system
+    entity_iri: CHEBI:16737            # creatinine
+    quality_iri: PATO:0000033
+  - id: csf_creatine
+    label: CSF creatine concentration
+    scale: organ_system
+    entity_iri: CHEBI:16919            # creatine
+    quality_iri: PATO:0000033
+  - id: csf_homovanillic_acid
+    label: CSF homovanillic acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:545959           # homovanillic acid
+    quality_iri: PATO:0000033
+  - id: csf_5hiaa
+    label: CSF 5-hydroxyindoleacetic acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:27823            # (5-hydroxyindol-3-yl)acetic acid (5-HIAA)
+    quality_iri: PATO:0000033
+  - id: csf_dopamine
+    label: CSF dopamine concentration
+    scale: organ_system
+    entity_iri: CHEBI:18243            # dopamine
+    quality_iri: PATO:0000033
+  - id: csf_dopa
+    label: CSF DOPA (L-dopa) concentration
+    scale: organ_system
+    entity_iri: CHEBI:15765            # L-dopa (L-3,4-dihydroxyphenylalanine)
+    quality_iri: PATO:0000033
+  - id: csf_epinephrine
+    label: CSF epinephrine concentration
+    scale: organ_system
+    entity_iri: CHEBI:33568            # adrenaline (epinephrine)
+    quality_iri: PATO:0000033
+  - id: csf_metanephrine
+    label: CSF metanephrine concentration
+    scale: organ_system
+    entity_iri: CHEBI:89633            # metanephrine
+    quality_iri: PATO:0000033
+  - id: csf_mhpg_aldehyde
+    label: CSF 3-methoxy-4-hydroxyphenylglycolaldehyde concentration
+    scale: organ_system
+    entity_iri: CHEBI:27932            # 3-methoxy-4-hydroxyphenylglycolaldehyde
+    quality_iri: PATO:0000033
+
+  # --- pterins / BH4 pathway / folate ---
+  - id: csf_biopterin
+    label: CSF biopterin concentration
+    scale: organ_system
+    entity_iri: CHEBI:15373            # biopterin
+    quality_iri: PATO:0000033
+  - id: csf_tetrahydrobiopterin
+    label: CSF tetrahydrobiopterin concentration
+    scale: organ_system
+    entity_iri: CHEBI:15372            # 5,6,7,8-tetrahydrobiopterin (BH4)
+    quality_iri: PATO:0000033
+  - id: csf_dihydrobiopterin
+    label: CSF dihydrobiopterin concentration
+    scale: organ_system
+    entity_iri: CHEBI:64277            # 7,8-dihydrobiopterin (BH2)
+    quality_iri: PATO:0000033
+  - id: csf_neopterin
+    label: CSF neopterin concentration
+    scale: organ_system
+    entity_iri: CHEBI:28670            # neopterin
+    quality_iri: PATO:0000033
+  - id: csf_sepiapterin
+    label: CSF sepiapterin concentration
+    scale: organ_system
+    entity_iri: CHEBI:16095            # sepiapterin
+    quality_iri: PATO:0000033
+  - id: csf_5mthf
+    label: CSF 5-methyltetrahydrofolate concentration
+    scale: organ_system
+    entity_iri: CHEBI:15641            # 5-methyltetrahydrofolic acid
+    quality_iri: PATO:0000033
+
+  - id: csf_alanine
+    label: CSF alanine concentration
+    scale: organ_system
+    entity_iri: CHEBI:16977            # L-alanine
+    quality_iri: PATO:0000033
+  - id: csf_beta_alanine
+    label: CSF beta-alanine concentration
+    scale: organ_system
+    entity_iri: CHEBI:16958            # beta-alanine
+    quality_iri: PATO:0000033
+  - id: csf_lysine
+    label: CSF lysine concentration
+    scale: organ_system
+    entity_iri: CHEBI:18019            # L-lysine
+    quality_iri: PATO:0000033
+  - id: csf_histidine
+    label: CSF histidine concentration
+    scale: organ_system
+    entity_iri: CHEBI:15971            # L-histidine
+    quality_iri: PATO:0000033
+  - id: csf_threonine
+    label: CSF threonine concentration
+    scale: organ_system
+    entity_iri: CHEBI:16857            # L-threonine
+    quality_iri: PATO:0000033
+  - id: csf_tyrosine
+    label: CSF tyrosine concentration
+    scale: organ_system
+    entity_iri: CHEBI:17895            # L-tyrosine
+    quality_iri: PATO:0000033
+  - id: csf_aspartate
+    label: CSF aspartate concentration
+    scale: organ_system
+    entity_iri: CHEBI:17053            # L-aspartic acid
+    quality_iri: PATO:0000033
+  - id: csf_asparagine
+    label: CSF asparagine concentration
+    scale: organ_system
+    entity_iri: CHEBI:17196            # L-asparagine
+    quality_iri: PATO:0000033
+  - id: csf_citrulline
+    label: CSF citrulline concentration
+    scale: organ_system
+    entity_iri: CHEBI:16349            # L-citrulline
+    quality_iri: PATO:0000033
+  - id: csf_ornithine
+    label: CSF ornithine concentration
+    scale: organ_system
+    entity_iri: CHEBI:15729            # L-ornithine
+    quality_iri: PATO:0000033
+  - id: csf_tryptophan
+    label: CSF tryptophan concentration
+    scale: organ_system
+    entity_iri: CHEBI:16828            # L-tryptophan
+    quality_iri: PATO:0000033
+  - id: csf_taurine
+    label: CSF taurine concentration
+    scale: organ_system
+    entity_iri: CHEBI:15891            # taurine
+    quality_iri: PATO:0000033
+  - id: csf_proline
+    label: CSF proline concentration
+    scale: organ_system
+    entity_iri: CHEBI:17203            # L-proline
+    quality_iri: PATO:0000033
+  - id: csf_hydroxyproline
+    label: CSF hydroxyproline concentration
+    scale: organ_system
+    entity_iri: CHEBI:18095            # trans-4-hydroxy-L-proline
+    quality_iri: PATO:0000033
+  - id: csf_sarcosine
+    label: CSF sarcosine concentration
+    scale: organ_system
+    entity_iri: CHEBI:15611            # sarcosine (N-methylglycine)
+    quality_iri: PATO:0000033
+  - id: csf_cystine
+    label: CSF cystine concentration
+    scale: organ_system
+    entity_iri: CHEBI:16283            # L-cystine
+    quality_iri: PATO:0000033
+  - id: csf_cystathionine
+    label: CSF cystathionine concentration
+    scale: organ_system
+    entity_iri: CHEBI:17482            # L-cystathionine
+    quality_iri: PATO:0000033
+  - id: csf_alloisoleucine
+    label: CSF L-alloisoleucine concentration
+    scale: organ_system
+    entity_iri: CHEBI:43433            # L-alloisoleucine
+    quality_iri: PATO:0000033
+  - id: csf_alpha_aminobutyrate
+    label: CSF alpha-aminobutyrate concentration
+    scale: organ_system
+    entity_iri: CHEBI:35619            # L-alpha-aminobutyric acid
+    quality_iri: PATO:0000033
+  - id: csf_homocarnosine
+    label: CSF homocarnosine concentration
+    scale: organ_system
+    entity_iri: CHEBI:28050            # homocarnosine
+    quality_iri: PATO:0000033
+  - id: csf_gaba
+    label: CSF gamma-aminobutyric acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:16865            # gamma-aminobutyric acid (GABA)
+    quality_iri: PATO:0000033
+
+  # --- D-2-hydroxyglutarate (D-2-HG) ---
+  # NOTE on chirality: HP:6000246 names "D-2-hydroxyglutaric acid". In CHEBI the
+  # D-enantiomer is the (R)-isomer (D = (R) for 2-hydroxyglutarate).
+  - id: csf_2_hydroxyglutarate
+    label: CSF D-2-hydroxyglutaric acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:32796            # (R)-2-hydroxyglutaric acid = D-2-hydroxyglutarate
+    quality_iri: PATO:0000033
+
+  # --- N-acetyl aspartate / NAAG ---
+  - id: csf_n_acetylaspartate
+    label: CSF N-acetylaspartic acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:16953            # N-acetyl-L-aspartate (NAA)
+    quality_iri: PATO:0000033
+  - id: csf_naag
+    label: CSF N-acetyl-aspartyl-glutamate concentration
+    scale: organ_system
+    entity_iri: CHEBI:191259           # N-acetyl-aspartyl-glutamate (NAAG)
+    quality_iri: PATO:0000033
+
+  # --- pyrimidine / purine intermediates ---
+  - id: csf_uracil
+    label: CSF uracil concentration
+    scale: organ_system
+    entity_iri: CHEBI:17568            # uracil
+    quality_iri: PATO:0000033
+  - id: csf_thymine
+    label: CSF thymine concentration
+    scale: organ_system
+    entity_iri: CHEBI:17821            # thymine
+    quality_iri: PATO:0000033
+  - id: csf_dihydrothymine
+    label: CSF dihydrothymine concentration
+    scale: organ_system
+    entity_iri: CHEBI:27468            # 5,6-dihydrothymine
+    quality_iri: PATO:0000033
+  - id: csf_5_hydroxymethyluracil
+    label: CSF 5-hydroxymethyluracil concentration
+    scale: organ_system
+    entity_iri: CHEBI:16964            # 5-hydroxymethyluracil
+    quality_iri: PATO:0000033
+  - id: csf_aica
+    label: CSF 5-amino-4-imidazolecarboxyamide concentration
+    scale: organ_system
+    entity_iri: CHEBI:2030             # 5-aminoimidazole-4-carboxamide (AICA)
+    quality_iri: PATO:0000033
+
+  # --- glycosaminoglycan / glycoprotein-catabolism marker ---
+  - id: csf_aspartylglucosamine
+    label: CSF aspartylglucosamine concentration
+    scale: organ_system
+    # entity_iri omitted: no exact CHEBI 'name:'/exact-synonym match for
+    # aspartylglucosamine (2-acetamido-1-N-(4-L-aspartyl)-2-deoxy-beta-D-
+    # glucopyranosylamine) verified in the cached OBO; left null (not fabricated).
+    quality_iri: PATO:0000033
+
+  # --- protein / peptide biomarkers (CSF) ---
+  - id: csf_protein
+    label: CSF protein concentration
+    scale: organ_system
+    # total CSF protein (no single PR class); entity_iri left null.
+    quality_iri: PATO:0000033
+  - id: csf_albumin
+    label: CSF albumin concentration
+    scale: organ_system
+    entity_iri: PR:000003918           # albumin
+    quality_iri: PATO:0000033
+  - id: csf_amyloid_beta
+    label: CSF amyloid-beta peptide concentration
+    scale: organ_system
+    entity_iri: PR:000036193           # amyloid beta peptide
+    quality_iri: PATO:0000033
+  - id: csf_amyloid_beta_42
+    label: CSF amyloid-beta 42 peptide concentration
+    scale: organ_system
+    # specific Abeta(1-42) species: no exact PR class verified; entity_iri null.
+    quality_iri: PATO:0000033
+  - id: csf_amyloid_beta_40
+    label: CSF amyloid-beta 40 peptide concentration
+    scale: organ_system
+    # specific Abeta(1-40) species: no exact PR class verified; entity_iri null.
+    quality_iri: PATO:0000033
+  - id: csf_14_3_3
+    label: CSF 14-3-3 protein concentration
+    scale: organ_system
+    entity_iri: PR:000003236           # 14-3-3 protein
+    quality_iri: PATO:0000033
+  - id: csf_gfap
+    label: CSF glial fibrillary acidic protein concentration
+    scale: organ_system
+    entity_iri: PR:000007939           # glial fibrillary acidic protein
+    quality_iri: PATO:0000033
+  - id: csf_nfl
+    label: CSF neurofilament light chain concentration
+    scale: organ_system
+    entity_iri: PR:000011119           # neurofilament light polypeptide
+    quality_iri: PATO:0000033
+  - id: csf_mbp
+    label: CSF myelin basic protein concentration
+    scale: organ_system
+    entity_iri: PR:000010228           # myelin basic protein
+    quality_iri: PATO:0000033
+  - id: csf_chi3l1
+    label: CSF chitinase-3-like protein 1 concentration
+    scale: organ_system
+    entity_iri: PR:000005423           # chitinase-3-like protein 1 (YKL-40)
+    quality_iri: PATO:0000033
+  - id: csf_chitotriosidase
+    label: CSF chitotriosidase 1 concentration
+    scale: organ_system
+    entity_iri: PR:000005426           # chitotriosidase-1
+    quality_iri: PATO:0000033
+  - id: csf_alpha_crystallin_b
+    label: CSF alpha-crystallin B chain concentration
+    scale: organ_system
+    entity_iri: PR:000005908           # alpha-crystallin B chain (CRYAB)
+    quality_iri: PATO:0000033
+  - id: csf_ace
+    label: CSF angiotensin-converting enzyme concentration
+    scale: organ_system
+    entity_iri: PR:000001322           # angiotensin-converting enzyme
+    quality_iri: PATO:0000033
+  - id: csf_apolipoprotein_b
+    label: CSF apolipoprotein B concentration
+    scale: organ_system
+    entity_iri: PR:000004145           # apolipoprotein B-100
+    quality_iri: PATO:0000033
+  - id: csf_beta_hcg
+    label: CSF beta chorionic gonadotropin concentration
+    scale: organ_system
+    entity_iri: PR:000005391           # choriogonadotropin subunit beta
+    quality_iri: PATO:0000033
+  - id: csf_interferon_alpha
+    label: CSF interferon alpha concentration
+    scale: organ_system
+    entity_iri: PR:000029555           # interferon alpha-1/13
+    quality_iri: PATO:0000033
+
+causal_edges:
+  # Only edges whose sign follows from a cited within-CSF precursor->product or
+  # neighbouring-metabolite mechanism. CSF metabolite levels reflect CNS pool
+  # turnover; the blood-CSF barrier and CNS enzymology are not modelled here, so we
+  # keep edges minimal and defensible (prefer abstention).
+
+  # --- BH4 / pterin pathway (sepiapterin -> BH2 -> BH4; BH4 is cofactor for the
+  #     aromatic-amino-acid hydroxylases) ---
+  - source: csf_sepiapterin
+    target: csf_dihydrobiopterin
+    sign: "+"
+    mechanism: sepiapterin is reduced by sepiapterin reductase / aldo-keto reductases to 7,8-dihydrobiopterin (BH2) in the salvage pathway; a larger sepiapterin pool feeds more BH2 (product formation)
+    evidence: "Lehninger Principles of Biochemistry (tetrahydrobiopterin biosynthesis & salvage); Blau et al., Physician's Guide to Inherited Metabolic Diseases (sepiapterin-reductase deficiency: raised CSF sepiapterin and BH2, low BH4)"
+  - source: csf_dihydrobiopterin
+    target: csf_tetrahydrobiopterin
+    sign: "+"
+    mechanism: 7,8-dihydrobiopterin (BH2) is reduced to tetrahydrobiopterin (BH4) by dihydrofolate reductase / dihydropteridine reductase; more substrate (BH2) supports more BH4 regeneration (product formation, salvage limb)
+    evidence: "Lehninger Principles of Biochemistry (BH4 regeneration by dihydropteridine reductase, QDPR); Blau et al., Physician's Guide to Inherited Metabolic Diseases (BH4 salvage)"
+
+  # --- BH4 is the obligatory cofactor for tyrosine hydroxylase (DOPA synthesis) and
+  #     tryptophan hydroxylase (serotonin -> 5-HIAA): more BH4 -> more monoamine
+  #     synthesis -> higher HVA / 5-HIAA. (BH4 deficiency lowers HVA & 5-HIAA.) ---
+  - source: csf_tetrahydrobiopterin
+    target: csf_dopa
+    sign: "+"
+    mechanism: BH4 is the obligatory cofactor of tyrosine hydroxylase, the rate-limiting step converting tyrosine to L-DOPA; reduced BH4 lowers DOPA/dopamine synthesis (BH4-deficiency states show low CSF HVA)
+    evidence: "Lehninger Principles of Biochemistry (tyrosine hydroxylase requires BH4); Blau et al., Physician's Guide to Inherited Metabolic Diseases (BH4-synthesis defects: low CSF HVA and 5-HIAA)"
+  - source: csf_tetrahydrobiopterin
+    target: csf_homovanillic_acid
+    sign: "+"
+    causal_evidence: genetic_lof_gof
+    mechanism: BH4 cofactor drives tyrosine-hydroxylase dopamine synthesis; homovanillic acid is the terminal dopamine catabolite, so dopaminergic synthesis sets the HVA pool (BH4 deficiency -> low CSF HVA)
+    evidence: "Blau et al., Physician's Guide to Inherited Metabolic Diseases (CSF HVA reflects central dopamine turnover; reduced in BH4 and TH/AADC defects); Lehninger (dopamine catabolism to HVA via MAO/COMT)"
+  - source: csf_tetrahydrobiopterin
+    target: csf_5hiaa
+    sign: "+"
+    causal_evidence: genetic_lof_gof
+    mechanism: BH4 is also cofactor for tryptophan hydroxylase (serotonin synthesis); 5-HIAA is the terminal serotonin catabolite, so reduced BH4 lowers CSF 5-HIAA (serotonergic turnover marker)
+    evidence: "Blau et al., Physician's Guide to Inherited Metabolic Diseases (CSF 5-HIAA reflects central serotonin turnover; low in BH4 defects); Lehninger (tryptophan hydroxylase requires BH4)"
+
+  # --- dopamine synthesis/catabolism axis: DOPA -> dopamine -> HVA ---
+  - source: csf_dopa
+    target: csf_dopamine
+    sign: "+"
+    mechanism: L-DOPA is decarboxylated to dopamine by aromatic-L-amino-acid decarboxylase (AADC); more DOPA supports more dopamine (product formation). In AADC deficiency DOPA accumulates while dopamine/HVA fall (separate AADC lesion), so this edge is the substrate-supply limb only
+    evidence: "Lehninger Principles of Biochemistry (catecholamine biosynthesis: DOPA -> dopamine by AADC); Blau et al., Physician's Guide to Inherited Metabolic Diseases (catecholamine pathway)"
+  - source: csf_dopamine
+    target: csf_homovanillic_acid
+    sign: "+"
+    mechanism: homovanillic acid is the principal end-metabolite of dopamine (via MAO + COMT); the size of the dopamine pool that is turned over sets the HVA level
+    evidence: "Lehninger Principles of Biochemistry (dopamine catabolism by MAO/COMT to HVA); Blau et al., Physician's Guide to Inherited Metabolic Diseases (CSF HVA as dopamine-turnover marker)"
+
+  # --- serotonin metabolite from tryptophan precursor ---
+  - source: csf_tryptophan
+    target: csf_5hiaa
+    sign: "+"
+    mechanism: tryptophan is the precursor of serotonin (via tryptophan hydroxylase + AADC); 5-HIAA is serotonin's terminal catabolite, so greater precursor supply raises serotonergic turnover and CSF 5-HIAA
+    evidence: "Lehninger Principles of Biochemistry (serotonin biosynthesis from tryptophan; catabolism to 5-HIAA); Blau et al., Physician's Guide to Inherited Metabolic Diseases"
+
+  # --- creatine synthesis: guanidinoacetate -> creatine -> creatinine ---
+  - source: csf_guanidinoacetate
+    target: csf_creatine
+    sign: "+"
+    mechanism: guanidinoacetate is methylated by GAMT to creatine; more guanidinoacetate substrate supports more creatine (product). In GAMT deficiency guanidinoacetate accumulates and creatine falls (separate GAMT lesion); this edge is the substrate-supply limb
+    evidence: "Lehninger Principles of Biochemistry (creatine biosynthesis: AGAT then GAMT); Blau et al., Physician's Guide to Inherited Metabolic Diseases (cerebral creatine-deficiency syndromes: GAMT, AGAT)"
+  - source: csf_creatine
+    target: csf_creatinine
+    sign: "+"
+    mechanism: creatinine is formed non-enzymatically from the creatine/phosphocreatine pool at a rate proportional to that pool; a larger creatine pool yields more creatinine
+    evidence: "Lehninger Principles of Biochemistry (creatine -> creatinine non-enzymatic conversion); Boron & Boulpaep Medical Physiology (creatinine as the creatine-pool turnover product)"
+
+constitutive_edges: []   # none — single-scale CSF-compartment fragment (Phase 1)

@@ -1,0 +1,157 @@
+# =============================================================================
+# Calcium-phosphate / PTH / vitamin D homeostasis — PhysioMap fragment
+# *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Hand-encoded canonical bone-mineral endocrine physiology. Every edge sign is
+# the sign of the partial derivative of the target w.r.t. the source at steady
+# state, all else equal. This fragment is largely self-contained (a small SCC
+# over plasma_calcium <-> pth <-> calcitriol <-> plasma_phosphate) and loads
+# standalone; it also composes via PhysioMap.merge.
+# ROBERT: please correct signs/edges.
+#
+# Scope: ORGAN / ORGAN_SYSTEM scale. Within-scale signed cyclic causal edges.
+#
+# Core negative-feedback loop (required):
+#   plasma_calcium -| pth -> plasma_calcium
+#   (rising Ca2+ suppresses PTH via the parathyroid CaSR; PTH raises Ca2+ via
+#    bone resorption + renal Ca reabsorption + (indirectly) calcitriol-driven
+#    gut absorption)                                            (net negative)
+# Additional loop: pth -> calcitriol -| pth (calcitriol short feedback);
+# phosphate arm: plasma_phosphate -> pth (+) -| plasma_phosphate (phosphaturia).
+#
+# Reference models / sources: Peterson & Riggs 2010 (multiscale bone-mineral
+# homeostasis model); Raposo et al. 2002 (Ca-PTH dynamic model); HumMod
+# parathyroid / calcium modules; standard endocrinology (Williams; Boron &
+# Boulpaep).
+# =============================================================================
+
+name: calcium_pth
+description: >-
+  DRAFT calcium-phosphate / PTH / vitamin D (calcitriol) homeostasis as a
+  PhysioMap signed cyclic causal graph. Canonical bone-mineral endocrine
+  physiology (Peterson & Riggs 2010; Raposo 2002; HumMod). Single-scale
+  (Phase 1). Self-contained small SCC including the Ca-PTH negative-feedback
+  loop.
+
+nodes:
+  - id: plasma_calcium
+    label: plasma (ionised) calcium concentration
+    scale: organ_system
+    entity_iri: CHEBI:29108            # calcium(2+)
+    quality_iri: PATO:0000033          # concentration
+  - id: pth
+    label: plasma parathyroid hormone concentration
+    scale: organ_system
+    entity_iri: PR:000013429  # parathyroid hormone
+    quality_iri: PATO:0000033
+  - id: calcitriol
+    label: plasma calcitriol (1,25-dihydroxyvitamin D3) concentration
+    scale: organ_system
+    entity_iri: CHEBI:17823            # calcitriol
+    quality_iri: PATO:0000033
+  - id: plasma_phosphate
+    label: plasma phosphate concentration
+    scale: organ_system
+    entity_iri: CHEBI:43474            # hydrogenphosphate / inorganic phosphate
+    quality_iri: PATO:0000033
+
+  # --- cellular producer nodes (cell-of-origin grounding for secreted hormones) ---
+  - id: parathyroid_chief_pth_secretion
+    label: parathyroid chief-cell parathyroid-hormone secretion rate
+    scale: cellular
+    entity_iri: GO:0035898             # parathyroid hormone secretion
+    quality_iri: PATO:0000161
+    bearer_entity_iri: CL:0000446  # chief cell of parathyroid gland
+  - id: proximal_tubule_calcitriol_production
+    label: renal proximal-tubule-cell calcitriol (1-alpha-hydroxylase) production rate
+    scale: cellular
+    entity_iri: GO:0036378             # calcitriol biosynthetic process from calciol
+    quality_iri: PATO:0000161
+    bearer_entity_iri: CL:1000838  # kidney proximal convoluted tubule epithelial cell
+
+causal_edges:
+  # --- Ca-PTH negative feedback (core loop) --------------------------------
+  - source: plasma_calcium
+    target: pth
+    sign: "-"
+    causal_evidence: curated_mechanistic
+    mechanism: parathyroid calcium-sensing receptor (CaSR) suppresses PTH secretion
+    evidence: "Peterson & Riggs 2010 bone-mineral model; Raposo 2002; HumMod parathyroid; textbook | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-035 (6.8: Calcium Homeostasis - Interactions of the Skeletal System and Other Organ): 'When calcium is not binding to these receptors, the cells release PTH' — parathyroid CaSR-mediated suppression of PTH when Ca2+ is adequate; release when Ca2+ falls.; OpenStax Anatomy & Physiology 2e §anp-093 (17.6: The Parathyroid Glands): 'A negative feedback loop regulates the levels of PTH, with rising blood calcium levels inhibiting further release of PTH'; OpenStax Anatomy & Physiology 2e §anp-099 (17.12: Development and Aging of the Endocrine System): 'elevated blood calcium levels inhibit secretion of PTH' (Chapter Review §17.5); 'reduced dietary calcium levels, causing a compensatory increase in parathyroid hormone' (aging section).; OpenStax Anatomy & Physiology 2e §anp-137 (23.8: Chemical Digestion and Absorption - A Closer Look): 'Blood levels of ionic calcium determine the absorption of dietary calcium. When blood levels of ionic calcium drop, parathyroid hormone (PTH) secreted by the parathyroid glands stimulates...' — falling plasma calcium drives PTH secretion; OpenStax Anatomy & Physiology 2e §anp-152 (25.9: Endocrine Regulation of Kidney Function): 'Parathyroid hormone (PTH)...produced by the parathyroid glands in response to decreased circulating Ca++ levels.'; OpenStax Anatomy & Physiology 2e §anp-153 (Regulation of Fluid Volume and Composition): 'The parathyroid glands monitor and respond to circulating levels of Ca++ in the blood. When levels drop too low, PTH is released'; OpenStax Anatomy & Physiology 2e §anp-157 (26.4: Electrolyte Balance): 'PTH is released from the parathyroid gland in response to a decrease in the concentration of blood calcium.'; OpenStax Biology 2e §bio-33.3 (Homeostasis): 'If calcium levels decrease, specialized cells in the parathyroid gland sense this and release parathyroid hormone (PTH).'; OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): 'PTH is released in response to low blood Ca2+ levels'; 'PTH release is inhibited by rising blood calcium levels.'; OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): 'PTH increases blood calcium concentrations when calcium ion levels fall below normal.' (inverse: high calcium suppresses PTH)"
+  - source: pth
+    target: plasma_calcium
+    sign: "+"
+    causal_evidence: curated_mechanistic
+    mechanism: PTH drives osteoclastic bone resorption and distal renal Ca2+ reabsorption
+    evidence: "Peterson & Riggs 2010 (bone + kidney Ca handling); HumMod; standard endocrinology | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-034 (Exercise, Nutrition, Hormones, and Bone Tissue): 'PTH stimulates osteoclast proliferation and activity. As a result, calcium is released from the bones into the circulation, thus increasing the calcium ion concentration in the blood.'; OpenStax Anatomy & Physiology 2e §anp-090 (17.3: Hormones): table entry 'PTH: Increases blood Ca2+ levels'; OpenStax Anatomy & Physiology 2e §anp-093 (17.6: The Parathyroid Glands): 'PTH secretion causes the release of calcium from the bones by stimulating osteoclasts...PTH also inhibits osteoblasts...PTH causes increased reabsorption of calcium...in the kidney tubules'; OpenStax Anatomy & Physiology 2e §anp-099 (17.12: Development and Aging of the Endocrine System): 'PTH stimulates demineralization of bones to increase blood calcium levels'.; OpenStax Anatomy & Physiology 2e §anp-137 (23.8: Chemical Digestion and Absorption - A Closer Look): 'PTH secreted by the parathyroid glands stimulates the release of calcium ions from bone matrices and increases the reabsorption of calcium by the kidneys' — PTH raises plasma calcium via bone and kidney; OpenStax Anatomy & Physiology 2e §anp-150 (25.7: Tubular Reabsorption): PTH induces Ca++ channel insertion in DCT luminal surface and calcitriol synthesis, both of which promote calcium recovery and raise plasma calcium; OpenStax Anatomy & Physiology 2e §anp-152 (25.9: Endocrine Regulation of Kidney Function): 'By ridding the blood of phosphate, higher circulating Ca++ levels are permitted.'; OpenStax Anatomy & Physiology 2e §anp-153 (Regulation of Fluid Volume and Composition): 'PTH is released to stimulate the DCT to reabsorb Ca++ from the forming urine'; OpenStax Anatomy & Physiology 2e §anp-157 (26.4: Electrolyte Balance): 'PTH raises blood calcium levels by inhibiting the loss of calcium through the kidneys' and 'activates osteoclasts to break down bone matrix and release inorganic calcium-phosphate salts.'; OpenStax Anatomy & Physiology 2e §anp-166 (28.5: Changes During Pregnancy, Labor, and Birth): 'increased parathyroid levels mobilize calcium from maternal bones for fetal use.'; OpenStax Biology 2e §bio-33.3 (Homeostasis): 'The effects of PTH are to raise blood levels of [calcium]' via increased intestinal absorption, renal reabsorption, and bone resorption.; OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): 'PTH increases Ca2+ levels by targeting the skeleton, the kidneys, and the intestine.'; OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): 'PTH increases blood calcium concentrations when calcium ion levels fall below normal.'"
+
+  # --- PTH -> vitamin D activation, with short feedback --------------------
+  - source: pth
+    target: calcitriol
+    sign: "+"
+    causal_evidence: curated_mechanistic
+    mechanism: PTH stimulates renal 1-alpha-hydroxylase (CYP27B1) -> calcitriol synthesis
+    evidence: "Peterson & Riggs 2010; Raposo 2002; standard endocrinology | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-034 (Exercise, Nutrition, Hormones, and Bone Tissue): 'another function of PTH is to stimulate the synthesis of vitamin D [calcitriol]'; OpenStax Anatomy & Physiology 2e §anp-035 (6.8: Calcium Homeostasis - Interactions of the Skeletal System and Other Organ): 'PTH stimulates the synthesis of vitamin D, which in turn, stimulates calcium absorption from any digested food in the small intestine.'; OpenStax Anatomy & Physiology 2e §anp-093 (17.6: The Parathyroid Glands): 'PTH initiates the production of the steroid hormone calcitriol...in the kidneys'; OpenStax Anatomy & Physiology 2e §anp-098 (17.11: Organs with Secondary Endocrine Functions): 'the kidneys also play a role in regulating blood calcium levels through the production of calcitriol from vitamin D3, which is released in response to the secretion of parathyroid hormone (PTH)'; OpenStax Anatomy & Physiology 2e §anp-137 (23.8: Chemical Digestion and Absorption - A Closer Look): 'PTH also upregulates the activation of vitamin D in the kidney' — PTH stimulates renal calcitriol synthesis; OpenStax Anatomy & Physiology 2e §anp-152 (25.9: Endocrine Regulation of Kidney Function): 'PTH...stimulates the hydroxylation of calcidiol to calcitriol (1,25-hydroxycholecalciferol, the active form of vitamin D).'; OpenStax Anatomy & Physiology 2e §anp-153 (Regulation of Fluid Volume and Composition): 'PTH also stimulates the renal conversion of calcidiol into calcitriol, the active form of vitamin D'; OpenStax Anatomy & Physiology 2e §anp-154 (25.11: The Urinary System and Homeostasis): 'PTH stimulates the final step in the formation of active vitamin D3' (line 361); 'Calcium recovery in the DCT is influenced by PTH and active vitamin D' (line 343); OpenStax Anatomy & Physiology 2e §anp-157 (26.4: Electrolyte Balance): 'PTH also increases the gastrointestinal absorption of dietary calcium by converting vitamin D into dihydroxyvitamin D (calcitriol).'; OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): 'PTH triggers the formation of calcitriol, an active form of vitamin D, which acts on the intestines to increase absorption of dietary calcium.'; OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): 'PTH... (3) stimulates synthesis and secretion of calcitriol by the kidneys, which enhances Ca2+ absorption by the digestive system.'"
+  - source: calcitriol
+    target: plasma_calcium
+    sign: "+"
+    causal_evidence: curated_mechanistic
+    mechanism: calcitriol increases intestinal Ca2+ absorption (and synergises with PTH on bone)
+    evidence: "Peterson & Riggs 2010 (gut Ca absorption); HumMod; textbook | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-034 (Exercise, Nutrition, Hormones, and Bone Tissue): 'calcitriol, the active form of vitamin D, is produced by the kidneys and stimulates the absorption of calcium and phosphate from the digestive tract'; 'vitamin D promotes intestinal absorption of calcium'; OpenStax Anatomy & Physiology 2e §anp-035 (6.8: Calcium Homeostasis - Interactions of the Skeletal System and Other Organ): 'vitamin D ... stimulates calcium absorption from any digested food in the small intestine' — calcitriol raises intestinal Ca2+ absorption, increasing plasma calcium.; OpenStax Anatomy & Physiology 2e §anp-093 (17.6: The Parathyroid Glands): 'Calcitriol then stimulates increased absorption of dietary calcium by the intestines'; OpenStax Anatomy & Physiology 2e §anp-098 (17.11: Organs with Secondary Endocrine Functions): 'Calcitriol — Aids in the absorption of Ca2+'; OpenStax Anatomy & Physiology 2e §anp-137 (23.8: Chemical Digestion and Absorption - A Closer Look): 'which then facilitates intestinal calcium ion absorption' — calcitriol raises plasma calcium by increasing gut Ca absorption; OpenStax Anatomy & Physiology 2e §anp-144 (24.8: Nutrition and Diet) — Vitamin D 'Aids in calcium absorption, promoting bone growth'; deficiency causes 'Rickets, bone pain, muscle weakness'; OpenStax Anatomy & Physiology 2e §anp-153 (Regulation of Fluid Volume and Composition): 'Calcitriol then stimulates the intestines to absorb more Ca++ from the diet'; OpenStax Anatomy & Physiology 2e §anp-154 (25.11: The Urinary System and Homeostasis): 'Activated vitamin D is important for absorption of Ca++ in the digestive tract, its reabsorption in the kidney, and the maintenance of normal serum concentrations of Ca++ and phosphate' (lines 17-19); OpenStax Anatomy & Physiology 2e §anp-157 (26.4: Electrolyte Balance): 'Calcium is absorbed through the intestines under the influence of activated vitamin D. A deficiency of vitamin D leads to a decrease in absorbed calcium.'; OpenStax Biology 2e §bio-34.2 (34.2: Nutrition and Energy Production): Table 34.2 — 'Vitamin D: Critical for calcium absorption for bone development and strength.'; OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): calcitriol 'acts on the intestines to increase absorption of dietary calcium' — increased intestinal absorption raises plasma calcium.; OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): 'PTH... stimulates synthesis and secretion of calcitriol by the kidneys, which enhances Ca2+ absorption by the digestive system' — calcitriol raises plasma calcium via intestinal Ca2+ absorption."
+  - source: calcitriol
+    target: pth
+    sign: "-"
+    mechanism: calcitriol directly suppresses PTH gene transcription/secretion (VDR feedback)
+    evidence: "Peterson & Riggs 2010; standard endocrinology (vitamin D - PTH feedback)"
+
+  # --- phosphate arm -------------------------------------------------------
+  - source: pth
+    target: plasma_phosphate
+    sign: "-"
+    mechanism: PTH induces phosphaturia (downregulates proximal-tubule NaPi cotransporters)
+    evidence: "Peterson & Riggs 2010 (renal phosphate handling); HumMod; textbook | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-152 (25.9: Endocrine Regulation of Kidney Function): 'It [PTH] also blocks reabsorption of phosphate (PO3–), causing its loss in the urine.'; OpenStax Anatomy & Physiology 2e §anp-153 (Regulation of Fluid Volume and Composition): 'When Ca++ levels are low, PTH inhibits reabsorption of [phosphate] so that its blood level drops, allowing Ca++ levels to rise'; OpenStax Anatomy & Physiology 2e §anp-154 (25.11: The Urinary System and Homeostasis): 'PTH... reduces phosphate reabsorption, resulting in higher circulating Ca++ levels' (lines 361-362); OpenStax Anatomy & Physiology 2e §anp-157 (26.4: Electrolyte Balance): 'PTH also increases the loss of phosphate through the kidneys.'"
+  - source: calcitriol
+    target: plasma_phosphate
+    sign: "+"
+    mechanism: calcitriol increases intestinal phosphate absorption
+    evidence: "Peterson & Riggs 2010 (gut phosphate); standard endocrinology"
+  - source: plasma_phosphate
+    target: pth
+    sign: "+"
+    mechanism: hyperphosphatemia raises PTH (lowers ionised Ca2+ and directly stimulates parathyroid)
+    evidence: "Peterson & Riggs 2010; clinical CKD-MBD; standard endocrinology"
+  - source: plasma_phosphate
+    target: calcitriol
+    sign: "-"
+    mechanism: phosphate (via FGF23) suppresses renal 1-alpha-hydroxylase, lowering calcitriol
+    evidence: "Peterson & Riggs 2010; FGF23-phosphate axis; standard endocrinology"
+
+  # --- granular chief-cell CaSR feedback (refines lumped plasma_calcium -| pth) ---
+  # NB: partially double-counts the lumped plasma_calcium -| pth edge above via the
+  # existing parathyroid_chief_pth_secretion -> pth production arm; same net sign, no conflict.
+  - source: plasma_calcium
+    target: parathyroid_chief_pth_secretion
+    sign: "-"
+    causal_evidence: curated_mechanistic
+    mechanism: chief-cell calcium-sensing receptor (CaSR) detects ionized Ca2+; a fall in plasma Ca2+ disinhibits PTH secretion while a rise suppresses it (inverse regulatory influence)
+    evidence: '"The parathyroid glands produce and secrete PTH... in response to low blood calcium levels" and "rising blood calcium levels inhibiting further release of PTH" — OpenStax Anatomy & Physiology 2e, section anp-093 (The Parathyroid Glands)'
+# =============================================================================
+# TYPED PRODUCTION relations: connect each secretion/activation process to its
+# output. Production is distinct from both constitution and authored causal
+# influence; no part_of claim is made.
+# =============================================================================
+production_edges:
+  # Parathyroid chief cells secrete PTH; secretion rate sets plasma PTH.
+  # Boron & Boulpaep, Medical Physiology, Ch. 52 (parathyroid chief-cell PTH secretion).
+  - source: parathyroid_chief_pth_secretion
+    target: pth
+    sign: "+"
+    production_evidence: legacy-evidence-unclassified
+  # Renal proximal-tubule cells express 1-alpha-hydroxylase (CYP27B1), converting
+  # 25-OH-vitamin D to calcitriol; the renal production rate sets plasma calcitriol.
+  # (Borderline production: enzymatic activation rather than de-novo synthesis, but the
+  # macro level is set by this cell's output.) Boron & Boulpaep, Medical Physiology,
+  # Ch. 52 (renal 1-alpha-hydroxylase calcitriol synthesis in the proximal tubule).
+  - source: proximal_tubule_calcitriol_production
+    target: calcitriol
+    sign: "+"
+    production_evidence: legacy-evidence-unclassified

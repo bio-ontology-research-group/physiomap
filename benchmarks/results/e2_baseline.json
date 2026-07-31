@@ -1,0 +1,37 @@
+{
+  "disagreement": {
+    "naive_shortest_correct": 0,
+    "pairs": 0,
+    "physiomap_correct": 0
+  },
+  "feedback_contrast": {
+    "naive_shortest_accuracy": 0.5931372549019608,
+    "naive_shortest_correct": 121,
+    "pairs": 204
+  },
+  "methods": {
+    "CS (PhysioMap)": {
+      "abstain": 695,
+      "correct": 171,
+      "determinate": 171,
+      "precision": 1.0,
+      "wrong": 0
+    },
+    "naive-forward": {
+      "abstain": 675,
+      "correct": 186,
+      "determinate": 191,
+      "precision": 0.9738219895287958,
+      "wrong": 5
+    },
+    "naive-shortest": {
+      "abstain": 491,
+      "correct": 292,
+      "determinate": 375,
+      "precision": 0.7786666666666666,
+      "wrong": 83
+    }
+  },
+  "pairs": 866,
+  "schema_version": "1.0.0"
+}

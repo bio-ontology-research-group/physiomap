@@ -1,0 +1,130 @@
+# =============================================================================
+# Multi-scale: EPO receptor -> JAK2/STAT5 erythropoiesis     *** DRAFT FOR REVIEW ***
+# =============================================================================
+# A molecular/subcellular signal-transduction vertical giving the mechanistic basis
+# for the EPO -> red-cell-mass arm of the existing EPO/hematology system. Encodes the
+# canonical type-I cytokine-receptor cascade for erythropoiesis:
+#
+#   WITHIN-SCALE CAUSAL (subcellular signal transduction in erythroid progenitors):
+#       erythropoietin (boundary, organ_system)              # circulating EPO ligand
+#         -> epo_receptor_activity                            # Epo-bound, dimerized EpoR
+#         -> jak2_activity                                    # receptor-associated JAK2 trans-/autophosphorylation
+#         -> stat5_activity                                   # JAK2 phosphorylates STAT5 -> nuclear pSTAT5
+#         -> erythroid_progenitor_proliferation               # STAT5 transcriptional survival/proliferation program
+#       stat5_activity -> socs_activity -> jak2_activity (-)   # SOCS negative-feedback loop
+#       stat5_activity -> bcl_xl_level -> erythroid_progenitor_proliferation (+)  # anti-apoptotic survival
+#
+#   CROSS-SCALE CONSTITUTIVE (part_of + determination; NOT causal):
+#       erythroid_progenitor_proliferation (cellular) >> red_cell_mass (organ_system)
+#
+# Feedback: pSTAT5 transcribes SOCS proteins (CIS/SOCS1/SOCS3) which bind JAK2/EpoR and
+# accelerate receptor degradation -> JAK2 activity down. Correct net steady-state response
+# of jak2/stat5 to sustained EPO needs loop-aware comparative statics (this SOCS brake is
+# why the JAK-STAT response is transient/adaptive, not the naive forward sign).
+#
+# SOURCES (verified against BioModels + textbook):
+#   - BioModels BIOMD0000000271  Becker2010_EpoR_CoreModel
+#       Becker, Schilling, Bachmann, Baumann, Raue, Maiwald, Timmer & Klingmüller (2010)
+#       "Covering a broad dynamic range: information processing at the erythropoietin
+#       receptor." Science 328:1404-1408. PubMed 20488988.
+#       -> Epo binds EpoR, receptor activation, ligand depletion / receptor turnover.
+#   - BioModels BIOMD0000001077  Adlung2021 - Cell-to-cell variability in JAK2/STAT5
+#       Adlung, Stapor, Tönsing, Schmiester, Schwarzmüller, Postawa, Wang, Timmer,
+#       Klingmüller, Hasenauer & Schilling (2021) "Cell-to-cell variability in JAK2/STAT5
+#       pathway components and cytoplasmic volumes defines survival threshold in erythroid
+#       progenitor cells." Cell Reports 36:109507. PubMed 34380040.
+#       -> EpoR -> JAK2 -> STAT5 cascade controls erythroid progenitor survival/proliferation.
+#   - Boron & Boulpaep, Medical Physiology (hematopoiesis / erythropoiesis): EPO produced
+#       by renal interstitial cells acts on EpoR-bearing CFU-E/erythroid progenitors via
+#       JAK2/STAT5, driving proliferation and survival (Bcl-xL) -> expansion of the
+#       erythroid lineage -> increased red cell mass. SOCS proteins terminate signaling.
+#
+# BOUNDARY NODES (existing-map ids, NOT redefined here):
+#   erythropoietin, red_cell_mass
+# =============================================================================
+# NOTE (integration fix): the downward macro->micro causal 'driver' edge was REMOVED.
+# PhysioMap models causation WITHIN scale and cross-scale dependence as CONSTITUTIVE
+# (upward determination) only (see MULTISCALE.md). This vertical's top molecular node is
+# therefore a root, exercised by molecular/drug interventions, and lifts UP via the
+# constitutive edge(s). This keeps the combined causal+constitutive meta-graph acyclic.
+
+name: epo_jak2_stat5_erythropoiesis
+nodes:
+- id: epo_receptor_activity
+  label: Epo-bound dimerized erythropoietin receptor activity
+  scale: subcellular
+  entity_iri: PR:000007142             # erythropoietin receptor
+  quality_iri: PATO:0002354
+- id: jak2_activity
+  label: Janus kinase 2 (JAK2) catalytic activity
+  scale: subcellular
+  entity_iri: PR:O60674  # tyrosine-protein kinase JAK2 (human)
+  quality_iri: PATO:0001414
+- id: stat5_activity
+  label: phosphorylated STAT5 transcription-factor activity
+  scale: subcellular
+  entity_iri: GO:0007259  # cell surface receptor signaling pathway via JAK-STAT
+  quality_iri: PATO:0000161
+- id: socs_activity
+  label: SOCS/CIS feedback-inhibitor activity
+  scale: subcellular
+  entity_iri: PR:000015394
+  quality_iri: PATO:0000161
+- id: bcl_xl_level
+  label: Bcl-xL anti-apoptotic protein level
+  scale: subcellular
+  quality_iri: PATO:0000033
+- id: erythroid_progenitor_proliferation
+  label: erythroid progenitor (CFU-E) proliferation/survival rate
+  scale: cellular
+  entity_iri: GO:0008283               # cell population proliferation (process bearer)
+  bearer_entity_iri: CL:0000038        # erythroid progenitor cell (anatomical bearer)
+  quality_iri: PATO:0000161
+  quality_kind: rate
+causal_edges:
+- source: epo_receptor_activity
+  target: jak2_activity
+  sign: +
+  causal_evidence: mechanistic_model
+  mechanism: 'active dimerized EpoR juxtaposes receptor-associated JAK2 (quality: active receptor -> disposition: JAK2 trans-autophosphorylation competence -> process: JAK2 tyrosine autophosphorylation -> quality: JAK2 catalytic activity)'
+  evidence: 'BioModels BIOMD0000001077 Adlung et al. (2021) Cell Reports 36:109507, PubMed 34380040 (EpoR -> JAK2 activation). Boron & Boulpaep, Medical Physiology. [citations PubMed-verified]'
+- source: jak2_activity
+  target: stat5_activity
+  sign: +
+  causal_evidence: mechanistic_model
+  mechanism: 'active JAK2 phosphorylates EpoR tyrosines and recruited STAT5 (quality: JAK2 activity -> disposition: STAT5 SH2 docking + phosphorylation -> process: STAT5 tyrosine phosphorylation, dimerization, nuclear import -> quality: pSTAT5 activity)'
+  evidence: 'BioModels BIOMD0000001077 Adlung et al. (2021) Cell Reports 36:109507, PubMed 34380040 (JAK2 -> STAT5 phosphorylation cascade). Boron & Boulpaep, Medical Physiology. [citations PubMed-verified]'
+- source: stat5_activity
+  target: erythroid_progenitor_proliferation
+  sign: +
+  causal_evidence: mechanistic_model
+  mechanism: 'nuclear pSTAT5 activates the erythroid survival/proliferation transcriptional program (quality: pSTAT5 activity -> disposition: promoter occupancy at target genes -> process: transcription of proliferation/survival genes -> quality: progenitor proliferation/survival rate)'
+  evidence: 'Adlung et al. (2021) Cell Reports 36:109507, PubMed 34380040 (STAT5 sets the survival threshold of erythroid progenitor cells); the calibrated model is BioModels BIOMD0000001077 (intervention-capable: nuclear pSTAT5 of 24-118 molecules for 120 min ensures CFU-E survival). Genetic-LoF converse: Socolovsky et al. (1999) Cell 98:181, PubMed 10428030 (Stat5a-/-5b-/- -> erythroid progenitor apoptosis, fetal anemia). Boron & Boulpaep, Medical Physiology. [citations PubMed-verified]'
+- source: stat5_activity
+  target: bcl_xl_level
+  sign: +
+  causal_evidence: genetic_lof_gof
+  mechanism: 'pSTAT5 transcriptionally induces the anti-apoptotic gene Bcl-xL (quality: pSTAT5 activity -> disposition: STAT5 binding at the BCL2L1 promoter -> process: Bcl-xL transcription -> quality: Bcl-xL protein level)'
+  evidence: 'Primary genetic loss-of-function: Socolovsky et al. (1999) Cell 98:181, PubMed 10428030 (opened) — Stat5a-/-5b-/- knockout abolishes immediate-early Bcl-xL induction in erythroid cells and STAT5 binds the Bcl-X promoter directly, i.e. do(STAT5 LoF) -> Bcl-xL down. Adlung et al. (2021) Cell Reports 36:109507 (STAT5-driven anti-apoptotic survival program in erythroid progenitors). Boron & Boulpaep, Medical Physiology (EPO promotes erythroid survival). [citations PubMed-verified]'
+- source: bcl_xl_level
+  target: erythroid_progenitor_proliferation
+  sign: +
+  mechanism: 'Bcl-xL suppresses mitochondrial apoptosis in CFU-E (quality: Bcl-xL level -> disposition: inhibition of pro-apoptotic Bax/Bak -> process: blockade of apoptosis -> quality: progenitor survival/net proliferation rate)'
+  evidence: Adlung et al. (2021) Cell Reports 36:109507; Boron & Boulpaep, Medical Physiology (EPO-dependent survival prevents apoptosis of erythroid progenitors). [citations PubMed-verified]
+- source: stat5_activity
+  target: socs_activity
+  sign: +
+  causal_evidence: mechanistic_model
+  mechanism: 'pSTAT5 induces SOCS/CIS feedback inhibitors (quality: pSTAT5 activity -> disposition: STAT5 binding at SOCS/CIS promoters -> process: SOCS transcription -> quality: SOCS inhibitor activity)'
+  evidence: Adlung et al. (2021) Cell Reports 36:109507 (negative feedback module of the JAK2/STAT5 pathway). Boron & Boulpaep, Medical Physiology. [citations PubMed-verified]
+- source: socs_activity
+  target: jak2_activity
+  sign: '-'
+  causal_evidence: mechanistic_model
+  mechanism: 'SOCS/CIS proteins bind JAK2 / EpoR and target the receptor complex for degradation (quality: SOCS activity -> disposition: SH2-mediated JAK2/EpoR binding + ubiquitin targeting -> process: kinase inhibition and receptor turnover -> quality: reduced JAK2 activity)'
+  evidence: Adlung et al. (2021) Cell Reports 36:109507 (SOCS-mediated negative feedback). Boron & Boulpaep, Medical Physiology (cytokine-signaling termination by SOCS). [citations PubMed-verified]
+production_edges:
+- source: erythroid_progenitor_proliferation
+  target: red_cell_mass
+  sign: +
+  production_evidence: legacy-evidence-unclassified

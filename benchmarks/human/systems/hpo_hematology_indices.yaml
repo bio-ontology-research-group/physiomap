@@ -1,0 +1,83 @@
+# =============================================================================
+# Hematology indices  — PhysioMap fragment   *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Hand-encoded HPO-coverage fragment for four directional laboratory-index terms.
+# Each node is an (entity, PATO determinable-quality) physiological VARIABLE. Where a
+# defensible cited causal sign exists it is added; otherwise the node is left as a
+# grounded "island" (abstains) rather than fabricating an edge. ROBERT: please correct
+# signs/edges/IRIs.
+#
+# Analyte clustering & decisions:
+#   1. erythrocyte_sedimentation_rate (ESR) — HP:0003565 "+". NEW node. ESR is the rate
+#      at which erythrocytes settle in anticoagulated blood; it is a genuine physical/
+#      laboratory rate (quality = rate). Its dominant physiological determinant is the
+#      plasma concentration of asymmetric acute-phase proteins (chiefly FIBRINOGEN, also
+#      immunoglobulins), which reduce the zeta-potential between red cells, promote
+#      rouleaux, and accelerate sedimentation (Boron & Boulpaep Medical Physiology, blood;
+#      Harrison's Principles of Internal Medicine, "The acute phase response / ESR &
+#      CRP"). PhysioMap has NO fibrinogen node, so no clean upstream causal driver node
+#      exists; ESR is left as a grounded island (no fabricated edge). entity_iri null
+#      (no exact OBO class for the ESR observable); quality = rate.
+#
+#   2. total_iron_binding_capacity (TIBC) — HP:0025196 "+" and HP:0033211 "-". ONE new
+#      node, two opposite signs. TIBC is the total iron-binding capacity of plasma
+#      transferrin (apo + holo); it is essentially proportional to the plasma transferrin
+#      (serotransferrin) protein concentration. Hepatic transferrin synthesis is
+#      up-regulated by iron deficiency and down-regulated by iron repletion / chronic
+#      disease, so TIBC rises in iron-deficiency anemia and falls in iron overload /
+#      anemia of chronic disease (Harrison's, "Iron deficiency and other hypoproliferative
+#      anemias"; Boron & Boulpaep, iron metabolism; Williams Hematology, iron).
+#      Modeled as plasma transferrin-bound-iron CAPACITY: entity = serotransferrin
+#      (PR:000016261, the iron-binding plasma protein), quality = concentration. No
+#      defensible determinate single-node causal driver in the existing corpus (the
+#      regulation by iron stores is inverse and indirect via hepatic synthesis, and there
+#      is no transferrin-synthesis node), so TIBC is a grounded island (no guessed edge).
+#
+#   3. cytochrome_b5_reductase_activity — HP:6000133 "-" "Decreased erythrocyte
+#      nicotinamide adenine dinucleotide-cytochrome b5 reductase activity". NEW enzyme-
+#      ACTIVITY node. This is erythrocyte NADH-cytochrome b5 reductase (CYB5R3); its LoF
+#      causes recessive hereditary methemoglobinemia type I/II (OMIM 250800) because the
+#      enzyme reduces methemoglobin (Fe3+) back to functional hemoglobin (Fe2+) using
+#      NADH via cytochrome b5 (Lehninger; Harrison's, "Methemoglobinemia"; Williams
+#      Hematology). scale = cellular, bearer = erythrocyte (CL:0000232). entity_iri =
+#      GO:0090524 (cytochrome-b5 reductase activity, acting on NADH — the molecular
+#      function); quality = catalytic activity (PATO:0001414).
+# =============================================================================
+
+name: hpo_hematology_indices
+description: >-
+  DRAFT hematology laboratory-index fragment covering erythrocyte sedimentation rate
+  (ESR), total iron-binding capacity (TIBC, ~ plasma transferrin), and erythrocyte
+  NADH-cytochrome b5 reductase (CYB5R3) activity. Each is a grounded physiological
+  variable. No defensible single-source causal driver exists in the current corpus for
+  any of the three (ESR's driver fibrinogen and TIBC's transferrin-synthesis regulator
+  are not yet modeled), so all three nodes are grounded islands that abstain rather than
+  propagate a fabricated sign. Single-scale (ORGAN_SYSTEM) plus one CELLULAR enzyme-
+  activity root. Phase 1.
+
+nodes:
+  - id: erythrocyte_sedimentation_rate
+    label: erythrocyte sedimentation rate (ESR)
+    scale: organ_system
+    # entity_iri null: no exact OBO class for the ESR laboratory observable. The
+    # bearer is the erythrocyte population in whole blood; the measured quantity is a
+    # settling RATE.
+    quality_iri: PATO:0000161          # rate
+  - id: total_iron_binding_capacity
+    label: total iron-binding capacity (TIBC)
+    scale: organ_system
+    entity_iri: PR:000016261           # serotransferrin (plasma iron-binding protein)
+    quality_iri: PATO:0000033          # concentration (TIBC ~ plasma transferrin conc.)
+  - id: cytochrome_b5_reductase_activity
+    label: erythrocyte NADH-cytochrome b5 reductase (CYB5R3) activity
+    scale: cellular
+    entity_iri: GO:0090524             # cytochrome-b5 reductase activity, acting on NADH
+    bearer_entity_iri: CL:0000232      # erythrocyte (CYB5R3 acts in red cells)
+    quality_iri: PATO:0001414          # catalytic / enzyme activity
+
+# No causal_edges: the defensible upstream drivers (fibrinogen for ESR; hepatic
+# transferrin synthesis / iron-store regulation for TIBC) are not modeled in the
+# current corpus, and CYB5R3 activity's product (functional hemoglobin / methemoglobin)
+# has no existing node. Per PhysioMap policy, prefer NO edge over a guess. These nodes
+# integrate later via a fibrinogen node, a transferrin-synthesis node, or a
+# methemoglobin node + constitutive lift.

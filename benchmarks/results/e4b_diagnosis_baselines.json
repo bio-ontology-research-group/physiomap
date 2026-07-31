@@ -1,0 +1,40 @@
+{
+  "alpha": 0.85,
+  "arms": {
+    "chance": {
+      "median_rank": 88.0,
+      "mrr": 0.03282774891772937,
+      "scored": 163,
+      "top1": 0.9314285714285714,
+      "top10": 9.314285714285715,
+      "top3": 2.7942857142857145
+    },
+    "comparative static": {
+      "median_rank": 1,
+      "mrr": 0.7074812542603953,
+      "scored": 163,
+      "top1": 40,
+      "top10": 161,
+      "top3": 127
+    },
+    "shortest signed path": {
+      "median_rank": 2,
+      "mrr": 0.5352737650656422,
+      "scored": 163,
+      "top1": 30,
+      "top10": 105,
+      "top3": 94
+    },
+    "signed diffusion (alpha=0.85)": {
+      "median_rank": 2,
+      "mrr": 0.5583070771414482,
+      "scored": 163,
+      "top1": 30,
+      "top10": 110,
+      "top3": 99
+    }
+  },
+  "candidate_pool": 175,
+  "hpo_release": "hp/releases/2026-02-16",
+  "schema_version": "1.0.0"
+}

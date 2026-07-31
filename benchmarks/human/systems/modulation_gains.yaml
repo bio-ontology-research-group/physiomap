@@ -1,0 +1,275 @@
+# =============================================================================
+# Multiplicative (gain) MODULATION edges over core physiology   *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Permissive / sensitizing gains: a node scales the STRENGTH of an existing causal edge.
+# George-style (cf. george_heart_rate.yaml). Base edge already present; interventional
+# interaction evidence required. Parallel layer -> changes no node-level prediction (sound).
+# =============================================================================
+name: modulation_gains
+description: DRAFT multiplicative (gain) MODULATION edges over core physiology — permissive / sensitizing effects where a
+  node SCALES the strength of an existing causal edge (target = ... + k(modulator)*source). Multi-agent literature fan-out
+  (propose + adversarial verify per gain domain), following George Gkoutoss T3 -> (sympathetic_tone -> heart_rate) template.
+  Every modulated base edge already exists in the map; each gain carries interventional two-factor-do()/cross-term interaction
+  evidence. Modulation edges sit in a PARALLEL layer (not in causal_subgraph) and change no node-level sign prediction — they
+  only enable the gain-sensitivity query. See benchmarks/results/phenotype_connections.md.
+nodes: []
+causal_edges: []
+modulation_edges:
+- modulator: angiotensin_II
+  influence_id: influence:baroreceptor_firing_rate:negative:sympathetic_tone
+  sign: +
+  can_flip_sign: true
+  mechanism: 'Angiotensin II acts centrally (area postrema / rostral medulla, AT1-receptor mediated) to attenuate the maximum
+    range and gain of the arterial baroreflex control of renal sympathetic nerve activity (RSNA): a given fall in baroreceptor
+    afferent firing produces a smaller reflex disinhibition of sympathetic outflow. This scales the SLOPE (gain) of the existing
+    inhibitory baroreceptor_firing_rate -> sympathetic_tone edge rather than adding to sympathetic_tone directly. Because
+    the base coefficient is negative, blunting |gain| toward zero is a positive d(gain)/d(AngII). Route-dependent reversal
+    (some central/intracerebroventricular protocols increase rather than blunt max gain) means the gain can in principle cross
+    zero, so can_flip_sign is true.'
+  evidence: 'Two-factor interventional infusion (verified). Sanderford & Bishop, ''Angiotensin II acutely attenuates range
+    of arterial baroreflex control of renal sympathetic nerve activity'', Am J Physiol Heart Circ Physiol 279(4):H1804, 2000
+    (PMID 11009467, verified): a 5-min IV do(AngII) infusion (10 and 20 ng/kg/min) in conscious rabbits, with the full baroreflex
+    MAP->RSNA curve constructed, dose-dependently reduced the maximum RSNA observed at low MAP (i.e. reduced the range/slope
+    of baroreceptor-firing -> sympathetic outflow), with a greater effect via the vertebral circulation implicating a CNS
+    site of action -- a genuine do(AngII) change in baroreflex GAIN, not just baseline. Corroborated by central-mechanism
+    follow-up, AJP-Heart 2002 (PMID 11959620, verified). Base causal edge baroreceptor_firing_rate -> sympathetic_tone (sign
+    ''-'') exists in all_edges.json; modulator angiotensin_II exists in all_nodes.json. Textbook anchor: Guyton & Hall, baroreceptor
+    reflex resetting by the renin-angiotensin system. [NB: first-order additive shadow (angiotensin_II -> sympathetic_tone)
+    is not currently in the causal graph, so only the second-order gain query is represented; sound (adds no node-level prediction).]'
+  causal_evidence: pharmacological
+- modulator: arterial_pco2
+  influence_id: influence:arterial_po2:positive:hemoglobin_o2_saturation
+  sign: '-'
+  can_flip_sign: false
+  mechanism: 'Bohr effect (CO2 arm): CO2 (and the H+ generated from it by erythrocyte carbonic anhydrase) binds and stabilizes
+    the deoxy/T-state of hemoglobin, lowering O2 affinity and right-shifting the oxyhemoglobin dissociation curve (P50 rises).
+    At a fixed sub-saturating PaO2 on the steep part of the sigmoid, the right-shift reduces the local slope d(SaO2)/d(PaO2),
+    so this is a genuine rescaling of the PaO2->SaO2 responsiveness, not an additive push. Cross-partial d2(SaO2)/d(PaO2)d(PaCO2)
+    < 0.'
+  evidence: 'Verified two-factor interventional measurement of the human SaO2-vs-PO2 dissociation curve with PCO2 set across
+    20/40/60/80 mmHg (crossed with temperature): both the CO2-Bohr coefficient and the curve position/slope change with PCO2
+    (P50 27.1 +/- 2.6 mmHg at 37C/40 mmHg, rising with PCO2), a measured CO2 x temperature interaction. The modulator is manipulated
+    while the PaO2->SaO2 slope is read out. Woyke/Reinke et al., ''Effects of Carbon Dioxide and Temperature on the Oxygen-Hemoglobin
+    Dissociation Curve of Human Blood'', Front. Med. 2021, doi:10.3389/fmed.2021.808025 (DOI confirmed via web). Textbook
+    anchor: Boron & Boulpaep, Medical Physiology, Bohr effect. Base edge arterial_po2->hemoglobin_o2_saturation (+) exists;
+    additive shadow edge arterial_pco2->hemoglobin_o2_saturation (-) present and sign-consistent.'
+  causal_evidence: curated_mechanistic
+- modulator: arterial_ph
+  influence_id: influence:arterial_po2:positive:hemoglobin_o2_saturation
+  sign: +
+  can_flip_sign: false
+  mechanism: 'Bohr effect (proton arm): raising pH (lowering H+) increases hemoglobin O2 affinity and left-shifts the dissociation
+    curve (P50 falls). The left-shift moves the steep sigmoid region to lower PaO2, so at a fixed sub-saturating PaO2 the
+    local slope d(SaO2)/d(PaO2) increases. Cross-partial d2(SaO2)/d(PaO2)d(pH) > 0. pH and PaCO2 are distinct map nodes; this
+    is the separately-evidenced proton arm of the Bohr effect.'
+  evidence: 'Direct ODC measurements: an acute ~0.1-unit pH change moves P50 by ~3 mmHg (Severinghaus standard relation),
+    i.e. the SaO2-vs-PO2 slope at fixed PaO2 shifts with pH (left-shift on alkalinization). The H+/CO2 dependence of the measured
+    curve is documented in Woyke/Reinke et al., Front. Med. 2021, doi:10.3389/fmed.2021.808025 (DOI confirmed via web). Textbook
+    anchor: Boron & Boulpaep, Medical Physiology, Bohr effect. Base edge arterial_po2->hemoglobin_o2_saturation (+) exists;
+    additive shadow edge arterial_ph->hemoglobin_o2_saturation (+) present and sign-consistent.'
+  causal_evidence: curated_mechanistic
+- modulator: core_temperature
+  influence_id: influence:arterial_po2:positive:hemoglobin_o2_saturation
+  sign: '-'
+  can_flip_sign: false
+  mechanism: O2-Hb binding is exothermic, so raising temperature shifts the equilibrium toward deoxy-Hb, lowering O2 affinity
+    and right-shifting the dissociation curve (P50 rises). At a fixed sub-saturating PaO2, the right-shift reduces the local
+    slope d(SaO2)/d(PaO2), rescaling the PaO2->SaO2 responsiveness. Cross-partial d2(SaO2)/d(PaO2)d(temperature) < 0.
+  evidence: 'Verified two-factor interventional measurement of the human SaO2-vs-PO2 dissociation curve at 13.7/23/30/37/42
+    C (crossed with PCO2): increasing temperature produces a significant rightward shift (P50 increase), i.e. the PaO2->SaO2
+    slope changes with temperature, with a measured temperature x PCO2 interaction term. The modulator is set while the curve
+    is read out. Woyke/Reinke et al., Front. Med. 2021, doi:10.3389/fmed.2021.808025 (DOI confirmed via web). Textbook anchor:
+    Guyton & Hall, Textbook of Medical Physiology (temperature shift of the ODC). Base edge arterial_po2->hemoglobin_o2_saturation
+    (+) exists; additive shadow edge core_temperature->hemoglobin_o2_saturation (-) present and sign-consistent.'
+  causal_evidence: curated_mechanistic
+- modulator: cortisol
+  influence_id: influence:plasma_glucagon:positive:hepatic_glucose_production
+  sign: +
+  can_flip_sign: false
+  mechanism: 'Glucocorticoid permissiveness on hepatic gluconeogenesis: cortisol -> hepatocyte GR (NR3C1) transcriptional
+    disposition -> induction of gluconeogenic enzyme machinery (PEPCK/G6Pase), maintenance of glucagon-cAMP-PKA-CREB coupling,
+    and supply of gluconeogenic precursors -> a given plasma glucagon level produces a larger hepatic glucose output. Scales
+    the gain of the glucagon -> hepatic_glucose_production edge.'
+  evidence: 'Base edge plasma_glucagon -> hepatic_glucose_production (+) confirmed present in all_edges.json; cortisol, plasma_glucagon,
+    hepatic_glucose_production all present in all_nodes.json. INTERVENTIONAL perturbation two-factor do(): Chan, ''The permissive
+    effects of glucocorticoid on hepatic gluconeogenesis...'', J Biol Chem 1984;259 (PMID 6234302, verified via PubMed) -
+    in hepatocytes/perfused livers from fasted rats, ADRENALECTOMY produced ''a reduction in both sensitivity and responsiveness
+    to the hormone [glucagon] in gluconeogenesis'' (the glucagon dose-response slope fell: 1 nM glucagon failed to stimulate
+    glucose output from lactate in adrenalectomized livers but 10 nM did), and glucocorticoid replacement restored it - an
+    explicit slope/gain change with the modulator. Corroborated by Exton et al., J Biol Chem 1972;247(11):3579-88 (PMID 4337859,
+    verified).'
+  causal_evidence: perturbation
+- modulator: cortisol
+  influence_id: influence:epinephrine:positive:hepatic_glycogenolysis
+  sign: +
+  can_flip_sign: false
+  mechanism: 'Glucocorticoid permissiveness on catecholamine-driven hepatic glycogenolysis: cortisol -> hepatocyte GR transcriptional
+    disposition -> maintenance of the inactive-phosphorylase pool and the beta-adrenergic / cAMP-PKA -> glycogen-phosphorylase
+    (PYGL) activation cascade -> a given epinephrine level mobilizes more hepatic glycogen. Scales the gain of the epinephrine
+    -> hepatic_glycogenolysis edge.'
+  evidence: 'Base edge epinephrine -> hepatic_glycogenolysis (+) confirmed present in all_edges.json; cortisol, epinephrine,
+    hepatic_glycogenolysis all present in all_nodes.json. INTERVENTIONAL perturbation (CITATION CORRECTED from the proposer''s
+    unverifiable ''Endocrine Reviews 2026'' to the canonical verified anchor): Exton, Friedmann, Wong, Brineaux, Corbin &
+    Park, ''Interaction of Glucocorticoids with Glucagon and Epinephrine in the Control of Gluconeogenesis and Glycogenolysis
+    in Liver and of Lipolysis in Adipose Tissue'', J Biol Chem 1972;247(11):3579-3588 (PMID 4337859, verified via PubMed/JBC)
+    - in ADRENALECTOMIZED rats the glycogenolytic action of epinephrine is impaired at the level of glycogen phosphorylase
+    (inactive-phosphorylase pool depleted; epinephrine/cAMP fail to generate the hyperglycemic response), and HYDROCORTISONE
+    replacement restores the inactive-phosphorylase levels and the epinephrine response - an interventional restoration of
+    the epinephrine glycogenolytic responsiveness by the modulator. Mechanism parallels the glucagon permissiveness of Chan,
+    J Biol Chem 1984 (PMID 6234302). Lower-confidence member of the set (the glycogenolysis-specific dose-response slope is
+    documented qualitatively rather than as an isolated numeric slope), but the do()/restore interaction is real and interventional.
+    [NB: first-order additive shadow (cortisol -> hepatic_glycogenolysis) is not currently in the causal graph, so only the
+    second-order gain query is represented; sound (adds no node-level prediction).]'
+  causal_evidence: perturbation
+- modulator: cortisol
+  influence_id: influence:epinephrine:positive:lipolysis_rate
+  sign: +
+  can_flip_sign: false
+  mechanism: 'Glucocorticoid permissiveness on adipocyte lipolysis: cortisol -> GR transcriptional disposition -> protein-synthesis-dependent
+    up-regulation/maintenance of the beta-adrenergic -> cAMP -> PKA -> hormone-sensitive lipase (HSL/LIPE) cascade -> a given
+    catecholamine (epinephrine) concentration drives a larger lipolytic flux. Scales the gain of the epinephrine -> lipolysis_rate
+    edge rather than adding to it.'
+  evidence: 'Base edge epinephrine -> lipolysis_rate (+) confirmed present in all_edges.json; cortisol, epinephrine, lipolysis_rate
+    all present in all_nodes.json. INTERVENTIONAL perturbation two-factor do(): Lamberts et al., ''The mechanism of the potentiating
+    effect of glucocorticoids on catecholamine-induced lipolysis'', Metabolism 1975;24(6):681-694 (verified via Metabolism/ScienceDirect)
+    - preincubation of isolated rat fat cells with dexamethasone (or pretreating rats with cortisol) ENHANCED epinephrine-stimulated
+    lipolysis AND cAMP-dependent protein-kinase activity; the potentiation persisted under maximal phosphodiesterase inhibition
+    (theophylline / dibutyryl-cAMP), locating the gain at PKA induction rather than cAMP supply. Corroborated by Exton et
+    al., J Biol Chem 1972;247(11):3579-88 (PMID 4337859, verified) for adipose lipolysis, and textbook permissive physiology
+    (Boron & Boulpaep). Catecholamines are weakly lipolytic without glucocorticoid; a small glucocorticoid dose markedly potentiates
+    them - a classic multiplicative permissive interaction.'
+  causal_evidence: perturbation
+- modulator: cortisol
+  influence_id: influence:norepinephrine:positive:total_peripheral_resistance
+  sign: +
+  can_flip_sign: false
+  mechanism: 'Glucocorticoid permissiveness on vascular smooth muscle: cortisol -> GR (NR3C1) transcriptional disposition
+    -> enhanced agonist-mediated pharmacomechanical coupling (up-regulated alpha1-adrenoceptor / Gq density, RhoA-Rho-kinase
+    Ca2+-sensitization, suppression of the endothelial NO and PGI2 vasodilator brake) -> a given norepinephrine concentration
+    produces a larger rise in vascular smooth-muscle contractile tone and hence total peripheral resistance. This scales the
+    gain k of the additive NE -> TPR edge (target = ... + k(cortisol)*NE) rather than adding an independent push.'
+  evidence: 'Base edge norepinephrine -> total_peripheral_resistance (+) confirmed present in all_edges.json; modulator cortisol
+    and both endpoints present in all_nodes.json. INTERVENTIONAL two-factor do(): Pirpiris et al., Hypertension 1992;19(6):567-574
+    (PMID 1592452, verified via PubMed/AHA) - in 12 normal men, 7 days dexamethasone 3 mg/d (vs the mineralocorticoid fludrocortisone
+    comparator, isolating the GR effect) raised mean arterial pressure (82->91 mmHg, p<0.001), cold-pressor responsiveness
+    (8.6->17.1 R units, p<0.05), and the FOREARM VASCULAR RESPONSE slope to intra-arterial norepinephrine (F=33.0, p<0.01)
+    - the slope of the NE pressor/vasoconstrictor response increased with glucocorticoid, a genuine gain change. Mechanism
+    corroborated in textbook permissive vascular physiology (Boron & Boulpaep, Medical Physiology; Guyton & Hall).'
+  causal_evidence: pharmacological
+- modulator: erythrocyte_23_bpg
+  influence_id: influence:arterial_po2:positive:hemoglobin_o2_saturation
+  sign: '-'
+  can_flip_sign: false
+  mechanism: 2,3-bisphosphoglycerate binds the central cavity of deoxy (T-state) hemoglobin and stabilizes the low-affinity
+    conformation; raising erythrocyte 2,3-BPG right-shifts the dissociation curve and increases P50. At a fixed sub-saturating
+    PaO2 the local slope d(SaO2)/d(PaO2) falls, a true rescaling of the PaO2->SaO2 responsiveness. Cross-partial d2(SaO2)/d(PaO2)d(2,3-BPG)
+    < 0.
+  evidence: 'Reconstituted/stripped-hemoglobin O2-equilibrium titrations show that adding 2,3-BPG shifts the entire O2-saturation-vs-PO2
+    curve rightward (raises P50) in a dose-dependent manner: the modulator is set at multiple levels and the whole SaO2-vs-PO2
+    relationship (its slope at fixed PO2) moves, a mechanistic-cross-term / slope-changing manipulation, not a single operating-point
+    association (Benesch & Benesch, classic 2,3-DPG O2-affinity studies). Textbook anchor: Boron & Boulpaep, Medical Physiology
+    (2,3-BPG and the ODC right-shift). Base edge arterial_po2->hemoglobin_o2_saturation (+) exists; additive shadow edge erythrocyte_23_bpg->hemoglobin_o2_saturation
+    (-) present and sign-consistent. (Node erythrocyte_23_bpg, ORGAN_SYSTEM scale, is the one carrying the shadow edge to
+    the target; the CELLULAR duplicate erythrocyte_2_3_bpg is correctly not used.)'
+  causal_evidence: curated_mechanistic
+- modulator: free_t3
+  influence_id: influence:epinephrine:positive:lipolysis_rate
+  sign: +
+  can_flip_sign: false
+  mechanism: 'T3 amplifies the catecholamine-stimulated lipolytic gain in adipocytes: it up-regulates beta2/beta3-adrenoceptor
+    while down-regulating alpha2A-adrenoceptor, Gi-alpha2 and PDE3B, and (post-receptor) alters Ca2+/phosphodiesterase coupling,
+    so a given epinephrine drive yields a larger cAMP -> PKA -> hormone-sensitive-lipase lipolytic response. This multiplies
+    the gain of the existing positive epinephrine -> lipolysis_rate edge; d(gain)/d(T3) > 0 and the gain stays positive (blunted,
+    not reversed, in hypothyroidism, so it cannot cross zero).'
+  evidence: 'Base edge epinephrine -> lipolysis_rate (+) exists in all_edges.json; modulator free_t3 exists in all_nodes.json
+    (note: free_t3 also has a direct additive + edge to lipolysis_rate, consistent with the modulation''s positive additive
+    shadow). INTERVENTIONAL interaction evidence: (i) Wahrenberg H, Wennlund A, Arner P. ''Adrenergic regulation of lipolysis
+    in fat cells from hyperthyroid and hypothyroid patients.'' J Clin Endocrinol Metab 1994;78(4):898-903. PMID:8157718 (VERIFIED)
+    -- the catecholamine (noradrenaline) lipolytic SLOPE moves monotonically with thyroid state: beta-adrenergic responsiveness
+    +2-fold (sensitivity +10-fold) in hyperthyroid, -50% in hypothyroid vs euthyroid -- a three-state interventional interaction.
+    (ii) Goswami A, Rosenberg IN. ''Thyroid hormone modulation of epinephrine-induced lipolysis in rat adipocytes: a possible
+    role of calcium.'' Endocrinology 1978;103(6):2223-33. PMID:218806 (VERIFIED; proposer''s volume ''102'' is a typo, PMID/title
+    correct) -- hypothyroid rat adipocytes were nearly unresponsive to epinephrine (0.1-10 uM) with UNCHANGED beta-receptor
+    number/affinity, and T3 injection RESTORED the epinephrine lipolytic slope: a do(T3) that recovers the source->target
+    responsiveness independent of receptor count.'
+  causal_evidence: pharmacological
+- modulator: free_t3
+  influence_id: influence:sympathetic_tone:positive:metabolic_rate
+  sign: +
+  can_flip_sign: false
+  mechanism: 'Facultative (adaptive) thermogenesis is driven by sympathetic/noradrenergic stimulation of brown/beige adipocytes,
+    and T3 multiplies that gain: TRalpha-mediated T3 signaling synergizes with the adrenergic cAMP pathway on the UCP1 promoter
+    (TREs confer T3 transactivation AND potentiate the cAMP response) and T3 stabilizes UCP1 mRNA, so the sympathetic -> uncoupled-respiration
+    / metabolic-rate response is steeper when T3 is present. This scales the gain of the existing positive sympathetic_tone
+    -> metabolic_rate edge (its thermogenic component); d(gain)/d(T3) > 0 and the gain stays positive.'
+  evidence: 'Base edge sympathetic_tone -> metabolic_rate (+) exists in all_edges.json; modulator free_t3 exists in all_nodes.json
+    (free_t3 also has a direct additive + edge to metabolic_rate, consistent with the positive shadow). MECHANISTIC CROSS-TERM
+    evidence: Hernandez A, Obregon MJ. ''Triiodothyronine amplifies the adrenergic stimulation of uncoupling protein expression
+    in rat brown adipocytes.'' Am J Physiol Endocrinol Metab 2000;278(5):E769-77. PMID:10780931 (VERIFIED via PubMed, title/journal/year/pages
+    confirmed). In primary brown adipocytes the sensitivity of UCP1 mRNA to norepinephrine is potentiated by the presence
+    of T3, and the UCP1 promoter responds ~4-fold to cAMP alone, ~4-fold to T3 alone, but ~12-fold to both combined -- a supra-additive
+    (multiplicative) cross-term between the adrenergic (cAMP) and T3 inputs, i.e. a genuine change in the slope of the adrenergic
+    effect with T3. Genetic corroboration: TRalpha-isoform-specific thyroid-hormone/sympathetic interaction is required for
+    adaptive thermogenesis (Ribeiro MO et al., J Clin Invest 2001; PMID:11435461).'
+  causal_evidence: mechanistic_model
+- modulator: free_t3
+  influence_id: influence:sympathetic_tone:positive:myocardial_contractility
+  sign: +
+  can_flip_sign: false
+  mechanism: T3 (TRalpha-mediated) raises cardiomyocyte beta-adrenergic responsiveness by increasing the Gs/Gi ratio (down-regulating
+    inhibitory Galpha-i3/Galpha-o) and beta1/beta2-adrenoceptor density, so a given increment of sympathetic/catecholamine
+    drive yields a larger cAMP -> PKA -> phospholamban/SERCA + L-type-Ca/troponin inotropic response. This multiplies (scales)
+    the gain of the existing positive sympathetic_tone -> myocardial_contractility edge rather than adding a fixed offset;
+    d(gain)/d(T3) > 0 and the gain stays positive (cannot cross zero) at a normal operating point.
+  evidence: 'Base edge sympathetic_tone -> myocardial_contractility (+) exists in all_edges.json; modulator free_t3 exists
+    in all_nodes.json. INTERVENTIONAL interaction evidence: Carvalho-Bianco SD, Kim BW, Zhang JX, et al. ''Chronic cardiac-specific
+    thyrotoxicosis increases myocardial beta-adrenergic responsiveness.'' Mol Endocrinol 2004;18(7):1840-9. PMID:15131256
+    (VERIFIED via PubMed, title/authors/journal/year/pages confirmed). Cardiac-specific transgenic type-2 deiodinase (D2)
+    overexpression is a localized genetic do() that raises intracardiac T3; isolated D2-TG ventricular myocytes showed increased
+    cAMP accumulation in response to norepinephrine and forskolin vs controls via reduced inhibitory G-protein (Galpha-i3/Galpha-o)
+    -- a two-state interventional change in the SLOPE of the cardiac response to beta-adrenergic stimulation, not a baseline
+    shift. Textbook anchor: Boron & Boulpaep, Medical Physiology (thyroid potentiation of catecholamine cardiac action; beta-AR/Gs
+    up-regulation in thyrotoxic myocardium). [NB: first-order additive shadow (free_t3 -> myocardial_contractility) is not
+    currently in the causal graph, so only the second-order gain query is represented; sound (adds no node-level prediction).]'
+  causal_evidence: perturbation
+- modulator: plasma_adiponectin
+  influence_id: influence:plasma_insulin:positive:peripheral_glucose_uptake
+  sign: +
+  can_flip_sign: false
+  mechanism: Adiponectin -> AdipoR1/AdipoR2 -> APPL1 -> AMPK activation + endothelial NO-mediated muscle microvascular recruitment
+    -> for a GIVEN plasma_insulin input, increased insulin delivery to myocytes and amplified insulin-stimulated PI3K/Akt
+    signalling and GLUT4 translocation -> greater insulin-mediated peripheral glucose uptake. Adiponectin SCALES the gain
+    of the plasma_insulin -> peripheral_glucose_uptake edge (an insulin SENSITISER), distinct from any small insulin-independent
+    basal effect.
+  evidence: 'Two-factor PHARMACOLOGICAL interaction (do(adiponectin) x do(insulin) clamp): globular adiponectin infused BEFORE
+    a hyperinsulinaemic-euglycaemic clamp recruited significantly MORE muscle microvasculature than insulin alone, increased
+    insulin-mediated whole-body glucose disposal, and amplified insulin-stimulated muscle Akt phosphorylation - i.e. adiponectin
+    increases the slope of insulin on glucose uptake (Zhao, Chai, Fu, Aylor, Barrett et al., ''Globular Adiponectin Enhances
+    Muscle Insulin Action via Microvascular Recruitment and Increased Insulin Delivery'', Circ Res 2013;112:1263-1271, doi:10.1161/CIRCRESAHA.111.300388,
+    PMID 23459195; URL https://www.ahajournals.org/doi/10.1161/CIRCRESAHA.111.300388 - VERIFIED). Corroborated by gAd restoring
+    microvascular insulin responses via AMPK (Zhao et al., J Physiol 2015, doi:10.1113/JP270371).'
+  causal_evidence: pharmacological
+- modulator: plasma_calcium
+  influence_id: influence:synaptic_acetylcholine_concentration:positive:postsynaptic_membrane_potential
+  sign: '-'
+  can_flip_sign: false
+  mechanism: Extracellular (plasma, ionised) Ca2+ screens the fixed negative surface charges on the outer membrane face and
+    on voltage-gated Na+ channels (Frankenhaeuser-Hodgkin surface-potential effect). Raising [Ca2+]o increases screening,
+    right-shifting (depolarising) the voltage-dependence of Na+-channel activation, so a given excitatory (ACh) synaptic drive
+    moves the cell less far toward firing threshold. The gain of the depolarising-input -> membrane-potential/excitability
+    edge therefore FALLS as [Ca2+]o rises (membrane-stabilising action; hypercalcaemia -> hypoexcitability) and RISES in hypocalcaemia
+    (latent tetany / Chvostek-Trousseau). This is a genuine multiplicative gain on the depolarising input, not an additive
+    push on membrane potential.
+  evidence: 'Base causal edge synaptic_acetylcholine_concentration -> postsynaptic_membrane_potential (+) already present
+    in all_edges.json; modulator plasma_calcium already a node in all_nodes.json. Interaction (two-factor interventional cross-term):
+    Martiszus, Tsintsadze, Chang & Smith, ''Enhanced excitability of cortical neurons in low-divalent solutions is primarily
+    mediated by altered voltage-dependence of voltage-gated sodium channels'', eLife 2021;10:e67914 (VERIFIED via WebSearch,
+    elifesciences.org/articles/67914; authors confirmed). Switching the bath from physiological to reduced extracellular divalent/Ca2+
+    (a do() on [Ca2+]o) left-shifted Na+-channel V0.5, increasing channel availability and the efficacy of a given depolarisation
+    -> enhanced excitability; thus the SLOPE of the depolarising-input -> firing relation changes with [Ca2+]o (the required
+    gain cross-term). Foundation: Frankenhaeuser & Hodgkin 1957 (surface-charge screening). Textbook anchors: Guyton & Hall,
+    Textbook of Medical Physiology (low plasma Ca2+ raises neuromuscular excitability -> tetany); Boron & Boulpaep, Medical
+    Physiology (membrane potential / hypocalcaemic tetany). Sign: d(gain)/d([Ca2+]o) < 0 (membrane stabilisation), monotonic
+    screening so can_flip_sign=false. [NB: first-order additive shadow (plasma_calcium -> postsynaptic_membrane_potential)
+    is not currently in the causal graph, so only the second-order gain query is represented; sound (adds no node-level prediction).]'
+  causal_evidence: perturbation

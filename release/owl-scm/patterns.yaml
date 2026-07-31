@@ -1,0 +1,93 @@
+version: 1.4.0
+namespace: https://w3id.org/physiomap/
+patterns:
+  - id: causal-collection-v2
+    arity: 2
+    owl_template: "collection-of ?B SubClassOf has-member some (caused-by some ?A)"
+    direction: source-to-target
+    reasoning_mode: elk
+    output_kind: influence
+    quantitative_semantics: signed-first-derivative
+    evidence_requirements: interventional-or-curated
+    trace_policy: all-witnesses
+  - id: production-collection-v2
+    arity: 2
+    owl_template: "collection-of ?B SubClassOf has-member some (produced-by some ?A)"
+    direction: source-to-target
+    reasoning_mode: elk
+    output_kind: production-relation
+    quantitative_semantics: signed-process-output
+    evidence_requirements: explicit-production-status
+    trace_policy: all-witnesses
+  - id: constitution-v1
+    arity: 2
+    owl_template: "?B SubClassOf constituted-by some ?A"
+    direction: micro-to-macro
+    reasoning_mode: elk
+    output_kind: constitutive-constraint
+    quantitative_semantics: typed-composition
+    evidence_requirements: part-structure
+    trace_policy: all-witnesses
+  - id: ratio-v1
+    arity: 3
+    owl_template: "?R SubClassOf has-numerator some ?N and has-denominator some ?D"
+    direction: arguments-to-result
+    reasoning_mode: elk
+    output_kind: quantitative-expression
+    quantitative_semantics: ratio
+    evidence_requirements: definition
+    trace_policy: all-witnesses
+  - id: multiplicative-modulation-v2
+    arity: 3
+    owl_template: "collection-of ?M SubClassOf has-member some (modulates some (?B and caused-by some ?A))"
+    direction: modulator-to-influence
+    reasoning_mode: elk
+    output_kind: modulation
+    quantitative_semantics: signed-mixed-derivative
+    evidence_requirements: interaction
+    trace_policy: all-witnesses
+  - id: aggregation-expression-v1
+    arity: variadic
+    owl_template: "?W SubClassOf has-summand some ?P_i"
+    direction: parts-to-whole
+    reasoning_mode: structural-validator
+    output_kind: quantitative-expression
+    quantitative_semantics: aggregation
+    evidence_requirements: part-structure
+    trace_policy: all-witnesses
+  - id: structural-function-v1
+    arity: variadic
+    owl_template: "?T SubClassOf has-argument some ?A_i"
+    direction: arguments-to-result
+    reasoning_mode: structural-validator
+    output_kind: quantitative-expression
+    quantitative_semantics: structural-function
+    evidence_requirements: definition
+    trace_policy: all-witnesses
+  - id: product-expression-v1
+    arity: variadic
+    owl_template: "?T SubClassOf has-factor some ?A_i"
+    direction: factors-to-result
+    reasoning_mode: structural-validator
+    output_kind: quantitative-expression
+    quantitative_semantics: product
+    evidence_requirements: definition
+    trace_policy: all-witnesses
+  - id: sum-expression-v1
+    arity: variadic
+    owl_template: "?T SubClassOf has-summand some ?A_i"
+    direction: summands-to-result
+    reasoning_mode: structural-validator
+    output_kind: quantitative-expression
+    quantitative_semantics: sum
+    evidence_requirements: definition
+    trace_policy: all-witnesses
+  - id: rate-expression-v1
+    arity: 3
+    owl_template: "?R SubClassOf has-rate-numerator some ?N and has-rate-denominator some ?D"
+    direction: arguments-to-result
+    reasoning_mode: structural-validator
+    output_kind: quantitative-expression
+    quantitative_semantics: rate
+    evidence_requirements: definition
+    trace_policy: all-witnesses

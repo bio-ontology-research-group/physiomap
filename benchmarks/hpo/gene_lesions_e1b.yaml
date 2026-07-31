@@ -1,0 +1,741 @@
+genes:
+  ABAT:
+    note: 'auto E1b: LoF of ABAT (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      abat_activity: '-'
+  ABCA1:
+    note: 'auto E1b: LoF of ABCA1 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      abca1_activity: '-'
+  ABCD1:
+    note: 'auto E1b: LoF of ABCD1 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      abcd1_activity: '-'
+  ABCG5:
+    note: 'auto E1b: LoF of ABCG5 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      abcg5_abcg8_activity: '-'
+  ACACA:
+    note: 'auto E1b: LoF of ACACA (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      acetyl_coa_carboxylase_activity: '-'
+  ACADVL:
+    note: 'auto E1b: LoF of ACADVL (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      vlcad_activity: '-'
+  ACAT1:
+    note: 'auto E1b: LoF of ACAT1 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      beta_ketothiolase_activity: '-'
+  ADA:
+    note: 'auto E1b: LoF of ADA (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      adenosine_deaminase_activity: '-'
+  ADA2:
+    note: 'auto E1b: LoF of ADA2 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      ada2_activity: '-'
+  ADSL:
+    note: 'auto E1b: LoF of ADSL (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      adsl_activity: '-'
+  AGL:
+    note: 'auto E1b: LoF of AGL (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      glycogen_debrancher_activity: '-'
+  AGXT:
+    note: 'auto E1b: LoF of AGXT (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      agt_activity: '-'
+  AK1:
+    note: 'auto E1b: LoF of AK1 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      adenylate_kinase_activity: '-'
+  ALDH2:
+    note: 'auto E1b: LoF of ALDH2 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      aldehyde_dehydrogenase_activity: '-'
+  ALDH5A1:
+    note: 'auto E1b: LoF of ALDH5A1 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      ssadh_activity: '-'
+  ALDH7A1:
+    note: 'auto E1b: LoF of ALDH7A1 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      aldh7a1_activity: '-'
+  ALDOB:
+    note: 'auto E1b: LoF of ALDOB (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      aldolase_b_activity: '-'
+  ALPL:
+    note: 'auto E1b: LoF of ALPL (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      tissue_nonspecific_alp_activity: '-'
+  AMACR:
+    note: 'auto E1b: LoF of AMACR (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      amacr_activity: '-'
+  AMPD1:
+    note: 'auto E1b: LoF of AMPD1 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      myoadenylate_deaminase_activity: '-'
+  APRT:
+    note: 'auto E1b: LoF of APRT (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      aprt_activity: '-'
+  ARSA:
+    note: 'auto E1b: LoF of ARSA (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      arsa_activity: '-'
+      arylsulfatase_a_activity: '-'
+  ARSB:
+    note: 'auto E1b: LoF of ARSB (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      arylsulfatase_b_activity: '-'
+  ASAH1:
+    note: 'auto E1b: LoF of ASAH1 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      acid_ceramidase_activity: '-'
+  ASL:
+    note: 'auto E1b: LoF of ASL (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      asl_activity: '-'
+  ASNS:
+    note: 'auto E1b: LoF of ASNS (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      asns_activity: '-'
+  ATP7B:
+    note: Wilson disease
+    primary:
+      atp7b_activity: '-'
+  AVP:
+    note: central diabetes insipidus -> ADH deficiency
+    primary:
+      adh: '-'
+  BCKDHA:
+    note: 'auto E1b: LoF of BCKDHA (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      bckdh_activity: '-'
+  BCO1:
+    note: 'auto E1b: LoF of BCO1 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      bco1_activity: '-'
+  BPGM:
+    note: 'auto E1b: LoF of BPGM (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      bisphosphoglycerate_mutase_activity: '-'
+  BTD:
+    note: 'auto E1b: LoF of BTD (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      biotinidase_activity: '-'
+  CA2:
+    note: 'auto E1b: LoF of CA2 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      carbonic_anhydrase_ii_activity: '-'
+  CAT:
+    note: 'auto E1b: LoF of CAT (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      catalase_activity: '-'
+  CBS:
+    note: classic homocystinuria
+    primary:
+      cbs_enzyme_activity: '-'
+  CFTR:
+    note: 'auto E1b: LoF of CFTR (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      cftr_activity: '-'
+  COMT:
+    note: 'auto E1b: LoF of COMT (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      comt_activity: '-'
+  COQ2:
+    note: 'auto E1b: LoF of COQ2 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      coq2_activity: '-'
+  CPN1:
+    note: 'auto E1b: LoF of CPN1 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      carboxypeptidase_n_activity: '-'
+  CPOX:
+    note: 'auto E1b: LoF of CPOX (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      coproporphyrinogen_oxidase_activity: '-'
+  CPT1A:
+    note: 'auto E1b: LoF of CPT1A (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      cpt1_activity: '-'
+  CPT2:
+    note: 'auto E1b: LoF of CPT2 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      cpt2_activity: '-'
+  CTNS:
+    note: 'auto E1b: LoF of CTNS (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      cystinosin_activity: '-'
+      cystinosin_transport_activity: '-'
+  CYP11B2:
+    note: aldosterone synthase / GRA -> aldosterone excess
+    primary:
+      aldosterone: +
+  CYP17A1:
+    note: 'auto E1b: LoF of CYP17A1 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      cyp17a1_activity: '-'
+  CYP19A1:
+    note: 'auto E1b: LoF of CYP19A1 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      aromatase_activity: '-'
+  CYP21A2:
+    note: 21-hydroxylase deficiency -> cortisol (and aldosterone) deficiency
+    primary:
+      cortisol: '-'
+  CYP7A1:
+    note: 'auto E1b: LoF of CYP7A1 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      cyp7a1_activity: '-'
+  D2HGDH:
+    note: 'auto E1b: LoF of D2HGDH (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      d2hgdh_activity: '-'
+  DBH:
+    note: 'auto E1b: LoF of DBH (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      dbh_activity: '-'
+  DCXR:
+    note: 'auto E1b: LoF of DCXR (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      dcxr_activity: '-'
+  DDC:
+    note: 'auto E1b: LoF of DDC (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      aadc_activity: '-'
+  DHCR24:
+    note: 'auto E1b: LoF of DHCR24 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      dhcr24_activity: '-'
+  DHCR7:
+    note: 'auto E1b: LoF of DHCR7 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      dhcr7_activity: '-'
+  DHTKD1:
+    note: 'auto E1b: LoF of DHTKD1 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      dhtkd1_activity: '-'
+  DIO1:
+    note: 'auto E1b: LoF of DIO1 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      type_1_deiodinase_activity: '-'
+  DMGDH:
+    note: 'auto E1b: LoF of DMGDH (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      dmgdh_activity: '-'
+  DPYD:
+    note: 'auto E1b: LoF of DPYD (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      dihydropyrimidine_dehydrogenase_activity: '-'
+  DPYS:
+    note: 'auto E1b: LoF of DPYS (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      dihydropyrimidinase_activity: '-'
+  EBP:
+    note: 'auto E1b: LoF of EBP (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      ebp_activity: '-'
+  ECHS1:
+    note: 'auto E1b: LoF of ECHS1 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      echs1_activity: '-'
+  ETFDH:
+    note: 'auto E1b: LoF of ETFDH (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      etfdh_activity: '-'
+  FAH:
+    note: 'auto E1b: LoF of FAH (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      fumarylacetoacetase_activity: '-'
+  FBP1:
+    note: 'auto E1b: LoF of FBP1 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      fructose_1_6_bisphosphatase_activity: '-'
+  FDFT1:
+    note: 'auto E1b: LoF of FDFT1 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      squalene_synthase_activity: '-'
+  FTCD:
+    note: 'auto E1b: LoF of FTCD (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      ftcd_activity: '-'
+  FUCA1:
+    note: 'auto E1b: LoF of FUCA1 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      alpha_l_fucosidase_activity: '-'
+  G6PC:
+    note: GSD Ia (von Gierke)
+    primary:
+      g6pase_activity: '-'
+  G6PD:
+    note: 'auto E1b: LoF of G6PD (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      g6pd_activity: '-'
+  GAA:
+    note: 'auto E1b: LoF of GAA (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      acid_alpha_glucosidase_activity: '-'
+  GALC:
+    note: 'auto E1b: LoF of GALC (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      galactocerebrosidase_activity: '-'
+  GALE:
+    note: 'auto E1b: LoF of GALE (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      udp_glucose_4_epimerase_activity: '-'
+  GALK1:
+    note: 'auto E1b: LoF of GALK1 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      galactokinase_activity: '-'
+  GALT:
+    note: 'auto E1b: LoF of GALT (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      galt_activity: '-'
+  GBA1:
+    note: 'auto E1b: LoF of GBA1 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      glucocerebrosidase_activity: '-'
+  GCDH:
+    note: 'auto E1b: LoF of GCDH (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      gcdh_activity: '-'
+  GCH1:
+    note: 'auto E1b: LoF of GCH1 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      gch1_activity: '-'
+  GCK:
+    note: 'auto E1b: LoF of GCK (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      beta_cell_glucokinase_activity: '-'
+  GGT1:
+    note: 'auto E1b: LoF of GGT1 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      ggt1_activity: '-'
+  GK:
+    note: 'auto E1b: LoF of GK (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      glycerol_kinase_activity: '-'
+  GLB1:
+    note: 'auto E1b: LoF of GLB1 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      beta_galactosidase_activity: '-'
+  GLS:
+    note: 'auto E1b: LoF of GLS (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      renal_glutaminase_activity: '-'
+  GLUD1:
+    note: 'auto E1b: GoF of GLUD1 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      glutamate_dehydrogenase_activity: +
+  GLUL:
+    note: 'auto E1b: LoF of GLUL (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      glutamine_synthetase_activity: '-'
+  GNS:
+    note: 'auto E1b: LoF of GNS (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      n_acetylglucosamine_6_sulfatase_activity: '-'
+  GUSB:
+    note: 'auto E1b: LoF of GUSB (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      beta_glucuronidase_activity: '-'
+  GYS1:
+    note: 'auto E1b: LoF of GYS1 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      muscle_glycogen_synthase_activity: '-'
+  GYS2:
+    note: 'auto E1b: LoF of GYS2 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      hepatic_glycogen_synthase_activity: '-'
+  HAL:
+    note: 'auto E1b: LoF of HAL (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      hal_activity: '-'
+  HAMP:
+    note: juvenile hemochromatosis (hepcidin gene)
+    primary:
+      hepcidin: '-'
+  HEXB:
+    note: 'auto E1b: LoF of HEXB (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      beta_hexosaminidase_b_activity: '-'
+  HFE:
+    note: hereditary hemochromatosis -> inappropriately low hepcidin
+    primary:
+      hepcidin: '-'
+  HGD:
+    note: 'auto E1b: LoF of HGD (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      hgd_activity: '-'
+  HGSNAT:
+    note: 'auto E1b: LoF of HGSNAT (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      heparan_alpha_glucosaminide_n_acetyltransferase_activity: '-'
+  HMBS:
+    note: 'auto E1b: LoF of HMBS (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      porphobilinogen_deaminase_activity: '-'
+  HMGCL:
+    note: 'auto E1b: LoF of HMGCL (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      hmgcl_activity: '-'
+  HMGCR:
+    note: 'auto E1b: LoF of HMGCR (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      hmg_coa_reductase_activity: '-'
+  HOGA1:
+    note: 'auto E1b: LoF of HOGA1 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      hoga1_activity: '-'
+  HPRT1:
+    note: Lesch-Nyhan -> urate overproduction
+    primary:
+      hgprt_activity: '-'
+  HSD11B2:
+    note: 'auto E1b: LoF of HSD11B2 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      hsd11b2_activity: '-'
+  HSD17B3:
+    note: 'auto E1b: LoF of HSD17B3 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      hsd17b3_activity: '-'
+  HSD3B2:
+    note: 'auto E1b: LoF of HSD3B2 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      adrenal_hsd3b2_activity: '-'
+  IDS:
+    note: 'auto E1b: LoF of IDS (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      iduronate_sulfatase_activity: '-'
+  ITPA:
+    note: 'auto E1b: LoF of ITPA (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      itpase_activity: '-'
+  IVD:
+    note: 'auto E1b: LoF of IVD (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      ivd_activity: '-'
+  IYD:
+    note: 'auto E1b: LoF of IYD (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      iyd_activity: '-'
+  KHK:
+    note: 'auto E1b: LoF of KHK (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      fructokinase_activity: '-'
+  KNG1:
+    note: 'auto E1b: LoF of KNG1 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      plasma_kininogen: '-'
+  KYNU:
+    note: 'auto E1b: LoF of KYNU (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      kynu_activity: '-'
+      kynureninase_activity: '-'
+  LCAT:
+    note: 'auto E1b: LoF of LCAT (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      lcat_activity: '-'
+  LDHA:
+    note: 'auto E1b: LoF of LDHA (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      muscle_lactate_dehydrogenase_activity: '-'
+  LDLR:
+    note: familial hypercholesterolemia
+    primary:
+      hepatic_ldl_receptor_activity: '-'
+  LEPR:
+    note: 'auto E1b: LoF of LEPR (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      lepr_signaling: '-'
+  LIAS:
+    note: 'auto E1b: LoF of LIAS (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      lias_activity: '-'
+  LIPA:
+    note: 'auto E1b: LoF of LIPA (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      lysosomal_acid_lipase_activity: '-'
+  LIPC:
+    note: 'auto E1b: LoF of LIPC (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      hepatic_lipase_activity: '-'
+  LIPE:
+    note: 'auto E1b: LoF of LIPE (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      adipose_hsl_activity: '-'
+  LPL:
+    note: 'auto E1b: LoF of LPL (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      lipoprotein_lipase_activity: '-'
+  MAN2B1:
+    note: 'auto E1b: LoF of MAN2B1 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      alpha_mannosidase_activity: '-'
+  MANBA:
+    note: 'auto E1b: LoF of MANBA (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      beta_mannosidase_activity: '-'
+  MCCC1:
+    note: 'auto E1b: LoF of MCCC1 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      mcc_activity: '-'
+  MLYCD:
+    note: 'auto E1b: LoF of MLYCD (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      mlycd_activity: '-'
+  MMUT:
+    note: 'auto E1b: LoF of MMUT (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      mut_activity: '-'
+  MOGS:
+    note: 'auto E1b: LoF of MOGS (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      mannosyl_oligosaccharide_glucosidase_activity: '-'
+  MPI:
+    note: 'auto E1b: LoF of MPI (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      phosphomannose_isomerase_activity: '-'
+  MTR:
+    note: 'auto E1b: LoF of MTR (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      methionine_synthase_activity: '-'
+  MTTP:
+    note: 'auto E1b: LoF of MTTP (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      mttp_activity: '-'
+  MVK:
+    note: 'auto E1b: LoF of MVK (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      mevalonate_kinase_activity: '-'
+  NAGLU:
+    note: 'auto E1b: LoF of NAGLU (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      alpha_n_acetylglucosaminidase_activity: '-'
+  NEU1:
+    note: 'auto E1b: LoF of NEU1 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      neuraminidase_activity: '-'
+  OAT:
+    note: 'auto E1b: LoF of OAT (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      ornithine_aminotransferase_activity: '-'
+  PAH:
+    note: phenylketonuria
+    primary:
+      pah_enzyme_activity: '-'
+  PCK1:
+    note: 'auto E1b: LoF of PCK1 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      pepck_activity: '-'
+  PDHA1:
+    note: 'auto E1b: LoF of PDHA1 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      pdh_complex_activity: '-'
+  PHEX:
+    note: X-linked hypophosphatemia -> excess FGF23
+    primary:
+      fgf23: +
+  PHYH:
+    note: 'auto E1b: LoF of PHYH (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      phytanoyl_coa_hydroxylase_activity: '-'
+  PKLR:
+    note: 'auto E1b: LoF of PKLR (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      erythrocyte_pyruvate_kinase_activity: '-'
+      pyruvate_kinase_activity: '-'
+  PLA2G7:
+    note: 'auto E1b: LoF of PLA2G7 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      paf_acetylhydrolase_activity: '-'
+  PNLIP:
+    note: 'auto E1b: LoF of PNLIP (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      duodenal_lipase_activity: '-'
+  PNP:
+    note: 'auto E1b: LoF of PNP (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      purine_nucleoside_phosphorylase_activity: '-'
+  PNPO:
+    note: 'auto E1b: LoF of PNPO (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      pnpo_activity: '-'
+  PRODH:
+    note: 'auto E1b: LoF of PRODH (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      prodh_activity: '-'
+  PRPS1:
+    note: 'auto E1b: GoF of PRPS1 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      prpp_synthetase_activity: +
+  PTS:
+    note: 'auto E1b: LoF of PTS (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      ptps_activity: '-'
+  PYGL:
+    note: 'auto E1b: LoF of PYGL (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      glycogen_phosphorylase_activity: '-'
+  PYGM:
+    note: 'auto E1b: LoF of PYGM (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      myophosphorylase_activity: '-'
+  QDPR:
+    note: 'auto E1b: LoF of QDPR (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      qdpr_activity: '-'
+  SARDH:
+    note: 'auto E1b: LoF of SARDH (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      sardh_activity: '-'
+  SC5D:
+    note: 'auto E1b: LoF of SC5D (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      sc5d_activity: '-'
+  SCNN1B:
+    note: Liddle ENaC gain-of-function
+    primary:
+      sodium_water_reabsorption: +
+  SCNN1G:
+    note: Liddle ENaC gain-of-function
+    primary:
+      sodium_water_reabsorption: +
+  SDHA:
+    note: 'auto E1b: LoF of SDHA (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      succinate_dehydrogenase_activity: '-'
+  SECISBP2:
+    note: 'auto E1b: LoF of SECISBP2 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      secisbp2_activity: '-'
+  SGSH:
+    note: 'auto E1b: LoF of SGSH (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      sgsh_activity: '-'
+  SLC12A1:
+    note: Bartter NKCC2 loss-of-function (salt wasting)
+    primary:
+      sodium_water_reabsorption: '-'
+  SLC12A3:
+    note: Gitelman NCC loss-of-function (salt wasting)
+    primary:
+      sodium_water_reabsorption: '-'
+  SLC22A5:
+    note: 'auto E1b: LoF of SLC22A5 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      octn2_activity: '-'
+  SLC26A3:
+    note: 'auto E1b: LoF of SLC26A3 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      slc26a3_activity: '-'
+  SLC2A1:
+    note: 'auto E1b: LoF of SLC2A1 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      slc2a1_activity: '-'
+  SLC30A10:
+    note: 'auto E1b: LoF of SLC30A10 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      slc30a10_activity: '-'
+  SLC30A2:
+    note: 'auto E1b: LoF of SLC30A2 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      slc30a2_activity: '-'
+  SLC37A4:
+    note: 'auto E1b: LoF of SLC37A4 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      glucose_6_phosphate_translocase_activity: '-'
+  SLC39A14:
+    note: 'auto E1b: LoF of SLC39A14 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      slc39a14_activity: '-'
+  SLC39A8:
+    note: 'auto E1b: LoF of SLC39A8 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      slc39a8_activity: '-'
+  SLC3A1:
+    note: 'auto E1b: LoF of SLC3A1 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      slc3a1_activity: '-'
+  SLC5A5:
+    note: 'auto E1b: LoF of SLC5A5 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      nis_activity: '-'
+  SLC6A19:
+    note: 'auto E1b: LoF of SLC6A19 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      slc6a19_activity: '-'
+  SLC6A6:
+    note: 'auto E1b: LoF of SLC6A6 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      slc6a6_activity: '-'
+  SLC9A3:
+    note: 'auto E1b: LoF of SLC9A3 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      slc9a3_activity: '-'
+  SMPD1:
+    note: 'auto E1b: LoF of SMPD1 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      acid_sphingomyelinase_activity: '-'
+  SPR:
+    note: 'auto E1b: LoF of SPR (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      sepiapterin_reductase_activity: '-'
+  SUOX:
+    note: 'auto E1b: LoF of SUOX (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      suox_activity: '-'
+  TALDO1:
+    note: 'auto E1b: LoF of TALDO1 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      transaldolase_activity: '-'
+  TPO:
+    note: thyroid dyshormonogenesis -> low T4
+    primary:
+      free_t4: '-'
+  TRPM6:
+    note: familial hypomagnesemia
+    primary:
+      trpm6_activity: '-'
+  TSHR:
+    note: TSH-resistance / congenital hypothyroidism -> low T4
+    primary:
+      free_t4: '-'
+  TTPA:
+    note: 'auto E1b: LoF of TTPA (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      ttpa_activity: '-'
+  TYMP:
+    note: 'auto E1b: LoF of TYMP (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      thymidine_phosphorylase_activity: '-'
+  UGT1A1:
+    note: Gilbert / Crigler-Najjar
+    primary:
+      ugt1a1_activity: '-'
+  UMPS:
+    note: 'auto E1b: LoF of UMPS (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      umps_activity: '-'
+  UPB1:
+    note: 'auto E1b: LoF of UPB1 (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      beta_ureidopropionase_activity: '-'
+  UROD:
+    note: 'auto E1b: LoF of UROD (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      uroporphyrinogen_decarboxylase_activity: '-'
+  UROS:
+    note: 'auto E1b: LoF of UROS (enzyme-deficiency IEM); resolved via UniProt->PR'
+    primary:
+      uroporphyrinogen_iii_synthase_activity: '-'
+  XDH:
+    note: hereditary xanthinuria
+    primary:
+      xanthine_oxidase_activity: '-'

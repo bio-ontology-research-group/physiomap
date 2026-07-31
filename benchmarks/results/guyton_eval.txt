@@ -1,0 +1,51 @@
+========================================================================
+PhysioMap benchmark — qualitative comparative-statics signs
+========================================================================
+
+### ace_inhibitor  —  ACE inhibitor (lower angiotensin II)
+  OK  aldosterone                    expected=-  predicted=-
+   ?  total_peripheral_resistance    expected=-  predicted=?
+   ?  sodium_water_reabsorption      expected=-  predicted=?
+   ?  adh                            expected=-  predicted=?
+  OK  mean_arterial_pressure         expected=-  predicted=-
+  OK  renin                          expected=+  predicted=+ [loop]
+   -> correct=3 wrong=0 ambiguous=3   (loop-critical 1/1)
+
+### primary_aldosteronism  —  Primary aldosteronism (autonomous aldosterone excess)
+  OK  sodium_water_reabsorption      expected=+  predicted=+
+  OK  extracellular_fluid_volume     expected=+  predicted=+
+  OK  blood_volume                   expected=+  predicted=+
+  OK  mean_arterial_pressure         expected=+  predicted=+
+  OK  sodium_excretion               expected=+  predicted=+ [loop]
+  OK  renin                          expected=-  predicted=- [loop]
+  OK  angiotensin_II                 expected=-  predicted=- [loop]
+  OK  sympathetic_tone               expected=-  predicted=- [loop]
+   -> correct=8 wrong=0 ambiguous=0   (loop-critical 4/4)
+
+### sympathetic_activation  —  Increased baroreflex sympathetic outflow
+   ?  total_peripheral_resistance    expected=+  predicted=?
+  OK  heart_rate                     expected=+  predicted=+
+   ?  cardiac_output                 expected=+  predicted=?
+  OK  mean_arterial_pressure         expected=+  predicted=+
+   ?  renin                          expected=+  predicted=?
+   -> correct=2 wrong=0 ambiguous=3   (loop-critical 0/0)
+
+### primary_sodium_retention  —  Primary increase in renal sodium/water reabsorption
+  OK  extracellular_fluid_volume     expected=+  predicted=+
+  OK  blood_volume                   expected=+  predicted=+
+  OK  venous_return                  expected=+  predicted=+
+  OK  cardiac_output                 expected=+  predicted=+
+  OK  mean_arterial_pressure         expected=+  predicted=+
+  OK  renal_perfusion_pressure       expected=+  predicted=+
+  OK  sodium_excretion               expected=+  predicted=+ [loop]
+  OK  renin                          expected=-  predicted=- [loop]
+  OK  angiotensin_II                 expected=-  predicted=- [loop]
+  OK  aldosterone                    expected=-  predicted=- [loop]
+  OK  sympathetic_tone               expected=-  predicted=- [loop]
+   -> correct=11 wrong=0 ambiguous=0   (loop-critical 5/5)
+
+------------------------------------------------------------------------
+TOTAL  scored=24  correct=24  wrong=0  ambiguous=6
+Directional accuracy (correct / scored) = 100.0%   |  ambiguous = 6/30
+Loop-critical net signs correct = 10/10
+------------------------------------------------------------------------

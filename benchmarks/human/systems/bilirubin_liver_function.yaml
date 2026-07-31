@@ -1,0 +1,172 @@
+# =============================================================================
+# Bilirubin metabolism + hepatic synthetic/clearance function
+#                                    — PhysioMap fragment  *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Hand-encoded, single-scale (ORGAN_SYSTEM / ORGAN). Each edge sign is the sign of
+# the partial derivative of the target w.r.t. the source at steady state, all else
+# equal (interventionist partial). ROBERT: please correct signs/edges/IRIs.
+#
+# Physiology (Boron & Boulpaep Medical Physiology, "Hepatobiliary function";
+# Lehninger Principles of Biochemistry, heme catabolism; Harrison's Principles of
+# Internal Medicine, "Jaundice" / hyperbilirubinemia):
+#   Heme -> biliverdin -> UNCONJUGATED (indirect) bilirubin, water-insoluble,
+#   carried in plasma bound to ALBUMIN. Hepatocyte sinusoidal UPTAKE (OATP1B1/1B3,
+#   SLCO1B1/1B3) -> intracellular CONJUGATION by UGT1A1 (bilirubin
+#   UDP-glucuronosyltransferase) to bilirubin (di)glucuronide = CONJUGATED (direct)
+#   bilirubin -> canalicular EXCRETION into bile by MRP2 (ABCC2). Bile acids are
+#   synthesized from cholesterol in hepatocytes and likewise excreted into bile.
+#   Albumin is synthesized by hepatocytes and is the dominant plasma protein.
+#
+# Sign logic (per task spec):
+#   - LoF of an enzyme/transporter REDUCES its activity node (modeled by clamping
+#     the activity node DOWN under intervention).
+#   - conjugation_activity DOWN  =>  UNconjugated bilirubin UP   (edge sign "+":
+#       d[unconj]/d[conjugation_activity] < 0, i.e. conjugation REMOVES unconjugated
+#       substrate, so the edge conjugation_activity -> unconjugated is "-")  ... see
+#       per-edge signs below (substrate-consumption is "-"; product-formation "+").
+#
+# DISORDERS this fragment is built to reproduce (sign of the change in the marker):
+#   - Gilbert syndrome / Crigler-Najjar (UGT1A1 hypomorph / LoF; OMIM 143500 Gilbert,
+#     OMIM 218800 Crigler-Najjar type I): ugt1a1_activity DOWN
+#       -> hepatic_bilirubin_conjugation DOWN
+#       -> plasma_unconjugated_bilirubin UP  (and plasma_conjugated_bilirubin DOWN).
+#   - Dubin-Johnson syndrome (ABCC2 / MRP2 LoF; OMIM 237500):
+#     hepatic_conjugated_bilirubin_excretion DOWN
+#       -> plasma_conjugated_bilirubin UP (conjugated regurgitates into plasma).
+#   - Hepatocellular failure (reduced synthetic function):
+#     hepatic_albumin_synthesis DOWN -> plasma_albumin DOWN (hypoalbuminemia).
+#
+# OMIM #: 143500 (Gilbert), 218800 (Crigler-Najjar type I), 237500 (Dubin-Johnson)
+#   — these are cited as REAL OMIM phenotype MIM numbers for provenance, not encoded
+#   as nodes.
+#
+# Boundary nodes: NONE referenced (no defensible existing node — the corpus has no
+#   plasma-oncotic / albumin / hepatobiliary node). This fragment is therefore a
+#   self-contained island: validate_fragment will WARN "island; will not integrate"
+#   (NOT an error). It can later couple via a constitutive lift or an oncotic-
+#   pressure node when one exists. Single-scale (Phase 1).
+# =============================================================================
+
+name: bilirubin_liver_function
+description: >-
+  DRAFT bilirubin metabolism and hepatic synthetic/clearance function as a PhysioMap
+  signed causal graph. Encodes the hepatic bilirubin handling chain — sinusoidal
+  uptake of albumin-bound unconjugated bilirubin, UGT1A1 conjugation, and MRP2/ABCC2
+  canalicular excretion of conjugated bilirubin — together with hepatocyte albumin
+  synthesis and bile-acid handling. Built to reproduce the sign of the bilirubin/
+  albumin changes in Gilbert syndrome, Crigler-Najjar, Dubin-Johnson, and
+  hepatocellular failure. Single-scale (ORGAN_SYSTEM / ORGAN), Phase 1.
+
+nodes:
+  - id: plasma_unconjugated_bilirubin
+    label: plasma unconjugated (indirect) bilirubin concentration
+    scale: organ_system
+    entity_iri: CHEBI:16990            # bilirubin (IXalpha), unconjugated
+    quality_iri: PATO:0000033          # concentration
+  - id: plasma_conjugated_bilirubin
+    label: plasma conjugated (direct) bilirubin concentration
+    scale: organ_system
+    # entity_iri omitted: no clean exact CHEBI class for conjugated/diglucuronide
+    # bilirubin verified in OLS4 (CHEBI:16990 'bilirubin IXalpha' is the unconjugated
+    # parent). IRI left blank rather than fabricated.
+    quality_iri: PATO:0000033          # concentration
+  - id: hepatic_bilirubin_uptake
+    label: hepatocyte sinusoidal uptake of unconjugated bilirubin (OATP1B1/1B3)
+    scale: organ
+    entity_iri: GO:0015723             # bilirubin transport (only BP-level bilirubin-transport term; direction not distinguished)
+    quality_iri: PATO:0000161          # rate
+  - id: hepatic_bilirubin_conjugation
+    label: hepatic bilirubin conjugation (glucuronidation) rate
+    scale: organ
+    entity_iri: GO:0006789             # bilirubin conjugation (bilirubin glucuronide formation)
+    quality_iri: PATO:0000161          # rate
+  - id: ugt1a1_activity
+    label: UGT1A1 (bilirubin UDP-glucuronosyltransferase) activity
+    scale: cellular
+    entity_iri: PR:P22309              # UDP-glucuronosyltransferase 1A1 (human)
+    quality_iri: PATO:0001414          # catalytic activity
+  - id: hepatic_conjugated_bilirubin_excretion
+    label: hepatocyte canalicular excretion of conjugated bilirubin (MRP2/ABCC2)
+    scale: organ
+    quality_iri: PATO:0000161          # rate
+  - id: plasma_albumin
+    label: plasma albumin concentration
+    scale: organ_system
+    entity_iri: CHEBI:166964           # albumin type (OLS4-verified label "albumin type")
+    quality_iri: PATO:0000033          # concentration
+  - id: hepatic_albumin_synthesis
+    label: hepatic (hepatocyte) albumin synthesis rate
+    scale: organ
+    quality_iri: PATO:0000161          # rate
+  - id: plasma_bile_acids
+    label: plasma (and bile) bile-acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:3098             # bile acid (OLS4-verified label "bile acid")
+    quality_iri: PATO:0000033          # concentration
+
+causal_edges:
+  # --- bilirubin uptake -> intracellular substrate available for conjugation ---
+  - source: hepatic_bilirubin_uptake
+    target: plasma_unconjugated_bilirubin
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: hepatocyte sinusoidal uptake of albumin-bound unconjugated bilirubin via OATP1B1/1B3 (SLCO1B1/1B3) clears it from plasma; higher uptake lowers plasma unconjugated bilirubin
+    evidence: "Boron & Boulpaep Medical Physiology (hepatic uptake of bilirubin, OATP1B1/1B3); Harrison's Principles of Internal Medicine, 'Bilirubin metabolism' (Rotor-syndrome impaired uptake -> conjugated/unconjugated hyperbilirubinemia)"
+  - source: hepatic_bilirubin_uptake
+    target: hepatic_bilirubin_conjugation
+    sign: "+"
+    mechanism: uptake delivers unconjugated bilirubin into the hepatocyte, supplying substrate for UGT1A1; higher uptake raises the achievable conjugation flux (substrate supply)
+    evidence: "Boron & Boulpaep Medical Physiology (sequential hepatic bilirubin handling: uptake -> conjugation -> excretion); Lehninger Principles of Biochemistry (heme catabolism / bilirubin glucuronidation)"
+
+  # --- UGT1A1 activity drives conjugation (Gilbert / Crigler-Najjar locus) ---
+  - source: ugt1a1_activity
+    target: hepatic_bilirubin_conjugation
+    sign: "+"
+    causal_evidence: genetic_lof_gof
+    mechanism: UGT1A1 (bilirubin UDP-glucuronosyltransferase) catalyzes glucuronidation of bilirubin; enzyme activity is rate-limiting for the conjugation flux
+    evidence: "Lehninger Principles of Biochemistry (bilirubin glucuronidation by UGT1A1); Harrison's, 'Jaundice' — Gilbert syndrome (OMIM 143500) and Crigler-Najjar type I (OMIM 218800) are UGT1A1 hypomorph/LoF causing unconjugated hyperbilirubinemia"
+
+  # --- conjugation consumes unconjugated, produces conjugated bilirubin ---
+  - source: hepatic_bilirubin_conjugation
+    target: plasma_unconjugated_bilirubin
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: conjugation consumes intracellular unconjugated bilirubin; higher conjugation flux lowers the unconjugated pool that equilibrates with plasma (UGT1A1 LoF therefore RAISES plasma unconjugated bilirubin)
+    evidence: "Harrison's Principles of Internal Medicine, 'Jaundice' (impaired conjugation -> unconjugated hyperbilirubinemia; Gilbert OMIM 143500, Crigler-Najjar OMIM 218800); Boron & Boulpaep Medical Physiology"
+  - source: hepatic_bilirubin_conjugation
+    target: plasma_conjugated_bilirubin
+    sign: "+"
+    causal_evidence: genetic_lof_gof
+    mechanism: conjugation produces bilirubin glucuronides (conjugated/direct bilirubin); higher conjugation flux raises the conjugated pool available for canalicular excretion and, at steady state, the small fraction refluxing to plasma
+    evidence: "Lehninger Principles of Biochemistry (formation of bilirubin diglucuronide); Boron & Boulpaep Medical Physiology (conjugated bilirubin formation); Crigler-Najjar type I / Gilbert syndrome (UGT1A1 LoF/hypomorph, OMIM 218800/143500) present with reduced plasma conjugated bilirubin alongside unconjugated hyperbilirubinemia, confirming conjugation sets the conjugated-bilirubin production term"
+
+  # --- canalicular excretion clears conjugated bilirubin (Dubin-Johnson locus) ---
+  - source: hepatic_conjugated_bilirubin_excretion
+    target: plasma_conjugated_bilirubin
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: MRP2/ABCC2 actively transports conjugated bilirubin across the canalicular membrane into bile; higher excretion clears the hepatocyte conjugated pool and lowers plasma conjugated bilirubin (MRP2 LoF therefore RAISES plasma conjugated bilirubin)
+    evidence: "Boron & Boulpaep Medical Physiology (canalicular MRP2/ABCC2 export of conjugated bilirubin); Harrison's, 'Jaundice' — Dubin-Johnson syndrome (ABCC2/MRP2 LoF; OMIM 237500) causes conjugated hyperbilirubinemia"
+
+  # --- bile-acid handling (hepatocyte synthesis + canalicular export to bile) ---
+  - source: hepatic_conjugated_bilirubin_excretion
+    target: plasma_bile_acids
+    sign: "?"
+    mechanism: "ambiguous: MRP2/ABCC2 export of bilirubin glucuronides is not the principal bile-acid pump (BSEP/ABCB11 handles bile acids), but cholestatic loss of canalicular secretory function broadly reduces biliary clearance and can raise plasma bile acids; the net partial w.r.t. the bilirubin-excretion node alone is not determinate"
+    evidence: "Boron & Boulpaep Medical Physiology (distinct canalicular transporters: MRP2 for organic anions/conjugated bilirubin vs BSEP for bile acids); flagged '?' per PhysioMap policy (do not fabricate a determinate sign)"
+
+  # --- hepatic synthetic function: albumin (liver-failure marker) ---
+  - source: hepatic_albumin_synthesis
+    target: plasma_albumin
+    sign: "+"
+    mechanism: albumin is synthesized almost exclusively by hepatocytes and secreted into plasma; synthesis rate sets the steady-state plasma albumin concentration (reduced hepatic synthetic function in liver failure -> hypoalbuminemia)
+    evidence: "Boron & Boulpaep Medical Physiology (hepatic protein synthesis; albumin); Harrison's Principles of Internal Medicine (hypoalbuminemia in chronic liver failure / cirrhosis as a marker of synthetic dysfunction) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-155 (26.2: Body Fluids and Fluid Compartment): 'a decrease in osmotic pressure in chronic and severe liver disease, where the liver is unable to manufacture plasma proteins ... A decrease in the normal levels of plasma proteins results in a decrease of colloid osmotic pressure.'; OpenStax Biology 2e §bio-40.2 (Components of the Blood): 'Human serum albumin is the most abundant protein in human blood plasma and is synthesized in the liver.'"
+
+  # --- albumin as the plasma carrier of unconjugated bilirubin ---
+  - source: plasma_albumin
+    target: plasma_unconjugated_bilirubin
+    sign: "+"
+    mechanism: unconjugated bilirubin is water-insoluble and circulates tightly bound to albumin; higher plasma albumin increases the bound-bilirubin carrying capacity, raising measured total plasma unconjugated bilirubin (and conversely lowering free bilirubin)
+    evidence: "Boron & Boulpaep Medical Physiology (albumin binding of unconjugated bilirubin); Lehninger Principles of Biochemistry (albumin transport of bilirubin); clinical correlate: low albumin / displacers raise free bilirubin (kernicterus risk)"
+
+constitutive_edges: []   # none — single-scale fragment (no cross-scale lift this phase)

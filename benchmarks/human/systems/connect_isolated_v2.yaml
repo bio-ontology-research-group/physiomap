@@ -1,0 +1,566 @@
+# *** DRAFT FOR REVIEW *** connect-isolated round 2 (lone nodes + small islands)
+# Every edge is interventional (do() semantics); every citation was checked against
+# its real source (PubMed concordance / textbook WebSearch). nodes: [] -> reuse existing.
+# See benchmarks/results/connect_isolated_v2.md
+name: connect_isolated_v2_human
+description: Citation-verified causal edges connecting previously-isolated lone nodes / small islands to the core (human-scale endpoints); DRAFT.
+nodes: []
+causal_edges:
+- source: plasma_aspartate
+  target: plasma_n_acetylaspartate
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'aspartate concentration (substrate availability) -> NAT8L N-acetyltransferase disposition -> N-acetylation process -> plasma N-acetylaspartate concentration'
+  evidence: 'PMID 32545833; (Introduction; Antioxidants (Basel) 2020;9(6):522); “Aspartate N-acetyltransferase (NAT8L) is a neuronal enzyme producing N-acetylaspartate (NAA) from acetyl-CoA and aspartate” | Aspartate is the amino-acid substrate from which NAT8L synthesises N-acetylaspartate, so do(raise aspartate) raises NAA (sign +). [citations PubMed-verified]'
+- source: slc6a6_activity
+  target: plasma_taurine
+  sign: +
+  causal_evidence: genetic_lof_gof
+  mechanism: 'SLC6A6 (TauT) transport activity (Na/Cl-coupled taurine uptake/renal reabsorption) -> taurine retention process -> plasma taurine concentration'
+  evidence: 'PMID 31345061; (Abstract; Biallelic mutation of human SLC6A6 encoding the taurine transporter TAUT (2019)); “taurine levels were severely reduced in plasma, skeletal muscle, and brain” | Biallelic SLC6A6 (TAUT) loss-of-function lowers plasma taurine, so SLC6A6 transport activity raises plasma taurine (sign +); the monogenic LoF is a clean do(). [citations PubMed-verified]'
+- source: plasma_methionine
+  target: plasma_methionine_sulfoxide
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'methionine concentration (oxidizable thioether substrate) -> susceptibility to ROS oxidation -> oxidation process (addition of an oxygen atom) -> methionine sulfoxide concentration'
+  evidence: 'PMID 30545068; (Introduction; Antioxidants (Basel) 2018;7(12):191); “Methionine side chains can also be oxidized by reactive oxygen species. Methionine oxidation, by the addition of an extra oxygen atom, leads to the generation of methionine sulfoxide.” | Methionine is the substrate that ROS oxidise to methionine sulfoxide, so do(raise methionine) raises the oxidisable pool and methionine sulfoxide (sign +). [citations PubMed-verified]'
+- source: dystrophin_level
+  target: plasma_3_methylhistidine
+  sign: '-'
+  causal_evidence: genetic_lof_gof
+  mechanism: 'dystrophin level (sarcolemmal integrity) -> when low, myofibrillar (actin/myosin) protein catabolism rises -> release of non-reutilised 3-methylhistidine -> plasma/urinary 3-methylhistidine concentration'
+  evidence: 'PMID 477220; (Abstract; Increased turnover of muscle contractile proteins in Duchenne muscular dystrophy as assessed by 3-methylhistidine and creatinine excretion (1979)); “expression of the data to allow for differences in muscle mass gives fractional degradation rates 2--3 times higher than in age-matched controls” | Dystrophin LoF (Duchenne) raises myofibrillar protein degradation, the source of 3-methylhistidine (occurs only in actin/myosin, not reutilised), so do(lower dystrophin) raises 3-methylhistidine (sign -). [citations PubMed-verified]'
+- source: plasma_carnosine
+  target: plasma_histidine
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'carnosine concentration (beta-alanyl-histidine dipeptide substrate) -> carnosinase (CN1) dipeptidase disposition -> hydrolysis process liberating the C-terminal histidine -> plasma histidine concentration'
+  evidence: 'Adelmann et al., Association Between Serum Carnosinase Concentration and Activity and Renal Function Impairment, Front. Pharmacol. 2022;13:899057 (open-access review); (Section: serum carnosinase substrates); “The major substrate of CN1, carnosine, consists of beta-alanine and histidine...” | Carnosine is the beta-alanyl-histidine dipeptide hydrolysed by carnosinase (CN1) into its constituents, so do(raise carnosine substrate) raises liberated histidine (sign +).'
+- source: plasma_ethanolamine
+  target: plasma_phosphoethanolamine
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'ethanolamine concentration (substrate) -> ethanolamine kinase (ETNK1/ETNK2) catalytic disposition -> ATP-dependent phosphorylation process (Kennedy-pathway first step) -> phosphoethanolamine concentration'
+  evidence: 'Phosphoethanolamine: a translational journey from biological process and physiopathological effects to therapeutical innovation, Front. Pharmacol. 2026;17:1790807 (open-access mini-review); (Section: Kennedy/CDP-ethanolamine pathway); “ethanolamine kinase-1 (ETNK1) and ethanolamine kinase-2 (ETNK2), choline kinase-A (CHKA) and choline kinase-B (CHKB) are four enzymes responsible for the conversion of ETN to pETN.” | Ethanolamine (ETN) is phosphorylated by ethanolamine kinase to phosphoethanolamine (pETN), so do(raise ethanolamine substrate) raises phosphoethanolamine (sign +).'
+- source: kynureninase_activity
+  target: urinary_3_hydroxykynurenine
+  sign: '-'
+  causal_evidence: genetic_lof_gof
+  mechanism: 'kynureninase (KYNU) catalytic activity -> cleavage of L-3-hydroxykynurenine to 3-hydroxyanthranilate -> consumption of 3-hydroxykynurenine; when activity falls (KYNU LoF) the substrate accumulates and spills into urine -> urinary 3-hydroxykynurenine excretion'
+  evidence: 'PMID 17334708; (Abstract; Xanthurenic aciduria due to a mutation in KYNU encoding kynureninase (2007)); “Massive urinary excretion of xanthurenic acid, 3-hydroxykynurenine and kynurenine...suggested kynureninase deficiency.” | KYNU loss-of-function (a clean genetic do()) causes massive urinary 3-hydroxykynurenine, so kynureninase activity decreases urinary 3-hydroxykynurenine (sign -). [citations PubMed-verified]'
+- source: dystrophin_level
+  target: urinary_3_methylhistidine
+  sign: '-'
+  causal_evidence: genetic_lof_gof
+  mechanism: 'Dystrophin loss (DMD, a natural single-gene do()) -> sarcolemmal fragility/myofibrillar damage -> accelerated actin/myosin (myofibrillar) catabolism -> increased release of the non-reutilized post-translational residue 3-methylhistidine -> increased urinary 3-methylhistidine excretion (lower dystrophin -> higher 3-MeHis).'
+  evidence: 'PMID 6780020; (Abstract); “The ratio of 3-methylhistidine:creatinine excretion, a measure of the fractional catabolic rate of myofibrillar protein was increased in severe injury, thyrotoxicosis, neoplastic disease, prednisolone administration, and sometimes Duchenne muscular dystrophy.” | Urinary 3-methylhistidine excretion rises with increased myofibrillar protein catabolism and is increased in Duchenne muscular dystrophy (dystrophin loss), supporting do(dystrophin down) -> 3-MeHis up (sign -). [citations PubMed-verified]'
+- source: alpha_1_3_fucosyltransferase_activity
+  target: neutrophil_extravasation
+  sign: +
+  causal_evidence: perturbation
+  mechanism: 'alpha-1,3-fucosyltransferase (FUT7) catalytic activity (disposition) fucosylates sialyl-LacNAc to synthesize the sialyl-Lewis-X selectin ligand (process), increasing the E/P-selectin-mediated tethering/rolling and extravasation of leukocytes (quality)'
+  evidence: 'PMID 23192350; (Results/Conclusion); “FUT9 shRNA alone also reduced leukocyte rolling on L-cells bearing E-selectin” | Silencing an alpha-1,3-fucosyltransferase (which forms sialyl-Lewis-X) reduces E-selectin-mediated leukocyte rolling, so increasing fucosyltransferase activity increases selectin-mediated leukocyte adhesion/extravasation (do(enzyme up) -> extravasation up, sign +) [citations PubMed-verified]'
+- source: cystathionine_gamma_lyase_activity
+  target: csf_cystathionine
+  sign: '-'
+  causal_evidence: genetic_lof_gof
+  mechanism: 'cystathionine gamma-lyase (CTH) catalytic activity (disposition) cleaves cystathionine to cysteine (process); Mendelian loss of CTH activity removes this disposal step, so cystathionine accumulates systemically (highest in brain/CNS) and rises in CSF (quality up) — decreased enzyme activity -> increased metabolite'
+  evidence: 'PMID 19428278; (Abstract); “More marked cystathioninuria and hypercystathioninemia of genetic origin is caused by mutations that decrease the activity of cystathionine γ-lyase (CTH; EC 4.4.1.1)” | Mutations that decrease CTH activity cause cystathionine to accumulate (cystathioninuria/hypercystathioninemia); thus do(CTH activity down) -> cystathionine up, edge sign - (enzyme activity inversely sets its substrate/product cystathionine level) [citations PubMed-verified]'
+- source: plasma_albumin
+  target: csf_protein
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'albumin is synthesized only in the liver and reaches CSF solely by diffusion across the blood-CSF barrier (process); since albumin is the dominant CSF protein (35-80% of total) and is entirely blood-derived, raising plasma albumin (or barrier permeability to it) raises CSF total protein (quality up) — sign +'
+  evidence: 'Gonzalez-Quevedo A. Editorial on ''Cerebrospinal fluid total protein reference intervals derived from 20 years of patient data''. J Lab Precis Med 2018; (Editorial, sections on CSF protein origin and barrier permeability); “Increased TP in the CSF can be related to: (I) increased entry of plasma proteins due to increased permeability of the blood-CSF barrier” | CSF total protein rises through increased entry of plasma proteins (chiefly albumin, the dominant blood-derived CSF protein) across the blood-CSF barrier, so do(plasma albumin / its barrier transfer up) -> CSF total protein up, sign +'
+- source: plasma_albumin
+  target: csf_albumin
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'albumin is synthesized only in the liver (not in the CNS), so all CSF albumin derives from plasma by diffusion across the blood-CSF barrier (process); raising plasma albumin raises CSF albumin (quality up) — sign +'
+  evidence: 'Gonzalez-Quevedo A. Editorial on ''Cerebrospinal fluid total protein reference intervals derived from 20 years of patient data''. J Lab Precis Med 2018; (Editorial, section on CSF protein origin); “All blood-derived CSF proteins can be synthesized in peripheral organs and in the CNS, with the exception of albumin which is only synthesized in the liver.” | Albumin is synthesized exclusively in the liver, so CSF albumin is entirely plasma-derived (it enters CSF only by transfer from blood); therefore do(plasma albumin up) -> CSF albumin up, sign +'
+- source: csf_ace
+  target: angiotensin_II
+  sign: +
+  causal_evidence: pharmacological
+  mechanism: 'ACE is a peptidyl-dipeptidase that cleaves a C-terminal dipeptide from angiotensin I to generate angiotensin II; ACE inhibitors lower angiotensin II'
+  evidence: 'StatPearls (NCBI Bookshelf), Physiology, Renin Angiotensin System, NBK470410; (Section: Angiotensin-Converting Enzyme); “ACE cleaves 2 amino acids from the C-terminus of angiotensin I, generating the biologically active peptide angiotensin II.” | do(increase ACE activity) -> increased angiotensin II formation (+); ACE inhibitors decrease it'
+- source: sting_activity
+  target: csf_interferon_alpha
+  sign: +
+  causal_evidence: genetic_lof_gof
+  mechanism: 'cGAS-STING activation (cGAMP ligand or STING1 gain-of-function as in SAVI) drives IRF3-dependent transcription and production of type I interferon (IFN-alpha)'
+  evidence: 'PMID 35561451; “STING-driven IFN-α production was similar in both sexes, preserved with aging” | do(activate STING) -> increased IFN-alpha production (+); STING1 GoF (SAVI) causes constitutive IFN-alpha [citations PubMed-verified]'
+- source: plasma_3_ketoacyl_coa_thiolase
+  target: hepatic_ketogenesis
+  sign: +
+  causal_evidence: genetic_lof_gof
+  mechanism: 'long-chain 3-ketoacyl-CoA thiolase (MTP) activity -> completes last step of long-chain fatty-acid beta-oxidation -> supplies acetyl-CoA for hepatic ketogenesis; LoF deficiency = natural do() causing hypoketotic hypoglycemia'
+  evidence: 'GeneReviews (Long-Chain Hydroxyacyl-CoA Dehydrogenase Deficiency / Trifunctional Protein Deficiency); (NCBI Bookshelf NBK583531, Clinical Description; ''The last three [steps of beta-oxidation] are catalyzed by the mitochondrial trifunctional protein (TFP)''); “recurrent hypoketotic hypoglycemia precipitated by infection or fasting in infancy” | TFP (containing long-chain 3-ketoacyl-CoA thiolase) deficiency produces a hypoketotic state, so its activity positively drives ketogenesis (do(loss)->ketones down).'
+- source: plasma_apolipoprotein_a4
+  target: plasma_chylomicron
+  sign: '-'
+  causal_evidence: perturbation
+  mechanism: 'apoA-IV on nascent chylomicrons -> normal chylomicron particle size and lipolytic clearance; apoA-IV knockout yields larger, slowly cleared chylomicrons -> apoA-IV lowers circulating chylomicron level'
+  evidence: 'PMID 22207575; (Abstract (Apolipoprotein A-IV regulates chylomicron metabolism-mechanism and function)); “A-IV KO resulted in the secretion of larger chylomicrons from the intestine into the lymph, and those chylomicrons were cleared from the plasma more slowly than wild-type chylomicrons.” | do(remove apoA-IV) raises/retains plasma chylomicrons, so apoA-IV activity negatively affects plasma chylomicron level. [citations PubMed-verified]'
+- source: plasma_arachidonic_acid
+  target: plasma_mead_acid
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'low arachidonic acid (essential-fatty-acid deficiency) de-represses the shared delta-6/delta-5 desaturase-elongase, which instead elongates/desaturates oleic acid to Mead acid -> Mead acid rises (basis of the Holman triene:tetraene ratio)'
+  evidence: 'PMID 24184513; (Abstract (Identification of genes and pathways involved in the synthesis of Mead acid (20:3n-9), an indicator of essential fatty acid deficiency)); “Mead acid (20:3n-9) is synthesized from oleic acid during a state of essential fatty acid deficiency (EFAD).” | When essential fatty acids (the arachidonic-acid supply) are low, Mead acid synthesis turns on, i.e. do(lower arachidonic) increases Mead acid. [citations PubMed-verified]'
+- source: plasma_myristic_acid
+  target: ldl_cholesterol
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'dietary myristic acid (14:0) downregulates hepatic LDL-receptor activity and raises serum total/LDL cholesterol in controlled human feeding trials (a controlled dietary do())'
+  evidence: 'PMID 8148355; (Abstract (Impact of myristic acid versus palmitic acid on serum lipid and lipoprotein levels in healthy women and men; Zock, de Vries, Katan)); “Mean serum cholesterol was 4.53 mmol/L on the high-oleic acid diet, 4.96 mmol/L on the palmitic acid diet, and 5.19 mmol/L on the myristic acid diet (P < .0001 for all comparisons).” | Controlled substitution to a myristic-acid diet raised serum (and LDL) cholesterol the most, so myristic acid positively affects LDL-cholesterol. [citations PubMed-verified]'
+- source: carboxylesterase_1_activity
+  target: plasma_triglycerides
+  sign: '-'
+  causal_evidence: genetic_lof_gof
+  mechanism: 'hepatic CES1 hydrolyzes intracellular triglycerides; hepatic CES1 knockdown causes hepatic TG accumulation with increased VLDL secretion and plasma lipids -> CES1 activity lowers circulating triglycerides'
+  evidence: 'PMID 24038130; (Abstract/Results (Hepatic carboxylesterase 1 is essential for both normal and farnesoid X receptor-controlled lipid homeostasis)); “knockdown of hepatic CES1 increased hepatic TG and plasma cholesterol levels” | do(reduce CES1) raises hepatic/plasma lipids (TG), so CES1 activity negatively affects plasma triglycerides. [citations PubMed-verified]'
+- source: plasma_cholinesterase_activity
+  target: ghrelin
+  sign: '-'
+  causal_evidence: perturbation
+  mechanism: 'plasma butyrylcholinesterase deacylates (hydrolyzes the octanoyl group of) acyl-ghrelin, inactivating it; BChE gene deletion raises plasma ghrelin and BChE gene transfer sharply lowers it'
+  evidence: 'PMID 25646463; (Abstract (Plasma butyrylcholinesterase regulates ghrelin to control aggression, PNAS)); “C57BL/6 mice with BChE gene deletion exhibited increased ghrelin and fought more readily than wild-type animals.” | do(delete BChE) raises plasma ghrelin (and gene transfer lowers it), so BChE activity negatively affects ghrelin. [citations PubMed-verified]'
+- source: alpha_n_acetylgalactosaminidase_activity
+  target: tn_antigen_level
+  sign: '-'
+  causal_evidence: genetic_lof_gof
+  mechanism: 'alpha-N-acetylgalactosaminidase (NAGA) cleaves terminal alpha-GalNAc from Tn-antigen glycopeptides; LoF deficiency (Kanzaki disease) leads to lysosomal Tn-antigen accumulation -> NAGA activity lowers Tn-antigen'
+  evidence: 'PMID 14685826; (Abstract (Structural and immunocytochemical studies on alpha-N-acetylgalactosaminidase deficiency (Schindler/Kanzaki disease))); “Immunocytochemical analysis revealed that the main lysosomal accumulated material in cultured fibroblasts from patients with Kanzaki disease is Tn-antigen.” | do(loss of NAGA) accumulates Tn-antigen, so NAGA activity negatively affects Tn-antigen level. [citations PubMed-verified]'
+- source: mannosyl_oligosaccharide_glucosidase_activity
+  target: plasma_immunoglobulin
+  sign: +
+  causal_evidence: genetic_lof_gof
+  mechanism: 'MOGS (glucosidase I) trims glucose from N-glycans during glycoprotein maturation; MOGS LoF (CDG-IIb) impairs immunoglobulin glycosylation/production -> hypogammaglobulinemia, so MOGS activity supports plasma immunoglobulin'
+  evidence: 'PMID 30587846; (Abstract (Compound heterozygous variants in MOGS inducing congenital disorders of glycosylation (CDG) IIb)); “Low immunoglobulin was discovered in the siblings.” | do(loss of MOGS) lowers immunoglobulin (hypogammaglobulinemia), so MOGS activity positively affects plasma immunoglobulin. [citations PubMed-verified]'
+- source: arylsulfatase_a_activity
+  target: tissue_galactosylceramide
+  sign: +
+  causal_evidence: genetic_lof_gof
+  mechanism: 'arylsulfatase A desulfates sulfatide (3-O-sulfogalactosylceramide) to its product galactosylceramide; enzyme activity directly produces galactosylceramide (LoF blocks the conversion, a natural do())'
+  evidence: 'PMID 19224915; (Abstract (Saposin B-dependent reconstitution of arylsulfatase A activity in vitro and in cell culture models of metachromatic leukodystrophy)); “Arylsulfatase A (ASA) catalyzes the intralysosomal desulfation of 3-O-sulfogalactosylceramide (sulfatide) to galactosylceramide.” | ASA activity produces galactosylceramide from sulfatide, so do(increase ASA) increases the galactosylceramide product (positive enzyme->product edge). [citations PubMed-verified]'
+- source: plasma_ck_mb
+  target: plasma_creatine_kinase
+  sign: +
+  causal_evidence: perturbation
+  mechanism: 'CK-MB is one isoenzyme fraction of circulating total CK; a rise in the MB fraction (e.g. myocardial release) adds to and raises measured total plasma creatine kinase activity'
+  evidence: 'PMID 3510780; (Results / CK-MB mass per unit total CK); “CK-MB in skeletal muscles ranged from 0.9 to 44 ng/U of total CK; the mean for myocardium was 202 ng/U.” | CK-MB is expressed and measured as a fraction (ng) per unit of total CK activity, so increasing CK-MB increases total plasma CK (sign +) [citations PubMed-verified]'
+- source: lchad_mtp_activity
+  target: urinary_3_hydroxysebacic_acid
+  sign: '-'
+  causal_evidence: genetic_lof_gof
+  mechanism: 'LCHAD/MTP deficiency blocks beta-oxidation of long-chain 3-hydroxyacyl-CoAs; accumulating 3-hydroxy fatty acids undergo omega-oxidation to C6-C14 3-hydroxydicarboxylic acids (incl. C10 3-hydroxysebacic) excreted in urine'
+  evidence: 'PMID 2044590; (Title and case description); “Her urine contained large amounts of C6-C14 3-hydroxydicarboxylic acids.” | the paper documents ''3-Hydroxydicarboxylic aciduria due to long-chain 3-hydroxyacyl-coenzyme A dehydrogenase deficiency'' with large urinary C6-C14 3-hydroxydicarboxylic acids (incl. C10 3-hydroxysebacic), so reduced LCHAD/MTP activity raises this metabolite (sign -) [citations PubMed-verified]'
+- source: urinary_d_lactate
+  target: arterial_ph
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'D-lactate (whose urinary excretion tracks systemic D-lactate load) is a metabolic acid; systemic absorption produces anion-gap metabolic acidosis, lowering arterial blood pH'
+  evidence: 'PMID 35783896; (Abstract); “Systemic absorption of D-lactic acid results in anion-gap metabolic acidosis (AGMA), LA, and neurologic symptoms.” | absorbed D-lactic acid causes anion-gap metabolic acidosis (decreased pH), so increased D-lactate body/urine load lowers arterial pH (sign -) [citations PubMed-verified]'
+- source: thyrotroph_tsh_secretion
+  target: plasma_glycoprotein_hormone_alpha_subunit
+  sign: +
+  causal_evidence: pharmacological
+  mechanism: 'TRH-driven thyrotroph secretory activity -> co-secretion disposition of the shared glycoprotein-hormone alpha subunit -> exocytosis process -> plasma free alpha-subunit concentration'
+  evidence: 'PMID 1688869; (Results/Abstract); “alpha-Subunit levels rose after TRH administration in all men with IHH to a peak level of 0.86 +/- 0.25 ng/ml” | TRH administration (do() stimulus driving pituitary thyrotroph/gonadotroph glycoprotein-hormone secretion) raised serum free alpha-subunit, so thyrotroph secretory drive -(+)-> plasma glycoprotein-hormone alpha subunit. [citations PubMed-verified]'
+- source: plasma_prostaglandin_e2
+  target: urinary_pge2_metabolite
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'circulating PGE2 -> 15-PGDH catabolism disposition -> oxidation to the stable end-metabolite PGE-M and renal excretion process -> urinary PGE2-metabolite concentration'
+  evidence: 'PMID 16115954; (Introduction); “PGE2 is metabolized to PGE-M in a series of steps...urinary PGE-M can be used as an index of systemic PGE2 production” | Urinary PGE-M is the stable catabolic end-product of systemic PGE2 and rises with systemic PGE2 production, so plasma PGE2 -(+)-> urinary PGE2 metabolite. [citations PubMed-verified]'
+- source: plasma_ethanol
+  target: plasma_acetaldehyde
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'ethanol concentration -> alcohol dehydrogenase (ADH) oxidation disposition -> ethanol oxidation process -> acetaldehyde concentration'
+  evidence: 'PMID 15521590; (Abstract); “The results indicated higher blood acetaldehyde and ethanol concentrations in alcoholic individuals acutely poisoned with ethanol in comparison to acutely poisoned social drinkers.” | Ethanol is oxidized by ADH to acetaldehyde and higher blood ethanol accompanies higher blood acetaldehyde, so ethanol -(+)-> plasma acetaldehyde. [citations PubMed-verified]'
+- source: blood_ethylene_glycol
+  target: plasma_glycolate
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'ethylene glycol concentration -> ADH/ALDH oxidation disposition -> sequential oxidation to glycolaldehyde then glycolic acid -> plasma glycolate concentration'
+  evidence: 'PMID 3783803; (Abstract); “Glycolic acid is the ethylene glycol (EG) metabolite that accumulates in the highest concentrations in the blood and may be the major contributing factor to the acute toxicity of EG.” | Ethylene glycol is metabolized to glycolic acid which accumulates in blood, so blood ethylene glycol -(+)-> plasma glycolate. [citations PubMed-verified]'
+- source: plasma_propylene_glycol
+  target: plasma_lactate
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'propylene glycol concentration -> alcohol dehydrogenase oxidation disposition -> oxidation via lactaldehyde to lactic acid process -> plasma lactate concentration'
+  evidence: 'PMID 20099997; (Abstract); “Propylene glycol is eliminated from the body by oxidation through alcohol dehydrogenase to form lactic acid.” | Propylene glycol is oxidized by ADH to lactic acid, so blood propylene glycol -(+)-> plasma lactate. [citations PubMed-verified]'
+- source: plasma_sorbitol
+  target: plasma_myo_inositol
+  sign: '-'
+  causal_evidence: pharmacological
+  mechanism: 'polyol-pathway sorbitol accumulation -> increased intracellular osmolality / reduced myo-inositol uptake disposition -> competitive myo-inositol depletion process -> lowered myo-inositol level'
+  evidence: 'PMID 6438438; (Abstract); “Polyol pathway blockade with Sorbinil (Pfizer, Connecticut) prevented nerve myoinositol reduction in both groups of animals.” | Aldose-reductase inhibition (do() that lowers sorbitol accumulation) prevents myo-inositol depletion, establishing the coupling sorbitol -(-)-> myo-inositol. [citations PubMed-verified]'
+- source: stroke_volume
+  target: systolic_blood_pressure
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'left-ventricular stroke volume (volume ejected into the aorta per beat) raises the peak aortic/arterial pressure during systole; for a given arterial compliance, larger ejected volume produces a higher systolic pressure.'
+  evidence: 'StatPearls (NCBI Bookshelf), Physiology, Pulse Pressure, NBK482408; (Physiology, Pulse Pressure, StatPearls (NCBI Bookshelf NBK482408), Pathophysiology section); “As he or she continues to exercise, the systolic pressure will progressively increase due to an increase in stroke volume and cardiac output.” | Increasing stroke volume raises systolic blood pressure (do(stroke_volume)->systolic_blood_pressure, sign +).'
+- source: total_peripheral_resistance
+  target: diastolic_blood_pressure
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'total peripheral (arteriolar) resistance sets the rate of diastolic runoff from the arterial reservoir; higher resistance slows runoff and sustains a higher pressure trough during diastole, so diastolic pressure rises with TPR.'
+  evidence: 'StatPearls (NCBI Bookshelf), Physiology, Pulse Pressure, NBK482408; (Physiology, Pulse Pressure, StatPearls (NCBI Bookshelf NBK482408), Pathophysiology section); “Diastolic pressure, on the contrary, will continually decrease due to a decrease in the total peripheral resistance.” | Lowering total peripheral resistance lowers diastolic pressure; equivalently raising TPR raises it (do(TPR)->diastolic_blood_pressure, sign +).'
+- source: superoxide_dismutase_activity
+  target: mean_arterial_pressure
+  sign: '-'
+  causal_evidence: genetic_lof_gof
+  mechanism: 'superoxide dismutase activity scavenges vascular superoxide, which otherwise reacts with endothelial NO; higher SOD activity preserves NO bioavailability -> vasodilation -> lower arterial pressure (ecSOD knockout shows the converse, elevated BP).'
+  evidence: 'PMID 12933702; (Abstract); “Blood pressure was significantly higher in ecSOD-/- than ecSOD+/+ mice.” | Genetic loss of SOD activity raises blood pressure, so SOD activity lowers mean arterial pressure (do(SOD activity)->mean_arterial_pressure, sign -). [citations PubMed-verified]'
+- source: neutrophil_extravasation
+  target: myeloperoxidase_activity
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'MPO is stored in neutrophil azurophilic granules; recruitment/extravasation of activated neutrophils to tissue increases the number of degranulating neutrophils, raising extracellular MPO catalytic activity at the site.'
+  evidence: 'PMID 21036525; (Abstract); “The activated neutrophils release myeloperoxidase (MPO), a specific enzyme with strong oxidative activity.” | Neutrophils are the source of MPO; increasing neutrophil recruitment/activation increases MPO activity (do(neutrophil_extravasation)->myeloperoxidase_activity, sign +). [citations PubMed-verified]'
+- source: ocrl1_activity
+  target: renal_calcium_reabsorption
+  sign: +
+  causal_evidence: genetic_lof_gof
+  mechanism: 'OCRL-1 (PI(4,5)P2 5-phosphatase) supports proximal-tubule endocytic/transport function; loss of OCRL activity (Lowe syndrome) causes a selective proximal tubulopathy with hypercalciuria, i.e. reduced renal calcium reabsorption, so OCRL activity supports calcium reabsorption.'
+  evidence: 'PMID 18480301; (Abstract); “Patients with Lowe syndrome do not have renal Fanconi syndrome but a selective proximal tubulopathy, variable in extent and dominated by low molecular weight proteinuria and hypercalciuria.” | Loss of OCRL activity produces hypercalciuria (decreased tubular calcium reabsorption), so OCRL activity increases renal calcium reabsorption (do(OCRL activity)->renal_calcium_reabsorption, sign +). [citations PubMed-verified]'
+- source: il6
+  target: plasma_alpha_globulin
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'IL-6 is the principal inducer of hepatic acute-phase protein synthesis; the alpha-globulin electrophoretic fraction is dominated by acute-phase reactants (alpha-1-antitrypsin, alpha-1-antichymotrypsin, haptoglobin), so IL-6 raises the alpha-globulin concentration.'
+  evidence: 'PMID 2472425; (Abstract); “Purified human fibroblast and recombinant IFN beta 2/IL-6 each mediate a specific increase in steady-state levels of alpha 1 AT mRNA and a corresponding increase in net synthesis of alpha 1 AT in primary cultures of human peripheral blood monocytes as well as in HepG2 and Hep3B cells.” | IL-6 increases synthesis of alpha-1-antitrypsin (the principal alpha-1-globulin), so IL-6 raises the plasma alpha-globulin fraction (do(IL-6)->plasma_alpha_globulin, sign +). [citations PubMed-verified]'
+- source: il1beta
+  target: plasma_serum_amyloid_a
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'IL-1 beta is a major cytokine inducer of hepatic serum amyloid A acute-phase synthesis; raising circulating IL-1 beta increases hepatocyte SAA transcription/synthesis and thus plasma SAA.'
+  evidence: 'PMID 1706240; (Abstract); “IL-1 is the major stimulating cytokine increasing SAA synthesis by a factor in excess of 100-fold.” | IL-1 (beta) strongly increases serum amyloid A synthesis, so raising IL-1 beta raises plasma SAA (do(IL-1 beta)->plasma_serum_amyloid_a, sign +). [citations PubMed-verified]'
+- source: plasma_prealbumin
+  target: plasma_retinol_binding_protein
+  sign: +
+  causal_evidence: genetic_lof_gof
+  mechanism: 'plasma RBP circulates bound to transthyretin (prealbumin) in a 1:1 complex; this binding prevents glomerular filtration of the low-molecular-weight RBP, extending its plasma half-life, so higher transthyretin retains more RBP in plasma (TTR-deficient mice lose RBP renally and have low plasma RBP).'
+  evidence: 'PMID 11058748; (Abstract); “Transthyretin (TTR, formerly called prealbumin), one of the transporters of the hormone thyroxine and the lipocalin retinol-binding protein (RBP), the specific carrier of the vitamin, are known to form, under physiological conditions, a macromolecular complex that is believed to play an important physiological role: prevention of glomerular filtration of the low molecular weight RBP in the kidneys.” | Transthyretin (prealbumin) binds RBP and prevents its renal filtration, raising plasma RBP (do(plasma_prealbumin)->plasma_retinol_binding_protein, sign +). [citations PubMed-verified]'
+- source: plasma_alpha1_antitrypsin
+  target: trypsin_activity
+  sign: '-'
+  causal_evidence: genetic_lof_gof
+  mechanism: 'quality(plasma A1AT concentration) -> disposition(serine-protease inhibitor / serpin) -> process(covalent suicide-complex formation with trypsin) -> quality(trypsin catalytic activity decreased); A1AT LoF deficiency is a natural do() raising unopposed protease activity'
+  evidence: 'Harper''s Illustrated Biochemistry (Rodwell et al.), 31st ed.; (Chapter on Plasma Proteins / Protease inhibitors (alpha-1-antitrypsin)); “The first identified role for alpha-1 antitrypsin was to control the activity of the digestive enzyme trypsin.” | A1AT is the serpin that inhibits trypsin, so raising plasma A1AT lowers trypsin catalytic activity (do(A1AT up) -> trypsin activity down).'
+- source: plasma_progranulin
+  target: tnf_alpha
+  sign: '-'
+  causal_evidence: genetic_lof_gof
+  mechanism: 'quality(progranulin level) -> disposition(negative regulator of TNF-mediated inflammation) -> process(microglial/macrophage proinflammatory cytokine production) -> quality(TNF-alpha concentration); Grn LoF is a natural do() that amplifies the inflammatory/cytokine response'
+  evidence: 'PMID 23041626; “Grn-/- microglia treated with LPS/IFN-gamma exhibited an amplified inflammatory response” | Progranulin deficiency (do: progranulin down) amplifies the proinflammatory (TNF) response, so progranulin negatively regulates TNF (source up -> TNF down). [citations PubMed-verified]'
+- source: plasma_tenascin_c
+  target: tnf_alpha
+  sign: +
+  causal_evidence: perturbation
+  mechanism: 'quality(tenascin-C level) -> disposition(endogenous TLR4 ligand / post-transcriptional regulator via miR-155) -> process(macrophage proinflammatory cytokine translation) -> quality(TNF-alpha concentration); tenascin-C knockout/addition experiments provide the do()'
+  evidence: 'PMID 23084751; “Tenascin-C enables macrophage translation of proinflammatory cytokines upon LPS activation of toll-like receptor 4 (TLR4)” | Tenascin-C drives macrophage proinflammatory cytokine (TNF-alpha) production, so do(tenascin-C up) -> TNF-alpha up. [citations PubMed-verified]'
+- source: plasma_urate
+  target: plasma_allantoin
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'quality(plasma urate concentration, the substrate) -> disposition(reactivity of urate with reactive oxygen species; humans lack uricase) -> process(non-enzymatic oxidation of uric acid by free radicals) -> quality(plasma/serum allantoin concentration); increasing the urate substrate increases allantoin formation'
+  evidence: 'PMID 15346653; “Reaction of uric acid with free radicals, such as hydroxyl radical and hypochlorous acid (HOCl) results in allantoin production.” | Allantoin is the oxidation product of urate; more urate substrate -> more allantoin produced (do(urate up) -> allantoin up). [citations PubMed-verified]'
+- source: xanthine_oxidase_activity
+  target: urinary_8_oxoguanosine
+  sign: +
+  causal_evidence: pharmacological
+  mechanism: 'increased XO catalytic activity -> superoxide/H2O2 generation (ROS disposition) -> oxidative guanine base modification process -> raised oxidized-guanosine concentration; XO inhibition lowers oxidized-guanine marker (note: cited marker is 8-OHdG/DNA, catalog node is the closely-related 8-oxoguanosine/RNA marker)'
+  evidence: 'PMID 36968831; (Abstract / Results); “Vehicle-treated mice subjected to renal I/R had a markedly increased density of 8-OHdG near the outer stripe of the outer medulla, but oxypurinol treatment decreased the density of 8-OHdG after renal I/R injury.” | Inhibiting xanthine oxidase (oxypurinol, a do() on XO activity) decreases oxidized-guanine damage, so XO activity (+)-> oxidized guanosine marker. [citations PubMed-verified]'
+- source: aldehyde_oxidase_activity
+  target: plasma_acetaldehyde
+  sign: '-'
+  causal_evidence: genetic_lof_gof
+  mechanism: 'AOX1 catalytic activity -> oxidase disposition acting on acetaldehyde -> oxidation of acetaldehyde to acetate (clearance process) -> lowered acetaldehyde concentration; loss of AOX1 activity = natural do() raising substrate'
+  evidence: 'PMID 7726572; (Abstract); “AO acts not only upon acetaldehyde but also upon NADH, with superoxide anion radical (O2.-) formation.” | Aldehyde oxidase oxidizes (acts upon) acetaldehyde, so higher AOX1 activity lowers acetaldehyde concentration. [citations PubMed-verified]'
+- source: blood_cadmium
+  target: gfr
+  sign: '-'
+  causal_evidence: pharmacological
+  mechanism: 'accumulated cadmium -> proximal-tubule and glomerular cytotoxicity (nephrotoxic disposition) -> tubular/glomerular damage process -> progressive decline in glomerular filtration rate'
+  evidence: 'PMID 8563845; (Abstract); “The GFR also decreases with cadmium dose and there is a dose-response relation between blood cadmium and prevalence of glomerular damage.” | Higher body/blood cadmium dose lowers GFR in a dose-response manner, so blood cadmium (-)-> GFR. [citations PubMed-verified]'
+- source: blood_mercury
+  target: gfr
+  sign: '-'
+  causal_evidence: pharmacological
+  mechanism: 'mercury accumulation in S3 proximal tubule -> renal vascular endothelial dysfunction + NHE3 inhibition (nephrotoxic disposition) -> reduced renal blood flow / tubular injury process -> decreased GFR'
+  evidence: 'PMID 33476711; (Title / Abstract); “Changes in the renal function after acute mercuric chloride exposure in the rat are associated with renal vascular endothelial dysfunction and proximal tubule NHE3 inhibition.” | Acute mercuric chloride exposure (do() raising body mercury) reduces renal function/GFR, so blood mercury (-)-> GFR. [citations PubMed-verified]'
+- source: plasma_thallium
+  target: gfr
+  sign: '-'
+  causal_evidence: pharmacological
+  mechanism: 'thallium reabsorbed via NKCC2 in medullary thick ascending limb -> mitochondrial dysfunction + ROS + calcium-crystal cast formation (nephrotoxic disposition) -> acute tubular injury process -> severely reduced kidney function (GFR)'
+  evidence: 'PMID 39361050; (Abstract); “Five days post-administration, rats exhibited severely compromised kidney function.” | Thallium administration (do() raising plasma thallium) severely compromises kidney function, so plasma thallium (-)-> GFR. [citations PubMed-verified]'
+- source: adipose_hsl_activity
+  target: lipolysis_rate
+  sign: +
+  causal_evidence: genetic_lof_gof
+  mechanism: 'HSL catalytic activity -> lipase disposition on stored acylglycerols -> hydrolysis of triacylglycerol/diacylglycerol (lipolysis process) -> increased adipose lipolysis rate (FFA + glycerol release)'
+  evidence: 'PMID 14641008; (Abstract (opening sentence)); “HSL (hormone-sensitive lipase) is a key enzyme in the mobilization of fatty acids from acylglycerols in adipocytes as well as non-adipocytes.” | HSL catalytically mobilizes fatty acids from acylglycerols (lipolysis), so higher HSL activity (+)-> lipolysis rate. [citations PubMed-verified]'
+- source: plasma_branched_chain_amino_acids
+  target: mtor_activity
+  sign: +
+  causal_evidence: perturbation
+  mechanism: 'elevated leucine (a BCAA) -> binds Sestrin2 leucine-sensor (sensing disposition) -> dissociates Sestrin2 from GATOR2, activating Rag-GTPase signaling process -> increased mTORC1 kinase activity'
+  evidence: 'PMID 26449471; (Abstract); “Leucine is a proteogenic amino acid that also regulates many aspects of mammalian physiology, in large part by activating the mTOR complex 1 (mTORC1) protein kinase” | Leucine (a branched-chain amino acid) activates mTORC1, so plasma BCAA (+)-> mTOR kinase activity. [citations PubMed-verified]'
+- source: plasma_insulin
+  target: cellular_autophagy_rate
+  sign: '-'
+  causal_evidence: pharmacological
+  mechanism: 'insulin -> insulin-receptor/PI3K-Akt-mTORC1 activation + FoxO1 inactivation (signaling disposition) -> suppressed transcription of key autophagy genes and ULK1 inhibition (autophagy-initiation process) -> decreased autophagy rate'
+  evidence: 'PMID 19758991; (Abstract); “Insulin suppression of autophagy involves FoxO1-mediated transcription of key autophagy genes.” | Insulin suppresses autophagy (via FoxO1-dependent autophagy-gene transcription), so plasma insulin (-)-> autophagy rate. [citations PubMed-verified]'
+- source: plasma_dihydrotestosterone
+  target: sebaceous_gland_sebum_secretion_rate
+  sign: +
+  causal_evidence: pharmacological
+  mechanism: 'DHT binds nuclear androgen receptor in sebocytes -> stimulates sebocyte proliferation and lipogenesis -> increased sebum secretion rate'
+  evidence: 'StatPearls (NCBI Bookshelf), Physiology, Sebaceous Glands; (Physiology, Sebaceous Glands, NBK499819); “Androgens regulate sebaceous gland function through binding to nuclear androgen receptors... androgens stimulate cell proliferation and lipogenesis.” | Androgens (DHT being the principal sebaceous androgen) stimulate sebocyte lipogenesis, supporting do(DHT up) -> sebum secretion up (+).'
+- source: muscle_lactate_dehydrogenase_activity
+  target: skeletal_muscle_lactate
+  sign: +
+  causal_evidence: genetic_lof_gof
+  mechanism: 'skeletal-muscle LDHA catalyzes pyruvate + NADH -> lactate + NAD+; higher LDHA activity increases intracellular lactate (LDHA LoF lowers it - a natural do())'
+  evidence: 'StatPearls (NCBI Bookshelf), Biochemistry, Lactate Dehydrogenase; (Biochemistry, Lactate Dehydrogenase, NBK557536, Function); “The function of the enzyme is to catalyze the reversible conversion of lactate to pyruvate with the reduction of NAD+ to NADH and vice versa.” | LDH interconverts pyruvate and lactate; in glycolytic muscle the LDHA-driven direction makes lactate, so do(LDHA activity up) -> intracellular lactate up (+).'
+- source: estradiol
+  target: uterine_smooth_muscle_mass
+  sign: +
+  causal_evidence: pharmacological
+  mechanism: 'estradiol -> ER -> IGF1/PI3K/mTOR activation in uterine myocytes -> myometrial hyperplasia -> increased uterine smooth muscle mass'
+  evidence: 'PMID 19589861; (Abstract); “estradiol was able to activate the PI3K/mTOR signaling pathway in uterine myocytes and suggest that this activation is responsible for the induction of myometrial hyperplasia during early gestation.” | Estradiol induces myometrial hyperplasia, supporting do(estradiol up) -> myometrial (uterine smooth muscle) mass up (+). [citations PubMed-verified]'
+- source: gi_parasympathetic_tone
+  target: salivation_rate
+  sign: +
+  causal_evidence: pharmacological
+  mechanism: 'parasympathetic (cholinergic) efferents release ACh onto M3 muscarinic receptors of salivary acinar cells -> IP3/Ca2+ -> increased fluid/saliva secretion'
+  evidence: 'StatPearls (NCBI Bookshelf), Physiology, Salivation; (Physiology, Salivation, NBK542251); “Stimulation of either parasympathetic or sympathetic nervous systems will stimulate salivary gland secretion, but the effects of parasympathetic stimulation are stronger and longer lasting.” | Parasympathetic stimulation increases salivary secretion, supporting do(parasympathetic tone up) -> salivation rate up (+).'
+- source: bronchial_smooth_muscle_tone
+  target: airway_resistance
+  sign: +
+  causal_evidence: pharmacological
+  mechanism: 'increased bronchial smooth muscle contractile tone narrows airway lumen (decreased diameter) -> increased resistance to airflow'
+  evidence: 'PMID 1537710; (Abstract); “With a steady-state MCh infusion of 2.4 micrograms/min into the bronchial perfusate (perfusate concentration = 0.7 microM), there was an approximate doubling of lung resistance and a 50% fall in dynamic compliance.” | Methacholine-induced bronchial smooth muscle contraction roughly doubled lung resistance, supporting do(bronchial tone up) -> airway resistance up (+). [citations PubMed-verified]'
+- source: plasma_calcium
+  target: parafollicular_cell_calcitonin_secretion
+  sign: +
+  causal_evidence: pharmacological
+  mechanism: 'elevated extracellular ionised Ca2+ activates the CaSR on thyroid parafollicular C cells -> Gq/PLC -> increased calcitonin secretion'
+  evidence: 'StatPearls (NCBI Bookshelf), Physiology, Calcium; (Physiology, Calcium, NBK482128); “Calcitonin is released by the thyroid parafollicular cells (C-cells) in response to an increase in serum calcium.” | Elevated serum calcium stimulates C-cell calcitonin release, supporting do(plasma calcium up) -> calcitonin secretion up (+).'
+- source: calcitriol
+  target: intestinal_calcium_absorption
+  sign: +
+  causal_evidence: pharmacological
+  mechanism: 'calcitriol (1,25(OH)2D) binds intestinal VDR -> transcription of TRPV6/calbindin/PMCA -> increased active transcellular calcium absorption'
+  evidence: 'PMID 36014856; (Abstract); “1,25(OH)2 D released from the kidney is the most important regulator of increased intestinal Ca absorption.” | 1,25(OH)2D (calcitriol) is the principal regulator that increases intestinal calcium absorption, supporting do(calcitriol up) -> intestinal Ca absorption up (+). [citations PubMed-verified]'
+- source: fsh
+  target: spermatogenesis_rate
+  sign: +
+  causal_evidence: pharmacological
+  mechanism: 'FSH binds Sertoli-cell FSHR -> Sertoli production of regulatory molecules/nutrients and androgen-binding protein -> support of germ-cell development / spermatogenesis'
+  evidence: 'PMID 30619093; (Abstract / Review text); “FSH supports in Sertoli cells, in synergy with T, the production of regulatory molecules and nutrients needed for the maintenance of spermatogenesis.” | FSH supports the maintenance of spermatogenesis via Sertoli cells, supporting do(FSH up) -> spermatogenesis rate up (+). [citations PubMed-verified]'
+- source: cortisol
+  target: thymic_mass
+  sign: '-'
+  causal_evidence: pharmacological
+  mechanism: 'cortisol -> glucocorticoid receptor in thymocytes -> increased thymocyte (CD4+CD8+) apoptosis -> acute thymic involution / reduced thymus mass'
+  evidence: 'PMID 39315105; (Abstract); “These regimens produced a marked acute thymic involution in mice, which correlated with elevated serum glucocorticoid levels and a diminishment of naive T cells in the periphery.” | Elevated glucocorticoids (cortisol) cause acute thymic involution, supporting do(cortisol up) -> thymus mass down (-). [citations PubMed-verified]'
+- source: plasma_oxytocin
+  target: uterine_contractility
+  sign: +
+  causal_evidence: pharmacological
+  mechanism: 'oxytocin binds myometrial OTR (Gq/PLC) -> elevated intracellular Ca2+ -> increased myometrial contraction frequency/strength'
+  evidence: 'PMID 24888645; (Abstract); “Receptor activation triggers a number of signalling events to stimulate contraction, primarily by elevating intracellular calcium (Ca(2+) ).” | do(plasma_oxytocin up) -> uterine_contractility up: oxytocin-receptor activation stimulates myometrial contraction via Ca2+ (sign +). [citations PubMed-verified]'
+- source: nipple_suckling_stimulation
+  target: pituitary_prolactin_secretion
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'suckling mechanosensory afferents -> hypothalamus -> decreased dopaminergic inhibition / PRL-releasing drive -> increased pituitary prolactin secretion'
+  evidence: 'PMID 25589271; (Abstract); “Prolactin (PRL) released from lactotrophs of the anterior pituitary gland in response to the suckling by the offspring is the major hormonal signal responsible for stimulation of milk synthesis in the mammary glands.” | do(suckling up) -> plasma_prolactin up: suckling triggers anterior-pituitary prolactin release (sign +). [citations PubMed-verified]'
+- source: plasma_prolactin
+  target: mammary_milk_production_rate
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'prolactin binds mammary epithelial PRL receptors -> JAK2/STAT5 transcription of milk-protein genes -> increased milk synthesis/secretion'
+  evidence: 'PMID 25589271; (Abstract); “Prolactin (PRL) released from lactotrophs of the anterior pituitary gland in response to the suckling by the offspring is the major hormonal signal responsible for stimulation of milk synthesis in the mammary glands.” | do(plasma_prolactin up) -> mammary_milk_production_rate up: prolactin is the major hormonal signal stimulating milk synthesis (sign +). [citations PubMed-verified]'
+- source: na_k_atpase_activity
+  target: cell_membrane_potential
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'electrogenic Na+/K+-ATPase (3 Na+ out / 2 K+ in) sets and stabilizes the transmembrane ion gradients underlying the resting membrane potential'
+  evidence: 'StatPearls: Physiology, Sodium Potassium Pump (NCBI Bookshelf NBK537088); (StatPearls, Physiology, Sodium Potassium Pump (NBK537088)); “It has an ongoing role in stabilizing the cell''s resting membrane potential, regulating cell volume and signal transduction.” | do(Na/K-ATPase activity) -> cell_membrane_potential: the electrogenic pump maintains/stabilizes the resting membrane potential (sign +, polarizing).'
+- source: intracellular_adp
+  target: intracellular_atp
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'ADP is the phosphoryl-acceptor substrate of mitochondrial ATP synthase (complex V); increased ADP availability raises ATP synthesis flux'
+  evidence: 'PMID 21874297; (Abstract); “Complex V uses the energy created by the proton electrochemical gradient to phosphorylate ADP to ATP.” | do(intracellular_adp up) -> intracellular_atp up: ADP is the substrate phosphorylated to ATP by ATP synthase (sign +). [citations PubMed-verified]'
+- source: mitochondrial_proton_gradient
+  target: intracellular_atp
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'the inner-membrane proton electrochemical gradient (proton-motive force) drives ATP synthase rotary catalysis, phosphorylating ADP to ATP'
+  evidence: 'PMID 21874297; (Abstract); “Complex V uses the energy created by the proton electrochemical gradient to phosphorylate ADP to ATP.” | do(proton gradient up) -> intracellular_atp up: the proton electrochemical gradient powers ATP synthesis by complex V (sign +). [citations PubMed-verified]'
+- source: salivary_amylase_activity
+  target: plasma_glucose
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'salivary alpha-amylase hydrolyzes dietary starch (alpha-1,4 bonds) to maltose/glucose oligomers, increasing absorbable glucose and postprandial plasma glucose'
+  evidence: 'PMID 21152272; (Abstract); “Hydrolysate aliquots taken at T0 (time zero) of the digestion of chewed samples contained higher levels of glucose and dextrins compared with chopped samples.” | do(salivary amylase exposure up) -> more glucose released from starch -> plasma_glucose up (sign +); saliva-exposed (chewed) samples yield more glucose. [citations PubMed-verified]'
+- source: plasma_iodide
+  target: plasma_t4
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'plasma iodide is the rate-limiting substrate taken up by NIS and organified on thyroglobulin to synthesize thyroxine (T4); iodide deficiency limits T4 output'
+  evidence: 'PMID 30780803; (Abstract); “Adequate levels of iodine, a trace element variably distributed on the earth, are required for the synthesis of the thyroid hormones thyroxine (T4) and triiodothyronine (T3).” | do(plasma_iodide up) -> plasma_t4 up: iodide is the required substrate for thyroxine synthesis (sign +). [citations PubMed-verified]'
+- source: cox_2_activity
+  target: plasma_prostaglandin_e2
+  sign: +
+  causal_evidence: pharmacological
+  mechanism: 'COX-2 (PTGS2) oxygenates arachidonic acid to PGH2, which PGE synthase converts to PGE2; COX-2 inhibition (celecoxib) lowers PGE2 production'
+  evidence: 'PMID 16080279; (Abstract); “Celecoxib inhibited COX-2-mediated prostaglandin E2 (PGE2) production in human dermal fibroblasts (IC50 = 91 nmol/l)” | do(cox_2_activity up) -> plasma_prostaglandin_e2 up: COX-2 produces PGE2 and its pharmacological inhibition reduces PGE2 (sign +). [citations PubMed-verified]'
+- source: dietary_linoleic_acid_intake
+  target: plasma_arachidonic_acid
+  sign: +
+  causal_evidence: perturbation
+  mechanism: 'dietary linoleic acid (18:2 n-6) is desaturated/elongated (delta6-desaturase, elongase, delta5-desaturase) to arachidonic acid (20:4 n-6), raising the arachidonic-acid pool'
+  evidence: 'PMID 20656894; (Abstract); “Linoleic acid supplementation increased arachidonic acid levels in CF but not WT cells.” | do(linoleic acid intake up) -> plasma_arachidonic_acid up: supplemental linoleic acid is converted to and increases arachidonic acid (sign +). [citations PubMed-verified]'
+- source: dietary_linolenic_acid_intake
+  target: plasma_epa
+  sign: +
+  causal_evidence: perturbation
+  mechanism: 'dietary ALA (18:3 n-3) is elongated/desaturated to EPA (20:5 n-3); raising ALA intake raises plasma/tissue EPA'
+  evidence: 'PMID 7910999; (Abstract, Results); “EPA concentrations increased by 2.5-fold in the plasma lipid fractions and neutrophil phospholipids.” | do(increase dietary alpha-linolenic acid) increases plasma EPA (+); flaxseed/ALA-rich diet raised plasma EPA 2.5-fold [citations PubMed-verified]'
+- source: plasma_epa
+  target: plasma_arachidonic_acid
+  sign: '-'
+  causal_evidence: perturbation
+  mechanism: 'EPA competitively displaces n-6 arachidonic acid from membrane/plasma phospholipids and competes for the desaturase/elongase machinery, lowering AA'
+  evidence: 'PMID 23497599; (Abstract, Results); “EPA supplementation decreased the level of some n-6 fatty acids such as arachidonic acid.” | do(increase EPA) decreases plasma arachidonic acid (-); EPA supplementation lowered plasma AA [citations PubMed-verified]'
+- source: vkgc_activity
+  target: plasma_pivka_ii
+  sign: '-'
+  causal_evidence: pharmacological
+  mechanism: 'GGCX gamma-carboxylates prothrombin Glu residues; reduced carboxylase function (warfarin/vitamin-K antagonism or GGCX LoF) leaves prothrombin uncarboxylated, raising des-gamma-carboxy prothrombin (PIVKA-II)'
+  evidence: 'PMID 2381266; (Abstract, Results); “In 18 (60%) of 30 patients treated with warfarin, PIVKA-II values were 1 microgram/ml or more, although they were less than 1 microgram/ml in all 39 normal subjects.” | do(decrease vitamin-K-dependent carboxylase activity, via warfarin) increases plasma PIVKA-II (-): less carboxylation raises des-gamma-carboxy prothrombin [citations PubMed-verified]'
+- source: plasma_threonine
+  target: hepatic_gluconeogenesis
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'threonine is a glucogenic amino acid: SDS-type deamination yields alpha-ketobutyrate -> propionyl-CoA -> succinyl-CoA, a TCA/oxaloacetate-feeding gluconeogenic precursor'
+  evidence: 'Nelson & Cox, Lehninger Principles of Biochemistry, 7th ed.; (Chapter 18, Amino Acid Oxidation (glucogenic vs ketogenic amino acids)); “The carbon skeletons of the glucogenic amino acids, including threonine, are degraded to pyruvate or to citric acid cycle intermediates and can be converted to glucose via gluconeogenesis.” | do(increase plasma threonine) increases hepatic gluconeogenic substrate supply (+): threonine is glucogenic and feeds gluconeogenesis'
+- source: plasma_histidine
+  target: plasma_urocanic_acid
+  sign: +
+  causal_evidence: genetic_lof_gof
+  mechanism: 'histidase (HAL) deaminates L-histidine to trans-urocanic acid as the committed first step of histidine catabolism, so histidine is the direct precursor of urocanic acid'
+  evidence: 'PMID 1943682; (Abstract); “Histidase (histidine ammonia-lyase, EC 4.3.1.3) catalyzes the deamination of L-histidine to trans-urocanic acid in the liver and skin of mammals.” | do(increase plasma histidine) increases plasma urocanic acid (+): histidine is the substrate deaminated to urocanic acid (confirmed by histidase LoF lowering urocanic acid) [citations PubMed-verified]'
+- source: plasma_folate
+  target: urinary_figlu
+  sign: '-'
+  causal_evidence: perturbation
+  mechanism: 'FTCD transfers FIGLU''s formimino group to tetrahydrofolate; when folate is scarce this step stalls, so FIGLU accumulates and is excreted in urine (the classic FIGLU folate-deficiency test)'
+  evidence: 'PMID 6296342; (Abstract, Results); “FIGLU excretion was increased and serum, erythrocyte and liver folate levels were depressed when rats were fed folic acid-free diets for 28 days.” | do(decrease folate, via folic-acid-free diet) increases urinary FIGLU (-): low folate blocks FTCD-dependent FIGLU disposal, raising FIGLU excretion [citations PubMed-verified]'
+- source: bace1_activity
+  target: amyloid_protein_aggregate_amount
+  sign: +
+  causal_evidence: pharmacological
+  mechanism: 'BACE1 beta-secretase activity (disposition) catalyzes the rate-limiting cleavage of APP that generates amyloid-beta; higher BACE1 activity -> more Abeta -> more amyloid aggregate. Pharmacological BACE1 inhibition (verubecestat) is a do(BACE1 down) that lowers CNS/CSF Abeta.'
+  evidence: 'PMID 27807285; (Abstract; Sci Transl Med 2016;8:363ra150); “verubecestat (MK-8931) is a potent, selective, structurally unique BACE1 inhibitor that reduced plasma, cerebrospinal fluid (CSF), and brain concentrations of Aβ40, Aβ42” | Inhibiting BACE1 lowers Abeta concentrations, so do(BACE1 up) raises Abeta and its aggregate burden: BACE1 activity --(+)--> amyloid. [citations PubMed-verified]'
+- source: dienoyl_coa_reductase_activity
+  target: urinary_decadienoylcarnitine
+  sign: '-'
+  causal_evidence: perturbation
+  mechanism: '2,4-dienoyl-CoA reductase activity (disposition) consumes 2,4-dienoyl-CoA intermediates during unsaturated fatty-acid beta-oxidation; loss of activity blocks the pathway so decadienoyl-CoA/carnitine (C10:2) accumulates. Decr knockout is a do(low DECR) that raises decadienoylcarnitine.'
+  evidence: 'PMID 19578400; (Abstract; PLoS Genet 2009;5:e1000543); “fasted Decr(-/-) mice displayed increased serum acylcarnitines, especially decadienoylcarnitine, a product of the incomplete oxidation of linoleic acid (C(18:2))” | DECR knockout increases decadienoylcarnitine, so do(DECR down) raises C10:2-carnitine: enzyme activity --(-)--> decadienoylcarnitine. [citations PubMed-verified]'
+- source: tissue_galactosylceramide
+  target: urinary_sulfatide
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'Galactosylceramide (GalCer) is the obligate biosynthetic precursor of sulfatide: cerebroside sulfotransferase (CST) 3-O-sulfates GalCer to form sulfatide. Increasing the GalCer pool increases sulfatide substrate available for excretion, joining the ARSA/sulfatide island (ARSA deficiency separately raises sulfatide by blocking its degradation) to the core GalCer node.'
+  evidence: 'PMID 23574804; (Biosynthesis and biological function of sulfoglycolipids (PMC3669731)); “The carbohydrate moiety of sulfatide and seminolipid is biosynthesized via sequential reactions catalyzed by common enzymes: ceramide galactosyltransferase (CGT) and cerebroside sulfotransferase (CST).” | GalCer is sulfated by CST to make sulfatide, so do(GalCer up) increases sulfatide: galactosylceramide --(+)--> sulfatide. [citations PubMed-verified]'
+- source: elovl2_activity
+  target: plasma_arachidonic_acid
+  sign: '-'
+  causal_evidence: perturbation
+  mechanism: 'ELOVL2 elongase activity (disposition) consumes C20 PUFA substrates (including arachidonic acid, 20:4n-6) to form C22 PUFAs (e.g. adrenic acid, 22:4n-6); elovl2 ablation halts elongation and accumulates the C20/C22 substrate pool. elovl2 knockout is a do(low ELOVL2) that raises its upstream substrate.'
+  evidence: 'PMID 31101849; (Abstract/Results; Sci Rep 2019;9:7533 (CRISPR/Cas9 elovl2 ablation in Atlantic salmon)); “We observed accumulation of 20:5n-3 and 22:5n-3 in liver, brain and white muscle phospholipids in elovl2 KO salmon compared with the WT.” | elovl2 knockout accumulates its C20/C22 PUFA substrates, so do(ELOVL2 up) lowers the upstream C20 substrate (arachidonic acid): enzyme activity --(-)--> arachidonic acid. [citations PubMed-verified]'
+- source: acid_sphingomyelinase_activity
+  target: tissue_ceramide
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'Acid sphingomyelinase (SMPD1) hydrolyzes sphingomyelin to ceramide; higher SMPD1 activity -> more ceramide generation. This links the acid-ceramidase/ceramide island (acid ceramidase separately degrades ceramide) to the core SMPD1 node via the ceramide-producing reaction.'
+  evidence: 'PMID 25803076; (Abstract; Secretory sphingomyelinase in health and disease, Biol Chem 2015); “Acid sphingomyelinase (ASM), a key enzyme in sphingolipid metabolism, hydrolyzes sphingomyelin to ceramide and phosphorylcholine.” | SMPD1 hydrolyzes sphingomyelin to ceramide, so do(SMPD1 up) raises tissue ceramide: acid sphingomyelinase activity --(+)--> ceramide. [citations PubMed-verified]'
+- source: methylcrotonyl_coa_carboxylase_activity
+  target: plasma_3_hydroxyisovalerylcarnitine
+  sign: '-'
+  causal_evidence: genetic_lof_gof
+  mechanism: '3-methylcrotonyl-CoA carboxylase activity (disposition) carboxylates 3-methylcrotonyl-CoA in leucine catabolism; loss of activity backs up 3-methylcrotonyl-CoA into alternative products, primarily 3-hydroxyisovalerylcarnitine (C5-OH). MCC LoF is a natural do(low MCC) that raises C5-OH.'
+  evidence: 'PMID 29767664; (Abstract; Biochemical and molecular characterization of 3-Methylcrotonylglycinuria (PMC6082241)); “Its deficiency leads to accumulation in blood and/or urine of 3-methylcrotonyl-CoA metabolites, primarily 3-hydroxyisovaleryl-carnitine (C5-OH) in plasma and 3-methylcrotonyl-glycine (3-MCG) and 3-hydroxyisovaleric acid (3-HIVA) in urine” | MCC deficiency elevates plasma C5-OH (and urinary 3-MCG), so do(MCC down) raises C5-OH: enzyme activity --(-)--> 3-hydroxyisovalerylcarnitine. [citations PubMed-verified]'
+- source: isobutyryl_coa_dehydrogenase_activity
+  target: plasma_c4_acylcarnitine
+  sign: '-'
+  causal_evidence: genetic_lof_gof
+  mechanism: 'Isobutyryl-CoA dehydrogenase (ACAD8) activity (disposition) dehydrogenates isobutyryl-CoA in valine catabolism; loss of activity backs up isobutyryl-CoA, raising C4 (butyryl/isobutyryl) acylcarnitine. ACAD8 LoF is a natural do(low ACAD8) that elevates C4-carnitine.'
+  evidence: 'PMID 16857760; (Abstract; Pediatr Res 2006 (Variations in IBD/ACAD8 in children with elevated C4-carnitine)); “four newborns with elevated C(4)-carnitine identified by tandem mass spectrometry (MS/MS) screening” | ACAD8/IBD deficiency presents with elevated C4-acylcarnitine, so do(ACAD8 down) raises C4-carnitine: enzyme activity --(-)--> C4 acylcarnitine. [citations PubMed-verified]'
+- source: malonyl_coa_decarboxylase_activity
+  target: plasma_malonylcarnitine
+  sign: '-'
+  causal_evidence: genetic_lof_gof
+  mechanism: 'Malonyl-CoA decarboxylase (MLYCD) activity (disposition) decarboxylates malonyl-CoA to acetyl-CoA; loss of activity raises malonyl-CoA, which is converted to malonic acid and malonylcarnitine (C3DC). MLYCD LoF is a natural do(low MLYCD) that elevates malonylcarnitine.'
+  evidence: 'PMID 17186413; (Abstract; Clinical, enzymatic and molecular characterization of nine new patients with MLYCD deficiency); “For all, detection of elevated malonic acid in urine (+/- increased C3DC acylcarnitine by analysis employing tandem mass spectrometry) led to pursuit of enzyme studies.” | MLYCD deficiency elevates malonic acid and C3DC (malonyl)carnitine, so do(MLYCD down) raises malonylcarnitine: enzyme activity --(-)--> malonylcarnitine. [citations PubMed-verified]'
+- source: erythrocyte_hydrogen_peroxide
+  target: erythrocyte_methemoglobin
+  sign: +
+  causal_evidence: pharmacological
+  mechanism: 'elevated intracellular H2O2 (oxidant) -> disposition to oxidize the ferrous heme iron of oxyhemoglobin -> Fe2+ -> Fe3+ oxidation process -> increased methemoglobin (ferric, non-O2-carrying) concentration'
+  evidence: 'PMID 6277918; (abstract); “Either O2.- or H2O2 alone was capable of mediating methemoglobin formation in the intact erythrocyte.” | Adding H2O2 to intact red cells (a do() oxidant exposure) raises methemoglobin, supporting erythrocyte_hydrogen_peroxide ->(+) erythrocyte_methemoglobin. [citations PubMed-verified]'
+- source: plasma_beta_aminoisobutyrate
+  target: resting_energy_expenditure
+  sign: +
+  causal_evidence: pharmacological
+  mechanism: 'AGXT2 catabolizes BAIBA, so AGXT2 loss raises plasma BAIBA; BAIBA acts as a myokine -> PPAR-alpha-mediated browning of white adipose tissue + hepatic beta-oxidation disposition -> increased thermogenic fuel oxidation -> raised resting energy expenditure'
+  evidence: 'PMID 24411942; (abstract / title); “BAIBA increases the expression of brown adipocyte-specific genes in white adipocytes” | BAIBA administration induces browning of white fat and hepatic beta-oxidation (raising energy expenditure), supporting plasma_beta_aminoisobutyrate ->(+) resting_energy_expenditure and joining the AGXT2/BAIBA island to the energy-balance core. [citations PubMed-verified]'
+- source: prolidase_activity
+  target: plasma_proline
+  sign: +
+  causal_evidence: genetic_lof_gof
+  mechanism: 'prolidase (PEPD) hydrolyzes C-terminal proline/hydroxyproline imidodipeptides liberated from collagen breakdown -> liberation/recycling of free proline disposition -> increased plasma free proline; prolidase deficiency (a natural LoF do()) lowers recycled proline'
+  evidence: 'PMID 9020526; (abstract); “Prolidase plays an important role in the recycling of proline for collagen synthesis” | Prolidase liberates/recycles free proline from imidodipeptides, so prolidase activity raises available proline, supporting prolidase_activity ->(+) plasma_proline and joining the prolidase island to the amino-acid core. [citations PubMed-verified]'
+- source: plasma_valine
+  target: urinary_3_hydroxyisobutyrate
+  sign: +
+  causal_evidence: pharmacological
+  mechanism: '3-hydroxyisobutyrate is an obligatory intermediate of valine catabolism; raising valine flux increases 3-hydroxyisobutyrate production and urinary excretion, and lowering dietary valine (a do() on the precursor) reduces it - establishing plasma valine as a positive causal driver of urinary 3-hydroxyisobutyrate, the analyte that joins this valine-catabolism enzyme island to the core BCAA hub.'
+  evidence: 'PMID 34176136; (Meyer et al., HIBADH deficiency - a novel disorder of valine metabolism (J Inherit Metab Dis), abstract); “Under strict adherence to a low-valine diet a rapid decrease of 3HiB excretion in the urine was observed.” | Reducing the precursor valine lowers urinary 3-hydroxyisobutyrate (3HiB), i.e. valine causally increases urinary 3-hydroxyisobutyrate (sign +). [citations PubMed-verified]'
+- source: skeletal_muscle_blood_flow
+  target: cardiac_output
+  sign: +
+  causal_evidence: mechanistic_model
+  mechanism: 'Skeletal-muscle vasodilation (e.g. driven by intracellular ATP/creatine-phosphate depletion during work) increases local muscle blood flow; because venous return is the sum of all local tissue blood flows, increasing muscle blood flow raises venous return and therefore cardiac output - the Guyton local-flow control of cardiac output.'
+  evidence: 'Guyton & Hall, Textbook of Medical Physiology, 12th edition; (Ch. 20, Cardiac Output, Venous Return, and Their Regulation); “The venous return to the heart is the sum of all the local blood flows through all the individual tissue segments of the peripheral circulation. Therefore, it follows that cardiac output regulation is the sum of all the local blood flow regulations.” | Local tissue blood flow (here skeletal-muscle blood flow) sums into venous return and thereby sets cardiac output, supporting skeletal_muscle_blood_flow -> cardiac_output with sign +.'
+- source: rnasel_activity
+  target: blood_viral_load
+  sign: '-'
+  causal_evidence: perturbation
+  mechanism: '2-5A produced by OAS activates RNase L, whose endoribonuclease activity cleaves viral single-stranded RNA, degrading the viral genome and reducing viral replication; inducing/perturbing RNase L activity therefore lowers viral load, connecting the OAS/2-5A/RNase L antiviral island to the systemic blood viral load hub.'
+  evidence: 'PMID 9525594; (Title/abstract: RNase L mediates the antiviral effect of interferon through a selective reduction in viral RNA during encephalomyocarditis virus infection); “RNase L induction markedly enhanced the anti-EMCV activity of IFN via a reduction in EMCV RNA.” | Inducing RNase L activity reduces viral RNA/viral burden, supporting rnasel_activity -> blood_viral_load with sign - (interventional induction of the enzyme). [citations PubMed-verified]'
+- source: beta_hexosaminidase_b_activity
+  target: plasma_beta_hexosaminidase
+  sign: +
+  causal_evidence: genetic_lof_gof
+  mechanism: 'The beta subunit (HEXB) is shared by both hexosaminidase isoenzymes (HexA = alpha-beta, HexB = beta-beta); biallelic HEXB loss-of-function (Sandhoff disease, a natural do()) abolishes both isoenzymes, so total serum beta-hexosaminidase falls - hence beta-hexosaminidase-B activity positively determines measured serum total hexosaminidase, joining the lysosomal HEX/GM2 island to the core serum analyte.'
+  evidence: 'PMID 28553389; (Sandhoff Disease without Hepatosplenomegaly Due to Hexosaminidase B Gene Mutation, abstract/introduction); “Sandhoff disease is a neurodegenerative disease caused due to deficiency of hexosaminidase (HEX) A and B.” | HEXB (beta-subunit) loss causes deficiency of both HexA and HexB, so loss of beta-hexosaminidase-B activity lowers total (serum) hexosaminidase, supporting beta_hexosaminidase_b_activity -> plasma_beta_hexosaminidase with sign +. [citations PubMed-verified]'
+- source: ppt1_activity
+  target: mitochondrial_complex_iv_activity
+  sign: '?'
+  causal_evidence: genetic_lof_gof
+  mechanism: 'PPT1 (CLN1) is a lysosomal/cytosolic palmitoyl-protein thioesterase whose loss (Ppt1-/- = natural do()) alters depalmitoylation/turnover of mitochondrial proteins (PPT1 associates with the F1 complex of ATP synthase), producing functional changes in mitochondrial electron-transport-chain complexes I and IV; net direction on complex IV activity is genuinely ambiguous from the cited source (decreased inhibitor sensitivity, not clearly reduced baseline activity), so sign = ?.'
+  evidence: 'PMID 27722792; (Metabolic Brain Disease; abstract/conclusion (Saha et al., Decreased sensitivity of palmitoyl protein thioesterase 1-deficient neurons to chemical anoxia)); “Altogether, our results indicate that PPT1 deficiency in neurons causes functional changes in complexes I and IV of the mitochondrial electron transport chain.” | Genetic loss of PPT1 (do(PPT1=0) in Ppt1-/- neurons) causally changes mitochondrial complex IV (cytochrome c oxidase) function, linking the NCL enzyme island member ppt1_activity to the core node mitochondrial_complex_iv_activity; direction unresolved so sign=?. [citations PubMed-verified]'

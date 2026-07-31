@@ -1,0 +1,573 @@
+# =============================================================================
+# Phenotype-node connections — multi-agent literature fan-out   *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Connects orphan HPO analyte ROOT nodes (no upstream parent) to core physiology by specific
+# mechanisms. Signs adversarially verified; citations web-verified or textbook-anchored.
+# Preferred direction core->analyte (sink) to keep the diagnostic core unperturbed.
+# =============================================================================
+name: phenotype_connections
+description: DRAFT within-scale signed causal edges connecting previously-orphan HPO phenotype/analyte ROOT nodes to the core
+  physiology. Multi-agent literature fan-out (one connect + one adversarial verify agent per theme); every analyte was either
+  connected by a specific, literature-grounded mechanism (citation verified or textbook-anchored) or left a sound-abstaining
+  root. Edges are preferentially core->analyte (analyte = downstream sink) to keep the diagnostic core unperturbed. See benchmarks/results/phenotype_connections.md.
+nodes:
+- id: plasma_riboflavin
+  label: plasma riboflavin (vitamin B2) concentration
+  scale: organ_system
+  entity_iri: CHEBI:17015
+  quality_iri: PATO:0000033
+- id: hepatocellular_injury
+  label: hepatocellular injury / loss of hepatocyte plasma-membrane integrity (necrosis)
+  scale: organ_system
+  entity_iri: UBERON:0002107
+  quality_iri: PATO:0001167
+  bearer_entity_iri: UBERON:0002107
+causal_edges:
+- source: adipose_tissue_mass
+  target: plasma_25oh_vitamin_d
+  sign: '-'
+  mechanism: Increased adiposity/obesity downregulates hepatic CYP2R1 (the principal vitamin D 25-hydroxylase), reducing conversion
+    of cholecalciferol (D3) to 25-hydroxyvitamin D. High-fat-diet feeding lowers liver Cyp2r1 expression dose-dependently
+    and obese livers generate less 25(OH)D, so serum 25(OH)D is low in obesity and rises subnormally after supplementation
+    (volumetric dilution of 25(OH)D into expanded adipose adds in the same negative direction). Within-scale ORGAN_SYSTEM
+    -> ORGAN_SYSTEM; analyte is a downstream sink, so no new path is created through the homeostatic feedback core.
+  evidence: 'do(increase adipose mass)/high-fat-diet perturbation lowers hepatic 25-hydroxylase activity and serum 25(OH)D.
+    Roizen JD et al., Obesity Decreases Hepatic 25-Hydroxylase Activity Causing Low Serum 25-Hydroxyvitamin D. J Bone Miner
+    Res 2019;34(6):1068-1073 (PMID:30790351, verified via PubMed/PMC6663580). Corroborated by Wu et al. PMID:34448353 (HFD
+    reduces hepatic vitamin-D-25-hydroxylase). Textbook anchor: Holick MF, Vitamin D Deficiency, NEJM 2007;357:266-281 (PMID:17634462,
+    verified).'
+  causal_evidence: perturbation
+- source: adipose_tissue_mass
+  target: plasma_adiponectin
+  sign: '-'
+  mechanism: 'The adipose paradox: although adiponectin is secreted only by adipocytes, plasma adiponectin FALLS as adipose-tissue
+    mass rises. Hypertrophic/hypoxic adipocytes down-regulate per-cell ADIPOQ (local hypoxia, adipocyte hypertrophy, increased
+    local TNF-alpha/IL-6), and this per-cell suppression dominates the increase in producer-cell number, so net plasma adiponectin
+    decreases. Interventional support: weight-loss / fat-mass reduction raises plasma adiponectin (do(decrease adipose mass)
+    -> increase adiponectin).'
+  evidence: 'Diez JJ, Iglesias P. The role of the novel adipocyte-derived hormone adiponectin in human disease. Eur J Endocrinol.
+    2003;148(3):293-300. PMID:12611609 (PMID verified via PubMed). Inverse relation corroborated by Kern 2003 (PMID:12829646).
+    NOTE: partially mediated by the adipose_tissue_mass -> tnf_alpha -> plasma_adiponectin path; this edge captures the additional
+    TNF-independent hypoxia/hypertrophy component. Both endpoints ORGAN_SYSTEM.'
+  causal_evidence: curated_mechanistic
+- source: amyloid_protein_aggregate_amount
+  target: csf_amyloid_beta_42
+  sign: '-'
+  mechanism: Abeta42 is the most aggregation-prone Abeta species; as fibrillar plaque burden rises it acts as a 'sink', sequestering
+    soluble Abeta42 into insoluble plaque and lowering the soluble CSF pool. do(more aggregation) -> lower soluble CSF Abeta42
+    (the classic inverse CSF-Abeta42 vs amyloid-PET signature of Alzheimer's disease). Captures the HPO 'Decreased CSF Abeta42'
+    term mechanistically.
+  evidence: 'Mechanism: plaque sequestration of soluble Abeta42 (''sink'' hypothesis). Citation VERIFIED: Fagan et al., ''Inverse
+    relation between in vivo amyloid imaging load and CSF Abeta42 in humans'', Ann Neurol 2006;59:512-519, PMID 16372280 (confirmed
+    real via PubMed). Review anchor: Blennow & Zetterberg, ''Biomarkers for Alzheimer''s disease: current status and prospects'',
+    J Intern Med 2018;284:643.'
+  causal_evidence: curated_mechanistic
+- source: bace1_activity
+  target: csf_amyloid_beta_40
+  sign: +
+  mechanism: Amyloid-beta 40 is generated by sequential cleavage of APP by beta-secretase (BACE1) then gamma-secretase. Abeta40
+    is the dominant, relatively soluble, less aggregation-prone Abeta species; its CSF concentration tracks amyloidogenic
+    production, and pharmacological BACE1 inhibition lowers CSF Abeta40 dose-dependently. Higher BACE1 activity -> more Abeta40
+    production -> higher CSF Abeta40. Mirrors the curated edge bace1_activity -> csf_amyloid_beta (+).
+  evidence: 'Mechanism: BACE1 is the rate-limiting beta-secretase generating Abeta40; BACE1 inhibitors dose-dependently lower
+    CSF Abeta (pharmacological do()). Same sign/structure as the curated edge bace1_activity -> csf_amyloid_beta (+) (present
+    in all_edges.json). Anchor: O''Brien & Wong, ''Amyloid precursor protein processing and Alzheimer''s disease'', Annu Rev
+    Neurosci 2011;34:185 (verified review of BACE1/gamma-secretase APP cleavage to Abeta40/42).'
+  causal_evidence: pharmacological
+- source: bckdh_enzyme_activity
+  target: csf_alloisoleucine
+  sign: '-'
+  mechanism: L-alloisoleucine is the non-physiological D-allo epimer formed by transamination/racemization of the isoleucine
+    branched-chain keto-acid (2-oxo-3-methylvalerate). When BCKDH is deficient (maple syrup urine disease, a clean genetic
+    LoF do()), the keto-acid pool backs up and alloisoleucine accumulates (pathognomonic MSUD marker). Higher BCKDH activity
+    drains the keto-acid pool and lowers alloisoleucine. Mirrors the curated edges bckdh_enzyme_activity -> plasma_alloisoleucine
+    (-) and bckdh_enzyme_activity -> csf_isoleucine/leucine/valine (-).
+  evidence: 'Mechanism: BCKDH-complex deficiency backs up branched-chain keto-acids; alloisoleucine is the pathognomonic MSUD
+    metabolite. Same sign and structure as the curated map edges bckdh_enzyme_activity -> plasma_alloisoleucine (-) and bckdh_enzyme_activity
+    -> csf_isoleucine (-) (both present in all_edges.json). Anchor: Guyton & Hall, Medical Physiology, 11th ed. (branched-chain
+    amino-acid catabolism); MSUD/alloisoleucine reviewed in Chuang & Shih, OMMBID ''Maple Syrup Urine Disease (Branched-Chain
+    Ketoaciduria)''.'
+  causal_evidence: genetic_lof_gof
+- source: capillary_permeability
+  target: plasma_surfactant_protein
+  sign: +
+  mechanism: Surfactant proteins (SP-A/SP-D) are synthesized by type-II alveolar epithelium and normally confined to the alveolar
+    lining. When the alveolar-capillary barrier loses integrity (increased microvascular/epithelial permeability in lung injury/edema),
+    SPs spill into the circulation in proportion to barrier disruption (mirroring albumin leak). do(barrier permeability up)
+    -> alveolar-to-blood SP spillover up -> plasma surfactant protein up.
+  evidence: SP-D traverses disrupted alveolar-capillary barriers proportionally to surface-area loss, mirroring albumin leakage;
+    serum SP-D rises in ALI/ARDS due to barrier injury and leakage into circulation. PMC4122417 (Lung SP-D response and regulation
+    during acute and chronic lung injury); Boron & Boulpaep, Medical Physiology (alveolar-capillary barrier). Uses systemic
+    capillary_permeability as the within-scale proxy for alveolar barrier permeability (no lung-specific barrier node exists).
+  causal_evidence: curated_mechanistic
+- source: cellular_adp_level
+  target: acetyl_coa_carboxylase_activity
+  sign: '-'
+  mechanism: 'ACC catalytic activity is acutely controlled by cellular energy charge, on top of its ACACA/ACACB gene-dose
+    floor. A rise in cellular ADP/AMP (energy deficit: fasting, exercise, hypoxia) allosterically activates AMP-activated
+    protein kinase (AMPK), which phosphorylates ACC1/ACC2 at the equivalent Ser80/Ser221 sites and inactivates them. So do(increase)
+    in cellular ADP lowers ACC activity. This is a genuine within-CELLULAR allosteric/phosphorylation controller, parallel
+    to the already-encoded cellular_adp_level -> phosphofructokinase_activity energy-charge edge.'
+  evidence: 'Mechanism: ADP/AMP rise -> AMPK activation -> ACC1/ACC2 Ser80/Ser221 phosphorylation -> ACC inactivation. Hardie
+    DG, AMP-activated protein kinase: a key regulator of energy balance with many roles in human disease, J Intern Med 2014;276(6):543-559,
+    PMID 24824502 (verified: confirms AMPK phosphorylates both ACC isoforms at equivalent Ser sites, inactivating them and
+    thereby lowering malonyl-CoA, enhancing fatty-acid oxidation). Guyton & Hall, Medical Physiology, 11th ed., Ch. 68 (energy
+    metabolism / fat utilization). ACC is an established direct AMPK substrate; AMPK activation by AMP/ADP and the resulting
+    inhibitory ACC Ser-phosphorylation are demonstrated by perturbation (AMP titration, AMPK activators, non-phosphorylatable
+    ACC mutants) in the cited mechanistic literature.'
+  causal_evidence: curated_mechanistic
+- source: cellular_cobalamin_uptake
+  target: methionine_synthase_activity
+  sign: +
+  mechanism: Methionine synthase (MTR) is a cobalamin-dependent enzyme requiring methylcobalamin as prosthetic cofactor to
+    remethylate homocysteine to methionine. Intracellular methylcobalamin supply depends on transcobalamin-II-mediated cellular
+    cobalamin uptake and downstream processing (MMACHC/MTRR); when cellular cobalamin uptake falls (transcobalamin-II deficiency,
+    cblE/cblG, B12 deficiency), holo-MTR activity drops. do(increase cellular cobalamin uptake) -> increased functional methionine
+    synthase activity. Consistent with the existing downstream edge methionine_synthase_activity -> plasma_homocysteine (-).
+  evidence: 'Mechanism: textbook cobalamin biochemistry — methylcobalamin is the obligate cofactor of cytosolic methionine
+    synthase; cofactor availability (set by cellular uptake) determines holoenzyme activity. Textbook anchors: Guyton & Hall,
+    Medical Physiology, 11th ed., Ch. 32 (vitamin B12 coenzyme function); Boron & Boulpaep, Medical Physiology (cobalamin-dependent
+    methionine synthase / methylcobalamin cofactor). Sign chain checks: cellular_cobalamin_uptake -> plasma_methylcobalamin
+    already (+); methylcobalamin is the MTR cofactor.'
+  causal_evidence: curated_mechanistic
+- source: cellular_cobalamin_uptake
+  target: methylmalonyl_coa_mutase_activity
+  sign: +
+  mechanism: Methylmalonyl-CoA mutase (MMUT) is an adenosylcobalamin (AdoCbl)-dependent mitochondrial enzyme; its functional
+    holoenzyme activity requires AdoCbl generated from cobalamin delivered by transcobalamin-II-mediated cellular uptake and
+    processed via MMAA/MMAB. When cellular cobalamin uptake/AdoCbl supply falls (transcobalamin-II deficiency, cblA/cblB,
+    B12 deficiency), measured MMUT holoenzyme activity drops, raising methylmalonate. do(increase cellular cobalamin uptake)
+    -> increased functional MMUT activity. Consistent with existing downstream edges MMUT -> plasma_lactate (-) and -> urinary_methylmalonylcarnitine
+    (-).
+  evidence: 'Mechanism: textbook cobalamin biochemistry — adenosylcobalamin is the obligate cofactor of mitochondrial methylmalonyl-CoA
+    mutase; cofactor availability (set by cellular uptake) determines holoenzyme activity. Textbook anchors: Guyton & Hall,
+    Medical Physiology, 11th ed., Ch. 32 (vitamin B12 coenzyme functions, methylmalonyl-CoA); Boron & Boulpaep, Medical Physiology
+    (adenosylcobalamin-dependent methylmalonyl-CoA mutase). Sign chain checks: cellular_cobalamin_uptake -> plasma_adenosylcobalamin
+    already (+); AdoCbl is the MMUT cofactor.'
+  causal_evidence: curated_mechanistic
+- source: cortisol
+  target: plasma_fibronectin
+  sign: +
+  mechanism: Plasma fibronectin (FN1) is synthesized by hepatocytes. Glucocorticoids acting via the glucocorticoid receptor
+    induce FN1 transcription (~6-fold mRNA rise) and improve secretion efficiency, raising secreted plasma fibronectin ~2.8-fold;
+    GR antagonist abolishes the effect dose-dependently. do(cortisol up) -> hepatic fibronectin synthesis/secretion up ->
+    plasma fibronectin up.
+  evidence: Dexamethasone/corticosterone raise secreted plasma fibronectin ~2.8-fold in hepatocyte culture, with 6-fold FN1
+    mRNA induction blocked by transcription inhibitors and abolished by a GR-competing antagonist (GR-mediated). PMID:3611064
+    (Nimmer et al., 'Regulation of plasma fibronectin biosynthesis by glucocorticoids in chick hepatocyte cultures', J Biol
+    Chem 1987) — verified real.
+  causal_evidence: pharmacological
+- source: cortisol
+  target: plasma_plasminogen
+  sign: +
+  mechanism: Glucocorticoid (cortisol/hydrocortisone) independently increases hepatic plasminogen mRNA and is permissive/potentiating
+    for the hepatic acute-phase response (synergy with IL-6 on C/EBPbeta-class acute-phase genes), raising plasma plasminogen.
+  evidence: 'Mechanism: cortisol -> hepatic glucocorticoid receptor -> increased/permissive PLG transcription within the IL-6
+    acute-phase program -> higher plasma plasminogen. Citation: Jenkins GR, Seiffert D, Parmer RJ, Miles LA. Blood 1997;89(7):2394-2403
+    (PMID 9116283; hydrocortisone separately increased plasminogen mRNA in primary hepatocytes). Standard glucocorticoid-permissiveness
+    for hepatic acute-phase proteins: Boron & Boulpaep, Medical Physiology; Guyton & Hall, Medical Physiology (cortisol and
+    the acute-phase response). Hydrocortisone addition (pharmacological do()) to primary hepatocytes increases plasminogen
+    mRNA.'
+  causal_evidence: pharmacological
+- source: cortisol
+  target: plasma_tryptophan
+  sign: '-'
+  mechanism: Cortisol (glucocorticoid) transcriptionally induces hepatic tryptophan 2,3-dioxygenase (TDO/TDO2) de novo, the
+    rate-limiting, hormone-inducible enzyme of the dominant (>90%) hepatic kynurenine pathway. Increased TDO flux catabolises
+    tryptophan to N-formylkynurenine, depleting the circulating (total) tryptophan pool. The TDO-induction effect dominates
+    net plasma tryptophan, so the sign is determinately negative. Within-scale ORGAN_SYSTEM -> ORGAN_SYSTEM; cortisol is an
+    upstream core variable, plasma_tryptophan is a downstream sink (no new path through the feedback core).
+  evidence: 'Glucocorticoid de-novo induction of hepatic TDO lowering systemic tryptophan is established physiology. do()
+    support: Gibney et al., Int J Neuropsychopharmacol 2014;17(6):917-928 (PMID 24472498, verified) shows stress/corticosterone
+    induces hepatic TDO and TDO inhibition raises tryptophan; in humans a hydrocortisone RCT (Hydrocortisone Affects Fatigue
+    and Physical Functioning Through Metabolism of Tryptophan, J Clin Endocrinol Metab 2018;103(9):3411) confirms cortisol
+    lowers tryptophan availability via this pathway. Textbook anchor: Boron & Boulpaep, Medical Physiology (glucocorticoid
+    induction of hepatic TDO).'
+  causal_evidence: pharmacological
+- source: cystathionine_gamma_lyase_activity
+  target: csf_alpha_aminobutyrate
+  sign: +
+  mechanism: Alpha-aminobutyrate (2-aminobutyrate) is produced by transamination of 2-oxobutyrate. The major source of 2-oxobutyrate
+    is the cystathionine gamma-lyase (CTH/CSE) step of trans-sulfuration, which cleaves cystathionine to cysteine + 2-oxobutyrate
+    + NH3 (also from threonine catabolism). Greater CTH flux raises the 2-oxobutyrate/2-aminobutyrate pool, so alpha-aminobutyrate
+    rises with CTH activity. Directly mirrors the curated edge cystathionine_gamma_lyase_activity -> plasma_alpha_aminobutyrate
+    (+).
+  evidence: 'Mechanism: CTH cleaves cystathionine to cysteine + 2-oxobutanoate + NH3; 2-oxobutanoate is transaminated to 2-aminobutyrate.
+    Identical sign/structure to the curated map edge cystathionine_gamma_lyase_activity -> plasma_alpha_aminobutyrate (+)
+    (present in all_edges.json). Anchor: Boron & Boulpaep, Medical Physiology (sulfur amino-acid / trans-sulfuration metabolism).'
+  causal_evidence: curated_mechanistic
+- source: free_t3
+  target: plasma_mbl
+  sign: +
+  mechanism: Thyroid hormone is a strong positive transcriptional regulator of hepatic mannan-binding lectin (MBL2). In human
+    hepatocyte (HuH-7) culture, T3 gave a ~4-fold increase in MBL at 1 nM and >8-fold at 100 nM (dose-dependent, P<0.001);
+    T4 similar, less potent. core->analyte downstream sink (free T3 -> circulating MBL via hepatocyte production), no new
+    feedback-core path. Within-scale ORGAN_SYSTEM->ORGAN_SYSTEM.
+  evidence: Sorensen, Hansen, Steffensen, Jensenius, Thiel. Hormonal regulation of mannan-binding lectin synthesis in hepatocytes.
+    Clin Exp Immunol 2006;145(1):173-182, PMID 16792688 (DOI 10.1111/j.1365-2249.2006.03101.x) - VERIFIED; T3 4-fold at 1
+    nM, >8-fold at 100 nM, dose-dependent, P<0.001.
+  causal_evidence: pharmacological
+- source: hepatocellular_injury
+  target: plasma_alt
+  sign: +
+  mechanism: Loss of hepatocyte plasma-membrane integrity / hepatocellular necrosis passively releases cytosolic alanine aminotransferase
+    (ALT, the most liver-specific aminotransferase) into the circulation in proportion to the degree/extent of injury, raising
+    plasma ALT. do(increase hepatocellular injury) -> Delta plasma ALT up.
+  evidence: Hepatocellular necrosis releases cytosolic ALT into plasma (passive membrane-permeability leak), proportional
+    to injury. Smith AK et al., 'Contrasting model mechanisms of alanine aminotransferase (ALT) release from damaged and necrotic
+    hepatocytes', PLoS Comput Biol 2020;16(6):e1007622 (PMID:32484845, VERIFIED real, exactly on point); Guyton & Hall, Medical
+    Physiology, 11th ed., liver function tests.
+  causal_evidence: curated_mechanistic
+- source: hepatocellular_injury
+  target: plasma_ast
+  sign: +
+  mechanism: Hepatocellular necrosis / loss of hepatocyte membrane integrity releases both cytosolic and mitochondrial aspartate
+    aminotransferase (AST) into plasma, raising plasma AST. Same membrane-leak mechanism as ALT; reuses the ORGAN_SYSTEM hepatocellular_injury
+    node.
+  evidence: AST released from injured/necrotic hepatocytes (cytosolic + mitochondrial isoforms) by passive membrane leak.
+    Smith AK et al., PLoS Comput Biol 2020;16(6):e1007622 (PMID:32484845, VERIFIED, ALT/AST biomarker-release modelling);
+    Guyton & Hall, Medical Physiology, 11th ed., liver function tests.
+  causal_evidence: curated_mechanistic
+- source: hepatocellular_injury
+  target: plasma_cholinesterase_activity
+  sign: '-'
+  mechanism: Serum butyrylcholinesterase (BCHE / pseudocholinesterase) is synthesized almost exclusively by hepatocytes and
+    continuously secreted into plasma; hepatocellular injury/necrosis (and the cirrhosis it drives) reduces functional hepatic
+    synthetic mass, lowering BCHE production, so serum cholinesterase activity falls. A recognised marker of hepatic synthetic
+    reserve (parallels falling albumin). do(increase hepatocellular injury) -> Delta serum cholinesterase down.
+  evidence: 'Serum cholinesterase is a hepatocyte-synthesis-dependent biomarker that falls with impaired hepatic synthetic
+    capacity (cirrhosis: median 1590 vs 7886 IU/L in controls). Ramachandran J et al., ''Serum cholinesterase is an excellent
+    biomarker of liver cirrhosis'', Trop Gastroenterol 2014;35(1):15-20 (PMID:25276901, VERIFIED real); Boron & Boulpaep,
+    Medical Physiology (hepatic synthetic function).'
+  causal_evidence: curated_mechanistic
+- source: hoga1_activity
+  target: urinary_2_4_dihydroxyglutarate
+  sign: '-'
+  mechanism: HOGA1 (mitochondrial 4-hydroxy-2-oxoglutarate aldolase) cleaves 4-hydroxy-2-oxoglutarate (HOG) in the hydroxyproline
+    catabolic pathway. When HOGA1 activity falls (primary hyperoxaluria type 3, HOGA1 LoF), its substrate HOG accumulates
+    and is reduced to 2,4-dihydroxyglutarate, which is excreted — so lower HOGA1 activity raises urinary 2,4-dihydroxyglutarate
+    (negative sign). Mirrors the existing hoga1_activity -> urinary_4_hydroxy_2_oxoglutarate (-) edge (parallel accumulation
+    product). HOGA1 genetic LoF is a clean do() that raises this metabolite.
+  evidence: Belostotsky R et al., The enzyme 4-hydroxy-2-oxoglutarate aldolase is deficient in primary hyperoxaluria type
+    III (PMID 22391140); Clifford-Mobley/Pelle et al., 4-Hydroxyglutamate Is a Biomarker for Primary Hyperoxaluria Type 3
+    (PMC4270872) — reports significantly increased 4-hydroxy-2-oxoglutarate, 4-hydroxyglutamate and 2,4-dihydroxyglutarate
+    in PH3 patients. PMID and PMC verified real via PubMed.
+  causal_evidence: genetic_lof_gof
+- source: il1beta
+  target: plasma_tenascin_c
+  sign: +
+  mechanism: Tenascin-C (TNC) is an inducible matricellular protein at low baseline; pro-inflammatory IL-1alpha/IL-1beta (with
+    TGF-beta, PDGF, mechanical stress) induce TNC transcription (NF-kB/c-Jun) in fibroblasts/myofibroblasts, raising tissue
+    and circulating TNC. do(IL-1beta up) -> fibroblast TNC transcription up -> plasma tenascin-C up.
+  evidence: Tenascin-C expression is induced by inflammatory cytokines including IL-1, signalling through NF-kB/c-Jun/Sp1
+    to activate TNC transcription. PMID:25793574 (Chiovaro, Chiquet-Ehrismann & Chiquet, 'Transcriptional regulation of tenascin
+    genes', Cell Adh Migr 2015) — verified consistent with literature. This closes a real positive-feedback loop with the
+    existing plasma_tenascin_c -> tnf_alpha (+) and tnf_alpha -> il1beta (+) edges (TNC amplifies inflammation via TLR4).
+  causal_evidence: curated_mechanistic
+- source: il6
+  target: plasma_alpha1_antitrypsin
+  sign: +
+  mechanism: Alpha-1-antitrypsin (SERPINA1) is the prototypical hepatic positive acute-phase reactant; plasma AAT rises 3-4
+    fold during inflammation. IL-6 (JAK1/STAT3 in hepatocytes, the same axis driving CRP/haptoglobin/fibrinogen already in
+    this model) up-regulates hepatic SERPINA1 synthesis. do(IL-6 up) -> hepatic AAT synthesis up -> plasma AAT up.
+  evidence: AAT is a prototype liver-derived acute-phase protein whose plasma concentration increases 3-4 fold during inflammation;
+    IL-6 is the primary inducer of hepatocyte acute-phase protein synthesis. StatPearls 'Physiology, Acute Phase Reactants'
+    (NCBI Bookshelf NBK519570); Guyton & Hall, Medical Physiology, 11th ed., acute-phase response. Consistent with existing
+    il6 -> c_reactive_protein/haptoglobin/fibrinogen (+) edges in the map.
+  causal_evidence: curated_mechanistic
+- source: il6
+  target: plasma_ca125
+  sign: +
+  mechanism: CA125 (MUC16) is produced by mesothelial cells lining the serous cavities. In non-malignant states inflammatory
+    cytokines (IL-6, IL-1beta) via NF-kB induce MUC16 synthesis and ectodomain shedding from mesothelial cells, raising serum
+    CA125. do(IL-6 up) -> mesothelial MUC16 synthesis/shedding up -> plasma CA125 up.
+  evidence: 'Mechanical stretch and inflammatory cytokines (IL-1beta, IL-6, IL-8) directly upregulate MUC16/CA125 expression
+    and shedding from mesothelial cells; serum CA125 correlates positively with serum IL-6/TNF-alpha in heart failure. PMID:22743023
+    (Kosar/Huang et al., ''New mechanism of elevated CA125 in heart failure: the mechanical stress and inflammatory stimuli
+    initiate CA125 synthesis'', Med Hypotheses 2012) — verified real.'
+  causal_evidence: curated_mechanistic
+- source: il6
+  target: plasma_plasminogen
+  sign: +
+  mechanism: Plasminogen is a (modest) positive hepatic acute-phase reactant. IL-6, acting on hepatocytes via JAK/STAT3 and
+    the transcription factor C/EBPbeta, transcriptionally up-regulates the plasminogen (PLG) gene, raising plasminogen mRNA
+    and plasma plasminogen concentration. Demonstrated in primary murine hepatocytes, Hep3B human hepatoma cells, and in vivo
+    after recombinant IL-6 injection in mice.
+  evidence: 'Mechanism: IL-6 -> STAT3/C/EBPbeta -> increased hepatic PLG transcription -> higher plasma plasminogen (modest
+    positive acute-phase reactant). Citation: Jenkins GR, Seiffert D, Parmer RJ, Miles LA. Regulation of plasminogen gene
+    expression by interleukin-6. Blood 1997;89(7):2394-2403 (PMID 9116283 — title/authors/journal/volume/pages verified).
+    C/EBPbeta mechanism corroborated by Bannach FG et al., J Thromb Haemost 2004;2(12):2205-2212. Textbook anchor: Boron &
+    Boulpaep, Medical Physiology (hepatic IL-6-driven acute-phase response). Recombinant IL-6 do() (cytokine addition to hepatocytes
+    / IL-6 injection in vivo) raises plasminogen mRNA and a plasminogen-promoter luciferase reporter — pharmacological/perturbational
+    interventional evidence.'
+  causal_evidence: pharmacological
+- source: interferon_gamma
+  target: xanthine_oxidase_activity
+  sign: +
+  mechanism: 'Interferon-gamma is a potent transcriptional inducer of xanthine oxidoreductase (XDH/XO): in cultured endothelial
+    cells IFN-gamma markedly raises the XDH/XO mRNA and activity, with the major site of upregulation at the level of transcription;
+    in vivo IFN/IFN-inducer administration increases XO activity across organs. Raising the inflammatory IFN-gamma signal
+    therefore increases tissue/circulating XO catalytic activity. The XO-activity node is a downstream sink that drives hepatic
+    urate production and lowers plasma xanthine, so connecting it adds no new path into the cardiovascular/renal feedback
+    core.'
+  evidence: 'Interventional do(IFN): in-vivo IFN/IFN-inducer administration increases XO activity (Ghezzi P et al., Biochem
+    Biophys Res Commun 1984, PMID:6584105); IFN-gamma treatment of cultured pulmonary endothelial cells raises XDH/XO mRNA
+    and activity chiefly via increased transcription rate (Dupont GP et al., J Clin Invest 1992, PMID:1370294, verified via
+    WebSearch/JCI). Net effect is induction (+); a separate post-translational NO-mediated inactivation occurs in IFN-gamma-stimulated
+    macrophages (PMID:7524568) but does not reverse the dominant transcriptional induction. Interventional: do(IFN) administration
+    in vivo and IFN-gamma treatment of endothelial cells increase XDH/XO transcription and activity.'
+  causal_evidence: perturbation
+- source: myocardial_contractility
+  target: left_atrial_pressure
+  sign: '-'
+  mechanism: Left atrial pressure equals LV filling pressure. Reduced LV contractility (systolic dysfunction) impairs LV emptying,
+    raising LV end-diastolic/filling pressure, which transmits backward to elevate left atrial pressure (backward/congestive
+    failure). do(contractility down) -> LV filling pressure up -> left atrial pressure up; contractility and LA pressure move
+    oppositely (sign -).
+  evidence: Depressed contractility raises atrial/filling pressures (congestive backward failure). Guyton & Hall, Medical
+    Physiology, 11th ed., Ch.22 (Cardiac Failure); Boron & Boulpaep, Medical Physiology (ventricular function and congestion).
+    Directly parallels the existing myocardial_contractility -> right_atrial_pressure (-) edge in this map (same sign convention).
+  causal_evidence: curated_mechanistic
+- source: plasma_2_hydroxybutyrate
+  target: urinary_2_hydroxybutyric_acid
+  sign: +
+  mechanism: 2-hydroxybutyrate is a small freely-filtered organic acid with limited tubular reabsorption; urinary excretion
+    is a monotone-increasing function of the filtered (plasma) load. Raising plasma 2-HB raises filtered 2-HB and thus urinary
+    2-HB.
+  evidence: 'Standard renal handling of filtered low-molecular-weight organic acids: Guyton & Hall, Textbook of Medical Physiology,
+    11th ed., Ch. 27 (excretion of freely filtered organic solutes scales with plasma concentration). Follows the model''s
+    existing plasma->urinary excretion convention.'
+  causal_evidence: curated_mechanistic
+- source: plasma_alpha_globulin
+  target: plasma_globulin
+  sign: +
+  mechanism: The alpha-globulin acute-phase fraction is a constituent of total globulin. Raising the alpha-globulin fraction
+    (already il6-driven in this model) raises total globulin. do(alpha-globulin up) -> total globulin up (constituent of an
+    additive identity, same plasma scale).
+  evidence: Total serum globulin is the sum of alpha, beta and gamma fractions; alpha-globulin is an acute-phase constituent.
+    Boron & Boulpaep, Medical Physiology (plasma proteins). Existing edge il6 -> plasma_alpha_globulin (+) makes globulin
+    transitively inflammation-predictable.
+  causal_evidence: curated_mechanistic
+- source: plasma_apolipoprotein_b
+  target: csf_apolipoprotein_b
+  sign: +
+  mechanism: ApoB is not synthesized in the CNS (brain makes ApoE/ApoA-I, no ApoB), so any CSF ApoB derives from plasma ApoB
+    crossing/leaking the blood-CSF/blood-brain barrier (CSF ApoB is used as a blood-contamination/BBB-leak index). Higher
+    plasma ApoB -> more transfer into CSF -> higher CSF ApoB. Directly analogous to the curated edge plasma_albumin -> csf_albumin
+    (+).
+  evidence: 'Mechanism: absence of CNS ApoB synthesis means CSF ApoB is plasma-derived (barrier transfer/leak), monotonic
+    positive. Identical structure to the curated edge plasma_albumin -> csf_albumin (+) (present in all_edges.json). Anchor:
+    Roheim et al., ''Apolipoproteins in human cerebrospinal fluid'', PNAS 1979;76:4646 (apolipoprotein profile of CSF; no
+    ApoB synthesis in CNS).'
+  causal_evidence: curated_mechanistic
+- source: plasma_cck
+  target: fecal_pancreatic_elastase
+  sign: +
+  mechanism: Cholecystokinin (CCK) from duodenal I-cells is the principal physiological secretagogue for pancreatic acinar
+    cells, driving exocytosis of the zymogen complement including proelastase (CELA). Greater acinar secretory drive delivers
+    more elastase-1 to the gut lumen; elastase-1 resists intestinal degradation and is concentrated several-fold in stool,
+    so steady-state fecal elastase-1 rises with acinar secretory output and falls with acinar functional loss (exocrine pancreatic
+    insufficiency). do(sustained increase in CCK / acinar secretory drive) -> increased luminal then fecal elastase-1.
+  evidence: 'Mechanism: CCK is the dominant acinar enzyme-secretagogue; fecal elastase-1 is a stable, pancreas-specific marker
+    of acinar secretory/functional capacity that falls in exocrine pancreatic insufficiency and rises with secretory output.
+    CITATION (verified): Walkowiak J et al., ''Fecal elastase-1 concentration: an indirect test of exocrine pancreatic function
+    and a marker of an enteropathy regardless of cause'', PMID:12604968 (title/PMID confirmed via PubMed). Textbook anchor:
+    Guyton & Hall, Medical Physiology, 11th ed., Ch. 64 (pancreatic secretion regulated by CCK and secretin). CAVEAT: fecal
+    elastase is a chronic integrated acinar-capacity marker, relatively insensitive to acute single CCK pulses; the ''+''
+    is a steady-state directional claim (acinar drive up -> fecal elastase up; acinar loss -> down).'
+  causal_evidence: curated_mechanistic
+- source: plasma_free_fatty_acids
+  target: plasma_2_hydroxybutyrate
+  sign: +
+  mechanism: 'Increased delivery of free fatty acids to the liver drives hepatic fatty-acid beta-oxidation, raising the hepatic
+    NADH/NAD+ ratio and increasing the oxidative-stress demand for glutathione synthesis. 2-hydroxybutyrate is generated from
+    alpha-ketobutyrate (a by-product of the cystathionine/glutathione-synthesis pathway and of Met/Thr catabolism) by NADH-dependent
+    reduction (LDH / alpha-hydroxybutyrate dehydrogenase). Higher hepatic lipid oxidation therefore raises plasma 2-HB. Parallels
+    the existing plasma_free_fatty_acids -> hepatic_ketogenesis (+) edge (same FFA -> hepatic lipid-oxidation driver). do():
+    raising FFA flux (lipid infusion / fasting / insulin resistance) raises plasma 2-HB.'
+  evidence: Gall WE et al., alpha-Hydroxybutyrate Is an Early Biomarker of Insulin Resistance and Glucose Intolerance in a
+    Nondiabetic Population, PLoS One 2010;5(5):e10883 (PMID 20526369; doi:10.1371/journal.pone.0010883) — alpha-HB rises with
+    increased lipid oxidation/oxidative stress. Verified real via PubMed (PMID 20526369) and PMC2878333.
+  causal_evidence: curated_mechanistic
+- source: plasma_free_fatty_acids
+  target: plasma_acetylcarnitine
+  sign: +
+  mechanism: 'Plasma acetylcarnitine (C2) reflects the mitochondrial acetyl-CoA/CoA ratio: when beta-oxidation flux outpaces
+    TCA-cycle capacity, excess acetyl-CoA is buffered by carnitine acetyltransferase (CrAT) to acetylcarnitine, which is exported
+    to plasma. A do(increase) in plasma free fatty acids (fasting, lipolysis, exercise) drives hepatic and muscle FAO, raises
+    matrix acetyl-CoA, and increases plasma C2. Human fasting/exercise studies show concordant FFA and plasma C2 rises with
+    hepato-splanchnic C2 release.'
+  evidence: 'Mechanism: FFA up -> FAO up -> matrix acetyl-CoA up -> CrAT buffering -> acetylcarnitine export -> plasma C2
+    up. Xu G, Hansen JS, Zhao XJ, et al., Liver and Muscle Contribute Differently to the Plasma Acylcarnitine Pool During
+    Fasting and Exercise in Humans, J Clin Endocrinol Metab 2016;101(12):5044-5052, PMID 27648961 (verified: fasting/exercise
+    increase plasma short-chain acylcarnitines including C2, with pronounced hepato-splanchnic C2 release). Guyton & Hall,
+    Medical Physiology, 11th ed., Ch. 68 (fat utilization in fasting). Curated mechanistic: CrAT-mediated acetyl-CoA-to-acetylcarnitine
+    buffering is biochemically established; the FFA->FAO->acetyl-CoA->C2 directionality is corroborated by fasting/exercise
+    (do()-like) human flux studies showing concordant rises.'
+  causal_evidence: perturbation
+- source: plasma_glucose
+  target: csf_erythritol
+  sign: +
+  mechanism: 'Erythritol is synthesized endogenously from glucose via the pentose-phosphate pathway: glucose-6-phosphate ->
+    PPP -> erythrose-4-phosphate -> erythrose -> (reduction) -> erythritol. Higher plasma glucose raises PPP flux and substrate
+    availability, increasing the circulating erythritol pool; CSF erythritol tracks the systemic pool of this small, freely-diffusing
+    polyol. do(plasma glucose up) -> CSF erythritol up.'
+  evidence: 'Hootman KC et al., ''Erythritol is a pentose-phosphate pathway metabolite and associated with adiposity gain
+    in young adults'', PNAS 2017;114(21):E4233-E4240 (PMID 28484010; DOI 10.1073/pnas.1620079114). Verified via PubMed/PNAS.
+    Demonstrates endogenous glucose->erythritol conversion by 13C-glucose stable-isotope tracing (ex vivo blood and in vivo
+    dried-blood-spot), with blood erythritol markedly elevated with adiposity gain / elevated HbA1c. Both endpoints ORGAN_SYSTEM
+    scale (same-scale, within-scale edge). Note: the HPO ''decreased CSF erythritol'' direction in transaldolase deficiency
+    is set by the PPP enzyme block, a separate enzyme-determined axis not claimed by this core->sink edge.'
+  causal_evidence: curated_mechanistic
+- source: plasma_glucose
+  target: plasma_apolipoprotein_c3
+  sign: +
+  mechanism: Glucose transactivates the hepatic APOC3 gene. Elevated glucose activates carbohydrate-response-element-binding
+    protein (ChREBP) and HNF-4alpha, which bind the APOC3 promoter and increase apoC-III transcription and secretion. In vivo,
+    plasma apoC-III tracks fasting glucose more closely than insulin, identifying glucose as the dominant driver in hyperglycemia.
+    do(raise plasma glucose) -> increased hepatic APOC3 transcription -> increased plasma apoC-III. Within-scale ORGAN_SYSTEM
+    -> ORGAN_SYSTEM (circulating glucose to circulating apoC-III).
+  evidence: Glucose directly activates apoCIII transcription in hepatocytes via ChREBP and HNF-4alpha; plasma apoCIII correlates
+    more strongly with fasting glucose than with insulin. Caron S et al., 'Transcriptional activation of apolipoprotein CIII
+    expression by glucose may contribute to diabetic dyslipidemia,' Arterioscler Thromb Vasc Biol 2011;31(3):513-519, PMID
+    21183731 (verified via PubMed).
+  causal_evidence: curated_mechanistic
+- source: plasma_hippuric_acid
+  target: urinary_hippuric_acid
+  sign: +
+  mechanism: 'Hippuric acid is cleared almost entirely by the kidney — freely filtered plus efficient proximal-tubule organic-anion
+    secretion (OAT1/OAT3, PAH-like) — so urinary hippurate excretion is a monotone-increasing function of plasma hippurate.
+    Raising plasma hippurate raises its renal (filtered + secreted) load and thus urinary hippurate. do(): any rise in plasma
+    hippurate (benzoate / dietary polyphenol load) raises urinary hippurate.'
+  evidence: 'Proximal-tubule organic-anion secretion (OAT1/OAT3): Guyton & Hall, Textbook of Medical Physiology, 11th ed.,
+    Ch. 27. Hippurate as the renally-excreted gut-microbial benzoate–glycine conjugate: Nutrients 2023;15(5):1138 (PMC10005077).
+    Plasma hippuric_acid itself remains an abstained exogenous (diet/microbiome) root; this edge only makes the urinary reading
+    forward-predictable.'
+  causal_evidence: curated_mechanistic
+- source: plasma_ige
+  target: plasma_allergen_specific_ige
+  sign: +
+  mechanism: 'Allergen-specific IgE is the atopy-driven subset of the total circulating IgE pool. Both fractions are produced
+    by the same Th2 program: IL-4/IL-13 -> STAT6 -> germline Cepsilon transcription, plus CD40-CD40L co-stimulation, driving
+    deletional class-switch recombination in B cells. Raising the systemic IgE-production drive (reflected in total plasma
+    IgE, itself fed in the core by aicda/cd40l/btk) raises the allergen-specific clones. core->analyte downstream sink; adds
+    no new path through the feedback core. Within-scale ORGAN_SYSTEM->ORGAN_SYSTEM.'
+  evidence: 'Th2 two-signal model of IgE class switching: IL-4/IL-13 + CD40L drive Cepsilon switching (verified: Punnonen
+    et al., PNAS 1993;90(8):3730-3734, PMID 8097323, IL-13/IL-4-induced human IgE synthesis). Total and antigen-specific IgE
+    share these drivers (Janeway''s Immunobiology 9th ed., Ch.10).'
+  causal_evidence: curated_mechanistic
+- source: plasma_igg
+  target: plasma_precipitin
+  sign: +
+  mechanism: A precipitin is a precipitating (immune-complex-forming) antibody, predominantly high-avidity IgG (also IgM),
+    assayed by precipitation reactions (e.g. anti-avian/anti-fungal precipitins in hypersensitivity pneumonitis). Precipitin
+    titre scales with the antigen-specific IgG produced by the humoral response, so it tracks the circulating IgG pool (fed
+    in the core by helper-T/CD40L/AICDA/BTK). core->analyte downstream sink. Within-scale ORGAN_SYSTEM->ORGAN_SYSTEM.
+  evidence: Guyton & Hall, Textbook of Medical Physiology, 11th ed., Ch.34 (Immunity and Allergy - antibody mechanisms including
+    precipitation); Janeway's Immunobiology 9th ed., Ch.10 (precipitating IgG/IgM immune complexes).
+  causal_evidence: curated_mechanistic
+- source: plasma_immunoglobulin
+  target: plasma_globulin
+  sign: +
+  mechanism: Total plasma globulin is the mereological sum of its sub-fractions; the gamma-globulin fraction IS the immunoglobulins.
+    Raising total immunoglobulin necessarily raises measured total globulin. do(immunoglobulin up) -> total globulin up (constituent
+    of an additive identity, same plasma scale).
+  evidence: Total serum globulin = alpha + beta + gamma globulin fractions, with gamma globulin = immunoglobulins; this is
+    a definitional additive relationship. Boron & Boulpaep, Medical Physiology (plasma proteins); NCBI Clinical Methods Ch.101
+    (Serum Albumin and Globulin).
+  causal_evidence: curated_mechanistic
+- source: plasma_immunoglobulin
+  target: plasma_specific_antibody
+  sign: +
+  mechanism: 'Antigen-specific antibody titre is the subset of total circulating immunoglobulin generated by the antigen-driven
+    B-cell/helper-T humoral response (germinal-center proliferation, AICDA-mediated class switch and affinity maturation,
+    plasma-cell secretion). Systemic Ig-production capacity drives specific-antibody titre: when total Ig production fails
+    (agammaglobulinemia/CVID - the HPO ''Decreased specific antibody'' context), specific antibody falls in step. plasma_immunoglobulin
+    is fed in the core by btk_kinase_activity. core->analyte downstream sink. Within-scale ORGAN_SYSTEM->ORGAN_SYSTEM.'
+  evidence: Guyton & Hall, Textbook of Medical Physiology, 11th ed., Ch.34 (Immunity and Allergy - B lymphocytes, plasma cells
+    and antibody production); Janeway's Immunobiology 9th ed., Ch.10-11 (T-dependent B-cell responses generate antigen-specific
+    antibody).
+  causal_evidence: curated_mechanistic
+- source: plasma_insulin
+  target: plasma_apolipoprotein_c3
+  sign: '-'
+  mechanism: 'Insulin suppresses hepatic APOC3 transcription. Nuclear FOXO1 binds an insulin-response element in the APOC3
+    promoter to activate transcription; insulin signaling phosphorylates FOXO1 and excludes it from the nucleus, de-repressing
+    (lowering) apoC-III synthesis. Insulin replacement in insulin-deficient states reduces hepatic APOC3 mRNA and normalizes
+    hypertriglyceridemia (a do()-like manipulation). do(raise insulin) -> decreased APOC3 transcription -> decreased plasma
+    apoC-III. Within-scale ORGAN_SYSTEM -> ORGAN_SYSTEM. Note: glucose and insulin act through distinct, opposing transcriptional
+    arms (ChREBP/HNF-4alpha vs FOXO1); each is captured by a separate edge, so the net of a mixed glucose+insulin load is
+    the resolved sum of both edges.'
+  evidence: APOC3 hepatic expression is negatively regulated by insulin via FOXO1; FOXO1 binds the APOC3 promoter insulin-response
+    element and insulin phosphorylates/excludes FOXO1 from the nucleus, downregulating apoC-III. Altomonte J et al., 'Foxo1
+    mediates insulin action on apoC-III and triglyceride metabolism,' J Clin Invest 2004;114(10):1493-1503, PMID 15546000
+    (verified via PubMed/JCI). Reviewed in Caron et al. ATVB 2011, PMID 21183731.
+  causal_evidence: curated_mechanistic
+- source: plasma_phosphate
+  target: prpp_synthetase_activity
+  sign: +
+  mechanism: 'Inorganic phosphate (Pi) is an obligate activator and cofactor of PRPP synthetase (PRPS1): Pi binds the regulatory/allosteric
+    site (the site that also binds the inhibitory nucleotides ADP/GDP), stabilising the active hexameric conformation, and
+    enzyme activity is strictly dependent on Pi (with Mg2+). Intracellular Pi tracks plasma phosphate and is rate-limiting
+    for PRPP production in human cells. Raising plasma (hence intracellular) phosphate therefore increases realised PRPS catalytic
+    activity. The activity node is a downstream sink (it then drives de-novo purine synthesis), so no new path through the
+    homeostatic feedback core is created.'
+  evidence: 'Pi is a defined allosteric activator/cofactor of PRPS demonstrated by enzyme-kinetic studies in which adding/removing
+    Pi changes activity (a do(Pi) manipulation on the purified/cellular enzyme), and intracellular Pi is rate-limiting for
+    PRPP production. Becker MA, ''Phosphoribosylpyrophosphate synthetase and the regulation of phosphoribosylpyrophosphate
+    production in human cells'', Prog Nucleic Acid Res Mol Biol 2001, PMID:11550793 (verified); enzyme requirement for Pi/Mg2+
+    also in classic PRS kinetic literature. Textbook anchor: Guyton & Hall, Medical Physiology, 11th ed. (purine synthesis).
+    Pi shown to be a defined allosteric activator by enzyme-kinetic do(Pi) studies; intracellular Pi rate-limiting for PRPP
+    production.'
+  causal_evidence: perturbation
+- source: plasma_riboflavin
+  target: glutathione_reductase_activity
+  sign: +
+  mechanism: Erythrocyte glutathione reductase (GSR) is an FAD-flavoprotein whose measured (basal, non-FAD-stimulated) catalytic
+    activity depends on saturation of the apoenzyme with its FAD cofactor, derived from dietary riboflavin (vitamin B2). In
+    riboflavin deficiency FAD supply falls, apo-GSR accumulates and basal GSR activity drops (the erythrocyte glutathione
+    reductase activation coefficient, EGRAC, rises). do(raise riboflavin/FAD availability) -> increased holo-GSR activity.
+  evidence: 'Mechanism: cofactor (FAD) saturation of apo-GSR sets the holoenzyme activity; this is the physiological basis
+    of the EGRAC riboflavin-status assay (basal activity low + large FAD activation = deficiency). CITATIONS (verified): Hill
+    MHE et al., ''Optimal and stable conditions for the determination of erythrocyte glutathione reductase activation coefficient
+    to evaluate riboflavin status'', PMID:7883462 (confirmed; AC ~1.3 in healthy subjects, rising to ~1.6 on 0.5 mg/d riboflavin,
+    falling after supplementation); EGRAC protocol PMID:37988268 (confirmed). New node plasma_riboflavin grounded CHEBI:17015
+    (riboflavin, OBO-verified).'
+  causal_evidence: curated_mechanistic
+- source: platelet_count
+  target: plasma_thrombopoietin
+  sign: '-'
+  mechanism: 'TPO is produced near-constitutively (mainly hepatic); its plasma level is set by clearance, not production.
+    Circulating platelets (and megakaryocytes) bear c-Mpl receptors that bind, internalise and degrade TPO, so plasma TPO
+    is inversely related to total platelet mass: high platelet count sponges/removes more TPO (level falls); thrombocytopenia
+    leaves more free TPO (level rises). do(raise platelet count) -> decrease TPO. This closes the autoregulatory negative-feedback
+    loop with the existing plasma_thrombopoietin -> platelet_count (+) edge.'
+  evidence: Fielder PJ, Gurney AL, Stefanich E, Marian M, Moore MW, Carver-Moore K, de Sauvage FJ. Regulation of thrombopoietin
+    levels by c-mpl-mediated binding to platelets. Blood. 1996;87(6):2154-2161. PMID:8630374 (PMID verified via PubMed; c-mpl-/-
+    mice have fewer platelets and higher plasma TPO with unchanged TPO mRNA, and platelet-rich plasma binds/internalises 125I-TPO).
+    Both endpoints ORGAN_SYSTEM; existing TPO->platelet_count(+) edge present in textbook_extracted.yaml.
+  causal_evidence: curated_mechanistic
+- source: sarcolemmal_permeability
+  target: plasma_ast
+  sign: +
+  mechanism: AST is abundant in skeletal muscle; loss of sarcolemmal membrane integrity (rhabdomyolysis/myonecrosis) releases
+    muscle AST into plasma, producing a non-hepatic aminotransferase rise. Exactly parallels the existing muscle-leak panel
+    edges sarcolemmal_permeability -> plasma_creatine_kinase / plasma_ldh / plasma_aldolase / plasma_myoglobin already in
+    the graph.
+  evidence: Skeletal-muscle necrosis releases AST (and ALT) into plasma in parallel with CK and LDH. Nathwani RA, Pais S,
+    Reynolds TB, Kaplowitz N, 'Serum alanine aminotransferase in skeletal muscle diseases', Hepatology 2005;41(2):380-2 (PMID:15660433,
+    VERIFIED real); mirrors the curated sarcolemmal_permeability -> CK/LDH/aldolase/myoglobin leak edges. Guyton & Hall, Medical
+    Physiology, 11th ed.
+  causal_evidence: curated_mechanistic
+- source: tnf_alpha
+  target: plasma_adiponectin
+  sign: '-'
+  mechanism: 'Adipose/circulating TNF-alpha suppresses adipocyte ADIPOQ transcription and secretion (NF-kB activation, down-regulation
+    of the PPAR-gamma-driven ADIPOQ promoter), lowering plasma adiponectin. do(raise TNF-alpha) -> decrease adiponectin. Verified:
+    plasma adiponectin and adipose ADIPOQ mRNA are inversely related to adipose TNF-alpha expression; TNF-alpha is a principal
+    driver of the low-adiponectin state of obesity/inflammation.'
+  evidence: 'Kern PA, Di Gregorio GB, Lu T, Rassouli N, Ranganathan G. Adiponectin expression from human adipose tissue: relation
+    to obesity, insulin resistance, and tumor necrosis factor-alpha expression. Diabetes. 2003;52(7):1779-1785. PMID:12829646
+    (PMID verified via PubMed). Both endpoints ORGAN_SYSTEM scale; analyte is a downstream sink, no new path through the feedback
+    core.'
+  causal_evidence: curated_mechanistic

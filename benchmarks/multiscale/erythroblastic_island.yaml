@@ -1,0 +1,132 @@
+# =============================================================================
+# Cellular scale: Erythroblastic island (central macrophage <-> erythroblast)
+#                                                          *** DRAFT FOR REVIEW ***
+# =============================================================================
+# The erythroblastic island is the anatomical/functional niche of terminal
+# erythropoiesis: a central nurse macrophage surrounded by maturing erythroblasts.
+# The macrophage anchors, feeds (iron) and supports erythroblasts; erythroblasts in
+# turn signal back to the macrophage (adhesion + retention + final enucleation /
+# pyrenocyte clearance). This module encodes that bidirectional cell-cell
+# communication at the CELLULAR scale and ties the EPO/JAK-STAT erythropoiesis
+# vertical (epo_jak_stat.yaml) to its physical niche.
+#
+# CELL TYPES (nodes):  quality determinable = PATO:0000161 'rate' (graded magnitude;
+#   NOT PATO:0000161 'accumulation' (structural) nor PATO:0002354 'active' (a determinate
+#   state value), per ontology audit 2026-06):
+#   - island_macrophage_activity   central nurse macrophage support rate (CL:0000235)
+#   - erythroblast_proliferation    erythroblast proliferation rate (CL:0000765)
+#   - erythroblast_maturation       erythroblast enucleation / terminal maturation rate (CL:0000765)
+#
+# CELL-CELL SIGNALS (ligand -> receptor, OmniPath consensus_stimulation = +):
+#   macrophage -> erythroblast:
+#     VCAM1 (macrophage)  -> ITGA4/VLA-4 (erythroblast)   adhesion/retention (+)
+#         OmniPath VCAM1->ITGA4 is_stimulation=True, PMID 11751331; 22623428
+#     KITLG/SCF (macrophage, membrane) -> KIT (erythroblast)  survival/proliferation (+)
+#         OmniPath KITLG->KIT is_stimulation=True, PMID 7680037
+#   erythroblast -> macrophage:
+#     ICAM4 (erythroblast) -> ITGAV/alphaV integrin (macrophage)  island assembly (+)
+#         OmniPath ICAM4->ITGAV is_stimulation=True, PMID 11435317 (15355350)
+#
+# WITHIN-CELLULAR CAUSAL INTEGRATION (into EXISTING fine-scale cellular node):
+#     island_macrophage_activity -> erythroid_progenitor_proliferation (+)
+#         (the macrophage niche supports CFU-E/erythroid progenitor expansion)
+#
+# CROSS-SCALE CONSTITUTIVE LIFT (part_of + determination; NOT causal):
+#     erythroblast_maturation (cellular) >> red_cell_mass (organ_system) (+)
+#
+# Bidirectional macrophage<->erythroblast edges form a CELLULAR SCC (the island as a
+# positive-feedback adhesion/support unit), so net response to perturbing one cell
+# requires loop-aware comparative statics, not forward propagation.
+#
+# (EPO hormonal input is a downward macro->micro influence and is NOT modeled here;
+#  the macrophage node is a ROOT exercised by interventions.)
+#
+# SOURCES (verified):
+#   - Manwani D, Bieker JJ (2008) "The erythroblastic island." Curr Top Dev Biol
+#       82:23-53. PMID 18282516.
+#   - Chasis JA, Mohandas N (2008) "Erythroblastic islands: niches for erythropoiesis."
+#       Blood 112:470-478. PMID 18650462.
+#   - OmniPath ligand-receptor (intercell): VCAM1->ITGA4, KITLG->KIT, ICAM4->ITGAV
+#       (consensus_stimulation = True; PMIDs above).
+#   - Boron & Boulpaep, Medical Physiology (erythropoiesis): macrophage-supported
+#       maturation and enucleation of erythroid precursors expands red cell mass.
+#
+# BOUNDARY NODES (existing-map ids, NOT redefined here):
+#   erythroid_progenitor_proliferation (cellular), red_cell_mass (organ_system)
+# =============================================================================
+
+name: erythroblastic_island
+nodes:
+- id: island_macrophage_activity
+  label: erythroblastic-island central (nurse) macrophage support activity
+  scale: cellular
+  entity_iri: CL:0000235
+  quality_iri: PATO:0000161
+- id: erythroblast_proliferation
+  label: erythroblast proliferation rate
+  scale: cellular
+  entity_iri: CL:0000765
+  quality_iri: PATO:0000161
+- id: erythroblast_maturation
+  label: erythroblast terminal maturation / enucleation rate
+  scale: cellular
+  entity_iri: GO:0043354  # enucleate erythrocyte maturation
+  quality_iri: PATO:0000161
+  bearer_entity_iri: CL:0000765  # erythroblast
+causal_edges:
+- source: island_macrophage_activity
+  target: erythroblast_proliferation
+  sign: +
+  causal_evidence: perturbation
+  mechanism: 'paracrine/juxtacrine: macrophage membrane-bound SCF (KITLG) engages erythroblast
+    KIT receptor tyrosine kinase (quality: macrophage support activity -> disposition:
+    KITLG presentation + VCAM1 adhesion -> process: KIT signaling, GO:0038109 KIT-signaling-pathway
+    -> quality: erythroblast proliferation rate)'
+  evidence: 'Interventional: erythroblasts in direct macrophage contact proliferate ~3-fold more than progenitors cultured alone (EPO-independent, altered G0/G1 transit), and chemical depletion of splenic macrophages prevents the appropriate erythroid response to bleeding — do(macrophage support up/down) shifts erythroblast proliferation. Chasis & Mohandas (2008) Blood 112:470-478, PMID 18650462 (full text). OmniPath ligrec KITLG->KIT is_stimulation=True, PMID 7680037; Manwani & Bieker (2008) Curr Top Dev Biol 82:23-53, PMID 18282516. Boron & Boulpaep, Medical Physiology. [citations PubMed-verified]'
+- source: island_macrophage_activity
+  target: erythroblast_maturation
+  sign: +
+  causal_evidence: perturbation
+  mechanism: 'juxtacrine adhesion + iron handoff: macrophage VCAM1 binds erythroblast integrin
+    alpha4-beta1 (VLA-4) anchoring the cell and supplying iron/ferritin for hemoglobinization
+    (quality: macrophage support activity -> disposition: VCAM1-VLA4 adhesion + iron supply
+    -> process: GO:0043249 erythrocyte maturation / enucleation -> quality: erythroblast maturation rate)'
+  evidence: 'Interventional: macrophage depletion causes pro-erythroblast differentiation arrest, i.e. do(macrophage down) impairs terminal maturation/enucleation; macrophage contact (VCAM1-VLA4 adhesion, iron/ferritin handoff) supports hemoglobinization and enucleation. Chasis & Mohandas (2008) Blood 112:470-478, PMID 18650462 (full text). OmniPath ligrec VCAM1->ITGA4 is_stimulation=True; 22623428; Manwani & Bieker (2008) Curr Top Dev Biol 82:23-53, PMID 18282516. Boron & Boulpaep, Medical Physiology. [citations PubMed-verified]'
+- source: erythroblast_proliferation
+  target: island_macrophage_activity
+  sign: +
+  mechanism: 'juxtacrine feedback: expanding erythroblasts present ICAM4 to macrophage alphaV
+    integrin, assembling/stabilizing the island and sustaining macrophage support (quality:
+    erythroblast number/proliferation -> disposition: ICAM4-alphaV adhesion -> process: GO:0007157
+    heterophilic cell-cell adhesion / island assembly -> quality: macrophage support activity)'
+  evidence: 'OmniPath ligrec ICAM4->ITGAV is_stimulation=True, PMID 11435317 (15355350); Chasis & Mohandas (2008) Blood 112:470-478, PMID 18650462. Manwani & Bieker (2008) PMID 18282516. [citations PubMed-verified]'
+- source: erythroblast_maturation
+  target: island_macrophage_activity
+  sign: +
+  mechanism: 'erythroblast enucleation releases pyrenocytes (extruded nuclei) presenting
+    phosphatidylserine, engaging macrophage clearance receptors that reinforce the nurse
+    program (quality: erythroblast maturation/enucleation rate -> disposition: PS exposure +
+    ICAM4-alphaV contact -> process: GO:0006911 phagocytosis of pyrenocytes -> quality: macrophage support activity)'
+  evidence: 'Chasis & Mohandas (2008) Blood 112:470-478, PMID 18650462 (central macrophage ingests extruded nuclei); Manwani & Bieker (2008) Curr Top Dev Biol 82:23-53, PMID 18282516. [citations PubMed-verified]'
+- source: erythroblast_proliferation
+  target: erythroblast_maturation
+  sign: +
+  mechanism: 'lineage progression: a larger proliferating erythroblast pool feeds the terminal
+    maturation/enucleation program (quality: erythroblast proliferation rate -> disposition:
+    cell-cycle exit competence -> process: GO:0030218 erythrocyte differentiation -> quality:
+    erythroblast maturation/enucleation rate)'
+  evidence: 'Manwani & Bieker (2008) Curr Top Dev Biol 82:23-53, PMID 18282516; Boron & Boulpaep, Medical Physiology (erythroid precursors proliferate then mature/enucleate). [citations PubMed-verified]'
+- source: island_macrophage_activity
+  target: erythroid_progenitor_proliferation
+  sign: +
+  causal_evidence: perturbation
+  mechanism: 'the central macrophage niche supports earliest erythroid progenitor (CFU-E)
+    expansion via SCF/adhesion + iron provision (quality: macrophage support activity ->
+    disposition: KITLG/VCAM1 presentation -> process: niche-supported progenitor survival/proliferation
+    -> quality: erythroid progenitor proliferation rate)'
+  evidence: 'Interventional: macrophage depletion reduces early (CFU-E) progenitor proliferation and causes differentiation arrest, i.e. do(macrophage down) impairs progenitor expansion. Chasis & Mohandas (2008) Blood 112:470-478, PMID 18650462 (full text; macrophage essential for erythroid expansion); Manwani & Bieker (2008) Curr Top Dev Biol 82:23-53, PMID 18282516. [citations PubMed-verified]'
+production_edges:
+- source: erythroblast_maturation
+  target: red_cell_mass
+  sign: +
+  production_evidence: legacy-evidence-unclassified

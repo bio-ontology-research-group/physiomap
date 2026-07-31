@@ -1,0 +1,267 @@
+# =============================================================================
+# Energy balance / appetite (leptin-ghrelin-hypothalamus) — PhysioMap fragment
+# *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Hand-encoded canonical energy-homeostasis physiology. Every causal edge sign is
+# the sign of the partial derivative of the target w.r.t. the source at steady
+# state, all else equal (interventionist partial).
+#
+# Single-scale (ORGAN / ORGAN_SYSTEM). Within-scale signed cyclic causal edges.
+#
+# CORE NEGATIVE-FEEDBACK LOOP (leptin adiposity-signal loop):
+#   adipose_tissue_mass -> leptin (+) -> hypothalamic_appetite_drive (-)
+#     -> food_intake (+) -> body_weight (+) -> adipose_tissue_mass (+)
+#   Net loop sign is NEGATIVE: a rise in fat mass raises leptin, which suppresses
+#   appetite and intake, which reduces weight/fat -> the classic lipostat.
+#   The correct net effect of an intervention REQUIRES loop reasoning (naive
+#   forward propagation through the negative feedback gives the wrong sign).
+#
+# A second, opposing (orexigenic) limb via ghrelin:
+#   food_intake -> ghrelin (-)  [postprandial suppression]
+#   ghrelin -> hypothalamic_appetite_drive (+)
+#
+# A third (lipostatic) limb via ghrelin adiposity coupling:
+#   adipose_tissue_mass -> ghrelin (-)  [circulating ghrelin inversely related to
+#     fat mass; Tschoep et al., Diabetes 2001] -> appetite_drive (+) -> ...
+#   This keeps the lipostat net-negative through the ghrelin arm as well.
+#
+# BOUNDARY NODES (referenced by id from existing vocabulary, NOT redefined here):
+#   plasma_insulin  — adiposity signal (CNS) and peripheral metabolic hormone
+#   plasma_glucose  — substrate availability sensed in appetite control
+#   metabolic_rate  — thermogenic energy expenditure arm of the balance
+#
+# REFERENCE MODEL (verified):
+#   BioModels BIOMD0000000901 — "ChowHall2008 Dynamics of Human Weight Change"
+#     Chow CC & Hall KD. "The dynamics of human body weight change."
+#     PLoS Comput Biol. 2008. PMID 18369435.
+#   (Provides the energy-balance mass dynamics: intake vs expenditure -> body
+#    composition / fat mass.)
+# TEXTBOOK ANCHORS (verified, canonical):
+#   Boron & Boulpaep, Medical Physiology — hypothalamic (arcuate) control of
+#     appetite; leptin/insulin adiposity signals; ghrelin as orexigenic gut signal.
+#   Williams Textbook of Endocrinology — leptin physiology and the adipostat.
+# PRIMARY LITERATURE (verified, canonical):
+#   Friedman JM & Halaas JL. "Leptin and the regulation of body weight in
+#     mammals." Nature 1998;395:763-770. (leptin negative-feedback lipostat)
+#
+# ROBERT: please correct signs/edges.
+# =============================================================================
+
+name: energy_balance_appetite
+description: >-
+  DRAFT energy-balance / appetite control (leptin-ghrelin-hypothalamus) as a
+  PhysioMap signed cyclic causal graph. Canonical energy-homeostasis physiology
+  (ChowHall2008 / BIOMD0000000901; Boron & Boulpaep; Williams Endocrinology;
+  Friedman & Halaas 1998). Single-scale (Phase 1). Includes the leptin negative-
+  feedback lipostat loop plus the opposing ghrelin orexigenic limb, with
+  insulin / glucose / metabolic-rate couplings to the existing map.
+
+nodes:
+  - id: leptin
+    label: plasma leptin concentration
+    scale: organ_system
+    entity_iri: PR:000009758           # leptin (protein)
+    quality_iri: PATO:0000033          # concentration
+    quality_kind: ratio
+  - id: ghrelin
+    label: plasma ghrelin concentration
+    scale: organ_system
+    entity_iri: PR:000007973           # appetite-regulating hormone (GHRL/ghrelin)
+    quality_iri: PATO:0000033
+    quality_kind: ratio
+  - id: hypothalamic_appetite_drive
+    label: hypothalamic (arcuate) orexigenic appetite drive
+    scale: organ
+    entity_iri: GO:0032100             # positive regulation of appetite (process bearer)
+    bearer_entity_iri: UBERON:0001898  # hypothalamus (anatomical bearer)
+    quality_iri: PATO:0000161          # rate (neural drive)
+    quality_kind: rate
+  - id: food_intake
+    label: energy (food) intake rate
+    scale: organism
+    entity_iri: GO:0007631             # feeding behavior (process bearer)
+    quality_iri: PATO:0000161          # rate
+    quality_kind: rate
+  - id: adipose_tissue_mass
+    label: adipose (fat) tissue mass
+    scale: organ_system
+    entity_iri: UBERON:0001013         # adipose tissue
+    quality_iri: PATO:0000125          # mass
+  - id: body_weight
+    label: total body weight
+    scale: organism
+    entity_iri: UBERON:0000468         # multicellular organism
+    quality_iri: PATO:0000125          # mass
+  - id: lean_body_mass
+    label: lean body mass (fat-free mass)
+    scale: organ_system
+    quality_iri: PATO:0000125          # mass  (a constituent of body weight; conservation part)
+
+  # --- cellular producers of the secreted adiposity/gut hormones -------------
+  # (ground the macro humoral substance nodes in their dominant cell of origin;
+  #  OLS4-verified CL IRIs, labels confirmed 2026-06)
+  - id: adipocyte_leptin_secretion
+    label: adipocyte leptin secretion rate
+    scale: cellular
+    entity_iri: CL:0000136             # adipocyte
+    quality_iri: PATO:0000161          # secretion rate
+  - id: ghrelin_cell_ghrelin_secretion
+    label: gastric ghrelin-cell ghrelin secretion rate
+    scale: cellular
+    entity_iri: GO:0036321             # ghrelin secretion
+    quality_iri: PATO:0000161
+    bearer_entity_iri: CL:0005018  # ghrelin secreting cell
+
+causal_edges:
+  # --- leptin adiposity signal: fat mass sets leptin ------------------------
+  - source: adipose_tissue_mass
+    target: leptin
+    sign: "+"
+    mechanism: >-
+      adipocyte mass increases leptin (LEP) gene expression and secretion;
+      circulating leptin is proportional to total fat mass (the afferent
+      adiposity signal of the lipostat)
+    evidence: "Friedman & Halaas, Nature 1998 (leptin proportional to fat mass); Williams Textbook of Endocrinology | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-098 (17.11: Organs with Secondary Endocrine Functions): 'leptin, a protein manufactured by adipose cells that circulates in amounts directly proportional to levels of body fat'"
+
+  # --- leptin central anorexigenic action -----------------------------------
+  - source: leptin
+    target: hypothalamic_appetite_drive
+    sign: "-"
+    mechanism: >-
+      leptin acts on arcuate-nucleus neurons (inhibits orexigenic NPY/AgRP,
+      activates anorexigenic POMC), lowering net orexigenic appetite drive
+    evidence: "Boron & Boulpaep, Medical Physiology (arcuate appetite control); Friedman & Halaas, Nature 1998 | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-098 (17.11: Organs with Secondary Endocrine Functions): 'Binding of leptin produces a feeling of satiety after a meal, thereby reducing appetite'; OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): 'Leptin increases the activity of anorexigenic neurons and decreases that of orexigenic neurons, producing a feeling of satiety after eating, thus affecting appetite and reducing the urge for further eating.'"
+
+  # --- ghrelin: postprandial suppression and orexigenic central action ------
+  - source: food_intake
+    target: ghrelin
+    sign: "-"
+    causal_evidence: perturbation
+    mechanism: >-
+      gastric ghrelin secretion is suppressed by feeding/nutrient ingestion and
+      rises with fasting (preprandial hunger signal)
+    evidence: "Boron & Boulpaep, Medical Physiology (ghrelin as preprandial orexigenic gut hormone)"
+  - source: ghrelin
+    target: hypothalamic_appetite_drive
+    sign: "+"
+    mechanism: >-
+      ghrelin activates arcuate NPY/AgRP neurons via GHS-R1a, increasing
+      orexigenic appetite drive
+    evidence: "Boron & Boulpaep, Medical Physiology (ghrelin orexigenic action on hypothalamus) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-134 (23.5: The Stomach): hormone table — ghrelin 'Regulates food intake, primarily by stimulating hunger and satiety', stimulus: fasting state (levels increase just prior to meals), target: hypothalamus"
+
+  # --- appetite drive -> intake ---------------------------------------------
+  - source: hypothalamic_appetite_drive
+    target: food_intake
+    sign: "+"
+    mechanism: >-
+      net hypothalamic orexigenic drive increases motivated feeding behaviour and
+      energy intake
+    evidence: "Boron & Boulpaep, Medical Physiology (hypothalamic regulation of feeding)"
+
+  # --- energy-balance mass dynamics (ChowHall2008) --------------------------
+  - source: food_intake
+    target: body_weight
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: >-
+      sustained positive energy balance (intake exceeding expenditure) increases
+      body energy stores and hence body weight (mass balance of the body-weight ODE)
+    evidence: 'BioModels BIOMD0000000901 ChowHall2008; Chow & Hall, PLoS Comput Biol 2008, PMID 18369435 | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-144 (24.8: Nutrition and Diet) — excess caloric intake accumulates as fat: ''If an excess of 200 calories per day is ingested, one extra pound of body weight will be gained every 18 days'' [citations PubMed-verified]'
+  - source: metabolic_rate
+    target: body_weight
+    sign: "-"
+    causal_evidence: mechanistic_model
+    mechanism: >-
+      higher energy expenditure (thermogenesis / metabolic rate) at fixed intake
+      produces negative energy balance, reducing body weight
+    evidence: 'BioModels BIOMD0000000901 ChowHall2008 (expenditure term of energy balance); Chow & Hall, PLoS Comput Biol 2008, PMID 18369435 [citations PubMed-verified]'
+  - source: body_weight
+    target: adipose_tissue_mass
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: >-
+      a fraction of gained/lost body mass is partitioned into the fat
+      compartment, so fat mass tracks body weight (body-composition partition)
+    evidence: 'BioModels BIOMD0000000901 ChowHall2008 (fat/lean body-composition partitioning); Chow & Hall, PLoS Comput Biol 2008, PMID 18369435 [citations PubMed-verified]'
+
+  # --- adiposity -> ghrelin (third lipostatic limb) -------------------------
+  - source: adipose_tissue_mass
+    target: ghrelin
+    sign: "-"
+    mechanism: >-
+      circulating (fasting) ghrelin is inversely related to adiposity: rising fat
+      mass suppresses ghrelin, adding a third adiposity-signal limb to the lipostat
+      (higher fat mass -> lower ghrelin -> lower orexigenic drive)
+    evidence: 'Tschoep M, Weyer C, Tataranni PA, Devanarayan V, Ravussin E, Heiman ML. Circulating ghrelin levels are decreased in human obesity. Diabetes 2001;50(4):707-709, PMID 11289032 (ghrelin negatively correlated with percent body fat) [citations PubMed-verified]'
+
+  # --- expenditure / leptin-driven thermogenesis (closes a second loop) -----
+  - source: leptin
+    target: metabolic_rate
+    sign: "+"
+    mechanism: >-
+      leptin signalling supports sympathetic thermogenic tone and resting energy
+      expenditure; falling leptin during weight loss lowers metabolic rate
+      (adaptive thermogenesis)
+    evidence: "Friedman & Halaas, Nature 1998; Williams Textbook of Endocrinology (leptin and energy expenditure)"
+
+  # --- cross-fragment couplings (BOUNDARY nodes from existing vocabulary) ----
+  - source: plasma_insulin
+    target: hypothalamic_appetite_drive
+    sign: "-"
+    mechanism: >-
+      insulin is a CNS adiposity signal acting on arcuate neurons (like leptin)
+      to suppress orexigenic appetite drive
+    evidence: "Boron & Boulpaep, Medical Physiology (insulin as central adiposity/anorexigenic signal)"
+  - source: adipose_tissue_mass
+    target: plasma_insulin
+    sign: "+"
+    mechanism: >-
+      increased adiposity raises basal insulin (adiposity-associated insulin
+      resistance / compensatory hyperinsulinaemia)
+    evidence: "Williams Textbook of Endocrinology (adiposity and fasting insulin); Boron & Boulpaep"
+  - source: food_intake
+    target: plasma_glucose
+    sign: "+"
+    causal_evidence: perturbation
+    mechanism: >-
+      nutrient (carbohydrate) ingestion raises the plasma glucose load entering
+      the circulation
+    evidence: "Boron & Boulpaep, Medical Physiology (postprandial glucose appearance)"
+  - source: plasma_glucose
+    target: hypothalamic_appetite_drive
+    sign: "-"
+    mechanism: >-
+      glucose-sensing hypothalamic neurons reduce orexigenic drive when substrate
+      (glucose) availability is high (glucostatic component of satiety)
+    evidence: "Boron & Boulpaep, Medical Physiology (glucostatic regulation of feeding)"
+
+constitutive_edges:
+  # --- AGGREGATION (conservation): body weight is the mereological sum of its parts ---------
+  # body_weight = fat mass + lean mass; each part contributes +. A conservation rung
+  # (evaluation family 9: Δbody_weight = Σ Δparts at steady state) — NOT causal (body weight
+  # does not cause fat; fat is part_of body weight). See physiomap_core/constitution.py.
+  - micro: adipose_tissue_mass
+    macro: body_weight
+    relation: aggregation
+    sign: "+"
+  - micro: lean_body_mass
+    macro: body_weight
+    relation: aggregation
+    sign: "+"
+
+
+production_edges:
+  # Adipocytes secrete leptin; adipocyte leptin secretion rate sets plasma leptin.
+  - source: adipocyte_leptin_secretion
+    target: leptin
+    sign: "+"
+    production_evidence: curated_source_statement
+    mechanism: adipocyte leptin secretion releases leptin into the circulating plasma pool
+    evidence: Williams Textbook of Endocrinology (leptin physiology); Friedman & Halaas, Nature 1998;395:763-770.
+  # Gastric ghrelin (X/A-like) cells secrete ghrelin into the circulating pool.
+  - source: ghrelin_cell_ghrelin_secretion
+    target: ghrelin
+    sign: "+"
+    production_evidence: curated_source_statement
+    mechanism: gastric X/A-like-cell secretion releases ghrelin into the circulating plasma pool
+    evidence: Boron & Boulpaep, Medical Physiology (ghrelin as the preprandial orexigenic gut hormone).

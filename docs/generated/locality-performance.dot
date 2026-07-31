@@ -1,0 +1,7 @@
+digraph G {
+          graph [rankdir=LR, bgcolor="transparent", pad=.2]; node [shape=box, style="rounded,filled", fontname="Helvetica"];
+          S [label="6 checksum-pinned source ontologies", fillcolor="#e5e7eb"];
+          L [label="OWLAPI BOT locality extraction\n89,661 module axioms / 200.5 s refresh", fillcolor="#dbeafe"];
+          K [label="TBox-only primary KB\nABox individuals excluded", fillcolor="#dcfce7"];
+          S -> L -> K;
+        }

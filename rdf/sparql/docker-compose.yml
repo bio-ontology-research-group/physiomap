@@ -1,0 +1,23 @@
+# One-command PhysioMap SPARQL endpoint.
+#
+#   docker compose up -d
+#
+# Serves a read-only SPARQL endpoint over rdf/physiomap.ttl at
+#   http://localhost:3030/physiomap/sparql
+# Put it behind the existing bio2vec.net nginx (proxy /physiomap/sparql -> :3030/physiomap/sparql)
+# to expose it as https://bio2vec.net/physiomap/sparql (the void:sparqlEndpoint in ../void.ttl).
+
+services:
+  fuseki:
+    image: stain/jena-fuseki:latest
+    environment:
+      - ADMIN_PASSWORD=change-me
+      - FUSEKI_DATASET_1=physiomap
+    ports:
+      - "3030:3030"
+    volumes:
+      # load the graph read-only into the "physiomap" dataset on first start
+      - ../physiomap.ttl:/staging/physiomap.ttl:ro
+    # After start:  docker compose exec fuseki /jena-fuseki/bin/s-put \
+    #   http://localhost:3030/physiomap/data default /staging/physiomap.ttl
+    restart: unless-stopped

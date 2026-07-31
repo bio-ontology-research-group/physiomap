@@ -1,0 +1,250 @@
+# =============================================================================
+# Monogenic HPO phenotype prediction and lesion abduction, curated pilot
+# =============================================================================
+# Each disorder maps a monogenic loss/gain-of-function onto:
+#   - `primary`: the PhysioMap node(s) the variant directly perturbs, with the sign
+#     (LoF of an enzyme/activator -> '-'; GoF / LoF-of-an-inhibitor -> '+'). This is the
+#     do() — "nature's intervention".
+#   - `phenotypes`: the secondary physiological abnormalities, each a PhysioMap node + a
+#     PATO direction (sign). These are the chronic, COMPENSATED clinical findings, i.e. the
+#     steady state after homeostatic feedback — exactly what comparative statics predicts.
+#
+# All disorders here use nodes ALREADY in the map (no expansion needed), so the pilot runs
+# on the current composed human map. Signs are canonical textbook physiology (Boron &
+# Boulpaep; Williams Endocrinology; Harrison's). Disorder names + gene symbols + mechanisms
+# are high-confidence; the OMIM phenotype numbers are curated and the per-phenotype HPO term
+# IDs are intentionally OMITTED here — binding each (node, direction) to an HPO term via its
+# EQ logical definition (uPheno) is the documented next step and must be machine-verified,
+# not hand-typed. NEVER fabricate an identifier.
+#
+# Two tasks are scored (physiomap_core/hpo.py):
+#   FORWARD  — do(primary) -> predicted signs; score directional agreement + soundness on the
+#              annotated phenotypes; emit determinate predictions on UN-annotated nodes as
+#              novel hypotheses.
+#   BACKWARD — observe the phenotype signs, abduce the primary lesion (rank_explanations);
+#              score top-k recovery of the true (node, sign).
+# =============================================================================
+
+name: hpo_monogenic_pilot
+description: >-
+  DRAFT curated pilot of ~10 monogenic endocrine/renal/metabolic disorders whose primary
+  lesion and secondary phenotypes both live inside the current PhysioMap human map. Exercises
+  forward phenotype prediction (comparative statics) and backward lesion abduction against
+  loss-of-function "nature's do()" ground truth.
+
+disorders:
+  # ---- RAAS / electrolyte (targets live in the whole-body SCC -> many '?') --------------
+  - name: Liddle syndrome
+    gene: SCNN1B / SCNN1G
+    omim: "177200"
+    mechanism: >-
+      gain-of-function of the epithelial Na channel (ENaC) in the distal nephron -> constitutive
+      distal Na (and water) reabsorption, independent of aldosterone.
+    provenance: "Boron & Boulpaep Medical Physiology (ENaC / Liddle); OMIM 177200"
+    primary: { sodium_water_reabsorption: "+" }
+    phenotypes:
+      - { node: mean_arterial_pressure, sign: "+", label: "hypertension (increased blood pressure)" }
+      - { node: plasma_potassium, sign: "-", label: "hypokalemia (decreased serum potassium)" }
+      - { node: renin, sign: "-", label: "suppressed plasma renin" }
+      - { node: aldosterone, sign: "-", label: "suppressed plasma aldosterone" }
+
+  - name: Gitelman syndrome
+    gene: SLC12A3 (NCC)
+    omim: "263800"
+    mechanism: >-
+      loss-of-function of the thiazide-sensitive Na-Cl cotransporter (DCT) -> renal salt wasting
+      -> volume contraction -> secondary RAAS activation.
+    provenance: "Boron & Boulpaep (NCC / Gitelman); OMIM 263800"
+    primary: { sodium_water_reabsorption: "-" }
+    phenotypes:
+      - { node: plasma_potassium, sign: "-", label: "hypokalemia" }
+      - { node: renin, sign: "+", label: "elevated plasma renin" }
+      - { node: aldosterone, sign: "+", label: "secondary hyperaldosteronism" }
+      - { node: mean_arterial_pressure, sign: "-", label: "low-normal blood pressure" }
+      - { node: plasma_bicarbonate, sign: "+", label: "metabolic alkalosis (increased bicarbonate)" }
+
+  - name: Bartter syndrome type 1
+    gene: SLC12A1 (NKCC2)
+    omim: "601678"
+    mechanism: >-
+      loss-of-function of the loop-of-Henle Na-K-2Cl cotransporter -> salt wasting (note: at this
+      node granularity Bartter is qualitatively degenerate with Gitelman — both = salt wasting).
+    provenance: "Boron & Boulpaep (NKCC2 / Bartter); OMIM 601678"
+    primary: { sodium_water_reabsorption: "-" }
+    phenotypes:
+      - { node: plasma_potassium, sign: "-", label: "hypokalemia" }
+      - { node: renin, sign: "+", label: "elevated plasma renin" }
+      - { node: aldosterone, sign: "+", label: "secondary hyperaldosteronism" }
+      - { node: plasma_bicarbonate, sign: "+", label: "metabolic alkalosis" }
+
+  - name: Glucocorticoid-remediable aldosteronism (FH type I)
+    gene: CYP11B1/CYP11B2 chimera
+    omim: "103900"
+    mechanism: >-
+      ACTH-driven ectopic aldosterone synthase expression -> primary aldosterone excess.
+    provenance: "Williams Textbook of Endocrinology (familial hyperaldosteronism); OMIM 103900"
+    primary: { aldosterone: "+" }
+    phenotypes:
+      - { node: mean_arterial_pressure, sign: "+", label: "hypertension" }
+      - { node: plasma_potassium, sign: "-", label: "hypokalemia" }
+      - { node: renin, sign: "-", label: "suppressed plasma renin" }
+
+  # ---- HPA axis (feedback nodes outside the SCC -> determinate) -------------------------
+  - name: 21-hydroxylase deficiency (classic salt-wasting CAH)
+    gene: CYP21A2
+    omim: "201910"
+    mechanism: >-
+      loss-of-function of adrenal 21-hydroxylase -> impaired cortisol (and aldosterone) synthesis;
+      loss of cortisol negative feedback raises ACTH.
+    provenance: "Williams Textbook of Endocrinology (CAH); OMIM 201910"
+    primary: { cortisol: "-" }
+    phenotypes:
+      - { node: acth, sign: "+", label: "elevated ACTH (loss of cortisol negative feedback)" }
+      - { node: aldosterone, sign: "-", label: "aldosterone deficiency (salt-wasting form)" }
+      - { node: plasma_sodium_concentration, sign: "-", label: "hyponatremia" }
+      - { node: plasma_potassium, sign: "+", label: "hyperkalemia" }
+      - { node: mean_arterial_pressure, sign: "-", label: "hypotension / salt wasting" }
+
+  # ---- lipid (feedback node outside the SCC -> determinate) -----------------------------
+  - name: Familial hypercholesterolemia
+    gene: LDLR
+    omim: "143890"
+    mechanism: >-
+      loss-of-function of the hepatic LDL receptor -> reduced LDL clearance (Brown-Goldstein).
+    provenance: "Williams / Harrison's (LDLR); OMIM 143890"
+    primary: { hepatic_ldl_receptor_activity: "-" }
+    phenotypes:
+      - { node: ldl_cholesterol, sign: "+", label: "hypercholesterolemia (increased LDL)" }
+
+  # ---- iron (hepcidin vertical -> determinate) ------------------------------------------
+  - name: Hereditary hemochromatosis (HFE-related)
+    gene: HFE
+    omim: "235200"
+    mechanism: >-
+      loss-of-function of HFE -> inappropriately low hepcidin -> unrestrained ferroportin iron
+      efflux -> iron overload.
+    provenance: "Harrison's (hemochromatosis); Ganz & Nemeth hepcidin physiology; OMIM 235200"
+    primary: { hepcidin: "-" }
+    phenotypes:
+      - { node: plasma_iron, sign: "+", label: "elevated serum iron" }
+      - { node: transferrin_saturation, sign: "+", label: "increased transferrin saturation" }
+      - { node: ferritin_stores, sign: "+", label: "hyperferritinemia / iron overload" }
+
+  # ---- body fluids (volume node -> SCC -> '?') ------------------------------------------
+  - name: Central diabetes insipidus
+    gene: AVP
+    omim: "125700"
+    mechanism: >-
+      deficient arginine-vasopressin (ADH) secretion -> loss of renal free-water reabsorption.
+    provenance: "Boron & Boulpaep (ADH / water handling); OMIM 125700"
+    primary: { adh: "-" }
+    phenotypes:
+      - { node: plasma_osmolality, sign: "+", label: "increased plasma osmolality" }
+      - { node: plasma_sodium_concentration, sign: "+", label: "hypernatremia" }
+
+  # ---- thyroid (HPT feedback outside the SCC -> determinate) ----------------------------
+  - name: Congenital hypothyroidism
+    gene: TSHR / TPO
+    omim: "218700"
+    mechanism: >-
+      loss-of-function of thyroid hormone synthesis/responsiveness -> low T4; loss of negative
+      feedback raises TSH.
+    provenance: "Williams Textbook of Endocrinology (congenital hypothyroidism); OMIM 218700"
+    primary: { free_t4: "-" }
+    phenotypes:
+      - { node: tsh, sign: "+", label: "elevated TSH (loss of T4 negative feedback)" }
+      - { node: free_t3, sign: "-", label: "low free T3" }
+      - { node: metabolic_rate, sign: "-", label: "decreased basal metabolic rate" }
+      - { node: heart_rate, sign: "-", label: "bradycardia" }
+      - { node: ldl_cholesterol, sign: "+", label: "hypothyroid hypercholesterolemia" }
+
+  # ---- EXPANSION COVERAGE: disorders that exercise the newly-added metabolic fragments ----
+  # (amino-acid, purine/urate, trace-metal, intermediary-fuel, bilirubin, phosphate/FGF23).
+  # These are mostly self-contained metabolic subsystems, so their secondary phenotypes are
+  # DETERMINATE (predicted + recovered cleanly), unlike the RAAS/volume disorders above.
+  - name: Phenylketonuria
+    gene: PAH
+    omim: "261600"
+    mechanism: "loss of phenylalanine hydroxylase -> Phe cannot be converted to Tyr."
+    provenance: "Lehninger Ch.18; OMIM 261600"
+    primary: { pah_enzyme_activity: "-" }
+    phenotypes:
+      - { node: plasma_phenylalanine, sign: "+", label: "hyperphenylalaninemia" }
+      - { node: plasma_tyrosine, sign: "-", label: "low tyrosine" }
+
+  - name: Classic homocystinuria
+    gene: CBS
+    omim: "236200"
+    mechanism: "loss of cystathionine beta-synthase -> homocysteine accumulates and is remethylated to methionine."
+    provenance: "Lehninger Ch.22; OMIM 236200"
+    primary: { cbs_enzyme_activity: "-" }
+    phenotypes:
+      - { node: plasma_homocysteine, sign: "+", label: "hyperhomocysteinemia" }
+      - { node: plasma_methionine, sign: "+", label: "hypermethioninemia" }
+
+  - name: Maple syrup urine disease
+    gene: BCKDH
+    omim: "248600"
+    mechanism: "loss of branched-chain alpha-keto acid dehydrogenase -> BCAA accumulate."
+    provenance: "Lehninger Ch.18; OMIM 248600"
+    primary: { bckdh_enzyme_activity: "-" }
+    phenotypes:
+      - { node: plasma_branched_chain_amino_acids, sign: "+", label: "elevated branched-chain amino acids" }
+
+  - name: Lesch-Nyhan syndrome
+    gene: HPRT1
+    omim: "300322"
+    mechanism: "loss of HGPRT salvage de-represses de-novo purine synthesis -> urate overproduction."
+    provenance: "Lehninger; OMIM 300322"
+    primary: { hgprt_activity: "-" }
+    phenotypes:
+      - { node: plasma_urate, sign: "+", label: "hyperuricemia" }
+
+  - name: Hereditary xanthinuria
+    gene: XDH
+    omim: "278300"
+    mechanism: "loss of xanthine oxidase -> xanthine accumulates, urate falls."
+    provenance: "Lehninger; OMIM 278300"
+    primary: { xanthine_oxidase_activity: "-" }
+    phenotypes:
+      - { node: plasma_urate, sign: "-", label: "hypouricemia" }
+      - { node: plasma_xanthine, sign: "+", label: "xanthinemia" }
+
+  - name: Glycogen storage disease type Ia (von Gierke)
+    gene: G6PC
+    omim: "232200"
+    mechanism: "loss of glucose-6-phosphatase -> impaired hepatic glucose output; G6P shunted to lactate."
+    provenance: "Lehninger Ch.15; OMIM 232200"
+    primary: { g6pase_activity: "-" }
+    phenotypes:
+      - { node: plasma_glucose, sign: "-", label: "fasting hypoglycemia" }
+      - { node: plasma_lactate, sign: "+", label: "lactic acidemia" }
+
+  - name: Crigler-Najjar / Gilbert (UGT1A1)
+    gene: UGT1A1
+    omim: "143500"
+    mechanism: "loss of bilirubin UDP-glucuronosyltransferase -> impaired conjugation."
+    provenance: "Harrison's; OMIM 143500 (Gilbert) / 218800 (Crigler-Najjar I)"
+    primary: { ugt1a1_activity: "-" }
+    phenotypes:
+      - { node: plasma_unconjugated_bilirubin, sign: "+", label: "unconjugated hyperbilirubinemia" }
+      - { node: plasma_conjugated_bilirubin, sign: "-", label: "low conjugated bilirubin" }
+
+  - name: Wilson disease
+    gene: ATP7B
+    omim: "277900"
+    mechanism: "loss of ATP7B -> impaired hepatic copper excretion and ceruloplasmin loading."
+    provenance: "Harrison's; OMIM 277900"
+    primary: { atp7b_activity: "-" }
+    phenotypes:
+      - { node: plasma_ceruloplasmin, sign: "-", label: "low ceruloplasmin" }
+
+  - name: X-linked hypophosphatemic rickets
+    gene: PHEX
+    omim: "307800"
+    mechanism: "PHEX loss -> excess FGF23 -> renal phosphate wasting and suppressed calcitriol."
+    provenance: "Williams Endocrinology; OMIM 307800"
+    primary: { fgf23: "+" }
+    phenotypes:
+      - { node: plasma_phosphate, sign: "-", label: "hypophosphatemia" }
+      - { node: calcitriol, sign: "-", label: "inappropriately low/normal calcitriol" }

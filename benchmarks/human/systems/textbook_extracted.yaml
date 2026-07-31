@@ -1,0 +1,1861 @@
+# =============================================================================
+# Open-textbook extracted nodes + WITHIN-SCALE signed causal edges  *** DRAFT ***
+# =============================================================================
+# Per-section multi-agent fan-out over OpenStax Anatomy & Physiology 2e; Wong, Cells:
+# Molecules and Mechanisms; Jakubowski & Flatt, Fundamentals of Biochemistry Vol I.
+# Edge signs adversarially verified; entity IRIs OBO-verified. CROSS-scale relations
+# (enzyme->plasma-metabolite etc.) are recorded separately as candidate constitutive
+# lifts (benchmarks/results/textbook_extraction.md), NOT added as causal edges (PhysioMap
+# causation is within-scale). See that report + benchmarks/results/textbook_corroboration.yaml.
+# =============================================================================
+name: textbook_extracted
+description: >-
+  DRAFT within-scale signed causal edges + their variables extracted from open
+  physiology/cell-biology/biochemistry textbooks (signs adversarially verified, IRIs
+  OBO-verified). Boundary edges connect into the existing curated map.
+nodes:
+  - id: intracellular_atp
+    label: "intracellular ATP concentration (cellular)"
+    scale: cellular
+    entity_iri: CHEBI:15422
+    quality_iri: PATO:0000033
+  - id: na_k_atpase_activity
+    label: "cardiomyocyte Na+/K+-ATPase (sodium-potassium pump) activity"
+    scale: subcellular
+    entity_iri: PR:000004435
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000746
+  - id: cardiomyocyte_intracellular_sodium
+    label: "cardiomyocyte intracellular (cytosolic) sodium concentration"
+    scale: subcellular
+    entity_iri: CHEBI:29101            # sodium(1+)
+    quality_iri: PATO:0000033
+    bearer_entity_iri: CL:0000746
+  - id: adipose_hsl_activity
+    label: "adipose hormone-sensitive lipase (HSL/LIPE) activity"
+    scale: cellular
+    entity_iri: PR:000009834
+    quality_iri: PATO:0001414
+  - id: glutamate_dehydrogenase_activity
+    label: "glutamate dehydrogenase (GLUD1/GLUD2) catalytic activity"
+    scale: cellular
+    entity_iri: PR:000008056
+    quality_iri: PATO:0001414
+  - id: glutamine_synthetase_activity
+    label: "glutamine synthetase (GLUL) catalytic activity"
+    scale: cellular
+    entity_iri: PR:000008058
+    quality_iri: PATO:0001414
+  - id: tert_expression
+    label: "TERT gene expression level (telomerase reverse transcriptase)"
+    scale: molecular
+    entity_iri: PR:O14746              # telomerase reverse transcriptase (human), UniProtKB:O14746 (protein-product proxy for expression)
+    quality_iri: PATO:0000070
+  - id: telomerase_activity
+    label: "telomerase (TERT) catalytic activity"
+    scale: molecular
+    entity_iri: PR:000016238
+    quality_iri: PATO:0001414
+  - id: telomere_length
+    label: "chromosomal telomere length (number of telomeric repeats)"
+    scale: molecular
+    entity_iri: GO:0000781             # chromosome, telomeric region (the telomere)
+    quality_iri: PATO:0000122
+  - id: cellular_replicative_capacity
+    label: "cellular replicative capacity (number of cell divisions before senescence/apoptosis)"
+    scale: cellular
+    quality_iri: PATO:0000161
+  - id: mtor_activity
+    label: "mTOR (serine/threonine-protein kinase mTOR) kinase activity"
+    scale: molecular
+    entity_iri: PR:000003041
+    quality_iri: PATO:0001414
+  - id: cellular_autophagy_rate
+    label: "cellular autophagy rate"
+    scale: cellular
+    entity_iri: GO:0006914
+    quality_iri: PATO:0000161
+  - id: phospholamban_level
+    label: "cardiac sarcoplasmic-reticulum phospholamban (PLN) protein level / inhibitory association with SERCA2a"
+    scale: subcellular
+    entity_iri: PR:000012875
+    quality_iri: PATO:0000070
+  - id: neutrophil_extravasation
+    label: "neutrophil extravasation rate (tissue recruitment)"
+    scale: tissue
+    entity_iri: GO:0072672  # neutrophil extravasation
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0002049  # vasculature
+  - id: vsm_cgmp_level
+    label: "vascular smooth muscle cyclic GMP (cGMP) concentration"
+    scale: subcellular
+    entity_iri: CHEBI:16356
+    quality_iri: PATO:0000033
+  - id: helper_t_cell_activation
+    label: "helper T cell (CD4+) activation rate"
+    scale: cellular
+    entity_iri: GO:0035710  # CD4-positive, alpha-beta T cell activation
+    quality_iri: PATO:0000161
+    bearer_entity_iri: CL:0000492  # CD4-positive helper T cell
+  - id: b_cell_proliferation
+    label: "B cell proliferation rate"
+    scale: cellular
+    entity_iri: GO:0042100  # B cell proliferation
+    quality_iri: PATO:0000161
+    bearer_entity_iri: CL:0000236  # B cell
+  - id: synaptic_acetylcholine
+    label: "synaptic acetylcholine concentration (neuromuscular junction)"
+    scale: cellular
+    entity_iri: CHEBI:15355
+    quality_iri: PATO:0000033
+  - id: nmj_ache_activity
+    label: "acetylcholinesterase activity at neuromuscular junction synapse"
+    scale: cellular
+    entity_iri: GO:0003990
+    quality_iri: PATO:0001414
+  - id: skeletal_muscle_contraction_rate
+    label: "skeletal muscle contraction rate"
+    scale: tissue
+    entity_iri: GO:0003009  # skeletal muscle contraction
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0001134  # skeletal muscle tissue
+  - id: plasma_anandamide
+    label: "anandamide (N-arachidonoylethanolamine) concentration"
+    scale: molecular
+    entity_iri: CHEBI:2700
+    quality_iri: PATO:0000033
+  - id: plasma_oleylethanolamide
+    label: "oleylethanolamide (OEA) concentration"
+    scale: molecular
+    entity_iri: CHEBI:71466            # oleoyl ethanolamide (OEA = N-oleoylethanolamine)
+    quality_iri: PATO:0000033
+  - id: sodium_calcium_exchanger_activity
+    label: "sodium-calcium exchanger (NCX/SLC8A1) transport activity"
+    scale: subcellular
+    entity_iri: PR:000015207
+    quality_iri: PATO:0001414
+  - id: plasma_oxytocin
+    label: "plasma oxytocin concentration"
+    scale: organ_system
+    entity_iri: CHEBI:7872
+    quality_iri: PATO:0000033
+  - id: uterine_contraction_rate
+    label: "uterine smooth-muscle contraction rate (myometrial activity)"
+    scale: organ
+    entity_iri: GO:0070471  # uterine smooth muscle contraction
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0000995  # uterus
+  - id: cervical_distension
+    label: "uterine cervix mechanical distension (stretch)"
+    scale: organ
+    entity_iri: UBERON:0000002
+    quality_iri: PATO:0002284
+  - id: skin_melanin_content
+    label: "skin melanin content (epidermal melanin amount)"
+    scale: tissue
+    entity_iri: UBERON:0002097
+    quality_iri: PATO:0000070
+  - id: skin_cholecalciferol_synthesis
+    label: "cutaneous cholecalciferol (vitamin D3) synthesis rate"
+    scale: organ
+    entity_iri: GO:0042368  # vitamin D biosynthetic process
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0001003  # skin epidermis
+  - id: sebaceous_gland_sebum_secretion_rate
+    label: "sebaceous gland sebum secretion rate"
+    scale: organ
+    entity_iri: UBERON:0001821
+    quality_iri: PATO:0000161
+  - id: skeletal_muscle_atp
+    label: "skeletal-muscle intracellular ATP concentration"
+    scale: cellular
+    entity_iri: CHEBI:15422
+    quality_iri: PATO:0000033
+  - id: skeletal_muscle_creatine_phosphate
+    label: "skeletal-muscle creatine phosphate (phosphocreatine) concentration"
+    scale: cellular
+    entity_iri: CHEBI:17287
+    quality_iri: PATO:0000033
+  - id: skeletal_muscle_lactate
+    label: "skeletal-muscle intracellular lactate concentration"
+    scale: cellular
+    entity_iri: CHEBI:24996
+    quality_iri: PATO:0000033
+  - id: motor_neuron_firing_rate
+    label: "skeletal muscle motor neuron action potential firing rate"
+    scale: cellular
+    entity_iri: GO:0001508  # action potential
+    quality_iri: PATO:0000161
+    bearer_entity_iri: CL:0000100  # motor neuron
+  - id: skeletal_muscle_sarcoplasmic_calcium
+    label: "sarcoplasmic free Ca2+ concentration in skeletal muscle fiber"
+    scale: subcellular
+    entity_iri: CHEBI:29108            # calcium(2+)
+    quality_iri: PATO:0000033
+  - id: skeletal_muscle_tension
+    label: "skeletal muscle contractile tension (force generated)"
+    scale: tissue
+    entity_iri: UBERON:0001134
+    quality_iri: PATO:0002284
+  - id: motor_unit_recruitment
+    label: "number of active motor units recruited in skeletal muscle"
+    scale: tissue
+    entity_iri: UBERON:0001134
+    quality_iri: PATO:0000070
+  - id: skeletal_muscle_tone
+    label: "resting skeletal muscle tone (low-level tonic contractile state)"
+    scale: tissue
+    entity_iri: UBERON:0001134
+    quality_iri: PATO:0002284
+  - id: uterine_smooth_muscle_mass
+    label: "uterine smooth muscle (myometrium) mass"
+    scale: organ
+    entity_iri: UBERON:0001296
+    quality_iri: PATO:0000125
+  - id: respiratory_rate
+    label: "respiratory (breathing) rate"
+    scale: organ_system
+    entity_iri: GO:0007585  # respiratory gaseous exchange by respiratory system
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0001004  # respiratory system
+  - id: skeletal_muscle_blood_flow
+    label: "skeletal muscle blood flow"
+    scale: organ
+    entity_iri: UBERON:0001134
+    quality_iri: PATO:0000161
+  - id: splanchnic_blood_flow
+    label: "splanchnic (digestive system) blood flow"
+    scale: organ_system
+    entity_iri: UBERON:0001007
+    quality_iri: PATO:0000161
+  - id: stomach_volume
+    label: "stomach volume (gastric filling / distension)"
+    scale: organ
+    entity_iri: UBERON:0000945
+    quality_iri: PATO:0000918
+  - id: stomach_motility
+    label: "gastric motility (rate of smooth-muscle contractions in stomach wall)"
+    scale: organ
+    entity_iri: GO:0035482  # gastric motility
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0000945  # stomach
+  - id: pupil_diameter
+    label: "pupil diameter"
+    scale: organ
+    entity_iri: UBERON:0001771
+    quality_iri: PATO:0001334
+  - id: salivation_rate
+    label: "salivation rate"
+    scale: organ
+    entity_iri: GO:0046541  # saliva secretion
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0001044  # saliva-secreting gland
+  - id: bronchial_smooth_muscle_tone
+    label: "bronchial smooth muscle contractile tone"
+    scale: organ
+    entity_iri: GO:0006939  # smooth muscle contraction
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0002185  # bronchus
+  - id: trh
+    label: "hypothalamic thyrotropin-releasing hormone concentration"
+    scale: organ_system
+    entity_iri: CHEBI:35940            # protirelin (INN for thyrotropin-releasing hormone, pGlu-His-Pro-NH2)
+    quality_iri: PATO:0000033
+  - id: pituitary_prolactin_secretion
+    label: "anterior-pituitary lactotroph prolactin secretory output (rate)"
+    scale: organ_system
+    entity_iri: GO:0070459  # prolactin secretion
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0002196  # adenohypophysis
+  - id: plasma_prolactin
+    label: "plasma prolactin concentration"
+    scale: organ_system
+    entity_iri: PR:000013246
+    quality_iri: PATO:0000033
+  - id: parafollicular_cell_calcitonin_secretion
+    label: "thyroid parafollicular cell (C cell) calcitonin secretion rate"
+    scale: cellular
+    entity_iri: GO:0036161  # calcitonin secretion
+    quality_iri: PATO:0000161
+    bearer_entity_iri: CL:0000570  # parafollicular cell
+  - id: intestinal_calcium_absorption
+    label: "intestinal dietary calcium absorption rate"
+    scale: organ
+    entity_iri: GO:0070588  # calcium ion transmembrane transport
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0002108  # small intestine
+  - id: plasma_melatonin
+    label: "plasma melatonin concentration"
+    scale: organ_system
+    entity_iri: CHEBI:16796
+    quality_iri: PATO:0000033
+  - id: spermatogenesis_rate
+    label: "testicular spermatogenesis rate"
+    scale: organ
+    entity_iri: GO:0007283
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0000473
+  - id: platelet_count
+    label: "circulating platelet count"
+    scale: organ_system
+    entity_iri: CL:0000233             # platelet (counted cell type)
+    quality_iri: PATO:0000070
+  - id: blood_platelet_count
+    label: "blood platelet count"
+    scale: organ_system
+    entity_iri: CL:0000233
+    quality_iri: PATO:0000070
+  - id: plasma_heparin
+    label: "plasma (basophil-derived) heparin concentration"
+    scale: organ_system
+    entity_iri: CHEBI:28304
+    quality_iri: PATO:0000033
+  - id: plasma_bradykinin
+    label: "plasma bradykinin concentration"
+    scale: organ_system
+    entity_iri: CHEBI:3165
+    quality_iri: PATO:0000033
+  - id: intrapericardial_pressure
+    label: "intrapericardial (pericardial cavity) fluid pressure"
+    scale: organ
+    entity_iri: UBERON:0001074
+    quality_iri: PATO:0001025
+  - id: capillary_hydrostatic_pressure
+    label: "capillary hydrostatic pressure"
+    scale: organ_system
+    entity_iri: UBERON:0001982
+    quality_iri: PATO:0001025
+  - id: interstitial_fluid_volume
+    label: "interstitial fluid volume"
+    scale: organ_system
+    entity_iri: UBERON:0000913
+    quality_iri: PATO:0000918
+  - id: arterial_compliance
+    label: "systemic arterial compliance (distensibility)"
+    scale: organ_system
+    entity_iri: UBERON:0001637
+    quality_iri: PATO:0015008
+  - id: blood_colloidal_osmotic_pressure
+    label: "blood colloidal osmotic pressure (BCOP / oncotic pressure)"
+    scale: organ_system
+    entity_iri: UBERON:0001969
+    quality_iri: PATO:0001025
+  - id: net_filtration_pressure
+    label: "net filtration pressure (NFP = CHP - BCOP)"
+    scale: organ_system
+    entity_iri: UBERON:0001982
+    quality_iri: PATO:0001025
+  - id: lymphatic_flow
+    label: "lymphatic drainage flow rate"
+    scale: organ_system
+    entity_iri: GO:0003017  # lymph circulation
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0001473  # lymphatic vessel
+  - id: capillary_filtration_rate
+    label: "systemic capillary filtration rate"
+    scale: organ_system
+    entity_iri: UBERON:0001982
+    quality_iri: PATO:0000161
+  - id: lymph_drainage_rate
+    label: "systemic lymphatic drainage rate"
+    scale: organ_system
+    entity_iri: GO:0003017  # lymph circulation
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0001473  # lymphatic vessel
+  - id: thymic_mass
+    label: "thymus mass"
+    scale: organ
+    entity_iri: UBERON:0002370
+    quality_iri: PATO:0000125
+  - id: tissue_interstitial_fluid_volume
+    label: "tissue interstitial fluid volume (local edema)"
+    scale: organ
+    entity_iri: UBERON:0000913
+    quality_iri: PATO:0000918
+  - id: th2_cell_activation
+    label: "Th2 cell activation / IL-4, IL-6, IL-10 cytokine secretion rate"
+    scale: cellular
+    entity_iri: GO:0035745  # T-helper 2 cell cytokine production
+    quality_iri: PATO:0000161
+    bearer_entity_iri: CL:0000546  # T-helper 2 cell
+  - id: blood_viral_load
+    label: "blood viral load (circulating virus concentration/titre)"
+    scale: organ_system
+    quality_iri: PATO:0000033
+  - id: cd4_t_cell_count
+    label: "circulating CD4+ helper T cell count"
+    scale: organ_system
+    entity_iri: CL:0000492
+    quality_iri: PATO:0000070
+  - id: mast_cell_degranulation
+    label: "mast cell degranulation rate"
+    scale: cellular
+    entity_iri: GO:0043303  # mast cell degranulation
+    quality_iri: PATO:0000161
+    bearer_entity_iri: CL:0000097  # mast cell
+  - id: t_cell_immune_activity
+    label: "T cell mediated immune activity (rate)"
+    scale: organ_system
+    entity_iri: GO:0002456
+    quality_iri: PATO:0000161
+  - id: bronchiole_smooth_muscle_tone
+    label: "bronchiole smooth muscle contractile tone"
+    scale: organ
+    entity_iri: UBERON:0002186
+    quality_iri: PATO:0001579
+  - id: bronchiole_airflow
+    label: "bronchiole airflow (luminal flow rate)"
+    scale: organ
+    entity_iri: UBERON:0002186
+    quality_iri: PATO:0001574
+  - id: alveolar_surfactant_concentration
+    label: "alveolar pulmonary surfactant concentration (secreted by type II pneumocytes)"
+    scale: organ
+    entity_iri: UBERON:0002299
+    quality_iri: PATO:0000033
+  - id: alveolar_surface_tension
+    label: "alveolar surface tension"
+    scale: organ
+    entity_iri: UBERON:0002299
+    quality_iri: PATO:0001461
+  - id: airway_resistance
+    label: "airway resistance"
+    scale: organ
+    entity_iri: UBERON:0002185
+    quality_iri: PATO:0001470
+  - id: alveolar_po2
+    label: "alveolar partial pressure of oxygen (PAO2)"
+    scale: organ
+    entity_iri: CHEBI:15379
+    quality_iri: PATO:0001025
+  - id: alveolar_pco2
+    label: "alveolar partial pressure of carbon dioxide (PACO2)"
+    scale: organ
+    entity_iri: CHEBI:16526
+    quality_iri: PATO:0001025
+  - id: bronchiole_diameter
+    label: "bronchiole luminal diameter (airway calibre)"
+    scale: organ
+    entity_iri: UBERON:0002186
+    quality_iri: PATO:0001708
+  - id: pulmonary_arteriole_diameter
+    label: "pulmonary arteriole luminal diameter (hypoxic vasoconstriction target)"
+    scale: organ
+    entity_iri: UBERON:8600077         # pulmonary arteriole
+    quality_iri: PATO:0001708
+  - id: erythrocyte_2_3_bpg
+    label: "erythrocyte 2,3-bisphosphoglycerate (BPG) concentration"
+    scale: cellular
+    entity_iri: CHEBI:19324
+    quality_iri: PATO:0000033
+  - id: gi_sympathetic_tone
+    label: "sympathetic efferent outflow to GI tract"
+    scale: organ_system
+    quality_iri: PATO:0000161
+  - id: gi_parasympathetic_tone
+    label: "parasympathetic (vagal/pelvic) efferent outflow to GI tract"
+    scale: organ_system
+    quality_iri: PATO:0000161
+  - id: gi_tract_motility
+    label: "gastrointestinal tract motility (contractile activity / peristalsis rate)"
+    scale: organ
+    entity_iri: GO:0030432  # peristalsis
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0001555  # digestive tract
+  - id: gi_tract_secretion
+    label: "gastrointestinal tract digestive secretion rate"
+    scale: organ
+    entity_iri: UBERON:0001555
+    quality_iri: PATO:0000161
+  - id: plasma_secretin
+    label: "plasma secretin concentration"
+    scale: organ_system
+    entity_iri: PR:000014543
+    quality_iri: PATO:0000033
+  - id: plasma_cck
+    label: "plasma cholecystokinin (CCK) concentration"
+    scale: organ_system
+    entity_iri: PR:000005110
+    quality_iri: PATO:0000033
+  - id: pancreatic_bicarbonate_secretion
+    label: "pancreatic bicarbonate secretion rate"
+    scale: organ
+    entity_iri: GO:0015701  # bicarbonate transport
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0001264  # pancreas
+  - id: pancreatic_enzyme_secretion
+    label: "pancreatic digestive enzyme secretion rate"
+    scale: organ
+    entity_iri: GO:0030157  # pancreatic juice secretion
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0001264  # pancreas
+  - id: lower_esophageal_sphincter_tone
+    label: "lower esophageal sphincter tone (resting contractile tone)"
+    scale: organ
+    entity_iri: UBERON:0004550
+    quality_iri: PATO:0001439
+  - id: esophageal_luminal_pressure
+    label: "esophageal luminal pressure (distension)"
+    scale: organ
+    entity_iri: UBERON:0001043
+    quality_iri: PATO:0001025
+  - id: gastric_motility
+    label: "gastric smooth muscle contraction rate (motility)"
+    scale: organ
+    entity_iri: GO:0035482  # gastric motility
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0000945  # stomach
+  - id: plasma_motilin
+    label: "plasma motilin concentration"
+    scale: organ_system
+    entity_iri: PR:P12872
+    quality_iri: PATO:0000033
+  - id: plasma_cholecystokinin
+    label: "plasma cholecystokinin (CCK) concentration"
+    scale: organ_system
+    entity_iri: PR:P06307
+    quality_iri: PATO:0000033
+  - id: small_intestine_motility
+    label: "small intestine motility (peristalsis / migrating motility complex) rate"
+    scale: organ
+    entity_iri: GO:1990770             # small intestine smooth muscle contraction (process bearer of the rate)
+    quality_iri: PATO:0000161
+  - id: pancreatic_exocrine_secretion
+    label: "pancreatic exocrine (enzyme + bicarbonate juice) secretion rate"
+    scale: organ
+    entity_iri: GO:0030157             # pancreatic juice secretion (process bearer of the rate)
+    quality_iri: PATO:0000161
+  - id: duodenal_chyme_acidity
+    label: "duodenal chyme acidity"
+    scale: organ
+    entity_iri: UBERON:0002114
+    quality_iri: PATO:0001842
+  - id: s_cell_secretin_secretion
+    label: "intestinal type-S enteroendocrine cell secretin secretion rate"
+    scale: cellular
+    entity_iri: GO:0030072  # peptide hormone secretion
+    quality_iri: PATO:0000161
+    bearer_entity_iri: CL:0002281  # type S enteroendocrine cell
+  - id: i_cell_cck_secretion
+    label: "intestinal type-I enteroendocrine cell CCK secretion rate"
+    scale: cellular
+    entity_iri: CL:0002277
+    quality_iri: PATO:0000161
+  - id: trypsin_activity
+    label: "trypsin proteolytic activity in duodenum"
+    scale: organ_system
+    entity_iri: PR:000027795
+    quality_iri: PATO:0001414
+  - id: intestinal_lipid_emulsification
+    label: "bile salt-mediated lipid emulsification rate in small intestine"
+    scale: organ
+    entity_iri: UBERON:0002108
+    quality_iri: PATO:0000161
+  - id: hepatic_lipogenesis
+    label: "hepatic de novo lipogenesis rate (acetyl-CoA to fatty acids/triglycerides)"
+    scale: organ
+    entity_iri: GO:0006633             # fatty acid biosynthetic process (rate-limiting core of de novo lipogenesis)
+    quality_iri: PATO:0000161
+  - id: gallbladder_bile_secretion
+    label: "gallbladder bile secretion rate (bile salts released into intestine)"
+    scale: organ
+    entity_iri: GO:0032782  # bile acid secretion
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0002110  # gallbladder
+  - id: muscle_protein_synthesis_rate
+    label: "skeletal muscle protein synthesis rate"
+    scale: tissue
+    entity_iri: GO:0160307  # protein biosynthetic process
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0001134  # skeletal muscle tissue
+  - id: urinary_glucose
+    label: "urinary glucose excretion (glycosuria)"
+    scale: organ_system
+    entity_iri: CHEBI:17234
+    quality_iri: PATO:0000161
+  - id: endometrial_thickness
+    label: "uterine endometrial lining thickness"
+    scale: organ
+    entity_iri: UBERON:0001295
+    quality_iri: PATO:0000915
+  - id: alveolar_surfactant_amount
+    label: "alveolar surfactant amount (pulmonary surfactant in lung alveoli)"
+    scale: organ
+    entity_iri: UBERON:0002048
+    quality_iri: PATO:0000070
+  - id: uterine_contractility
+    label: "uterine myometrial contractility (contraction frequency and strength)"
+    scale: organ
+    entity_iri: UBERON:0000995
+    quality_iri: PATO:0001579
+  - id: nipple_suckling_stimulation
+    label: "nipple/areolar mechanosensory (suckling) stimulation rate"
+    scale: organ
+    quality_iri: PATO:0000161
+  - id: mammary_milk_production_rate
+    label: "mammary gland milk synthesis and secretion rate"
+    scale: organ
+    entity_iri: GO:0007595  # lactation
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0001911  # mammary gland
+  # --- run-2: Biology 2e + remaining Biochemistry Vol I -------------------------
+  - id: urinary_protein
+    label: "urinary protein excretion rate"
+    scale: organ_system
+    quality_iri: PATO:0000161
+  - id: plasma_oncotic_pressure
+    label: "plasma oncotic (colloid osmotic) pressure"
+    scale: organ_system
+    entity_iri: UBERON:0001969
+    quality_iri: PATO:0001025
+  - id: cell_membrane_potential
+    label: "cell (plasma) membrane potential"
+    scale: cellular
+    entity_iri: GO:0005886             # plasma membrane (bearer of the membrane potential)
+    quality_iri: PATO:0001462
+  - id: hmg_coa_reductase_activity
+    label: "hepatocyte HMG-CoA reductase (HMGCR) catalytic activity"
+    scale: cellular
+    entity_iri: PR:P04035
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000182
+  - id: intracellular_adp
+    label: "intracellular ADP concentration"
+    scale: subcellular
+    entity_iri: CHEBI:16761
+    quality_iri: PATO:0000033
+  - id: cellular_atp_level
+    label: "intracellular ATP concentration (cellular energy charge)"
+    scale: cellular
+    entity_iri: CHEBI:15422
+    quality_iri: PATO:0000033
+  - id: cellular_adp_level
+    label: "intracellular ADP concentration (cellular energy deficit signal)"
+    scale: cellular
+    entity_iri: CHEBI:16761
+    quality_iri: PATO:0000033
+  - id: isocitrate_dehydrogenase_activity
+    label: "mitochondrial isocitrate dehydrogenase (NAD+) catalytic activity"
+    scale: cellular
+    entity_iri: GO:0004449
+    quality_iri: PATO:0001414
+  - id: alpha_ketoglutarate_dehydrogenase_activity
+    label: "mitochondrial alpha-ketoglutarate (oxoglutarate) dehydrogenase catalytic activity"
+    scale: cellular
+    entity_iri: GO:0004591
+    quality_iri: PATO:0001414
+  - id: mitochondrial_proton_gradient
+    label: "mitochondrial inner-membrane proton (H+) electrochemical gradient (proton-motive force)"
+    scale: subcellular
+    entity_iri: GO:0005743
+    quality_iri: PATO:0001462
+  - id: cellular_nadh
+    label: "intracellular NADH concentration"
+    scale: cellular
+    entity_iri: CHEBI:16908
+    quality_iri: PATO:0000033
+  - id: cellular_fadh2
+    label: "intracellular FADH2 concentration"
+    scale: cellular
+    entity_iri: CHEBI:17877
+    quality_iri: PATO:0000033
+  - id: muscle_glycogen_synthase_activity
+    label: "skeletal-muscle glycogen synthase (GYS1) catalytic activity"
+    scale: cellular
+    entity_iri: PR:000008365
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0008002
+  - id: gastric_pepsin_activity
+    label: "gastric pepsin (pepsin A) proteolytic activity"
+    scale: organ
+    entity_iri: UBERON:0000945
+    quality_iri: PATO:0001414
+  - id: salivary_amylase_activity
+    label: "salivary alpha-amylase (AMY1) catalytic activity in oral cavity"
+    scale: cellular
+    entity_iri: PR:000037015
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:4052065
+  - id: hepatic_glycogen_content
+    label: "hepatic (liver) glycogen content"
+    scale: organ
+    entity_iri: CHEBI:28087
+    quality_iri: PATO:0000070
+    bearer_entity_iri: UBERON:0002107
+  - id: plasma_iodide
+    label: "plasma iodide concentration"
+    scale: organ_system
+    entity_iri: CHEBI:16382
+    quality_iri: PATO:0000033
+  - id: pancreatic_lipase_activity
+    label: "pancreatic triacylglycerol lipase catalytic activity in small intestine"
+    scale: cellular
+    entity_iri: PR:000012925
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0002064
+  - id: synaptic_acetylcholine_concentration
+    label: "synaptic cleft acetylcholine concentration (cholinergic synapse)"
+    scale: cellular
+    entity_iri: CHEBI:15355
+    quality_iri: PATO:0000033
+  - id: synaptic_gaba_concentration
+    label: "synaptic cleft gamma-aminobutyric acid (GABA) concentration"
+    scale: cellular
+    entity_iri: CHEBI:16865
+    quality_iri: PATO:0000033
+  - id: postsynaptic_membrane_potential
+    label: "postsynaptic neuron membrane potential"
+    scale: cellular
+    entity_iri: GO:0045211             # postsynaptic membrane (bearer of the membrane potential)
+    quality_iri: PATO:0001462
+    bearer_entity_iri: CL:0000540
+  - id: postsynaptic_ampa_receptor_density
+    label: "postsynaptic membrane AMPA glutamate receptor density"
+    scale: subcellular
+    entity_iri: GO:0032281             # AMPA glutamate receptor complex
+    quality_iri: PATO:0000070
+  - id: acetylcholinesterase_activity
+    label: "acetylcholinesterase catalytic activity in neuromuscular junction"
+    scale: cellular
+    entity_iri: PR:000003626
+    quality_iri: PATO:0001414
+  - id: presynaptic_neurotransmitter_release_rate
+    label: "presynaptic neurotransmitter release rate (vesicle exocytosis)"
+    scale: cellular
+    entity_iri: GO:0007269             # neurotransmitter secretion
+    quality_iri: PATO:0000161
+    bearer_entity_iri: CL:0000540  # neuron
+  - id: csf_production_rate
+    label: "cerebrospinal fluid production rate"
+    scale: organ
+    entity_iri: GO:0033326  # cerebrospinal fluid secretion
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0001886  # choroid plexus
+  - id: intracranial_pressure
+    label: "intracranial (CSF) pressure"
+    scale: organ_system
+    entity_iri: UBERON:0001359
+    quality_iri: PATO:0001025
+  - id: monoamine_oxidase_activity
+    label: "monoamine oxidase (MAO) catalytic activity"
+    scale: molecular
+    entity_iri: GO:0097621
+    quality_iri: PATO:0001414
+  - id: synaptic_dopamine_concentration
+    label: "synaptic dopamine concentration (brain, substantia nigra pathway)"
+    scale: organ_system
+    entity_iri: CHEBI:18243
+    quality_iri: PATO:0000033
+    bearer_entity_iri: UBERON:0002038
+  - id: synaptic_serotonin_concentration
+    label: "synaptic serotonin concentration (brain)"
+    scale: organ_system
+    entity_iri: CHEBI:28790
+    quality_iri: PATO:0000033
+  - id: nociceptive_afferent_activity
+    label: "nociceptive afferent (pain) signaling rate"
+    scale: organ_system
+    quality_iri: PATO:0000161
+  - id: scn_output_rate
+    label: "suprachiasmatic nucleus (SCN) neural output signal rate"
+    scale: organ
+    entity_iri: UBERON:0002034
+    quality_iri: PATO:0000161
+  - id: bone_mass
+    label: "bone tissue mass (skeletal mass)"
+    scale: organ
+    entity_iri: UBERON:0002481
+    quality_iri: PATO:0000125
+  - id: synaptic_ach_concentration
+    label: "acetylcholine concentration in neuromuscular synaptic cleft"
+    scale: cellular
+    entity_iri: CHEBI:15355
+    quality_iri: PATO:0000033
+  - id: skeletal_muscle_force
+    label: "skeletal muscle contractile force"
+    scale: tissue
+    entity_iri: UBERON:0001134
+    quality_iri: PATO:0001035
+  - id: tidal_volume
+    label: "tidal volume (volume of air per breath)"
+    scale: organ_system
+    entity_iri: UBERON:0002048
+    quality_iri: PATO:0000918
+  - id: pulmonary_perfusion
+    label: "pulmonary capillary perfusion rate (blood flow through lung capillaries)"
+    scale: organ
+    entity_iri: GO:0008015  # blood circulation
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0002048  # lung
+  - id: blood_carbon_monoxide
+    label: "blood carbon monoxide concentration"
+    scale: organ_system
+    entity_iri: CHEBI:17245
+    quality_iri: PATO:0000033
+  - id: erythrocyte_carbonic_anhydrase_activity
+    label: "erythrocyte carbonic anhydrase II (CA2) catalytic activity"
+    scale: cellular
+    entity_iri: PR:000004918
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000232
+  - id: plasma_vitamin_k
+    label: "plasma vitamin K concentration"
+    scale: organ_system
+    entity_iri: CHEBI:28384
+    quality_iri: PATO:0000033
+  - id: coronary_blood_flow
+    label: "coronary artery blood flow rate"
+    scale: organ
+    entity_iri: UBERON:0001621
+    quality_iri: PATO:0001574
+  - id: renal_tubular_ammonia_secretion
+    label: "renal proximal tubule ammonia (NH3) secretion rate into filtrate"
+    scale: organ
+    entity_iri: GO:0070634  # transepithelial ammonium transport
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0004134  # proximal tubule
+  - id: bone_mineral_density
+    label: "skeletal bone mineral density"
+    scale: organ
+    entity_iri: UBERON:0001474
+    quality_iri: PATO:0001019
+  - id: calcineurin_activity
+    label: "calcineurin catalytic activity"
+    scale: cellular
+    entity_iri: PR:000003278
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000084
+  - id: t_cell_activation_rate
+    label: "T cell activation rate"
+    scale: cellular
+    entity_iri: GO:0042110  # T cell activation
+    quality_iri: PATO:0000161
+    bearer_entity_iri: CL:0000084  # T cell
+  - id: molecular_chaperone_activity
+    label: "molecular chaperone activity"
+    scale: molecular
+    entity_iri: GO:0044183
+    quality_iri: PATO:0001414
+  - id: amyloid_protein_aggregate_amount
+    label: "amyloid protein aggregate amount"
+    scale: molecular
+    quality_iri: PATO:0000070
+  - id: erythrocyte_23_bpg
+    label: "erythrocyte 2,3-bisphosphoglycerate concentration"
+    scale: organ_system
+    entity_iri: CHEBI:19324
+    quality_iri: PATO:0000033
+  - id: cgas_activity
+    label: "cyclic GMP-AMP synthase (cGAS) catalytic activity"
+    scale: subcellular
+    entity_iri: PR:Q8N884
+    quality_iri: PATO:0001414
+  - id: cgamp_concentration
+    label: "cytosolic 2',3'-cGAMP concentration"
+    scale: subcellular
+    entity_iri: CHEBI:75947
+    quality_iri: PATO:0000033
+  - id: sting_activity
+    label: "STING (stimulator of interferon genes protein) signaling activity"
+    scale: subcellular
+    entity_iri: PR:Q86WV6
+    quality_iri: PATO:0001414
+  - id: oas_activity
+    label: "2'-5'-oligoadenylate synthase (OAS) catalytic activity"
+    scale: subcellular
+    entity_iri: PR:P00973
+    quality_iri: PATO:0001414
+  - id: oligoadenylate_25_concentration
+    label: "cytosolic 2',5'-oligoadenylate (2-5A) concentration"
+    scale: subcellular
+    quality_iri: PATO:0000033
+  - id: rnasel_activity
+    label: "RNaseL (2-5A-dependent ribonuclease) catalytic activity"
+    scale: subcellular
+    entity_iri: PR:000014058
+    quality_iri: PATO:0001414
+  - id: caspase_1_activity
+    label: "caspase-1 catalytic activity"
+    scale: cellular
+    entity_iri: PR:000002309
+    quality_iri: PATO:0001414
+  - id: il18
+    label: "circulating interleukin-18 concentration"
+    scale: organ_system
+    entity_iri: PR:000001376
+    quality_iri: PATO:0000033
+  - id: interferon_gamma
+    label: "circulating interferon-gamma concentration"
+    scale: organ_system
+    entity_iri: PR:000000017
+    quality_iri: PATO:0000033
+  - id: macrophage_caspase1_activity
+    label: "macrophage caspase-1 catalytic activity"
+    scale: cellular
+    entity_iri: PR:000002309
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000235
+  - id: macrophage_nlrp3_inflammasome_assembly
+    label: "macrophage NLRP3 inflammasome complex assembly rate"
+    scale: cellular
+    entity_iri: GO:0044546  # NLRP3 inflammasome complex assembly
+    quality_iri: PATO:0000161
+    bearer_entity_iri: CL:0000235  # macrophage
+  - id: skeletal_muscle_sr_calcium_release
+    label: "skeletal-muscle sarcoplasmic-reticulum Ca2+ release flux (RyR1-mediated)"
+    scale: subcellular
+    entity_iri: GO:0014808  # release of sequestered calcium ion into cytosol by sarcoplasmic reticulum
+    quality_iri: PATO:0000161
+    bearer_entity_iri: CL:0008002  # skeletal muscle fiber
+  - id: enteropeptidase_activity
+    label: "enteropeptidase catalytic activity (duodenum)"
+    scale: organ
+    entity_iri: PR:000013329
+    quality_iri: PATO:0001414
+    bearer_entity_iri: UBERON:0002114
+  - id: duodenal_trypsin_activity
+    label: "trypsin catalytic activity (duodenum)"
+    scale: organ
+    entity_iri: PR:000027795
+    quality_iri: PATO:0001414
+    bearer_entity_iri: UBERON:0002114
+  - id: duodenal_chymotrypsin_activity
+    label: "chymotrypsin catalytic activity (duodenum)"
+    scale: organ
+    quality_iri: PATO:0001414
+    bearer_entity_iri: UBERON:0002114
+  - id: duodenal_elastase_activity
+    label: "pancreatic elastase catalytic activity (duodenum)"
+    scale: organ
+    entity_iri: PR:000007008
+    quality_iri: PATO:0001414
+    bearer_entity_iri: UBERON:0002114
+  - id: duodenal_carboxypeptidase_activity
+    label: "carboxypeptidase catalytic activity (duodenum)"
+    scale: organ
+    entity_iri: PR:000005795
+    quality_iri: PATO:0001414
+    bearer_entity_iri: UBERON:0002114
+  - id: duodenal_lipase_activity
+    label: "pancreatic lipase catalytic activity (duodenum)"
+    scale: organ
+    entity_iri: PR:000012925
+    quality_iri: PATO:0001414
+    bearer_entity_iri: UBERON:0002114
+  - id: cox_1_activity
+    label: "COX-1 (PTGS1) cyclooxygenase catalytic activity (platelet)"
+    scale: cellular
+    entity_iri: PR:000013427
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000233
+  - id: cox_2_activity
+    label: "COX-2 (PTGS2) cyclooxygenase catalytic activity (endothelial)"
+    scale: cellular
+    entity_iri: PR:000013428
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000115
+  - id: dietary_linoleic_acid_intake
+    label: "dietary linoleic acid (18:2 n-6) intake"
+    scale: organism
+    entity_iri: CHEBI:17351
+    quality_iri: PATO:0000070
+  - id: dietary_linolenic_acid_intake
+    label: "dietary alpha-linolenic acid (18:3 n-3) intake"
+    scale: organism
+    entity_iri: CHEBI:27432
+    quality_iri: PATO:0000070
+  - id: plasma_epa
+    label: "plasma eicosapentaenoic acid (EPA, 20:5 n-3) concentration"
+    scale: organ_system
+    entity_iri: CHEBI:28364
+    quality_iri: PATO:0000033
+  - id: vkgc_activity
+    label: "vitamin K-dependent gamma-carboxylase (GGCX) activity"
+    scale: molecular
+    entity_iri: PR:000007956
+    quality_iri: PATO:0001414
+  - id: membrane_pip2_vsmc
+    label: "phosphatidylinositol 4,5-bisphosphate concentration in vascular smooth muscle cell membrane"
+    scale: subcellular
+    entity_iri: CHEBI:232300
+    quality_iri: PATO:0000033
+    bearer_entity_iri: CL:0000359
+causal_edges:
+  - source: intracellular_atp
+    target: phosphofructokinase_activity
+    sign: "-"
+    causal_evidence: perturbation
+    mechanism: "Allosteric negative feedback: excess ATP binds to an allosteric site on PFK (outside the fructose-6-phosphate active site), conformationally inhibiting the enzyme and blocking glycolysis"
+    evidence: "Wong, Cells: Molecules and Mechanisms §wong-3.4 (Regulation of Enzyme Activity): 'if there are high enough levels of ATP in the cell that other cellular processes aren't using, then it can bind to phosphofructokinase outside of its active site... and turn it off. This blocks glycolysis and production of excess ATP when the cell does not need it.' | textbook corroboration: OpenStax Biology 2e §bio-7.2 (7.2: Glycolysis): 'it is less active when ADP levels are low and the concentration of ATP is high. Thus, if there is 'sufficient' ATP in the system, the pathway slows down. This is a type of end product inhibition, since ATP is the end product of glucose catabolism.'"
+  - source: na_k_atpase_activity
+    target: cardiomyocyte_intracellular_sodium
+    sign: "-"
+    causal_evidence: pharmacological
+    mechanism: "Na+/K+-ATPase continuously exports 3 Na+ per cycle, keeping intracellular [Na+] low; greater pump activity lowers cytosolic [Na+] (quality: pump activity -> process: electrogenic Na+ extrusion -> quality: intracellular [Na+])"
+    evidence: "Wong, Cells: Molecules and Mechanisms §wong-4.4 (The Action Potential in Neurons): 'the Na+/K+ ATPase...utilizes the energy from ATP hydrolysis to power the conformational changes needed to move both Na+ and K+ ions against the gradient'; cardiac glycosides 'inhibit the Na+/K+ ATPase...causes a rise in [Na+]in'"
+  - source: plasma_ketone_bodies
+    target: arterial_ph
+    sign: "-"
+    causal_evidence: mechanistic_model
+    mechanism: "Ketone bodies (acetoacetate, 3-hydroxybutyrate) are acidic; their accumulation in blood raises [H+] and lowers arterial pH (ketoacidosis)."
+    evidence: "Wong, Cells: Molecules and Mechanisms §wong-5.7 (5.7 Starch and Glycogen Depolymerization Undeclared): 'This leads to a buildup of the molecules in the bloodstream, which lowers the pH, since the molecules are acidic.'"
+  - source: norepinephrine
+    target: plasma_free_fatty_acids
+    sign: "+"
+    causal_evidence: pharmacological
+    mechanism: "norepinephrine activates beta-adrenergic receptors on brown (and white) adipocytes, stimulating hormone-sensitive lipase via cAMP/PKA, mobilising free fatty acids from stored triacylglycerol"
+    evidence: "Wong, Cells: Molecules and Mechanisms §wong-5.9 (Amino Acid Degradation - Undeclared): 'The hormone norepinephrine increases production of free fatty acids, which open the thermogenin channel' (section 5.5, Uncoupling Electron Transport from ATP Synthesis)"
+  - source: plasma_free_fatty_acids
+    target: metabolic_heat_production
+    sign: "+"
+    causal_evidence: perturbation
+    mechanism: "free fatty acids open the UCP1/thermogenin proton channel in brown adipose tissue inner mitochondrial membrane, uncoupling electron transport from ATP synthesis so the proton gradient dissipates as heat (non-shivering thermogenesis)"
+    evidence: "Wong, Cells: Molecules and Mechanisms §wong-5.9 (Amino Acid Degradation - Undeclared): free fatty acids open the thermogenin channel, allowing protons to flow back into the matrix without ATP synthase, and 'the excess energy not being used in ATP production is released as heat' (section 5.5, Uncoupling Electron Transport from ATP Synthesis)"
+  - source: tert_expression
+    target: telomerase_activity
+    sign: "+"
+    causal_evidence: perturbation
+    mechanism: "TERT gene encodes the catalytic reverse-transcriptase subunit of the telomerase holoenzyme; more TERT expression produces more functional telomerase enzyme"
+    evidence: "Wong, Cells: Molecules and Mechanisms §wong-7.7 (Telomeres - Undeclared): 'The activity of telomerase is primarily regulated by expression of the TERT gene (telomerase reverse transcriptase)'"
+  - source: telomerase_activity
+    target: telomere_length
+    sign: "+"
+    causal_evidence: perturbation
+    mechanism: "Telomerase acts as a reverse transcriptase reading its self-contained RNA template to add telomeric repeat sequences to the 3' ends of linear chromosomes, thereby extending telomere length"
+    evidence: "Wong, Cells: Molecules and Mechanisms §wong-7.7 (Telomeres - Undeclared): 'Telomerase is a large holoenzyme that acts as a reverse transcriptase, reading a self-contained RNA template to add on telomere sequence to the 3’ ends of linear chromosomes' and 'while telomerases are active, the 3’ ends can be extended'"
+  - source: helper_t_cell_activation
+    target: b_cell_proliferation
+    sign: "+"
+    mechanism: "Activated helper T cell binds to and activates a B cell that has also bound to the same antigen, leading to massive B-cell proliferation"
+    evidence: "Wong, Cells: Molecules and Mechanisms §wong-16.8 (The Immune System - Undeclared): 'The activated helper T-cell binds to and activates a B cell that has also bound to the antigen of interest, leading to massive B-cell proliferation'"
+  - source: nmj_ache_activity
+    target: synaptic_acetylcholine
+    sign: "-"
+    causal_evidence: pharmacological
+    mechanism: "Acetylcholinesterase hydrolyzes acetylcholine in the synapse, reducing its concentration"
+    evidence: "Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-5.7 (Binding - Enzyme Linked Immunosorbant): 'The transmitter must not reside too long in the synapse; otherwise, muscle contraction will continue uncontrolled. To prevent this, a hydrolytic enzyme, acetylcholinesterase, a serine esterase found in the synapse, cleaves the transmitter at rates close to diffusion-controlled.'"
+  - source: core_temperature
+    target: metabolic_rate
+    sign: "+"
+    causal_evidence: perturbation
+    mechanism: "Temperature sets the rate of enzyme-catalysed metabolic reactions; controlled hypothermia (reduced core temperature) decreases whole-body metabolic rate, while hyperthermia raises it (Q10 effect on cellular chemistry)."
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-004 (1.5: Requirements for Human Life): 'controlled hypothermia... decreases the metabolic needs of the brain, heart, and other organs' and 'slows the patient's metabolic rate'; also: 'chemical reactions upon which the body depends can only take place within a narrow range of body temperature'."
+  - source: uterine_contraction_rate
+    target: cervical_distension
+    sign: "+"
+    mechanism: "stronger uterine contractions push the fetus against and through the cervix, increasing cervical mechanical stretch"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-005 (1.6: Homeostasis): 'This causes even greater stretching of the cervix' — parturition positive-feedback loop"
+  - source: plasma_histamine
+    target: capillary_permeability
+    sign: "+"
+    causal_evidence: pharmacological
+    mechanism: "Histamine released by mast cells acts on vascular endothelium to loosen interendothelial junctions, making the vessel wall 'leaky' and increasing fluid/protein extravasation into interstitial tissue"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-024 (4.7: Tissue Injury and Aging): 'The endothelium lining the local blood vessel becomes leaky under the influence of histamine and other inflammatory mediators allowing neutrophils, macrophages, and fluid to move from the blood into the interstitial tissue spaces.' | textbook corroboration: OpenStax Biology 2e §bio-42.1 (42.1: Innate Immune Response): 'In response to a cut, mast cells secrete histamines that cause nearby capillaries to dilate' (Figure 42.5 caption) — histamine from mast cells/basophils increases microvascular permeability during inflammation."
+  - source: plasma_histamine
+    target: total_peripheral_resistance
+    sign: "-"
+    causal_evidence: pharmacological
+    mechanism: "Histamine is a potent vasodilator: it binds H1 receptors on vascular smooth muscle and endothelium to cause arteriolar dilation, reducing total peripheral resistance"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-024 (4.7: Tissue Injury and Aging): 'mast cells present in tissue degranulate, releasing the potent vasodilator histamine. Increased blood flow results in apparent redness and heat' — vasodilation implies decreased peripheral resistance. | textbook corroboration: OpenStax Biology 2e §bio-42.1 (42.1: Innate Immune Response): 'mast cells secrete histamines that cause nearby capillaries to dilate' (Figure 42.5 caption) — histamine-mediated arteriolar vasodilation reduces peripheral resistance.; OpenStax Biology 2e §bio-42.4 (42.4: Disruptions in the Immune System): 'effects of an allergic reaction range from...plummeting blood pressure' in anaphylactic shock — histamine-driven vasodilation causes the observed MAP/TPR drop"
+  - source: plasma_calcitonin
+    target: plasma_calcium
+    sign: "-"
+    causal_evidence: pharmacological
+    mechanism: "Calcitonin stimulates calcium uptake by bones and inhibits osteoclasts, thereby lowering plasma calcium concentration"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-034 (Exercise, Nutrition, Hormones, and Bone Tissue): 'Calcitonin inhibits osteoclast activity and stimulates calcium uptake by the bones, thus reducing the concentration of calcium ions in the blood.' | textbook corroboration: OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): 'Calcitonin decreases blood calcium levels by inhibiting osteoclasts, stimulating osteoblasts, and stimulating calcium excretion by the kidneys.'; OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): 'The combination of these two events [inhibit osteoclast activity; stimulate renal calcium excretion] lowers body fluid levels of calcium.'"
+  - source: plasma_calcium
+    target: plasma_calcitonin
+    sign: "+"
+    causal_evidence: perturbation
+    mechanism: "Elevated blood calcium stimulates the thyroid gland to release calcitonin"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-035 (6.8: Calcium Homeostasis - Interactions of the Skeletal System and Other Organ): 'When blood levels of calcium get too high, the thyroid gland is stimulated to release calcitonin.' | textbook corroboration: OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): 'The hormone calcitonin...has the opposite effect on blood calcium levels as does PTH.' — implied: calcitonin is released in response to high blood calcium.; OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): 'calcitonin is produced by parafollicular cells of the thyroid... Calcitonin release is not controlled by TSH, but instead is released when calcium ion concentrations in the blood rise.'"
+  - source: skeletal_muscle_creatine_phosphate
+    target: skeletal_muscle_atp
+    sign: "+"
+    causal_evidence: perturbation
+    mechanism: "Creatine kinase transfers the phosphate group from creatine phosphate to ADP, rapidly regenerating ATP during the first seconds of muscle contraction"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-055 (10.4: Muscle Fiber Contraction and Relaxation): 'creatine phosphate transfers its phosphate back to ADP to form ATP and creatine. This reaction is catalyzed by the enzyme creatine kinase and occurs very quickly; thus, creatine phosphate-derived ATP powers the first few seconds of muscle contraction'"
+  - source: motor_unit_recruitment
+    target: skeletal_muscle_tension
+    sign: "+"
+    causal_evidence: perturbation
+    mechanism: "Activating more motor units (each comprising a motor neuron and its innervated muscle fibers) adds their contractile forces; larger motor units contribute disproportionately more force (up to 50x that of smallest units)"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-056 (10.5: Nervous System Control of Muscle Tension): 'As more motor units are recruited, the muscle contraction grows progressively stronger'; 'the largest motor units may generate a contractile force of 50 times more than the smallest motor units in the muscle'"
+  - source: testosterone
+    target: lean_body_mass
+    sign: "+"
+    mechanism: "testosterone (anabolic steroid form) stimulates myofibril formation and structural protein synthesis in skeletal muscle, increasing muscle fiber diameter (hypertrophy) and overall lean body mass"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-058 (10.7: Exercise and Muscle Performance): 'Anabolic steroids are a form of testosterone, a male sex hormone that stimulates muscle formation, leading to increased muscle mass'"
+  - source: pituitary_gh
+    target: lean_body_mass
+    sign: "+"
+    causal_evidence: pharmacological
+    mechanism: "growth hormone facilitates anabolic building of skeletal muscle mass and promotes healing/repair of muscle tissue after exercise-induced damage, supporting net accretion of lean mass"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-058 (10.7: Exercise and Muscle Performance): 'Human growth hormone (hGH)...can facilitate building muscle mass, its main role is to promote the healing of muscle and other tissues after strenuous exercise'"
+  - source: sympathetic_tone
+    target: respiratory_rate
+    sign: "+"
+    mechanism: "Sympathetic activation increases breathing rate to deliver more oxygen to activated skeletal muscle during fight-or-flight response."
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-080 (15.2: Divisions of the Autonomic Nervous System): 'As a response to a threat, the sympathetic system would increase heart rate and breathing rate and cause blood flow to the skeletal muscle to increase.'"
+  - source: sympathetic_tone
+    target: splanchnic_blood_flow
+    sign: "-"
+    causal_evidence: pharmacological
+    mechanism: "Sympathetic activation constricts splanchnic vasculature, diverting blood away from the digestive system toward skeletal muscle during fight-or-flight."
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-080 (15.2: Divisions of the Autonomic Nervous System): 'blood flow to the digestive system to decrease' as part of sympathetic fight-or-flight; also 'The digestive system shuts down so that blood is not absorbing nutrients when it should be delivering oxygen to skeletal muscles.'"
+  - source: epinephrine
+    target: total_peripheral_resistance
+    sign: "?"
+    causal_evidence: pharmacological
+    mechanism: "circulating epinephrine from the adrenal medulla binds adrenergic receptors on systemic blood vessel walls, causing smooth muscle constriction and raising vascular resistance"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-081 (15.3: Autonomic Reflexes and Homeostasis): 'The hormones released from the adrenal medulla—epinephrine and norepinephrine—will also bind to these receptors [adrenergic receptors on blood vessels], causing constriction and increasing blood pressure.' | textbook corroboration: OpenStax Biology 2e §bio-41.5 (41.5: Hormonal Control of Osmoregulatory Functions): 'These hormones [epinephrine and norepinephrine] function by acting directly on the smooth muscles of blood vessels to constrict them.'"
+  - source: stomach_volume
+    target: stomach_motility
+    sign: "+"
+    causal_evidence: perturbation
+    mechanism: "gastric distension activates intramural mechanoreceptors (stretch receptors); an enteric short reflex directly activates postganglionic parasympathetic neurons in the stomach wall, increasing smooth-muscle contraction and gastric motility"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-081 (15.3: Autonomic Reflexes and Homeostasis): 'If stretch receptors in the stomach are activated by the filling and distension of the stomach, a short reflex will directly activate the smooth muscle fibers of the stomach wall to increase motility to digest the excessive food in the stomach.'"
+  - source: trh
+    target: pituitary_tsh_secretion
+    sign: "+"
+    causal_evidence: perturbation
+    mechanism: "TRH from the hypothalamus reaches the anterior pituitary via the hypophyseal portal system and stimulates TSH synthesis and release from thyrotrophs."
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-091 (17.4: The Pituitary Gland and Hypothalamus): 'TSH is released from the anterior pituitary in response to thyrotropin-releasing hormone (TRH) from the hypothalamus.' | textbook corroboration: OpenStax Biology 2e §bio-37.4 (37.4: Regulation of Hormone Production): hypothalamus produces hormones that stimulate anterior pituitary; anterior pituitary releases TSH which stimulates thyroid to produce T3/T4"
+  - source: free_t4
+    target: trh
+    sign: "-"
+    causal_evidence: pharmacological
+    mechanism: "Elevated thyroid hormone levels feed back to suppress hypothalamic TRH production, completing the HPT negative-feedback loop."
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-091 (17.4: The Pituitary Gland and Hypothalamus): 'elevated levels of thyroid hormones in the bloodstream then trigger a drop in production of TRH and subsequently TSH.' | textbook corroboration: OpenStax Biology 2e §bio-37.4 (37.4: Regulation of Hormone Production): increasing blood T3/T4 inhibit both pituitary and hypothalamus signaling in a negative feedback loop"
+  - source: adh
+    target: total_peripheral_resistance
+    sign: "+"
+    causal_evidence: pharmacological
+    mechanism: "At high concentrations ADH (vasopressin) causes constriction of blood vessels, increasing peripheral resistance and thereby blood pressure."
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-091 (17.4: The Pituitary Gland and Hypothalamus): 'ADH is also known as vasopressin because, in very high concentrations, it causes constriction of blood vessels, which increases blood pressure by increasing peripheral resistance.' | textbook corroboration: OpenStax Biology 2e §bio-41.5 (41.5: Hormonal Control of Osmoregulatory Functions): 'ADH also acts as a vasoconstrictor and increases blood pressure during hemorrhaging.'"
+  - source: acth
+    target: plasma_androgen
+    sign: "+"
+    causal_evidence: pharmacological
+    mechanism: "ACTH stimulates adrenal zona reticularis to produce androgens (DHEA, androstenedione), which are then converted peripherally to testosterone or estrogens"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-094 (17.7: The Adrenal Glands): 'The androgens produced in the zona reticularis supplement the gonadal androgens. They are produced in response to ACTH from the anterior pituitary.'"
+  - source: cortisol
+    target: lean_body_mass
+    sign: "-"
+    causal_evidence: pharmacological
+    mechanism: "chronic cortisol elevation (long-term stress / glucocorticoid excess) promotes catabolism of skeletal muscle proteins into amino acids, reducing lean body mass"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-094 (17.7: The Adrenal Glands): 'cortisol promotes the catabolism of glycogen to glucose, the catabolism of stored triglycerides into fatty acids and glycerol, and the catabolism of muscle proteins into amino acids'; also supported by Cushing's disease phenotype described in the same section."
+  - source: plasma_sodium_concentration
+    target: aldosterone
+    sign: "-"
+    mechanism: "low plasma Na+ is directly sensed by the adrenal zona glomerulosa and stimulates aldosterone secretion to restore sodium balance (independent of the RAAS arm)"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-094 (17.7: The Adrenal Glands): 'it [aldosterone] is released in response to elevated blood K+, low blood Na+, low blood pressure, or low blood volume.' | textbook corroboration: OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): 'Aldosterone release from the adrenal cortex is stimulated by a decrease in blood concentrations of sodium ions, blood volume, or blood pressure, or by an increase in blood potassium levels.'"
+  - source: plasma_beta_hcg
+    target: progesterone
+    sign: "+"
+    causal_evidence: pharmacological
+    mechanism: "human chorionic gonadotropin (hCG) promotes progesterone synthesis (LH-receptor-mediated stimulation of corpus luteum/placenta)"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-096 (17.9: Gonadal and Placental Hormones): 'The hCG hormone promotes progesterone synthesis and reduces the mother's immune function to protect the fetus from immune rejection.' | textbook corroboration: OpenStax Biology 2e §bio-43.5 (43.5: Human Pregnancy and Birth): 'chorion begins releasing a hormone called human beta chorionic gonadotropin (β-HCG) which makes its way to the corpus luteum and keeps that structure active. This ensures adequate levels of progesterone that will maintain the endometrium.'"
+  - source: anp
+    target: renin
+    sign: "-"
+    causal_evidence: pharmacological
+    mechanism: "ANP inhibits renin secretion, thereby suppressing the RAAS"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-098 (17.11: Organs with Secondary Endocrine Functions): 'Other actions of ANP include the inhibition of renin secretion, thus inhibition of the renin-angiotensin-aldosterone system (RAAS)' | textbook corroboration: OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): 'ANP also reduces the amounts of renin released by the kidneys and aldosterone released by the adrenal cortex, further preventing the retention of water.'; OpenStax Biology 2e §bio-41.5 (41.5: Hormonal Control of Osmoregulatory Functions): 'Its [ANP's] actions suppress the actions of aldosterone, ADH, and renin.'"
+  - source: anp
+    target: total_peripheral_resistance
+    sign: "-"
+    causal_evidence: pharmacological
+    mechanism: "ANP causes vasodilation, lowering total peripheral resistance and contributing to blood pressure reduction"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-098 (17.11: Organs with Secondary Endocrine Functions): 'Other actions of ANP include … vasodilation. Therefore, ANP aids in decreasing blood pressure' | textbook corroboration: OpenStax Biology 2e §bio-41.5 (41.5: Hormonal Control of Osmoregulatory Functions): 'The atrial natriuretic peptide (ANP) lowers blood pressure by acting as a vasodilator.'"
+  - source: plasma_osteocalcin
+    target: peripheral_glucose_uptake
+    sign: "+"
+    mechanism: "Osteocalcin acts on peripheral tissues to increase insulin sensitivity and glucose utilization"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-098 (17.11: Organs with Secondary Endocrine Functions): 'It also acts on peripheral tissues to increase their sensitivity to insulin and their utilization of glucose'"
+  - source: plasma_thrombopoietin
+    target: platelet_count
+    sign: "+"
+    causal_evidence: pharmacological
+    mechanism: "Thrombopoietin secreted by the liver stimulates megakaryopoiesis and platelet production in bone marrow"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-098 (17.11: Organs with Secondary Endocrine Functions): 'Thrombopoietin stimulates the production of the blood's platelets'"
+  - source: plasma_adiponectin
+    target: peripheral_glucose_uptake
+    sign: "+"
+    mechanism: "Adiponectin reduces cellular insulin resistance, thereby enhancing insulin-mediated peripheral glucose uptake"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-098 (17.11: Organs with Secondary Endocrine Functions): 'Adiponectin … appears to reduce cellular insulin resistance'"
+  - source: plasma_albumin
+    target: plasma_volume
+    sign: "+"
+    causal_evidence: pharmacological
+    mechanism: "Albumin raises plasma colloid oncotic pressure, drawing water from interstitial tissues across capillary walls into the bloodstream, thereby expanding plasma (and blood) volume."
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-100 (18.2: An Overview of Blood): 'albumin…its presence holds water inside the blood vessels and draws water from the tissues, across blood vessel walls, and into the bloodstream. This in turn helps to maintain both blood volume and blood pressure.'"
+  - source: plasma_thrombopoietin
+    target: blood_platelet_count
+    sign: "+"
+    causal_evidence: pharmacological
+    mechanism: "Thrombopoietin stimulates proliferation of megakaryoblasts, which mature into megakaryocytes that release thousands of platelet fragments into the circulation"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-103 (18.5: Leukocytes and Platelets): 'thrombopoietin, a glycoprotein secreted by the kidneys and liver, stimulates the proliferation of megakaryoblasts, which mature into megakaryocytes…[which] release into the circulation thousands of cytoplasmic fragments' (platelets)"
+  - source: plasmin_fibrinolysis
+    target: plasma_bradykinin
+    sign: "+"
+    causal_evidence: perturbation
+    mechanism: "during fibrinolysis, factor XII and the kallikrein-kinin contact pathway generate bradykinin from kininogen"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-104 (18.6: Hemostasis): 'there is a fairly complicated series of reactions that involves factor XII ... bradykinin, a vasodilator, is released, reversing the effects of the serotonin and prostaglandins from the platelets'"
+  - source: intrapericardial_pressure
+    target: end_diastolic_volume
+    sign: "-"
+    causal_evidence: perturbation
+    mechanism: "Elevated pericardial fluid pressure externally compresses the heart, preventing full diastolic relaxation and reducing the volume of blood that can fill the ventricular chambers before each contraction."
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-106 (19.2: Heart Anatomy): 'excess fluid in the pericardial cavity puts pressure on the heart and prevents full relaxation, so the chambers within the heart contain slightly less blood as they begin each heart cycle' (cardiac tamponade description)."
+  - source: left_atrial_pressure
+    target: end_diastolic_volume
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: "atrial systole raises pressure within the atria, pumping blood through the open atrioventricular valves into the ventricles (the 'atrial kick'), contributing the remaining 20–30% of ventricular filling"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-108 (19.4: Cardiac Cycle): 'Atrial contraction, also referred to as the \"atrial kick,\" contributes the remaining 20–30 percent of filling'; 'As the atrial muscles contract... pressure rises within the atria and blood is pumped into the ventricles through the open atrioventricular valves'"
+  - source: heart_rate
+    target: end_diastolic_volume
+    sign: "-"
+    causal_evidence: perturbation
+    mechanism: "Higher heart rate shortens diastolic filling time, reducing ventricular filling and EDV (preload)."
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-109 (19.5: Cardiac Physiology): 'as the HR rises, there is less time spent in diastole and consequently less time for the ventricles to fill with blood … SV gradually decreases due to decreased filling time.'"
+  - source: venous_return
+    target: capillary_hydrostatic_pressure
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: "Elevated venous pressure is reflected retrograde into venules and capillaries, raising capillary hydrostatic pressure"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-111 (20.2: Structure and Function of Blood Vessels): 'Any blood that accumulates in a vein will increase the pressure within it, which can then be reflected back into the smaller veins, venules, and eventually even the capillaries.'"
+  - source: capillary_hydrostatic_pressure
+    target: interstitial_fluid_volume
+    sign: "+"
+    causal_evidence: curated_mechanistic
+    mechanism: "Elevated capillary hydrostatic pressure raises the outward Starling filtration force (Jv), driving fluid from capillary lumen into the interstitial space, increasing interstitial fluid volume and causing edema"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-111 (20.2: Structure and Function of Blood Vessels): 'Increased pressure will promote the flow of fluids out of the capillaries and into the interstitial fluid. The presence of excess tissue fluid around the cells leads to a condition called edema.' | curated_mechanistic: NCBI Bookshelf NBK53445 'Pathophysiology of Edema - Capillary Fluid Exchange' (opened) — even modest capillary-pressure increases substantially increase filtration, raising interstitial fluid"
+  - source: arterial_compliance
+    target: pulse_pressure
+    sign: "-"
+    causal_evidence: mechanistic_model
+    mechanism: "A compliant artery absorbs the stroke volume ejected per beat, dampening the systolic pressure rise; reduced compliance causes the same stroke volume to produce a larger systolic spike and thus wider pulse pressure"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-112 (20.3: Blood Flow, Blood Pressure, and Resistance): 'A persistently high pulse pressure at or above 100 mm Hg may indicate excessive resistance in the arteries'; arterial stiffening reduces the ability to buffer systolic pressure surges."
+  - source: capillary_hydrostatic_pressure
+    target: net_filtration_pressure
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: "NFP = CHP - BCOP; capillary hydrostatic pressure is the positive driving component that pushes fluid out of capillaries into the interstitium (filtration)"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-113 (20.4: Capillary Exchange): 'The net filtration pressure (NFP) represents the interaction of the hydrostatic and osmotic pressures, driving fluid out of the capillary. It is equal to the difference between the CHP and the BCOP.'"
+  - source: blood_colloidal_osmotic_pressure
+    target: net_filtration_pressure
+    sign: "-"
+    causal_evidence: mechanistic_model
+    mechanism: "NFP = CHP - BCOP; blood colloidal osmotic pressure generated by plasma proteins opposes filtration and drives reabsorption, reducing NFP"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-113 (20.4: Capillary Exchange): 'whereas hydrostatic pressure forces fluid out of the capillary, osmotic pressure draws fluid back in... NFP = CHP - BCOP.'"
+  - source: net_filtration_pressure
+    target: interstitial_fluid_volume
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: "Positive NFP drives net filtration of fluid out of capillaries into the interstitial space, increasing interstitial fluid volume; negative NFP (reabsorption) decreases it"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-113 (20.4: Capillary Exchange): 'Thus, the NFP of 10 mm Hg drives a net movement of fluid out of the capillary at the arterial end.' and 'when reabsorption is occurring, the NFP is a negative number.'"
+  - source: plasma_albumin
+    target: blood_colloidal_osmotic_pressure
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: "Plasma proteins (chiefly albumin) are too large to cross the capillary wall; their colloidal suspension in blood generates the blood colloidal osmotic pressure (oncotic pressure) that drives water reabsorption from interstitium into capillaries"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-113 (20.4: Capillary Exchange): 'it is the plasma proteins that play the key role... The pressure created by the concentration of colloidal proteins in the blood is called the blood colloidal osmotic pressure (BCOP). Its effect on capillary exchange accounts for the reabsorption of water.'"
+  - source: lymphatic_flow
+    target: interstitial_fluid_volume
+    sign: "-"
+    causal_evidence: mechanistic_model
+    mechanism: "Lymphatic capillaries continuously drain excess interstitial fluid that was not reabsorbed at the venous end of capillaries, returning it to the venous circulation and thereby reducing interstitial fluid volume"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-113 (20.4: Capillary Exchange): 'This excess fluid is picked up by capillaries of the lymphatic system... An important function of the lymphatic system is to return the fluid (lymph) to the blood. Approximately 24 liters per day are filtered, whereas 20.4 liters are reabsorbed [by capillaries].'"
+  - source: anp
+    target: aldosterone
+    sign: "-"
+    mechanism: "ANP suppresses adrenal aldosterone synthesis and release"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-114 (20.5: Homeostatic Regulation of the Vascular System): 'Natriuretic hormones are antagonists to angiotensin II. They...suppress renin, aldosterone, and ADH production and release.' | textbook corroboration: OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): 'ANP also reduces the amounts of renin released by the kidneys and aldosterone released by the adrenal cortex, further preventing the retention of water.'; OpenStax Biology 2e §bio-41.5 (41.5: Hormonal Control of Osmoregulatory Functions): 'Its [ANP's] actions suppress the actions of aldosterone, ADH, and renin.'"
+  - source: anp
+    target: adh
+    sign: "-"
+    causal_evidence: pharmacological
+    mechanism: "ANP suppresses hypothalamic/posterior-pituitary ADH (vasopressin) production and release"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-114 (20.5: Homeostatic Regulation of the Vascular System): 'Natriuretic hormones are antagonists to angiotensin II. They...suppress renin, aldosterone, and ADH production and release.' | textbook corroboration: OpenStax Biology 2e §bio-41.5 (41.5: Hormonal Control of Osmoregulatory Functions): 'Its [ANP's] actions suppress the actions of aldosterone, ADH, and renin.'"
+  - source: erythropoietin
+    target: total_peripheral_resistance
+    sign: "+"
+    causal_evidence: pharmacological
+    mechanism: "EPO directly causes vasoconstriction, raising peripheral resistance independently of hematocrit/viscosity changes"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-114 (20.5: Homeostatic Regulation of the Vascular System): 'In addition, EPO is a vasoconstrictor. Overproduction of EPO...will increase viscosity, resistance, and pressure.'"
+  - source: mean_arterial_pressure
+    target: capillary_filtration_rate
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: "Elevated arterial blood pressure raises capillary hydrostatic pressure, increasing the net outward Starling force and driving more fluid across the capillary wall into interstitial space"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-117 (21.2: Anatomy of the Lymphatic and Immune Systems): 'Blood pressure causes leakage of fluid from the capillaries, resulting in the accumulation of fluid in the interstitial space'"
+  - source: capillary_filtration_rate
+    target: interstitial_fluid_volume
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: "Greater capillary filtration delivers more fluid to the interstitial compartment, expanding its volume"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-117 (21.2: Anatomy of the Lymphatic and Immune Systems): 'Blood pressure causes leakage of fluid from the capillaries, resulting in the accumulation of fluid in the interstitial space'; '20 liters of plasma is released into the interstitial space of the tissues each day due to capillary filtration'"
+  - source: interstitial_fluid_volume
+    target: lymph_drainage_rate
+    sign: "+"
+    causal_evidence: curated_mechanistic
+    mechanism: "Raised interstitial fluid volume/pressure provides the driving pressure into initial lymphatics and creates radial tension on anchoring filaments that widens initial-lymphatic diameter and opens inter-endothelial flap junctions, increasing lymph flow (Guyton's interstitial-pressure/lymph-flow relationship)"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-117 (21.2: Anatomy of the Lymphatic and Immune Systems): 'As interstitial pressure increases, the spaces between the cells open up, allowing the fluid to enter. Entry of fluid...is also enabled by the collagen filaments that anchor the capillaries to surrounding structures. As interstitial pressure increases, the filaments pull on the endothelial cell flaps, opening up them even further' | curated_mechanistic: NCBI Bookshelf NBK53445 'Pathophysiology of Edema' (opened) — increased interstitial fluid pressure increases lymph flow"
+  - source: plasma_leukotriene_c4
+    target: capillary_permeability
+    sign: "+"
+    causal_evidence: pharmacological
+    mechanism: "Leukotrienes act on endothelial cells to increase vascular permeability, promoting fluid and protein extravasation at sites of inflammation"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-118 (21.3: Barrier Defenses and the Innate Immune Response): 'Leukotrienes attract neutrophils from the blood by chemotaxis and increase vascular permeability.'"
+  - source: plasma_allergen_specific_ige
+    target: plasma_histamine
+    sign: "+"
+    causal_evidence: perturbation
+    mechanism: "Allergen-specific IgE bound to mast-cell Fc receptors; allergen cross-linking triggers mast cell degranulation and histamine release"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-120 (21.5: The Adaptive Immune Response - B Lymphocytes and Antibodies): 'if a person is allergic to peanuts, there will be peanut-specific IgE bound to their mast cells. In this person, eating peanuts will cause the mast cells to degranulate, sometimes causing severe allergic reactions' | textbook corroboration: OpenStax Biology 2e §bio-42.4 (42.4: Disruptions in the Immune System): 'IgE molecules on mast cells bind the antigen via their variable domains and stimulate the mast cell to release the modified amino acids histamine and serotonin' — confirms IgE-triggered mast cell degranulation releases histamine"
+  - source: plasma_specific_antibody
+    target: blood_viral_load
+    sign: "-"
+    causal_evidence: pharmacological
+    mechanism: "Antibody-mediated neutralization coats virions, blocking receptor binding and preventing infection of new cells, reducing circulating virus titre (seroconversion)"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-121 (21.6: The Immune Response Against Pathogens): 'As the antibody levels rise, the virus levels decline, and this is a sign that the immune response is being at least partially effective' — seroconversion demonstrates the reciprocal causal relationship."
+  - source: epinephrine
+    target: mean_arterial_pressure
+    sign: "+"
+    causal_evidence: pharmacological
+    mechanism: "Epinephrine acts on adrenergic receptors to increase heart rate, cardiac output, and peripheral vasoconstriction, raising blood pressure"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-122 (21.7: Diseases Associated with Depressed or Overactive Immune Responses): 'epinephrine raises blood pressure and relaxes bronchial smooth muscle, it is routinely used to counteract the effects of anaphylaxis' | textbook corroboration: OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): 'Epinephrine and norepinephrine increase heart rate, breathing rate, cardiac muscle contractions, blood pressure, and blood glucose levels.'; OpenStax Biology 2e §bio-42.4 (42.4: Disruptions in the Immune System): 'If not treated with epinephrine to counter the blood pressure and breathing effects, this condition can be fatal' — epinephrine raises blood pressure in anaphylaxis"
+  - source: cortisol
+    target: t_cell_immune_activity
+    sign: "-"
+    causal_evidence: pharmacological
+    mechanism: "Glucocorticoids (cortisol) suppress T cell activation, proliferation, and effector function via glucocorticoid receptor-mediated repression of cytokine genes and T cell signaling pathways"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-123 (21.8: Transplantation and Cancer Immunology): 'hormones such as cortisol (naturally produced by the adrenal cortex) and prednisone (synthetic) are well known for their abilities to suppress T cell immune mechanisms'"
+  - source: bronchiole_smooth_muscle_tone
+    target: bronchiole_airflow
+    sign: "-"
+    causal_evidence: mechanistic_model
+    mechanism: "Increased bronchiole smooth muscle contraction narrows the bronchiole lumen, reducing airflow through the tube; relaxation widens lumen and increases airflow."
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-124 (22.2: Organs and Structures of the Respiratory System): 'This muscular wall can change the size of the tubing to increase or decrease airflow through the tube' (bronchioles); asthma section: 'bronchospasms (constriction of the bronchioles), which can inhibit air from entering the lungs'."
+  - source: alveolar_surfactant_concentration
+    target: alveolar_surface_tension
+    sign: "-"
+    mechanism: "Pulmonary surfactant (phospholipids + proteins) secreted by type II alveolar cells intercalates at the air-liquid interface and reduces surface tension of the alveolar wall."
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-124 (22.2: Organs and Structures of the Respiratory System): 'A type II alveolar cell is interspersed among the type I cells and secretes pulmonary surfactant, a substance composed of phospholipids and proteins that reduces the surface tension of the alveoli'."
+  - source: core_temperature
+    target: alveolar_ventilation
+    sign: "+"
+    mechanism: "hypothalamus senses elevated body temperature and increases respiratory rate and depth via respiratory centers"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-126 (22.4: The Process of Breathing): 'an increase in body temperature causes an increase in respiratory rate'"
+  - source: alveolar_po2
+    target: pulmonary_arteriole_diameter
+    sign: "+"
+    mechanism: "higher alveolar PO2 causes pulmonary arterioles to dilate (vasodilation), increasing blood flow to well-ventilated alveoli; low alveolar PO2 causes constriction redirecting blood away"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-127 (22.5: Gas Exchange): 'a greater partial pressure of oxygen in the alveoli causes the pulmonary arterioles to dilate, increasing blood flow'; 'constricting the pulmonary arterioles that serves the dysfunctional alveolus, which redirects blood to other alveoli that have sufficient ventilation'"
+  - source: alveolar_pco2
+    target: bronchiole_diameter
+    sign: "+"
+    causal_evidence: perturbation
+    mechanism: "higher alveolar PCO2 stimulates bronchodilation, increasing airway diameter to allow more CO2-laden air to be exhaled"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-127 (22.5: Gas Exchange): 'A greater partial pressure of carbon dioxide in the alveoli causes the bronchioles to increase their diameter … allowing carbon dioxide to be exhaled from the body at a greater rate'"
+  - source: arterial_ph
+    target: hemoglobin_o2_saturation
+    sign: "+"
+    causal_evidence: perturbation
+    mechanism: "Bohr effect: higher (more alkaline) blood pH increases hemoglobin's affinity for oxygen, raising Hb-O2 saturation; conversely, lower (more acidic) pH promotes O2 dissociation from heme, reducing saturation"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-128 (22.6: Transport of Gases): 'The Bohr effect is a phenomenon that arises from the relationship between pH and oxygen's affinity for hemoglobin: A lower, more acidic pH promotes oxygen dissociation from hemoglobin. In contrast, a higher, or more basic, pH inhibits oxygen dissociation from hemoglobin.' | textbook corroboration: Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-5.03.4 (Summary); Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-5.03.7 (Summary): 'The Bohr effect, where a decrease in pH shifts the binding curve to favor oxygen release, is highlighted as a critical regulatory mechanism in oxygen delivery to tissues.' Corroborates arterial_ph → hemoglobin_o2_saturation (+).; OpenStax Biology 2e §bio-39.4 (39.4: Transport of Gases in Human Bodily Fluids): 'This increase in carbon dioxide and subsequent decrease in pH reduce the affinity of hemoglobin for oxygen. The oxygen dissociates from the Hb molecule, shifting the oxygen dissociation curve to the right.' Lower pH reduces Hb-O2 affinity and saturation (Bohr effect)."
+  - source: core_temperature
+    target: hemoglobin_o2_saturation
+    sign: "-"
+    causal_evidence: perturbation
+    mechanism: "higher body temperature promotes faster dissociation of oxygen from hemoglobin, reducing Hb-O2 saturation (right-shift of the O2-Hb dissociation curve)"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-128 (22.6: Transport of Gases): 'a higher temperature promotes hemoglobin and oxygen to dissociate faster, whereas a lower temperature inhibits dissociation' | textbook corroboration: OpenStax Biology 2e §bio-39.4 (39.4: Transport of Gases in Human Bodily Fluids): 'A similar shift in the curve also results from an increase in body temperature. Increased temperature, such as from increased activity of skeletal muscle, causes the affinity of hemoglobin for oxygen to be reduced.' Higher temperature reduces Hb-O2 saturation."
+  - source: esophageal_luminal_pressure
+    target: lower_esophageal_sphincter_tone
+    sign: "-"
+    causal_evidence: perturbation
+    mechanism: "Distension of the esophagus by a bolus triggers a reflex relaxation of the lower esophageal sphincter (receptive relaxation), allowing the bolus to pass into the stomach"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-133 (23.4: The Mouth, Pharynx, and Esophagus): 'distention of the esophagus initiates a short reflex relaxation of the lower esophageal sphincter that allows the bolus to pass into the stomach'"
+  - source: pancreatic_bicarbonate_secretion
+    target: duodenal_chyme_acidity
+    sign: "-"
+    causal_evidence: mechanistic_model
+    mechanism: "bicarbonate secreted into the duodenum neutralizes acidic chyme, reducing luminal acidity"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-136 (23.7: Accessory Organs in Digestion- The Liver, Pancreas, and Gallbladder): 'sodium bicarbonate...serves to buffer the acidic gastric juice in chyme'; 'the pancreas secretes just enough bicarbonate to counterbalance the amount of HCl produced in the stomach'"
+  - source: plasma_secretin
+    target: plasma_bile_acids
+    sign: "+"
+    causal_evidence: perturbation
+    mechanism: "secretin (triggered by fatty chyme) stimulates bile production and release from the liver"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-136 (23.7: Accessory Organs in Digestion- The Liver, Pancreas, and Gallbladder): 'bile production increases when fatty chyme enters the duodenum and stimulates the secretion of the gut hormone secretin'"
+  - source: lean_body_mass
+    target: metabolic_rate
+    sign: "+"
+    mechanism: "skeletal muscle (lean mass) is the dominant site of resting energy expenditure; loss of muscle mass directly reduces whole-body basal metabolic rate"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-139 (24.3: Carbohydrate Metabolism): 'Changes in body composition, including reduced lean muscle mass, are mostly responsible for this decrease [in metabolic rate]'"
+  - source: plasma_cck
+    target: plasma_pancreatic_lipase
+    sign: "+"
+    causal_evidence: perturbation
+    mechanism: "CCK released by intestinal mucosa in response to chyme stimulates release of pancreatic lipase from the pancreas"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-140 (24.4: Lipid Metabolism): 'CCK stimulates the release of pancreatic lipase from the pancreas'"
+  # Component-bridge CB-PHY-007 (reviewed 2026-07-18): joins previously-isolated
+  # small_intestine_motility to core via plasma_motilin. Scoped to the fasting-state,
+  # motilin-driven proximal-small-bowel phase-III MMC; NOT fed-state intestinal motility.
+  - source: plasma_motilin
+    target: small_intestine_motility
+    sign: "+"
+    causal_evidence: pharmacological
+    mechanism: "Plasma motilin acts on the smooth-muscle/enteric motilin receptor (MLNR/GPR38) to trigger a premature phase-III migrating-motor-complex contractile front that originates gastroduodenally and propagates into the proximal small intestine during the fasting (interdigestive) state; the intrinsic distal-small-intestinal MMC front is motilin-independent, so the sign holds for the motilin-driven proximal front, not for fed-state intestinal motility."
+    evidence: "PMID:456236 / DOI:10.1007/BF01489315 (Vantrappen et al., Motilin and the interdigestive migrating myoelectric complex in man): intravenous infusion of pure motilin induced a premature phase-III activity front in 12/16 fasting normal volunteers (endpoint: intestinal migrating-motor-complex activity). Pharmacological corroboration: the motilin-receptor agonist erythromycin induces phase-III MMC-like activity in the human GI tract (PMID:3943442)."
+  - source: adh
+    target: urine_osmolality
+    sign: "+"
+    causal_evidence: pharmacological
+    mechanism: "ADH (vasopressin) inserts aquaporin-2 water channels into the apical membrane of collecting-duct principal cells, increasing water reabsorption from the tubular lumen; higher ADH concentrates urine (raises urine osmolality), while insufficient ADH release or receptor deficiency yields high volumes of very dilute urine (diabetes insipidus)."
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-145 (25.2: Physical Characteristics of Urine): 'insufficient pituitary antidiuretic hormone (ADH) release or insufficient numbers of ADH receptors in the collecting ducts means that too few water channels are inserted... Insufficient numbers of water channels (aquaporins) reduce water absorption, resulting in high volumes of very dilute urine.'"
+  - source: plasma_glucose
+    target: urinary_glucose
+    sign: "+"
+    mechanism: "When plasma glucose exceeds the PCT transport maximum (Tm ~200 mg/dL), the SGLT2/Na+-glucose symporters are saturated and glucose spills into the urine (glycosuria)"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-150 (25.7: Tubular Reabsorption): 'Some glucose may appear in the urine if circulating glucose levels are high enough that all the glucose transporters in the PCT are saturated, so that their capacity to move glucose is exceeded (transport maximum, or Tm). This recovery rate translates to an arterial concentration of about 200 mg/dL.'"
+  - source: plasma_osmolality
+    target: aldosterone
+    sign: "-"
+    mechanism: "elevated ECF osmolality (following aldosterone-driven Na reabsorption) inhibits further aldosterone release as negative feedback"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-157 (26.4: Electrolyte Balance): 'In a negative feedback loop, increased osmolality of the ECF (which follows aldosterone-stimulated sodium absorption) inhibits the release of the hormone.'"
+  - source: mean_arterial_pressure
+    target: aldosterone
+    sign: "-"
+    causal_evidence: perturbation
+    mechanism: "decreased blood pressure is a direct stimulus for aldosterone release"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-157 (26.4: Electrolyte Balance): 'Aldosterone is released if blood levels of potassium increase, if blood levels of sodium severely decrease, or if blood pressure decreases.' | textbook corroboration: OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): 'Aldosterone release from the adrenal cortex is stimulated by a decrease in blood concentrations of sodium ions, blood volume, or blood pressure, or by an increase in blood potassium levels.'"
+  - source: plasma_potassium
+    target: plasma_bicarbonate
+    sign: "-"
+    causal_evidence: curated_mechanistic
+    mechanism: "Hyperkalemia impairs renal proximal-tubule ammoniagenesis and ammonium reabsorption (K+ competes at the Na-K-2Cl cotransporter), reducing ammonia-dependent acid excretion and bicarbonate regeneration -> metabolic acidosis (type-4 RTA), lowering plasma [HCO3-]. (The older 'K+/H+ competition at Na+/H+ exchange' account is a sign-preserving oversimplification.)"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-158 (26.5: Acid-Base Balance): 'If more potassium is present than normal, potassium, rather than the hydrogen ions, will be exchanged, and...less bicarbonate is conserved.' | curated_mechanistic: Deranged Physiology 'Type 4 (hyperkalaemic) renal tubular acidosis' (opened) — hyperkalemia impairs ammoniagenesis/NH4+ excretion; correcting hyperkalemia corrects the acidosis"
+  - source: plasma_chloride
+    target: plasma_bicarbonate
+    sign: "-"
+    causal_evidence: mechanistic_model
+    mechanism: "Chloride loss (hypochloremia) prompts the kidney to reabsorb bicarbonate in place of the lost chloride ions to maintain electrochemical neutrality, raising plasma [HCO3-]; thus lower plasma [Cl-] causes higher [HCO3-] — i.e. plasma_chloride negatively affects plasma_bicarbonate."
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-158 (26.5: Acid-Base Balance): 'lost chloride results in an increased reabsorption of bicarbonate by the renal system.'"
+  - source: plasma_ketone_bodies
+    target: plasma_bicarbonate
+    sign: "-"
+    causal_evidence: mechanistic_model
+    mechanism: "Elevated ketone bodies in the renal filtrate bind bicarbonate ions, preventing their conservation and return to blood, thereby lowering plasma [HCO3-]."
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-158 (26.5: Acid-Base Balance): 'elevated levels of ketones (common in unmanaged diabetes mellitus), which bind bicarbonate in the filtrate and prevent its conservation.'"
+  - source: acth
+    target: aldosterone
+    sign: "+"
+    mechanism: "ACTH stimulates adrenal zona glomerulosa to increase aldosterone synthesis and secretion (e.g., in Cushing's disease / chronic ACTH hypersecretion)"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-159 (26.6: Disorders of Acid-Base Balance): 'The oversecretion of ACTH results in elevated aldosterone levels and an increased loss of potassium by urinary excretion.'"
+  - source: epinephrine
+    target: alveolar_ventilation
+    sign: "+"
+    causal_evidence: pharmacological
+    mechanism: "Elevated catecholamines (epinephrine, norepinephrine) stimulate respiratory rate and depth, producing hyperventilation and respiratory alkalosis"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-159 (26.6: Disorders of Acid-Base Balance): 'An elevated respiratory rate leading to hyperventilation can be due to extreme emotional upset or fear, fever, infections, hypoxia, or abnormally high levels of catecholamines, such as epinephrine and norepinephrine.'"
+  - source: estradiol
+    target: ldl_cholesterol
+    sign: "-"
+    mechanism: "Estrogens reduce circulating cholesterol levels (predominantly LDL), contributing to cardiovascular protection in pre-menopausal females; loss of estrogen at menopause is associated with rising cholesterol and cardiovascular risk"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-161 (27.3: Anatomy and Physiology of the Female Reproductive System): 'estrogens reduce the amount of cholesterol in the blood vessels. When estrogen is lacking, many people find that they suddenly have problems with high cholesterol'"
+  - source: plasma_beta_hcg
+    target: estradiol
+    sign: "+"
+    causal_evidence: pharmacological
+    mechanism: "hCG secreted by trophoblast stimulates the corpus luteum to maintain steroidogenesis and estrogen (estradiol) production during early pregnancy"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-164 (28.3: Embryonic Development): 'The trophoblast secretes human chorionic gonadotropin (hCG), a hormone that directs the corpus luteum to survive, enlarge, and continue producing progesterone and estrogen to suppress menses.'"
+  - source: alveolar_surfactant_amount
+    target: alveolar_surface_tension
+    sign: "-"
+    causal_evidence: pharmacological
+    mechanism: "Pulmonary surfactant adsorbs at the air-liquid interface of alveoli and reduces surface tension, lowering the collapsing pressure and enabling alveolar expansion."
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-165 (28.4: Fetal Development): 'The lungs begin producing surfactant, a substance that reduces surface tension in the lungs and assists proper lung expansion after birth.'"
+  - source: progesterone
+    target: pituitary_fsh_secretion
+    sign: "-"
+    causal_evidence: pharmacological
+    mechanism: "Progesterone directly suppresses pituitary FSH secretion (parallel to estradiol), preventing ovulation during pregnancy"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-166 (28.5: Changes During Pregnancy, Labor, and Birth): 'Like estrogen, progesterone suppresses FSH and LH.' | textbook corroboration: OpenStax Biology 2e §bio-43.3 (43.3: Human Reproductive Anatomy and Gametogenesis): 'Progesterone assists in endometrial regrowth and inhibition of FSH and LH release.' Also: 'The progesterone facilitates the regrowth of the uterine lining and inhibits the release of further FSH and LH.'; OpenStax Biology 2e §bio-43.5 (43.5: Human Pregnancy and Birth): 'Hormonal methods use synthetic progesterone (sometimes in combination with estrogen), to inhibit the hypothalamus from releasing FSH or LH, and thus prevent an egg from being available for fertilization.'"
+  - source: plasma_oxytocin
+    target: plasma_prostaglandin_e2
+    sign: "+"
+    causal_evidence: pharmacological
+    mechanism: "Uterine contractions triggered by oxytocin stimulate prostaglandin secretion from fetal membranes, further amplifying contractile activity"
+    evidence: "OpenStax Anatomy & Physiology 2e §anp-166 (28.5: Changes During Pregnancy, Labor, and Birth): 'uterine contractions...stimulate the secretion of prostaglandins from fetal membranes. Like oxytocin, prostaglandins also enhance uterine contractile strength.'"
+  # --- run-2 within-scale edges ---
+  - source: mean_arterial_pressure
+    target: urinary_protein
+    sign: "+"
+    causal_evidence: perturbation
+    mechanism: "Elevated blood pressure increases the hydrostatic pressure across the glomerular filtration barrier, forcing protein that would normally be retained into the renal tubular filtrate and thence into urine."
+    evidence: "OpenStax Biology 2e §bio-5.2 (5.2: Passive Transport): 'One of the effects of high blood pressure is the appearance of protein in the urine, which abnormally high pressure squeezes through.'"
+  - source: plasma_albumin
+    target: plasma_oncotic_pressure
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: "Albumin, produced by the liver and too large to cross plasma membranes easily, is the principal determinant of plasma colloid osmotic (oncotic) pressure, which opposes capillary fluid filtration into tissues."
+    evidence: "OpenStax Biology 2e §bio-5.2 (5.2: Passive Transport): 'Animals also have high albumin concentrations, which the liver produces, in their blood. This protein is too large to pass easily through plasma membranes and is a major factor in controlling the osmotic pressures applied to tissues.'"
+  - source: mitochondrial_complex_i_activity
+    target: mitochondrial_respiratory_chain_activity
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: "Complex I (NADH:ubiquinone oxidoreductase) oxidizes NADH and feeds electrons into the mitochondrial electron-transport chain; greater complex I activity drives greater overall respiratory chain electron flux."
+    evidence: "OpenStax Biology 2e §bio-7.1 (7.1: Energy in Living Systems): 'Most of the ATP generated during glucose catabolism... is derived from... chemiosmosis, which takes place in mitochondria'; NAD+ accepts electrons from organic molecules and passes them into the respiratory chain; in type 2 diabetes 'the oxidation efficiency of NADH is reduced, impacting oxidative phosphorylation'."
+  - source: mitochondrial_respiratory_chain_activity
+    target: mitochondrial_atp_synthase_activity
+    sign: "+"
+    causal_evidence: perturbation
+    mechanism: "The respiratory chain generates a proton electrochemical gradient across the inner mitochondrial membrane; this proton-motive force drives ATP synthase (complex V) to phosphorylate ADP to ATP via chemiosmosis (oxidative phosphorylation)."
+    evidence: "OpenStax Biology 2e §bio-7.1 (7.1: Energy in Living Systems): 'chemiosmosis... is used to generate 90 percent of the ATP made during glucose catabolism'; 'The production of ATP using the process of chemiosmosis is called oxidative phosphorylation'; reduced NADH oxidation 'impact[s] oxidative phosphorylation'."
+  - source: cellular_atp_level
+    target: citrate_synthase_activity
+    sign: "-"
+    causal_evidence: perturbation
+    mechanism: "Allosteric product-inhibition: high ATP negatively regulates citrate synthase (step 1 of citric acid cycle) by feedback inhibition, slowing entry of acetyl-CoA into the cycle"
+    evidence: "OpenStax Biology 2e §bio-7.3 (7.3: Oxidation of Pyruvate and the Citric Acid Cycle): 'The rate of this reaction is controlled by negative feedback and the amount of ATP available. If ATP levels increase, the rate of this reaction decreases.'"
+  - source: cellular_adp_level
+    target: isocitrate_dehydrogenase_activity
+    sign: "+"
+    causal_evidence: perturbation
+    mechanism: "Allosteric activation: ADP signals low energy status and positively activates isocitrate dehydrogenase (step 3 of TCA cycle), accelerating NADH production and ATP regeneration"
+    evidence: "OpenStax Biology 2e §bio-7.3 (7.3: Oxidation of Pyruvate and the Citric Acid Cycle): 'This step is also regulated by negative feedback from ATP and NADH and a positive effect of ADP.'"
+  - source: cellular_atp_level
+    target: isocitrate_dehydrogenase_activity
+    sign: "-"
+    causal_evidence: perturbation
+    mechanism: "Allosteric feedback inhibition: high ATP suppresses isocitrate dehydrogenase activity (step 3 of TCA cycle), slowing the cycle when energy is abundant"
+    evidence: "OpenStax Biology 2e §bio-7.3 (7.3: Oxidation of Pyruvate and the Citric Acid Cycle): 'This step is also regulated by negative feedback from ATP and NADH and a positive effect of ADP.'"
+  - source: cellular_atp_level
+    target: alpha_ketoglutarate_dehydrogenase_activity
+    sign: "-"
+    causal_evidence: perturbation
+    mechanism: "Feedback inhibition: ATP inhibits alpha-ketoglutarate dehydrogenase complex (step 4 of TCA cycle), reducing conversion of alpha-ketoglutarate to succinyl-CoA when cellular energy is high"
+    evidence: "OpenStax Biology 2e §bio-7.3 (7.3: Oxidation of Pyruvate and the Citric Acid Cycle): 'The enzyme that catalyzes step four is regulated by feedback inhibition of ATP, succinyl CoA, and NADH.'"
+  - source: cellular_nadh
+    target: mitochondrial_complex_i_activity
+    sign: "+"
+    causal_evidence: perturbation
+    mechanism: "NADH donates two electrons to Complex I (NADH dehydrogenase), driving its redox activity and proton-pumping function"
+    evidence: "OpenStax Biology 2e §bio-7.4 (7.4: Oxidative Phosphorylation): 'two electrons are carried to the first complex via NADH'; NADH provides the electron input that sustains Complex I catalytic activity"
+  - source: cellular_fadh2
+    target: mitochondrial_complex_ii_activity
+    sign: "+"
+    causal_evidence: perturbation
+    mechanism: "FADH2 donates electrons directly to Complex II (succinate dehydrogenase), bypassing Complex I and entering the ETC at ubiquinone"
+    evidence: "OpenStax Biology 2e §bio-7.4 (7.4: Oxidative Phosphorylation): 'Complex II directly receives FADH2—which does not pass through complex I'; FADH2 is the electron substrate for Complex II"
+  - source: intracellular_atp
+    target: mitochondrial_respiratory_chain_activity
+    sign: "-"
+    causal_evidence: perturbation
+    mechanism: "Buildup of ATP signals decreased demand; reduced ADP:ATP ratio slows electron transport chain activity"
+    evidence: "OpenStax Biology 2e §bio-7.7 (7.7: Regulation of Cellular Respiration): 'As ATP usage decreases, the concentration of ADP decreases, and now, ATP begins to build up in the cell. This change in the relative concentration of ADP to ATP triggers the cell to slow down the electron transport chain.'"
+  - source: intracellular_atp
+    target: isocitrate_dehydrogenase_activity
+    sign: "-"
+    causal_evidence: perturbation
+    mechanism: "Adequate ATP levels decrease isocitrate dehydrogenase activity, reducing TCA cycle flux when energy is not needed"
+    evidence: "OpenStax Biology 2e §bio-7.7 (7.7: Regulation of Cellular Respiration): 'When adequate ATP and NADH levels are available, the rates of these reactions [isocitrate dehydrogenase and alpha-ketoglutarate dehydrogenase] decrease.'"
+  - source: intracellular_atp
+    target: alpha_ketoglutarate_dehydrogenase_activity
+    sign: "-"
+    causal_evidence: perturbation
+    mechanism: "High ATP inhibits alpha-ketoglutarate dehydrogenase, downregulating TCA cycle when energy is sufficient"
+    evidence: "OpenStax Biology 2e §bio-7.7 (7.7: Regulation of Cellular Respiration): 'When adequate ATP and NADH levels are available, the rates of these reactions [isocitrate and alpha-ketoglutarate dehydrogenase] decrease' (Table 7.1)."
+  - source: intracellular_atp
+    target: pyruvate_dehydrogenase_activity
+    sign: "-"
+    causal_evidence: perturbation
+    mechanism: "Acetyl CoA and NADH (reflecting high energy/ATP state) accumulation decreases pyruvate dehydrogenase activity via feedback inhibition"
+    evidence: "OpenStax Biology 2e §bio-7.7 (7.7: Regulation of Cellular Respiration): 'If either acetyl groups or NADH accumulates, there is less need for the reaction, and the rate decreases.' Table 7.1 lists ATP, NADH as decreasing pyruvate dehydrogenase."
+  - source: phosphorylase_kinase_activity
+    target: myophosphorylase_activity
+    sign: "+"
+    causal_evidence: perturbation
+    mechanism: "glycogen phosphorylase kinase (GPK) phosphorylates and activates muscle glycogen phosphorylase (myophosphorylase/PYGM), converting it from the b to the a form"
+    evidence: "OpenStax Biology 2e §bio-9.3 (9.3: Response to the Signal): 'activating intermediate glycogen phosphorylase kinase (GPK) that in turn activates glycogen phosphorylase (GP) that catabolizes glycogen'"
+  - source: gastric_acid_secretion
+    target: gastric_pepsin_activity
+    sign: "+"
+    causal_evidence: perturbation
+    mechanism: "HCl secreted by parietal cells acidifies the gastric lumen, converting inactive pepsinogen (secreted by chief cells) to active pepsin A via autocatalytic cleavage; the more acid, the more efficient the activation"
+    evidence: "OpenStax Biology 2e §bio-34.1 (34.1: Digestive Systems): 'Hydrochloric acid helps to convert the inactive pepsinogen to pepsin.'"
+  - source: gastric_pepsin_activity
+    target: gastric_pepsin_activity
+    sign: "+"
+    causal_evidence: perturbation
+    mechanism: "Active pepsin cleaves its own precursor pepsinogen, generating more pepsin — a positive autocatalytic feedback loop within the gastric lumen"
+    evidence: "OpenStax Biology 2e §bio-34.1 (34.1: Digestive Systems): 'Pepsin breaks peptide bonds and cleaves proteins into smaller polypeptides; it also helps activate more pepsinogen, starting a positive feedback mechanism that generates more pepsin.'"
+  - source: plasma_glucose
+    target: adipose_tissue_mass
+    sign: "+"
+    mechanism: "excess plasma glucose enters glycolysis yielding pyruvate, which is used for de novo fatty acid synthesis; these fatty acids are stored in adipose cells, increasing fat mass"
+    evidence: "OpenStax Biology 2e §bio-34.2 (34.2: Nutrition and Energy Production): 'The pyruvate produced during glycolysis is used to synthesize fatty acids. When there is more glucose in the body than required, the resulting excess pyruvate is converted into molecules that eventually result in the synthesis of fatty acids within the body. These fatty acids are stored in adipose cells.'"
+  - source: acetylcholinesterase_activity
+    target: synaptic_acetylcholine_concentration
+    sign: "-"
+    causal_evidence: pharmacological
+    mechanism: "Acetylcholinesterase hydrolyzes acetylcholine in the synaptic cleft into choline and acetate, reducing the available ACh concentration; inhibiting this enzyme prolongs ACh presence (basis of AChE-inhibitor drugs used in Alzheimer's disease)."
+    evidence: "OpenStax Biology 2e §bio-35.2 (35.2: How Neurons Communicate): 'some drugs that are given to Alzheimer's patients work by inhibiting acetylcholinesterase, the enzyme that degrades acetylcholine. This inhibition of the enzyme essentially increases neurotransmission at synapses that release acetylcholine.'"
+  - source: synaptic_acetylcholine_concentration
+    target: postsynaptic_membrane_potential
+    sign: "+"
+    causal_evidence: pharmacological
+    mechanism: "Acetylcholine binds to ligand-gated Na+ channels on the postsynaptic membrane (neuromuscular junction), opening them and allowing Na+ to enter the postsynaptic cell, causing depolarization (excitatory postsynaptic potential, EPSP), i.e. a rise in membrane potential toward threshold."
+    evidence: "OpenStax Biology 2e §bio-35.2 (35.2: How Neurons Communicate): 'when acetylcholine is released at the synapse between a nerve and muscle (called the neuromuscular junction) by a presynaptic neuron, it causes postsynaptic Na+ channels to open. Na+ enters the postsynaptic cell and causes the postsynaptic membrane to depolarize. This depolarization is called an excitatory postsynaptic potential (EPSP).'"
+  - source: synaptic_gaba_concentration
+    target: postsynaptic_membrane_potential
+    sign: "-"
+    causal_evidence: pharmacological
+    mechanism: "GABA binds to and opens Cl- channels on the postsynaptic membrane; Cl- ions enter the cell and hyperpolarize the membrane (inhibitory postsynaptic potential, IPSP), reducing the membrane potential and making the neuron less likely to fire."
+    evidence: "OpenStax Biology 2e §bio-35.2 (35.2: How Neurons Communicate): 'when the neurotransmitter GABA (gamma-aminobutyric acid) is released from a presynaptic neuron, it binds to and opens Cl- channels. Cl- ions enter the cell and hyperpolarizes the membrane, making the neuron less likely to fire an action potential.'"
+  - source: nociceptive_afferent_activity
+    target: sympathetic_tone
+    sign: "+"
+    causal_evidence: perturbation
+    mechanism: "Nociceptive signals project to hypothalamus, activating the sympathetic branch of the visceral sensory system (fight-or-flight response)"
+    evidence: "OpenStax Biology 2e §bio-36.2 (36.2: Somatosensation): 'threatening—or painful—stimuli stimulate the sympathetic branch of the visceral sensory system, readying a fight-or-flight response'"
+  # Curatorial correction (Paul N. Schofield, 2026-06-11): hypothalamic/feedback drive onto plasma
+  # prolactin is INDIRECT — TRH, estradiol, dopamine and suckling act on the lactotroph's PRL
+  # *secretory output* (`pituitary_prolactin_secretion`), which then sets plasma PRL. The lactotroph
+  # cell output is linked by a typed production relation below; this also resolves the
+  # previously-islanded lactotroph_prl_secretion node). Macro-scale mediator, not the cellular
+  # lactotroph (which would be an unsupported direct macro-to-cell shortcut).
+  - source: pituitary_prolactin_secretion
+    target: plasma_prolactin
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: "anterior-pituitary lactotroph PRL secretory output sets the circulating prolactin concentration (mass balance: plasma [PRL] = secretion − clearance)"
+    evidence: "Williams Textbook of Endocrinology, 14th ed., ch 8 (lactotroph PRL secretion sets plasma prolactin). Curated by Paul N. Schofield. *** DRAFT FOR REVIEW ***"
+  - source: plasma_prolactin
+    target: gnrh
+    sign: "-"
+    causal_evidence: pharmacological
+    mechanism: "Elevated prolactin inhibits hypothalamic GnRH release, suppressing the reproductive axis during lactation"
+    evidence: "OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): 'Prolactin release inhibits the release of GnRH from the hypothalamus, resulting in a loss of FSH and LH release from the anterior pituitary.'"
+  - source: plasma_calcitonin
+    target: urinary_calcium
+    sign: "+"
+    causal_evidence: pharmacological
+    mechanism: "Calcitonin acts on kidney tubules to stimulate calcium excretion, increasing urinary calcium output."
+    evidence: "OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): 'It acts in the bones to inhibit osteoclast activity and in the kidneys to stimulate excretion of calcium. The combination of these two events lowers body fluid levels of calcium.'"
+  - source: anp
+    target: blood_volume
+    sign: "-"
+    causal_evidence: pharmacological
+    mechanism: "ANP-driven natriuresis and diuresis reduce total circulating volume; combined with vasodilation, ANP achieves net blood volume reduction."
+    evidence: "OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): 'ANP causes a reduction in blood volume and blood pressure, and reduces the concentration of Na+ in the blood.'"
+  - source: acetylcholinesterase_activity
+    target: synaptic_ach_concentration
+    sign: "-"
+    causal_evidence: pharmacological
+    mechanism: "AChE hydrolyzes acetylcholine into acetate and choline in the synaptic cleft, reducing ACh availability to bind nicotinic receptors at the motor end plate"
+    evidence: "OpenStax Biology 2e §bio-38.4 (38.4: Muscle Contraction and Locomotion): 'ACh is broken down by the enzyme acetylcholinesterase (AChE) into acetyl and choline. AChE resides in the synaptic cleft, breaking down ACh so that it does not remain bound to ACh receptors.'"
+  - source: respiratory_rate
+    target: alveolar_ventilation
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: "Breathing faster increases the total volume of air moved into and out of the alveoli per minute, directly raising alveolar ventilation (VA = RR x [VT - VD])."
+    evidence: "OpenStax Biology 2e §bio-39.3 (39.3: Breathing): 'The respiratory rate contributes to the alveolar ventilation, or how much air moves into and out of the alveoli.'"
+  - source: tidal_volume
+    target: alveolar_ventilation
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: "Larger tidal volume per breath increases total air moved through alveoli per minute, raising effective alveolar ventilation independently of rate."
+    evidence: "OpenStax Biology 2e §bio-39.3 (39.3: Breathing): 'There are two ways to keep the alveolar ventilation constant: increase the respiratory rate while decreasing the tidal volume of air per breath (shallow breathing), or decrease the respiratory rate while increasing the tidal volume per breath.' — showing tidal volume and respiratory rate both determine ventilation."
+  - source: arterial_pco2
+    target: plasma_bicarbonate
+    sign: "+"
+    mechanism: "CO2 diffuses into erythrocytes; carbonic anhydrase II catalyses CO2 + H2O → H2CO3 → H+ + HCO3-; the generated bicarbonate is exported to plasma via the chloride shift (band-3 Cl-/HCO3- exchanger), raising plasma bicarbonate concentration"
+    evidence: "OpenStax Biology 2e §bio-39.4 (39.4: Transport of Gases in Human Bodily Fluids): 'carbon dioxide diffuses into the red blood cells. Carbonic anhydrase (CA) within the red blood cells quickly converts the carbon dioxide into carbonic acid (H2CO3). Carbonic acid is an unstable intermediate molecule that immediately dissociates into bicarbonate ions and hydrogen (H+) ions… The newly synthesized bicarbonate ion is transported out of the red blood cell into the liquid component of the blood.' Rising PaCO2 increases the substrate flux through this reaction, generating more plasma bicarbonate."
+  - source: blood_carbon_monoxide
+    target: hemoglobin_o2_saturation
+    sign: "-"
+    causal_evidence: perturbation
+    mechanism: "Carbon monoxide binds hemoglobin with ~250-fold higher affinity than oxygen, occupying heme sites and competitively preventing O2 binding; raised blood CO concentration displaces oxygen from hemoglobin, reducing SaO2"
+    evidence: "OpenStax Biology 2e §bio-39.4 (39.4: Transport of Gases in Human Bodily Fluids): 'Carbon monoxide has a greater affinity for hemoglobin than oxygen. Therefore, when carbon monoxide is present, it binds to hemoglobin preferentially over oxygen. As a result, oxygen cannot bind to hemoglobin, so very little oxygen is transported through the body… as percent CO increases, the oxygen saturation of hemoglobin decreases.'"
+  - source: plasma_vitamin_k
+    target: thrombin
+    sign: "+"
+    causal_evidence: pharmacological
+    mechanism: "Vitamin K is required for hepatic gamma-carboxylation of glutamate residues on clotting factors II (prothrombin), VII, IX, and X; without sufficient vitamin K these zymogens are non-functional (PIVKA-II forms instead), reducing thrombin generation in the coagulation cascade."
+    evidence: "OpenStax Biology 2e §bio-40.2 (Components of the Blood): 'Many of the clotting factors require vitamin K to work, and vitamin K deficiency can lead to problems with blood clotting.'"
+  - source: plasma_allergen_specific_ige
+    target: plasma_serotonin
+    sign: "+"
+    causal_evidence: perturbation
+    mechanism: "Allergen-specific IgE bound to mast-cell Fc receptors; allergen cross-linking triggers mast cell degranulation, releasing both histamine and serotonin as inflammatory mediators"
+    evidence: "OpenStax Biology 2e §bio-42.4 (42.4: Disruptions in the Immune System): 'IgE molecules on mast cells bind the antigen via their variable domains and stimulate the mast cell to release the modified amino acids histamine and serotonin'"
+  - source: estradiol
+    target: plasma_calcium
+    sign: "+"
+    causal_evidence: pharmacological
+    mechanism: "Estrogen promotes intestinal calcium absorption and renal calcium conservation; its withdrawal at menopause decreases blood calcium levels, causing compensatory mobilisation of calcium from bone"
+    evidence: "OpenStax Biology 2e §bio-43.3 (43.3: Human Reproductive Anatomy and Gametogenesis): 'Estrogen is involved in calcium metabolism and, without it, blood levels of calcium decrease. To replenish the blood, calcium is lost from bone which may decrease the bone density and lead to osteoporosis.'"
+  - source: calcineurin_activity
+    target: t_cell_activation_rate
+    sign: "+"
+    causal_evidence: pharmacological
+    mechanism: "Calcineurin (protein phosphatase 3 catalytic subunit alpha) is required for T cell activation; its phosphatase activity dephosphorylates NFAT, enabling nuclear translocation and T cell function."
+    evidence: "Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-4.8.4 (Protein Folding In Vivo): 'calcineurin, an important protein (with phosphatase activity) in immune cells (T cells) required for T cell function'; the FKBP:FK506 and cyclophilin:cyclosporin complexes inhibit calcineurin and thereby prevent T cell activation."
+  - source: molecular_chaperone_activity
+    target: amyloid_protein_aggregate_amount
+    sign: "-"
+    causal_evidence: perturbation
+    mechanism: "Chaperones sequester exposed hydrophobic patches on nascent and misfolded proteins, preventing the intermolecular interactions that drive amyloid fibril and prefibril aggregate formation"
+    evidence: "Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-4.10.5 (Misfolding and Aggregation Summary): 'this process is usually prevented in the cell by the interaction of nascent protein forms with chaperones, which sequester exposed hydrophobic patches and prevent aggregation'"
+  - source: arterial_pco2
+    target: hemoglobin_o2_saturation
+    sign: "-"
+    causal_evidence: perturbation
+    mechanism: "CO2 binds covalently to Hb N-terminus forming a negatively charged carbamate that salt-bridges with Arg 141, stabilizing the T (deoxy) state and lowering Hb-O2 affinity; higher PaCO2 increases [H+] (carbonic acid equilibrium) further reinforcing T-state stabilization"
+    evidence: "Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-5.03.4 (Summary): 'Protons (decreasing pH), carbon dioxide, and bisphosphoglycerate, all allosteric ligands ... shift the binding curves of Hb for oxygen to the right, lowering the apparent affinity of Hb for oxygen' | textbook corroboration: Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-5.03.4 (Summary)"
+  - source: cgas_activity
+    target: cgamp_concentration
+    sign: "+"
+    causal_evidence: perturbation
+    mechanism: "cGAS catalyzes ATP + GTP -> 2',3'-cGAMP when bound to cytosolic dsDNA; more cGAS activity produces more cGAMP product"
+    evidence: "Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-5.04.1 (Recognition and Response in the Innate Immune System): 'dsDNA or dsRNA binds to the cGAS... On binding, the nucleic acid activates the synthesis of these small molecule messengers [cGAMP]'"
+  - source: cgamp_concentration
+    target: sting_activity
+    sign: "+"
+    causal_evidence: perturbation
+    mechanism: "cGAMP (the product of cGAS) binds to the STING effector protein, activating it to drive downstream antiviral gene expression including type I interferon"
+    evidence: "Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-5.04.1 (Recognition and Response in the Innate Immune System): 'The product of the synthase, cGAMP, binds to a downstream effector protein, STING, which ultimately leads to the synthesis of proteins involved in the antiviral response'"
+  - source: oas_activity
+    target: oligoadenylate_25_concentration
+    sign: "+"
+    causal_evidence: perturbation
+    mechanism: "OAS catalyzes ATP -> 2',5'-oligoadenylate (2-5A) when activated by dsRNA; more OAS activity produces more 2-5A"
+    evidence: "Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-5.04.1 (Recognition and Response in the Innate Immune System): dsRNA activates OAS synthase which produces the 2',5'-OA small molecule messenger; OAS and RNaseL are shown as sensor/synthase -> nucleotide messenger -> antiviral effector chain"
+  - source: oligoadenylate_25_concentration
+    target: rnasel_activity
+    sign: "+"
+    causal_evidence: perturbation
+    mechanism: "2',5'-oligoadenylate binds and activates RNaseL (2-5A-dependent ribonuclease), which then degrades viral RNA as an antiviral effector"
+    evidence: "Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-5.04.1 (Recognition and Response in the Innate Immune System): the figure overview shows OAS -> 2',5'-OA -> RNaseL as a nucleotide messenger -> antiviral effector pathway in humans; '2-5A-dependent ribonuclease' is the accepted name for RNaseL"
+  - source: il18
+    target: interferon_gamma
+    sign: "+"
+    causal_evidence: perturbation
+    mechanism: "IL-18 (IFN-gamma-inducing factor) stimulates immune cells to produce and secrete interferon-gamma; increased IL-18 leads to increased circulating IFN-gamma."
+    evidence: "Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-5.04.2 (Inflammasome): 'Active IL-18 leads to the increase of another cytokine, interferon-gamma'."
+  - source: macrophage_nlrp3_inflammasome_assembly
+    target: macrophage_caspase1_activity
+    sign: "+"
+    causal_evidence: perturbation
+    mechanism: "Assembled NLRP3 inflammasome recruits ASC, which brings procaspase-1 into proximity via CARD:CARD interactions, enabling autocatalytic cleavage of procaspase-1 to active caspase-1"
+    evidence: "Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-5.04.3 (The Active Inflammasome): 'Activated NLRP3 recruits the ASC Adaptor Protein, which leads to the recruitment and activation of procaspase 1'"
+  - source: cellular_potassium_uptake
+    target: macrophage_nlrp3_inflammasome_assembly
+    sign: "-"
+    causal_evidence: perturbation
+    mechanism: "Intracellular K+ depletion (K+ efflux, i.e. reduced net cellular uptake) is a proximate signal activating NLRP3; NEK7 binds NLRP3 after K+ efflux and triggers inflammasome assembly"
+    evidence: "Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-5.04.3 (The Active Inflammasome): 'Potassium ion decreases in cells caused by efflux can activate NLRP3 inflammasomes' and 'K+ efflux from the cell is an early signal and ... NEK7 ... binds to NLRP3 after potassium ion efflux and activates it'"
+  - source: enteropeptidase_activity
+    target: duodenal_trypsin_activity
+    sign: "+"
+    causal_evidence: perturbation
+    mechanism: "Enteropeptidase cleaves the trypsinogen activation peptide (TAP) from trypsinogen N-terminus, inducing a conformational change that yields active trypsin in the duodenum."
+    evidence: "Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-6.6.3 (Zymogen Activation): 'Once in the duodenum, enteropeptidase activates trypsinogen by removing the 7-10 amino acids trypsinogen activation peptide (TAP) from the N-terminal region... Removal of TAP induces a conformational change, resulting in active trypsin.'"
+  - source: duodenal_trypsin_activity
+    target: duodenal_chymotrypsin_activity
+    sign: "+"
+    causal_evidence: perturbation
+    mechanism: "Trypsin proteolytically cleaves and activates chymotrypsinogen to chymotrypsin in the duodenal lumen via zymogen cascade."
+    evidence: "Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-6.6.3 (Zymogen Activation): 'Once activated, trypsin will cleave and activate other zymogen proteases and lipases in the duodenum. These include the activation of elastase, chymotrypsin, carboxypeptidase, and lipase.'"
+  - source: duodenal_trypsin_activity
+    target: duodenal_elastase_activity
+    sign: "+"
+    causal_evidence: perturbation
+    mechanism: "Trypsin proteolytically cleaves and activates proelastase to elastase in the duodenal lumen."
+    evidence: "Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-6.6.3 (Zymogen Activation): 'Once activated, trypsin will cleave and activate other zymogen proteases and lipases in the duodenum. These include the activation of elastase, chymotrypsin, carboxypeptidase, and lipase.'"
+  - source: duodenal_trypsin_activity
+    target: duodenal_carboxypeptidase_activity
+    sign: "+"
+    causal_evidence: perturbation
+    mechanism: "Trypsin proteolytically cleaves and activates procarboxypeptidase to carboxypeptidase in the duodenal lumen."
+    evidence: "Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-6.6.3 (Zymogen Activation): 'Once activated, trypsin will cleave and activate other zymogen proteases and lipases in the duodenum. These include the activation of elastase, chymotrypsin, carboxypeptidase, and lipase.'"
+  - source: duodenal_trypsin_activity
+    target: duodenal_lipase_activity
+    sign: "+"
+    causal_evidence: perturbation
+    mechanism: "Trypsin proteolytically cleaves and activates prolipase to lipase in the duodenal lumen."
+    evidence: "Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-6.6.3 (Zymogen Activation): 'Once activated, trypsin will cleave and activate other zymogen proteases and lipases in the duodenum. These include the activation of elastase, chymotrypsin, carboxypeptidase, and lipase.'"
+  - source: plasma_heparin
+    target: antithrombin
+    sign: "+"
+    causal_evidence: pharmacological
+    mechanism: "Heparin binds a specific site on antithrombin III, inducing a conformational change that increases antithrombin's efficacy as a thrombin inhibitor; heparin also facilitates 1D diffusion of thrombin along the polyanion chain to find antithrombin, accelerating inhibition"
+    evidence: "Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-7.2.5 (Glycosaminoglycans - Heteropolysaccharides with Disaccharide Repeating Units): 'Heparin acts as a catalyst to accelerate the inhibition of the enzyme thrombin... It has a specific binding site for antithrombin III, which causes a conformational change in the protein, making it a more effective inhibitor'"
+production_edges:
+  # --- typed production relations promoted from cross-scale textbook relations (reviewed) ---
+  # NOTE: the lactotroph ↠ pituitary_prolactin_secretion production relation lives in
+  # williams_extracted.yaml (where the lactotroph_prl_secretion micro node is defined), so it
+  # composes only when that fragment is present and never dangles in systems-only compositions.
+  - source: lipolysis_rate
+    target: plasma_glycerol
+    sign: "+"
+    production_evidence: legacy-evidence-unclassified
+  - source: glutamate_dehydrogenase_activity
+    target: plasma_glutamate
+    sign: "+"
+    production_evidence: legacy-evidence-unclassified
+  - source: glutamate_dehydrogenase_activity
+    target: plasma_ammonia
+    sign: "-"
+    production_evidence: legacy-evidence-unclassified
+  - source: glutamate_dehydrogenase_activity
+    target: plasma_alpha_ketoglutarate
+    sign: "-"
+    production_evidence: legacy-evidence-unclassified
+  - source: s_cell_secretin_secretion
+    target: plasma_secretin
+    sign: "+"
+    production_evidence: legacy-evidence-unclassified
+  - source: i_cell_cck_secretion
+    target: plasma_cck
+    sign: "+"
+    production_evidence: legacy-evidence-unclassified
+  - source: pyruvate_dehydrogenase_activity
+    target: plasma_pyruvate
+    sign: "-"
+    production_evidence: legacy-evidence-unclassified
+  - source: muscle_lactate_dehydrogenase_activity
+    target: plasma_lactate
+    sign: "+"
+    production_evidence: legacy-evidence-unclassified
+  - source: intestinal_lactase_activity
+    target: plasma_glucose
+    sign: "+"
+    production_evidence: legacy-evidence-unclassified
+  - source: intestinal_lactase_activity
+    target: plasma_galactose
+    sign: "+"
+    production_evidence: legacy-evidence-unclassified
+  - source: sucrase_isomaltase_activity
+    target: plasma_glucose
+    sign: "+"
+    production_evidence: legacy-evidence-unclassified
+  - source: erythrocyte_carbonic_anhydrase_activity
+    target: plasma_bicarbonate
+    sign: "+"
+    production_evidence: legacy-evidence-unclassified
+  - source: caspase_1_activity
+    target: il1beta
+    sign: "+"
+    production_evidence: legacy-evidence-unclassified
+  # --- mast-cell degranulation releases preformed histamine (OpenStax anp-021) ---
+  - source: mast_cell_degranulation
+    target: plasma_histamine
+    sign: "+"
+    production_evidence: curated_source_statement
+    mechanism: mast cell degranulation -> exocytosis of preformed histamine-containing granules -> tissue/plasma histamine rises
+    evidence: '"When irritated or damaged, mast cells release histamine, an inflammatory mediator" — OpenStax Anatomy & Physiology 2e, section anp-021 (Connective Tissue)'

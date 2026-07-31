@@ -1,0 +1,237 @@
+# Cross-scale textbook relations: review outcome (step b). Promoted production lifts are in
+# benchmarks/human/systems/textbook_extracted.yaml (constitutive_edges); rejected ones are causal/
+# downward/non-constitutive and recorded here only.
+_about: Cross-scale textbook relations reviewed for promotion to constitutive lifts (step b). Promoted
+  = genuine production lifts added to textbook_extracted.yaml; rejected = causal/downward/non-constitutive
+  (kept here for record, NOT added).
+promoted_production:
+- lipolysis_rate ▷ plasma_glycerol (+)
+- glutamate_dehydrogenase_activity ▷ plasma_glutamate (+)
+- glutamate_dehydrogenase_activity ▷ plasma_ammonia (-)
+- glutamate_dehydrogenase_activity ▷ plasma_alpha_ketoglutarate (-)
+- glutamine_synthetase_activity ▷ plasma_glutamine (+)
+- glutamine_synthetase_activity ▷ plasma_ammonia (-)
+- glutamine_synthetase_activity ▷ plasma_glutamate (-)
+- s_cell_secretin_secretion ▷ plasma_secretin (+)
+- i_cell_cck_secretion ▷ plasma_cck (+)
+- pyruvate_dehydrogenase_activity ▷ plasma_pyruvate (-)
+- muscle_lactate_dehydrogenase_activity ▷ plasma_lactate (+)
+- myophosphorylase_activity ▷ muscle_glycogen_content (-)
+- muscle_glycogen_synthase_activity ▷ muscle_glycogen_content (+)
+- intestinal_lactase_activity ▷ plasma_glucose (+)
+- intestinal_lactase_activity ▷ plasma_galactose (+)
+- sucrase_isomaltase_activity ▷ plasma_glucose (+)
+- erythrocyte_carbonic_anhydrase_activity ▷ plasma_bicarbonate (+)
+- caspase_1_activity ▷ il1beta (+)
+promoted_but_deferred:
+- osteoblast_activity ▷ plasma_calcium
+rejected:
+- rel: adipose_hsl_activity->lipolysis_rate
+  reason: Target is a process RATE within adipose, not a produced macro substance pool; enzyme-drives-a-reaction-rate
+    is causal, not a constitutive production lift of a substance.
+- rel: telomere_length->cellular_replicative_capacity
+  reason: Telomere length is a permissive/causal structural buffer enabling divisions; it does not produce
+    or consume a substance pool, and the target is a capacity, not a macro substance.
+- rel: mtor_activity->cellular_autophagy_rate
+  reason: mTOR kinase regulatory signaling suppresses autophagy; this is cross-scale causal regulation
+    of a process rate, not production/consumption of a substance pool.
+- rel: vessel_injury->plasma_e_selectin
+  reason: vessel_injury is an injury/exposure stimulus, not a producer cell/enzyme; it does not synthesize
+    E-selectin — it causally triggers endothelial cells to express it (cross-scale causal cascade, not
+    constitutive production).
+- rel: macrophage_activation->plasma_e_selectin
+  reason: Activated macrophages produce cytokines, not E-selectin; the cytokines causally induce E-selectin
+    expression on endothelial cells. The micro does not produce the macro substance — this is cross-scale
+    causal induction, not a production lift.
+- rel: plasma_anandamide->food_intake
+  reason: Causal endocannabinoid signaling (anandamide binds CB receptors to stimulate appetite); the
+    micro does not produce/consume the macro substance 'food_intake' (which is a behavioral rate, not
+    a substance) - not a constitutive production lift.
+- rel: plasma_androgen->sebaceous_gland_sebum_secretion_rate
+  reason: Downward (organ_system hormone -> organ process) causal endocrine stimulation; androgen does
+    not itself produce sebum, it triggers the gland - not production.
+- rel: pth->osteoclast_activity
+  reason: PTH causally stimulates osteoclast resorptive activity; it does not produce osteoclasts or the
+    activity quantity. Causal cross-scale, not production.
+- rel: plasma_calcitonin->osteoclast_activity
+  reason: Hormone inhibits an activity; regulatory/causal, the micro target is not a substance calcitonin
+    produces or consumes.
+- rel: plasma_calcitonin->renal_calcium_reabsorption
+  reason: Hormone modulates a tubular transport rate; causal regulation, not production/consumption of
+    the target substance.
+- rel: intracellular_calcium->skeletal_muscle_contraction_rate
+  reason: Cytosolic Ca triggers contraction (troponin); causal trigger of a process rate, not production
+    of a substance pool.
+- rel: skeletal_muscle_atp->skeletal_muscle_contraction_rate
+  reason: ATP enables cross-bridge cycling; causal/permissive, not the micro producing the macro substance.
+- rel: skeletal_muscle_lactate->skeletal_muscle_contraction_rate
+  reason: Lactate/pH impairs contraction; causal influence, not production/consumption of the target.
+- rel: motor_neuron_firing_rate->skeletal_muscle_sarcoplasmic_calcium
+  reason: Neural firing triggers SR Ca release via EC coupling; causal, the neuron does not produce the
+    calcium pool.
+- rel: skeletal_muscle_sarcoplasmic_calcium->skeletal_muscle_tension
+  reason: Ca drives cross-bridge tension; causal mechanism, not production of a substance.
+- rel: motor_neuron_firing_rate->skeletal_muscle_tension
+  reason: Firing frequency drives tension via summation/tetanus; causal, not production.
+- rel: motor_neuron_firing_rate->skeletal_muscle_tone
+  reason: Tonic neural drive maintains muscle tone; causal regulation, not production/consumption of a
+    macro substance.
+- rel: estradiol->uterine_smooth_muscle_mass
+  reason: Causal trophic hormone effect (estrogen stimulates myometrial hyperplasia/hypertrophy), not
+    the micro producing/secreting the macro substance; estradiol does not constitute uterine muscle mass.
+- rel: calcitriol->intestinal_calcium_absorption
+  reason: Causal hormonal regulation of an absorption process; calcitriol neither produces nor consumes
+    the target (a transport rate, not a substance the hormone synthesizes), so not a production lift.
+- rel: intestinal_calcium_absorption->plasma_calcium
+  reason: Causal transport flux (absorption rate raises the calcium pool); the intestine absorbs dietary
+    calcium, it does not produce/synthesize the calcium substance, so this is not a production lift.
+- rel: free_t3->myocardial_contractility
+  reason: Purely causal hormone action (T3 acts on cardiomyocytes as a positive inotrope); T3 does not
+    produce/secrete 'contractility', so it is not a production constitutive lift.
+- rel: core_temperature->myocardial_contractility
+  reason: Purely causal cross-scale effect (temperature alters cross-bridge enzyme kinetics); core_temperature
+    does not produce/secrete myocardial contractility, which is not a substance at all.
+- rel: mast_cell_degranulation->capillary_permeability
+  reason: 'Causal paracrine effect: mast-cell mediators act on vasculature to raise permeability; the
+    mast cell does not produce ''capillary permeability'' (not a secreted substance), so not a production
+    lift.'
+- rel: mast_cell_degranulation->mean_arterial_pressure
+  reason: Causal hemodynamic effect (vasodilation/plasma extravasation lowers BP), not production; mast
+    cells do not produce/secrete mean arterial pressure.
+- rel: arterial_po2->bronchiole_diameter
+  reason: Causal/reflex regulation of airway caliber by blood O2; PO2 does not produce or constitute bronchiole
+    diameter.
+- rel: erythrocyte_2_3_bpg->hemoglobin_o2_saturation
+  reason: 'Allosteric/causal modulation of Hb-O2 affinity, not production: BPG does not synthesize or
+    consume hemoglobin oxygen saturation (a binding-state quality, not a substance the micro produces/consumes).'
+- rel: sympathetic_tone->salivation_rate
+  reason: Autonomic neural reflex regulating a glandular secretion rate; sympathetic tone does not produce
+    or consume saliva as a substance, so this is purely causal, not a constitutive production lift.
+- rel: plasma_osmolality->salivation_rate
+  reason: 'Downward (organ_system->organ) regulatory/causal effect: osmolality modulates salivary gland
+    secretion via thirst/dehydration; osmolality neither produces nor consumes saliva, so not a production
+    lift.'
+- rel: plasma_cck->pancreatic_bicarbonate_secretion
+  reason: CCK enhancing secretin-driven bicarbonate output is a causal hormone action (organ_system->organ),
+    not CCK being produced by the target.
+- rel: plasma_bile_acids->intestinal_lipid_emulsification
+  reason: Bile salts emulsifying lipids is a causal/functional effect, not production of bile acids by
+    the target; downward organ_system->organ.
+- rel: epinephrine->myocardial_contractility
+  reason: Beta-1 adrenergic positive inotropy is causal signaling, not the heart producing epinephrine.
+- rel: epinephrine->hepatic_gluconeogenesis
+  reason: cAMP/PKA induction of gluconeogenic flux is causal hormone signaling, not production of epinephrine.
+- rel: plasma_cck->gallbladder_bile_secretion
+  reason: CCK triggering gallbladder contraction is a causal action, not production of CCK by the gallbladder.
+- rel: plasma_cck->hypothalamic_appetite_drive
+  reason: CCK acting centrally as a satiety signal is causal neuroendocrine signaling, not production.
+- rel: plasma_insulin->muscle_protein_synthesis_rate
+  reason: Insulin promoting muscle protein synthesis is causal hormone signaling, not the muscle producing
+    insulin.
+- rel: plasma_insulin->muscle_glycogen_content
+  reason: Insulin stimulating glycogen storage is a causal anabolic action, not production of insulin
+    by the target.
+- rel: afferent_arteriolar_tone->gfr
+  reason: Hemodynamic causal relation (arteriolar constriction lowers glomerular filtration); GFR is a
+    flow rate, not a substance the micro produces/consumes — not a production lift.
+- rel: cardiac_output->left_atrial_pressure
+  reason: Pure causal hemodynamic backpressure relation; cardiac output does not produce/secrete left
+    atrial pressure as a substance — not constitutive production.
+- rel: angiotensin_II->gfr
+  reason: Purely causal cross-scale signaling (vasoconstriction raising filtration pressure); AngII does
+    not produce GFR, and GFR is a process rate, not a substance.
+- rel: testosterone->spermatogenesis_rate
+  reason: Hormone causally driving a process rate; testosterone does not produce/secrete spermatogenesis
+    as a substance.
+- rel: estradiol->endometrial_thickness
+  reason: Hormone causally stimulating tissue growth; not production of a macro substance the source itself
+    makes.
+- rel: progesterone->endometrial_thickness
+  reason: Hormone causally maintaining endometrial thickness; not a production/secretion of a substance
+    by the source.
+- rel: plasma_beta_hcg->luteal_progesterone_secretion
+  reason: hCG is a signal that directs the corpus luteum to secrete progesterone; hCG does not itself
+    produce progesterone secretion (causal endocrine signaling, not a production lift).
+- rel: progesterone->uterine_contractility
+  reason: Hormone causally inhibiting myometrial contraction; not production/consumption of a substance.
+- rel: plasma_oxytocin->uterine_contractility
+  reason: Hormone causally stimulating contractions via myometrial receptors; not production of a substance.
+- rel: plasma_prostaglandin_e2->uterine_contractility
+  reason: Hormone causally enhancing contractile strength; not production/consumption of a macro substance.
+- rel: uterine_contractility->plasma_oxytocin
+  reason: 'Ferguson reflex: cervical/uterine stretch reflexively triggers pituitary oxytocin release;
+    a neuroendocrine reflex, not the uterus producing oxytocin (explicitly a REJECT pattern).'
+- rel: plasma_prolactin->mammary_milk_production_rate
+  reason: 'Causal hormonal stimulation, not production: prolactin is a signaling hormone acting on lactocytes
+    to drive milk synthesis; it does not itself produce/secrete the macro substance, and the direction
+    is organ_system->organ (not finer producer->coarser substance).'
+- rel: mitochondrial_complex_i_activity->mitochondrial_proton_gradient
+  reason: 'Causal, not production: Complex I pumps/relocates protons to establish an electrochemical gradient
+    (a physical state, not a synthesized substance); also scale is inverted (cellular source coarser than
+    subcellular target).'
+- rel: mitochondrial_complex_iii_activity->mitochondrial_proton_gradient
+  reason: A proton electrochemical gradient is not a substance pool the enzyme synthesizes; complex III
+    is one causal contributor pumping protons, not a constitutive producer of a discrete macro substance.
+- rel: mitochondrial_proton_gradient->mitochondrial_atp_synthase_activity
+  reason: 'Pure causal: the gradient drives synthase activity (chemiosmosis); it does not produce or secrete
+    the enzyme.'
+- rel: plasma_glucose->muscle_glycogen_content
+  reason: Downward macro->tissue substrate effect; plasma glucose is the substrate, not the producer of
+    glycogen (glycogen synthase is). Causal, not constitutive production.
+- rel: intracellular_adp->mitochondrial_respiratory_chain_activity
+  reason: ADP is an energy-charge regulatory signal that activates the chain; it does not produce the
+    enzyme complex. Causal regulation.
+- rel: intracellular_adp->isocitrate_dehydrogenase_activity
+  reason: Allosteric/energy-state activation of an enzyme, not production of the macro. Causal regulation.
+- rel: intracellular_adp->pyruvate_dehydrogenase_activity
+  reason: ADP-mediated activation of PDH is regulatory signaling, not the micro producing the macro. Causal
+    regulation.
+- rel: epinephrine->camp_level
+  reason: Epinephrine is an upstream hormone signal raising cAMP via adenylyl cyclase; it does not itself
+    produce cAMP. Downward (organ_system->subcellular) causal signaling, not production.
+- rel: pka_activity->phosphorylase_kinase_activity
+  reason: PKA phosphorylates/activates phosphorylase kinase; causal post-translational regulation, not
+    production/secretion of the enzyme.
+- rel: pka_activity->muscle_glycogen_synthase_activity
+  reason: PKA phosphorylates and inhibits another enzyme's activity; this is cross-scale regulation, not
+    production of a substance.
+- rel: plasma_glucose->hepatic_glycogen_content
+  reason: Substance-pool to substance-pool flux (substrate level driving a store), downward organ_system->organ;
+    not a producer enzyme/cell making the macro substance.
+- rel: hepatic_glycogen_content->plasma_glucose
+  reason: Glycogen store is a substance pool, not a producer cell/enzyme; glucose release is causal glycogenolytic
+    flux between two substance pools, not a constitutive production lift.
+- rel: plasma_iodide->thyroid_follicular_t4_secretion
+  reason: Substrate availability driving a secretion rate, downward organ_system->cellular; the micro
+    node does not produce iodide. Causal, not production.
+- rel: gastric_acid_secretion->salivary_amylase_activity
+  reason: Acid denatures/inactivates an enzyme; cross-scale inhibition of enzyme activity, not production/consumption
+    of a substance.
+- rel: intestinal_lipid_emulsification->pancreatic_lipase_activity
+  reason: Emulsification increases lipase efficiency (surface area); causal modulation of enzyme activity,
+    not production of a substance.
+- rel: pancreatic_lipase_activity->plasma_chylomicron
+  reason: Lipase hydrolyzes triglycerides upstream; chylomicrons are assembled by enterocytes, not produced
+    by lipase. Multi-step causal chain, not a direct production lift.
+- rel: pth->osteoblast_activity
+  reason: Downward macro->micro causal regulation (hormone PTH modulating osteoblast cell activity), not
+    production; PTH does not produce/consume the substance 'osteoblast_activity'.
+- rel: uterine_contraction_rate->plasma_oxytocin
+  reason: Neuroendocrine positive-feedback reflex (uterine/cervical stretch -> posterior pituitary releases
+    oxytocin); the uterus does not produce/secrete oxytocin, so this is causal across scales, not a production
+    lift.
+- rel: skeletal_muscle_contraction_rate->venous_return
+  reason: Mechanical muscle-pump compression of veins is a causal hemodynamic effect across scales; venous
+    return is not a substance produced/secreted by muscle contraction, so this is not a production lift.
+- rel: il1beta->macrophage_activation
+  reason: 'Downward (organ_system organ_system->cellular) causal signaling: circulating IL-1beta recruits/activates
+    macrophages; the macrophage does not produce the macro substance, so this is causal across scales,
+    not a production lift.'
+- rel: dietary_linoleic_acid_intake->plasma_arachidonic_acid
+  reason: 'Causal precursor-supply, not production: dietary linoleic acid (18:2 n-6) is a substrate/forcing
+    input that is converted by elongases/desaturases into the distinct molecule arachidonic acid; the
+    intake node does not itself produce/constitute plasma AA.'
+- rel: dietary_linolenic_acid_intake->plasma_epa
+  reason: Source is a dietary/boundary intake of the precursor ALA, not the cell/enzyme that produces
+    EPA; the actual producer (elongases/desaturases) is absent, so this is causal substrate supply across
+    scales, not the micro literally producing the macro substance.

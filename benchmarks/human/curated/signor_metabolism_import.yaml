@@ -1,0 +1,250 @@
+# SIGNOR import: steroidogenesis / amino-acid / pyrimidine / sterol metabolism
+# *** DRAFT FOR REVIEW (imported, gated) ***
+# Auto-imported 22 within-scale signed causal edges + 2 new nodes.
+# Every edge: do(source)->Δtarget, validated by fan-out agents (ontology IDs vs OBO,
+# PMID existence+concordance vs PubMed, sign, scale). Cross-scale/duplicate/pituitary-
+# mediation-conflicting candidates were dropped. causal_evidence carries the admissible class.
+name: signor_metabolism_import
+description: Within-scale signed causal edges imported from SIGNOR (Apr 2026, direct + signed + cited human interactions),
+  anchored to existing PhysioMap metabolite/steroid nodes. Steroid biosynthesis cascade (pregnenolone/progesterone/17-OH/androstenedione/DHEA/cortisol
+  precursors), amino-acid and pyrimidine conversions, sterol and catecholamine steps. Each edge carries its SIGNOR id + PMID
+  (existence+concordance checked) and causal_evidence class.
+nodes:
+- id: plasma_uridine
+  label: plasma uridine concentration
+  scale: organ_system
+  entity_iri: CHEBI:16704
+  quality_iri: PATO:0000033
+- id: skeletal_muscle_amp
+  label: skeletal muscle intracellular AMP concentration
+  scale: cellular
+  entity_iri: CHEBI:16027
+  quality_iri: PATO:0000033
+causal_edges:
+- source: plasma_17_hydroxypregnenolone
+  target: plasma_17ohp
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'precursor of: 3beta-HSD/HSD3B isomerase converts 17alpha-hydroxypregnenolone (delta-5) to 17alpha-hydroxyprogesterone
+    (delta-4)'
+  evidence: 'SIGNOR-268639: 17alpha-hydroxypregnenolone (CHEBI:28750) up-regulates 17alpha-hydroxyprogesterone (CHEBI:17252)
+    via ''precursor of'' mechanism (3beta-HSD enzymatic conversion). PMID 2139411 (Lorence et al. 1990 Endocrinology 126:2493):
+    resolves OK; abstract explicitly confirms ''catalyzed the conversion of 17 alpha-hydroxypregnenolone to 17 alpha-hydroxyprogesterone''
+    — concordant. Both nodes organ_system scale (plasma concentrations). INDRA: unreachable. *** DRAFT FOR REVIEW (imported)
+    ***'
+- source: plasma_phenylalanine
+  target: plasma_tyrosine
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'precursor of: phenylalanine hydroxylase (PAH) converts L-phenylalanine to L-tyrosine using O2 and tetrahydrobiopterin
+    cofactors'
+  evidence: 'SIGNOR-264172: phenylalanine (CHEBI:28044) up-regulates tyrosine (CHEBI:18186) via ''precursor of'' mechanism
+    (PAH enzymatic conversion). PMID/citation NBK536726 (NCBI Bookshelf: ''Pharmacological Treatment of Parkinson''s Disease''):
+    this is an NCBI Bookshelf ID, not a PubMed PMID — pmid_ok=false. Mechanism is well-established biochemistry (PAH, phenylalanine
+    hydroxylase). Both nodes organ_system scale. INDRA: unreachable. *** DRAFT FOR REVIEW (imported) ***'
+- source: plasma_dopa
+  target: synaptic_dopamine_concentration
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'precursor of: L-DOPA is decarboxylated to dopamine by aromatic L-amino acid decarboxylase (AADC/DDC) in pre-synaptic
+    neurons'
+  evidence: 'SIGNOR-264174: L-dopa (CHEBI:15765) up-regulates dopamine (CHEBI:18243) via ''precursor of'' mechanism (AADC
+    decarboxylation). PMID/citation NBK536726 (NCBI Bookshelf: ''Pharmacological Treatment of Parkinson''s Disease''): this
+    is an NCBI Bookshelf ID, not a PubMed PMID — pmid_ok=false. Mechanism is well-established pharmacology (basis of Parkinson''s
+    levodopa therapy). Source: plasma_dopa (organ_system); target: synaptic_dopamine_concentration (organ_system). Both organ_system
+    scale. INDRA: unreachable. *** DRAFT FOR REVIEW (imported) ***'
+- source: progesterone
+  target: plasma_17ohp
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'precursor of: CYP17A1 (P450c17) 17alpha-hydroxylates progesterone to form 17alpha-hydroxyprogesterone'
+  evidence: 'SIGNOR-268649: progesterone (CHEBI:17026) up-regulates 17alpha-hydroxyprogesterone (CHEBI:17252) via ''precursor
+    of'' mechanism (CYP17A1 17alpha-hydroxylase). PMID 17192295 (Rosa et al. 2007 J Clin Endocrinol Metab 92:1000): resolves
+    OK; title ''P450c17 deficiency: clinical and molecular characterization'' — explicitly states ''P450c17 catalyzes two
+    reactions: the 17alpha-hydroxylation of progesterone and pregnenolone'', concordant. Both nodes organ_system scale. INDRA:
+    unreachable. *** DRAFT FOR REVIEW (imported) ***'
+- source: plasma_androstenedione
+  target: testosterone
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'precursor of: 17beta-HSD3 (HSD17B3) reduces androstenedione to testosterone in testicular Leydig cells; HSD17B12
+    also performs this conversion'
+  evidence: 'SIGNOR-268665: androst-4-ene-3,17-dione (CHEBI:16422) up-regulates testosterone (CHEBI:17347) via ''precursor
+    of'' mechanism (17beta-HSD3). PMID 16166196 (Luu-The et al. 2006 Mol Endocrinol 20:437): resolves OK; abstract states
+    ''17beta-HSD3, the enzyme involved in the biosynthesis of the androgen testosterone...from androstenedione in the testis''
+    — concordant. Both nodes organ_system scale. INDRA: unreachable. *** DRAFT FOR REVIEW (imported) ***'
+- source: plasma_7_dehydrocholesterol
+  target: plasma_total_cholesterol
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'precursor of: sterol delta7-reductase (DHCR7) reduces the delta-7 double bond in 7-dehydrocholesterol to produce
+    cholesterol'
+  evidence: 'SIGNOR-267250: cholesta-5,7-dien-3beta-ol / 7-dehydrocholesterol (CHEBI:17759) up-regulates cholesterol (CHEBI:16113)
+    via ''precursor of'' mechanism (DHCR7). PMID 9634533 (Wassif et al. 1998 Am J Hum Genet 63:55): resolves OK; title ''Mutations
+    in the human sterol delta7-reductase gene...cause Smith-Lemli-Opitz syndrome'' — confirms DHCR7 converts 7-DHC to cholesterol;
+    loss-of-function causes elevated 7-DHC and low cholesterol, concordant (genetic LoF = do() evidence). Both nodes organ_system
+    scale. INDRA: unreachable. *** DRAFT FOR REVIEW (imported) ***'
+- source: plasma_11_deoxycortisol
+  target: cortisol
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'precursor of: CYP11B1 (11beta-hydroxylase) catalyzes 11-hydroxylation of 11-deoxycortisol to cortisol in adrenal
+    zona fasciculata'
+  evidence: 'SIGNOR-268675: 11-deoxycortisol (CHEBI:28324) up-regulates cortisol (CHEBI:17650) via ''precursor of'' mechanism
+    (CYP11B1). PMID 9814482 (Mulatero et al. 1998 J Clin Endocrinol Metab 83:3996): resolves OK; abstract explicitly states
+    ''recombinant CYP11B genes encode enzymes that can catalyze conversion of 11-deoxycortisol to cortisol'' — concordant.
+    Both nodes organ_system scale. INDRA: unreachable. *** DRAFT FOR REVIEW (imported) ***'
+- source: tissue_ceramide
+  target: tissue_sphingomyelin
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: ceramide is a biosynthetic precursor of sphingomyelin; CERT protein transfers ceramide from ER to Golgi for sphingomyelin
+    synthase (SMS)-catalyzed conversion
+  evidence: 'SIGNOR-268497 (curated_mechanistic); PMID 18184806 (Kudo et al. 2008 PNAS 105:488-93, ''Structural basis for
+    specific lipid recognition by CERT...'', abstract: ''ceramide is synthesized in the ER and transferred to the Golgi apparatus
+    for conversion to sphingomyelin'') — resolves OK, concordant YES. INDRA: 40 statements ceramide->sphingomyelin incl. 30
+    Conversion + 2 Activation. *** DRAFT FOR REVIEW (imported) ***'
+- source: myoadenylate_deaminase_activity
+  target: skeletal_muscle_amp
+  sign: '-'
+  causal_evidence: genetic_lof_gof
+  mechanism: AMP deaminase 1 (AMPD1) catalyzes AMP -> IMP + NH3 in skeletal muscle, reducing intramuscular AMP concentration
+  evidence: 'SIGNOR-269772 (curated_mechanistic); PMID 1631143 (Morisaki et al. 1992 PNAS 89:6457, ''Molecular basis of AMP
+    deaminase deficiency in skeletal muscle'') — resolves OK, concordant YES (AMPD1 deficiency -> AMP deamination absent ->
+    AMP accumulates in muscle; natural LoF confirms do(AMPD1 KO) -> muscle AMP ↑ i.e. AMPD1 activity -> AMP ↓). INDRA: no
+    matching statements found for AMPD1/AMP pair. *** DRAFT FOR REVIEW (imported) ***'
+- source: plasma_tyrosine
+  target: plasma_dopa
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: tyrosine hydroxylase (TH) hydroxylates L-tyrosine to L-DOPA in dopaminergic neurons; plasma tyrosine is the substrate
+    pool
+  evidence: 'SIGNOR-264173 (curated_mechanistic); PMID NBK536726 (NCBI Bookshelf — NOT a PubMed PMID; pmid_ok=false) — sentence:
+    ''L-tyrosine is converted into L-DOPA through hydroxylation at the phenol ring by tyrosine hydroxylase (TH)''. INDRA:
+    not queried (timeout). *** DRAFT FOR REVIEW (imported) ***'
+- source: plasma_estrone
+  target: estradiol
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 17β-hydroxysteroid dehydrogenase type 12 (HSD17B12) reduces estrone (E1) to 17β-estradiol (E2)
+  evidence: 'SIGNOR-268661 (curated_mechanistic); PMID 16166196 (Luu-The et al. 2006 Mol Endocrinol 20:437-43, ''Characterization
+    of type 12 17beta-hydroxysteroid dehydrogenase, an isoform of type 3 17beta-HSD responsible for estradiol formation'')
+    — resolves OK, concordant YES (directly characterizes E1->E2 conversion). INDRA: 31 statements (22 Conversion, 2 Activation)
+    — strong concordant support. *** DRAFT FOR REVIEW (imported) ***'
+- source: plasma_17_hydroxypregnenolone
+  target: plasma_dhea
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: P450c17 (CYP17A1) lyase activity cleaves C17-20 bond of 17α-hydroxypregnenolone to produce dehydroepiandrosterone
+    (DHEA)
+  evidence: 'SIGNOR-268647 (curated_mechanistic); PMID 17192295 (Guran et al. 2007 J Clin Endocrinol Metab 92:1000-7, ''P450c17
+    deficiency: clinical and molecular characterization'') — resolves OK, concordant YES (''P450c17 catalyzes two reactions:
+    17α-hydroxylation...and subsequent cleavage of C17-20 to produce DHEA and androstenedione''). INDRA: not queried (timeout).
+    *** DRAFT FOR REVIEW (imported) ***'
+- source: progesterone
+  target: plasma_deoxycorticosterone
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: CYP21A2 (P450c21, steroid 21-hydroxylase) catalyzes 21-hydroxylation of progesterone to 11-deoxycorticosterone
+  evidence: 'SIGNOR-268631 (curated_mechanistic); PMID 25855791 (Pallan et al. 2015 J Biol Chem 290:13128-43, ''Human Cytochrome
+    P450 21A2, the Major Steroid 21-Hydroxylase: STRUCTURE OF THE ENZYME·PROGESTERONE SUBSTRATE COMPLEX'') — resolves OK,
+    concordant YES (''catalyzes the 21-hydroxylation of progesterone...to form 11-deoxycorticosterone''). INDRA: not queried
+    (timeout). *** DRAFT FOR REVIEW (imported) ***'
+- source: plasma_uracil
+  target: plasma_deoxyuridine
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'precursor of: uracil + deoxyribose-1-phosphate → 2''-deoxyuridine via UPP2 reverse reaction (thymidine phosphorylase
+    / uridine phosphorylase 2)'
+  evidence: 'SIGNOR-268090 SIGNOR-280536; PMID 21855639 (OK: A novel structural mechanism for redox regulation of uridine
+    phosphorylase 2 activity, Roosild et al., J Struct Biol 2011) — paper confirms UPP catalyzes reversible conversion of
+    uridine to uracil and ribose-1-phosphate; the reverse reaction (uracil + deoxyribose-1-P → 2''-deoxyuridine) is biochemically
+    supported and concordant with the substrate-product claim; do(plasma_uracil UP) → plasma_deoxyuridine UP via UPP2-catalyzed
+    nucleoside synthesis direction. Concordant with pyrimidine salvage pathway biochemistry. *** DRAFT FOR REVIEW (imported)
+    ***'
+- source: plasma_serine
+  target: plasma_glycine
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'precursor of: L-serine → glycine via serine hydroxymethyltransferase (SHMT); the gamma-carbon is transferred
+    to tetrahydrofolate, releasing glycine and 5,10-methylene-THF'
+  evidence: 'SIGNOR-268222; PMID 32439610 (OK: Reprogramming of serine, glycine and one-carbon metabolism in cancer, Li &
+    Ye, BBA Mol Basis Dis 2020) — paper confirms SHMT1/SHMT2 catalyze serine → glycine with one-carbon transfer to THF; biochemistry
+    is universal (not cancer-specific); do(plasma_serine UP) → plasma_glycine UP is supported by the metabolic flux. The PMID
+    is primarily a cancer metabolism review but the underlying biochemistry described is normal physiology. Concordant with
+    the substrate-product claim. *** DRAFT FOR REVIEW (imported) ***'
+- source: plasma_androstenedione
+  target: plasma_estrone
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'precursor of: androst-4-ene-3,17-dione (androstenedione) → estrone via aromatase (CYP19A1); cytochrome P450
+    aromatase converts the androgen to an estrogen in the final step of estrogen biosynthesis'
+  evidence: 'SIGNOR-268668; PMID 27702664 (OK: Impact of R264C and R264H polymorphisms in human aromatase function, Baravalle
+    et al., J Steroid Biochem Mol Biol 2017) — paper directly studies human CYP19A1 (aromatase) converting androgens including
+    androstenedione to estrogens; confirms biochemical pathway and supports the substrate-product causal claim; do(plasma_androstenedione
+    UP) → plasma_estrone UP via CYP19A1-catalyzed aromatization. Concordant. Existing map has aromatase_activity → plasma_estrone
+    (+) but no direct metabolite-to-metabolite edge. *** DRAFT FOR REVIEW (imported) ***'
+- source: plasma_uracil
+  target: plasma_uridine
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'precursor of: uracil + ribose-1-phosphate → uridine via UPP (uridine phosphorylase) reverse reaction; UPP2 catalyzes
+    the reversible interconversion of uridine and uracil'
+  evidence: 'SIGNOR-280528; PMID 21855639 (OK: A novel structural mechanism for redox regulation of uridine phosphorylase
+    2 activity, Roosild et al., J Struct Biol 2011) — paper confirms UPP catalyzes ''reversible conversion of uridine to uracil
+    and ribose-1-phosphate''; the reverse reaction (uracil + R1P → uridine) is explicitly described and biochemically supported;
+    do(plasma_uracil UP) → plasma_uridine UP. Concordant with pyrimidine salvage pathway biochemistry. *** DRAFT FOR REVIEW
+    (imported) ***'
+- source: plasma_dhea
+  target: plasma_androstenedione
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'precursor of: dehydroepiandrosterone (DHEA) → androst-4-ene-3,17-dione (androstenedione) via 3β-hydroxysteroid
+    dehydrogenase/Δ5→4-isomerase (3β-HSD); the enzyme dehydrogenates and isomerizes the Δ5 steroid DHEA to the Δ4 steroid
+    androstenedione'
+  evidence: 'SIGNOR-268641; PMID 2139411 (OK: Human 3β-hydroxysteroid dehydrogenase/delta5→4isomerase from placenta, Lorence
+    et al., Endocrinology 1990) — paper confirms expression of human 3β-HSD that catalyzes dehydrogenation/isomerization of
+    C21 and C19 steroids including DHEA → androstenedione; do(plasma_dhea UP) → plasma_androstenedione UP via 3β-HSD. Concordant.
+    Existing map has plasma_dhea → plasma_androgen (+) but not the direct plasma_dhea → plasma_androstenedione edge. *** DRAFT
+    FOR REVIEW (imported) ***'
+- source: norepinephrine
+  target: epinephrine
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'precursor of: noradrenaline (norepinephrine) → adrenaline (epinephrine) via phenylethanolamine N-methyltransferase
+    (PNMT) N-methylation in adrenal medulla chromaffin cells'
+  evidence: 'SIGNOR-264183; PMID 7961964 (OK: Functional and high level expression of human dopamine beta-hydroxylase in transgenic
+    mice, Kobayashi et al., J Biol Chem 1994) — NOTE: PMID IS NOT CONCORDANT. The SIGNOR sentence correctly describes PNMT-mediated
+    N-methylation of noradrenaline to adrenaline, but the cited PMID (7961964) is about dopamine beta-hydroxylase (DBH, dopamine
+    → norepinephrine), not PNMT (norepinephrine → adrenaline). The biochemistry of the edge is well-established (PNMT, adrenal
+    medulla pathway) but the specific PMID is wrong. Edge attaches to existing nodes norepinephrine (CHEBI:18357) and epinephrine
+    (CHEBI:28918) using physiomap canonical ChEBI IDs (SIGNOR uses CHEBI:33569/CHEBI:33568 generic forms). *** DRAFT FOR REVIEW
+    (imported) ***'
+- source: plasma_17ohp
+  target: plasma_androstenedione
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: CYP17A1 17,20-lyase cleaves the C17-C20 bond of 17alpha-hydroxyprogesterone to yield androstenedione; more substrate
+    raises product (enzyme kinetics, normal adrenal and gonadal steroidogenesis)
+  evidence: 'SIGNOR-268650 (mechanism: precursor of) | PMID:17192295 resolved (J Clin Endocrinol Metab 2007, P450c17 deficiency)
+    — concordant: describes dual 17α-hydroxylase/17,20-lyase activity of CYP17A1; deficiency abolishes both reactions, confirming
+    17OHP is the precursor for androstenedione via this enzyme | *** DRAFT FOR REVIEW (imported) ***'
+- source: plasma_deoxycorticosterone
+  target: plasma_corticosterone
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: CYP11B2 (aldosterone synthase) hydroxylates 11-deoxycorticosterone at C11 to produce corticosterone in the adrenal
+    cortex; more precursor raises product
+  evidence: 'SIGNOR-268673 (mechanism: precursor of) | PMID:33117906 resolved (Int J Neonatal Screen 2020, CAH newborn screening
+    review) — concordant: states CYP11B2 synthesizes aldosterone from 11-deoxycorticosterone through corticosterone, confirming
+    11-DOC is the direct precursor of corticosterone | *** DRAFT FOR REVIEW (imported) ***'
+- source: plasma_17ohp
+  target: plasma_11_deoxycortisol
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: CYP21A2 (21-hydroxylase) catalyses 21-hydroxylation of 17alpha-hydroxyprogesterone to 11-deoxycortisol; raising
+    17OHP substrate increases 11-deoxycortisol product
+  evidence: 'SIGNOR-268642 (mechanism: precursor of) | PMID:25855791 resolved (J Biol Chem 2015, CYP21A2 structure and mechanism)
+    — concordant: CYP21A2 is the major steroid 21-hydroxylase that catalyzes the 21-hydroxylation of 17alpha-hydroxyprogesterone
+    to form 11-deoxycortisol; CYP21A2 deficiency causes 17OHP accumulation, confirming the precursor-product relationship
+    | *** DRAFT FOR REVIEW (imported) ***'

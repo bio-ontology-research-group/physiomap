@@ -1,0 +1,62 @@
+# =============================================================================
+# PATO quality -> measurement kind (extensive / ratio / rate / intensive)
+# =============================================================================
+# The *composition* semantics of a cross-scale constitutive (determination) edge is not a
+# free per-edge choice: it is fixed by the MEASUREMENT TYPE of the macro variable's PATO
+# quality. This file curates that typing so the determination relation (and its sign) is
+# *derived*, not asserted (physiomap_core/quantity.py).
+#
+#   extensive  -- additive over part_of: whole = sum of parts (mass, volume, amount).
+#                 Basis of `aggregation` constitutive edges (sign +). [Krantz-Luce-Suppes-
+#                 Tversky 1971 Ch.3: extensive <=> concatenation with additive representation.]
+#   ratio      -- an INTENSIVE quantity that is a ratio of two extensives
+#                 (concentration = amount / volume). A part determines the whole `+` via the
+#                 NUMERATOR extensive and `-` via the DENOMINATOR extensive. [Redlich 1970.]
+#   rate       -- a temporal flux (amount / time); parallel contributions add (sign +).
+#   intensive  -- no general part->whole composition rule (pressure, pH, temperature, activity,
+#                 potential, resistance): a determination sign cannot be derived from the
+#                 quality type and must come from an explicit mechanism, else the solver abstains.
+#
+# DEFAULT for any PATO quality NOT listed here = `intensive` (the safe, abstaining default):
+# only the *composable* kinds (extensive / ratio / rate) are enumerated. Labels/definitions
+# verified against ontology/.obo_cache/PATO.obo (2026-07-09). A node may override its quality's
+# kind with `Node.quality_kind` for a misused/ambiguous IRI.
+# =============================================================================
+qualities:
+
+  # ---- extensive (additive; whole = sum of parts) ----
+  PATO:0000070: {kind: extensive, label: amount}
+  PATO:0000918: {kind: extensive, label: volume}
+  PATO:0000125: {kind: extensive, label: mass}
+
+  # ---- ratio (intensive = numerator_extensive / denominator_extensive) ----
+  PATO:0000033:                                   # "concentration of"
+    kind: ratio
+    label: concentration of
+    numerator: PATO:0000070                        # amount of solute (extensive) -> +
+    denominator: PATO:0000918                      # volume of solvent/compartment (extensive) -> -
+  PATO:0001655:                                   # "osmolarity" (concentration quality)
+    kind: ratio
+    label: osmolarity
+    numerator: PATO:0000070                        # osmoles (amount) -> +
+    denominator: PATO:0000918                      # volume -> -
+  PATO:0001019:                                   # "mass density" / volume-fraction (hematocrit)
+    kind: ratio
+    label: mass density
+    numerator: PATO:0000125                        # mass (or packed-cell volume) -> +
+    denominator: PATO:0000918                      # total volume -> -
+
+  # ---- rate (temporal flux; parallel contributions add, sign +) ----
+  PATO:0000161: {kind: rate, label: rate}
+  PATO:0001574: {kind: rate, label: flow rate}
+  PATO:0002243: {kind: rate, label: fluid flow rate}
+  PATO:0001492: {kind: rate, label: growth rate}
+  PATO:0000044: {kind: rate, label: frequency}
+
+  # ---- intensive listed explicitly for documentation (else default already = intensive) ----
+  PATO:0001025: {kind: intensive, label: pressure}
+  PATO:0001842: {kind: intensive, label: acidity (pH = -log10 of a concentration ratio)}
+  PATO:0001470: {kind: intensive, label: "ratio (used for resistance) -- hard-intensive"}
+  PATO:0001414: {kind: intensive, label: catalytic activity}
+  PATO:0000146: {kind: intensive, label: temperature}
+  PATO:0001462: {kind: intensive, label: membrane potential}

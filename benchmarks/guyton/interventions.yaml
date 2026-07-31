@@ -1,0 +1,100 @@
+# =============================================================================
+# Guyton CV core — intervention gold set            *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Each case fixes the sign of one node (do-intervention) and lists the EXPECTED
+# steady-state sign of downstream variables, i.e. sign(d x*/d theta) at the new
+# equilibrium — NOT naive forward propagation. Signs are the established
+# physiological/clinical outcomes implemented by the Guyton source models.
+#
+# `loop_critical` flags targets whose correct sign requires reasoning over a
+# feedback loop (pressure natriuresis, baroreflex, or RAAS suppression) and that
+# naive forward sign propagation would get wrong or leave undefined. A non-trivial
+# pass must get these right. ROBERT: please correct expected signs.
+# =============================================================================
+
+map: guyton_cv_core.yaml
+
+interventions:
+  - id: ace_inhibitor
+    label: ACE inhibitor (lower angiotensin II)
+    description: >-
+      Pharmacological RAAS blockade. Lowering AngII drops resistance and
+      aldosterone; mean arterial pressure falls; renin rises reactively as the
+      negative feedback on renin is released.
+    do:
+      angiotensin_II: "-"
+    expected:
+      aldosterone: "-"
+      total_peripheral_resistance: "-"
+      sodium_water_reabsorption: "-"
+      adh: "-"
+      mean_arterial_pressure: "-"
+      renin: "+"
+    loop_critical:
+      - renin                # reactive rise — renin is UPSTREAM of AngII; only the loop predicts it
+
+  - id: primary_aldosteronism
+    label: Primary aldosteronism (autonomous aldosterone excess)
+    description: >-
+      Conn's syndrome. Sustained aldosterone raises Na/water reabsorption, expands
+      volume and raises pressure; the hallmark is SUPPRESSED renin and angiotensin
+      II (low-renin hypertension), with pressure natriuresis raising Na excretion.
+    do:
+      aldosterone: "+"
+    expected:
+      sodium_water_reabsorption: "+"
+      extracellular_fluid_volume: "+"
+      blood_volume: "+"
+      mean_arterial_pressure: "+"
+      sodium_excretion: "+"        # aldosterone-escape / pressure natriuresis
+      renin: "-"
+      angiotensin_II: "-"
+      sympathetic_tone: "-"
+    loop_critical:
+      - renin
+      - angiotensin_II
+      - sympathetic_tone
+      - sodium_excretion
+
+  - id: sympathetic_activation
+    label: Increased baroreflex sympathetic outflow
+    description: >-
+      Primary rise in sympathetic tone (e.g. central sympathetic drive). Raises
+      resistance, heart rate and contractility, hence cardiac output and pressure;
+      stimulates renin.
+    do:
+      sympathetic_tone: "+"
+    expected:
+      total_peripheral_resistance: "+"
+      heart_rate: "+"
+      cardiac_output: "+"
+      mean_arterial_pressure: "+"
+      renin: "+"
+
+  - id: primary_sodium_retention
+    label: Primary increase in renal sodium/water reabsorption
+    description: >-
+      Models a primary antinatriuretic lesion (or high-salt loading via the tubule).
+      Volume and pressure rise; Guyton's pressure natriuresis raises sodium excretion
+      to re-approach balance, and the raised pressure SUPPRESSES renin / AngII /
+      aldosterone and sympathetic tone.
+    do:
+      sodium_water_reabsorption: "+"
+    expected:
+      extracellular_fluid_volume: "+"
+      blood_volume: "+"
+      venous_return: "+"
+      cardiac_output: "+"
+      mean_arterial_pressure: "+"
+      renal_perfusion_pressure: "+"
+      sodium_excretion: "+"        # pressure natriuresis
+      renin: "-"
+      angiotensin_II: "-"
+      aldosterone: "-"
+      sympathetic_tone: "-"
+    loop_critical:
+      - sodium_excretion           # pressure natriuresis closes the balance
+      - renin
+      - angiotensin_II
+      - aldosterone
+      - sympathetic_tone

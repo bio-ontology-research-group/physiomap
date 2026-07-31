@@ -1,0 +1,41 @@
+{
+  "excluded_genes": [
+    "ADA",
+    "ADA2",
+    "ADSL",
+    "AK1",
+    "AMPD1",
+    "APRT",
+    "DPYD",
+    "DPYS",
+    "ITPA",
+    "PRPS1",
+    "TYMP",
+    "UGT1A1",
+    "UMPS",
+    "UPB1",
+    "XDH"
+  ],
+  "full": {
+    "abstain": 695,
+    "correct": 171,
+    "determinate": 171,
+    "genes_scored": 183,
+    "genes_with_prediction": 98,
+    "precision": 1.0,
+    "wrong": 0,
+    "wrong_calls": []
+  },
+  "hpo_release": "hp/releases/2026-02-16",
+  "leakage_controlled": {
+    "abstain": 657,
+    "correct": 151,
+    "determinate": 151,
+    "genes_scored": 168,
+    "genes_with_prediction": 91,
+    "precision": 1.0,
+    "wrong": 0,
+    "wrong_calls": []
+  },
+  "schema_version": "1.0.0"
+}

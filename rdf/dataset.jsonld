@@ -1,0 +1,29 @@
+{
+  "@context": "https://schema.org/",
+  "@type": "Dataset",
+  "@id": "https://w3id.org/physiomap/",
+  "name": "PhysioMap: a signed, multi-scale causal knowledge graph of human physiology",
+  "description": "A typed causal knowledge graph of human physiology: 1,695 (entity, PATO quality, scale) variables, 2,172 signed causal influences, 68 production relations, 6 constitutive constraints, 8 quantitative expressions, and 16 modulations. Controlled causal evidence is distinguished from explicitly unclassified legacy evidence; entities and qualities are grounded in OBO Foundry ontologies.",
+  "url": "https://bio2vec.net/physiomap/",
+  "sameAs": "https://github.com/bio-ontology-research-group/physiomap",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "keywords": [
+    "causal knowledge graph", "human physiology", "comparative statics", "feedback",
+    "perturbation phenotypes", "OBO Foundry", "PATO", "Relation Ontology", "SIO", "FAIR"
+  ],
+  "creator": [
+    { "@type": "Person", "name": "Robert Hoehndorf", "@id": "https://orcid.org/0000-0001-8149-5890" },
+    { "@type": "Person", "name": "Paul N. Schofield" },
+    { "@type": "Person", "name": "Georgios V. Gkoutos" }
+  ],
+  "publisher": { "@type": "Organization", "name": "Bio-Ontology Research Group, KAUST" },
+  "measurementTechnique": "expert and literature curation under an interventional-evidence gate; OBO ontology grounding; automated validation gates",
+  "distribution": [
+    {
+      "@type": "DataDownload",
+      "name": "PhysioMap RDF (Turtle)",
+      "encodingFormat": "text/turtle",
+      "contentUrl": "https://bio2vec.net/physiomap/rdf/physiomap.ttl"
+    }
+  ]
+}

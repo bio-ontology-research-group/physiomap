@@ -1,0 +1,145 @@
+# =============================================================================
+# Glucose-insulin-glucagon homeostasis — PhysioMap fragment   *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Hand-encoded canonical endocrine physiology. Every edge sign is the sign of
+# the partial derivative of the target w.r.t. the source at steady state, all
+# else equal. Cross-fragment boundary nodes (cortisol, sympathetic_tone,
+# plasma_potassium) are REFERENCED by id, not redefined here, so this fragment
+# will not load standalone (expected); it composes via PhysioMap.merge.
+# ROBERT: please correct signs/edges.
+#
+# Scope: ORGAN / ORGAN_SYSTEM scale. Within-scale signed cyclic causal edges.
+#
+# The required negative-feedback loops are present (one shared SCC over
+# plasma_glucose <-> hormones <-> fluxes):
+#   1. Insulin loop : glucose -> insulin -> peripheral_glucose_uptake (+)
+#                     and insulin -| hepatic_glucose_production, both lowering
+#                     glucose                                  (net negative)
+#   2. Glucagon loop: glucose -| glucagon -> hepatic_glucose_production -> glucose
+#                     (rising glucose suppresses glucagon, lowering production)
+#                                                              (net negative)
+# Reference models: Bergman minimal model (Bergman et al. 1979/1981); Sturis
+# et al. 1991 (ultradian oscillations); Topp et al. 2000 (beta-cell mass);
+# HumMod pancreas/liver modules; standard endocrinology texts.
+# =============================================================================
+
+name: glucose_insulin
+description: >-
+  DRAFT glucose-insulin-glucagon homeostasis as a PhysioMap signed cyclic causal
+  graph. Canonical endocrine physiology (Bergman minimal model; Sturis 1991;
+  Topp 2000; HumMod). Single-scale (Phase 1). Includes the two core negative-
+  feedback loops plus cortisol / sympathetic / potassium couplings.
+
+nodes:
+  - id: plasma_glucose
+    label: plasma glucose concentration
+    scale: organ_system
+    entity_iri: CHEBI:17234            # glucose
+    quality_iri: PATO:0000033          # concentration
+  - id: plasma_insulin
+    label: plasma insulin concentration
+    scale: organ_system
+    entity_iri: CHEBI:145810           # insulin (human)
+    quality_iri: PATO:0000033
+  - id: plasma_glucagon
+    label: plasma glucagon concentration
+    scale: organ_system
+    entity_iri: CHEBI:5391             # glucagon
+    quality_iri: PATO:0000033
+    quality_kind: ratio
+  - id: hepatic_glucose_production
+    label: hepatic glucose production (glycogenolysis + gluconeogenesis)
+    scale: organ
+    entity_iri: UBERON:0002107         # liver
+    quality_iri: PATO:0000161          # rate
+  - id: peripheral_glucose_uptake
+    label: insulin-mediated peripheral (muscle/adipose) glucose uptake
+    scale: organ_system
+    entity_iri: GO:0044381             # glucose import in response to insulin stimulus
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0001134  # skeletal muscle tissue
+
+causal_edges:
+  # --- insulin secretion / glucose sensing ---------------------------------
+  - source: plasma_glucose
+    target: plasma_insulin
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: glucose-stimulated insulin secretion (beta-cell)
+    evidence: "Bergman minimal model (1979/1981); Topp 2000 beta-cell model; HumMod pancreas; textbook | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-005 (1.6: Homeostasis): 'pancreatic beta cells respond to the increased level of blood glucose by releasing the hormone insulin'; OpenStax Anatomy & Physiology 2e §anp-090 (17.3: Hormones): 'High blood glucose levels cause the release of insulin from the pancreas'; OpenStax Anatomy & Physiology 2e §anp-097 (17.10: The Endocrine Pancreas): elevated blood glucose levels stimulate beta-cell insulin release (glucose-stimulated insulin secretion); OpenStax Anatomy & Physiology 2e §anp-142 (24.6: Metabolic States of the Body): 'The ingestion of food and the rise of glucose concentrations in the bloodstream stimulate pancreatic beta cells to release insulin into the bloodstream.'; OpenStax Anatomy & Physiology 2e §anp-144 (24.8: Nutrition and Diet) — 'As blood glucose levels rise, the pancreas releases insulin to stimulate the uptake of glucose'; OpenStax Biology 2e §bio-33.3 (Homeostasis): 'When an animal has eaten, blood glucose levels rise...the hormone insulin is released by the endocrine system.'; OpenStax Biology 2e §bio-37.1 (37.1: Types of Hormones): 'They are then released in response to stimuli such as high blood glucose levels in the case of insulin'; diagnostic context confirms pancreas stimulated by high glucose produces insulin to decrease blood glucose levels.; OpenStax Biology 2e §bio-37.4 (37.4: Regulation of Hormone Production): rise in blood glucose triggers pancreatic release of insulin (humoral stimulus example); OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): 'When blood glucose levels rise, such as after a meal, beta cells release insulin to lower blood glucose levels.'"
+  - source: plasma_glucose
+    target: plasma_glucagon
+    sign: "-"
+    causal_evidence: mechanistic_model
+    mechanism: hyperglycaemia suppresses alpha-cell glucagon secretion
+    evidence: "Sturis 1991; HumMod pancreas (alpha cell); standard endocrinology | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-097 (17.10: The Endocrine Pancreas): low blood glucose stimulates alpha-cell glucagon release; rising glucose inhibits further glucagon secretion (negative feedback); OpenStax Anatomy & Physiology 2e §anp-142 (24.6: Metabolic States of the Body): 'In response to a drop in blood glucose concentration, the hormone glucagon is released from the alpha cells of the pancreas.'; OpenStax Anatomy & Physiology 2e §anp-144 (24.8: Nutrition and Diet) — 'Falling glucose levels trigger the pancreas to release glucagon'; OpenStax Biology 2e §bio-33.3 (Homeostasis): 'if an animal has not eaten and blood glucose levels decrease, this is sensed in another group of cells in the pancreas, and the hormone glucagon is released.'; OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): 'As blood glucose levels decline, alpha cells release glucagon to raise the blood glucose levels.'"
+
+  # --- insulin effector arms (glucose-lowering) ----------------------------
+  - source: plasma_insulin
+    target: peripheral_glucose_uptake
+    sign: "+"
+    mechanism: insulin-stimulated GLUT4 translocation in muscle/adipose
+    evidence: "Bergman minimal model insulin action on glucose disposal (k_x*X*G); HumMod | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-005 (1.6: Homeostasis): 'insulin signals skeletal muscle fibers, fat cells (adipocytes), and liver cells to take up the excess glucose'; OpenStax Anatomy & Physiology 2e §anp-090 (17.3: Hormones): 'Insulin... Reduces blood glucose levels'; 'insulin increases the liver's storage of glucose as glycogen, decreasing blood glucose'; OpenStax Anatomy & Physiology 2e §anp-097 (17.10: The Endocrine Pancreas): insulin facilitates glucose uptake into body cells via GLUT4 translocation; skeletal muscle and adipose are primary targets; OpenStax Anatomy & Physiology 2e §anp-138 (24.2: Overview of Metabolic Reactions): 'insulin... promotes the uptake of glucose into body cells; causes cells in muscle, adipose tissue, and liver to take up glucose from the blood'; OpenStax Anatomy & Physiology 2e §anp-139 (24.3: Carbohydrate Metabolism): 'Cells in the body take up the circulating glucose in response to insulin'; OpenStax Anatomy & Physiology 2e §anp-142 (24.6: Metabolic States of the Body): 'insulin... initiates the absorption of blood glucose by liver hepatocytes, and by adipose and muscle cells.'; OpenStax Anatomy & Physiology 2e §anp-144 (24.8: Nutrition and Diet) — insulin 'stimulate[s] the uptake of glucose by hepatocytes in the liver, muscle cells/fibers, and adipocytes'; OpenStax Biology 2e §bio-37.1 (37.1: Types of Hormones): 'stimulates the pancreas to produce insulin to decrease blood glucose levels' — textbook description of insulin's glucose-lowering action via peripheral uptake.; OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): 'beta cells release insulin to lower blood glucose levels by increasing the rate of glucose uptake in most body cells.'"
+  - source: plasma_insulin
+    target: hepatic_glucose_production
+    sign: "-"
+    causal_evidence: mechanistic_model
+    mechanism: insulin suppresses hepatic glycogenolysis and gluconeogenesis
+    evidence: "Bergman minimal model (insulin suppresses net hepatic glucose output); HumMod liver | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-097 (17.10: The Endocrine Pancreas): insulin inhibits enzymes involved in glycogenolysis and gluconeogenesis, suppressing hepatic glucose output; OpenStax Anatomy & Physiology 2e §anp-138 (24.2: Overview of Metabolic Reactions): 'insulin... store it in the liver and muscle as glycogen; its effect is the opposite of glucagon'"
+
+  # --- glucagon effector arm (glucose-raising) -----------------------------
+  - source: plasma_glucagon
+    target: hepatic_glucose_production
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: glucagon drives hepatic glycogenolysis and gluconeogenesis
+    evidence: "HumMod liver; Sturis 1991; standard endocrinology | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-090 (17.3: Hormones): 'Glucagon: Increases blood glucose levels'; 'glucagon stimulates the breakdown of glycogen stores, increasing blood glucose'; OpenStax Anatomy & Physiology 2e §anp-097 (17.10: The Endocrine Pancreas): glucagon stimulates hepatic glycogenolysis and gluconeogenesis, raising blood glucose; OpenStax Anatomy & Physiology 2e §anp-138 (24.2: Overview of Metabolic Reactions): 'glucagon... stimulates the breakdown of glycogen in the liver to increase blood glucose levels'; OpenStax Anatomy & Physiology 2e §anp-144 (24.8: Nutrition and Diet) — glucagon released 'to turn off glycogen synthesis in the liver and stimulate its breakdown into glucose'"
+
+  # --- flux closure onto plasma glucose (loop closure) ---------------------
+  - source: hepatic_glucose_production
+    target: plasma_glucose
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: hepatic glucose output adds glucose to plasma pool
+    evidence: "Bergman minimal model glucose mass balance (EGP appearance term)"
+  - source: peripheral_glucose_uptake
+    target: plasma_glucose
+    sign: "-"
+    causal_evidence: mechanistic_model
+    mechanism: peripheral disposal removes glucose from plasma pool
+    evidence: "Bergman minimal model glucose mass balance (disposal/clearance term) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-005 (1.6: Homeostasis): 'As glucose concentration in the bloodstream drops, the decrease in concentration... is detected by pancreatic alpha cells, and insulin release stops'"
+
+  # --- cross-fragment couplings (boundary nodes) ---------------------------
+  - source: cortisol
+    target: hepatic_glucose_production
+    sign: "+"
+    mechanism: glucocorticoid induction of gluconeogenic enzymes (PEPCK/G6Pase)
+    evidence: "HumMod; cortisol gluconeogenesis; standard endocrinology | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-090 (17.3: Hormones): table entry 'Cortisol, corticosterone, cortisone: Increase blood glucose levels'"
+  - source: cortisol
+    target: peripheral_glucose_uptake
+    sign: "-"
+    mechanism: cortisol-induced peripheral insulin resistance reduces glucose uptake
+    evidence: "Clinical: glucocorticoid-induced insulin resistance; HumMod"
+  - source: sympathetic_tone
+    target: plasma_glucagon
+    sign: "+"
+    mechanism: adrenergic/sympathetic stimulation of alpha-cell glucagon secretion
+    evidence: "Catecholamine stimulation of glucagon; HumMod; standard endocrinology"
+  - source: sympathetic_tone
+    target: hepatic_glucose_production
+    sign: "+"
+    mechanism: catecholamine-driven hepatic glycogenolysis (beta-adrenergic)
+    evidence: "Catecholamine glycogenolysis; HumMod liver"
+  - source: sympathetic_tone
+    target: plasma_insulin
+    sign: "-"
+    mechanism: alpha-2 adrenergic inhibition of beta-cell insulin secretion
+    evidence: "Adrenergic suppression of insulin secretion; standard endocrinology"
+  - source: plasma_insulin
+    target: plasma_potassium
+    sign: "-"
+    causal_evidence: pharmacological
+    mechanism: insulin stimulates cellular K+ uptake (Na/K-ATPase), lowering plasma K+
+    evidence: "Insulin-mediated cellular potassium shift; clinical (insulin/glucose for hyperkalaemia)"
+
+constitutive_edges: []   # none yet — multi-scale expansion is the next step

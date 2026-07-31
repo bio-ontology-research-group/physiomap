@@ -1,0 +1,58 @@
+# =============================================================================
+# Curated HPOA gene-level annotation discordances  *** literature-verified ***
+# =============================================================================
+# (gene, node) observed-direction annotations that are EXCLUDED from the forward
+# eval because the HPOA *gene-level* direction is non-specific/incorrect for the
+# specific monogenic disorder, OR the phenotype's direction is genuinely variable
+# (not a deterministic directional ground truth). Each entry is verified against
+# primary literature; PhysioMap's mechanistic prediction is recorded. This is the
+# same discipline as `block_propagation` (the documented 11-deoxycortisol trap) —
+# exclusions are evidence-based, never to protect a number.
+#
+# Sources cite stable OMIM ids + the specific quantitative finding (no unverified PMIDs).
+# Applied by scripts/e1b_eval.py (and any large-scale forward eval).
+discordances:
+- gene: LDHA
+  node: plasma_lactate
+  hpo: HP:0002151           # Increased circulating lactate concentration
+  hpoa_direction: '+'
+  physiomap_direction: '-'
+  true_finding: >-
+    LDHA (lactate dehydrogenase A / M-subunit) deficiency = GSD XI (OMIM:612933). Lactate is
+    the PRODUCT of LDHA; deficiency gives a FLAT (decreased) lactate curve on the forearm
+    exercise test with an exaggerated ammonia rise — i.e. lactate is LOW/blunted, not raised.
+    PhysioMap (-) is correct; HP:0002151 is a non-specific lactic-acidosis annotation.
+  source: 'OMIM:612933; flat forearm-exercise lactate curve is the diagnostic hallmark of LDHA deficiency'
+- gene: ABCA1
+  node: plasma_apolipoprotein_a2
+  hpo: HP:0031800           # Elevated circulating apolipoprotein A-II concentration
+  hpoa_direction: '+'
+  physiomap_direction: '-'
+  true_finding: >-
+    Tangier disease (ABCA1 LoF, OMIM:205400) profoundly LOWERS apoA-I and apoA-II (apoA-II
+    ~7% of normal: mean 2.7 vs 23.0 mg/dl in controls), together with near-absent HDL.
+    PhysioMap (-) is correct; HP:0031800 (elevated apoA-II) contradicts the disorder.
+  source: 'OMIM:205400; Tangier homozygotes apoA-II ~2.7 mg/dl vs 23.0 control (Schaefer et al., Metabolism 1981)'
+- gene: LPL
+  node: ldl_cholesterol
+  hpo: HP:0003141           # Increased LDL cholesterol concentration
+  hpoa_direction: '+'
+  physiomap_direction: '-'
+  true_finding: >-
+    Lipoprotein lipase deficiency / familial chylomicronemia (OMIM:238600): massive
+    hypertriglyceridemia with markedly REDUCED LDL and HDL cholesterol (LDL ~28+/-16 mg/dl).
+    PhysioMap (-) is correct; the "increased LDL"/hypercholesterolemia annotation (total
+    cholesterol elevated by chylomicrons) does not hold for LDL specifically.
+  source: 'OMIM:238600; LDL ~28 mg/dl in LPL deficiency (Benlian et al., NEJM 1996; StatPearls NBK560795)'
+- gene: LCAT
+  node: ldl_cholesterol
+  hpo: HP:0003141           # Increased LDL cholesterol concentration
+  hpoa_direction: '+'
+  physiomap_direction: '-'
+  reason: variable_direction
+  true_finding: >-
+    Familial LCAT deficiency (OMIM:245900): LDL-C direction is genuinely VARIABLE — typically
+    LOW (PhysioMap's modal prediction) but variably elevated, and confounded by lipoprotein-X
+    (LpX). A variable-direction phenotype is not a valid deterministic directional ground truth;
+    excluded on that basis (not as an HPOA error).
+  source: 'OMIM:245900; "low LDL-C, variably elevated", LpX-confounded (Orphanet 79293; J Clin Med 2019;8:1860)'

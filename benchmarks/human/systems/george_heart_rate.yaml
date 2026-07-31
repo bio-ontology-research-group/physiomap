@@ -1,0 +1,82 @@
+# *** DRAFT FOR REVIEW *** Heart-rate control decomposition — curated by George Gkoutos.
+#
+# Source: G. Gkoutos, "heart_rate_physio_with_T3_example" (2026) — an expert hand-derived
+# decomposition of heart rate into signed causal "pressures" with per-step mechanisms, worked
+# through for the T3 example. This fragment encodes the two structural elements his synthesis
+# adds beyond the existing map:
+#   (1) SA-node intrinsic automaticity as an EXPLICIT pacemaker mediator (the funny current /
+#       L-type Ca / SERCA / phase-4 depolarisation layer that T3 and temperature act through),
+#       so the chronotropic drivers route HR via the pacemaker rate rather than directly; and
+#   (2) cardiac beta1-adrenergic *chronotropic responsiveness* — a gain that T3 turns up,
+#       amplifying the sympathetic effect on HR.
+#
+# Evidence: curator inference used in manual assertion (ECO:0000305); causal_evidence =
+# curated_mechanistic. Signs are interventional (do(): clinical hyper-/hypothyroid tachy-/brady-
+# cardia; fever tachycardia; beta-blockade) but the model is a DRAFT for George's own review.
+#
+# NB the beta-responsiveness "gain" is genuinely multiplicative (it scales sympathetic_tone ->
+# heart_rate). PhysioMap's sign algebra is additive, so it is encoded here as an additive
+# positive driver of heart_rate — a documented linearisation, and exactly the modelling question
+# George's synthesis surfaces. See benchmarks/results/george_heart_rate.md.
+name: george_heart_rate
+description: Heart-rate control decomposition curated by George Gkoutos — explicit SA-node automaticity mediator + beta1-adrenergic chronotropic responsiveness gain. DRAFT for domain review.
+
+nodes:
+  - id: sa_node_automaticity
+    label: sinoatrial node intrinsic pacemaker firing rate (phase-4 depolarisation / automaticity)
+    scale: organ
+    entity_iri: GO:0086015            # SA node cell action potential
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0002351  # sinoatrial node
+  - id: beta1_adrenergic_chronotropic_responsiveness
+    label: cardiac beta1-adrenergic chronotropic responsiveness (SA-node sensitivity to sympathetic/catecholamine drive)
+    scale: organ
+    entity_iri: UBERON:0002351        # sinoatrial node (bearer of the responsiveness)
+    quality_iri: PATO:0000085         # sensitivity toward
+
+causal_edges:
+  # (1) the intrinsic pacemaker sets heart rate
+  - source: sa_node_automaticity
+    target: heart_rate
+    sign: "+"
+    causal_evidence: curated_mechanistic
+    mechanism: 'SA-node phase-4 depolarisation slope (quality) -> pacemaker disposition -> spontaneous action-potential firing (process, GO:0086015 SA node cell action potential; GO:0086046 membrane depolarisation during SA node cell action potential) -> heart rate (quality)'
+    evidence: 'Curated by G. Gkoutos (2026), heart_rate_physio_with_T3_example — "SA-node automaticity ↑ → HR ↑"; standard pacemaker physiology (Boron & Boulpaep, the SA node as the dominant pacemaker). Evidence code ECO:0000305 (curator inference used in manual assertion).'
+
+  # (2) T3 raises beta1-adrenergic chronotropic responsiveness (a gain on sympathetic drive)
+  - source: free_t3
+    target: beta1_adrenergic_chronotropic_responsiveness
+    sign: "+"
+    causal_evidence: curated_mechanistic
+    mechanism: 'T3 (quality) -> thyroid-hormone-receptor transcriptional disposition -> up-regulation of beta1-adrenergic receptor / post-receptor cAMP-PKA coupling (process, GO:0003064 regulation of heart rate by hormone) -> beta1-adrenergic chronotropic responsiveness (quality)'
+    evidence: 'Curated by G. Gkoutos (2026), heart_rate_physio_with_T3_example — "T3 ↑ → β-adrenergic responsiveness ↑ → same sympathetic input produces stronger cAMP-PKA response"; classic thyroid-hormone sensitisation of cardiac beta-adrenergic signalling (Boron & Boulpaep). Evidence code ECO:0000305 (curator inference used in manual assertion).'
+
+  # heightened responsiveness amplifies the chronotropic effect.
+  # This edge is the FIRST-ORDER SHADOW of the multiplicative modulation declared below:
+  # around a positive operating point d(heart_rate)/d(responsiveness) = sympathetic_tone * k' > 0,
+  # so the gain shows up to the (additive) sign solver as this +ve edge. The modulation edge
+  # carries the genuinely multiplicative content (the second-order gain query).
+  - source: beta1_adrenergic_chronotropic_responsiveness
+    target: heart_rate
+    sign: "+"
+    causal_evidence: curated_mechanistic
+    mechanism: 'beta1-adrenergic chronotropic responsiveness (quality) -> for a given sympathetic/catecholamine input, stronger cAMP-PKA-mediated If and L-type Ca current modulation in the SA node -> larger increase in phase-4 slope and firing rate -> heart rate. (First-order shadow of the modulation_edge below.)'
+    evidence: 'Curated by G. Gkoutos (2026), heart_rate_physio_with_T3_example — "β responsiveness ↑ → sympathetic effects amplified → HR tendency ↑". Evidence code ECO:0000305 (curator inference used in manual assertion).'
+
+constitutive_edges: []
+
+# --- multiplicative (gain) edge ------------------------------------------------------------
+# George's key structural insight: beta1-adrenergic responsiveness is not just another additive
+# push on HR — it is a GAIN that scales the sympathetic_tone -> heart_rate edge. Encoded as a
+# modulation_edge: it leaves node-level sign predictions unchanged (its first-order effect is the
+# shadow edge above) but enables the gain-sensitivity query
+# (physiomap_core.modulation.gain_sensitivity): do(free_t3 +) raises the gain of
+# sympathetic_tone -> heart_rate (+), i.e. T3 amplifies the sympathetic chronotropic effect.
+modulation_edges:
+  - modulator: beta1_adrenergic_chronotropic_responsiveness
+    influence_id: influence:sympathetic_tone:positive:heart_rate
+    sign: "+"
+    can_flip_sign: false
+    causal_evidence: curated_mechanistic
+    mechanism: 'beta1-adrenergic chronotropic responsiveness scales the cAMP-PKA gain from sympathetic/catecholamine drive onto SA-node If and L-type Ca currents, so the same sympathetic_tone produces a larger rise in pacemaker firing (a multiplicative gain on sympathetic_tone -> heart_rate).'
+    evidence: 'Curated by G. Gkoutos (2026), heart_rate_physio_with_T3_example — "same sympathetic input produces stronger cAMP-PKA response". Evidence code ECO:0000305 (curator inference used in manual assertion).'

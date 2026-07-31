@@ -1,0 +1,76 @@
+# =============================================================================
+# Multi-scale GRN import: glucocorticoid receptor -> gluconeogenic gene transcription
+#                                                       *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Causal-evidence-gated import. Hepatic GR transactivates the rate-limiting gluconeogenic genes.
+# GR activity is a molecular ROOT (clamped by GR agonist/antagonist drugs); the downward driver
+# (cortisol -> GR) is OMITTED (cross-scale). PEPCK and G6Pase lift to hepatic glucose production.
+#
+#   gr_activity --(+)--> pepck1_expression      (PCK1 is a classic GR target gene)
+#   gr_activity --(+)--> g6pase_expression       (G6PC is GR/PGC-1alpha driven)
+#   pepck1_expression ▷(+) hepatic_glucose_production
+#   g6pase_expression ▷(+) hepatic_glucose_production
+#
+# INTERVENTIONAL GROUNDING:
+#   - dexamethasone (GR agonist) induces PEPCK/G6Pase and RAISES hepatic glucose output /
+#     causes hyperglycemia (pharmacological do())
+#   - mifepristone (GR antagonist) blocks dexamethasone-induced gluconeogenesis (pharmacological)
+#   - liver-specific GR knockout blunts dexamethasone-induced PEPCK/G6Pase (perturbation)
+#   - generalized (primary) glucocorticoid resistance from NR3C1 mutations (genetic)
+# (No PMID/OMIM numbers cited: the importer's proposed identifiers were found on review to be
+#  fabricated/misattributed, so only the well-established drug/KO/disease facts are recorded here;
+#  primary-citation verification pending. DRAFT for domain review.)
+#
+# BOUNDARY NODES (exist; not redefined): hepatic_glucose_production
+# =============================================================================
+name: gr_gluconeogenesis
+nodes:
+- id: gr_activity
+  label: hepatocyte glucocorticoid-receptor (NR3C1) transcriptional activity
+  scale: molecular
+  entity_iri: PR:000011406      # glucocorticoid receptor
+  quality_iri: PATO:0002354     # active
+  bearer_entity_iri: CL:0000182 # hepatocyte
+- id: pepck1_expression
+  label: hepatocyte cytosolic PEPCK (PCK1) expression level
+  scale: molecular
+  entity_iri: PR:000012416      # phosphoenolpyruvate carboxykinase, cytosolic [GTP]
+  quality_iri: PATO:0000070     # amount
+  bearer_entity_iri: CL:0000182
+- id: g6pase_expression
+  label: hepatocyte glucose-6-phosphatase (G6PC1) expression level
+  scale: molecular
+  entity_iri: PR:000007746      # glucose-6-phosphatase catalytic subunit 1
+  quality_iri: PATO:0000070     # amount
+  bearer_entity_iri: CL:0000182
+causal_edges:
+- source: gr_activity
+  target: pepck1_expression
+  sign: +
+  causal_evidence: pharmacological
+  mechanism: 'activated GR binds glucocorticoid-response elements at PCK1 and transactivates it
+    (quality: GR activity -> disposition: GRE occupancy at PCK1 -> process: PEPCK transcription
+    -> quality: PEPCK expression)'
+  evidence: 'INTERVENTIONAL (pharmacological + perturbation). Dexamethasone (GR agonist) induces
+    hepatic PEPCK; mifepristone blocks it; liver-specific GR knockout blunts dexamethasone-induced
+    PEPCK. DRAFT for domain review (primary citations pending verification).'
+- source: gr_activity
+  target: g6pase_expression
+  sign: +
+  causal_evidence: pharmacological
+  mechanism: 'activated GR (with PGC-1alpha) drives G6PC transcription (quality: GR activity ->
+    disposition: GRE/PGC-1alpha co-activation at G6PC -> process: G6Pase transcription -> quality:
+    G6Pase expression)'
+  evidence: 'INTERVENTIONAL (pharmacological + perturbation). Dexamethasone induces hepatic
+    G6Pase and raises glucose output; mifepristone and liver GR knockout blunt the induction.
+    DRAFT for domain review (primary citations pending verification).'
+- source: pepck1_expression
+  target: hepatic_glucose_production
+  sign: +
+  mechanism: greater hepatocyte PEPCK expression increases gluconeogenic catalytic capacity and hepatic glucose-production flux
+  evidence: DRAFT legacy relation; the fragment cites dexamethasone/mifepristone and liver-specific GR perturbation but does not yet provide a verified source-directed PEPCK intervention.
+- source: g6pase_expression
+  target: hepatic_glucose_production
+  sign: +
+  mechanism: greater hepatocyte glucose-6-phosphatase expression increases terminal glucose dephosphorylation capacity and hepatic glucose-production flux
+  evidence: DRAFT legacy relation; the fragment cites dexamethasone/mifepristone and liver-specific GR perturbation but does not yet provide a verified source-directed G6Pase intervention.

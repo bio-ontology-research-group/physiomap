@@ -1,0 +1,512 @@
+name: hall_extracted
+description: DRAFT within-scale signed causal edges + variables extracted from Guyton & Hall, Textbook of Medical Physiology
+  via per-chapter multi-agent fan-out. Signs adversarially verified; every edge carries a verbatim quote + chapter/page anchor.
+  New nodes de-duplicated against the existing map (physiomap_core.reconcile). DRAFT for domain review.
+nodes:
+- id: aqueous_humor_outflow_resistance
+  label: aqueous humor outflow resistance
+  scale: organ
+  entity_iri: UBERON:0001796
+  quality_iri: PATO:0001046
+- id: aqueous_humor_formation_rate
+  label: aqueous humor formation rate (ciliary body secretion)
+  scale: organ
+  entity_iri: UBERON:0001796
+  quality_iri: PATO:0002243
+- id: retinal_rhodopsin_concentration
+  label: retinal rhodopsin concentration (rod outer segment)
+  scale: cellular
+  entity_iri: PR:000001245
+  quality_iri: PATO:0000033
+  bearer_entity_iri: CL:0000604
+- id: retinal_photosensitivity
+  label: retinal photosensitivity (light-adapted sensitivity)
+  scale: organ
+  entity_iri: UBERON:0000966
+  quality_iri: PATO:0000927
+- id: bowmans_capsule_pressure
+  label: Bowman's capsule hydrostatic pressure (PB)
+  scale: organ
+  entity_iri: UBERON:0001230
+  quality_iri: PATO:0001025
+  quality_kind: intensive
+- id: peritubular_capillary_hydrostatic_pressure
+  label: peritubular capillary hydrostatic pressure (Pc)
+  scale: organ
+  entity_iri: UBERON:0005272
+  quality_iri: PATO:0001025
+  quality_kind: intensive
+- id: type_ii_pneumocyte_surfactant_secretion
+  label: type II alveolar epithelial cell (pneumocyte) surfactant secretion rate
+  scale: cellular
+  entity_iri: GO:0160069  # surfactant secretion
+  quality_iri: PATO:0000161
+  bearer_entity_iri: CL:0002063  # pulmonary alveolar type 2 cell
+  quality_kind: rate
+causal_edges:
+- source: cardiomyocyte_intracellular_sodium
+  target: na_k_atpase_activity
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'Elevated intracellular [Na+] allosterically stimulates Na+/K+-ATPase activity (approximately cubic relationship:
+    doubling intracellular Na+ from 10 to 20 mEq/L raises pump activity ~8-fold), restoring the transmembrane sodium gradient'
+  evidence: '"A special feature of the Na+-K+ ATPase pump is that its degree of activity is strongly stimulated when excess
+    sodium ions accumulate inside the cell membrane. In fact, the pumping activity increases approximately in proportion to
+    the third power of this intracellular sodium concentration. That is, as the internal sodium concentration rises from 10
+    to 20 mEq/L, the activity of the pump does not merely double but increases about eightfold." Guyton & Hall, Textbook of
+    Medical Physiology, ch w02, p 66'
+- source: interstitial_fluid_protein
+  target: interstitial_fluid_colloid_osmotic_pressure
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: plasma proteins that leak into interstitium are the solutes responsible for the interstitial colloid osmotic
+    (oncotic) pressure; more protein → higher oncotic pressure
+  evidence: '"it is the proteins of the plasma and interstitial fluids that are responsible for the osmotic pressures on the
+    two sides of the capillary membrane" and "the average protein concentration of the interstitial fluid is usually only
+    40 per cent of that in plasma...the average interstitial fluid colloid osmotic pressure for this concentration of proteins
+    is about 8 mm Hg" — Guyton & Hall, Textbook of Medical Physiology, ch w05'
+- source: lymph_drainage_rate
+  target: interstitial_fluid_protein
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: lymphatic drainage removes protein from interstitium; increased lymph flow lowers interstitial protein concentration
+    toward steady state
+  evidence: '"Third, the increasing interstitial fluid pressure greatly increases the rate of lymph flow...This in turn carries
+    away the excess interstitial fluid volume and excess protein that has accumulated in the spaces" — Guyton & Hall, Textbook
+    of Medical Physiology, ch w05'
+- source: interstitial_fluid_colloid_osmotic_pressure
+  target: capillary_filtration_rate
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: higher interstitial oncotic pressure creates an osmotic force pulling fluid out of capillaries into the interstitium,
+    adding to net filtration pressure
+  evidence: '"The interstitial fluid colloid osmotic pressure (Pif), which tends to cause osmosis of fluid outward through
+    the capillary membrane" listed as one of four Starling forces; and at the arterial end: interstitial fluid colloid osmotic
+    pressure = 8 mm Hg contributes to 41 mm Hg total outward force — Guyton & Hall, Textbook of Medical Physiology, ch w05'
+- source: capillary_hydrostatic_pressure
+  target: capillary_filtration_rate
+  sign: +
+  causal_evidence: mechanistic_model
+  mechanism: Higher capillary hydrostatic pressure increases the net filtration pressure driving fluid from capillary lumen
+    into interstitial space (Starling forces)
+  evidence: '"The increased cardiac output increases the capillary pressure so that fluid begins to transude out of the capillaries
+    into the tissues" Guyton & Hall, Textbook of Medical Physiology, ch w07, p 242'
+- source: aqueous_humor_formation_rate
+  target: intraocular_pressure
+  sign: +
+  causal_evidence: mechanistic_model
+  mechanism: increased ciliary-body secretion raises volume and pressure of anterior-chamber fluid against fixed outflow resistance
+  evidence: '"The balance between formation and reabsorption of aqueous humor regulates the total volume and pressure of the
+    intraocular fluid." Guyton & Hall, Textbook of Medical Physiology, ch w16, p. 623'
+- source: aqueous_humor_outflow_resistance
+  target: intraocular_pressure
+  sign: +
+  causal_evidence: mechanistic_model
+  mechanism: reduced drainage through trabecular meshwork into canal of Schlemm raises steady-state fluid pressure in anterior
+    chamber
+  evidence: '"The level of this pressure is determined mainly by the resistance to outflow of aqueous humor from the anterior
+    chamber into the canal of Schlemm. This outflow resistance results from the meshwork of trabeculae." Guyton & Hall, Textbook
+    of Medical Physiology, ch w16, p. 624'
+- source: retinal_rhodopsin_concentration
+  target: retinal_photosensitivity
+  sign: +
+  causal_evidence: mechanistic_model
+  mechanism: rhodopsin is the light-sensitive photochemical of rods; higher rhodopsin concentration enables detection of lower
+    light intensities (dark adaptation increases both rhodopsin and sensitivity in parallel)
+  evidence: '"If a person has been in bright light for hours, large portions of the photochemicals in both the rods and the
+    cones will have been reduced to retinal and opsins... the concentrations of the photosensitive chemicals remaining in
+    the rods and cones are considerably reduced, and the sensitivity of the eye to light is correspondingly reduced. This
+    is called light adaptation." Guyton & Hall, Textbook of Medical Physiology, ch w16, p. 631'
+- source: gi_sympathetic_tone
+  target: gi_tract_secretion
+  sign: '-'
+  causal_evidence: perturbation
+  mechanism: sympathetic inhibition of enteric neurons decreases GI secretion
+  evidence: 'In general, stimulation of the sympathetic nervous system inhibits activity of the gastrointestinal tract...
+    It exerts its effects in two ways: (1) to a slight extent by direct effect of secreted norepinephrine to inhibit intestinal
+    tract smooth muscle... and (2) to a major extent by an inhibitory effect of norepinephrine on the neurons of the entire
+    enteric nervous system.  ||  "Brunner''s glands are inhibited by sympathetic stimulation; therefore, such stimulation
+    in very excitable persons is likely to leave the duodenal bulb unprotected and is perhaps one of the factors that cause
+    this area of the gastrointestinal tract to be the site of peptic ulcers" — Guyton & Hall, Textbook of Medical Physiology,
+    ch w21, p. 806'
+- source: gi_sympathetic_tone
+  target: splanchnic_blood_flow
+  sign: '-'
+  causal_evidence: perturbation
+  mechanism: sympathetic norepinephrine causes arteriolar vasoconstriction in splanchnic bed → decreased blood flow
+  evidence: Sympathetic stimulation, by contrast, has a direct effect on essentially all the gastrointestinal tract to cause
+    intense vasoconstriction of the arterioles with greatly decreased blood flow.
+- source: delta_cell_somatostatin_secretion
+  target: gi_tract_motility
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: somatostatin decreases motility of stomach, duodenum, and gallbladder to extend digestion period
+  evidence: '"Somatostatin decreases the motility of the stomach, duodenum, and gallbladder. Somatostatin decreases both secretion
+    and absorption in the gastrointestinal tract." Guyton & Hall, Textbook of Medical Physiology, ch w25, p 972'
+- source: plasma_calcium
+  target: myocardial_contractility
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: extracellular Ca2+ availability directly initiates the cardiac actin-myosin contractile process; excess -> spastic contraction (raised inotropy), deficiency -> cardiac flaccidity
+  evidence: '"An excess of calcium ions causes ... the heart to go toward spastic contraction. This is caused by a direct effect of calcium ions to initiate the cardiac contractile process ... Conversely, deficiency of calcium ions causes cardiac flaccidity" -- Guyton & Hall, Textbook of Medical Physiology, ch 9 (Heart Muscle), p ~114'
+- source: renal_perfusion_pressure
+  target: afferent_arteriolar_resistance
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: increased renal arterial/wall pressure -> afferent smooth-muscle stretch, Ca2+ entry, contraction -> raised afferent resistance (myogenic autoregulation buffering RBF/GFR)
+  evidence: '"respond to increased wall tension or wall stretch by contraction of the vascular smooth muscle ... by raising vascular resistance, helps prevent excessive increases in renal blood flow and GFR when arterial pressure increases" -- Guyton & Hall, Textbook of Medical Physiology, ch 26 (Urine Formation I), p 324'
+- source: sympathetic_tone
+  target: afferent_arteriolar_resistance
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: renal sympathetic nerve activity -> alpha-adrenergic afferent (and efferent) arteriolar constriction -> raised afferent resistance -> reduced glomerular hydrostatic pressure and GFR
+  evidence: '"Strong activation of the renal sympathetic nerves can constrict the renal arterioles and decrease renal blood flow and GFR" -- Guyton & Hall, Textbook of Medical Physiology, ch 26 (Urine Formation I), p 322'
+- source: macula_densa_nacl_signal
+  target: afferent_arteriolar_resistance
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: increased distal NaCl at macula densa -> ATP/adenosine release -> afferent arteriolar constriction -> raised afferent resistance (tubuloglomerular feedback); decreased NaCl dilates the afferent arteriole
+  evidence: '"Decreased Macula Densa Sodium Chloride Causes Dilation of Afferent Arterioles ... it decreases resistance to blood flow in the afferent arterioles, which raises glomerular hydrostatic pressure" -- Guyton & Hall, Textbook of Medical Physiology, ch 26 (Urine Formation I), Fig 26-18, p 324'
+- source: right_atrial_pressure
+  target: afferent_arteriolar_resistance
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: atrial stretch (raised right atrial/filling pressure) -> reflex dilation of renal afferent arterioles -> lowered afferent resistance -> raised glomerular capillary pressure and filtration (volume reflex)
+  evidence: '"Stretch of the atria also causes significant reflex dilation of the afferent arterioles in the kidneys ... The decreased afferent arteriolar resistance in the kidneys causes the glomerular capillary pressure to rise" -- Guyton & Hall, Textbook of Medical Physiology, ch 18 (Nervous Regulation of the Circulation), p 212'
+- source: endothelial_no_production
+  target: renal_vascular_resistance
+  sign: '-'
+  causal_evidence: pharmacological
+  mechanism: endothelial NO -> vascular smooth-muscle cGMP -> renal arteriolar relaxation -> lowered renal vascular resistance; NOS inhibitors raise RVR and lower GFR/Na excretion
+  evidence: '"administration of drugs that inhibit this normal formation of nitric oxide increases renal vascular resistance and decreases GFR and urinary sodium excretion" -- Guyton & Hall, Textbook of Medical Physiology, ch 26 (Urine Formation I), p 322'
+- source: plasma_prostaglandin_e2
+  target: gfr
+  sign: +
+  causal_evidence: pharmacological
+  mechanism: PGE2/PGI2 -> afferent arteriolar vasodilation -> increased renal blood flow and glomerular hydrostatic pressure -> increased GFR; NSAID (aspirin) inhibition reduces GFR, especially under stress
+  evidence: '"prostaglandins (PGE2 and PGI2) and bradykinin ... cause vasodilation and increased renal blood flow and GFR" -- Guyton & Hall, Textbook of Medical Physiology, ch 26 (Urine Formation I), p 322-323'
+- source: bowmans_capsule_pressure
+  target: gfr
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: increased hydrostatic pressure in Bowman's capsule lowers net filtration pressure -> reduced GFR (e.g. ureteral obstruction/stones); micropuncture-measured Starling force
+  evidence: '"Increasing the hydrostatic pressure in Bowman''s capsule reduces GFR, whereas decreasing this pressure raises GFR" -- Guyton & Hall, Textbook of Medical Physiology, ch 26 (Urine Formation I), p 318'
+- source: pth
+  target: renal_phosphate_reabsorption
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: PTH -> decreased NaPi-IIa/IIc transport maximum in proximal tubule -> reduced phosphate reabsorption -> phosphaturia
+  evidence: '"inhibition of phosphate reabsorption by the proximal tubule" -- Guyton & Hall, Textbook of Medical Physiology, ch 27 (Urine Formation II) Table 27-3, p 343'
+- source: renal_perfusion_pressure
+  target: peritubular_capillary_hydrostatic_pressure
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'increased renal arterial pressure -> raised peritubular (and vasa recta) capillary hydrostatic pressure (buffered by autoregulation) -> feeds pressure-natriuresis reduction in reabsorption (Table 27-2: up Arterial Pressure -> up Pc)'
+  evidence: '"Increases in arterial pressure tend to raise peritubular capillary hydrostatic pressure" -- Guyton & Hall, Textbook of Medical Physiology, ch 27 (Urine Formation II) Table 27-2, p 341'
+- source: efferent_arteriolar_resistance
+  target: peritubular_capillary_hydrostatic_pressure
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'increased efferent arteriolar resistance -> reduced downstream peritubular capillary hydrostatic pressure -> raised net reabsorptive force -> increased Na/water reabsorption (angiotensin II mechanism; Table 27-2: down RE -> up Pc)'
+  evidence: '"Increase in resistance of either the afferent or the efferent arterioles reduces peritubular capillary hydrostatic pressure ... constriction of the efferent arterioles ... lowers peritubular capillary hydrostatic pressure" -- Guyton & Hall, Textbook of Medical Physiology, ch 27 (Urine Formation II) Table 27-2, p 341'
+- source: plasma_potassium
+  target: renal_potassium_excretion
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: raised plasma K+ -> stimulated basolateral Na/K-ATPase and increased cell-to-lumen K+ gradient in principal cells -> increased distal K+ secretion/excretion (direct, aldosterone-independent)
+  evidence: '"increased plasma potassium concentration directly raises potassium secretion by the cortical collecting tubules and indirectly increases potassium secretion by raising plasma aldosterone concentration" -- Guyton & Hall, Textbook of Medical Physiology, ch 29 (Renal Regulation), Fig 29-4/29-7, p 369-370'
+- source: arterial_ph
+  target: renal_potassium_excretion
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: increased H+ (low pH/acidosis) reduces principal-cell Na/K-ATPase activity and K+ secretion; alkalosis (high pH) increases distal K+ secretion
+  evidence: '"Acute increases in hydrogen ion concentration of the extracellular fluid (acidosis) reduce potassium secretion, whereas decreased hydrogen ion concentration (alkalosis) increases potassium secretion" -- Guyton & Hall, Textbook of Medical Physiology, ch 29 (Renal Regulation), p 372'
+- source: aldosterone
+  target: cellular_potassium_uptake
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: aldosterone -> increased Na/K-ATPase-mediated cellular K+ uptake -> lowered plasma K+ (extrarenal component of aldosterone's hypokalaemic action)
+  evidence: '"Aldosterone Increases Potassium Uptake into Cells. Increased potassium intake also stimulates secretion of aldosterone, which increases cell potassium uptake" -- Guyton & Hall, Textbook of Medical Physiology, ch 29 (Renal Regulation) Table 29-1, p 366'
+- source: arterial_ph
+  target: renal_glutaminase_activity
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: decreased pH (increased H+) -> stimulated renal glutamine metabolism/glutaminase -> increased NH4+ and new HCO3- for H+ buffering; alkalosis has the opposite effect
+  evidence: '"An increase in extracellular fluid H+ concentration stimulates renal glutamine metabolism and, therefore, increases the formation of NH4+ and new HCO3- ... a decrease in H+ concentration has the opposite effect" -- Guyton & Hall, Textbook of Medical Physiology, ch 30 (Regulation of Acid-Base Balance), p 394'
+- source: plasma_calcium
+  target: casr_activity
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'extracellular Ca2+ binds and activates the parathyroid chief-cell calcium-sensing receptor (CaSR), raising CaSR signalling activity; this supplies the upstream input to the existing casr_activity -(-)-> parathyroid_chief_pth_secretion edge (net: high Ca2+ -> CaSR active -> PTH secretion falls)'
+  evidence: '"Even the slightest decrease in calcium ion concentration in the extracellular fluid causes the parathyroid glands to increase their rate of secretion within minutes." Guyton & Hall, Textbook of Medical Physiology, ch 79 (chw36), p. 988. The CaSR is the established extracellular Ca2+ sensor mediating this control (named in the chapter reference list: Hofer AM, Brown EM: Extracellular calcium sensing; Chen RA, Goodman WG: Role of the calcium-sensing receptor).'
+- source: plasma_calcium
+  target: parathyroid_chief_cell_proliferation
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: sustained low extracellular Ca2+ drives parathyroid chief-cell hypertrophy/proliferation (glands enlarge fivefold or more in rickets, pregnancy, lactation); conditions that raise Ca2+ decrease gland size -> inverse (negative) control
+  evidence: '"Even the slightest decrease in calcium ion concentration ... causes the parathyroid glands to increase their rate of secretion within minutes; if the decreased calcium concentration persists, the glands will hypertrophy, sometimes fivefold or more ... Conversely, conditions that increase the calcium ion [concentration reduce gland size]." Guyton & Hall, Textbook of Medical Physiology, ch 79 (chw36), p. 988.'
+- source: pth
+  target: proximal_tubule_calcitriol_production
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: PTH (via cAMP in renal proximal-tubule cells) stimulates 1-alpha-hydroxylase, driving conversion of 25-OH-D to 1,25(OH)2D3 (calcitriol); without PTH almost no calcitriol is formed
+  evidence: '"Note also in Figure 79-6 that the conversion of 25-hydroxycholecalciferol to 1,25-dihydroxycholecalciferol requires PTH. In the absence of PTH, almost none of the 1,25-dihydroxycholecalciferol is formed." Guyton & Hall, Textbook of Medical Physiology, ch 79 (chw36), p. 985.'
+- source: plasma_calcium
+  target: proximal_tubule_calcitriol_production
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'raised plasma Ca2+ inversely controls calcitriol formation: a direct inhibitory effect of the Ca2+ ion on the 25-OH-D -> 1,25(OH)2D3 conversion, plus suppression of PTH (which is required for the conversion)'
+  evidence: '"Figure 79-8 demonstrates that the plasma concentration of 1,25-dihydroxycholecalciferol is inversely affected by the concentration of calcium in the plasma. ... First, the calcium ion itself has a slight effect in preventing the conversion of 25-hydroxycholecalciferol to 1,25-dihydroxycholecalciferol." Guyton & Hall, Textbook of Medical Physiology, ch 79 (chw36), p. 985.'
+- source: tsh
+  target: thyroid_follicular_t4_secretion
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: TSH increases proteolysis of stored thyroglobulin in the follicular cells, releasing T4/T3 into the blood; TSH increases all known secretory activities of the thyroid glandular cells
+  evidence: '"1. Increased proteolysis of the thyroglobulin that has already been stored in the follicles, with resultant release of the thyroid hormones into the circulating blood ... In summary, TSH increases all the known secretory activities of the thyroid glandular cells." Guyton & Hall, Textbook of Medical Physiology, ch 76 (chw34), p. 938.'
+- source: tsh
+  target: nis_activity
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: TSH increases activity of the follicular-cell iodide pump (NIS/SLC5A5), raising iodide trapping; hypophysectomy greatly diminishes iodide-pump activity
+  evidence: '"2. Increased activity of the iodide pump, which increases the rate of “iodide trapping” in the glandular cells, sometimes increasing the ratio of intracellular to extracellular iodide concentration ... to as much as eight times normal." Guyton & Hall, Textbook of Medical Physiology, ch 76 (chw34), p. 938.'
+- source: trh
+  target: thyrotroph_tsh_secretion
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: hypothalamic TRH binds TRH receptors on anterior-pituitary thyrotrophs, activating phospholipase C / Ca2+ / DAG second messengers to increase TSH release
+  evidence: '"TRH directly affects the anterior pituitary gland cells to increase their output of TSH." Guyton & Hall, Textbook of Medical Physiology, ch 76 (chw34), p. 938-939.'
+- source: free_t3
+  target: thyrotroph_tsh_secretion
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: circulating thyroid hormone (T3 is the active form) exerts direct negative feedback on anterior-pituitary thyrotrophs to decrease TSH secretion; a rise to ~1.75x normal drops TSH essentially to zero
+  evidence: '"Increased thyroid hormone in the body fluids decreases secretion of TSH by the anterior pituitary. When the rate of thyroid hormone secretion rises to about 1.75 times normal, the rate of TSH secretion falls essentially to zero ... increased thyroid hormone inhibits anterior pituitary secretion of TSH mainly by a direct effect on the [anterior pituitary]." Guyton & Hall, Textbook of Medical Physiology, ch 76 (chw34), p. 939.'
+- source: free_t4
+  target: thyrotroph_tsh_secretion
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: circulating free T4 (converted to T3 within the pituitary) exerts direct negative feedback on thyrotrophs to decrease TSH secretion; the feedback maintains near-constant free thyroid hormone
+  evidence: '"Increased thyroid hormone in the body fluids decreases secretion of TSH by the anterior pituitary. When the rate of thyroid hormone secretion rises to about 1.75 times normal, the rate of TSH secretion falls essentially to zero." Guyton & Hall, Textbook of Medical Physiology, ch 76 (chw34), p. 939.'
+- source: free_t3
+  target: metabolic_heat_production
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: thyroid hormone (T3) activates transcription of metabolic enzymes and Na-K-ATPase in nearly all tissues, raising O2 consumption and heat production; BMR falls 40-50% without thyroid and rises 60-100% in excess
+  evidence: '"Both of these hormones profoundly increase the metabolic rate of the body. Complete lack of thyroid secretion usually causes the basal metabolic rate to fall 40 to 50 per cent below normal, and extreme excesses of thyroid secretion can increase the basal metabolic rate to 60 to 100 per cent above normal." Guyton & Hall, Textbook of Medical Physiology, ch 76 (chw34), p. 934.'
+- source: free_t3
+  target: food_intake
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: thyroid hormone increases appetite and food intake, partly counterbalancing the raised metabolic rate
+  evidence: '"...thyroid hormone also increases the appetite, and this may counterbalance the change in the metabolic rate." and "In addition to increased appetite and food intake, which has been discussed..." Guyton & Hall, Textbook of Medical Physiology, ch 76 (chw34), p. 937-938.'
+- source: angiotensin_II
+  target: zona_glomerulosa_cell_aldosterone_secretion
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: angiotensin II acts directly on adrenal zona glomerulosa cells, increasing cholesterol->pregnenolone conversion and aldosterone-synthase output to stimulate aldosterone secretion
+  evidence: '"The secretion of these [zona glomerulosa] cells is controlled mainly by the extracellular fluid concentrations of angiotensin II and potassium, both of which stimulate aldosterone secretion." Guyton & Hall, Textbook of Medical Physiology, ch 77 (chw34), p. 944-945.'
+- source: plasma_potassium
+  target: zona_glomerulosa_cell_aldosterone_secretion
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: raised extracellular K+ depolarizes zona glomerulosa cells, triggering Ca2+ entry and increased aldosterone synthesis/secretion
+  evidence: '"The secretion of these [zona glomerulosa] cells is controlled mainly by the extracellular fluid concentrations of angiotensin II and potassium, both of which stimulate aldosterone secretion." Guyton & Hall, Textbook of Medical Physiology, ch 77 (chw34), p. 944-945.'
+- source: acth
+  target: zona_fasciculata_cortisol_secretion
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: ACTH -> adenylyl cyclase/cAMP -> protein kinase A -> cholesterol desmolase (rate-limiting cholesterol->pregnenolone) drives cortisol secretion by zona fasciculata cells; cortisol secretion is controlled almost entirely by ACTH
+  evidence: '"...secretion of cortisol is controlled almost entirely by ACTH secreted by the anterior pituitary gland." Guyton & Hall, Textbook of Medical Physiology, ch 77 (chw35), p. 955.'
+- source: crh
+  target: corticotroph_acth_secretion
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: hypothalamic CRF/CRH secreted into the hypophysial portal system induces ACTH secretion from anterior-pituitary corticotrophs; the pituitary secretes only minute ACTH without CRF
+  evidence: '"...corticotropin-releasing factor (CRF). It is secreted into the primary capillary plexus of the hypophysial portal system in the median eminence of the hypothalamus and then carried to the anterior pituitary gland, where it induces ACTH secretion. ... The anterior pituitary gland can secrete only minute quantities of ACTH in the absence of CRF." Guyton & Hall, Textbook of Medical Physiology, ch 77 (chw35), p. 955.'
+- source: cortisol
+  target: parvocellular_crh_secretion
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: cortisol exerts direct negative feedback on the hypothalamus (paraventricular parvocellular neurosecretory cells) to decrease CRF/CRH formation
+  evidence: '"Cortisol has direct negative feedback effects on (1) the hypothalamus to decrease the formation of CRF and (2) the anterior pituitary gland to decrease the formation of ACTH." Guyton & Hall, Textbook of Medical Physiology, ch 77 (chw35), p. 955-956.'
+- source: cortisol
+  target: corticotroph_acth_secretion
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: cortisol acts directly on anterior-pituitary corticotrophs to decrease ACTH formation (the basis of dexamethasone suppression)
+  evidence: '"Cortisol has direct negative feedback effects on (1) the hypothalamus to decrease the formation of CRF and (2) the anterior pituitary gland to decrease the formation of ACTH." Guyton & Hall, Textbook of Medical Physiology, ch 77 (chw35), p. 955-956.'
+- source: cortisol
+  target: plasma_amino_acids
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: cortisol mobilizes amino acids from extrahepatic (mainly muscle) protein stores, raising plasma amino acids available as substrate for hepatic gluconeogenesis
+  evidence: '"2. Cortisol causes mobilization of amino acids from the extrahepatic tissues mainly from muscle. As a result, more amino acids become available in the plasma to enter into the gluconeogenesis process of the liver..." Guyton & Hall, Textbook of Medical Physiology, ch 77 (chw35), p. 951.'
+- source: plasma_glucose
+  target: alpha_cell_glucagon_secretion
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: raised blood glucose suppresses pancreatic alpha-cell glucagon secretion (opposite direction to its effect on insulin); hypoglycemia raises glucagon severalfold
+  evidence: '"Increased Blood Glucose Inhibits Glucagon Secretion. The blood glucose concentration is by far the most potent factor that controls glucagon secretion ... increasing the blood glucose to hyperglycemic levels decreases plasma glucagon." Guyton & Hall, Textbook of Medical Physiology, ch 78 (chw35), p. 971.'
+- source: plasma_amino_acids
+  target: alpha_cell_glucagon_secretion
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: high plasma amino acids (especially alanine and arginine, after a protein meal) stimulate alpha-cell glucagon secretion, promoting conversion of amino acids to glucose
+  evidence: '"Increased Blood Amino Acids Stimulate Glucagon Secretion. High concentrations of amino acids, as occur in the blood after a protein meal (especially the amino acids alanine and arginine), stimulate the secretion of glucagon." Guyton & Hall, Textbook of Medical Physiology, ch 78 (chw35), p. 971.'
+- source: plasma_insulin
+  target: hepatic_glycogen_synthase_activity
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: insulin increases the activity of hepatic glycogen synthase (via dephosphorylation), promoting polymerization of glucose into liver glycogen
+  evidence: '"3. Insulin also increases the activities of the enzymes that promote glycogen synthesis, including especially glycogen synthase, which is responsible for polymerization of the monosaccharide units to form the glycogen molecules." Guyton & Hall, Textbook of Medical Physiology, ch 78 (chw35), p. 964.'
+- source: plasma_insulin
+  target: lipoprotein_lipase_activity
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: insulin activates lipoprotein lipase in the adipose-capillary endothelium, hydrolyzing VLDL/chylomicron triglycerides to fatty acids for uptake and storage in adipose
+  evidence: '"Insulin activates lipoprotein lipase in the capillary walls of the adipose tissue, which splits the triglycerides again into fatty acids, a requirement for them to be absorbed into the adipose cells..." Guyton & Hall, Textbook of Medical Physiology, ch 78 (chw35), p. 965.'
+- source: plasma_insulin
+  target: adipose_hsl_activity
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: insulin inhibits hormone-sensitive lipase in adipocytes, reducing hydrolysis of stored triglyceride and free-fatty-acid release
+  evidence: '"Insulin inhibits the action of hormone-sensitive lipase. This is the enzyme that causes hydrolysis of the triglycerides already stored in the fat cells." — Guyton & Hall, Textbook of Medical Physiology, Ch. 78, p. 965'
+- source: norepinephrine
+  target: beta_cell_insulin_secretion
+  sign: '-'
+  causal_evidence: pharmacological
+  mechanism: norepinephrine via alpha-adrenergic receptors inhibits exocytosis of insulin from beta cells
+  evidence: '"Other hormones, including somatostatin and norepinephrine (by activating a-adrenergic receptors), inhibit exocytosis of insulin." — Guyton & Hall, Textbook of Medical Physiology, Ch. 78, p. 968'
+- source: ghrh
+  target: somatotroph_gh_secretion
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: GHRH binds somatotroph membrane receptors -> adenylyl-cyclase/cAMP -> Ca2+ influx and GH vesicle fusion; also increases GH gene transcription
+  evidence: '"GHRH stimulates growth hormone secretion by attaching to specific cell membrane receptors on the outer surfaces of the growth hormone cells in the pituitary gland. The receptors activate the adenylyl cyclase system inside the cell membrane, increasing the intracellular level of cyclic adenosine monophosphate (cAMP)." — Guyton & Hall, Textbook of Medical Physiology, Ch. 75, p. 925-926'
+- source: somatostatin
+  target: somatotroph_gh_secretion
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: hypothalamic somatostatin (growth-hormone inhibitory hormone) suppresses somatotroph GH secretion
+  evidence: '"Growth hormone inhibitory hormone (somatostatin)" — Guyton & Hall, Textbook of Medical Physiology, Ch. 75, p. 925'
+- source: hepatic_igf1
+  target: somatotroph_gh_secretion
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: circulating IGF-1/somatomedin exerts negative feedback on somatotroph GH secretion, closing the GH-IGF-1 loop
+  evidence: '"Somatomedins (insulin-like growth factors)" — Guyton & Hall, Textbook of Medical Physiology, Ch. 75, p. 925'
+- source: plasma_glucose
+  target: somatotroph_gh_secretion
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: increased blood glucose inhibits, decreased blood glucose (hypoglycaemia) stimulates GH secretion (sensed via ventromedial hypothalamus)
+  evidence: '"Decreased blood glucose [stimulates] ... Increased blood glucose [inhibits growth hormone secretion]" — Guyton & Hall, Textbook of Medical Physiology, Ch. 75, p. 925'
+- source: plasma_free_fatty_acids
+  target: somatotroph_gh_secretion
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: increased blood free fatty acids inhibit, decreased FFA stimulate GH secretion
+  evidence: '"Decreased blood free fatty acids [stimulates] ... Increased blood free fatty acids [inhibits growth hormone secretion]" — Guyton & Hall, Textbook of Medical Physiology, Ch. 75, p. 925'
+- source: erythropoietin
+  target: epo_receptor_activity
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: EPO binds and dimerizes the erythropoietin receptor (EPOR) on erythroid progenitors -> receptor activation
+  evidence: '"The principal stimulus for red blood cell production in low oxygen states is a circulating hormone called erythropoietin ... In the absence of erythropoietin, hypoxia has little or no effect in stimulating red blood cell production." — Guyton & Hall, Textbook of Medical Physiology, Ch. 32, p. 422-423'
+- source: epo_receptor_activity
+  target: erythroid_progenitor_proliferation
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: activated EPOR stimulates production of proerythroblasts from hematopoietic stem cells and accelerates passage through erythroblast stages
+  evidence: '"the important effect of erythropoietin is to stimulate the production of proerythroblasts from hematopoietic stem cells in the bone marrow ... the erythropoietin causes these cells to pass more rapidly through the different erythroblastic stages" — Guyton & Hall, Textbook of Medical Physiology, Ch. 32, p. 423'
+- source: leptin
+  target: lepr_signaling
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: leptin binds LEPR on arcuate POMC/AGRP neurons -> LEPR signalling activation
+  evidence: '"Leptin then circulates to the brain, where it moves across the blood-brain barrier by facilitated diffusion and occupies leptin receptors at multiple sites in the hypothalamus, especially the POMC neurons of the arcuate nuclei." — Guyton & Hall, Textbook of Medical Physiology, Ch. 71, p. 868'
+- source: lepr_signaling
+  target: hypothalamic_appetite_drive
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: LEPR signalling stimulates POMC/alpha-MSH (anorexigenic) and inhibits AGRP-NPY, reducing orexigenic appetite drive
+  evidence: '"Stimulation of leptin receptors in these hypothalamic nuclei initiates multiple actions that decrease fat storage, including (1) decreased production in the hypothalamus of appetite stimulators, such as NPY and AGRP" — Guyton & Hall, Textbook of Medical Physiology, Ch. 71, p. 868-870'
+- source: adipose_tissue_mass
+  target: adipocyte_leptin_secretion
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: adipocytes secrete leptin in proportion to fat mass/size, the adiposity signal to the hypothalamus
+  evidence: '"When the amount of adipose tissue increases (signaling excess energy storage), the adipocytes produce increased amounts of leptin, which is released into the blood." — Guyton & Hall, Textbook of Medical Physiology, Ch. 71, p. 867-868'
+- source: gnrh
+  target: gonadotroph_lh_secretion
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: pulsatile GnRH -> gonadotroph cAMP -> LH secretion; LH follows GnRH pulses faithfully
+  evidence: '"The secretion of LH by the anterior pituitary gland is also cyclical, with LH following fairly faithfully the pulsatile release of GnRH." — Guyton & Hall, Textbook of Medical Physiology, Ch. 80, p. 1007-1008'
+- source: gnrh
+  target: gonadotroph_fsh_secretion
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: GnRH stimulates gonadotroph FSH secretion (responds to longer-term GnRH changes rather than each pulse)
+  evidence: '"FSH secretion ... changes more slowly over a period of many hours in response to longer-term changes in GnRH." — Guyton & Hall, Textbook of Medical Physiology, Ch. 80, p. 1007-1008'
+- source: lh
+  target: leydig_testosterone_secretion
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: LH stimulates Leydig cells (cAMP) -> testosterone secretion; output roughly proportional to LH
+  evidence: '"Testosterone is secreted by the interstitial cells of Leydig in the testes, but only when they are stimulated by LH ... the quantity of testosterone secreted increases approximately in direct proportion to the amount of LH available." — Guyton & Hall, Textbook of Medical Physiology, Ch. 80, p. 1007-1008'
+- source: testosterone
+  target: gnrh_neuron_gnrh_secretion
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: testosterone acts mainly on the hypothalamus to decrease GnRH secretion (primary HPG negative-feedback arm)
+  evidence: '"Most of this inhibition probably results from a direct effect of testosterone on the hypothalamus to decrease the secretion of GnRH." — Guyton & Hall, Textbook of Medical Physiology, Ch. 80, p. 1007-1008'
+- source: inhibin
+  target: gonadotroph_fsh_secretion
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: Sertoli-cell inhibin has a strong direct effect on the anterior pituitary to selectively inhibit FSH secretion (spermatogenesis feedback)
+  evidence: '"This hormone [inhibin] has a strong direct effect on the anterior pituitary gland to inhibit the secretion of FSH." — Guyton & Hall, Textbook of Medical Physiology, Ch. 80, p. 1008'
+- source: sympathetic_tone
+  target: adrenal_chromaffin_cell_epinephrine_secretion
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: sympathetic preganglionic (cholinergic) drive stimulates adrenal-medulla chromaffin cells to release large quantities of epinephrine (and norepinephrine)
+  evidence: '"Stimulation of the sympathetic nerves to the adrenal medullae causes large quantities of epinephrine and norepinephrine to be released into the circulating blood." — Guyton & Hall, Textbook of Medical Physiology, Ch. 60, p. 754-755'
+- source: epinephrine
+  target: metabolic_heat_production
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'adrenal epinephrine calorigenic effect: raises whole-body metabolic rate (up to ~100% above normal) and basal metabolic rate'
+  evidence: '"the epinephrine secreted by the adrenal medullae can increase the metabolic rate of the whole body often to as much as 100 per cent above normal" — Guyton & Hall, Textbook of Medical Physiology, Ch. 60, p. 754-755'
+- source: plasma_fibrinogen
+  target: fibrin_clot
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: thrombin polymerizes fibrinogen into fibrin fibers; fibrinogen is the essential substrate, so higher fibrinogen supply increases fibrin-clot formation
+  evidence: '"It acts on fibrinogen to remove four low-molecular-weight peptides from each molecule of fibrinogen ... fibrinogen is one of the essential factors in the coagulation process" — Guyton & Hall, Textbook of Medical Physiology, Ch. 36, p. 459-460'
+- source: plasma_glucagon
+  target: adipose_hsl_activity
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: glucagon (via cAMP/PKA) activates adipocyte hormone-sensitive lipase, increasing lipolysis and free-fatty-acid mobilization
+  evidence: '"glucagon activates adipose cell lipase, making [increased quantities of fatty acids available]" — Guyton & Hall, Textbook of Medical Physiology (insulin/glucagon; glucagon lipolytic action)'
+- source: plasma_vitamin_k
+  target: vkgc_activity
+  sign: +
+  causal_evidence: pharmacological
+  mechanism: vitamin K is the obligate cofactor for gamma-glutamyl carboxylase (GGCX) carboxylating clotting factors; warfarin (coumarin) antagonizes the vitamin-K axis, lowering carboxylase output — so raising vitamin K raises GGCX activity
+  evidence: '"Warfarin causes this effect by competing with vitamin K for reactive sites in the enzymatic processes for formation of prothrombin and the other three clotting factors, thereby blocking the action of vitamin K" — Guyton & Hall, Textbook of Medical Physiology, ch 36 (Hemostasis)'
+- source: il1beta
+  target: plasma_prostaglandin_e2
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: IL-1 (endogenous pyrogen) induces COX-mediated prostaglandin E2 synthesis; PGE2 acts on the hypothalamus to raise the thermoregulatory set-point (COX-blocking drugs abrogate the fever, corroborating the induction)
+  evidence: '"interleukin-1 causes fever by first inducing the formation of one of the prostaglandins, mainly prostaglandin E2... When prostaglandin formation is blocked by drugs, the fever is... reduced" — Guyton & Hall, Textbook of Medical Physiology (thermoregulation/fever)'
+production_edges:
+- source: type_ii_pneumocyte_surfactant_secretion
+  target: alveolar_surfactant_amount
+  sign: +
+  production_evidence: curated_source_statement
+  mechanism: 'process output: type II alveolar epithelial cell (pneumocyte) secretion of surfactant into the alveolar lining fluid increases the amount of surfactant in the alveolar space'
+  evidence: '"surfactant is secreted by special alveolar epithelial cells into the fluids that coat the inside surface of the alveoli." (Hall Textbook of Medical Physiology, ch 42, Lack of Surfactant as a Cause of Lung Collapse); RDS/hyaline membrane disease is the depressed-secretion phenotype.'

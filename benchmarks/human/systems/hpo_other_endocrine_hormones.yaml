@@ -1,0 +1,273 @@
+# =============================================================================
+# Other endocrine hormones / biomarkers — HPO directional-gap coverage
+#                                    — PhysioMap fragment  *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Hand-encoded grounding nodes for a set of circulating endocrine analytes,
+# bone-turnover markers, natriuretic peptides, steroid intermediates, thyroid
+# species, and two enzyme-activity roots, each required to cover an HPO
+# abnormal-quantity term. Most are plasma/serum concentrations (scale
+# organ_system, PATO:0000033). Two are enzyme catalytic-activity roots
+# (scale cellular, PATO:0001414) with a verified bearer cell.
+#
+# This is deliberately mostly an ISLAND fragment: a grounded concentration node
+# with NO causal edges is valuable and safe — the comparative-statics solver
+# simply abstains on it, and the HPO forward/backward harness maps the term to
+# the node + sign. Edges are added ONLY where a cited mechanism gives a
+# defensible interventional sign (the two enzyme roots -> their product/substrate
+# steroid or thyroid pools). Per PhysioMap policy, NO guessed edges.
+#
+# Provenance (physiology / biochemistry):
+#   - Williams Textbook of Endocrinology (steroidogenesis: pregnenolone ->
+#     17-OH-pregnenolone -> DHEA -> androstenedione -> testosterone/estrone;
+#     aromatase CYP19A1 converts androstenedione->estrone and testosterone->
+#     estradiol; DHEA-S is the sulfated DHEA pool; corticosterone & 18-OH species
+#     are mineralocorticoid-pathway intermediates).
+#   - Boron & Boulpaep Medical Physiology (thyroid hormone synthesis &
+#     peripheral deiodination: D1/D2 5'-deiodinase activate T4->T3; D3 and D1
+#     inner-ring deiodination produce reverse T3; thyroglobulin is the follicular
+#     storage protein; calcitonin from thyroid C cells; natriuretic peptides
+#     ANP/BNP and their N-terminal pro-fragments NT-proANP/NT-proBNP).
+#   - Harrison's Principles of Internal Medicine (tumor markers / endocrine labs:
+#     beta-hCG, VIP (VIPoma), gastrin, thyroglobulin; bone-turnover markers
+#     osteocalcin, beta-CTX, osteopontin; EPO, thrombopoietin, adiponectin, VEGF).
+#   - Lehninger Principles of Biochemistry (steroid & thyroid hormone chemistry).
+#
+# Entity IRIs verified by grepping ontology/.obo_cache (CHEBI/PR/CL); any analyte
+# without an exact OBO 'name:' match has entity_iri: null (NOT fabricated):
+#   - 18-hydroxycortisone: CHEBI has 18-hydroxycorticoSTERONE (a distinct
+#     compound), not 18-hydroxycortiSONE -> null.
+#   - beta-CTX (C-terminal collagen telopeptide crosslink): no clean OBO class -> null.
+#   - VEGF / NT-proANP / NT-proBNP / reverse-T3-as-distinct-pool / total-T4 vs
+#     free-T4: PR/CHEBI have the parent protein/small molecule but not always the
+#     exact circulating species; IRIs given only where the OBO name matches.
+#
+# Existing-node mappings (NOT re-created here; the HPO term maps to the existing id):
+#   anp, cortisol, erythropoietin, gastrin, fgf23, free_t4 (free fraction only).
+# =============================================================================
+
+name: hpo_other_endocrine_hormones
+description: >-
+  DRAFT grounding nodes for circulating endocrine hormones, steroid pathway
+  intermediates, thyroid hormone species, natriuretic peptides, bone-turnover
+  markers, and two enzyme-activity roots (aromatase, type-II deiodinase) needed
+  to cover HPO abnormal-quantity terms in the "other endocrine hormones" theme.
+  Mostly a self-contained island of grounded concentration nodes (the solver
+  abstains); a small number of cited enzyme -> steroid/thyroid product/substrate
+  edges are included. Single/dual-scale (ORGAN_SYSTEM concentrations + CELLULAR
+  enzyme roots), Phase 1.
+
+nodes:
+  # --- androgens / sex-steroid pathway -------------------------------------
+  - id: plasma_androgen
+    label: plasma androgen concentration (total androgenic steroids)
+    scale: organ_system
+    entity_iri: CHEBI:50113            # androgen (chemical class)
+    quality_iri: PATO:0000033
+
+  - id: plasma_androstenedione
+    label: plasma androstenedione concentration
+    scale: organ_system
+    entity_iri: CHEBI:16422            # androst-4-ene-3,17-dione (androstenedione)
+    quality_iri: PATO:0000033
+
+  - id: plasma_dhea
+    label: plasma dehydroepiandrosterone (DHEA) concentration
+    scale: organ_system
+    entity_iri: CHEBI:28689            # dehydroepiandrosterone
+    quality_iri: PATO:0000033
+
+  - id: plasma_dheas
+    label: plasma dehydroepiandrosterone-sulfate (DHEA-S) concentration
+    scale: organ_system
+    entity_iri: CHEBI:16814            # dehydroepiandrosterone sulfate
+    quality_iri: PATO:0000033
+
+  - id: plasma_dihydrotestosterone
+    label: plasma dihydrotestosterone (DHT) concentration
+    scale: organ_system
+    entity_iri: CHEBI:16330            # 17beta-hydroxy-5alpha-androstan-3-one (5alpha-DHT)
+    quality_iri: PATO:0000033
+
+  - id: plasma_17_hydroxypregnenolone
+    label: plasma 17-hydroxypregnenolone concentration
+    scale: organ_system
+    entity_iri: CHEBI:28750            # 17alpha-hydroxypregnenolone
+    quality_iri: PATO:0000033
+
+  - id: plasma_estrone
+    label: plasma estrone concentration
+    scale: organ_system
+    entity_iri: CHEBI:17263            # estrone
+    quality_iri: PATO:0000033
+
+  - id: plasma_estriol
+    label: plasma estriol concentration
+    scale: organ_system
+    entity_iri: CHEBI:27974            # estriol
+    quality_iri: PATO:0000033
+
+  - id: aromatase_activity
+    label: aromatase (CYP19A1) catalytic activity
+    scale: cellular
+    entity_iri: PR:000006100           # aromatase
+    bearer_entity_iri: CL:0000501      # granulosa cell (an aromatase-expressing steroidogenic cell)
+    quality_iri: PATO:0001414          # catalytic activity
+
+  # --- mineralocorticoid-pathway intermediates -----------------------------
+  - id: plasma_corticosterone
+    label: plasma corticosterone concentration
+    scale: organ_system
+    entity_iri: CHEBI:16827            # corticosterone
+    quality_iri: PATO:0000033
+
+  - id: plasma_18_hydroxycortisone
+    label: plasma 18-hydroxycortisone concentration
+    scale: organ_system
+    # no exact CHEBI 'name:' for 18-hydroxycortisone (CHEBI:16485 is
+    # 18-hydroxycorticoSTERONE, a different compound) -> entity_iri null
+    quality_iri: PATO:0000033
+
+  # --- thyroid hormone species ---------------------------------------------
+  - id: plasma_t4
+    label: plasma (total) thyroxine (T4) concentration
+    scale: organ_system
+    entity_iri: CHEBI:30660            # thyroxine (total T4 pool; free fraction is the separate free_t4 node)
+    quality_iri: PATO:0000033
+
+  - id: plasma_reverse_t3
+    label: plasma reverse triiodothyronine (reverse T3) concentration
+    scale: organ_system
+    entity_iri: CHEBI:28774            # 3,3',5'-triiodothyronine (reverse T3)
+    quality_iri: PATO:0000033
+
+  - id: plasma_thyroglobulin
+    label: plasma thyroglobulin concentration
+    scale: organ_system
+    entity_iri: PR:000016283           # thyroglobulin
+    quality_iri: PATO:0000033
+
+  - id: plasma_calcitonin
+    label: plasma calcitonin concentration
+    scale: organ_system
+    entity_iri: PR:000027224           # calcitonin (isoform 1; mature calcitonin)
+    quality_iri: PATO:0000033
+
+  - id: type_2_deiodinase_activity
+    label: tissue type-II iodothyronine deiodinase (DIO2) catalytic activity
+    scale: cellular
+    entity_iri: PR:000006481           # type II iodothyronine deiodinase
+    quality_iri: PATO:0001414          # catalytic activity
+
+  # --- gonadal / pituitary glycoprotein hormones ---------------------------
+  - id: plasma_amh
+    label: plasma anti-Mullerian hormone (AMH) concentration
+    scale: organ_system
+    entity_iri: PR:000000073           # Muellerian-inhibiting factor (anti-Mullerian hormone)
+    quality_iri: PATO:0000033
+
+  - id: plasma_glycoprotein_hormone_alpha_subunit
+    label: plasma glycoprotein hormone alpha subunit concentration
+    scale: organ_system
+    entity_iri: PR:000005388           # glycoprotein hormones alpha chain
+    quality_iri: PATO:0000033
+
+  - id: plasma_beta_hcg
+    label: plasma beta human chorionic gonadotropin (beta-hCG) concentration
+    scale: organ_system
+    entity_iri: PR:000005391           # choriogonadotropin subunit beta
+    quality_iri: PATO:0000033
+
+  # --- natriuretic peptides -------------------------------------------------
+  - id: plasma_bnp
+    label: plasma B-type (brain) natriuretic peptide (BNP) concentration
+    scale: organ_system
+    entity_iri: PR:000011375           # natriuretic peptides B (NPPB / BNP)
+    quality_iri: PATO:0000033
+
+  - id: plasma_nt_probnp
+    label: plasma N-terminal pro-B-type natriuretic peptide (NT-proBNP) concentration
+    scale: organ_system
+    # NT-proBNP is the cleaved N-terminal prohormone fragment of NPPB; no exact
+    # OBO 'name:' for this circulating fragment -> entity_iri null
+    quality_iri: PATO:0000033
+
+  - id: plasma_nt_proanp
+    label: plasma N-terminal pro-A-type natriuretic peptide (NT-proANP) concentration
+    scale: organ_system
+    # N-terminal pro-ANP fragment; no exact OBO 'name:' match -> entity_iri null
+    quality_iri: PATO:0000033
+
+  # --- other circulating endocrine / paracrine factors ---------------------
+  - id: plasma_adiponectin
+    label: plasma adiponectin concentration
+    scale: organ_system
+    entity_iri: PR:000003777           # adiponectin
+    quality_iri: PATO:0000033
+
+  - id: plasma_thrombopoietin
+    label: plasma thrombopoietin concentration
+    scale: organ_system
+    entity_iri: PR:000016318           # thrombopoietin
+    quality_iri: PATO:0000033
+
+  - id: plasma_vasoactive_intestinal_peptide
+    label: plasma vasoactive intestinal peptide (VIP) concentration
+    scale: organ_system
+    entity_iri: PR:000017299           # VIP peptides
+    quality_iri: PATO:0000033
+
+  - id: plasma_vegf
+    label: plasma vascular endothelial growth factor (VEGF) concentration
+    scale: organ_system
+    entity_iri: PR:P15692            # vascular endothelial growth factor A, long form (human) = canonical UniProt VEGFA (P15692); plasma VEGF = VEGFA, assays span multiple isoforms
+    quality_iri: PATO:0000033
+
+  - id: plasma_proinsulin
+    label: plasma proinsulin concentration
+    scale: organ_system
+    entity_iri: PR:000020310           # proinsulin
+    quality_iri: PATO:0000033
+
+  # --- bone-turnover markers (humoral / circulating) -----------------------
+  - id: plasma_osteocalcin
+    label: plasma osteocalcin concentration
+    scale: organ_system
+    entity_iri: PR:000030444           # osteocalcin
+    quality_iri: PATO:0000033
+
+  - id: plasma_osteopontin
+    label: plasma osteopontin concentration
+    scale: organ_system
+    entity_iri: PR:000015561           # osteopontin
+    quality_iri: PATO:0000033
+
+  - id: plasma_beta_ctx
+    label: plasma beta-CTX (C-terminal collagen type-I telopeptide) concentration
+    scale: organ_system
+    # beta-CrossLaps / beta-CTX is a collagen-I degradation fragment; no clean
+    # OBO class -> entity_iri null
+    quality_iri: PATO:0000033
+
+causal_edges:
+  # --- aromatase converts androgens -> estrogens ---------------------------
+  - source: aromatase_activity
+    target: plasma_estrone
+    sign: "+"
+    causal_evidence: genetic_lof_gof
+    mechanism: aromatase (CYP19A1) aromatizes androstenedione to estrone (and testosterone to estradiol); higher enzyme activity raises the estrogen product pool
+    evidence: "Williams Textbook of Endocrinology (aromatase CYP19A1 converts androstenedione->estrone, testosterone->estradiol); aromatase-excess syndrome (gain of CYP19A1) raises circulating estrogens"
+  - source: aromatase_activity
+    target: plasma_androstenedione
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: aromatase consumes androstenedione as substrate; higher aromatase activity lowers the androstenedione pool (substrate consumption), while aromatase deficiency raises androgens
+    evidence: "Williams Textbook of Endocrinology (aromatase deficiency: accumulation of androgenic precursors incl. androstenedione, low estrogens); substrate-consumption sign convention"
+
+  # --- type-II deiodinase: T4 -> T3 (does NOT make reverse T3) --------------
+  - source: type_2_deiodinase_activity
+    target: plasma_t4
+    sign: "-"
+    mechanism: type-II 5'-deiodinase (DIO2) removes an outer-ring iodine from T4 to generate T3, consuming T4 substrate; higher DIO2 activity lowers the local/contributory T4 pool
+    evidence: "Boron & Boulpaep Medical Physiology (peripheral deiodination: D2 5'-deiodinase activates T4->T3, consuming T4 substrate)"
+
+constitutive_edges: []   # none — grounding fragment (no cross-scale lift this phase)

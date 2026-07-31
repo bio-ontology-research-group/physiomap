@@ -1,0 +1,123 @@
+# =============================================================================
+# Potassium homeostasis — PhysioMap fragment
+# *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Hand-encoded canonical potassium regulation. Every causal edge sign is the
+# sign of the partial derivative of the target w.r.t. the source at steady
+# state, all else equal (the interventionist partial).
+#
+# Scope: ORGAN / ORGAN_SYSTEM scale. Within-scale signed cyclic causal edges.
+# Two complementary control systems for plasma [K+]:
+#   (1) EXTERNAL balance (renal excretion), slow, aldosterone-driven.
+#   (2) INTERNAL balance (transcellular shift), fast, insulin- and pH-driven.
+#
+# Core negative-feedback loop (required), the K+-aldosterone loop:
+#   plasma_potassium -> aldosterone (+)
+#   aldosterone -> renal_potassium_excretion (+)
+#   renal_potassium_excretion -> plasma_potassium (-)
+#   ==> net negative feedback restoring plasma [K+].
+#
+# Internal-balance arm:
+#   plasma_insulin -> cellular_potassium_uptake (+) -| plasma_potassium
+#   arterial_ph -> cellular_potassium_uptake (+) -| plasma_potassium
+#     (alkalosis/high pH drives K+ into cells; acidosis/low pH drives it out —
+#      the well-known H+/K+ transcellular exchange)
+#   plasma_potassium -> plasma_insulin (+)  (hyperkalemia stimulates insulin)
+#
+# Boundary nodes (defined in EXISTING vocabulary, not redefined here):
+#   plasma_potassium, aldosterone, plasma_insulin, arterial_ph
+#
+# Reference models / sources:
+#   - BioModels MODEL0911376350 (Guyton1972_Aldosterone), from Guyton AC,
+#     Coleman TG, Granger HJ. "Circulation: overall regulation."
+#     Annu Rev Physiol 1972;34:13-46 (PMID 4334846) — the aldosterone module
+#     of the Guyton circulation model couples plasma [K+] to aldosterone
+#     secretion and aldosterone to renal K+ excretion.
+#   - Guyton & Hall, Textbook of Medical Physiology (chapter on renal
+#     regulation of potassium and aldosterone).
+#   - Boron & Boulpaep, Medical Physiology (transcellular K+ shifts: insulin,
+#     acid-base; renal K+ secretion).
+# =============================================================================
+
+name: potassium_homeostasis
+description: >-
+  DRAFT potassium homeostasis as a PhysioMap signed cyclic causal graph.
+  External balance (aldosterone-driven renal K+ excretion) and internal
+  balance (insulin- and pH-driven transcellular K+ shift). Encodes the
+  K+-aldosterone negative-feedback loop. Boundary nodes: plasma_potassium,
+  aldosterone, plasma_insulin, arterial_ph. Sources: BioModels
+  MODEL0911376350 (Guyton1972_Aldosterone; Guyton 1972, Annu Rev Physiol,
+  PMID 4334846); Guyton & Hall; Boron & Boulpaep. Single-scale (Phase 1).
+
+nodes:
+- id: renal_potassium_excretion
+  label: renal (distal nephron) potassium excretion rate
+  scale: organ_system
+  entity_iri: GO:0036359               # renal potassium excretion (process bearer)
+  bearer_entity_iri: UBERON:0002113    # kidney (anatomical bearer)
+  quality_iri: PATO:0000161            # secretion/excretion rate
+  quality_kind: rate
+- id: cellular_potassium_uptake
+  label: net cellular (transcellular) potassium uptake rate
+  scale: cellular
+  entity_iri: GO:1990573               # potassium ion import across plasma membrane (process bearer)
+  quality_iri: PATO:0000161            # rate (of uptake)
+  quality_kind: rate
+
+causal_edges:
+  # --- K+-aldosterone negative-feedback loop (core, required) --------------
+- source: plasma_potassium
+  target: aldosterone
+  sign: "+"
+  mechanism: >-
+    rising plasma [K+] depolarises zona glomerulosa cells -> Ca2+ influx ->
+    stimulates aldosterone synthase (CYP11B2) and aldosterone secretion
+  evidence: "BioModels MODEL0911376350 (Guyton1972_Aldosterone); Williams/Guyton & Hall: plasma K+ is a primary stimulus of aldosterone | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-094 (17.7: The Adrenal Glands): 'it is released in response to elevated blood K+, low blood Na+, low blood pressure, or low blood volume.'; OpenStax Anatomy & Physiology 2e §anp-152 (25.9: Endocrine Regulation of Kidney Function): 'Aldosterone...is released from the adrenal cortex in response to angiotensin II or directly in response to increased plasma K+.'; OpenStax Anatomy & Physiology 2e §anp-157 (26.4: Electrolyte Balance): 'Aldosterone is released if blood levels of potassium increase.'; OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): 'Aldosterone release is stimulated by a decrease in blood sodium levels, blood volume, or blood pressure, or an increase in blood potassium levels.'; OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): 'Aldosterone release from the adrenal cortex is stimulated by a decrease in blood concentrations of sodium ions, blood volume, or blood pressure, or by an increase in blood potassium levels.' [citations PubMed-verified]"
+- source: aldosterone
+  target: renal_potassium_excretion
+  sign: "+"
+  mechanism: >-
+    aldosterone (MR) upregulates principal-cell ENaC and Na/K-ATPase ->
+    increased lumen-negative voltage and apical ROMK/BK K+ secretion
+  evidence: "BioModels MODEL0911376350 (Guyton1972_Aldosterone); Guyton & Hall: aldosterone increases distal K+ secretion | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-094 (17.7: The Adrenal Glands): 'aldosterone increases the excretion of K+.'; OpenStax Anatomy & Physiology 2e §anp-150 (25.7: Tubular Reabsorption): the Na+/K+ ATPase pump recovers Na+ while pumping K+ into forming urine; aldosterone increases this pump activity, increasing K+ secretion; OpenStax Anatomy & Physiology 2e §anp-152 (25.9: Endocrine Regulation of Kidney Function): 'It [aldosterone] is also important in regulating K+, promoting its excretion.'; OpenStax Anatomy & Physiology 2e §anp-153 (Regulation of Fluid Volume and Composition): 'When aldosterone causes a recovery of Na+ in the nephron, a negative electrical gradient is created that promotes the secretion of K+ and Cl– into the lumen'; OpenStax Anatomy & Physiology 2e §anp-154 (25.11: The Urinary System and Homeostasis): 'When Na+ is retained, K+ is excreted; when Na+ is lost, K+ is retained' (line 373) — reflects ENaC-mediated Na/K exchange in collecting duct driven by aldosterone; OpenStax Anatomy & Physiology 2e §anp-157 (26.4: Electrolyte Balance): 'aldosterone increases the excretion of potassium...excess potassium is pumped into the renal filtrate for excretion from the body.'; OpenStax Anatomy & Physiology 2e §anp-159 (26.6: Disorders of Acid-Base Balance): 'The oversecretion of ACTH results in elevated aldosterone levels and an increased loss of potassium by urinary excretion.'; OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): 'aldosterone maintains proper water balance by enhancing Na+ reabsorption and K+ secretion from extracellular fluid of the cells in kidney tubules.'; OpenStax Biology 2e §bio-41.5 (41.5: Hormonal Control of Osmoregulatory Functions): 'the aldosterone also stimulates potassium secretion concurrently with sodium reabsorption.' [citations PubMed-verified]"
+- source: renal_potassium_excretion
+  target: plasma_potassium
+  sign: "-"
+  mechanism: >-
+    urinary loss of K+ removes potassium from the extracellular fluid,
+    lowering plasma [K+] (external-balance arm)
+  evidence: "Guyton & Hall; Boron & Boulpaep: renal K+ excretion is the dominant route of external K+ balance"
+
+  # --- internal balance: transcellular shift (insulin + acid-base) --------
+- source: plasma_insulin
+  target: cellular_potassium_uptake
+  sign: "+"
+  causal_evidence: pharmacological
+  mechanism: >-
+    insulin stimulates the Na/K-ATPase (chiefly the alpha2 isoform in
+    skeletal muscle) via direct phosphorylation and translocation of the
+    pump to the plasma membrane, driving K+ from ECF into cells
+  evidence: "Boron & Boulpaep (insulin promotes cellular K+ uptake); Guyton & Hall (internal K+ balance) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-157 (26.4: Electrolyte Balance): 'When insulin is administered and glucose is taken up by cells, potassium passes through the cell membrane along with glucose, decreasing the amount of potassium in the blood.'"
+- source: cellular_potassium_uptake
+  target: plasma_potassium
+  sign: "-"
+  mechanism: >-
+    net movement of K+ from extracellular fluid into cells lowers plasma
+    [K+] without changing total body K+ (internal-balance arm)
+  evidence: "Boron & Boulpaep; Guyton & Hall: transcellular shift sets the rapid component of plasma [K+] | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-157 (26.4: Electrolyte Balance): 'potassium passes through the cell membrane along with glucose, decreasing the amount of potassium in the blood and IF.'"
+- source: arterial_ph
+  target: cellular_potassium_uptake
+  sign: "+"
+  mechanism: >-
+    alkalosis (high pH) drives H+ out of and K+ into cells via H+/K+
+    exchange and stimulated Na/K-ATPase; acidosis (low pH) reverses this
+  evidence: "Boron & Boulpaep; Guyton & Hall: acid-base status shifts K+ across the cell membrane (acidosis raises, alkalosis lowers plasma K+)"
+- source: plasma_potassium
+  target: plasma_insulin
+  sign: "+"
+  mechanism: >-
+    hyperkalemia depolarises pancreatic beta cells and directly stimulates
+    insulin secretion (a feedback that promotes K+ disposal into cells)
+  evidence: "Boron & Boulpaep; Williams Textbook of Endocrinology: K+ is a physiologic stimulus of insulin release"
+
+constitutive_edges: []   # none yet — multi-scale expansion is a later step

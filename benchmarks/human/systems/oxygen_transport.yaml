@@ -1,0 +1,134 @@
+# =============================================================================
+# Oxygen transport & delivery (the O2 cascade) — PhysioMap fragment  *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Hand-encoded, single-scale (ORGAN_SYSTEM / ORGAN). Every causal edge sign is the
+# sign of the partial derivative of the target w.r.t. the source at steady state,
+# all else equal (interventionist partial: push source UP, does target go up (+)
+# or down (-)?). ROBERT: please correct signs/edges.
+#
+# Scope: the convective O2 cascade from blood to tissue.
+#   CaO2 = (Hb x 1.34 x SaO2) + (0.003 x PaO2)        [arterial O2 content]
+#   DO2  = CO x CaO2                                   [oxygen delivery]
+#   VO2  = CO x (CaO2 - CvO2) = DO2 x O2ER             [Fick; O2 extraction ratio]
+# New nodes:
+#   hemoglobin_o2_saturation (SaO2), arterial_o2_content (CaO2),
+#   oxygen_delivery (DO2), tissue_o2_extraction (O2ER)
+#
+# Sources for canonical signs (all verified):
+#   - West, Respiratory Physiology: The Essentials — O2 cascade; DO2 = CO x CaO2;
+#     oxyhemoglobin dissociation curve (sigmoid SaO2 vs PaO2).
+#   - Boron & Boulpaep, Medical Physiology — O2 content, Fick principle, extraction.
+#   - BioModels BIOMD0000000248 (Lai2007_O2_Transport_Metabolism): Lai N, Camesasca M,
+#     Saidel GM, Dash RK, Cabrera ME. "Linking pulmonary oxygen uptake, muscle oxygen
+#     utilization and cellular metabolism during exercise." Ann Biomed Eng 2007;
+#     PubMed 17380394 — convective + diffusive muscle O2 transport / Fick.
+#   - BioModels MODEL2305140001: Chatzinikolaou et al. "Erythrocyte metabolism."
+#     Acta Physiol (Oxf) 2024; PubMed 38270467 — erythrocyte model of the
+#     hemoglobin oxygen dissociation curve (SaO2 as function of PaO2).
+#
+# FEEDBACK LOOP closed via the hematology/EPO fragment (boundary nodes):
+#   oxygen_delivery --(+)--> renal_tissue_oxygenation --(-)--> erythropoietin
+#     --(+)--> red_cell_mass --(+)--> hematocrit --(+)--> arterial_o2_content
+#     --(+)--> oxygen_delivery
+#   i.e. one negative edge (renal O2 -> EPO) in an otherwise positive cycle =>
+#   net NEGATIVE feedback (anemia/hypoxia -> EPO -> raise O2-carrying capacity ->
+#   restore tissue O2). Comparative statics, not forward propagation, gives net sign.
+#
+# Boundary nodes (defined in sibling fragments / Guyton core; REFERENCED, not
+# redefined here — standalone load flags them as unknown, EXPECTED; resolve on merge):
+#   arterial_po2                (respiratory_acidbase)
+#   hematocrit                  (hematology_epo)   <- proxy for [Hb]
+#   cardiac_output              (guyton CV/renal core)
+#   renal_tissue_oxygenation    (hematology_epo)   <- closes the EPO loop
+#   metabolic_rate              (thyroid)          <- tissue O2 consumption / demand
+# =============================================================================
+
+name: oxygen_transport
+description: >-
+  DRAFT oxygen transport & delivery (the O2 cascade) as a PhysioMap signed cyclic
+  causal graph. Encodes the oxyhemoglobin relationship (PaO2 -> SaO2), arterial O2
+  content (CaO2 = Hb-bound + dissolved), convective oxygen delivery (DO2 = CO x CaO2),
+  and tissue O2 extraction (Fick / O2ER), wiring DO2 into renal tissue oxygenation to
+  close the erythropoietin negative-feedback loop. Sources: West Respiratory Physiology;
+  Boron & Boulpaep; BioModels BIOMD0000000248 (Lai2007), MODEL2305140001 (Hb-O2 curve).
+  Single-scale (Phase 1).
+
+nodes:
+- id: hemoglobin_o2_saturation
+  label: arterial hemoglobin oxygen saturation (SaO2)
+  scale: organ_system
+  entity_iri: CHEBI:35143              # oxyhemoglobin / hemoglobin-bound O2
+  quality_iri: PATO:0001019            # fraction / saturation
+- id: arterial_o2_content
+  label: arterial oxygen content (CaO2, mL O2 per dL blood)
+  scale: organ_system
+  entity_iri: CHEBI:15379              # dioxygen
+  quality_iri: PATO:0000033            # concentration / content
+- id: oxygen_delivery
+  label: systemic oxygen delivery (DO2 = CO x CaO2)
+  scale: organ_system
+  entity_iri: GO:0015671               # oxygen transport
+  quality_iri: PATO:0000161
+- id: tissue_o2_extraction
+  label: tissue oxygen extraction ratio (O2ER = VO2/DO2)
+  scale: tissue
+  entity_iri: CHEBI:15379              # dioxygen
+  quality_iri: PATO:0001019            # fraction / ratio
+
+causal_edges:
+  # --- oxyhemoglobin dissociation relationship -----------------------------
+- source: arterial_po2
+  target: hemoglobin_o2_saturation
+  sign: "+"
+  mechanism: "oxyhemoglobin dissociation curve: rising PaO2 raises Hb O2 saturation (sigmoid; steep below ~60 mmHg, plateau above ~90 mmHg)"
+  evidence: 'West Respiratory Physiology (O2 dissociation curve); BioModels MODEL2305140001 (Chatzinikolaou 2024, Acta Physiol — erythrocyte Hb-O2 dissociation model) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-128 (22.6: Transport of Gases): ''as the partial pressure of oxygen increases, a proportionately greater number of oxygen molecules are bound by heme… the lower the partial pressure of oxygen, the fewer oxygen molecules are bound to heme''; OpenStax Anatomy & Physiology 2e §anp-129 (22.7: Modifications in Respiratory Functions): ''hemoglobin saturation is lower at high altitudes compared to hemoglobin saturation at sea level'' due to lower partial pressure of O2; OpenStax Biology 2e §bio-39.4 (39.4: Transport of Gases in Human Bodily Fluids): ''As the partial pressure of oxygen increases, the hemoglobin becomes increasingly saturated with oxygen'' (oxygen dissociation curve, sigmoidal). [citations PubMed-verified]'
+
+  # --- arterial O2 content: CaO2 = Hb*1.34*SaO2 + 0.003*PaO2 ----------------
+- source: oxygen_delivery
+  target: tissue_o2_extraction
+  sign: "-"
+  mechanism: "at fixed O2 consumption (VO2), O2ER = VO2/DO2; rising delivery lowers the fraction of delivered O2 that must be extracted (extraction reserve)"
+  evidence: "Boron & Boulpaep (Fick: VO2 = DO2 x O2ER); West Respiratory Physiology; BioModels BIOMD0000000248 (Lai2007) [citations PubMed-verified]"
+- source: metabolic_rate
+  target: tissue_o2_extraction
+  sign: "+"
+  mechanism: "higher metabolic O2 demand (VO2) at fixed delivery raises the extraction ratio O2ER = VO2/DO2 (widened a-v O2 difference)"
+  evidence: "Boron & Boulpaep (Fick principle; exercise widens a-v O2 difference); BioModels BIOMD0000000248 (Lai2007, muscle O2 utilization) [citations PubMed-verified]"
+  causal_evidence: mechanistic_model
+
+  # --- close the EPO negative-feedback loop into hematology -----------------
+- source: oxygen_delivery
+  target: renal_tissue_oxygenation
+  sign: "+"
+  mechanism: "renal tissue O2 tension is set by convective O2 delivery to the kidney (renal blood flow x arterial O2 content); higher systemic DO2 raises renal O2 supply -> closes the renal-O2 -> EPO loop"
+  evidence: "West Respiratory Physiology (tissue PO2 follows O2 delivery); Boron & Boulpaep (renal O2 supply/demand); BioModels BIOMD0000000248 (Lai2007 convective+diffusive tissue O2) [citations PubMed-verified]"
+  causal_evidence: mechanistic_model
+
+quantitative_definitions:
+  - kind: structural-function
+    result: arterial_o2_content
+    arguments:
+      - node: hemoglobin_o2_saturation
+        role: argument
+        derivative_sign: "+"
+      - node: hematocrit
+        role: argument
+        derivative_sign: "+"
+      - node: arterial_po2
+        role: argument
+        derivative_sign: "+"
+    mechanism: "CaO2 = (Hb × 1.34 × SaO2) + (0.003 × PaO2), with hematocrit as the model's proxy for Hb concentration"
+    evidence: "West Respiratory Physiology and Boron & Boulpaep (arterial oxygen-content equation)"
+  - kind: product
+    result: oxygen_delivery
+    arguments:
+      - node: cardiac_output
+        role: factor
+        derivative_sign: "+"
+      - node: arterial_o2_content
+        role: factor
+        derivative_sign: "+"
+    mechanism: "systemic oxygen delivery = cardiac output × arterial oxygen content"
+    evidence: "West Respiratory Physiology; BioModels BIOMD0000000248 (Lai2007 convective oxygen transport)"
+
+constitutive_edges: []   # none yet — multi-scale expansion is the next step

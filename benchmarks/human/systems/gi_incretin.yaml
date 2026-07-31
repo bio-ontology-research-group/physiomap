@@ -1,0 +1,219 @@
+# =============================================================================
+# GI incretin & gastric regulation — PhysioMap fragment   *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Hand-encoded, single-scale (ORGAN / ORGAN_SYSTEM). Each causal edge sign is the
+# sign of the partial derivative of the target w.r.t. the source at steady state,
+# all else equal (interventionist partial). ROBERT: please correct signs/edges.
+#
+# Scope: the enteroinsular / incretin axis and gastric regulation.
+#   Oral nutrients (proxied by gastric_emptying_rate -> intestinal nutrient
+#   delivery) drive enteroendocrine secretion of GLP-1 (L cells) and GIP (K
+#   cells), which POTENTIATE glucose-dependent insulin secretion (the incretin
+#   effect, ~60% of postprandial insulin). GLP-1 additionally slows gastric
+#   emptying, suppresses glucagon, and inhibits gastric acid secretion; gastrin
+#   stimulates gastric acid secretion.
+#
+# Sources for canonical signs (all verified):
+#   - Nauck & Meier 2021, Diabetes Obes Metab 23(Suppl 1):5-29, "The evolving
+#     story of incretins (GIP and GLP-1)..." doi:10.1111/dom.14496 — incretin
+#     effect: oral glucose -> GIP/GLP-1 -> potentiated glucose-dependent insulin
+#     secretion; GLP-1 suppresses glucagon.
+#   - Imeryuz et al. 1997, Am J Physiol 273(4):G920-G927,
+#     doi:10.1152/ajpgi.1997.273.4.G920 — GLP-1 inhibits gastric EMPTYING via
+#     vagal-afferent-mediated central mechanisms (used ONLY for glp1 -| emptying).
+#   - Wettergren et al. 1997, Gut 40(5):597-601, PMID 9203936 — GLP-1 7-36 amide
+#     inhibits gastric ACID secretion in humans, abolished by vagotomy (the
+#     vagal-dependent acid-secretion source; was previously misattributed to the
+#     Am J Physiol emptying paper above — reviewer-corrected).
+#   - Schubert 2020, Comprehensive Physiology 10(1):197-228,
+#     doi:10.1002/cphy.c180035; StatPearls 'Physiology, Gastrin' (NBK534822) —
+#     low antral pH -> D-cell somatostatin -| G-cell gastrin (acid -| gastrin
+#     negative feedback closing the gastric-acid loop).
+#   - Deane et al. 2010, J Clin Endocrinol Metab 95(1):215-221,
+#     doi:10.1210/jc.2009-1503 — endogenous GLP-1 slows gastric emptying,
+#     attenuating postprandial glycaemia (gastric emptying -> glucose appearance).
+#   - BioModels MODEL2403070001 (E-DES 1.0, Eindhoven Diabetes Simulator);
+#     Maas et al. 2015, J Diabetes Sci Technol 9(2):282-292,
+#     doi:10.1177/1932296814562607 — postprandial/OGTT glucose-appearance model:
+#     gastric emptying / gut glucose appearance raises plasma glucose, glucose
+#     raises insulin, insulin lowers glucose (loop closure onto plasma_glucose).
+#   - Boron & Boulpaep, Medical Physiology (GI): gastrin (G cells) stimulates
+#     parietal-cell gastric acid secretion; nutrient/distension drives gastrin.
+#
+# Negative-feedback loops (real physiology; net negative):
+#   1. Incretin-insulin loop:
+#        gastric_emptying_rate -> glp1/gip (+) -> plasma_insulin (+) and
+#        glp1 -| gastric_emptying_rate (-); faster emptying also raises plasma
+#        glucose (gastric_emptying_rate -> plasma_glucose +), and insulin lowers
+#        glucose in the sibling glucose_insulin fragment. Faster emptying raises
+#        incretins, glucose and insulin; incretins lower emptying, returning the
+#        system toward setpoint. (Driven by the LUMINAL nutrient proxy
+#        gastric_emptying_rate, not by a direct plasma_glucose -> incretin step,
+#        which was removed: IV glucose does not raise incretins.)
+#   2. Incretin-glucagon arm: gastric_emptying_rate -> glp1 (+) -| plasma_glucagon
+#        (-), reinforcing glucose lowering (loop-critical: net sign needs the loop).
+#   3. Gastric-acid loop: gastrin -> gastric_acid_secretion (+) and
+#        gastric_acid_secretion -| gastrin (-, antral pH -> somatostatin), with
+#        glp1 -| gastric_acid_secretion (-). A regulated negative-feedback loop,
+#        not an open chain (gastrin is no longer a source-only node).
+#
+# Boundary nodes (defined in sibling fragments; REFERENCED, not redefined here):
+#   plasma_glucose, plasma_insulin, plasma_glucagon  (glucose_insulin fragment)
+# A standalone load of this file will flag those as unknown — EXPECTED; they
+# resolve on merge() with the sibling fragments.
+# =============================================================================
+
+name: gi_incretin
+description: >-
+  DRAFT GI incretin and gastric-regulation fragment as a PhysioMap signed cyclic
+  causal graph. Encodes the enteroinsular (incretin) axis: oral nutrient delivery
+  (via gastric emptying) -> GLP-1 (L cells) and GIP (K cells) -> potentiated
+  glucose-dependent insulin secretion; GLP-1 slows gastric emptying, suppresses
+  glucagon, and inhibits gastric acid secretion; gastrin drives gastric acid.
+  Connects to the glucose-insulin core via plasma_glucose, plasma_insulin and
+  plasma_glucagon. Single-scale (Phase 1). Sources: Nauck & Meier 2021;
+  Wettergren 1997; Deane 2010; E-DES BioModels MODEL2403070001 (Maas 2015);
+  Boron & Boulpaep GI physiology.
+
+nodes:
+  - id: glp1
+    label: plasma glucagon-like peptide-1 (GLP-1, active 7-36 amide)
+    scale: organ_system
+    entity_iri: PR:000007891  # pro-glucagon (GLP-1 precursor)
+    quality_iri: PATO:0000033          # concentration
+  - id: gip
+    label: plasma glucose-dependent insulinotropic polypeptide (GIP)
+    scale: organ_system
+    entity_iri: PR:000007986  # gastric inhibitory polypeptide (GIP)
+    quality_iri: PATO:0000033          # concentration
+  - id: gastrin
+    label: plasma gastrin concentration
+    scale: organ_system
+    entity_iri: CHEBI:75436            # gastrin
+    quality_iri: PATO:0000033
+  - id: gastric_acid_secretion
+    label: gastric (parietal-cell) acid secretion rate
+    scale: organ
+    entity_iri: GO:0001696             # gastric acid secretion
+    quality_iri: PATO:0000161
+    bearer_entity_iri: CL:0000162  # parietal cell
+  - id: gastric_emptying_rate
+    label: gastric emptying rate (gastric -> duodenal nutrient delivery)
+    scale: organ
+    entity_iri: GO:0035483             # gastric emptying
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0000945  # stomach
+
+  # --- cellular producers of the secreted incretin/gastric hormones ----------
+  # (ground the macro humoral substance nodes in their dominant cell of origin;
+  #  OLS4-verified CL IRIs, labels confirmed 2026-06)
+  - id: g_cell_gastrin_secretion
+    label: gastric G-cell gastrin secretion rate
+    scale: cellular
+    entity_iri: GO:0030072             # peptide hormone secretion
+    quality_iri: PATO:0000161
+    bearer_entity_iri: CL:0000508  # type G enteroendocrine cell
+  - id: k_cell_gip_secretion
+    label: intestinal K-cell GIP secretion rate
+    scale: cellular
+    entity_iri: CL:0002278             # GIP cell (type K enteroendocrine cell)
+    quality_iri: PATO:0000161          # secretion rate
+  - id: l_cell_glp1_secretion
+    label: intestinal L-cell GLP-1 secretion rate
+    scale: cellular
+    entity_iri: CL:0002279             # type L enteroendocrine cell (L cell)
+    quality_iri: PATO:0000161          # secretion rate
+
+causal_edges:
+  # --- enteroendocrine secretion: nutrient delivery -> incretins -------------
+  - source: gastric_emptying_rate
+    target: glp1
+    sign: "+"
+    mechanism: faster gastric emptying delivers more nutrient to intestinal L cells, raising GLP-1 secretion
+    evidence: "Nauck & Meier 2021 Diabetes Obes Metab (oral nutrient -> L-cell GLP-1); Deane 2010 JCEM (emptying drives postprandial incretin/glycaemia)"
+  - source: gastric_emptying_rate
+    target: gip
+    sign: "+"
+    mechanism: faster gastric emptying delivers more nutrient to proximal small-intestinal K cells, raising GIP secretion
+    evidence: "Nauck & Meier 2021 Diabetes Obes Metab (oral nutrient -> K-cell GIP); E-DES BioModels MODEL2403070001 (gut nutrient appearance)"
+  # NOTE: direct plasma_glucose -> glp1/gip edges REMOVED (reviewer-corrected).
+  # Incretin (GLP-1/GIP) secretion is driven by LUMINAL glucose sensed via gut
+  # SGLT1 in L/K cells, NOT by systemic plasma glucose: intravenous glucose does
+  # NOT evoke incretin secretion — the oral-vs-IV gap IS the incretin effect
+  # (Nauck & Meier 2021). The luminal driver is already encoded by
+  # gastric_emptying_rate -> glp1/gip; a plasma_glucose source would conflate two
+  # distinct glucose pools and double-count that driver. d(incretin)/d(plasma_glucose)
+  # all-else-equal is therefore not a robust "+", so the edge is dropped rather
+  # than fabricated as "+" or left as "?".
+
+  # --- incretin effect: potentiation of glucose-dependent insulin secretion --
+  - source: glp1
+    target: plasma_insulin
+    sign: "+"
+    mechanism: GLP-1 binds beta-cell GLP-1R (cAMP/PKA), potentiating glucose-dependent insulin secretion
+    evidence: "Nauck & Meier 2021 Diabetes Obes Metab (incretin effect, ~60% of postprandial insulin) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-098 (17.11: Organs with Secondary Endocrine Functions): 'Other hormones produced by the intestinal cells aid in glucose metabolism, such as by stimulating the pancreatic beta cells to secrete insulin'"
+  - source: gip
+    target: plasma_insulin
+    sign: "+"
+    mechanism: GIP binds beta-cell GIPR, potentiating glucose-dependent insulin secretion
+    evidence: "Nauck & Meier 2021 Diabetes Obes Metab (GIP insulinotropic action) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-097 (17.10: The Endocrine Pancreas): GIP (glucose-dependent insulinotropic peptide) is the initial trigger for insulin production and secretion by beta cells following food ingestion; OpenStax Anatomy & Physiology 2e §anp-098 (17.11: Organs with Secondary Endocrine Functions): 'Glucose-dependent insulinotropic peptide (GIP) and glucagon-like peptide 1 (GLP-1) — Stimulate beta cells of the pancreas to release insulin'; OpenStax Anatomy & Physiology 2e §anp-135 (23.6: The Small and Large Intestines): 'K cells [secrete] the hormone glucose-dependent insulinotropic peptide, which stimulates the release of insulin'"
+
+  # --- GLP-1 incretin extra-pancreatic actions -------------------------------
+  - source: glp1
+    target: plasma_glucagon
+    sign: "-"
+    mechanism: GLP-1 suppresses alpha-cell glucagon secretion (glucose-dependent)
+    evidence: "Nauck & Meier 2021 Diabetes Obes Metab (GLP-1 lowers glucagon) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-098 (17.11: Organs with Secondary Endocrine Functions): 'reducing glucagon secretion from the alpha cells'"
+  - source: glp1
+    target: gastric_emptying_rate
+    sign: "-"
+    mechanism: GLP-1 slows gastric emptying via vagal-afferent / central parasympathetic inhibition (ileal brake)
+    evidence: "Wettergren 1997 Am J Physiol 273:G920 (GLP-1 inhibits gastric emptying, vagal); Deane 2010 JCEM"
+  - source: glp1
+    target: gastric_acid_secretion
+    sign: "-"
+    causal_evidence: pharmacological
+    mechanism: GLP-1 inhibits parietal-cell acid secretion via vagal-afferent / central parasympathetic pathways
+    evidence: 'Wettergren et al. 1997, Gut 40(5):597-601, PMID 9203936 (GLP-1 7-36 amide inhibits gastric acid secretion in humans; abolished by vagotomy) [citations PubMed-verified]'
+
+  # --- gastric acid regulation -----------------------------------------------
+  - source: gastrin
+    target: gastric_acid_secretion
+    sign: "+"
+    mechanism: gastrin stimulates parietal-cell H+/K+-ATPase acid secretion (directly + via ECL-cell histamine)
+    evidence: "Boron & Boulpaep Medical Physiology, GI chapter (gastrin -> parietal acid secretion) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-098 (17.11: Organs with Secondary Endocrine Functions): 'gastrin, a peptide hormone secreted in response to stomach distention that stimulates the release of hydrochloric acid'; OpenStax Anatomy & Physiology 2e §anp-132 (23.3: Digestive System Processes and Regulation): 'Gastrin stimulates the secretion of gastric acid by the parietal cells of the stomach mucosa'; OpenStax Anatomy & Physiology 2e §anp-134 (23.5: The Stomach): hormone table — gastrin 'Increases secretion by gastric glands'; text: 'gastrin … induces parietal cells to increase their production of HCl'; OpenStax Biology 2e §bio-34.4 (34.4: Digestive System Regulation): 'Gastrin stimulates the release of stomach acid, or hydrochloric acid (HCl) which aids in the digestion of the proteins'"
+  - source: gastric_acid_secretion
+    target: gastrin
+    sign: "-"
+    mechanism: antral luminal acidification (low pH) releases somatostatin from antral D cells, which paracrine-inhibits G-cell gastrin secretion — the antral-pH negative feedback that makes the gastric-acid arm a regulated loop (gastrin -> acid -| gastrin)
+    evidence: "Schubert 2020, Comprehensive Physiology 10(1):197-228, doi:10.1002/cphy.c180035 (low antral pH -> D-cell somatostatin -| gastrin); StatPearls 'Physiology, Gastrin' NBK534822 (pH<3 negative feedback on gastrin) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-134 (23.5: The Stomach): 'Whenever pH levels drop too low, cells in the stomach react by suspending HCl secretion' — acid negative feedback on gastrin loop; OpenStax Biology 2e §bio-34.4 (34.4: Digestive System Regulation): 'when the stomach is emptied, the acidic environment need not be maintained and a hormone called somatostatin stops the release of hydrochloric acid. This is controlled by a negative feedback mechanism.'"
+
+  # --- glucose-appearance loop closure onto plasma glucose (E-DES) -----------
+  - source: gastric_emptying_rate
+    target: plasma_glucose
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: faster gastric emptying accelerates intestinal glucose appearance into plasma
+    evidence: "E-DES BioModels MODEL2403070001 (Maas 2015 J Diabetes Sci Technol): gut glucose-appearance term raises plasma glucose; Deane 2010 JCEM"
+
+production_edges:
+  # --- PRODUCTION (cross-scale): cell of origin sets the macro humoral level ---
+  # G cells secrete gastrin; G-cell gastrin secretion rate sets plasma gastrin.
+  # Boron & Boulpaep, Medical Physiology (GI): antral/duodenal G cells are the
+  # source of circulating gastrin.
+  - source: g_cell_gastrin_secretion
+    target: gastrin
+    sign: "+"
+    production_evidence: legacy-evidence-unclassified
+  # K cells (duodenum/jejunum) secrete GIP; K-cell secretion rate sets plasma GIP.
+  # Boron & Boulpaep, Medical Physiology (GI); Williams Textbook of Endocrinology.
+  - source: k_cell_gip_secretion
+    target: gip
+    sign: "+"
+    production_evidence: legacy-evidence-unclassified
+  # L cells (distal small intestine/colon) secrete GLP-1; L-cell secretion rate
+  # sets plasma active GLP-1. Boron & Boulpaep, Medical Physiology (GI).
+  - source: l_cell_glp1_secretion
+    target: glp1
+    sign: "+"
+    production_evidence: legacy-evidence-unclassified

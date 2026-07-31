@@ -1,0 +1,70 @@
+========================================================================
+PhysioMap benchmark — qualitative comparative-statics signs
+========================================================================
+
+### ace_inhibitor  —  ACE inhibitor (lower angiotensin II)
+   ?  aldosterone                    expected=-  predicted=?
+   ?  total_peripheral_resistance    expected=-  predicted=?
+   ?  mean_arterial_pressure         expected=-  predicted=?
+   ?  renin                          expected=+  predicted=? [loop]
+   -> correct=0 wrong=0 ambiguous=4   (loop-critical 0/1)
+
+### spironolactone  —  Mineralocorticoid-receptor antagonist (block aldosterone)
+   ?  sodium_water_reabsorption      expected=-  predicted=?
+   ?  plasma_potassium               expected=+  predicted=?
+   ?  mean_arterial_pressure         expected=-  predicted=?
+   -> correct=0 wrong=0 ambiguous=3   (loop-critical 0/0)
+
+### thiazide_diuretic  —  Thiazide diuretic (reduce renal Na/water reabsorption)
+   ?  extracellular_fluid_volume     expected=-  predicted=?
+   ?  blood_volume                   expected=-  predicted=?
+   ?  mean_arterial_pressure         expected=-  predicted=?
+   ?  renin                          expected=+  predicted=? [loop]
+   -> correct=0 wrong=0 ambiguous=4   (loop-critical 0/1)
+
+### levothyroxine  —  Levothyroxine (thyroid hormone replacement)
+  OK  free_t3                        expected=+  predicted=+
+  OK  metabolic_rate                 expected=+  predicted=+
+  OK  tsh                            expected=-  predicted=- [loop]
+   -> correct=3 wrong=0 ambiguous=0   (loop-critical 1/1)
+
+### methimazole  —  Antithyroid drug (lower thyroid hormone)
+  OK  free_t3                        expected=-  predicted=-
+  OK  metabolic_rate                 expected=-  predicted=-
+  OK  tsh                            expected=+  predicted=+ [loop]
+   -> correct=3 wrong=0 ambiguous=0   (loop-critical 1/1)
+
+### glucocorticoid  —  Glucocorticoid therapy (raise cortisol)
+   ?  plasma_glucose                 expected=+  predicted=?
+  OK  acth                           expected=-  predicted=- [loop]
+   -> correct=1 wrong=0 ambiguous=1   (loop-critical 1/1)
+
+### insulin_therapy  —  Insulin therapy
+  OK  peripheral_glucose_uptake      expected=+  predicted=+
+   ?  hepatic_glucose_production     expected=-  predicted=?
+   ?  plasma_glucose                 expected=-  predicted=?
+   -> correct=1 wrong=0 ambiguous=2   (loop-critical 0/0)
+
+### epo_therapy  —  Erythropoietin therapy
+  OK  red_cell_mass                  expected=+  predicted=+
+  OK  hematocrit                     expected=+  predicted=+
+  OK  blood_viscosity                expected=+  predicted=+
+   -> correct=3 wrong=0 ambiguous=0   (loop-critical 0/0)
+
+### teriparatide  —  PTH analog (raise PTH)
+  OK  plasma_calcium                 expected=+  predicted=+
+   ?  plasma_phosphate               expected=-  predicted=?
+  OK  calcitriol                     expected=+  predicted=+
+   -> correct=2 wrong=0 ambiguous=1   (loop-critical 0/0)
+
+### arb_molecular  —  ARB — block vascular AT1 receptor (molecular target)
+  OK  intracellular_calcium          expected=-  predicted=-
+  OK  mlc_phosphorylation            expected=-  predicted=-
+  OK  vascular_smooth_muscle_tone    expected=-  predicted=-
+   -> correct=3 wrong=0 ambiguous=0   (loop-critical 0/0)
+
+------------------------------------------------------------------------
+TOTAL  scored=16  correct=16  wrong=0  ambiguous=15
+Directional accuracy (correct / scored) = 100.0%   |  ambiguous = 15/31
+Loop-critical net signs correct = 3/5
+------------------------------------------------------------------------

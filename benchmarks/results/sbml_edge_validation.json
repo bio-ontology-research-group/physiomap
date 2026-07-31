@@ -1,0 +1,93 @@
+[
+  {
+    "module": "Guyton1972_Angiotensin__MODEL0911342562.xml",
+    "input": "MDFLW",
+    "output": "ANC",
+    "edge": "renal_perfusion_pressure -> renin (-)  [higher macula densa flow suppresses renin]",
+    "expected": "-",
+    "adaptive": false,
+    "y0": 0.964580600354965,
+    "y1": 0.21558433271043811,
+    "numeric_sign": "-",
+    "agrees": true,
+    "status": "ok"
+  },
+  {
+    "module": "Guyton1972_Angiotensin__MODEL0911342562.xml",
+    "input": "MDFLW",
+    "output": "ANM",
+    "edge": "renal_perfusion_pressure -> (renin->) angiotensin effect (-)",
+    "expected": "-",
+    "adaptive": false,
+    "y0": 0.9968968620728995,
+    "y1": 0.9251355591859176,
+    "numeric_sign": "-",
+    "agrees": true,
+    "status": "ok"
+  },
+  {
+    "module": "Guyton1972_Aldosterone__MODEL0911376350.xml",
+    "input": "ANM",
+    "output": "AMC",
+    "edge": "angiotensin_II -> aldosterone (+)",
+    "expected": "+",
+    "adaptive": false,
+    "y0": 1.0576443349780025,
+    "y1": 2.593913203726909,
+    "numeric_sign": "+",
+    "agrees": true,
+    "status": "ok"
+  },
+  {
+    "module": "Guyton1972_AntidiureticHormone__MODEL0911309080.xml",
+    "input": "CNA",
+    "output": "ADHC",
+    "edge": "plasma_osmolality/sodium -> adh (+)",
+    "expected": "+",
+    "adaptive": false,
+    "y0": 1.0116666666666656,
+    "y1": 3.378916666666669,
+    "numeric_sign": "+",
+    "agrees": true,
+    "status": "ok"
+  },
+  {
+    "module": "Guyton1972_AtrialNatriureticPeptide__MODEL0911272039.xml",
+    "input": "PRA",
+    "output": "ANPC",
+    "edge": "blood_volume/atrial pressure -> anp (+)",
+    "expected": "+",
+    "adaptive": false,
+    "y0": 1.00568122,
+    "y1": 1.005965281,
+    "numeric_sign": "+",
+    "agrees": true,
+    "status": "ok"
+  },
+  {
+    "module": "Guyton1972_Autonomics__MODEL0911270005.xml",
+    "input": "PA",
+    "output": "AU",
+    "edge": "mean_arterial_pressure -> sympathetic_tone (-)  [ARTERIAL BAROREFLEX \u2014 adapts, BAROTC]",
+    "expected": "-",
+    "adaptive": true,
+    "y0": 1.1556935825023604,
+    "y1": 1.1556935825023604,
+    "numeric_sign": "0",
+    "agrees": false,
+    "status": "ok"
+  },
+  {
+    "module": "Guyton1972_AntidiureticHormone__MODEL0911309080.xml",
+    "input": "PA1",
+    "output": "ADHC",
+    "edge": "mean_arterial_pressure -> adh (-)  [pressure arm \u2014 adaptive]",
+    "expected": "-",
+    "adaptive": true,
+    "y0": 1.0116666666666656,
+    "y1": 1.0116666666666656,
+    "numeric_sign": "0",
+    "agrees": false,
+    "status": "ok"
+  }
+]

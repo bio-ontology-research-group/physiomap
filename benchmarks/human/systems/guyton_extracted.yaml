@@ -1,0 +1,1086 @@
+# =============================================================================
+# Guyton & Hall (11th ed.) extracted nodes + WITHIN-SCALE signed causal edges  *** DRAFT ***
+# =============================================================================
+# Per-chapter multi-agent fan-out over the institutional KAUST-library copy (read-only, not
+# redistributed). Signs adversarially verified; IRIs OBO-verified. INTEGRATED = backward-safe,
+# soundness-preserving subset. Deferred -> benchmarks/results/guyton_extracted_deferred.yaml.
+# Corroboration of EXISTING edges -> benchmarks/results/guyton_hall_corroboration.yaml
+# =============================================================================
+name: guyton_extracted
+description: DRAFT within-scale signed causal edges + variables from Guyton & Hall, Textbook of Medical Physiology
+  (11th ed.), per-chapter agent fan-out over the CV/renal/endocrine/respiratory core. Signs adversarially verified
+  (Opus); entity IRIs OBO-verified; every edge carries a chapter/section anchor + verbatim quote. This integrated
+  set is the backward-diagnosis-safe + soundness-preserving subset (forward 0-wrong, diagnose top3 non-regressing);
+  edges that perturbed the calibrated diagnostic core or that would form a cross-scale cycle are held in benchmarks/results/guyton_extracted_deferred.yaml
+  for review. See benchmarks/results/guyton_extraction.md.
+nodes:
+- id: afferent_arteriolar_resistance
+  label: renal afferent arteriolar resistance (RA) (organ)
+  scale: organ
+  entity_iri: UBERON:0004639
+  quality_iri: PATO:0001046
+- id: alveolar_air_pressure
+  label: alveolar air pressure (intra-alveolar pressure, PALV) (organ)
+  scale: organ
+  entity_iri: UBERON:0002048
+  quality_iri: PATO:0001025
+- id: av_conduction_velocity
+  label: atrioventricular (A-V node/bundle) conduction velocity (impulse transmission speed from atria to ventricles)
+  scale: organ
+  entity_iri: GO:0061337  # cardiac conduction
+  quality_iri: PATO:0002242
+  bearer_entity_iri: UBERON:0002352  # atrioventricular node
+- id: cardiac_muscle_metabolic_rate
+  label: cardiac (myocardial) muscle metabolic rate / oxygen consumption (organ)
+  scale: organ
+  entity_iri: GO:0009060  # aerobic respiration
+  quality_iri: PATO:0000161
+  bearer_entity_iri: UBERON:0001133  # cardiac muscle tissue
+- id: cerebral_blood_flow
+  label: cerebral (brain) blood flow rate
+  scale: organ
+  entity_iri: GO:0120275  # cerebral blood circulation
+  quality_iri: PATO:0001574
+  bearer_entity_iri: UBERON:0000955  # brain
+- id: distal_tubular_flow_rate
+  label: distal tubular flow rate (late distal / cortical collecting tubule luminal flow) (organ)
+  scale: organ
+  entity_iri: UBERON:0004135
+  quality_iri: PATO:0001574
+- id: efferent_arteriolar_resistance
+  label: renal efferent arteriolar resistance (RE) (organ)
+  scale: organ
+  entity_iri: UBERON:0004640
+  quality_iri: PATO:0001046
+- id: glomerular_colloid_osmotic_pressure
+  label: glomerular capillary colloid osmotic pressure (piG) (organ)
+  scale: organ
+  entity_iri: UBERON:0004212
+  quality_iri: PATO:0001025
+- id: glomerular_hydrostatic_pressure
+  label: glomerular capillary hydrostatic pressure (PG) (organ)
+  scale: organ
+  entity_iri: UBERON:0004212
+  quality_iri: PATO:0001025
+- id: interstitial_fluid_colloid_osmotic_pressure
+  label: interstitial fluid colloid osmotic pressure (pif) (organ_system)
+  scale: organ_system
+  entity_iri: UBERON:0000913
+  quality_iri: PATO:0001025
+- id: interstitial_fluid_oncotic_pressure
+  label: interstitial fluid colloid osmotic (oncotic) pressure (organ_system)
+  scale: organ_system
+  entity_iri: UBERON:0000913
+  quality_iri: PATO:0001025
+- id: interstitial_fluid_pressure
+  label: interstitial fluid hydrostatic pressure (Pif) (organ_system)
+  scale: organ_system
+  entity_iri: UBERON:0000913
+  quality_iri: PATO:0001025
+- id: interstitial_fluid_protein
+  label: interstitial fluid protein concentration (organ_system)
+  scale: organ_system
+  entity_iri: UBERON:0000913
+  quality_iri: PATO:0000033
+- id: intestinal_b12_absorption
+  label: intestinal (ileal) vitamin B12 absorption rate (organ)
+  scale: organ
+  entity_iri: GO:0015889  # cobalamin transport
+  quality_iri: PATO:0000161
+  bearer_entity_iri: UBERON:0002116  # ileum
+- id: intrapleural_pressure
+  label: intrapleural (intrathoracic) pressure (organ)
+  scale: organ
+  entity_iri: UBERON:0002402
+  quality_iri: PATO:0001025
+- id: muscle_tissue_oxygen
+  label: skeletal muscle tissue oxygen tension (organ)
+  scale: organ
+  entity_iri: CHEBI:15379
+  quality_iri: PATO:0000033
+  bearer_entity_iri: UBERON:0001134
+- id: parietal_cell_intrinsic_factor_secretion
+  label: gastric parietal-cell intrinsic factor secretion rate (cellular)
+  scale: cellular
+  entity_iri: PR:000007975
+  quality_iri: PATO:0000161
+  bearer_entity_iri: CL:0000162
+- id: plasma_amino_acids
+  label: plasma (total) amino acid concentration (organ_system)
+  scale: organ_system
+  entity_iri: CHEBI:33709
+  quality_iri: PATO:0000033
+- id: pleural_fluid_volume
+  label: pleural cavity fluid volume (organ)
+  scale: organ
+  entity_iri: UBERON:0002402
+  quality_iri: PATO:0000918
+- id: pulmonary_capillary_pressure
+  label: pulmonary capillary hydrostatic pressure (organ)
+  scale: organ
+  entity_iri: UBERON:0016405
+  quality_iri: PATO:0001025
+- id: pulmonary_interstitial_colloid_osmotic_pressure
+  label: pulmonary interstitial fluid colloid osmotic pressure (organ)
+  scale: organ
+  entity_iri: UBERON:0002048
+  quality_iri: PATO:0001025
+- id: pulmonary_interstitial_fluid_volume
+  label: pulmonary interstitial / alveolar fluid volume (pulmonary edema) (organ)
+  scale: organ
+  entity_iri: UBERON:0000114
+  quality_iri: PATO:0000918
+- id: pulmonary_lymph_flow
+  label: pulmonary lymphatic drainage flow rate (organ)
+  scale: organ
+  entity_iri: GO:0003017  # lymph circulation
+  quality_iri: PATO:0000161
+  bearer_entity_iri: UBERON:0002048  # lung
+- id: renal_blood_flow
+  label: renal blood flow (organ)
+  scale: organ
+  entity_iri: UBERON:0006544
+  quality_iri: PATO:0001574
+- id: renal_hydrogen_secretion
+  label: renal tubular hydrogen ion secretion / bicarbonate reabsorption rate (organ)
+  scale: organ
+  entity_iri: CHEBI:15378
+  quality_iri: PATO:0000161
+  bearer_entity_iri: UBERON:0009773
+- id: renal_vascular_resistance
+  label: total renal vascular resistance (organ)
+  scale: organ
+  entity_iri: UBERON:0006544
+  quality_iri: PATO:0001046
+- id: resistance_to_venous_return
+  label: resistance to venous return (RVR) (organ_system)
+  scale: organ_system
+  entity_iri: UBERON:0004581
+  quality_iri: PATO:0001470
+- id: salt_intake
+  label: dietary salt (NaCl) intake (organ_system)
+  scale: organ_system
+  entity_iri: CHEBI:26710
+  quality_iri: PATO:0000161
+causal_edges:
+- source: afferent_arteriolar_resistance
+  target: glomerular_hydrostatic_pressure
+  sign: '-'
+  mechanism: afferent constriction increases upstream resistance, dropping pressure delivered to the glomerular
+    capillaries
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.26 (Urine Formation by the Kidneys: I. Glomerular Filtration,
+    Renal Blood Flow, and Their Control) §Increased Glomerular Capillary Hydrostatic Pressure Increases GFR: “Increased
+    resistance of afferent arterioles reduces glomerular hydrostatic pressure and decreases GFR.”'
+  causal_evidence: curated_mechanistic
+- source: afferent_arteriolar_resistance
+  target: renal_blood_flow
+  sign: '-'
+  mechanism: increased segmental vascular resistance reduces flow at fixed renal artery-vein pressure gradient
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.26 (Urine Formation by the Kidneys: I. Glomerular Filtration,
+    Renal Blood Flow, and Their Control) §Determinants of Renal Blood Flow: “An increase in the resistance of any
+    of the vascular segments of the kidneys tends to reduce the renal blood flow”'
+  causal_evidence: curated_mechanistic
+- source: aldosterone
+  target: arterial_ph
+  sign: +
+  mechanism: aldosterone drives tubular H+ secretion in intercalated cells, lowering ECF hydrogen ion concentration
+    (raising pH)
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.77 (Adrenocortical Hormones) §Excess Aldosterone Increases
+    Tubular Hydrogen Ion Secretion: “Aldosterone ... causes secretion of hydrogen ions in exchange for sodium ...
+    This decreases the hydrogen ion concentration in the extracellular fluid, causing a mild degree of alkalosis.”'
+  causal_evidence: curated_mechanistic
+- source: aldosterone
+  target: renal_hydrogen_secretion
+  sign: +
+  mechanism: aldosterone stimulates H+ secretion by intercalated cells of the collecting duct, increasing bicarbonate
+    added to blood
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.30 (Regulation of Acid-Base Balance) §Regulation of
+    Renal Tubular Hydrogen Ion Secretion: “Aldosterone stimulates the secretion of H+ by the intercalated cells
+    of the collecting duct.”'
+  causal_evidence: curated_mechanistic
+- source: alveolar_air_pressure
+  target: pulmonary_perfusion
+  sign: '-'
+  mechanism: alveolar air pressure compresses alveolar-wall capillaries from outside; when it exceeds capillary
+    pressure the capillaries close and flow ceases
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.38 (Pulmonary Circulation, Pulmonary Edema, Pleural
+    Fluid) §Zones 1, 2, and 3 of Pulmonary Blood Flow: “any time the lung alveolar air pressure becomes greater
+    than the capillary blood pressure, the capillaries close and there is no blood flow”'
+  causal_evidence: curated_mechanistic
+- source: angiotensin_II
+  target: efferent_arteriolar_resistance
+  sign: +
+  mechanism: angiotensin II preferentially constricts the efferent arteriolar smooth muscle, raising efferent resistance
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.26 (Urine Formation by the Kidneys: I. Glomerular Filtration,
+    Renal Blood Flow, and Their Control) §Angiotensin II Constricts Efferent Arterioles: “Because angiotensin II
+    preferentially constricts efferent arterioles, increased angiotensin II levels raise glomerular hydrostatic
+    pressure while reducing renal blood flow.”'
+  causal_evidence: curated_mechanistic
+- source: angiotensin_II
+  target: renal_hydrogen_secretion
+  sign: +
+  mechanism: angiotensin II directly stimulates the Na+-H+ exchanger in the renal tubules, raising H+ secretion
+    and HCO3- reabsorption
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.30 (Regulation of Acid-Base Balance) §Regulation of
+    Renal Tubular Hydrogen Ion Secretion: “increased angiotensin II levels, which directly stimulate the activity
+    of the Na+-H+ exchanger in the renal tubules”'
+  causal_evidence: curated_mechanistic
+- source: arterial_pco2
+  target: renal_hydrogen_secretion
+  sign: +
+  mechanism: raised tubular-cell PCO2 increases intracellular H+ formation via carbonic anhydrase, driving the Na+-H+
+    exchanger
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.30 (Regulation of Acid-Base Balance) §Regulation of
+    Renal Tubular Hydrogen Ion Secretion: “The increased PCO2 raises the PCO2 of the tubular cells, causing increased
+    formation of H+ in the tubular cells, which in turn stimulates the secretion of H+.”'
+  causal_evidence: curated_mechanistic
+- source: arterial_pco2
+  target: total_peripheral_resistance
+  sign: '?'
+  mechanism: CO2 directly dilates most tissue arterioles but, via the brain vasomotor center and sympathetic system,
+    drives widespread vasoconstriction; net systemic sign is ambiguous
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.17 (Local and Humoral Control of Blood Flow by the Tissues)
+    §Vascular Control by Ions and Other Chemical Factors: “An increase in carbon dioxide concentration causes moderate
+    vasodilation in most tissues ... acting on the brain vasomotor center, has an extremely powerful indirect effect
+    ... to cause widespread vasoconstriction.” [degraded to ? in adversarial verification: Ch17: CO2 moderately
+    dilates local tissues but drives powerful CNS-sympathetic v]'
+  causal_evidence: curated_mechanistic
+- source: arterial_ph
+  target: renal_hydrogen_secretion
+  sign: '-'
+  mechanism: raised extracellular H+ (lowered pH) directly stimulates tubular H+ secretion; the tubular cells reduce
+    secretion when pH rises
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.30 (Regulation of Acid-Base Balance) §Regulation of
+    Renal Tubular Hydrogen Ion Secretion: “The tubular cells usually respond to a decrease in H+ concentration (alkalosis)
+    by reducing H+ secretion.”'
+  causal_evidence: curated_mechanistic
+- source: arterial_ph
+  target: renal_tubular_ammonia_secretion
+  sign: '-'
+  mechanism: raised extracellular H+ (lowered pH) stimulates renal glutamine metabolism, increasing NH4+ formation
+    and new HCO3-
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.30 (Regulation of Acid-Base Balance) §Chronic Acidosis
+    Increases NH4+ Excretion: “An increase in extracellular fluid H+ concentration stimulates renal glutamine metabolism
+    and, therefore, increases the formation of NH4+”'
+  causal_evidence: curated_mechanistic
+- source: arterial_ph
+  target: total_peripheral_resistance
+  sign: +
+  mechanism: lower pH (raised hydrogen ion) relaxes arteriolar smooth muscle; raising pH (lowering H+) conversely
+    constricts arterioles, raising resistance
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.17 (Local and Humoral Control of Blood Flow by the Tissues)
+    §Vascular Control by Ions and Other Chemical Factors: “An increase in hydrogen ion concentration (decrease in
+    pH) causes dilation of the arterioles. Conversely, slight decrease in hydrogen ion concentration causes arteriolar
+    constriction.”'
+  causal_evidence: curated_mechanistic
+- source: blood_colloidal_osmotic_pressure
+  target: glomerular_colloid_osmotic_pressure
+  sign: +
+  mechanism: higher arterial plasma colloid osmotic pressure enters the glomerular capillaries and raises their
+    colloid osmotic pressure
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.26 (Urine Formation by the Kidneys: I. Glomerular Filtration,
+    Renal Blood Flow, and Their Control) §Increased Glomerular Capillary Colloid Osmotic Pressure Decreases GFR:
+    “Increasing the arterial plasma colloid osmotic pressure raises the glomerular capillary colloid osmotic pressure”'
+  causal_evidence: curated_mechanistic
+- source: blood_volume
+  target: adh
+  sign: '-'
+  mechanism: low-pressure cardiopulmonary/atrial stretch receptors sense reduced blood volume and, via vagal/glossopharyngeal
+    afferents to hypothalamic nuclei, increase posterior-pituitary ADH secretion
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.28 (Regulation of Extracellular Fluid Osmolarity and
+    Sodium Concentration) §Cardiovascular Reflex Stimulation of ADH Release by Decreased Arterial Pressure and/or
+    Decreased Blood Volume: “Whenever blood pressure and blood volume are reduced, such as occurs during hemorrhage,
+    increased ADH secretion causes increased fluid reabsorption by the kidneys”'
+  causal_evidence: curated_mechanistic
+- source: blood_volume
+  target: water_intake
+  sign: '-'
+  mechanism: reduced blood volume unloads cardiopulmonary and systemic arterial baroreceptors, whose afferent input
+    to the thirst center increases the conscious drive to drink, independent of plasma osmolarity
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.28 (Regulation of Extracellular Fluid Osmolarity and
+    Sodium Concentration) §Stimuli for Thirst: “blood volume loss by hemorrhage stimulates thirst even though there
+    might be no change in plasma osmolarity. This probably occurs because of neutral input from cardiopulmonary
+    and systemic arterial baroreceptors”'
+  causal_evidence: curated_mechanistic
+- source: capillary_permeability
+  target: blood_volume
+  sign: '-'
+  mechanism: raised microvascular permeability raises the transudation disposition so fluid leaves plasma into tissues,
+    lowering circulating blood volume
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.24 (Circulatory Shock and Physiology of Its Treatment)
+    §Increased Capillary Permeability: “the permeability of the capillaries gradually increases, and large quantities
+    of fluid begin to transude into the tissues. This decreases the blood volume even more”'
+  causal_evidence: curated_mechanistic
+- source: capillary_permeability
+  target: capillary_filtration_rate
+  sign: +
+  mechanism: raised microvascular permeability raises the capillary filtration coefficient Kf, increasing the trans-capillary
+    filtration flux
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.25 (The Body Fluid Compartments: Extracellular and Intracellular
+    Fluids; Interstitial Fluid and Edema) §Factors That Can Increase Capillary Filtration: “Kf is the capillary
+    filtration coefficient (the product of the permeability and surface area of the capillaries) ... Increased capillary
+    filtration coefficient.”'
+  causal_evidence: curated_mechanistic
+- source: cardiac_muscle_metabolic_rate
+  target: coronary_blood_flow
+  sign: +
+  mechanism: raised myocardial metabolic/O2-demand lowers local cardiac O2, releasing adenosine and other vasodilators
+    that relax coronary arterioles, raising coronary flow
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.21 (Muscle Blood Flow and Cardiac Output During Exercise;
+    the Coronary Circulation and Ischemic Heart Disease) §Local Muscle Metabolism Is the Primary Controller of Coronary
+    Flow: “whenever the vigor of cardiac contraction is increased, regardless of cause, the rate of coronary blood
+    flow also increases. Conversely, decreased heart activity is accompanied by decreased coronary flow”'
+  causal_evidence: curated_mechanistic
+- source: cardiac_output
+  target: total_peripheral_resistance
+  sign: +
+  mechanism: excess cardiac output raises tissue blood flow, the disposition of local arterioles to autoregulate
+    drives the constriction process, raising whole-body resistance
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.19 (Dominant Role of the Kidney in Long-Term Pressure
+    Control) §Increased Fluid Volume Can Elevate Arterial Pressure: “When increased blood volume increases the cardiac
+    output, the blood flow increases in all tissues of the body, so that this autoregulation mechanism constricts
+    blood vessels all over the body. This in turn increases the total peripheral resistance”'
+  causal_evidence: curated_mechanistic
+- source: cellular_adp_level
+  target: phosphofructokinase_activity
+  sign: +
+  mechanism: rising cellular ADP (energy-deficit signal) allosterically activates phosphofructokinase, raising its
+    catalytic rate and accelerating glycolysis
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.67 (Metabolism of Carbohydrates, and Formation of Adenosine
+    Triphosphate) §Effect of ATP and ADP Cell Concentrations in Controlling the Rate of Glycolysis: “ADP (and AMP
+    as well) causes the opposite change in this enzyme, greatly increasing its activity.”'
+  causal_evidence: curated_mechanistic
+- source: cerebral_blood_flow
+  target: sympathetic_tone
+  sign: '-'
+  mechanism: reduced flow to the medullary vasomotor center lets CO2 accumulate locally, directly exciting the sympathetic
+    vasoconstrictor/cardioaccelerator neurons
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.18 (Nervous Regulation of the Circulation, and Rapid
+    Control of Arterial Pressure) §Central Nervous System Ischemic Response: “when blood flow to the vasomotor center...becomes
+    decreased severely enough to cause cerebral ischemia—the vasoconstrictor and cardioaccelerator neurons...become
+    strongly excited.”'
+  causal_evidence: curated_mechanistic
+- source: cervical_distension
+  target: plasma_oxytocin
+  sign: +
+  mechanism: cervical stretch afferents signal the hypothalamus to increase oxytocin secretion (Ferguson reflex)
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.75 (Pituitary Hormones and Their Control by the Hypothalamus)
+    §Oxytocin Causes Contraction of the Pregnant Uterus: “Stimulation of the cervix in a pregnant animal elicits
+    nervous signals that pass to the hypothalamus and cause increased secretion of oxytocin”'
+  causal_evidence: curated_mechanistic
+- source: coronary_blood_flow
+  target: myocardial_contractility
+  sign: +
+  mechanism: coronary perfusion supplies O2/substrate to the myocardium; reduced flow ischaemically depresses the
+    intrinsic inotropic state
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.22 (Cardiac Failure) §Cardiac Failure (introduction):
+    “decreased contractility of the myocardium resulting from diminished coronary blood flow”'
+  causal_evidence: curated_mechanistic
+- source: cortisol
+  target: capillary_permeability
+  sign: '-'
+  mechanism: cortisol reduces proteolytic-enzyme release and prostaglandin/leukotriene formation, lowering microvascular
+    permeability
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.77 (Adrenocortical Hormones) §Cortisol Prevents Development
+    of Inflammation: “Cortisol decreases the permeability of the capillaries, probably as a secondary effect of
+    the reduced release of proteolytic enzymes. This prevents loss of plasma into the tissues.”'
+  causal_evidence: curated_mechanistic
+- source: cortisol
+  target: red_cell_mass
+  sign: +
+  mechanism: cortisol raises erythropoiesis, increasing total circulating red cell mass
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.77 (Adrenocortical Hormones) §Effect on Blood Cells
+    and Immunity: “Cortisol increases the production of red blood cells ... When excess cortisol is secreted ...
+    polycythemia often results, and conversely, when the adrenal glands secrete no cortisol, anemia often results.”'
+  causal_evidence: curated_mechanistic
+- source: distal_tubular_flow_rate
+  target: renal_potassium_excretion
+  sign: +
+  mechanism: high luminal flow flushes secreted K+ downstream, lowering luminal K+ and preserving the diffusion
+    gradient that drives principal-cell K+ secretion into the tubule
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.29 (Renal Regulation of Potassium, Calcium, Phosphate,
+    and Magnesium; Integration of Renal Mechanisms for Control of Blood Volume and Extracellular Fluid Volume) §Increased
+    Distal Tubular Flow Rate Stimulates Potassium Secretion: “A rise in distal tubular flow rate, as occurs with
+    volume expansion, high sodium intake, or diuretic drug treatment, stimulates potassium secretion”'
+  causal_evidence: curated_mechanistic
+- source: duodenal_chyme_acidity
+  target: gastric_acid_secretion
+  sign: '-'
+  mechanism: luminal acid in the duodenum triggers the enterogastric nervous + hormonal feedback reflex that suppresses
+    parietal-cell acid secretion in the stomach
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.66 (Physiology of Gastrointestinal Disorders) §Peptic
+    Ulcer / Basic Cause of Peptic Ulceration: “When excess acid enters the duodenum, it reflexly inhibits gastric
+    secretion and peristalsis in the stomach, both by nervous reflexes and by hormonal feedback from the duodenum”'
+  causal_evidence: curated_mechanistic
+- source: duodenal_chyme_acidity
+  target: gastric_emptying_rate
+  sign: '-'
+  mechanism: duodenal acid activates the enterogastric reflex that inhibits gastric peristalsis, slowing delivery
+    of chyme from stomach to duodenum
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.66 (Physiology of Gastrointestinal Disorders) §Peptic
+    Ulcer / Basic Cause of Peptic Ulceration: “it reflexly inhibits gastric secretion and peristalsis in the stomach,
+    both by nervous reflexes and by hormonal feedback from the duodenum, thereby decreasing the rate of gastric
+    emptying”'
+  causal_evidence: curated_mechanistic
+- source: efferent_arteriolar_resistance
+  target: glomerular_hydrostatic_pressure
+  sign: +
+  mechanism: efferent constriction raises resistance to outflow from the glomerular capillaries, backing up and
+    raising glomerular hydrostatic pressure
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.26 (Urine Formation by the Kidneys: I. Glomerular Filtration,
+    Renal Blood Flow, and Their Control) §Increased Glomerular Capillary Hydrostatic Pressure Increases GFR: “Constriction
+    of the efferent arterioles increases the resistance to outflow from the glomerular capillaries. This raises
+    the glomerular hydrostatic pressure”'
+  causal_evidence: curated_mechanistic
+- source: efferent_arteriolar_resistance
+  target: renal_blood_flow
+  sign: '-'
+  mechanism: efferent constriction raises total renal vascular resistance, reducing renal blood flow
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.26 (Urine Formation by the Kidneys: I. Glomerular Filtration,
+    Renal Blood Flow, and Their Control) §Increased Glomerular Capillary Hydrostatic Pressure Increases GFR: “efferent
+    arteriolar constriction also reduces renal blood flow”'
+  causal_evidence: curated_mechanistic
+- source: epinephrine
+  target: bronchiole_smooth_muscle_tone
+  sign: '-'
+  mechanism: circulating epinephrine activates beta-adrenergic receptors on bronchiolar smooth muscle -> relaxation
+    -> reduced contractile tone
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.37 (Pulmonary Ventilation) §Nervous and Local Control
+    of the Bronchiolar Musculature: “Both these hormones—especially epinephrine, because of its greater stimulation
+    of beta-adrenergic receptors—cause dilation of the bronchial tree.”'
+  causal_evidence: curated_mechanistic
+- source: epinephrine
+  target: cellular_potassium_uptake
+  sign: +
+  mechanism: epinephrine activates beta2-adrenergic receptors that stimulate the Na+/K+-ATPase, driving K+ from
+    extracellular into intracellular fluid
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.29 (Renal Regulation of Potassium, Calcium, Phosphate,
+    and Magnesium; Integration of Renal Mechanisms for Control of Blood Volume and Extracellular Fluid Volume) §b-Adrenergic
+    Stimulation Increases Cellular Uptake of Potassium: “Increased secretion of catecholamines, especially epinephrine,
+    can cause movement of potassium from the extracellular to the intracellular fluid, mainly by activation of b2-adrenergic
+    receptors”'
+  causal_evidence: curated_mechanistic
+- source: epinephrine
+  target: erythropoietin
+  sign: +
+  mechanism: catecholamine signalling stimulates renal erythropoietin secretion independent of renal hypoxia
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.32 (Red Blood Cells, Anemia, and Polycythemia) §Role
+    of the Kidneys in Formation of Erythropoietin: “both norepinephrine and epinephrine and several of the prostaglandins
+    stimulate erythropoietin production”'
+  causal_evidence: curated_mechanistic
+- source: epinephrine
+  target: plasma_glucose
+  sign: +
+  mechanism: adrenal epinephrine drives hepatic glycogenolysis, releasing glucose into blood
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.78 (Insulin, Glucagon, and Diabetes Mellitus) §Role
+    of Insulin (and Other Hormones) in Switching: “Epinephrine is especially important in increasing plasma glucose
+    concentration during periods of stress when the sympathetic nervous system is excited”'
+  causal_evidence: curated_mechanistic
+- source: extracellular_fluid_volume
+  target: renal_hydrogen_secretion
+  sign: '-'
+  mechanism: ECF volume depletion stimulates tubular Na+ reabsorption coupled to the Na+-H+ exchanger, raising H+
+    secretion
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.30 (Regulation of Acid-Base Balance) §Regulation of
+    Renal Tubular Hydrogen Ion Secretion: “Extracellular fluid volume depletion stimulates sodium reabsorption by
+    the renal tubules and increases H+ secretion and HCO3- reabsorption”'
+  causal_evidence: curated_mechanistic
+- source: food_intake
+  target: metabolic_rate
+  sign: +
+  mechanism: energy-requiring digestion/absorption/storage reactions raising metabolic rate (thermogenic effect
+    / specific dynamic action)
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.72 (Energetics and Metabolic Rate) §Energy Used for
+    Processing Food—Thermogenic Effect of Food: “After a meal is ingested, the metabolic rate increases as a result
+    of the different chemical reactions associated with digestion, absorption, and storage of food”'
+  causal_evidence: curated_mechanistic
+- source: free_t3
+  target: lipolysis_rate
+  sign: +
+  mechanism: thyroid hormone raises overall cellular energy metabolism, depleting acetyl-CoA/intermediates and thereby
+    driving mobilization (hydrolysis) of stored triglycerides
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.68 (Lipid Metabolism) §Hormonal Regulation of Fat Utilization:
+    “thyroid hormone causes rapid mobilization of fat ... The resulting reduction in acetyl-CoA and other intermediates
+    ... is a stimulus to fat mobilization”'
+  causal_evidence: curated_mechanistic
+- source: glomerular_colloid_osmotic_pressure
+  target: gfr
+  sign: '-'
+  mechanism: rising glomerular plasma colloid osmotic pressure opposes filtration, lowering net filtration pressure
+    and GFR
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.26 (Urine Formation by the Kidneys: I. Glomerular Filtration,
+    Renal Blood Flow, and Their Control) §Increased Glomerular Capillary Colloid Osmotic Pressure Decreases GFR:
+    “Increasing the arterial plasma colloid osmotic pressure raises the glomerular capillary colloid osmotic pressure,
+    which in turn decreases GFR.”'
+  causal_evidence: curated_mechanistic
+- source: glomerular_hydrostatic_pressure
+  target: gfr
+  sign: +
+  mechanism: higher glomerular capillary hydrostatic pressure raises net filtration pressure driving fluid across
+    the filtration barrier, increasing GFR
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.26 (Urine Formation by the Kidneys: I. Glomerular Filtration,
+    Renal Blood Flow, and Their Control) §Increased Glomerular Capillary Hydrostatic Pressure Increases GFR: “Increases
+    in glomerular hydrostatic pressure raise GFR, whereas decreases in glomerular hydrostatic pressure reduce GFR.”'
+  causal_evidence: curated_mechanistic
+- source: hemoglobin_o2_saturation
+  target: arterial_pco2
+  sign: '-'
+  mechanism: O2 binding makes hemoglobin a stronger acid (oxygenation -> conformational acidity -> displacement)
+    that releases bound CO2 and H+, lowering blood CO2 content/PCO2
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.40 (Transport of Oxygen and Carbon Dioxide in Blood
+    and Tissue Fluids) §When Oxygen Binds with Hemoglobin, Carbon Dioxide Is Released (the Haldane Effect): “binding
+    of oxygen with hemoglobin tends to displace carbon dioxide from the blood. Indeed, this effect, called the Haldane
+    effect”'
+  causal_evidence: curated_mechanistic
+- source: interstitial_fluid_colloid_osmotic_pressure
+  target: net_filtration_pressure
+  sign: +
+  mechanism: interstitial protein-driven colloid osmotic pressure (pif) pulls fluid out of capillaries, adding to
+    net filtration force
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.25 (The Body Fluid Compartments: Extracellular and Intracellular
+    Fluids; Interstitial Fluid and Edema) §Washdown of the Interstitial Fluid Protein as a Safety Factor: “the interstitial
+    fluid colloid osmotic pressure caused by the proteins tends to draw fluid out of the capillaries, decreasing
+    the interstitial fluid proteins lowers the net filtration force”'
+  causal_evidence: curated_mechanistic
+- source: interstitial_fluid_oncotic_pressure
+  target: net_filtration_pressure
+  sign: +
+  mechanism: interstitial colloid osmotic pressure draws fluid out of the capillary (the +Pif-oncotic term of NFP),
+    raising net filtration
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.16 (The Microcirculation and the Lymphatic System: Capillary
+    Fluid Exchange, Interstitial Fluid, and Lymph Flow) §Four Primary Hydrostatic and Colloid Osmotic Forces: “The
+    interstitial fluid colloid osmotic pressure (Pif), which tends to cause osmosis of fluid outward through the
+    capillary membrane.”'
+  causal_evidence: curated_mechanistic
+- source: interstitial_fluid_pressure
+  target: lymph_drainage_rate
+  sign: +
+  mechanism: higher interstitial fluid pressure drives more fluid into terminal lymphatic capillaries, raising lymph
+    flow up to the maximum-flow plateau
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.16 (The Microcirculation and the Lymphatic System: Capillary
+    Fluid Exchange, Interstitial Fluid, and Lymph Flow) §Summary of Factors That Determine Lymph Flow: “the rate
+    of lymph flow is determined by the product of interstitial fluid pressure times the activity of the lymphatic
+    pump”'
+  causal_evidence: curated_mechanistic
+- source: interstitial_fluid_pressure
+  target: net_filtration_pressure
+  sign: '-'
+  mechanism: raising interstitial hydrostatic pressure opposes outward filtration (the -Pif term of NFP = Pc - Pif
+    - Pp + Pif), lowering net filtration
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.16 (The Microcirculation and the Lymphatic System: Capillary
+    Fluid Exchange, Interstitial Fluid, and Lymph Flow) §Four Primary Hydrostatic and Colloid Osmotic Forces: “The
+    interstitial fluid pressure (Pif), which tends to force fluid inward through the capillary membrane when Pif
+    is positive”'
+  causal_evidence: curated_mechanistic
+- source: interstitial_fluid_protein
+  target: interstitial_fluid_oncotic_pressure
+  sign: +
+  mechanism: dissolved interstitial proteins that fail to cross the capillary pores exert colloid osmotic pressure
+    in proportion to their concentration
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.16 (The Microcirculation and the Lymphatic System: Capillary
+    Fluid Exchange, Interstitial Fluid, and Lymph Flow) §Interstitial Fluid Colloid Osmotic Pressure: “the average
+    interstitial fluid colloid osmotic pressure for this concentration of proteins is about 8 mm Hg”'
+  causal_evidence: curated_mechanistic
+- source: interstitial_fluid_volume
+  target: interstitial_fluid_pressure
+  sign: +
+  mechanism: added fluid distends the interstitial gel/free-fluid compartment, raising the hydrostatic pressure
+    of the interstitial space
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.16 (The Microcirculation and the Lymphatic System: Capillary
+    Fluid Exchange, Interstitial Fluid, and Lymph Flow) §Role of the Lymphatic System in Controlling Interstitial
+    Fluid: “thus increasing both interstitial fluid volume and interstitial fluid pressure”'
+  causal_evidence: curated_mechanistic
+- source: intestinal_b12_absorption
+  target: plasma_vitamin_b12
+  sign: +
+  mechanism: absorbed B12 is transported into blood and stored/released, setting the plasma cobalamin pool
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.32 (Red Blood Cells, Anemia, and Polycythemia) §Maturation
+    Failure Caused by Poor Absorption of Vitamin B12 from the Gastrointestinal Tract—Pernicious Anemia: “vitamin
+    B12 is transported into the blood during the next few hours by the process of pinocytosis”'
+  causal_evidence: curated_mechanistic
+- source: intrapleural_pressure
+  target: right_atrial_pressure
+  sign: +
+  mechanism: a higher external (intrapleural) pressure on the heart requires a higher right-atrial pressure to fill
+    the cardiac chambers to the same volume (shifts the cardiac output curve rightward)
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.20 (Cardiac Output, Venous Return, and Their Regulation)
+    §Effect of External Pressure Outside the Heart on Cardiac Output Curves: “to fill the cardiac chambers with
+    blood requires an extra 2 mm Hg right atrial pressure to overcome the increased pressure on the outside of the
+    heart.”'
+  causal_evidence: curated_mechanistic
+- source: left_atrial_pressure
+  target: pulmonary_capillary_pressure
+  sign: +
+  mechanism: raising left atrial back-pressure raises downstream pulmonary capillary hydrostatic pressure (capillary
+    pressure tracks LA pressure +1-2 mm Hg)
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.38 (Pulmonary Circulation, Pulmonary Edema, Pleural
+    Fluid) §Pulmonary Capillary Dynamics / Pulmonary Edema Safety Factor: “every time the left atrial pressure rises
+    to high values, the pulmonary capillary pressure rises to a level 1 to 2 mm Hg greater than the left atrial
+    pressure”'
+  causal_evidence: curated_mechanistic
+- source: lymphatic_flow
+  target: interstitial_fluid_protein
+  sign: '-'
+  mechanism: lymphatics carry leaked proteins out of the interstitium back to the circulation, lowering interstitial
+    protein concentration
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.16 (The Microcirculation and the Lymphatic System: Capillary
+    Fluid Exchange, Interstitial Fluid, and Lymph Flow) §Role of the Lymphatic System in Controlling Interstitial
+    Fluid Protein: “the lymphatics can carry proteins and large particulate matter away from the tissue spaces,
+    neither of which can be removed by absorption”'
+  causal_evidence: curated_mechanistic
+- source: muscle_tissue_oxygen
+  target: skeletal_muscle_blood_flow
+  sign: '-'
+  mechanism: lower muscle tissue O2 prevents arteriolar wall contraction and releases vasodilator substances (adenosine,
+    K+, CO2), dilating arterioles and raising flow; raising O2 reverses this
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.21 (Muscle Blood Flow and Cardiac Output During Exercise;
+    the Coronary Circulation and Ischemic Heart Disease) §Local Regulation - Decreased Oxygen in Muscle Greatly
+    Enhances Flow: “reduction of oxygen in the muscle tissues ... causes local arteriolar vasodilation both because
+    the arteriolar walls cannot maintain contraction in the absence of oxygen”'
+  causal_evidence: curated_mechanistic
+- source: myocardial_contractility
+  target: right_atrial_pressure
+  sign: '-'
+  mechanism: stronger right-ventricular contractile pumping clears the right atrium faster, lowering its filling
+    pressure
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.15 (Vascular Distensibility and Functions of the Arterial
+    and Venous Systems) §Venous Pressures—Right Atrial Pressure: “strongly, the right atrial pressure decreases.”'
+  causal_evidence: curated_mechanistic
+- source: nipple_suckling_stimulation
+  target: plasma_oxytocin
+  sign: +
+  mechanism: suckling sensory afferents excite paraventricular/supraoptic oxytocin neurons, triggering posterior-pituitary
+    oxytocin release
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.75 (Pituitary Hormones and Their Control by the Hypothalamus)
+    §Oxytocin Aids in Milk Ejection by the Breasts: “The suckling stimulus on the nipple ... causes signals ...
+    which causes release of oxytocin by the posterior pituitary gland”'
+  causal_evidence: curated_mechanistic
+- source: norepinephrine
+  target: erythropoietin
+  sign: +
+  mechanism: catecholamine signalling stimulates renal erythropoietin secretion independent of renal hypoxia
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.32 (Red Blood Cells, Anemia, and Polycythemia) §Role
+    of the Kidneys in Formation of Erythropoietin: “both norepinephrine and epinephrine and several of the prostaglandins
+    stimulate erythropoietin production”'
+  causal_evidence: curated_mechanistic
+- source: parasympathetic_tone
+  target: av_conduction_velocity
+  sign: '-'
+  mechanism: vagal acetylcholine hyperpolarizes A-V junctional fibers, lowering safety factor, delaying or blocking
+    impulse transmission to the ventricles
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.10 (Rhythmical Excitation of the Heart) §Mechanism of
+    the Vagal Effects: “it decreases the excitability of the A-V junctional fibers ... thereby slowing transmission
+    of the cardiac impulse into the ventricles”'
+  causal_evidence: curated_mechanistic
+- source: parasympathetic_tone
+  target: myocardial_contractility
+  sign: '-'
+  mechanism: vagal acetylcholine release onto cardiac muscle lowers inotropic state (contractile force)
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.18 (Nervous Regulation of the Circulation, and Rapid
+    Control of Arterial Pressure) §Control of Heart Activity by the Vasomotor Center: “transmit parasympathetic
+    impulses through the vagus nerves to the heart to decrease heart rate and heart contractility.”'
+  causal_evidence: curated_mechanistic
+- source: parasympathetic_tone
+  target: sa_node_automaticity
+  sign: '-'
+  mechanism: vagal acetylcholine raises K+ permeability and hyperpolarizes sinus-node fibers, lengthening time to
+    reach threshold, lowering intrinsic pacemaker firing rate
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.10 (Rhythmical Excitation of the Heart) §Mechanism of
+    the Vagal Effects: “the initial rise of the sinus nodal membrane potential ... requires much longer to reach
+    the threshold potential for excitation. This greatly slows the rate of rhythmicity of these nodal fibers.”'
+  causal_evidence: curated_mechanistic
+- source: parietal_cell_intrinsic_factor_secretion
+  target: intestinal_b12_absorption
+  sign: +
+  mechanism: secreted intrinsic factor binds B12 and binds ileal brush-border receptors, enabling pinocytotic uptake
+    → raises B12 absorption rate
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.32 (Red Blood Cells, Anemia, and Polycythemia) §Maturation
+    Failure Caused by Poor Absorption of Vitamin B12 from the Gastrointestinal Tract—Pernicious Anemia: “Lack of
+    intrinsic factor, therefore, causes diminished availability of vitamin B12 because of faulty absorption of the
+    vitamin”'
+  causal_evidence: curated_mechanistic
+- source: pituitary_gh
+  target: lipolysis_rate
+  sign: +
+  mechanism: growth hormone activates hormone-sensitive triglyceride lipase in fat cells, raising the rate of triglyceride
+    hydrolysis (lipolysis)
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.68 (Lipid Metabolism) §Hormonal Regulation of Fat Utilization:
+    “Growth hormone has an effect similar to but weaker than that of corticotropin and glucocorticoids in activating
+    hormone-sensitive lipase”'
+  causal_evidence: curated_mechanistic
+- source: plasma_amino_acids
+  target: plasma_glucagon
+  sign: +
+  mechanism: high circulating amino acids stimulate alpha-cell glucagon secretion to drive their conversion to glucose
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.78 (Insulin, Glucagon, and Diabetes Mellitus) §Increased
+    Blood Amino Acids Stimulate Glucagon Secretion: “High concentrations of amino acids, as occur in the blood after
+    a protein meal (especially the amino acids alanine and arginine), stimulate the secretion of glucagon” [re-pointed
+    from alpha_cell_glucagon_secretion to the macro node to keep the meta-graph acyclic]'
+  causal_evidence: curated_mechanistic
+- source: plasma_amino_acids
+  target: plasma_insulin
+  sign: +
+  mechanism: circulating amino acids metabolized by beta cells raise intracellular ATP, potentiating glucose-stimulated
+    insulin exocytosis
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.78 (Insulin, Glucagon, and Diabetes Mellitus) §Other
+    Factors That Stimulate Insulin Secretion: Amino Acids: “some of the amino acids have a similar effect. The most
+    potent of these are arginine and lysine... strongly potentiate the glucose stimulus for insulin secretion” [re-pointed
+    from beta_cell_insulin_secretion to the macro node to keep the meta-graph acyclic]'
+  causal_evidence: curated_mechanistic
+- source: plasma_beta_hcg
+  target: testosterone
+  sign: +
+  mechanism: hCG acts on Leydig-cell LH receptors (same effects as LH) to stimulate testicular testosterone secretion
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.80 (Reproductive and Hormonal Functions of the Male
+    (and Function of the Pineal Gland)) §Human Chorionic Gonadotropin ... Stimulates Testosterone Secretion by the
+    Fetal Testes: “hCG from the placenta causes the testes of the fetus to secrete testosterone”'
+  causal_evidence: curated_mechanistic
+- source: plasma_bradykinin
+  target: capillary_permeability
+  sign: +
+  mechanism: bradykinin widens endothelial capillary pores, raising microvascular permeability
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.17 (Local and Humoral Control of Blood Flow by the Tissues)
+    §Bradykinin: “even smaller amounts injected locally into tissues can cause marked local edema resulting from
+    increase in capillary pore size.”'
+  causal_evidence: curated_mechanistic
+- source: plasma_bradykinin
+  target: total_peripheral_resistance
+  sign: '-'
+  mechanism: bradykinin acts on B2 receptors to relax arteriolar smooth muscle, lowering systemic vascular resistance
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.17 (Local and Humoral Control of Blood Flow by the Tissues)
+    §Bradykinin: “Bradykinin causes both powerful arteriolar dilation and increased capillary permeability.”'
+  causal_evidence: curated_mechanistic
+- source: plasma_free_fatty_acids
+  target: plasma_insulin
+  sign: +
+  mechanism: circulating free fatty acids are metabolized by beta cells, raising intracellular ATP and augmenting
+    insulin secretion
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.78 (Insulin, Glucagon, and Diabetes Mellitus) §Mechanisms
+    of Insulin Secretion (Table 78-1): “Increased blood free fatty acids” [re-pointed from beta_cell_insulin_secretion
+    to the macro node to keep the meta-graph acyclic]'
+  causal_evidence: curated_mechanistic
+- source: plasma_glucagon
+  target: myocardial_contractility
+  sign: +
+  mechanism: high-concentration glucagon raises cardiac cAMP, increasing inotropy
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.78 (Insulin, Glucagon, and Diabetes Mellitus) §Other
+    Effects of Glucagon: “Glucagon in very high concentrations also (1) enhances the strength of the heart”'
+  causal_evidence: curated_mechanistic
+- source: plasma_histamine
+  target: bronchiole_smooth_muscle_tone
+  sign: +
+  mechanism: histamine released by mast cells binds airway smooth muscle H1 receptors -> contraction -> increased
+    bronchiolar tone
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.37 (Pulmonary Ventilation) §Local Secretory Factors
+    Often Cause Bronchiolar Constriction: “Two of the most important of these are histamine and slow reactive substance
+    of anaphylaxis ... they play key roles in causing the airway obstruction”'
+  causal_evidence: curated_mechanistic
+- source: plasma_osmolality
+  target: plasma_potassium
+  sign: +
+  mechanism: high ECF osmolarity osmotically dehydrates cells, raising intracellular K+ concentration and promoting
+    K+ diffusion out of cells into the extracellular fluid
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.29 (Renal Regulation of Potassium, Calcium, Phosphate,
+    and Magnesium; Integration of Renal Mechanisms for Control of Blood Volume and Extracellular Fluid Volume) §Increased
+    Extracellular Fluid Osmolarity Causes Redistribution of Potassium: “Increased extracellular fluid osmolarity
+    causes osmotic flow of water out of the cells... promoting diffusion of potassium out of the cells and increasing
+    extracellular fluid potassium concentration”'
+  causal_evidence: curated_mechanistic
+- source: plasma_potassium
+  target: heart_rate
+  sign: '-'
+  mechanism: excess extracellular K+ depolarizes pacemaker/conductive fibers and slows the heart rate (and can block
+    A-V conduction)
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.9 (Heart Muscle; The Heart as a Pump and Function of
+    the Heart Valves) §Effect of Potassium Ions on Heart Function: “Excess potassium in the extracellular fluids
+    causes the heart to become dilated and flaccid and also slows the heart rate.”'
+  causal_evidence: curated_mechanistic
+- source: plasma_potassium
+  target: myocardial_contractility
+  sign: '-'
+  mechanism: high extracellular K+ depolarizes the resting membrane potential, decreasing action-potential intensity
+    and progressively weakening cardiac contraction
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.9 (Heart Muscle; The Heart as a Pump and Function of
+    the Heart Valves) §Effect of Potassium Ions on Heart Function: “a high potassium concentration in the extracellular
+    fluids decreases the resting membrane potential in the cardiac muscle fibers ... which makes contraction of
+    the heart progressively weaker”'
+  causal_evidence: curated_mechanistic
+- source: plasma_potassium
+  target: renal_hydrogen_secretion
+  sign: '-'
+  mechanism: low plasma K+ raises intracellular H+ in tubular cells, stimulating H+ secretion; high K+ inhibits
+    it
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.30 (Regulation of Acid-Base Balance) §Regulation of
+    Renal Tubular Hydrogen Ion Secretion: “hypokalemia stimulating and hyperkalemia inhibiting H+ secretion in the
+    proximal tubule.”'
+  causal_evidence: curated_mechanistic
+- source: plasma_potassium
+  target: total_peripheral_resistance
+  sign: '-'
+  mechanism: potassium ions inhibit vascular smooth muscle contraction, dilating arterioles and lowering resistance
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.17 (Local and Humoral Control of Blood Flow by the Tissues)
+    §Vascular Control by Ions and Other Chemical Factors: “An increase in potassium ion concentration causes vasodilation.
+    This results from the ability of potassium ions to inhibit smooth muscle contraction.”'
+  causal_evidence: curated_mechanistic
+- source: pulmonary_capillary_pressure
+  target: pulmonary_interstitial_fluid_volume
+  sign: +
+  mechanism: raised capillary hydrostatic pressure increases the outward filtration force across the pulmonary capillary
+    membrane, driving fluid into the interstitium and alveoli
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.38 (Pulmonary Circulation, Pulmonary Edema, Pleural
+    Fluid) §Pulmonary Edema / Pulmonary Edema Safety Factor: “the pulmonary capillary pressure must rise from the
+    normal level of 7 mm Hg to more than 28 mm Hg to cause pulmonary edema”'
+  causal_evidence: curated_mechanistic
+- source: pulmonary_capillary_wedge_pressure
+  target: pulmonary_interstitial_fluid_volume
+  sign: +
+  mechanism: raised pulmonary capillary hydrostatic pressure exceeds plasma colloid osmotic pressure, driving Starling
+    filtration of fluid into the lung interstitium and alveoli
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.22 (Cardiac Failure) §Unilateral Left Heart Failure:
+    “the pulmonary capillary pressure increases, and if this rises above ... colloid osmotic pressure of the plasma
+    ... fluid begins to filter out of the capillaries into the lung interstitial spaces and alveoli”'
+  causal_evidence: curated_mechanistic
+- source: pulmonary_interstitial_colloid_osmotic_pressure
+  target: pulmonary_interstitial_fluid_volume
+  sign: +
+  mechanism: interstitial colloid osmotic pressure is an outward Starling force pulling fluid out of the pulmonary
+    capillaries into the interstitium
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.38 (Pulmonary Circulation, Pulmonary Edema, Pleural
+    Fluid) §Interrelations Between Interstitial Fluid Pressure and Other Pressures in the Lung: “Forces tending
+    to cause movement of fluid outward ... Interstitial fluid colloid osmotic pressure 14”'
+  causal_evidence: curated_mechanistic
+- source: pulmonary_lymph_flow
+  target: pleural_fluid_volume
+  sign: '-'
+  mechanism: lymphatic vessels opening from the pleural cavity pump away transuded pleural fluid, keeping the pleural
+    space a thin potential space
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.38 (Pulmonary Circulation, Pulmonary Edema, Pleural
+    Fluid) §Fluid in the Pleural Cavity: “the excess fluid is pumped away by lymphatic vessels opening directly
+    from the pleural cavity”'
+  causal_evidence: curated_mechanistic
+- source: pulmonary_lymph_flow
+  target: pulmonary_interstitial_fluid_volume
+  sign: '-'
+  mechanism: pulmonary lymphatics actively pump filtered fluid out of the interstitial spaces back to the circulation,
+    lowering lung fluid volume and protecting against edema
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.38 (Pulmonary Circulation, Pulmonary Edema, Pleural
+    Fluid) §Negative Pulmonary Interstitial Pressure / Pulmonary Edema Safety Factor: “this fluid is pumped back
+    to the circulation through the pulmonary lymphatic system”'
+  causal_evidence: curated_mechanistic
+- source: renal_blood_flow
+  target: glomerular_colloid_osmotic_pressure
+  sign: '-'
+  mechanism: higher renal blood flow lowers the filtration fraction so plasma proteins are concentrated less along
+    the glomerular capillary, giving a lower colloid osmotic pressure
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.26 (Urine Formation by the Kidneys: I. Glomerular Filtration,
+    Renal Blood Flow, and Their Control) §Increased Glomerular Capillary Colloid Osmotic Pressure Decreases GFR:
+    “a greater rate of blood flow into the glomerulus ... causing a slower rise in the glomerular capillary colloid
+    osmotic pressure”'
+  causal_evidence: curated_mechanistic
+- source: renal_hydrogen_secretion
+  target: plasma_bicarbonate
+  sign: +
+  mechanism: tubular H+ secretion titrates filtered HCO3- and generates new HCO3-, returning bicarbonate to the
+    blood
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.30 (Regulation of Acid-Base Balance) §Secretion of Hydrogen
+    Ions and Reabsorption of Bicarbonate Ions by the Renal Tubules: “for every H+ secreted into the tubular lumen,
+    an HCO3- enters the blood.”'
+  causal_evidence: curated_mechanistic
+- source: renal_perfusion_pressure
+  target: glomerular_hydrostatic_pressure
+  sign: +
+  mechanism: raising renal arterial perfusion pressure is transmitted through the afferent arteriole to raise glomerular
+    capillary hydrostatic pressure
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.26 (Urine Formation by the Kidneys: I. Glomerular Filtration,
+    Renal Blood Flow, and Their Control) §Increased Glomerular Capillary Hydrostatic Pressure Increases GFR: “Increased
+    arterial pressure tends to raise glomerular hydrostatic pressure”'
+  causal_evidence: curated_mechanistic
+- source: renal_perfusion_pressure
+  target: sodium_water_reabsorption
+  sign: '-'
+  mechanism: raised renal arterial pressure raises peritubular/interstitial hydrostatic pressure and enhances backleak,
+    decreasing fractional tubular Na+/water reabsorption
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.27 (Urine Formation by the Kidneys: II. Tubular Reabsorption
+    and Secretion) §Effect of Arterial Pressure on Urine Output: “increased renal arterial pressure... decreases
+    the percentage of the filtered load of sodium and water that is reabsorbed by the tubules.”'
+  causal_evidence: curated_mechanistic
+- source: renal_vascular_resistance
+  target: renal_blood_flow
+  sign: '-'
+  mechanism: renal blood flow equals the renal arteriovenous pressure gradient divided by total renal vascular resistance
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.26 (Urine Formation by the Kidneys: I. Glomerular Filtration,
+    Renal Blood Flow, and Their Control) §Determinants of Renal Blood Flow: “a decrease in vascular resistance increases
+    renal blood flow if renal artery and renal vein pressures remain constant”'
+  causal_evidence: curated_mechanistic
+- source: resistance_to_venous_return
+  target: venous_return
+  sign: '-'
+  mechanism: increasing the resistance to venous flow (mainly venous, partly arteriolar) reduces venous flow into
+    the right atrium for a given pressure gradient
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.20 (Cardiac Output, Venous Return, and Their Regulation)
+    §Resistance to Venous Return: “an increase in resistance to twice normal rotates the curve downward to one-half
+    as great a slope.”'
+  causal_evidence: curated_mechanistic
+- source: right_atrial_pressure
+  target: heart_rate
+  sign: +
+  mechanism: stretch of the right atrial wall (raised right atrial pressure/filling) directly increases pacemaker
+    firing, raising heart rate (Bainbridge effect)
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.9 (Heart Muscle; The Heart as a Pump and Function of
+    the Heart Valves) §What Is the Explanation of the Frank-Starling Mechanism?: “Stretch of the right atrial wall
+    directly increases the heart rate by 10 to 20 per cent; this, too, helps increase the amount of blood pumped
+    each minute”'
+  causal_evidence: curated_mechanistic
+- source: right_atrial_pressure
+  target: venous_return
+  sign: '-'
+  mechanism: rising right-atrial pressure exerts a backward force on the veins (reduces the Psf–PRA pressure gradient),
+    impeding flow of blood from the systemic veins into the right atrium
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.20 (Cardiac Output, Venous Return, and Their Regulation)
+    §Normal Venous Return Curve: “the backward force of the rising atrial pressure on the veins of the systemic
+    circulation decreases venous return of blood to the heart.”'
+  causal_evidence: curated_mechanistic
+- source: salt_intake
+  target: extracellular_fluid_volume
+  sign: +
+  mechanism: accumulated NaCl raises ECF osmolality, the osmotic disposition drives thirst and ADH-mediated water
+    retention, expanding ECF volume
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.19 (Dominant Role of the Kidney in Long-Term Pressure
+    Control) §Importance of Salt in the Renal-Body Fluid Schema: “the amount of salt that accumulates in the body
+    is the main determinant of the extracellular fluid volume”'
+  causal_evidence: curated_mechanistic
+- source: salt_intake
+  target: plasma_osmolality
+  sign: +
+  mechanism: ingested NaCl adds solute to the extracellular fluid, raising its osmotic concentration
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.19 (Dominant Role of the Kidney in Long-Term Pressure
+    Control) §Importance of Salt in the Renal-Body Fluid Schema: “When there is excess salt in the extracellular
+    fluid, the osmolality of the fluid increases”'
+  causal_evidence: curated_mechanistic
+- source: sympathetic_tone
+  target: av_conduction_velocity
+  sign: +
+  mechanism: sympathetic norepinephrine raises Na/Ca permeability in A-V node/bundle fibers, easing excitation of
+    successive cells, decreasing atrioventricular conduction time
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.10 (Rhythmical Excitation of the Heart) §Mechanism of
+    the Sympathetic Effect: “increased sodium-calcium permeability makes it easier for the action potential to excite
+    each succeeding portion of the conducting fiber bundles, thereby decreasing the conduction time from the atria
+    to the ventricles”'
+  causal_evidence: curated_mechanistic
+- source: sympathetic_tone
+  target: coronary_blood_flow
+  sign: '?'
+  mechanism: direct sympathetic transmitter action on coronary vessels engages both alpha (constrictor, epicardial)
+    and beta (dilator, intramuscular) receptors, so the net direct vascular effect is genuinely indeterminate
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.21 (Muscle Blood Flow and Cardiac Output During Exercise;
+    the Coronary Circulation and Ischemic Heart Disease) §Nervous Control of Coronary Blood Flow: “sympathetic stimulation
+    can, at least theoretically, cause slight overall coronary constriction or dilation, but usually constriction”
+    [degraded to ? in adversarial verification: Direct coronary effect engages alpha-constrictor + beta-dilator;
+    Guyton: constri]'
+  causal_evidence: curated_mechanistic
+- source: sympathetic_tone
+  target: gfr
+  sign: '-'
+  mechanism: increased renal sympathetic nerve activity constricts the renal arterioles, lowering glomerular filtration
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.29 (Renal Regulation of Potassium, Calcium, Phosphate,
+    and Magnesium; Integration of Renal Mechanisms for Control of Blood Volume and Extracellular Fluid Volume) §Sympathetic
+    Nervous System Control of Renal Excretion: “(1) constriction of the renal arterioles, with resultant decreased
+    GFR”'
+  causal_evidence: curated_mechanistic
+- source: sympathetic_tone
+  target: metabolic_rate
+  sign: +
+  mechanism: sympathetic catecholamine release driving (uncoupled) oxidative metabolism / nonshivering thermogenesis
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.72 (Energetics and Metabolic Rate) §Energy Used for
+    Nonshivering Thermogenesis: “stimulated by sympathetic nervous system activation, which releases norepinephrine
+    and epinephrine, which in turn increase metabolic activity and heat generation”'
+  causal_evidence: curated_mechanistic
+- source: sympathetic_tone
+  target: renal_vascular_resistance
+  sign: +
+  mechanism: renal sympathetic nerve activation constricts the renal arterioles, raising total renal vascular resistance
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.26 (Urine Formation by the Kidneys: I. Glomerular Filtration,
+    Renal Blood Flow, and Their Control) §Sympathetic Nervous System Activation Decreases GFR: “Strong activation
+    of the renal sympathetic nerves can constrict the renal arterioles and decrease renal blood flow and GFR.”'
+  causal_evidence: curated_mechanistic
+- source: sympathetic_tone
+  target: resistance_to_venous_return
+  sign: +
+  mechanism: sympathetic constriction of systemic vessels (especially veins) raises the resistance to venous flow
+    toward the heart
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.20 (Cardiac Output, Venous Return, and Their Regulation)
+    §Effect of Sympathetic Stimulation on Cardiac Output: “it increases the mean systemic filling pressure because
+    of contraction of the peripheral vessels—especially the veins—and it increases the resistance to venous return.”'
+  causal_evidence: curated_mechanistic
+- source: sympathetic_tone
+  target: sa_node_automaticity
+  sign: +
+  mechanism: norepinephrine raises sinus-node Na/Ca permeability, speeding phase-4 drift to threshold, raising intrinsic
+    pacemaker firing rate
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.10 (Rhythmical Excitation of the Heart) §Mechanism of
+    the Sympathetic Effect: “an increase of sodium-calcium permeability causes ... increased rate of upward drift
+    of the diastolic membrane potential toward the threshold level for self-excitation”'
+  causal_evidence: curated_mechanistic
+- source: sympathetic_tone
+  target: skeletal_muscle_blood_flow
+  sign: '-'
+  mechanism: sympathetic vasoconstrictor fibres secrete norepinephrine onto muscle arterioles (alpha receptors),
+    constricting them and reducing resting muscle blood flow
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.21 (Muscle Blood Flow and Cardiac Output During Exercise;
+    the Coronary Circulation and Ischemic Heart Disease) §Sympathetic Vasoconstrictor Nerves: “When maximally activated,
+    this can decrease blood flow through resting muscles to as little as one half to one third normal”'
+  causal_evidence: curated_mechanistic
+- source: sympathetic_tone
+  target: sodium_water_reabsorption
+  sign: +
+  mechanism: renal sympathetic noradrenergic drive directly stimulates tubular Na+ transporters (proximal tubule,
+    thick ascending limb), raising tubular sodium reabsorption
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.27 (Urine Formation by the Kidneys: II. Tubular Reabsorption
+    and Secretion) §Sympathetic Nervous System Activation Increases Sodium Reabsorption: “Sympathetic activation
+    also increases sodium reabsorption in the proximal tubule, the thick ascending limb of the loop of Henle, and
+    perhaps in more distal parts of the renal tubule.”'
+  causal_evidence: curated_mechanistic
+- source: testosterone
+  target: bone_mass
+  sign: +
+  mechanism: testosterone increases bone matrix deposition and calcium retention, raising skeletal bone mass
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.80 (Reproductive and Hormonal Functions of the Male
+    (and Function of the Pineal Gland)) §Testosterone Increases Bone Matrix and Causes Calcium Retention: “testosterone
+    increases the total quantity of bone matrix and causes calcium retention”'
+  causal_evidence: curated_mechanistic
+- source: testosterone
+  target: metabolic_rate
+  sign: +
+  mechanism: androgen-receptor activation raising cellular oxidative metabolic rate (beyond the muscle-mass route)
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.72 (Energetics and Metabolic Rate) §Male Sex Hormone
+    Increases Metabolic Rate: “The male sex hormone testosterone can increase the metabolic rate about 10 to 15
+    per cent.”'
+  causal_evidence: curated_mechanistic
+- source: testosterone
+  target: muscle_protein_synthesis_rate
+  sign: +
+  mechanism: testosterone induces DNA-RNA transcription and protein synthesis in target tissues including skeletal
+    muscle
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.80 (Reproductive and Hormonal Functions of the Male
+    (and Function of the Pineal Gland)) §Basic Intracellular Mechanism of Action of Testosterone: “Testosterone
+    stimulates production of proteins virtually everywhere in the body”'
+  causal_evidence: curated_mechanistic
+- source: testosterone
+  target: spermatogenesis_rate
+  sign: +
+  mechanism: testosterone diffusing into seminiferous tubules drives growth/division of germinal cells, raising
+    spermatogenesis rate
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.80 (Reproductive and Hormonal Functions of the Male
+    (and Function of the Pineal Gland)) §Regulation of Spermatogenesis by FSH and Testosterone: “testosterone ...
+    is essential for growth and division of the testicular germinal cells, which is the first stage in forming sperm”'
+  causal_evidence: curated_mechanistic
+- source: total_peripheral_resistance
+  target: cardiac_output
+  sign: '-'
+  mechanism: by Ohm's law (CO = arterial pressure / TPR) with arterial pressure held by long-term regulation, raising
+    peripheral resistance lowers the steady-state cardiac output
+  evidence: 'Guyton & Hall, Medical Physiology, 11th ed. Ch.20 (Cardiac Output, Venous Return, and Their Regulation)
+    §Effect of Total Peripheral Resistance on the Long-Term Cardiac Output Level: “Any time the long-term level
+    of total peripheral resistance changes (but no other functions of the circulation change), the cardiac output
+    changes quantitatively in exactly the opposite direction.”'
+  causal_evidence: curated_mechanistic

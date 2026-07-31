@@ -1,0 +1,471 @@
+# =============================================================================
+# Lipids & lipoproteins — plasma/serum analytes, sterol-synthesis intermediates,
+# apolipoproteins, sphingolipids, fatty acids, and lipid-handling enzymes
+#                                    — PhysioMap fragment  *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Hand-encoded for HPO directional-gap coverage in the "lipids_lipoproteins" theme.
+# Each node is a physiological VARIABLE = (entity, PATO determinable-quality) at a
+# named scale. Most are plasma/serum/CSF/urine/fecal CONCENTRATION nodes (scale
+# organ_system, PATO:0000033 concentration); a handful are enzyme ACTIVITY roots
+# (scale cellular, PATO:0001414 catalytic activity, with bearer_entity_iri).
+#
+# This is largely an ISLAND fragment: the specialized lipid analytes below have no
+# defensible *signed* causal partner among the existing corpus nodes, so an
+# ungrounded concentration node that simply ABSTAINS is the correct (safe) encoding.
+# A small number of within-fragment enzyme->substrate / enzyme->product edges are
+# added where a cited biochemical mechanism gives a determinate sign (sterol-synthesis
+# block accumulating the immediate precursor; LPL hydrolysing chylomicron TG; LCAT
+# esterifying cholesterol). Boundary refs to existing corpus nodes are added only
+# where a textbook mechanism is unambiguous.
+#
+# Provenance (textbooks / databases consulted per term):
+#   - Lehninger Principles of Biochemistry (Nelson & Cox), "Lipid biosynthesis":
+#     cholesterol biosynthesis (mevalonate -> squalene -> lanosterol -> ...; the
+#     Bloch and Kandutsch-Russell pathways) — desmosterol, 7-DHC, 8-DHC, lathosterol,
+#     8(9)-cholestenol, dimethyl/monomethyl sterols are post-squalene intermediates.
+#   - Boron & Boulpaep Medical Physiology, "Lipid metabolism / lipoprotein transport":
+#     chylomicron, VLDL, LDL, HDL, apolipoproteins (apoA-I/A-II/A-IV, apoB, apoC-II/
+#     C-III, apoE), LPL, LCAT.
+#   - Harrison's Principles of Internal Medicine, "Disorders of lipoprotein metabolism"
+#     and "Lysosomal storage diseases": apolipoproteinemias, Tangier/apoA-I, ABL/HBL
+#     (apoB), LPL deficiency (chylomicronemia), LCAT deficiency, Fabry (Gb3), MLD
+#     (sulfatide), Niemann-Pick (lysosphingomyelin/SPC).
+#   - OMIM phenotype context (cited, NOT encoded): SLOS 270400 (DHCR7; 7-DHC/8-DHC up,
+#     C-triol/cholestane-triol up); desmosterolosis 602398 (DHCR24; desmosterol up);
+#     CTX 213700 (CYP27A1; cholestanol up, bile alcohols up, 27-OHC down/altered);
+#     sitosterolemia 210250 (ABCG5/8; sitosterol up); MVK deficiency 610377 (mevalonate
+#     kinase); LCAT deficiency 245900; LPL deficiency 238600; Fabry 301500; MLD 250100.
+#   - ChEBI / GO / PR identifiers verified by grep against ontology/.obo_cache OBO
+#     files (per-node comment gives the matched OBO name).
+#
+# Existing corpus nodes reused as boundary refs (NOT redefined here):
+#   ldl_cholesterol, hdl_cholesterol, plasma_triglycerides, plasma_free_fatty_acids,
+#   plasma_bile_acids  (ontology/.obo_cache/node_inventory.tsv).
+#
+# ROBERT: please correct signs / IRIs / scales / edges.
+# =============================================================================
+
+name: hpo_lipids_lipoproteins
+description: >-
+  DRAFT lipids & lipoproteins fragment for HPO directional-gap coverage. Plasma/serum/
+  CSF/urine/fecal concentration nodes for total lipids, lipoprotein particles and HDL
+  subfractions, apolipoproteins, cholesterol-synthesis sterol intermediates, oxysterols
+  and bile alcohols, sphingolipids, free fatty acids, and the lipid-handling enzymes
+  (LPL, LCAT, mevalonate kinase, sterol 27-hydroxylase, PAF acetylhydrolase). Mostly an
+  abstaining island of grounded analyte nodes; a few within-fragment enzyme->substrate/
+  product edges carry a cited determinate sign. Single-/multi-scale (ORGAN_SYSTEM +
+  CELLULAR enzyme roots). Phase 1.
+
+nodes:
+  # --- aggregate lipid / lipoprotein / apolipoprotein pools -------------------
+  - id: plasma_total_lipids                # CHEBI:18059 name: lipid (class)
+    label: plasma total lipid concentration
+    scale: organ_system
+    entity_iri: CHEBI:18059
+    quality_iri: PATO:0000033
+  - id: plasma_lipoprotein                 # GO:0034358 name: plasma lipoprotein particle
+    label: plasma (total) lipoprotein particle concentration
+    scale: organ_system
+    entity_iri: GO:0034358
+    quality_iri: PATO:0000033
+  - id: plasma_apolipoprotein              # CHEBI:39015 name: apolipoprotein (class)
+    label: plasma (total) apolipoprotein concentration
+    scale: organ_system
+    entity_iri: CHEBI:39015
+    quality_iri: PATO:0000033
+  - id: plasma_non_hdl_cholesterol         # no clean OBO class for non-HDL-C; entity null
+    label: plasma non-HDL cholesterol concentration
+    scale: organ_system
+    entity_iri: null
+    quality_iri: PATO:0000033
+
+  # --- lipoprotein particle classes ------------------------------------------
+  - id: plasma_vldl                        # GO:0034361 very-low-density lipoprotein particle
+    label: plasma VLDL (cholesterol) concentration
+    scale: organ_system
+    entity_iri: GO:0034361
+    quality_iri: PATO:0000033
+  - id: vldl_cholesterol                   # separate HPO node id requested (VLDL-C, +/-)
+    label: plasma VLDL cholesterol concentration
+    scale: organ_system
+    entity_iri: GO:0034361
+    quality_iri: PATO:0000033
+  - id: plasma_chylomicron                 # GO:0042627 chylomicron
+    label: plasma chylomicron concentration
+    scale: organ_system
+    entity_iri: GO:0042627
+    quality_iri: PATO:0000033
+  - id: plasma_chylomicrons                # requested separate id for the "decreased" term
+    label: plasma chylomicron concentration (decreased-term node)
+    scale: organ_system
+    entity_iri: GO:0042627
+    quality_iri: PATO:0000033
+
+  # --- HDL subfractions (HDL2a/2b/3a/3b/3c) ; entity GO:0034364 HDL particle ---
+  - id: plasma_hdl2a
+    label: plasma HDL2a subfraction concentration
+    scale: organ_system
+    entity_iri: GO:0034364
+    quality_iri: PATO:0000033
+  - id: plasma_hdl2b
+    label: plasma HDL2b subfraction concentration
+    scale: organ_system
+    entity_iri: GO:0034364
+    quality_iri: PATO:0000033
+  - id: plasma_hdl3a
+    label: plasma HDL3a subfraction concentration
+    scale: organ_system
+    entity_iri: GO:0034364
+    quality_iri: PATO:0000033
+  - id: plasma_hdl3b
+    label: plasma HDL3b subfraction concentration
+    scale: organ_system
+    entity_iri: GO:0034364
+    quality_iri: PATO:0000033
+  - id: plasma_hdl3c
+    label: plasma HDL3c subfraction concentration
+    scale: organ_system
+    entity_iri: GO:0034364
+    quality_iri: PATO:0000033
+
+  # --- specific apolipoproteins (PR ids verified) ----------------------------
+  - id: plasma_apolipoprotein_a1           # PR:000004140 apolipoprotein A-I
+    label: plasma apolipoprotein A-I concentration
+    scale: organ_system
+    entity_iri: PR:000004140
+    quality_iri: PATO:0000033
+  - id: plasma_apolipoprotein_a2           # PR:000004142 apolipoprotein A-II
+    label: plasma apolipoprotein A-II concentration
+    scale: organ_system
+    entity_iri: PR:000004142
+    quality_iri: PATO:0000033
+  - id: plasma_apolipoprotein_a4           # PR:000004143 apolipoprotein A-IV
+    label: plasma apolipoprotein A-IV concentration
+    scale: organ_system
+    entity_iri: PR:000004143
+    quality_iri: PATO:0000033
+  - id: plasma_apolipoprotein_b            # PR:000004145 apolipoprotein B-100 (apoB)
+    label: plasma apolipoprotein B concentration
+    scale: organ_system
+    entity_iri: PR:000004145
+    quality_iri: PATO:0000033
+  - id: plasma_apolipoprotein_c2           # PR:000004151 apolipoprotein C-II
+    label: plasma apolipoprotein C-II concentration
+    scale: organ_system
+    entity_iri: PR:000004151
+    quality_iri: PATO:0000033
+  - id: plasma_apolipoprotein_c3           # PR:000004152 apolipoprotein C-III
+    label: plasma apolipoprotein C-III concentration
+    scale: organ_system
+    entity_iri: PR:000004152
+    quality_iri: PATO:0000033
+  - id: plasma_apolipoprotein_e            # PR:000004155 apolipoprotein E
+    label: plasma apolipoprotein E concentration
+    scale: organ_system
+    entity_iri: PR:000004155
+    quality_iri: PATO:0000033
+
+  # --- cholesterol-synthesis sterol intermediates (post-squalene) ------------
+  - id: plasma_squalene                    # CHEBI:15440 squalene
+    label: plasma squalene concentration
+    scale: organ_system
+    entity_iri: CHEBI:15440
+    quality_iri: PATO:0000033
+  - id: plasma_desmosterol                 # CHEBI:17737 desmosterol
+    label: plasma desmosterol concentration
+    scale: organ_system
+    entity_iri: CHEBI:17737
+    quality_iri: PATO:0000033
+  - id: plasma_7_dehydrocholesterol        # CHEBI:17759 cholesta-5,7-dien-3beta-ol (7-DHC)
+    label: plasma 7-dehydrocholesterol concentration
+    scale: organ_system
+    entity_iri: CHEBI:17759
+    quality_iri: PATO:0000033
+  - id: plasma_8_dehydrocholesterol        # CHEBI:89982 name: 8-Dehydrocholesterol
+    label: plasma 8-dehydrocholesterol concentration
+    scale: organ_system
+    entity_iri: CHEBI:89982
+    quality_iri: PATO:0000033
+  - id: plasma_lathosterol                 # CHEBI:17168 5alpha-cholest-7-en-3beta-ol (lathosterol)
+    label: plasma lathosterol concentration
+    scale: organ_system
+    entity_iri: CHEBI:17168
+    quality_iri: PATO:0000033
+  - id: plasma_8_9_cholestenol             # no clean OBO match for 8(9)-cholestenol; entity null
+    label: plasma 8(9)-cholestenol concentration
+    scale: organ_system
+    entity_iri: null
+    quality_iri: PATO:0000033
+  - id: plasma_dimethylsterol              # methylsterol intermediate class; no clean OBO; null
+    label: plasma dimethyl sterol concentration
+    scale: organ_system
+    entity_iri: null
+    quality_iri: PATO:0000033
+  - id: plasma_monomethylsterol            # monomethyl sterol intermediate; no clean OBO; null
+    label: plasma monomethyl sterol concentration
+    scale: organ_system
+    entity_iri: null
+    quality_iri: PATO:0000033
+  - id: plasma_methylsterol                # methylsterol (generic) intermediate; no clean OBO; null
+    label: plasma methylsterol concentration
+    scale: organ_system
+    entity_iri: null
+    quality_iri: PATO:0000033
+
+  # --- plant/altered sterols & oxysterols / bile alcohols --------------------
+  - id: plasma_sitosterol                  # CHEBI:27693 sitosterol
+    label: plasma sitosterol concentration
+    scale: organ_system
+    entity_iri: CHEBI:27693
+    quality_iri: PATO:0000033
+  - id: plasma_cholestanol                 # no clean OBO 'cholestanol' match; entity null
+    label: plasma cholestanol concentration
+    scale: organ_system
+    entity_iri: null
+    quality_iri: PATO:0000033
+  - id: csf_cholestanol                    # CSF compartment; same molecule, entity null
+    label: CSF cholestanol concentration
+    scale: organ_system
+    entity_iri: null
+    quality_iri: PATO:0000033
+  - id: plasma_27_hydroxycholesterol       # 27-OHC = IUPAC (25R)-cholest-5-ene-3beta,26-diol (historical C27 = IUPAC C26)
+    label: plasma 27-hydroxycholesterol concentration
+    scale: organ_system
+    entity_iri: CHEBI:76591              # (25R)-cholest-5-ene-3beta,26-diol = 27-hydroxycholesterol (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_cholestane_triol            # cholestane-3,5,6-triol; no clean OBO; entity null
+    label: plasma cholestane-triol (C-triol) concentration
+    scale: organ_system
+    entity_iri: null
+    quality_iri: PATO:0000033
+  - id: plasma_bile_alcohol                # CHEBI:50420 bile alcohol (class)
+    label: plasma bile alcohol concentration
+    scale: organ_system
+    entity_iri: CHEBI:50420
+    quality_iri: PATO:0000033
+  - id: urinary_bile_alcohol               # CHEBI:50420 bile alcohol; urine compartment
+    label: urinary bile alcohol concentration
+    scale: organ_system
+    entity_iri: CHEBI:50420
+    quality_iri: PATO:0000033
+  - id: plasma_farnesol                    # CHEBI:28600 farnesol
+    label: plasma farnesol concentration
+    scale: organ_system
+    entity_iri: CHEBI:28600
+    quality_iri: PATO:0000033
+  - id: fecal_bile_acids                   # CHEBI:3098 bile acid (matches corpus plasma_bile_acids entity)
+    label: fecal bile acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:3098
+    quality_iri: PATO:0000033
+
+  # --- cholesterol esters & cholesterol sulfate ------------------------------
+  - id: plasma_cholesterol_esters          # CHEBI:17002 cholesteryl ester
+    label: plasma cholesterol ester concentration
+    scale: organ_system
+    entity_iri: CHEBI:17002
+    quality_iri: PATO:0000033
+  - id: plasma_cholesterol_sulfate         # CHEBI:41321 cholesterol sulfate
+    label: plasma cholesterol sulfate concentration
+    scale: organ_system
+    entity_iri: CHEBI:41321
+    quality_iri: PATO:0000033
+
+  # --- sphingolipids / phospholipids -----------------------------------------
+  - id: plasma_globotriaosylceramide       # Gb3 / Fabry; no clean OBO 'globotriaosylceramide'; null
+    label: plasma globotriaosylceramide concentration
+    scale: organ_system
+    entity_iri: null
+    quality_iri: PATO:0000033
+  - id: plasma_lysosphingomyelin           # SPC; no clean OBO 'lysosphingomyelin'; entity null
+    label: plasma lysosphingomyelin concentration
+    scale: organ_system
+    entity_iri: null
+    quality_iri: PATO:0000033
+  - id: urinary_sulfatide                  # CHEBI:18318 galactosylceramide sulfate (sulfatide); urine
+    label: urinary sulfatide concentration
+    scale: organ_system
+    entity_iri: CHEBI:18318
+    quality_iri: PATO:0000033
+  - id: plasma_plasmalogen                 # no clean OBO 'plasmalogen' single match; entity null
+    label: plasma plasmalogen concentration
+    scale: organ_system
+    entity_iri: null
+    quality_iri: PATO:0000033
+  - id: plasma_lysophosphatidylcholine     # CHEBI:60479 lysophosphatidylcholine
+    label: plasma lysophosphatidylcholine concentration
+    scale: organ_system
+    entity_iri: CHEBI:60479
+    quality_iri: PATO:0000033
+
+  # --- free fatty acids ------------------------------------------------------
+  - id: plasma_adrenic_acid                # CHEBI:53487 all-cis-docosa-7,10,13,16-tetraenoic acid
+    label: plasma adrenic acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:53487
+    quality_iri: PATO:0000033
+  - id: plasma_arachidonic_acid            # CHEBI:15843 arachidonic acid
+    label: plasma arachidonic acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:15843
+    quality_iri: PATO:0000033
+  - id: plasma_mead_acid                   # CHEBI:165475 5,8,11-eicosatrienoic acid (Mead acid)
+    label: plasma Mead acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:165475
+    quality_iri: PATO:0000033
+  - id: plasma_myristoleate                # CHEBI:27781 myristoleic acid
+    label: plasma myristoleate concentration
+    scale: organ_system
+    entity_iri: CHEBI:27781
+    quality_iri: PATO:0000033
+  - id: plasma_octadecanoate               # CHEBI:28842 octadecanoic acid (stearate)
+    label: plasma octadecanoate concentration
+    scale: organ_system
+    entity_iri: CHEBI:28842
+    quality_iri: PATO:0000033
+  - id: plasma_oleate                      # CHEBI:16196 oleic acid
+    label: plasma oleate concentration
+    scale: organ_system
+    entity_iri: CHEBI:16196
+    quality_iri: PATO:0000033
+  - id: plasma_palmitate                   # CHEBI:15756 hexadecanoic acid (palmitic acid)
+    label: plasma palmitate concentration
+    scale: organ_system
+    entity_iri: CHEBI:15756
+    quality_iri: PATO:0000033
+  - id: plasma_myristic_acid               # CHEBI:28875 tetradecanoic acid (myristic acid)
+    label: serum myristic acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:28875
+    quality_iri: PATO:0000033
+
+  # --- enzyme / activity nodes (cellular roots, bearer cell) ------------------
+  - id: cholesterol_esterification_rate    # process rate (LCAT-mediated plasma esterification)
+    label: plasma cholesterol esterification rate
+    scale: organ_system
+    entity_iri: null
+    quality_iri: PATO:0000161
+  - id: lcat_activity                      # PR:000009698 phosphatidylcholine-sterol acyltransferase
+    label: lecithin-cholesterol acyltransferase (LCAT) activity
+    scale: cellular
+    entity_iri: PR:000009698
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000182          # hepatocyte (LCAT synthesised in liver)
+  - id: lipoprotein_lipase_activity        # PR:000009897 lipoprotein lipase
+    label: lipoprotein lipase (LPL) activity
+    scale: cellular
+    entity_iri: PR:000009897
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000115          # endothelial cell (capillary endothelium, LPL surface)
+  - id: plasma_lipoprotein_lipase          # PR:000009897 lipoprotein lipase (mass concentration)
+    label: plasma lipoprotein lipase concentration
+    scale: organ_system
+    entity_iri: PR:000009897
+    quality_iri: PATO:0000033
+  - id: mevalonate_kinase_activity         # PR:000010786 mevalonate kinase
+    label: mevalonate kinase activity
+    scale: cellular
+    entity_iri: PR:000010786
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000182          # hepatocyte (and ubiquitous; liver-dominant cholesterol synthesis)
+  - id: sterol_27_hydroxylase_activity     # CYP27A1 = UniProtKB Q02318; PR label uses synonym 'sterol 26-hydroxylase' (26/27 numbering)
+    label: sterol 27-hydroxylase (CYP27A1) activity
+    scale: cellular
+    entity_iri: PR:Q02318                # sterol 26-hydroxylase, mitochondrial / CYP27A1 (verified PR.obo)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000182          # hepatocyte (mitochondrial CYP27A1)
+  - id: paf_acetylhydrolase_activity       # PR:000012812 platelet-activating factor acetylhydrolase
+    label: platelet-activating factor acetylhydrolase (PAF-AH) activity
+    scale: cellular
+    entity_iri: PR:000012812
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000235          # macrophage (PLA2G7 secreted by monocytes/macrophages)
+
+causal_edges:
+  # LPL hydrolyses chylomicron/VLDL triglyceride -> more LPL clears chylomicrons (-)
+  # and lowers plasma TG. LPL deficiency (OMIM 238600) => chylomicronemia + high TG.
+  - source: lipoprotein_lipase_activity
+    target: plasma_chylomicron
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: >-
+      LPL anchored on capillary endothelium hydrolyses core triacylglycerol of
+      chylomicrons (and VLDL), driving their clearance; loss of LPL activity causes
+      fasting chylomicronemia (familial chylomicronemia syndrome).
+    evidence: "Harrison's Principles of Internal Medicine, Disorders of Lipoprotein Metabolism; OMIM 238600 (LPL deficiency)"
+  - source: lipoprotein_lipase_activity
+    target: plasma_triglycerides
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: >-
+      LPL hydrolysis of TG-rich lipoprotein core lowers plasma triglyceride; LPL or
+      apoC-II loss raises plasma TG (type I/V hyperlipoproteinemia).
+    evidence: "Boron & Boulpaep Medical Physiology, Lipoprotein transport; OMIM 238600"
+  # apoC-II is the obligate cofactor that activates LPL; less apoC-II -> less LPL action
+  - source: plasma_apolipoprotein_c2
+    target: lipoprotein_lipase_activity
+    sign: "+"
+    causal_evidence: genetic_lof_gof
+    mechanism: >-
+      Apolipoprotein C-II is the physiological activator of lipoprotein lipase; apoC-II
+      deficiency phenocopies LPL deficiency (impaired TG-rich lipoprotein lipolysis).
+    evidence: "Harrison's, Disorders of Lipoprotein Metabolism; OMIM 207750 (apoC-II deficiency)"
+  # apoC-III inhibits LPL; more apoC-III -> less LPL action -> higher TG-rich particles
+  - source: plasma_apolipoprotein_c3
+    target: lipoprotein_lipase_activity
+    sign: "-"
+    mechanism: >-
+      Apolipoprotein C-III inhibits lipoprotein lipase and hepatic remnant uptake;
+      apoC-III excess raises triglyceride-rich lipoproteins.
+    evidence: "Harrison's, Disorders of Lipoprotein Metabolism (apoC-III as LPL inhibitor / ANGPTL pathway)"
+  # LCAT esterifies free cholesterol on HDL -> raises cholesterol esters, sets the
+  # plasma cholesterol esterification rate; LCAT deficiency lowers esterified
+  # cholesterol fraction (OMIM 245900).
+  - source: lcat_activity
+    target: cholesterol_esterification_rate
+    sign: "+"
+    causal_evidence: genetic_lof_gof
+    mechanism: >-
+      LCAT (plasma, HDL-associated) transfers an acyl group from phosphatidylcholine to
+      free cholesterol forming cholesteryl ester; it is the rate-determining enzyme of
+      plasma cholesterol esterification.
+    evidence: "Lehninger Principles of Biochemistry, cholesterol transport; OMIM 245900 (LCAT deficiency). Natural human loss-of-function do(): familial LCAT deficiency (a clean LoF) significantly reduces plasma cholesteryl ester levels, LCAT being the only enzyme able to esterify cholesterol in plasma (PMID:35598637, J Lipid Res, opened primary)."
+  - source: lcat_activity
+    target: plasma_cholesterol_esters
+    sign: "+"
+    causal_evidence: genetic_lof_gof
+    mechanism: >-
+      LCAT generates plasma cholesteryl esters; familial LCAT deficiency reduces the
+      esterified-cholesterol fraction.
+    evidence: "Harrison's, Disorders of Lipoprotein Metabolism; OMIM 245900"
+  # mevalonate kinase phosphorylates mevalonate, committing flux toward squalene/sterols;
+  # MVK deficiency blocks the pathway upstream of squalene (mevalonate accumulates).
+  - source: mevalonate_kinase_activity
+    target: plasma_squalene
+    sign: "+"
+    causal_evidence: genetic_lof_gof
+    mechanism: >-
+      Mevalonate kinase is an early committed step of the isoprenoid/sterol pathway;
+      loss of MVK activity reduces downstream isoprenoid (squalene) flux.
+    evidence: "Lehninger, isoprenoid/cholesterol biosynthesis; OMIM 610377 (mevalonate kinase deficiency)"
+  # CYP27A1 (sterol 27-hydroxylase) catabolises cholesterol via the acidic bile-acid
+  # pathway; its loss (CTX, OMIM 213700) diverts to bile-alcohol and cholestanol
+  # accumulation. More enzyme activity -> more 27-hydroxycholesterol product.
+  - source: sterol_27_hydroxylase_activity
+    target: plasma_27_hydroxycholesterol
+    sign: "+"
+    causal_evidence: genetic_lof_gof
+    mechanism: >-
+      CYP27A1 27-hydroxylates cholesterol/sterol intermediates (acidic bile-acid
+      synthesis pathway); its product is 27-hydroxycholesterol.
+    evidence: "Williams Textbook of Endocrinology / Lehninger, bile-acid synthesis; OMIM 213700 (CTX, CYP27A1)"
+  - source: sterol_27_hydroxylase_activity
+    target: plasma_bile_alcohol
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: >-
+      Loss of CYP27A1 (cerebrotendinous xanthomatosis) diverts bile-acid synthesis to
+      accumulation of C27 bile alcohols (excreted in urine); more enzyme activity
+      lowers bile-alcohol accumulation.
+    evidence: "Harrison's, inborn errors of bile-acid synthesis; OMIM 213700 (CTX)"

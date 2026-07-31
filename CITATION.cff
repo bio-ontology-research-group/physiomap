@@ -1,0 +1,43 @@
+cff-version: 1.2.0
+message: "If you use PhysioMap, please cite the paper below."
+title: "PhysioMap: an ontology-grounded causal knowledge graph of human physiology"
+type: software
+version: 1.1.1
+date-released: 2026-07-31
+authors:
+  - family-names: Hoehndorf
+    given-names: Robert
+    orcid: "https://orcid.org/0000-0001-8149-5890"
+    affiliation: "King Abdullah University of Science and Technology (KAUST)"
+    email: robert.hoehndorf@kaust.edu.sa
+  - family-names: Schofield
+    given-names: Paul N.
+    affiliation: "University of Cambridge"
+  - family-names: Gkoutos
+    given-names: Georgios V.
+    affiliation: "University of Birmingham"
+repository-code: "https://github.com/bio-ontology-research-group/physiomap"
+url: "https://bio2vec.net/physiomap/"
+license: BSD-3-Clause
+license-url: "https://github.com/bio-ontology-research-group/physiomap/blob/main/LICENSING.md"
+keywords:
+  - structural causal model
+  - causal knowledge graph
+  - comparative statics
+  - feedback
+  - derivative signs
+  - human physiology
+  - rare metabolic disease
+  - selective prediction
+preferred-citation:
+  type: unpublished
+  title: "PhysioMap: an ontology-grounded causal knowledge graph of human physiology"
+  authors:
+    - family-names: Hoehndorf
+      given-names: Robert
+    - family-names: Schofield
+      given-names: Paul N.
+    - family-names: Gkoutos
+      given-names: Georgios V.
+  year: 2026
+  notes: "Manuscript submitted to the Pacific Symposium on Biocomputing."

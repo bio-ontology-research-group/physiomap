@@ -1,0 +1,411 @@
+# =============================================================================
+# Reproductive hypothalamic-pituitary-gonadal (HPG) axis — PhysioMap fragment
+# *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Hand-encoded canonical HPG-axis physiology. Every causal edge sign is the sign
+# of the partial derivative of the target w.r.t. the source at steady state, all
+# else equal (interventionist partial). The axis is encoded sex-generically at the
+# hypothalamic/pituitary tier (GnRH -> LH/FSH) and then split into the gonadal
+# steroid/peptide outputs (estradiol, progesterone, testosterone, inhibin).
+#
+# FEEDBACK LOOPS encoded (the whole point):
+#   * Negative feedback (tonic / luteal & male):
+#       GnRH -> LH (+), GnRH -> FSH (+)
+#       LH -> {estradiol, progesterone, testosterone} (+)
+#       FSH -> {estradiol, inhibin} (+)
+#       estradiol/progesterone/testosterone -| GnRH, LH, FSH      (negative)
+#       inhibin -| FSH (selective FSH suppression; activin/inhibin balance)
+#     => classic HPG negative-feedback SCC that defends steroid levels.
+#   * Positive feedback (mid-cycle LH surge): sustained high estradiol SWITCHES
+#     to STIMULATING GnRH/LH (the surge). This is genuinely sign-AMBIGUOUS as a
+#     single steady-state partial (E2 -> LH is negative at low/moderate E2 but
+#     positive at sustained high E2). Because causal_subgraph() builds a plain
+#     nx.DiGraph (one edge per (source,target)), the tonic "-" and surge "+" arms
+#     are FOLDED INTO A SINGLE estradiol->lh "?" edge rather than two parallel edges
+#     (two would collapse to whichever loads last). Note E2 -| GnRH and E2 -| FSH
+#     remain "-" (tonic). Documented for ROBERT to split if the model gains a
+#     thresholded/dynamic representation.
+#
+# CROSS-SYSTEM COUPLING to the existing map (boundary nodes, owned by siblings):
+#   * cortisol -| gnrh, lh   (stress/HPA suppression of reproduction; functional
+#     hypothalamic amenorrhea) — connects to adrenal_cortisol.yaml.
+#   * leptin -> gnrh (+)  (energy availability / adipostat signal permissively
+#     gating the GnRH pulse generator) — connects to energy_balance_appetite.yaml.
+#     NOTE: this edge was originally (incorrectly) drawn FROM thyroid.yaml's
+#     metabolic_rate (an O2-consumption / energy-EXPENDITURE variable). The
+#     interventionist partial of an expenditure variable on GnRH is NEGATIVE (raising
+#     expenditure at fixed intake worsens energy availability and suppresses GnRH),
+#     so it was re-sourced to the true energy-AVAILABILITY/stores signal, leptin (+).
+#
+# KISSPEPTIN COLLAPSE (documented abstraction): the kisspeptin/KNDy pulse-generator
+# intermediary is collapsed — GnRH is used directly as the hypothalamic drive. The
+# steroid/leptin/cortisol feedbacks physiologically act largely via kisspeptin neurons;
+# this is an acceptable single-scale ORGAN_SYSTEM abstraction and removes no loop.
+#
+# SOURCES (verified):
+#   * BioModels BIOMD0000000494 — Roblitz2013, "Menstrual Cycle following GnRH
+#     analogue administration"; Röblitz S, Stötzel C, Deuflhard P, Jones HM,
+#     Azulay D-O, van der Graaf PH, Martin SW. "A mathematical model of the human
+#     menstrual cycle for the administration of GnRH analogues." J Theor Biol.
+#     2013;321:8-27. PMID:23206386. (GnRH->LH/FSH->E2/P4 with E2/P4/inhibin
+#     feedback and the E2-driven mid-cycle LH surge.)
+#   * Boron & Boulpaep, Medical Physiology — reproductive endocrinology chapters
+#     (HPG axis; gonadotropin regulation; inhibin selective FSH feedback; the
+#     mid-cycle estradiol positive-feedback LH surge).
+#   * Williams Textbook of Endocrinology — neuroendocrine control of reproduction;
+#     functional hypothalamic amenorrhea (CRH/cortisol suppression of GnRH).
+#
+# Scope: single scale (ORGAN_SYSTEM); no constitutive (cross-scale) edges.
+# ROBERT: please correct signs/edges; in particular the E2 positive-feedback arm.
+# =============================================================================
+
+name: reproductive_hpg
+description: >-
+  DRAFT reproductive HPG-axis fragment as a PhysioMap signed cyclic causal graph.
+  Owns gnrh, lh, fsh, estradiol, progesterone, testosterone, inhibin. Encodes the
+  GnRH->LH/FSH->gonadal-steroid cascade, the HPG negative-feedback loops, inhibin's
+  selective FSH feedback, and the (sign-ambiguous) mid-cycle estradiol positive
+  feedback driving the LH surge. Couples to the existing map via cortisol (HPA
+  suppression of GnRH/LH) and leptin (energy-availability gating of GnRH).
+  Single-scale (Phase 1). Sources: BioModels BIOMD0000000494 (Roblitz2013); Boron
+  & Boulpaep Medical Physiology; Endocrine Society FHA Guideline (Gordon 2017);
+  Welt 2004 (leptin and hypothalamic amenorrhea).
+
+nodes:
+- id: gnrh
+  label: hypothalamic gonadotropin-releasing hormone concentration / pulse drive
+  scale: organ_system
+  entity_iri: PR:000008127    # progonadoliberin-1 (GnRH precursor)
+  quality_iri: PATO:0000033            # concentration
+- id: pituitary_lh_secretion
+  label: anterior-pituitary luteinizing-hormone secretory output (rate)
+  scale: organ_system
+  entity_iri: GO:0032275                # luteinizing hormone secretion (process bearer of the rate)
+  quality_iri: PATO:0000161             # secretion rate
+- id: lh
+  label: plasma luteinizing hormone concentration
+  scale: organ_system
+  entity_iri: CHEBI:81568              # Luteinizing hormone (whole hormone)
+  quality_iri: PATO:0000033
+  quality_kind: ratio
+- id: pituitary_fsh_secretion
+  label: anterior-pituitary follicle-stimulating-hormone secretory output (rate)
+  scale: organ_system
+  entity_iri: GO:0046884                # follicle-stimulating hormone secretion (process bearer of the rate)
+  quality_iri: PATO:0000161             # secretion rate
+- id: fsh
+  label: plasma follicle-stimulating hormone concentration
+  scale: organ_system
+  entity_iri: CHEBI:81569              # Follicle stimulating hormone (whole hormone)
+  quality_iri: PATO:0000033
+  quality_kind: ratio
+- id: estradiol
+  label: plasma 17-beta-estradiol concentration
+  scale: organ_system
+  entity_iri: CHEBI:16469              # 17beta-estradiol
+  quality_iri: PATO:0000033
+- id: progesterone
+  label: plasma progesterone concentration
+  scale: organ_system
+  entity_iri: CHEBI:17026              # progesterone
+  quality_iri: PATO:0000033
+- id: testosterone
+  label: plasma testosterone concentration
+  scale: organ_system
+  entity_iri: CHEBI:17347              # testosterone
+  quality_iri: PATO:0000033
+- id: inhibin
+  label: plasma inhibin (B) concentration
+  scale: organ_system
+  entity_iri: GO:0043513               # inhibin B complex (continuant)
+  quality_iri: PATO:0000033
+  quality_kind: ratio
+
+  # --- cellular producer nodes (cell-of-origin grounding for secreted hormones) ---
+  # Each producer node carries a secretion-rate quality (PATO:0000161) and is linked to
+  # its hormone output by a typed production relation (see below).
+- id: gnrh_neuron_gnrh_secretion
+  label: hypothalamic GnRH-neuron gonadotropin-releasing hormone secretion rate
+  scale: cellular
+  entity_iri: CL:0011111               # hypothalamic gonadotropin-releasing hormone neuron (OLS4-verified)
+  quality_iri: PATO:0000161            # secretion rate
+- id: gonadotroph_lh_secretion
+  label: anterior-pituitary gonadotroph luteinizing-hormone secretion rate
+  scale: cellular
+  entity_iri: GO:0032275               # luteinizing hormone secretion
+  quality_iri: PATO:0000161
+  bearer_entity_iri: CL:0000437  # gonadtroph
+- id: gonadotroph_fsh_secretion
+  label: anterior-pituitary gonadotroph follicle-stimulating-hormone secretion rate
+  scale: cellular
+  entity_iri: GO:0046884               # follicle-stimulating hormone secretion
+  quality_iri: PATO:0000161
+  bearer_entity_iri: CL:0000437  # gonadtroph
+- id: granulosa_estradiol_secretion
+  label: ovarian granulosa-cell estradiol secretion rate
+  scale: cellular
+  entity_iri: GO:0035938               # estradiol secretion
+  quality_iri: PATO:0000161
+  bearer_entity_iri: CL:0000501  # granulosa cell
+- id: luteal_progesterone_secretion
+  label: corpus-luteum luteal-cell progesterone secretion rate
+  scale: cellular
+  entity_iri: GO:0042701               # progesterone secretion
+  quality_iri: PATO:0000161
+  bearer_entity_iri: CL:0000175  # luteal cell
+- id: leydig_testosterone_secretion
+  label: testicular Leydig-cell testosterone secretion rate
+  scale: cellular
+  entity_iri: GO:0035936               # testosterone secretion
+  quality_iri: PATO:0000161
+  bearer_entity_iri: CL:0000178  # Leydig cell
+- id: sertoli_inhibin_secretion
+  label: testicular Sertoli-cell inhibin-B secretion rate
+  scale: cellular
+  entity_iri: GO:0032334               # inhibin secretion
+  quality_iri: PATO:0000161
+  bearer_entity_iri: CL:0000216  # Sertoli cell
+
+causal_edges:
+  # --- hypothalamus -> pituitary --------------------------------------------
+- source: gnrh
+  target: pituitary_lh_secretion
+  sign: "+"
+  mechanism: GnRH pulses bind gonadotrope GnRHR, stimulating LH synthesis/secretion
+  evidence: "BioModels BIOMD0000000494 (Roblitz2013, GnRH->LH); Boron & Boulpaep reproductive endocrinology | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-091 (17.4: The Pituitary Gland and Hypothalamus): 'GnRH stimulates the anterior pituitary to secrete gonadotropins.'; OpenStax Anatomy & Physiology 2e §anp-160 (27.2: Anatomy and Physiology of the Male Reproductive System): GnRH binding to anterior pituitary stimulates release of LH.; OpenStax Anatomy & Physiology 2e §anp-161 (27.3: Anatomy and Physiology of the Female Reproductive System): 'the hypothalamus produces GnRH, a hormone that signals the anterior pituitary gland to produce the gonadotropins FSH and LH'; OpenStax Anatomy & Physiology 2e §anp-162 (27.4: Development of the Male and Female Reproductive Systems): 'a concerted release of hormones from the hypothalamus (GnRH), the anterior pituitary (LH and FSH), and the gonads...is responsible for the maturation of the reproductive systems'; 'initiation of puberty is the result of...increases in either estrogen or testosterone [driven by LH/FSH increases following GnRH]'.; OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): 'the hypothalamus produces gonadotropin-releasing hormone (GnRH), which stimulates the production and release of follicle-stimulating hormone (FSH) and luteinizing hormone (LH) from the anterior pituitary gland.'; OpenStax Biology 2e §bio-43.3 (43.3: Human Reproductive Anatomy and Gametogenesis): 'the hypothalamus sends a gonadotropin-releasing hormone (GnRH) to the anterior pituitary. This causes the release of follicle stimulating hormone (FSH) and luteinizing hormone (LH) from the anterior pituitary into the blood.'"
+- source: gnrh
+  target: pituitary_fsh_secretion
+  sign: "+"
+  mechanism: GnRH pulses stimulate gonadotrope FSH synthesis/secretion (slower-frequency pulses favour FSH)
+  evidence: "BioModels BIOMD0000000494 (Roblitz2013, GnRH->FSH); Boron & Boulpaep reproductive endocrinology | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-091 (17.4: The Pituitary Gland and Hypothalamus): 'GnRH stimulates the anterior pituitary to secrete gonadotropins.''; OpenStax Anatomy & Physiology 2e §anp-160 (27.2: Anatomy and Physiology of the Male Reproductive System): GnRH binding to anterior pituitary stimulates release of FSH.; OpenStax Anatomy & Physiology 2e §anp-161 (27.3: Anatomy and Physiology of the Female Reproductive System): 'the hypothalamus produces GnRH, a hormone that signals the anterior pituitary gland to produce the gonadotropins FSH and LH'; OpenStax Anatomy & Physiology 2e §anp-162 (27.4: Development of the Male and Female Reproductive Systems): GnRH from hypothalamus drives LH and FSH release from anterior pituitary, which then stimulate gonads to produce sex hormones in both male and female adolescents.; OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): 'the hypothalamus produces gonadotropin-releasing hormone (GnRH), which stimulates the production and release of follicle-stimulating hormone (FSH) and luteinizing hormone (LH) from the anterior pituitary gland.'; OpenStax Biology 2e §bio-43.3 (43.3: Human Reproductive Anatomy and Gametogenesis): 'the hypothalamus sends a gonadotropin-releasing hormone (GnRH) to the anterior pituitary. This causes the release of follicle stimulating hormone (FSH) and luteinizing hormone (LH) from the anterior pituitary into the blood.'"
+
+  # --- pituitary secretory output sets the plasma gonadotropin level (within-scale mediation) ---
+  # Curatorial correction (Paul N. Schofield, 2026-06-11): GnRH drive and the gonadal-steroid /
+  # inhibin / cortisol feedbacks onto plasma LH & FSH are INDIRECT — they act on the gonadotroph's
+  # LH/FSH *secretory output* (`pituitary_lh_secretion` / `pituitary_fsh_secretion`), which then set
+  # the plasma levels (secretion vs clearance). Typed production relations link the gonadotroph
+  # outputs below. Routed through the supported secretory intermediates rather than an unsupported
+  # direct macro-to-cell shortcut. Inserting these monotone pass-through nodes
+  # preserves every loop sign, so all comparative-statics predictions are unchanged.
+- source: pituitary_lh_secretion
+  target: lh
+  sign: "+"
+  causal_evidence: mechanistic_model
+  mechanism: "anterior-pituitary gonadotroph LH secretory output sets the circulating LH concentration (mass balance: plasma [LH] = secretion − clearance)"
+  evidence: "BioModels BIOMD0000000494 (Roblitz2013) models plasma LH as the gonadotroph secretory output into the circulation. Curated by Paul N. Schofield. *** DRAFT FOR REVIEW ***"
+- source: pituitary_fsh_secretion
+  target: fsh
+  sign: "+"
+  causal_evidence: mechanistic_model
+  mechanism: "anterior-pituitary gonadotroph FSH secretory output sets the circulating FSH concentration (mass balance: plasma [FSH] = secretion − clearance)"
+  evidence: "BioModels BIOMD0000000494 (Roblitz2013) models plasma FSH as the gonadotroph secretory output into the circulation. Curated by Paul N. Schofield. *** DRAFT FOR REVIEW ***"
+
+  # --- pituitary -> gonadal outputs -----------------------------------------
+- source: lh
+  target: estradiol
+  sign: "+"
+  causal_evidence: mechanistic_model
+  mechanism: LH drives thecal androgen production aromatised to estradiol; granulosa/Leydig steroidogenesis
+  evidence: "BioModels BIOMD0000000494 (Roblitz2013, LH->E2); Boron & Boulpaep two-cell two-gonadotropin model | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-161 (27.3: Anatomy and Physiology of the Female Reproductive System): 'LH also stimulates the granulosa and theca cells of the follicles to produce the sex steroid hormone estradiol'; OpenStax Anatomy & Physiology 2e §anp-162 (27.4: Development of the Male and Female Reproductive Systems): 'During puberty, the release of LH and FSH from the anterior pituitary stimulates the gonads to produce sex hormones in both male and female adolescents'; 'the dominant follicle produces more estrogen, triggering positive feedback and the LH surge'.; OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): 'LH also plays a role in the development of ova, induction of ovulation, and stimulation of estradiol and progesterone production by the ovaries.'; OpenStax Biology 2e §bio-43.3 (43.3: Human Reproductive Anatomy and Gametogenesis): 'LH also plays a role in the development of ova, induction of ovulation, and stimulation of estradiol...and progesterone production by the ovaries.'"
+- source: fsh
+  target: estradiol
+  sign: "+"
+  causal_evidence: mechanistic_model
+  mechanism: FSH induces granulosa-cell aromatase converting androgens to estradiol (follicular growth)
+  evidence: "BioModels BIOMD0000000494 (Roblitz2013, FSH->follicle/E2); Boron & Boulpaep folliculogenesis | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-161 (27.3: Anatomy and Physiology of the Female Reproductive System): 'FSH stimulates the follicles to grow'; 'FSH stimulates the growth of a tertiary follicle, and LH stimulates the production of estrogen by granulosa and theca cells'; OpenStax Anatomy & Physiology 2e §anp-162 (27.4: Development of the Male and Female Reproductive Systems): 'Early tertiary follicles...will be stimulated by an increase in FSH...to grow'; 'Supporting granulosa and theca cells in the growing follicles produce estrogens'.; OpenStax Anatomy & Physiology 2e §anp-163 (28.2: Fertilization): FSH analogs support development of multiple follicles in IVF, consistent with FSH driving folliculogenesis and granulosa-cell estradiol production.; OpenStax Biology 2e §bio-43.3 (43.3: Human Reproductive Anatomy and Gametogenesis): 'In females, FSH stimulates development of egg cells...Follicle cells produce the hormone inhibin...LH also plays a role in...stimulation of estradiol'; 'As the follicles grow, they begin releasing estrogens.'"
+- source: lh
+  target: progesterone
+  sign: "+"
+  causal_evidence: mechanistic_model
+  mechanism: LH maintains corpus luteum steroidogenesis raising progesterone (luteal phase)
+  evidence: "BioModels BIOMD0000000494 (Roblitz2013, LH->corpus luteum P4); Boron & Boulpaep luteal phase | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-161 (27.3: Anatomy and Physiology of the Female Reproductive System): 'The surge of LH also stimulates a change in the granulosa and theca cells...luteinized granulosa and theca cells of the corpus luteum begin to produce large amounts of the sex steroid hormone progesterone'; OpenStax Anatomy & Physiology 2e §anp-163 (28.2: Fertilization): LH analog triggers ovulation in IVF protocol, consistent with the LH surge triggering follicle rupture and subsequent luteal progesterone secretion.; OpenStax Biology 2e §bio-43.3 (43.3: Human Reproductive Anatomy and Gametogenesis): 'LH also plays a role in...stimulation of estradiol...and progesterone production by the ovaries.' Also: 'The corpus luteum produces estrogen and progesterone.'"
+- source: lh
+  target: testosterone
+  sign: "+"
+  mechanism: LH stimulates testicular Leydig-cell testosterone synthesis (and thecal androgen)
+  evidence: "Boron & Boulpaep, Medical Physiology, 3rd ed., Ch. 54 'The Male Reproductive System' (LH -> Leydig-cell testosterone biosynthesis). NOTE: not in BIOMD0000000494, which is a female menstrual-cycle model with no testosterone variable. | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-160 (27.2: Anatomy and Physiology of the Male Reproductive System): 'LH binds to receptors on Leydig cells in the testes and upregulates the production of testosterone.'; OpenStax Anatomy & Physiology 2e §anp-162 (27.4: Development of the Male and Female Reproductive Systems): FSH and LH stimulation of the gonads leads to 'secretion of higher levels of sex hormones'; 'interplay between the testes and the endocrine system precisely control the production of testosterone with a negative feedback loop'.; OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): 'LH stimulates production of the sex hormones (androgens) by the interstitial cells of the testes'; testosterone is the primary androgen produced.; OpenStax Biology 2e §bio-43.3 (43.3: Human Reproductive Anatomy and Gametogenesis): 'LH also enters the testes and stimulates the interstitial cells of Leydig to make and release testosterone into the testes and the blood.'"
+- source: fsh
+  target: inhibin
+  sign: "+"
+  causal_evidence: mechanistic_model
+  mechanism: FSH stimulates granulosa/Sertoli inhibin-B production
+  evidence: "BioModels BIOMD0000000494 (Roblitz2013) — inhibin synthesis driven by gonadotropin/follicle dynamics; Boron & Boulpaep, Medical Physiology, 3rd ed., Ch. 55 'The Female Reproductive System' (FSH-driven granulosa inhibin secretion) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-160 (27.2: Anatomy and Physiology of the Male Reproductive System): 'FSH also stimulates the Sertoli cells to produce hormones called inhibins.'; OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): 'Follicle cells produce the hormone inhibin, which inhibits FSH production.' (from ovarian follicles stimulated by FSH); 'FSH stimulates the maturation of sperm cells. FSH production is inhibited by the hormone inhibin, which is released by the testes.'; OpenStax Biology 2e §bio-43.3 (43.3: Human Reproductive Anatomy and Gametogenesis): 'FSH enters the testes and stimulates the Sertoli cells to begin facilitating spermatogenesis...The Sertoli cells produce the hormone inhibin.'"
+
+  # --- gonadal negative feedback (loop closure) -----------------------------
+- source: estradiol
+  target: gnrh
+  sign: "-"
+  mechanism: tonic/moderate estradiol exerts hypothalamic negative feedback slowing the GnRH pulse generator
+  evidence: "BioModels BIOMD0000000494 (Roblitz2013, E2 feedback); Boron & Boulpaep estradiol negative feedback | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-161 (27.3: Anatomy and Physiology of the Female Reproductive System): 'high concentrations of estrogen will stimulate the hypothalamus and pituitary to reduce the production of GnRH, LH, and FSH'; OpenStax Anatomy & Physiology 2e §anp-162 (27.4: Development of the Male and Female Reproductive Systems): 'very low concentrations of androgens or estrogens will negatively feed back onto the hypothalamus and pituitary, keeping the production of GnRH, LH, and FSH low'; 'the level of estrogen in the bloodstream is high enough that it triggers negative feedback at the hypothalamus and pituitary'.; OpenStax Biology 2e §bio-43.3 (43.3: Human Reproductive Anatomy and Gametogenesis): 'high level of estrogen causes FSH and especially LH to rise rapidly' (mid-cycle positive feedback) and 'The decrease in progesterone also allows the hypothalamus to send GnRH' (negative context when progesterone/estrogen are high)."
+- source: estradiol
+  target: pituitary_fsh_secretion
+  sign: "-"
+  causal_evidence: mechanistic_model
+  mechanism: estradiol negative feedback suppresses pituitary FSH secretion
+  evidence: "BioModels BIOMD0000000494 (Roblitz2013, E2->FSH feedback); Boron & Boulpaep | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-161 (27.3: Anatomy and Physiology of the Female Reproductive System): 'high concentrations of estrogen will stimulate the hypothalamus and pituitary to reduce the production of GnRH, LH, and FSH' (negative feedback); OpenStax Anatomy & Physiology 2e §anp-162 (27.4: Development of the Male and Female Reproductive Systems): 'the level of estrogen...triggers negative feedback at the hypothalamus and pituitary. This results in a reduction of FSH and LH'; 'Birth control pills provide constant levels of estrogen and progesterone to negatively feed back on the hypothalamus and pituitary, and suppress the release of FSH and LH'.; OpenStax Anatomy & Physiology 2e §anp-166 (28.5: Changes During Pregnancy, Labor, and Birth): 'They suppress FSH and LH production, effectively preventing ovulation.'"
+- source: progesterone
+  target: gnrh
+  sign: "-"
+  causal_evidence: mechanistic_model
+  mechanism: progesterone (with estradiol) slows the GnRH pulse generator (luteal-phase negative feedback)
+  evidence: "BioModels BIOMD0000000494 (Roblitz2013, P4 feedback); Boron & Boulpaep luteal feedback | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-161 (27.3: Anatomy and Physiology of the Female Reproductive System): 'Progesterone triggers negative feedback at the hypothalamus and pituitary, which keeps GnRH, LH, and FSH secretions low'; OpenStax Anatomy & Physiology 2e §anp-162 (27.4: Development of the Male and Female Reproductive Systems): 'Birth control pills provide constant levels of estrogen and progesterone to negatively feed back on the hypothalamus and pituitary, and suppress the release of FSH and LH, which inhibits ovulation'.; OpenStax Anatomy & Physiology 2e §anp-166 (28.5: Changes During Pregnancy, Labor, and Birth): 'Like estrogen, progesterone suppresses FSH and LH.' (via GnRH pulse suppression)"
+- source: progesterone
+  target: pituitary_lh_secretion
+  sign: "-"
+  causal_evidence: mechanistic_model
+  mechanism: progesterone reduces LH pulse frequency/secretion (luteal-phase negative feedback)
+  evidence: "BioModels BIOMD0000000494 (Roblitz2013) — P4 negative feedback term on gonadotropin secretion; Boron & Boulpaep, Medical Physiology, 3rd ed., Ch. 55 'The Female Reproductive System' (progesterone slowing of GnRH/LH pulse frequency) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-162 (27.4: Development of the Male and Female Reproductive Systems): 'Birth control pills provide constant levels of estrogen and progesterone to negatively feed back on the hypothalamus and pituitary, and suppress the release of FSH and LH, which inhibits ovulation'.; OpenStax Anatomy & Physiology 2e §anp-166 (28.5: Changes During Pregnancy, Labor, and Birth): 'Like estrogen, progesterone suppresses FSH and LH.'; OpenStax Biology 2e §bio-43.3 (43.3: Human Reproductive Anatomy and Gametogenesis): 'Progesterone assists in endometrial regrowth and inhibition of FSH and LH release.' Also: 'The progesterone...inhibits the release of further FSH and LH.'; OpenStax Biology 2e §bio-43.5 (43.5: Human Pregnancy and Birth): 'Hormonal methods use synthetic progesterone (sometimes in combination with estrogen), to inhibit the hypothalamus from releasing FSH or LH, and thus prevent an egg from being available for fertilization.'"
+- source: testosterone
+  target: gnrh
+  sign: "-"
+  mechanism: testosterone (and its estradiol metabolite) exerts hypothalamic negative feedback on GnRH
+  evidence: "Boron & Boulpaep, Medical Physiology, 3rd ed., Ch. 54 'The Male Reproductive System' (testosterone/estradiol negative feedback on hypothalamic GnRH pulse generator) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-160 (27.2: Anatomy and Physiology of the Male Reproductive System): testosterone binds androgen receptors on the hypothalamus, inhibiting GnRH synthesis and secretion.; OpenStax Anatomy & Physiology 2e §anp-162 (27.4: Development of the Male and Female Reproductive Systems): 'very low concentrations of androgens or estrogens will negatively feed back onto the hypothalamus and pituitary, keeping the production of GnRH, LH, and FSH low'.; OpenStax Biology 2e §bio-43.3 (43.3: Human Reproductive Anatomy and Gametogenesis): 'A negative feedback system occurs in the male with rising levels of testosterone acting on the hypothalamus and anterior pituitary to inhibit the release of GnRH, FSH, and LH.'"
+- source: testosterone
+  target: pituitary_lh_secretion
+  sign: "-"
+  mechanism: testosterone suppresses pituitary LH secretion (male negative feedback)
+  evidence: "Boron & Boulpaep, Medical Physiology, 3rd ed., Ch. 54 'The Male Reproductive System' (testosterone negative feedback on pituitary LH secretion) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-160 (27.2: Anatomy and Physiology of the Male Reproductive System): testosterone binds androgen receptors on the anterior pituitary, inhibiting LH secretion.; OpenStax Anatomy & Physiology 2e §anp-162 (27.4: Development of the Male and Female Reproductive Systems): 'Interplay between the testes and the endocrine system precisely control the production of testosterone with a negative feedback loop' (testosterone suppresses LH via negative feedback).; OpenStax Biology 2e §bio-43.3 (43.3: Human Reproductive Anatomy and Gametogenesis): 'rising levels of testosterone acting on the hypothalamus and anterior pituitary to inhibit the release of GnRH, FSH, and LH.'"
+- source: inhibin
+  target: pituitary_fsh_secretion
+  sign: "-"
+  mechanism: inhibin selectively suppresses pituitary FSH secretion (gonadal peptide feedback)
+  evidence: "BioModels BIOMD0000000494 (Roblitz2013) — inhibin selective negative feedback on FSH; Boron & Boulpaep, Medical Physiology, 3rd ed., Ch. 55 'The Female Reproductive System' (inhibin-B selective FSH feedback) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-096 (17.9: Gonadal and Placental Hormones): 'the testes produce the peptide hormone inhibin, which inhibits the secretion of FSH from the anterior pituitary gland' and 'the granulosa cells of the ovarian follicles produce inhibin, which inhibits the secretion of FSH.'; OpenStax Anatomy & Physiology 2e §anp-160 (27.2: Anatomy and Physiology of the Male Reproductive System): inhibins 'function to inhibit FSH release from the pituitary.'; OpenStax Anatomy & Physiology 2e §anp-161 (27.3: Anatomy and Physiology of the Female Reproductive System): 'inhibin, which normally participates in a negative feedback loop to the pituitary to control the production of FSH'; menopausal decrease in inhibin leads to an increase in FSH'; OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): 'FSH production is inhibited by the hormone inhibin, which is released by the testes'; 'Follicle cells produce the hormone inhibin, which inhibits FSH production.'; OpenStax Biology 2e §bio-43.3 (43.3: Human Reproductive Anatomy and Gametogenesis): 'The Sertoli cells produce the hormone inhibin, which is released into the blood when the sperm count is too high. This inhibits the release of GnRH and FSH, which will cause spermatogenesis to slow down.'"
+
+  # --- estradiol -> LH: dual-mode (tonic suppression + mid-cycle surge) -------
+  # SINGLE "?" edge (not two parallel edges): causal_subgraph() builds a plain
+  # nx.DiGraph, so two estradiol->lh edges would collapse to whichever loads last
+  # rather than combine. The net steady-state sign is genuinely ambiguous, so the
+  # two physiological arms are folded into ONE "?" edge per project policy.
+- source: estradiol
+  target: pituitary_lh_secretion
+  sign: "?"
+  causal_evidence: mechanistic_model
+  mechanism: >-
+    DUAL-MODE: tonic/moderate estradiol exerts NEGATIVE feedback suppressing
+    pituitary LH; sustained high estradiol SWITCHES to POSITIVE feedback at the
+    hypothalamus/pituitary triggering the mid-cycle LH surge. Net steady-state
+    sign of E2->LH is therefore threshold/context-dependent (negative at
+    low/moderate E2, positive at sustained high E2), hence "?".
+  evidence: "BioModels BIOMD0000000494 (Roblitz2013, E2->LH tonic feedback AND estradiol-triggered mid-cycle LH surge); Boron & Boulpaep Medical Physiology, Ch. 55 'The Female Reproductive System' (mid-cycle estradiol positive-feedback LH surge) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-161 (27.3: Anatomy and Physiology of the Female Reproductive System): both negative feedback ('reduce...LH') and positive surge ('extremely high concentrations of systemic plasma estrogen trigger...secreting large amounts of LH and FSH') — dual-mode ? edge; OpenStax Anatomy & Physiology 2e §anp-162 (27.4: Development of the Male and Female Reproductive Systems): dual-mode described — 'the level of estrogen...triggers negative feedback at the hypothalamus and pituitary. This results in a reduction of FSH and LH' (tonic negative) AND 'the dominant follicle produces more estrogen, triggering positive feedback and the LH surge that will induce ovulation' (positive feedback surge).; OpenStax Anatomy & Physiology 2e §anp-166 (28.5: Changes During Pregnancy, Labor, and Birth): 'They suppress FSH and LH production, effectively preventing ovulation.'"
+
+  # --- cross-system coupling to existing map (boundary nodes) ----------------
+- source: cortisol
+  target: gnrh
+  sign: "-"
+  mechanism: glucocorticoid/HPA activation suppresses the hypothalamic GnRH pulse generator (functional hypothalamic amenorrhea)
+  evidence: "Endocrine Society FHA Clinical Practice Guideline, Gordon CM et al., 'Functional Hypothalamic Amenorrhea: An Endocrine Society Clinical Practice Guideline.' J Clin Endocrinol Metab. 2017;102(5):1413-1439. (stress/CRH-glucocorticoid suppression of GnRH pulsatility) [citations PubMed-verified]"
+- source: cortisol
+  target: pituitary_lh_secretion
+  sign: "-"
+  mechanism: glucocorticoid excess blunts pituitary gonadotropin (LH) secretion
+  evidence: "Endocrine Society FHA Clinical Practice Guideline, Gordon CM et al., J Clin Endocrinol Metab. 2017;102(5):1413-1439. (glucocorticoid suppression of gonadotropin secretion in functional hypothalamic amenorrhea) [citations PubMed-verified]"
+- source: leptin
+  target: gnrh
+  sign: "+"
+  mechanism: >-
+    leptin signals sufficient energy stores and permissively gates the hypothalamic
+    GnRH pulse generator (acting via kisspeptin/KNDy neurons); falling leptin in
+    negative energy balance withdraws this permissive drive and suppresses GnRH
+    (functional hypothalamic amenorrhea / female-athlete-triad pathway)
+  evidence: "Welt CK et al., 'Recombinant human leptin in women with hypothalamic amenorrhea.' N Engl J Med. 2004;351(10):987-997. PMID:15342807 (leptin administration restores LH pulsatility/GnRH drive); Endocrine Society FHA Clinical Practice Guideline, Gordon CM et al., J Clin Endocrinol Metab. 2017;102(5):1413-1439. | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-162 (27.4: Development of the Male and Female Reproductive Systems): 'Body fat, corresponding with secretion of the hormone leptin by adipose cells, appears to have a strong role in determining menarche'; lean/active females show 'a delay in the onset of puberty', consistent with leptin permissively gating GnRH/reproductive axis. [citations PubMed-verified]"
+
+# =============================================================================
+# TYPED PRODUCTION relations: connect secretion processes to their outputs.
+# Production is distinct from constitution—the source cell/process is not asserted
+# part_of the hormone—and from authored causal influence. Provenance is recorded
+# above each edge.
+# =============================================================================
+production_edges:
+  # Hypothalamic GnRH neurons secrete GnRH; pulse/secretion rate sets the hypothalamic
+  # GnRH drive. Boron & Boulpaep, Medical Physiology, Ch. 55 (GnRH-neuron pulse generator).
+- source: gnrh_neuron_gnrh_secretion
+  target: gnrh
+  sign: "+"
+  production_evidence: legacy-evidence-unclassified
+  # Anterior-pituitary gonadotrophs secrete LH; secretion rate sets plasma LH.
+  # Boron & Boulpaep, Medical Physiology, Ch. 55 (gonadotroph LH/FSH secretion).
+- source: gonadotroph_lh_secretion
+  target: pituitary_lh_secretion
+  sign: "+"
+  production_evidence: legacy-evidence-unclassified
+  # Anterior-pituitary gonadotrophs (same cell type) secrete FSH; secretion rate sets
+  # plasma FSH. Boron & Boulpaep, Medical Physiology, Ch. 55 (gonadotroph LH/FSH secretion).
+- source: gonadotroph_fsh_secretion
+  target: pituitary_fsh_secretion
+  sign: "+"
+  production_evidence: legacy-evidence-unclassified
+  # Ovarian granulosa cells aromatise androgen to estradiol and secrete it; secretion
+  # rate sets plasma estradiol. Boron & Boulpaep, Medical Physiology, Ch. 55
+  # (two-cell two-gonadotropin model; granulosa aromatase/estradiol output).
+- source: granulosa_estradiol_secretion
+  target: estradiol
+  sign: "+"
+  production_evidence: legacy-evidence-unclassified
+  # Corpus-luteum (luteal) cells secrete progesterone; secretion rate sets plasma
+  # progesterone (luteal phase). Boron & Boulpaep, Medical Physiology, Ch. 55
+  # (corpus luteum progesterone production).
+- source: luteal_progesterone_secretion
+  target: progesterone
+  sign: "+"
+  production_evidence: legacy-evidence-unclassified
+  # Testicular Leydig cells synthesise and secrete testosterone; secretion rate sets
+  # plasma testosterone. Boron & Boulpaep, Medical Physiology, Ch. 54
+  # (Leydig-cell testosterone biosynthesis).
+- source: leydig_testosterone_secretion
+  target: testosterone
+  sign: "+"
+  production_evidence: legacy-evidence-unclassified
+  # Inhibin-B is secreted by gonadal cells — testicular Sertoli cells in males and
+  # ovarian granulosa cells in females. We ground the canonical male source (Sertoli
+  # cell); the female granulosa source is the same `inhibin` macro and could be added
+  # as a second producer node. Boron & Boulpaep, Medical Physiology, Ch. 54
+  # (Sertoli-cell inhibin-B secretion) / Ch. 55 (granulosa inhibin).
+- source: sertoli_inhibin_secretion
+  target: inhibin
+  sign: "+"
+  production_evidence: legacy-evidence-unclassified
+
+# =============================================================================
+# Benchmark GOLD interventions (proposed). loop_critical flags targets whose
+# correct steady-state sign requires reasoning over a feedback loop (naive
+# forward propagation would be wrong). All ids exist in the final map.
+# =============================================================================
+interventions:
+- id: primary_hypogonadism
+  label: Primary gonadal failure (gonadal steroid/inhibin output lost)
+  do: {estradiol: "-", testosterone: "-", inhibin: "-"}
+  expected:
+    gnrh: "+"
+    lh: "+"
+    fsh: "+"
+  loop_critical: [gnrh, lh, fsh]
+  rationale: >-
+    loss of gonadal negative feedback disinhibits the hypothalamus/pituitary,
+    raising GnRH/LH/FSH (hypergonadotropic hypogonadism) — requires loop reasoning.
+
+- id: gnrh_agonist_continuous
+  label: Continuous GnRH-agonist (downregulates gonadotropes after initial flare)
+  do: {gnrh: "+"}
+  expected:
+    lh: "+"
+    fsh: "+"
+    estradiol: "+"
+    testosterone: "+"
+  loop_critical: []
+  rationale: >-
+    treating sustained GnRH drive as a steady up-clamp raises gonadotropins and
+    thus gonadal steroids (the steady-state partial; clinical desensitisation is
+    a dynamic/pulsatility effect outside this static sign model).
+
+- id: hpa_stress_suppression
+  label: Chronic stress / hypercortisolism (functional hypothalamic amenorrhea)
+  do: {cortisol: "+"}
+  expected:
+    gnrh: "-"
+    lh: "-"
+    estradiol: "-"
+    progesterone: "-"
+  loop_critical: [estradiol, progesterone]
+  rationale: >-
+    cortisol suppresses GnRH/LH; the downstream fall in estradiol/progesterone
+    is mediated through the gonadal cascade and feedback loop.

@@ -1,0 +1,15 @@
+# w3id.org redirect for the PhysioMap namespace  https://w3id.org/physiomap/
+# Register by opening a pull request to https://github.com/perma-id/w3id.org that adds this
+# file at  physiomap/.htaccess . Update the TARGET host below to the canonical RDF location
+# (e.g. the SPARQL endpoint host or the raw RDF served with content negotiation).
+
+Options +FollowSymLinks
+RewriteEngine on
+
+# --- content negotiation: RDF for machines, HTML viewer for browsers ---
+RewriteCond %{HTTP_ACCEPT} (text/turtle|application/rdf\+xml|application/n-triples|application/ld\+json) [NC]
+RewriteRule ^(.*)$ https://bio2vec.net/physiomap/rdf/$1 [R=302,L]
+
+# --- default: send people to the interactive viewer / documentation ---
+RewriteRule ^$ https://bio2vec.net/physiomap/ [R=302,L]
+RewriteRule ^(.*)$ https://bio2vec.net/physiomap/#$1 [R=302,L]

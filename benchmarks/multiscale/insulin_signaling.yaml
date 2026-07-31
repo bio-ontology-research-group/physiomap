@@ -1,0 +1,102 @@
+# =============================================================================
+# Multi-scale vertical: insulin receptor -> GLUT4 signalling   *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Mechanistic, within-scale (molecular/subcellular) signal-transduction chain that
+# makes insulin's metabolic action on glucose uptake explicit, then lifts the result
+# onto the EXISTING organ-system glucose-disposal node by a CONSTITUTIVE edge.
+#
+#   WITHIN-SCALE CAUSAL (molecular/subcellular signal transduction):
+#       plasma_insulin (EXISTING, organism)  -> insulin_receptor_activity
+#       insulin_receptor_activity -> irs1_signaling -> pi3k_akt_activity
+#           -> glut4_membrane_translocation
+#   NEGATIVE-FEEDBACK LOOP (serine-feedback / desensitisation):
+#       pi3k_akt_activity -| irs1_signaling      (Akt/mTOR-S6K serine phosphorylation
+#                                                 of IRS-1 reduces its signalling)
+#   CROSS-SCALE CONSTITUTIVE (part_of + determination; NOT causal):
+#       glut4_membrane_translocation (subcellular) >> peripheral_glucose_uptake
+#                                                      (EXISTING, organ_system)
+#
+# Boundary nodes (from EXISTING VOCABULARY, not redefined here):
+#   plasma_insulin, peripheral_glucose_uptake
+#
+# SOURCES (verified):
+#   - Sedaghat AR, Sherman A, Quon MJ. 2002. "A mathematical model of metabolic
+#     insulin signaling pathways." Am J Physiol Endocrinol Metab 283:E1084-E1101.
+#     PubMed 12376338. BioModels BIOMD0000000137 (insulin receptor -> IRS-1 ->
+#     PI3K -> PKB/Akt + PKC-zeta -> GLUT4 translocation). NOTE: the deposited
+#     model BIOMD0000000137 is the 'Sedaghat2002_InsulinSignalling_noFeedback'
+#     encoding (verified via the BioModels API); the IRS-1 negative feedback is
+#     described in the PAPER's own feedback analysis (Figs 6-7), so the
+#     pi3k_akt_activity -| irs1_signaling edge cites the paper, NOT the model ID.
+#   - Liu Y-F, Herschkovitz A, Boura-Halfon S, et al. 2004. "Serine phosphorylation
+#     proximal to its phosphotyrosine binding domain inhibits IRS-1 function and
+#     promotes insulin resistance." Mol Cell Biol 24(21):9668-9681. PubMed 15485932.
+#     (independent confirmation of the IRS-1 serine-feedback mechanism)
+#   - Boron WF, Boulpaep EL. Medical Physiology (insulin signal transduction;
+#     PI3K/Akt-dependent GLUT4 vesicle exocytosis in muscle and adipose tissue).
+# =============================================================================
+# NOTE (integration fix): the downward macro->micro causal 'driver' edge was REMOVED.
+# PhysioMap models causation WITHIN scale and cross-scale dependence as CONSTITUTIVE
+# (upward determination) only (see MULTISCALE.md). This vertical's top molecular node is
+# therefore a root, exercised by molecular/drug interventions, and lifts UP via the
+# constitutive edge(s). This keeps the combined causal+constitutive meta-graph acyclic.
+
+name: insulin_signaling_multiscale
+nodes:
+- id: insulin_receptor_activity
+  label: insulin receptor tyrosine-kinase autophosphorylation / activity
+  scale: subcellular
+  entity_iri: PR:000009064
+  quality_iri: PATO:0002354
+- id: irs1_signaling
+  label: insulin receptor substrate-1 tyrosine-phosphorylation / signalling activity
+  scale: subcellular
+  entity_iri: GO:0008286  # insulin receptor signaling pathway
+  quality_iri: PATO:0000161
+- id: pi3k_akt_activity
+  label: PI3K/Akt (PKB) pathway activity
+  scale: subcellular
+  quality_iri: PATO:0002354
+- id: glut4_membrane_translocation
+  label: GLUT4 transporter at the plasma membrane (translocated fraction)
+  scale: subcellular
+  entity_iri: PR:P14672             # GLUT4/SLC2A4 (human); corrected from PR:000016649 (TRIM24 — wrong protein)
+  quality_iri: PATO:0000033
+  bearer_entity_iri: CL:0000188     # cell of skeletal muscle — dominant bearer for peripheral (skeletal-muscle) glucose uptake
+causal_edges:
+- source: insulin_receptor_activity
+  target: irs1_signaling
+  sign: +
+  causal_evidence: mechanistic_model
+  mechanism: active receptor kinase (disposition) tyrosine-phosphorylates IRS-1 (process) -> increased
+    IRS-1 docking/signalling activity (quality)
+  evidence: 'Sedaghat 2002 (PubMed 12376338; BIOMD0000000137), IRS-1 phosphorylation module; Boron & Boulpaep, Medical Physiology. [citations PubMed-verified]'
+- source: irs1_signaling
+  target: pi3k_akt_activity
+  sign: +
+  causal_evidence: mechanistic_model
+  mechanism: tyrosine-phosphorylated IRS-1 recruits PI3K p85 (disposition) -> PIP3 generation and PDK1/Akt
+    phosphorylation (process) -> increased Akt/PKB activity (quality)
+  evidence: 'Sedaghat 2002 (PubMed 12376338; BIOMD0000000137), PI3K -> PKB/Akt module; Boron & Boulpaep, Medical Physiology. [citations PubMed-verified]'
+- source: pi3k_akt_activity
+  target: glut4_membrane_translocation
+  sign: +
+  causal_evidence: mechanistic_model
+  mechanism: active Akt/PKB and PKC-zeta (disposition) phosphorylate AS160/TBC1D4, releasing Rab-GTPase
+    inhibition -> GLUT4-vesicle exocytosis to the plasma membrane (process) -> increased membrane GLUT4
+    density (quality)
+  evidence: 'Sedaghat 2002 (PubMed 12376338; BIOMD0000000137), GLUT4-translocation module; Boron & Boulpaep, Medical Physiology. [citations PubMed-verified]'
+- source: pi3k_akt_activity
+  target: irs1_signaling
+  sign: '-'
+  causal_evidence: mechanistic_model
+  mechanism: downstream Akt/mTOR-S6K1 (disposition) serine-phosphorylates IRS-1 (process) -> reduced IRS-1
+    tyrosine-phosphorylation / accelerated degradation, damping its signalling activity (quality) [intracellular
+    negative feedback]
+  evidence: 'Sedaghat AR, Sherman A, Quon MJ. 2002. Am J Physiol Endocrinol Metab 283:E1084, post-receptor negative-feedback analysis (Figs 6-7); NOTE: the deposited model BIOMD0000000137 is the noFeedback encoding (''Sedaghat2002_InsulinSignalling_noFeedback''), so it is NOT cited for this edge. Mechanism corroborated by Liu Y-F et al. 2004, Mol Cell Biol 24(21):9668-9681 (PubMed 15485932): serine-phosphorylation of IRS-1 proximal to its PTB domain inhibits IR-IRS-1 interaction (negative feedback); Boron & Boulpaep, Medical Physiology (serine-feedback desensitisation). [citations PubMed-verified]'
+- source: glut4_membrane_translocation
+  target: peripheral_glucose_uptake
+  sign: +
+  causal_evidence: mechanistic_model
+  mechanism: increasing the plasma-membrane GLUT4 fraction increases facilitated glucose transport into skeletal muscle and adipose cells and raises peripheral glucose uptake
+  evidence: Sedaghat et al. 2002, Am J Physiol Endocrinol Metab 283:E1084 (PMID 12376338; BioModels BIOMD0000000137); Boron & Boulpaep, Medical Physiology.

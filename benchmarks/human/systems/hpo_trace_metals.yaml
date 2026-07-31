@@ -1,0 +1,163 @@
+# =============================================================================
+# Trace metals — extended analyte coverage (HPO directional gap terms)
+#                                    — PhysioMap fragment  *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Hand-encoded, single-scale (ORGAN_SYSTEM / ORGAN). Each node is a measurable
+# circulating- or excretory-fluid trace-metal quantity referenced by an HPO
+# "abnormal quantity" term that PhysioMap did not yet cover. Each edge sign is the
+# sign of the partial derivative of the target w.r.t. the source at steady state,
+# all else equal (interventionist partial). ROBERT: please correct signs/edges/IRIs.
+#
+# This fragment EXTENDS the existing benchmarks/human/systems/trace_metals.yaml
+# (copper/magnesium) and the existing plasma_copper / plasma_ceruloplasmin /
+# plasma_zinc / hepatic_copper_excretion nodes (referenced as boundary nodes, NOT
+# redefined). It adds:
+#   - the NON-ceruloplasmin ("free") serum copper pool and its URINARY excretion
+#     (the Wilson-disease biomarkers: free Cu high, cupriuria high under chelation);
+#   - circulating + urinary MANGANESE (manganese-transporter disorders);
+#   - circulating SELENIUM (selenium deficiency / selenoprotein status);
+#   - urinary ZINC, breast-milk ZINC, urinary IODINE; and
+#   - four EXPOSURE / toxic-burden biomarkers measured in blood (bismuth, cadmium,
+#     mercury, thallium) — these are environmental/toxicological burden quantities,
+#     not endogenous homeostatic set-points, so they are encoded as grounded
+#     boundary roots WITHOUT fabricated causal edges (they abstain — valuable & safe).
+#
+# Sources for canonical signs / mechanisms / analyte definitions:
+#   - Boron & Boulpaep, Medical Physiology (copper, manganese, iodine, zinc and
+#     trace-metal handling; renal & hepatobiliary excretion; iodide trapping).
+#   - Harrison's Principles of Internal Medicine (Wilson disease; trace-element
+#     deficiency/toxicity; heavy-metal poisoning — Pb/Cd/Hg/Tl; selenium deficiency).
+#   - Williams Textbook of Endocrinology (iodine/thyroid; selenium & deiodinases).
+#   - Lehninger Principles of Biochemistry (ceruloplasmin ferroxidase; selenoproteins;
+#     metalloenzyme metal loading).
+#   - OMIM #277900 Wilson disease (ATP7B); #604290 / #613280 SLC39A8 (Mn) CDG;
+#     #617013 SLC39A14 hypermanganesemia with dystonia 2; #255800 hypermanganesemia
+#     with dystonia 1 (SLC30A10).
+#
+# DISORDERS this fragment helps reproduce:
+#   - Wilson disease (ATP7B LoF, OMIM 277900): biliary copper efflux fails ->
+#     hepatic & systemic FREE (non-ceruloplasmin) copper RISES (HP:0010838); urinary
+#     copper RISES (HP:0010839), strikingly so under penicillamine chelation.
+#   - Menkes disease (ATP7A LoF, OMIM 309400): systemic copper deficiency -> urinary
+#     copper FALLS (HP:0045035).
+#   - Manganese-transporter disorders: SLC30A10 / SLC39A14 LoF -> blood manganese
+#     RISES (hypermanganesemia, HP:0032097) with increased urinary Mn under chelation
+#     (HP:6000480); SLC39A8-CDG -> blood manganese FALLS (HP:0032098).
+#
+# Boundary nodes (defined in sibling fragment benchmarks/human/systems/trace_metals.yaml;
+# referenced, NOT redefined): plasma_copper, plasma_ceruloplasmin, hepatic_copper_excretion.
+# A standalone load of this file resolves them via the validator's stubbing.
+# =============================================================================
+
+name: hpo_trace_metals
+description: >-
+  DRAFT extended trace-metal analyte coverage for HPO directional phenotype terms.
+  Adds the non-ceruloplasmin (free) serum copper pool, urinary copper, circulating
+  and urinary manganese, circulating selenium, urinary and breast-milk zinc, urinary
+  iodine, and four blood heavy-metal exposure biomarkers (bismuth, cadmium, mercury,
+  thallium). Couples the copper biomarkers to the existing copper homeostasis nodes;
+  the manganese/selenium/iodine/zinc-excretion pools and the toxic-exposure burdens
+  are grounded boundary quantities (abstain rather than fabricate edges). Single-scale
+  (ORGAN_SYSTEM / ORGAN), Phase 1.
+
+nodes:
+  # --- copper: free pool + urinary excretion (Wilson / Menkes biomarkers) -----
+  - id: plasma_nonceruloplasmin_copper
+    label: plasma non-ceruloplasmin-bound ("free") copper concentration
+    scale: organ_system
+    entity_iri: CHEBI:29036            # copper(2+) (the loosely-bound/free Cu fraction)
+    quality_iri: PATO:0000033          # concentration
+  - id: urinary_copper
+    label: urinary copper concentration (cupriuria / 24 h copper excretion)
+    scale: organ_system
+    entity_iri: CHEBI:29036            # copper(2+)
+    quality_iri: PATO:0000033          # concentration
+
+  # --- manganese: circulating + urinary ---------------------------------------
+  - id: plasma_manganese
+    label: plasma (whole-blood) manganese concentration
+    scale: organ_system
+    entity_iri: CHEBI:18291            # manganese atom (total elemental Mn measured)
+    quality_iri: PATO:0000033          # concentration
+  - id: urinary_manganese
+    label: urinary manganese concentration
+    scale: organ_system
+    entity_iri: CHEBI:18291            # manganese atom
+    quality_iri: PATO:0000033          # concentration
+
+  # --- selenium ----------------------------------------------------------------
+  - id: plasma_selenium
+    label: plasma (serum) selenium concentration
+    scale: organ_system
+    entity_iri: CHEBI:27568            # selenium atom (total elemental Se measured)
+    quality_iri: PATO:0000033          # concentration
+
+  # --- zinc: urinary + breast milk --------------------------------------------
+  - id: urinary_zinc
+    label: urinary zinc concentration
+    scale: organ_system
+    entity_iri: CHEBI:29105            # zinc(2+)
+    quality_iri: PATO:0000033          # concentration
+  - id: breast_milk_zinc
+    label: breast milk zinc concentration
+    scale: organ_system
+    entity_iri: CHEBI:29105            # zinc(2+)
+    quality_iri: PATO:0000033          # concentration
+
+  # --- iodine ------------------------------------------------------------------
+  - id: urinary_iodine
+    label: urinary iodine (iodide) concentration
+    scale: organ_system
+    entity_iri: CHEBI:16382            # iodide (urinary iodine excretion = iodide)
+    quality_iri: PATO:0000033          # concentration
+
+  # --- toxic / exposure burden biomarkers (blood) -----------------------------
+  - id: blood_bismuth
+    label: blood bismuth concentration
+    scale: organ_system
+    entity_iri: CHEBI:33301            # bismuth atom (total elemental Bi)
+    quality_iri: PATO:0000033          # concentration
+  - id: blood_cadmium
+    label: blood cadmium concentration
+    scale: organ_system
+    entity_iri: CHEBI:22977            # cadmium atom (total elemental Cd)
+    quality_iri: PATO:0000033          # concentration
+  - id: blood_mercury
+    label: blood mercury concentration
+    scale: organ_system
+    entity_iri: CHEBI:25195            # mercury atom (total elemental Hg)
+    quality_iri: PATO:0000033          # concentration
+  - id: plasma_thallium
+    label: plasma (blood) thallium concentration
+    scale: organ_system
+    entity_iri: CHEBI:30440            # thallium atom (total elemental Tl)
+    quality_iri: PATO:0000033          # concentration
+
+causal_edges:
+  # ===== COPPER: Wilson-disease free-copper / cupriuria axis ==================
+  # In Wilson disease, ATP7B LoF abolishes biliary copper excretion; copper that
+  # cannot be excreted in bile accumulates and spills as loosely-bound (non-
+  # ceruloplasmin, "free") serum copper, which is then filtered/excreted in urine.
+  - source: hepatic_copper_excretion
+    target: plasma_nonceruloplasmin_copper
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: hepatobiliary excretion is the major route of copper elimination; when biliary copper efflux fails (ATP7B LoF, Wilson disease), copper accumulates in the liver and spills into plasma as the loosely-bound non-ceruloplasmin ("free") fraction, so lower hepatic copper excretion raises free serum copper
+    evidence: "OMIM #277900 Wilson disease (raised free/non-ceruloplasmin serum copper); Harrison's Principles of Internal Medicine (Wilson disease: low total but high free serum copper, hepatic copper accumulation); Boron & Boulpaep Medical Physiology (hepatobiliary copper excretion)"
+  - source: plasma_nonceruloplasmin_copper
+    target: urinary_copper
+    sign: "+"
+    causal_evidence: pharmacological
+    mechanism: ceruloplasmin-bound copper is not filtered, but the loosely-bound non-ceruloplasmin ("free") copper fraction is filtered at the glomerulus and excreted, so a rise in free serum copper (as in Wilson disease, especially under chelation) raises urinary copper excretion
+    evidence: "Harrison's Principles of Internal Medicine (Wilson disease: elevated 24 h urinary copper, marked increase after penicillamine challenge); Boron & Boulpaep Medical Physiology (renal handling of non-protein-bound copper)"
+  # Menkes / systemic copper deficiency: total body copper low -> filtered free
+  # copper low -> cupriuria falls (HP:0045035). Lower total serum copper lowers the
+  # filterable copper load.
+  - source: plasma_copper
+    target: urinary_copper
+    sign: "+"
+    causal_evidence: genetic_lof_gof
+    mechanism: at fixed ceruloplasmin binding, the total circulating copper pool sets the filterable copper load; systemic copper deficiency (e.g. Menkes disease, dietary deficiency) lowers serum copper and reduces urinary copper excretion
+    evidence: "Harrison's Principles of Internal Medicine (copper deficiency states show low serum and low urinary copper); Boron & Boulpaep Medical Physiology (renal copper handling)"
+
+constitutive_edges: []   # none — single-scale fragment (Phase 1)

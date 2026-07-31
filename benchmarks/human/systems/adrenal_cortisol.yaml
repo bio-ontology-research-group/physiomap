@@ -1,0 +1,159 @@
+# =============================================================================
+# HPA axis / cortisol — PhysioMap fragment             *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Hand-encoded canonical HPA-axis physiology. Every edge sign is sign(d target*/d
+# source) at steady state, all else equal. The classic glucocorticoid negative-
+# feedback loop is included as a single SCC:
+#   CRH -> ACTH (+) -> cortisol (+) -> ACTH (-, fast+slow feedback)
+#                                   -> CRH  (-, hypothalamic feedback)
+# Cross-system couplings (metabolic, vascular, renal) reference boundary node IDs
+# owned by sibling fragments (glucose, CV/renal/RAAS); these are EXPECTED to be
+# unresolved when this file is loaded standalone. ROBERT: please correct signs.
+#
+# Scope: single scale (ORGAN / ORGAN_SYSTEM), no constitutive (cross-scale) edges.
+# =============================================================================
+
+name: adrenal_cortisol
+description: >-
+  DRAFT HPA-axis / cortisol fragment as a PhysioMap signed cyclic causal graph.
+  Owns crh, acth, cortisol; includes the glucocorticoid negative-feedback loop
+  and canonical metabolic / cardiovascular / renal couplings onto boundary nodes.
+  Single-scale (Phase 1). Sources: HumMod adrenal/endocrine modules; Boron &
+  Boulpaep Medical Physiology (HPA axis, glucocorticoid actions); Guyton & Hall.
+
+nodes:
+  - id: crh
+    label: hypothalamic corticotropin-releasing hormone concentration
+    scale: organ_system
+    entity_iri: PR:000005867  # corticoliberin (CRH)
+    quality_iri: PATO:0000033          # concentration
+  - id: pituitary_acth_secretion
+    label: anterior-pituitary corticotropin (ACTH) secretory output (rate)
+    scale: organ_system
+    entity_iri: GO:0051458             # corticotropin secretion (occurrent bears the rate)
+    quality_iri: PATO:0000161          # secretion rate
+    quality_kind: rate
+  - id: acth
+    label: plasma adrenocorticotropic hormone (corticotropin) concentration
+    scale: organ_system
+    entity_iri: CHEBI:3892             # corticotropin / ACTH
+    quality_iri: PATO:0000033
+  - id: cortisol
+    label: plasma cortisol concentration
+    scale: organ_system
+    entity_iri: CHEBI:17650            # cortisol
+    quality_iri: PATO:0000033
+
+  # --- cellular producers (cross-scale grounding of the secreted hormones) ---
+  - id: zona_fasciculata_cortisol_secretion
+    label: adrenal zona fasciculata cell cortisol secretion rate
+    scale: cellular
+    entity_iri: GO:0043400            # cortisol secretion
+    quality_iri: PATO:0000161
+    bearer_entity_iri: CL:0002136  # type II cell of adrenal cortex
+  - id: corticotroph_acth_secretion
+    label: anterior-pituitary corticotroph ACTH secretion rate
+    scale: cellular
+    entity_iri: GO:0051458            # corticotropin secretion
+    quality_iri: PATO:0000161
+    bearer_entity_iri: CL:0002309  # corticotroph
+  - id: parvocellular_crh_secretion
+    label: hypothalamic parvocellular neurosecretory cell CRH secretion rate
+    scale: cellular
+    entity_iri: GO:0043396            # corticotropin-releasing hormone secretion
+    quality_iri: PATO:0000161
+    bearer_entity_iri: CL:1001505  # parvocellular neurosecretory cell
+
+causal_edges:
+  # --- HPA cascade ----------------------------------------------------------
+  - source: crh
+    target: pituitary_acth_secretion
+    sign: "+"
+    mechanism: CRH stimulates corticotrope ACTH (POMC) release from anterior pituitary
+    evidence: "HumMod endocrine (CRH -> ACTH); Boron & Boulpaep HPA axis | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-091 (17.4: The Pituitary Gland and Hypothalamus): 'The release of ACTH is regulated by the corticotropin-releasing hormone (CRH) from the hypothalamus.'; OpenStax Anatomy & Physiology 2e §anp-094 (17.7: The Adrenal Glands): 'Its secretion is prompted when CRH from the hypothalamus triggers ACTH release from the anterior pituitary.'"
+  - source: acth
+    target: cortisol
+    sign: "+"
+    mechanism: ACTH stimulates adrenal zona fasciculata cortisol synthesis/secretion
+    evidence: "HumMod adrenal cortex (ACTH -> cortisol); Guyton & Hall ch. 78 | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-090 (17.3: Hormones): table entry 'ACTH: Stimulates hormone release by adrenal cortex'; OpenStax Anatomy & Physiology 2e §anp-091 (17.4: The Pituitary Gland and Hypothalamus): 'ACTH stimulates the adrenal cortex to secrete corticosteroid hormones such as cortisol.'; OpenStax Anatomy & Physiology 2e §anp-094 (17.7: The Adrenal Glands): 'ACTH then stimulates the adrenal cortex to produce the hormone cortisol'; 'ACTH triggers the release of the glucocorticoids.'; OpenStax Anatomy & Physiology 2e §anp-138 (24.2: Overview of Metabolic Reactions): 'tumors of the pituitary that produce adrenocorticotropic hormone (ACTH), which subsequently stimulates the adrenal cortex to release excessive cortisol'; OpenStax Anatomy & Physiology 2e §anp-166 (28.5: Changes During Pregnancy, Labor, and Birth): 'ACTH stimulates maternal cortisol secretion, which contributes to fetal protein synthesis.'; OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): 'the hypothalamus triggers the release of ACTH from the anterior pituitary gland. The adrenal cortex is stimulated by ACTH to release steroid hormones called corticosteroids... glucocorticoids such as cortisol.'; OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): 'The glucocorticoids... are secreted in response to ACTH and levels are regulated by negative feedback.'"
+
+  # --- glucocorticoid negative feedback (loop closure) ----------------------
+  - source: cortisol
+    target: pituitary_acth_secretion
+    sign: "-"
+    causal_evidence: pharmacological
+    mechanism: cortisol (glucocorticoid) binds pituitary corticotrope glucocorticoid receptors and suppresses ACTH secretion (fast + delayed negative feedback)
+    evidence: "HumMod adrenal feedback; Boron & Boulpaep — glucocorticoid suppression of ACTH | pharmacological do(): the dexamethasone suppression test — dexamethasone (GR agonist / cortisol analog) directly suppresses pituitary ACTH secretion and lowers cortisol (en.wikipedia.org/wiki/Dexamethasone_suppression_test, opened) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-090 (17.3: Hormones): 'glucocorticoid concentrations in the blood rise, the hypothalamus and pituitary gland reduce their signaling to the adrenal glands' — glucocorticoid negative feedback on ACTH"
+  - source: cortisol
+    target: crh
+    sign: "-"
+    mechanism: cortisol suppresses hypothalamic CRH secretion (long-loop feedback)
+    evidence: "Boron & Boulpaep HPA axis — glucocorticoid feedback at hypothalamus | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-090 (17.3: Hormones): 'when glucocorticoid levels become elevated by causing negative signals to the pituitary gland and hypothalamus' — glucocorticoid negative feedback on CRH"
+
+  # --- pituitary ACTH output sets the plasma ACTH level (within-scale mediation) ---
+  # Curatorial correction (Paul N. Schofield, 2026-06-11): CRH/cortisol-feedback drive onto plasma
+  # ACTH is INDIRECT — it acts on the corticotroph's ACTH *secretory output* (`pituitary_acth_secretion`),
+  # which then sets plasma ACTH (secretion vs clearance). A typed production relation links the
+  # corticotroph output below. Routed through the supported secretory intermediate rather than an
+  # unsupported direct macro-to-cell shortcut.
+  - source: pituitary_acth_secretion
+    target: acth
+    sign: "+"
+    mechanism: "anterior-pituitary corticotroph ACTH secretory output sets the circulating ACTH concentration (mass balance: plasma [ACTH] = secretion − clearance)"
+    evidence: "HumMod endocrine / Boron & Boulpaep HPA axis model plasma ACTH as the corticotroph secretory output into the circulation. Curated by Paul N. Schofield. *** DRAFT FOR REVIEW ***"
+
+  # --- metabolic couplings (glucose boundary) -------------------------------
+  - source: cortisol
+    target: hepatic_glucose_production
+    sign: "+"
+    mechanism: cortisol induces gluconeogenic enzymes (PEPCK, G6Pase) raising hepatic glucose output
+    evidence: "Guyton & Hall — glucocorticoid gluconeogenesis; Boron & Boulpaep | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-090 (17.3: Hormones): table entry 'Cortisol, corticosterone, cortisone: Increase blood glucose levels'"
+  - source: cortisol
+    target: peripheral_glucose_uptake
+    sign: "-"
+    mechanism: cortisol antagonises insulin action in muscle/adipose (insulin resistance)
+    evidence: "Boron & Boulpaep — glucocorticoid peripheral insulin resistance"
+  - source: cortisol
+    target: plasma_glucose
+    sign: "+"
+    causal_evidence: pharmacological
+    mechanism: net effect of raised hepatic output plus reduced peripheral uptake raises glycaemia
+    evidence: "Guyton & Hall — cortisol hyperglycaemia; clinical Cushing's | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-094 (17.7: The Adrenal Glands): 'their overall effect is to inhibit tissue building while stimulating the breakdown of stored nutrients to maintain adequate fuel supplies'; 'Adrenal hormones also have several non-stress-related functions, including the increase of blood sodium and glucose levels.'; OpenStax Anatomy & Physiology 2e §anp-138 (24.2: Overview of Metabolic Reactions): 'cortisol... its main role is to increase blood glucose levels by gluconeogenesis'; OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): 'These hormones increase blood glucose levels to maintain levels within a normal range between meals.'"
+
+  # --- cardiovascular / renal couplings (CV-RAAS boundary) ------------------
+  - source: cortisol
+    target: total_peripheral_resistance
+    sign: "+"
+    mechanism: permissive action — sensitises arteriolar smooth muscle to catecholamines/AngII
+    evidence: "Boron & Boulpaep — glucocorticoid permissive vascular tone"
+  - source: cortisol
+    target: sodium_water_reabsorption
+    sign: "+"
+    mechanism: at high levels cortisol exerts mineralocorticoid (renal MR) activity, raising Na/water retention
+    evidence: "Boron & Boulpaep — high cortisol overwhelms 11b-HSD2, MR activation; clinical Cushing's"
+
+# --- cross-scale CONSTITUTIVE grounding: secreting cell ▷ macro hormone level ---
+# Production edges: the cell of origin synthesises/secretes the hormone, so its
+# secretion rate sets the macro plasma/hypothalamic level (micro is NOT part_of the
+# substance — production is exempt from the part_of check). Schema = {micro, macro,
+# relation, sign}; provenance is recorded here as comments. *** DRAFT FOR REVIEW ***
+production_edges:
+  # Adrenal zona fasciculata cells synthesise/secrete cortisol; their secretion rate sets
+  # plasma cortisol. Boron & Boulpaep Medical Physiology (adrenal cortex / glucocorticoid synthesis).
+  - source: zona_fasciculata_cortisol_secretion
+    target: cortisol
+    sign: "+"
+    production_evidence: legacy-evidence-unclassified
+  # Anterior-pituitary corticotrophs synthesise/secrete ACTH (from POMC); their secretion
+  # rate sets plasma ACTH. Boron & Boulpaep Medical Physiology (HPA axis; anterior pituitary).
+  - source: corticotroph_acth_secretion
+    target: pituitary_acth_secretion
+    sign: "+"
+    production_evidence: legacy-evidence-unclassified
+  # Hypothalamic parvocellular (PVN) neurosecretory neurons synthesise/secrete CRH into the
+  # hypophyseal portal system; their secretion rate sets hypothalamic CRH. Boron & Boulpaep
+  # Medical Physiology (HPA axis; hypothalamic CRH neurons).
+  - source: parvocellular_crh_secretion
+    target: crh
+    sign: "+"
+    production_evidence: legacy-evidence-unclassified

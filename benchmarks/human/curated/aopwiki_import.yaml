@@ -1,0 +1,404 @@
+# AOP-Wiki import: thyroid-hormone synthesis, steroidogenesis, hepatic-metabolic & airway key-event relationships
+# *** DRAFT FOR REVIEW (imported, gated) ***
+# 23 within-scale signed causal edges + 19 new nodes; do(source)->Δtarget,
+# fan-out-validated (ontology IDs vs OBO, PMID existence+concordance, sign, scale). Cross-scale/
+# duplicate/pituitary-mediation/soundness-breaking candidates dropped.
+name: aopwiki_import
+description: 'Within-scale signed causal edges imported from AOP-Wiki (2026-04-01 XML) adjacent key-event relationships in
+  covered human physiology: thyroid iodide handling/organification (NIS/TPO/DUOX/pendrin/IYD), thyroid-hormone distribution,
+  PPARα/FXR/GR hepatic-metabolic control, and airway-epithelial steps. Sign read from directional key-event titles; each edge
+  cites its AOP-Wiki KER id (curated_mechanistic).'
+nodes:
+- id: airway_mucin_secretion_rate
+  label: airway (bronchial) mucus secretion rate
+  scale: organ
+  entity_iri: GO:0070254
+  quality_iri: PATO:0000161
+- id: brain_t4_concentration
+  label: brain (neuronal tissue) thyroxine (T4) concentration
+  scale: organ
+  entity_iri: CHEBI:30660
+  quality_iri: PATO:0000033
+- id: duox_activity
+  label: thyroid follicular-cell dual oxidase 2 (DUOX2) H2O2-generating activity
+  scale: molecular
+  entity_iri: PR:Q9NRD8
+  quality_iri: PATO:0001414
+- id: egfr_activity
+  label: airway epithelial epidermal growth factor receptor (EGFR/ERBB1) kinase activity
+  scale: organ
+  entity_iri: PR:000006933
+  quality_iri: PATO:0001414
+- id: endothelial_akt_signaling
+  label: endothelial AKT1 kinase / eNOS-Ser1177 phosphorylation activity
+  scale: cellular
+  entity_iri: PR:000002190
+  quality_iri: PATO:0001414
+- id: fxr_activity
+  label: hepatic bile acid receptor (FXR/NR1H4) transcriptional activity
+  scale: molecular
+  entity_iri: PR:000011396
+  quality_iri: PATO:0001414
+- id: hepatic_de_novo_lipogenesis
+  label: hepatic de novo lipogenesis rate (fatty acid biosynthetic flux in hepatocytes)
+  scale: cellular
+  entity_iri: GO:0006633
+  quality_iri: PATO:0000161
+- id: hepatic_fa_beta_oxidation_rate
+  label: hepatic fatty acid beta-oxidation rate
+  scale: cellular
+  entity_iri: GO:0006635
+  quality_iri: PATO:0000161
+- id: hepatic_fatty_acid_content
+  label: hepatic (intracellular) fatty acid content
+  scale: organ
+  entity_iri: CHEBI:35366
+  quality_iri: PATO:0000070
+- id: hepatic_t4_clearance_rate
+  label: hepatic thyroxine (T4) clearance/catabolism rate
+  scale: organ
+  entity_iri: GO:0042404
+  quality_iri: PATO:0000161
+- id: hepatic_triglyceride_content
+  label: hepatic (liver) triglyceride content / intrahepatic triglyceride concentration
+  scale: organ
+  entity_iri: CHEBI:17855
+  quality_iri: PATO:0000033
+- id: iyd_activity
+  label: thyroid follicular-cell iodotyrosine deiodinase (IYD1) catalytic activity
+  scale: molecular
+  entity_iri: PR:Q6PHW0
+  quality_iri: PATO:0001414
+- id: pendrin_activity
+  label: thyroid follicular-cell pendrin (SLC26A4) iodide transport activity
+  scale: molecular
+  entity_iri: PR:O43511
+  quality_iri: PATO:0001414
+- id: ppara_activity
+  label: hepatic peroxisome proliferator-activated receptor alpha (PPARalpha/NR1C1) transcriptional activity
+  scale: molecular
+  entity_iri: PR:000013056
+  quality_iri: PATO:0001414
+- id: renal_oat1_activity
+  label: renal proximal-tubule organic anion transporter 1 (OAT1/SLC22A6) transport activity
+  scale: organ
+  entity_iri: PR:000014993
+  quality_iri: PATO:0001414
+- id: ros_concentration
+  label: cellular reactive oxygen species (ROS) concentration
+  scale: molecular
+  entity_iri: CHEBI:26523
+  quality_iri: PATO:0000033
+- id: skeletal_muscle_protein_catabolism_rate
+  label: skeletal muscle protein catabolism rate
+  scale: organ
+  entity_iri: UBERON:0001134
+  quality_iri: PATO:0000161
+- id: thyroid_follicular_iodide
+  label: thyroid follicular-cell intracellular iodide concentration
+  scale: cellular
+  entity_iri: CHEBI:16382
+  quality_iri: PATO:0000033
+- id: thyroidal_iodide
+  label: thyroid follicular cell intracellular iodide concentration
+  scale: cellular
+  entity_iri: CHEBI:16382
+  quality_iri: PATO:0000033
+causal_edges:
+- source: plasma_ketone_bodies
+  target: skeletal_muscle_protein_catabolism_rate
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: Circulating ketone bodies (acetoacetate, 3-hydroxybutyrate) suppress ubiquitin-proteasome-mediated muscle protein
+    catabolism during fasting; low ketone availability removes this inhibitory signal and increases muscle proteolysis
+  evidence: 'AOP-Wiki KER 895c39c8-3235-4c89-8d25-f1eef024ad3f; AOP: ''Antagonist binding to PPARα leading to body-weight
+    loss'' — KER direction: decreased circulating ketone bodies -> increased catabolism of muscle protein (organ UBERON:0002204);
+    interventionist sign: do(ketone bodies up) -> muscle catabolism down (sign -) | No PMID in batch | *** DRAFT FOR REVIEW
+    (imported) ***'
+- source: hepatic_t4_clearance_rate
+  target: plasma_t4
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: Hepatic catabolism of thyroxine (glucuronidation and sulfation by UGT/SULT enzymes) removes T4 from circulation;
+    increased hepatic clearance rate lowers serum T4 concentration
+  evidence: 'AOP-Wiki KER 035747ab-b591-4283-acfd-90ba868d5fc4; AOPs: ''Upregulation of Thyroid Hormone Catabolism via Activation
+    of Hepatic Nuclear Receptors and Subsequent Adverse Neurodevelopmental Outcomes in Mammals'', ''Interference with thyroid
+    serum binding protein transthyretin and subsequent adverse human neurodevelopmental toxicity'' — KER: increased T4 clearance
+    from serum (liver/organ) -> decreased serum T4 (organ_system); do(hepatic T4 clearance rate up) -> serum T4 down (sign
+    -) | No PMID in batch | *** DRAFT FOR REVIEW (imported) ***'
+- source: plasma_t4
+  target: brain_t4_concentration
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: Circulating thyroxine (T4) enters brain parenchyma via MCT8 (SLC16A2) and OATP transporters in the blood-brain
+    barrier; serum T4 concentration drives brain T4 availability
+  evidence: 'AOP-Wiki KER 517c7b8b-bbb6-4ca4-8e0a-740e2999e9f9; AOPs: ''Upregulation of Thyroid Hormone Catabolism via Activation
+    of Hepatic Nuclear Receptors...'', ''Inhibition of Thyroperoxidase and Subsequent Adverse Neurodevelopmental Outcomes
+    in Mammals'', ''Inhibition of Na+/I- symporter (NIS) leads to learning and memory impairment'' — KER: decreased serum
+    T4 (organ_system) -> decreased T4 in neuronal tissue (organ, UBERON:0000955); do(serum T4 up) -> brain T4 up (sign +)
+    | No PMID in batch | *** DRAFT FOR REVIEW (imported) ***'
+- source: nis_activity
+  target: thyroidal_iodide
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: NIS (SLC5A5) is the sodium/iodide symporter on the basolateral membrane of thyroid follicular cells; its activity
+    drives active iodide accumulation inside the follicular cell. do(NIS activity UP) → intracellular iodide concentration
+    UP.
+  evidence: 'AOP-Wiki KER uuid 19f3b2a4-c7fd-4363-9e2a-cf13496ac1b4 (AOPs: ''Inhibition of Na+/I- symporter (NIS) leads to
+    learning and memory impairment''; ''Sodium Iodide Symporter (NIS) Inhibition and Subsequent Adverse Neurodevelopmental
+    Outcomes in Mammals''; ''Sodium Iodide Symporter (NIS) Inhibition leading to altered amphibian metamorphosis''); no PMID
+    supplied; pmid_ok=false; pmid_concordant=false. Mechanism is textbook thyroid physiology (Dohan et al. 2003 Endocr Rev).
+    *** DRAFT FOR REVIEW (imported) ***'
+- source: thyroidal_iodide
+  target: thyroid_follicular_t4_secretion
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: Intracellular iodide availability in thyroid follicular cells is substrate for thyroid peroxidase (TPO)-mediated
+    organification and thyroglobulin iodination; reduced thyroidal iodide directly limits the rate of T4 synthesis and secretion.
+  evidence: 'AOP-Wiki KER uuid 45d971c2-7b7f-4b8b-a985-055f32d38129 (AOPs: ''Inhibition of Na+/I- symporter (NIS) leads to
+    learning and memory impairment''; ''Sodium Iodide Symporter (NIS) Inhibition and Subsequent Adverse Neurodevelopmental
+    Outcomes in Mammals''; ''Sodium Iodide Symporter (NIS) Inhibition leading to altered amphibian metamorphosis''); no PMID
+    supplied; pmid_ok=false; pmid_concordant=false. Established thyroid physiology: iodine deficiency → decreased T4 synthesis
+    (Bianco et al. 2019 PMID:31569177). *** DRAFT FOR REVIEW (imported) ***'
+- source: fxr_activity
+  target: ppara_activity
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: The bile acid receptor NR1H4 (FXR) is a nuclear receptor transcription factor that binds bile acids and activates
+    target gene expression. FXR directly trans-activates PPARA gene transcription in hepatocytes, upregulating PPARalpha protein
+    and activity. This is part of the hepatic lipid-metabolism regulatory network.
+  evidence: 'AOP-Wiki KER uuid 8ecf4269-13a8-4d7a-9f4c-8f3109705229 (AOP: ''NFE2L2/FXR activation leading to hepatic steatosis'');
+    no PMID supplied in candidate record; pmid_ok=false; pmid_concordant=false. Underlying biology: Pineda Torra et al. 2003
+    EMBO J (PMID:12881427) demonstrated FXR directly activates PPARalpha expression in liver. *** DRAFT FOR REVIEW (imported)
+    ***'
+- source: plasma_total_cholesterol
+  target: testosterone
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: Plasma cholesterol is the obligate precursor for all steroid hormones. Leydig cells import cholesterol via StAR
+    (steroidogenic acute regulatory protein); cholesterol is converted by CYP11A1 (side-chain cleavage enzyme) to pregnenolone,
+    then to testosterone via the steroidogenic cascade. Reduced plasma cholesterol substrate limits testosterone synthesis.
+  evidence: 'AOP-Wiki KER uuid 080d59cc-c252-46c4-a825-aca547b579ef; AOP: ''HMG-CoA reductase inhibition leading to decreased
+    fertility''. No PMID supplied. Mechanism: statins reduce cholesterol -> reduced steroidogenesis substrate -> reduced testosterone
+    (Dobs et al., J Clin Endocrinol Metab 2000; PMID not verified — using AOP-Wiki KER as provenance). Sign ''+'': increased
+    cholesterol increases testosterone. *** DRAFT FOR REVIEW (imported) ***'
+- source: free_t4
+  target: plasma_creatinine
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'Thyroid hormones (free T4/T3) maintain glomerular filtration rate (GFR) via multiple mechanisms: thyroid hormone
+    increases renal expression of Na/K-ATPase and eNOS, maintains cardiac output and renal perfusion, and reduces tubular
+    creatinine reabsorption. Hypothyroidism reduces GFR, impairing creatinine clearance and elevating serum creatinine.'
+  evidence: 'AOP-Wiki KER uuid ebcacecf-64d6-440c-9df7-473ac54f8c2a; AOP: ''Kidney dysfunction by decreased thyroid hormone''.
+    Source node mapped to free_t4 (organ_system scale; more proximal mechanistic driver than cellular synthesis rate for a
+    cross-organ causal claim). No PMID supplied. Clinical evidence: hypothyroidism consistently raises serum creatinine (Basu
+    & Mohapatra, Indian J Endocrinol Metab 2012; Iglesias et al., J Nephrol 2009). Sign ''-'': free_t4 up -> GFR up -> creatinine
+    clearance up -> plasma creatinine down. *** DRAFT FOR REVIEW (imported) ***'
+- source: renal_oat1_activity
+  target: plasma_urate
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: OAT1 (SLC22A6) in the proximal tubule S2 segment secretes urate from peritubular blood into tubular lumen for
+    urinary excretion. Inhibition of OAT1 transport activity reduces tubular urate secretion, resulting in net urate retention
+    and elevated plasma uric acid concentration.
+  evidence: 'AOP-Wiki KER uuid e8563e9f-b080-4bab-a6cc-5ecc9a18216b; AOP: ''Organic anion transporter (OAT1) inhibition leading
+    to renal failure and mortality''. No PMID supplied. Sign ''-'': OAT1 activity up -> renal urate secretion up -> plasma
+    urate down. Multiple pharmacological studies: probenecid (OAT1/3 inhibitor) causes hyperuricemia; OAT1 knockout mice show
+    hyperuricemia (Eraly et al., JASN 2008). *** DRAFT FOR REVIEW (imported) ***'
+- source: egfr_activity
+  target: airway_mucin_secretion_rate
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: EGFR kinase activation in airway epithelial cells drives transcription of mucin genes (MUC5AC, MUC5B) via ERK/MAP
+    kinase cascade and stimulates goblet cell differentiation, increasing airway mucus secretion rate. This is part of normal
+    epithelial defence response regulated by growth factors.
+  evidence: 'AOP-Wiki KER uuid 1398eb4d-3f8b-4b09-a07e-5a4a5cbe931d; AOP: ''EGFR Activation Leading to Decreased Lung Function''.
+    No PMID supplied. EGFR -> MUC5AC upregulation: Takeyama et al., Am J Physiol Lung Cell Mol Physiol 1999; Burgel & Nadel,
+    Eur Respir J 2004. Sign ''+'': EGFR activity increase -> mucin production increase. *** DRAFT FOR REVIEW (imported) ***'
+- source: endothelial_akt_signaling
+  target: endothelial_no_production
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: AKT1 (RAC-alpha kinase) is activated by upstream PI3K signalling (e.g. shear stress, insulin, VEGF) and phosphorylates
+    eNOS (NOS3) at Ser1177, displacing the inhibitory calmodulin and activating NO synthesis. Decreased AKT/eNOS signalling
+    reduces eNOS phosphorylation at Ser1177, impairing NO production.
+  evidence: 'AOP-Wiki KER uuid 47ca4026-7f6f-4c3c-ad98-b72b5aed093d; AOP: ''Peptide Oxidation Leading to Hypertension''. No
+    PMID supplied. Mechanism: AKT phosphorylates NOS3 Ser1177 -> NO production (Dimmeler et al., Nature 1999 PMID 10421379;
+    Fulton et al., Nature 1999 PMID 10421380). Sign ''+'': AKT activity up -> eNOS activated -> NO production up. *** DRAFT
+    FOR REVIEW (imported) ***'
+- source: iyd_activity
+  target: thyroid_follicular_iodide
+  sign: +
+  causal_evidence: genetic_lof_gof
+  mechanism: 'IYD (iodotyrosine deiodinase 1) catalyzes deiodination of MIT and DIT back to iodide + tyrosine within thyroid
+    follicular cells; when IYD activity is higher, more iodide is recycled from iodotyrosine intermediates, enlarging the
+    intracellular thyroidal iodide pool available for TPO-catalyzed organification (quality: IYD catalytic activity -> disposition:
+    iodotyrosine hydrolysis -> process: iodide salvage -> quality: thyroidal iodide concentration)'
+  evidence: 'AOP-Wiki KER 4988fd83-79f6-4a25-9ce9-31575e55f095; AOP: ''Iodotyrosine deiodinase (IYD) inhibition leading to
+    altered amphibian metamorphosis''. No PMID provided. pmid_ok=false. Human genetic grounding: IYD deficiency (homozygous
+    IYD loss-of-function mutations Q6PHW0) causes urinary iodine wasting and hypothyroidism (Moreno et al., NEJM 2008), confirming
+    interventional (genetic_lof_gof) evidence. INDRA: IYD has 217 total statements but 0 specific IYD->thyroidal_iodide pairs.
+    *** DRAFT FOR REVIEW (imported) ***'
+- source: pendrin_activity
+  target: tpo_nis_organification_capacity
+  sign: +
+  causal_evidence: genetic_lof_gof
+  mechanism: 'Pendrin (SLC26A4) transports iodide across the apical membrane of thyroid follicular cells into the follicular
+    lumen, where it serves as substrate for TPO-catalyzed organification (iodination of thyroglobulin tyrosine residues).
+    Pendrin activity up -> more luminal iodide -> higher iodide-organification capacity (quality: pendrin transport activity
+    -> disposition: apical iodide efflux -> process: luminal iodide accumulation -> quality: TPO/NIS organification capacity)'
+  evidence: 'AOP-Wiki KER 5d76797b-5e3c-4fd5-9805-69faff17190a; AOP: ''Pendrin inhibition leading to altered amphibian metamorphosis''.
+    No PMID provided. pmid_ok=false. Human genetic grounding: SLC26A4 (pendrin) biallelic loss-of-function mutations cause
+    Pendred syndrome (sensorineural deafness + goiter/hypothyroidism, OMIM #274600), demonstrating that pendrin is required
+    for normal thyroid hormone synthesis in humans (genetic_lof_gof). INDRA: SLC26A4->TPO: 3 statements (cross-confirming).
+    *** DRAFT FOR REVIEW (imported) ***'
+- source: duox_activity
+  target: tpo_nis_organification_capacity
+  sign: +
+  causal_evidence: genetic_lof_gof
+  mechanism: 'DUOX2 (dual oxidase 2) generates H2O2 at the apical surface of thyroid follicular cells; TPO requires H2O2 as
+    co-substrate for iodide organification (iodination and coupling reactions on thyroglobulin). DUOX2 activity up -> more
+    H2O2 -> higher TPO-dependent organification capacity (quality: DUOX2 oxidase activity -> disposition: H2O2 generation
+    -> process: TPO iodination -> quality: organification capacity)'
+  evidence: 'AOP-Wiki KER 5864d06a-158f-4557-a001-e5d7451b381b; AOP: ''Dual oxidase (DUOX) inhibition leading to altered amphibian
+    metamorphosis''. No PMID provided. pmid_ok=false. Human genetic grounding: DUOX2 biallelic loss-of-function mutations
+    cause congenital hypothyroidism (Moreno et al. NEJM 2002; Vigone et al. 2005; genetic_lof_gof). INDRA: DUOX2->TPO: 4 statements
+    (cross-confirming interaction). *** DRAFT FOR REVIEW (imported) ***'
+- source: plasma_dhea
+  target: testosterone
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'DHEA is a weak androgen and a precursor in the peripheral steroidogenesis pathway: DHEA -> androstenedione (via
+    3beta-HSD) -> testosterone (via 17beta-HSD). Elevated DHEA raises circulating testosterone through peripheral conversion,
+    particularly in adrenal-dependent androgen synthesis.'
+  evidence: 'AOP-Wiki KER uuid d6e84661-d181-4719-a932-6455733cab89; AOP: ''Inhibition of 17alpha-hydrolase/C 10,20-lyase
+    (Cyp17A1) activity leads to birth reproductive defects (cryptorchidism) in male (mammals)''. No PMID in candidate (pmid_ok=false).
+    INDRA: no DHEA->testosterone statements found; precursor-product relationship established in steroidogenesis biochemistry.
+    *** DRAFT FOR REVIEW (imported) ***'
+- source: intratesticular_testosterone
+  target: testosterone
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: The testis (Leydig cells) is the primary source of circulating testosterone in males, producing ~95% of total
+    testosterone. Intratesticular testosterone concentration reflects Leydig cell steroidogenesis; increased intratesticular
+    testosterone directly raises peripheral circulating testosterone levels via secretion into the blood.
+  evidence: 'AOP-Wiki KER uuid 6059b272-b307-492d-ba4c-b5b57e9dbf75; AOPs: ''Decreased testosterone synthesis leading to short
+    anogenital distance (AGD) in male (mammalian) offspring''; ''Decreased testosterone synthesis leading to hypospadias in
+    male (mammalian) offspring''; ''Decreased testosterone synthesis leading to increased nipple retention (NR) in male (rodent)
+    offspring''. No PMID in candidate (pmid_ok=false). INDRA: no intratesticular testosterone->circulating testosterone statements
+    (same molecule, different compartment). *** DRAFT FOR REVIEW (imported) ***'
+- source: ros_concentration
+  target: cftr_activity
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: Elevated reactive oxygen species (ROS) oxidize and S-nitrosylate CFTR protein, reducing its chloride channel
+    open-probability and membrane trafficking, decreasing CFTR function in airway epithelial cells.
+  evidence: 'AOP-Wiki KER uuid c6242221-dd92-45a8-8236-1c4e6688c9bb; AOP: ''Oxidative stress Leading to Decreased Lung Function
+    via CFTR dysfunction''. No PMID provided in batch; pmid_ok=false. INDRA: reactive_oxygen_species -> CFTR: DecreaseAmount=1,
+    Inhibition=1, Activation=1 (n=3); net inhibitory signal concordant with KER direction. *** DRAFT FOR REVIEW (imported)
+    ***'
+- source: ros_concentration
+  target: thyroid_follicular_t4_secretion
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: Elevated ROS inhibit thyroid peroxidase (TPO) activity and damage thyroglobulin iodination machinery, reducing
+    thyroid hormone (T4/T3) synthesis rate in thyroid follicular cells.
+  evidence: 'AOP-Wiki KER uuid d7cc7065-e998-4f4f-9a5f-71261f95fcbb; AOPs: ''Succinate dehydrogenase inhibition leading to
+    increased insulin resistance through reduction in circulating thyroxine''; ''AhR activation in the thyroid leading to
+    Subsequent Adverse Neurodevelopmental Outcomes in Mammals''. No PMID provided in batch; pmid_ok=false. INDRA: ROS->TPO
+    direct: 0 statements; ROS->thyroid hormone: 3 statements. *** DRAFT FOR REVIEW (imported) ***'
+- source: plasma_t4
+  target: peripheral_glucose_uptake
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: Thyroid hormone (T4/T3) upregulates GLUT4 expression, enhances insulin receptor signaling, and increases mitochondrial
+    oxidative capacity in skeletal muscle/adipose, augmenting insulin-stimulated peripheral glucose uptake; hypothyroidism
+    (low T4) impairs these pathways, causing insulin resistance.
+  evidence: 'AOP-Wiki KER uuid 9c393698-93cd-4bc0-a28c-e2400107bc4f; AOP: ''Succinate dehydrogenase inhibition leading to
+    increased insulin resistance through reduction in circulating thyroxine''. No PMID provided in batch; pmid_ok=false. INDRA:
+    thyroxine->glucose_uptake: 0 direct statements; T4->insulin_resistance: 0 statements. Mechanism well-established in endocrine
+    physiology textbooks. *** DRAFT FOR REVIEW (imported) ***'
+- source: hepatic_fatty_acid_content
+  target: hepatic_triglyceride_content
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: Hepatic long-chain fatty acids (from de novo lipogenesis, dietary uptake, or peripheral lipolysis/re-esterification)
+    are esterified to glycerol-3-phosphate by GPAT/AGPAT/DGAT enzymes to form triglycerides; increased hepatic fatty acid
+    availability drives triglyceride synthesis and intrahepatic TG accumulation.
+  evidence: 'AOP-Wiki KER uuid 3fe1f1ca-b143-4f09-9f43-96b8804849d5; AOP: ''Xenobiotic binding to peroxisome proliferator-activated
+    receptors (PPARs) causes dysregulation of lipid metabolism leading to liver steatosis''. No PMID provided in batch; pmid_ok=false.
+    INDRA: fatty_acid->triglyceride n=15 statements. *** DRAFT FOR REVIEW (imported) ***'
+- source: gnrh_neuron_gnrh_secretion
+  target: gonadotroph_lh_secretion
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: GnRH neuron pulsatile secretion drives gonadotroph LH synthesis and release via GnRHR binding at the pituitary;
+    decreased GnRH pulsatility lowers the LH secretory rate
+  evidence: 'AOP-Wiki KER uuid fc289ceb-1cec-4846-b483-5cba54e7ff15; AOP: ''Decreased GnRH pulsatility/release leading to
+    estradiol availability, increased via impaired ovulation''. No PMID provided (pmid_ok=false, pmid_concordant=false — AOP-only
+    provenance). INDRA: GNRH1->LHB Activation×1 + IncreaseAmount×2 (3 same-direction statements) independently confirm. ***
+    DRAFT FOR REVIEW (imported) ***'
+- source: ppara_activity
+  target: hepatic_fa_beta_oxidation_rate
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: PPARα acts as a nuclear receptor transcription factor; upon activation by fatty acid ligands (or fibrate drugs),
+    it directly induces CPT1A, HADHA and other FAO-cycle genes, increasing hepatic mitochondrial fatty acid β-oxidation flux
+  evidence: 'AOP-Wiki KER uuid 2f234598-bda7-42a8-bf7f-971319c7b317; AOP: ''Peroxisome proliferator-activated receptor alpha
+    activation leading to early life stage mortality via reduced ATP''. No PMID provided (pmid_ok=false, pmid_concordant=false).
+    AOP context is ecotox but the KER mechanism is conserved mammalian physiology (PPARα-driven FAO induction is the fasting-state
+    and fibrate-drug mechanism in humans). INDRA: PPARA->CPT1A Activation×2 + IncreaseAmount×4 (6 same-direction statements)
+    independently confirm. PR:Q07869 and GO:0006635 verified in offline OBO files. *** DRAFT FOR REVIEW (imported) ***'
+- source: gr_activity
+  target: hepatic_de_novo_lipogenesis
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: Glucocorticoid receptor (NR3C1) activation in hepatocytes drives transcription of lipogenic genes (FASN, ACACA,
+    SCD1), increasing de novo fatty acid biosynthesis flux. GR binds promoter regions of these enzymes directly and via SREBP1c
+    co-activation.
+  evidence: 'AOP-Wiki KER uuid 4cb2965c-c618-4264-b78f-6210ae959076; AOPs: ''Increased 11β-Hydroxysteroid dehydrogenase type
+    1 activity leading to MASLD progression via lipogenesis-associated mitochondrial dysfunction'' and two related MASLD lipogenesis
+    AOPs. No PMID supplied in batch entry (pmid_ok=false, pmid_concordant=false). KER curated as mechanistic (GR -> lipogenic
+    gene transcription). INDRA independently confirms NR3C1->FASN IncreaseAmount (PMID:30776459, 38481602) and NR3C1-FASN-ACACA-SCD1
+    promoter ChIP (PMID:29331496). *** DRAFT FOR REVIEW (imported) ***'
+# ---------------------------------------------------------------------------
+# FXR/PPARα component-bridge edges (reviewed 2026-07-18; CB-MET-003, CB-MET-004,
+# CB-BIO-007). These connect the off-core FXR island {fxr_activity, ppara_activity,
+# hepatic_fa_beta_oxidation_rate} to core in BOTH directions: bile_acids -> FXR ->
+# {PPARα (existing), CYP7A1} and PPARα -> hepatic ketogenesis. Primary-literature
+# PMIDs/DOIs (interventional), not AOP-only provenance.
+# ---------------------------------------------------------------------------
+- source: ppara_activity
+  target: hepatic_ketogenesis            # boundary node (intermediary_metabolism.yaml)
+  sign: +
+  causal_evidence: perturbation
+  mechanism: PPARalpha transactivates the hepatic fasting fatty-acid-oxidation / ketogenesis program (CPT1, mitochondrial HMG-CoA
+    synthase 2 [HMGCS2], the beta-oxidation gene battery) in hepatocytes, setting ketogenic flux capacity
+  evidence: 'perturbation do(): Ppara global knockout in mouse under fasting/starvation challenge. Intervention: PPARalpha-null;
+    measured endpoint: failure to induce the hepatic FAO/HMGCS2 program on fasting -> hypoketonaemia (with steatosis and hypoglycaemia);
+    context: mouse, hepatic, fasting transcriptional program. do(PPARalpha down) -> ketogenesis down, so activity up -> ketogenesis
+    up (sign +). Corroborated pharmacologically by fibrate (PPARalpha agonist) induction of hepatic FAO/ketogenesis genes. PMID:10359558
+    (Kersten S et al., J Clin Invest 1999;103:1489-1498); PMID:10377439 (Leone TC et al., PNAS 1999;96:7473-7478). Distinct
+    target from the existing ppara_activity -(+)-> hepatic_fa_beta_oxidation_rate edge. *** DRAFT FOR REVIEW ***'
+- source: fxr_activity
+  target: cyp7a1_activity                # boundary node (isolated_connections.yaml)
+  sign: '-'
+  causal_evidence: pharmacological
+  mechanism: Ligand-activated FXR (NR1H4) induces SHP (NR0B2), which represses LRH-1/HNF4 at the CYP7A1 promoter, lowering CYP7A1
+    (cholesterol 7alpha-hydroxylase) transcription and activity — the rate-limiting enzyme of the neutral bile-acid synthesis pathway
+  evidence: 'pharmacological do(): FXR synthetic agonist GW4064 (and bile-acid ligands / obeticholic acid) in hepatocytes and
+    mouse liver. Intervention: FXR agonism; measured endpoint: SHP induction with repressed CYP7A1 transcription/activity ->
+    reduced bile-acid synthesis; context: mouse/human hepatocyte, sub-acute transcriptional repression. do(FXR up) -> CYP7A1
+    down (sign -). PMID:11030332 (Goodwin B et al., Mol Cell 2000;6:517-526 — the FXR-SHP-LRH-1 cascade). *** DRAFT FOR REVIEW ***'
+- source: plasma_bile_acids              # boundary node (bilirubin_liver_function.yaml)
+  target: fxr_activity
+  sign: +
+  causal_evidence: pharmacological
+  mechanism: Bile acids (CDCA, DCA, LCA) are the endogenous agonists of the nuclear receptor FXR (NR1H4); raising plasma /
+    enterohepatic bile-acid concentration activates FXR-RXR-dependent transcription (induces SHP/FGF19, represses CYP7A1)
+  evidence: 'pharmacological do(): endogenous bile-acid ligands (CDCA/DCA/LCA) and synthetic FXR agonists (obeticholic acid ~100x
+    CDCA potency; GW4064) activate the FXR/NR1H4 receptor. Intervention: bile-acid / agonist ligand exposure; measured endpoint:
+    FXR-RXR transcriptional activation at physiological bile-acid concentrations; context: human/rodent nuclear-receptor pharmacology.
+    do(bile acids up) -> FXR transcriptional activity up (sign +). PMID:10334992 (Makishima M et al., Science 1999;284:1362-1365);
+    PMID:10334993 (Parks DJ et al., Science 1999;284:1365-1368); PMID:10360171 (Wang H et al., Mol Cell 1999;3:543-553). ***
+    DRAFT FOR REVIEW ***'

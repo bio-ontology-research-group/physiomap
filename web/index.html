@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PhysioMap — interactive causal map of human physiology</title>
+  <!-- inline SVG favicon (avoids a 404 / aborted request for /favicon.ico) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230d1117'/%3E%3Ccircle cx='9' cy='10' r='3' fill='%233fb950'/%3E%3Ccircle cx='23' cy='12' r='3' fill='%234493f8'/%3E%3Ccircle cx='16' cy='24' r='3' fill='%23f85149'/%3E%3Cpath d='M9 10 L23 12 M23 12 L16 24 M16 24 L9 10' stroke='%238b949e' stroke-width='1.5' fill='none'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/cytoscape@3.30.2/dist/cytoscape.min.js"></script>
+  <!-- fcose: fast force-directed layout for on-demand re-layout of the big graph -->
+  <script src="https://cdn.jsdelivr.net/npm/layout-base@2.0.1/layout-base.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/cose-base@2.2.0/cose-base.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/cytoscape-fcose@2.2.0/cytoscape-fcose.js"></script>
+</head>
+<body>
+  <header>
+    <h1>PhysioMap</h1>
+    <span class="tagline">a qualitative, cyclic, signed causal map of human physiology</span>
+    <span id="stats" class="stats"></span>
+    <span id="version" class="version"></span>
+    <label class="version" style="margin-left:10px;font-size:12px" title="switch the loaded data version">data
+      <select id="version-picker" style="margin-left:4px;background:#161b22;color:#c9d1d9;border:1px solid #30363d;border-radius:4px;font-size:12px;padding:1px 4px"></select>
+    </label>
+    <a href="editor.html" style="margin-left:auto;color:#58a6ff;text-decoration:none;font-size:13px">Curate (editor) &rarr;</a>
+    <a href="traces/" style="margin-left:14px;color:#58a6ff;text-decoration:none;font-size:13px">Mendelian disease traces &rarr;</a>
+  </header>
+
+  <div id="app">
+    <aside id="controls">
+      <section>
+        <label for="layout">Layout</label>
+        <select id="layout">
+          <option value="preset">precomputed (instant)</option>
+          <option value="fcose">force-directed (fcose)</option>
+          <option value="cose">force-directed (cose, slow)</option>
+          <option value="concentric">concentric (by degree)</option>
+          <option value="breadthfirst">hierarchical</option>
+          <option value="circle">circle</option>
+        </select>
+        <button id="relayout" class="mini" style="margin-top:6px">re-run layout</button>
+        <div class="muted" style="font-size:11px;margin-top:4px">Precomputed = instant when toggling
+          big groups. Pick fcose + "re-run layout" to recompute positions.</div>
+      </section>
+
+      <section id="knockout-panel">
+        <label>Synthetic knockout <span class="muted" style="font-weight:400">(live)</span></label>
+        <input id="ko-node" type="text" placeholder="node id or label, e.g. hepcidin" list="ko-nodelist" />
+        <datalist id="ko-nodelist"></datalist>
+        <div style="display:flex;gap:8px;align-items:center;margin:6px 0">
+          <label class="chk" style="margin:0"><input type="radio" name="ko-dir" value="+" checked /> ↑ raise / GoF</label>
+          <label class="chk" style="margin:0"><input type="radio" name="ko-dir" value="-" /> ↓ knock out / LoF</label>
+          <button id="ko-add" class="mini" style="float:none;margin:0" title="clamp several nodes at once">＋ add</button>
+        </div>
+        <div id="ko-targets" class="ko-targets"></div>
+        <div style="display:flex;gap:8px">
+          <button id="ko-run" class="mini">derive phenotypes</button>
+          <button id="ko-clear" class="mini">clear</button>
+        </div>
+        <div class="muted" style="font-size:11px;margin-top:4px">Clamp one node, or
+          <b>＋ add</b> several to impose a joint multi-node <i>do()</i> in a single solve.</div>
+        <div id="ko-status" class="muted" style="font-size:11px;margin-top:6px"></div>
+      </section>
+
+      <section>
+        <label for="search">Search node</label>
+        <input id="search" type="text" autocomplete="off"
+          placeholder="name, synonym (MAP, PaO₂), or IRI (PATO:0000033)" />
+        <div id="search-results" class="results"></div>
+        <div class="muted" style="font-size:11px;margin-top:4px">Searches all
+          <span id="search-total">…</span> nodes (incl. hidden groups); synonym- and ontology-aware.</div>
+      </section>
+
+      <section id="focus-section">
+        <label>Neighbourhood focus</label>
+        <div style="display:flex;gap:8px;align-items:center;margin-bottom:4px">
+          <span class="muted" style="margin:0">radius (hops)</span>
+          <select id="focus-radius" style="width:auto">
+            <option value="1">1</option><option value="2" selected>2</option>
+            <option value="3">3</option>
+          </select>
+          <button id="focus-exit" class="mini" style="float:none;margin:0;display:none">exit focus</button>
+        </div>
+        <div id="focus-status" class="muted" style="font-size:11px"></div>
+        <div class="muted" style="font-size:11px;margin-top:4px">Select a node, then
+          <b>⊙ focus neighbourhood</b> in its detail panel to isolate its typed-relation neighbourhood
+          across <i>all</i> systems.</div>
+      </section>
+
+      <section>
+        <label for="intervention">Intervention overlay</label>
+        <select id="intervention"><option value="">— none —</option></select>
+        <div id="intervention-info" class="muted"></div>
+      </section>
+
+      <section>
+        <label>Toggles</label>
+        <label class="chk"><input type="checkbox" id="show-constitutive" checked /> cross-scale constitutive edges</label>
+        <label class="chk"><input type="checkbox" id="show-quantitative" checked /> quantitative identities</label>
+        <label class="chk"><input type="checkbox" id="show-modulation" checked /> multiplicative (gain) edges</label>
+        <label class="chk"><input type="checkbox" id="highlight-scc" /> highlight whole-body SCC</label>
+        <label class="chk"><input type="checkbox" id="color-by-scale" /> colour nodes by scale (else system)</label>
+      </section>
+
+      <section>
+        <label>Filter by system <button id="sys-all" class="mini">all</button><button id="sys-none" class="mini">none</button></label>
+        <div id="systems"></div>
+        <div class="muted" style="font-size:11px;margin-top:2px">The physiological system a node
+          belongs to (what it is).</div>
+      </section>
+
+      <section>
+        <label>Filter by source / evidence <button id="src-all" class="mini">all</button><button id="src-none" class="mini">none</button></label>
+        <div id="sources"></div>
+        <div class="muted" style="font-size:11px;margin-top:2px">Where the node/evidence came from
+          (provenance). Draft textbook &amp; HPO imports are off by default. A node shows only if
+          <b>both</b> its system and its source are enabled.</div>
+      </section>
+
+      <section>
+        <label>Legend</label>
+        <div class="legend">
+          <div><span class="e plus"></span> increases (+)</div>
+          <div><span class="e minus"></span> decreases (−)</div>
+          <div><span class="e unknown"></span> unknown (?)</div>
+          <div><span class="e production"></span> production / consumption</div>
+          <div><span class="e const"></span> constitutive (determination)</div>
+          <div><span class="e quantitative"></span> quantitative identity (=)</div>
+          <div><span class="e modul"></span> modulation (multiplicative gain ⊗)</div>
+        </div>
+        <div class="legend" id="overlay-legend" style="display:none">
+          <div><span class="dot up"></span> predicted ↑</div>
+          <div><span class="dot down"></span> predicted ↓</div>
+          <div><span class="dot amb"></span> ambiguous (?)</div>
+          <div><span class="dot doo"></span> intervened (do)</div>
+          <div><span class="dot none"></span> unaffected</div>
+        </div>
+      </section>
+
+      <section>
+        <label>About SCC &amp; ? predictions</label>
+        <div class="legend" style="display:block;line-height:1.5">
+          <p style="margin:4px 0">An <b>SCC</b> (strongly connected component) is a set of nodes
+          wired into a <b>feedback loop</b> — each reachable from the others. "Highlight whole-body
+          SCC" shows <span id="about-scc-summary">the largest homeostatic feedback core</span>
+          (cardiovascular / renal / RAAS / fluid–electrolyte).</p>
+          <p style="margin:4px 0"><b>Determinate (↑/↓):</b> the intervention forces the node one way
+          for every reaction strength — a <b>sound</b> prediction (never wrong vs real HPO data).
+          <b>? (ambiguous):</b> the node sits in a feedback loop where opposing arms fight, so the
+          steady-state sign is magnitude-dependent — PhysioMap <b>abstains</b> rather than guess.</p>
+          <p style="margin:4px 0">PhysioMap predicts the <b>steady-state</b> (comparative-statics)
+          sign, not naive path propagation. <a href="traces/">See worked disease traces &rarr;</a></p>
+          <p style="margin:4px 0"><b>Modulation (⊗, dashed purple):</b> a <b>multiplicative gain</b> —
+          one variable <b>scales the strength</b> of another edge instead of pushing the target
+          directly (e.g. thyroid hormone amplifies how strongly sympathetic tone drives heart rate).
+          It is the sign of an <i>interaction</i> (a mixed 2nd derivative), not a magnitude; it leaves
+          ordinary sign predictions unchanged but answers "does X change the <i>sensitivity</i> of one
+          variable to another?". A modulation is really a link from a node to an <i>edge</i> (three
+          endpoints), drawn here as a single arrow to the modulated edge's target; <b>click a ⊗ edge to
+          highlight the actual edge it modulates.</b></p>
+        </div>
+      </section>
+    </aside>
+
+    <main id="cy"></main>
+
+    <aside id="detail">
+      <div class="placeholder">Click a node or edge for details.</div>
+    </aside>
+  </div>
+
+  <script src="app.js?v=20260714-sharded-model"></script>
+</body>
+</html>

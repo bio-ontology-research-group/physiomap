@@ -1,0 +1,1339 @@
+# =============================================================================
+# HPO term -> (PhysioMap node, PATO direction)   *** curated, hp.obo-verified ***
+# =============================================================================
+# Maps HPO abnormal-quantity terms to a PhysioMap node + sign (the increased/decreased
+# direction). Every HP id + label was verified DIRECTLY against the downloaded hp.obo
+# (scripts/build_hpo_observations.py re-checks the label at build time). Scope = the
+# physiological lab/vital/metabolite terms PhysioMap covers; an annotation to a more SPECIFIC
+# HP term is matched via the is-a hierarchy (true-path rule) at build time.
+# =============================================================================
+# HP terms that must NOT propagate up the is_a hierarchy into a mapped term, because HPO files
+# them under a directional term for a DIFFERENT analyte. The deoxycortisols are steroid PRECURSORS
+# that accumulate when cortisol synthesis is blocked (21-/11-hydroxylase deficiency) — i.e. they
+# rise *because cortisol falls* — yet HPO places them under "Increased circulating cortisol level".
+block_propagation:
+  - HP:0025436   # Elevated serum 11-deoxycortisol (CYP11B1/CYP11B2) — NOT cortisol
+  - HP:6000516   # Elevated circulating 21-deoxycortisol (CYP21A2) — NOT cortisol
+
+terms:
+  HP:0000822: { node: mean_arterial_pressure,        sign: "+", label: Hypertension }
+  HP:0002615: { node: mean_arterial_pressure,        sign: "-", label: Hypotension }
+  HP:0002153: { node: plasma_potassium,              sign: "+", label: Hyperkalemia }
+  HP:0002900: { node: plasma_potassium,              sign: "-", label: Hypokalemia }
+  HP:0003228: { node: plasma_sodium_concentration,   sign: "+", label: Hypernatremia }
+  HP:0002902: { node: plasma_sodium_concentration,   sign: "-", label: Hyponatremia }
+  HP:0003072: { node: plasma_calcium,                sign: "+", label: Hypercalcemia }
+  HP:0002901: { node: plasma_calcium,                sign: "-", label: Hypocalcemia }
+  HP:0002905: { node: plasma_phosphate,              sign: "+", label: Hyperphosphatemia }
+  HP:0002148: { node: plasma_phosphate,              sign: "-", label: Hypophosphatemia }
+  HP:0003074: { node: plasma_glucose,                sign: "+", label: Hyperglycemia }
+  HP:0001943: { node: plasma_glucose,                sign: "-", label: Hypoglycemia }
+  HP:0003124: { node: ldl_cholesterol,               sign: "+", label: Hypercholesterolemia }
+  HP:0002155: { node: plasma_triglycerides,          sign: "+", label: Hypertriglyceridemia }
+  HP:0002149: { node: plasma_urate,                  sign: "+", label: Hyperuricemia }
+  HP:0003537: { node: plasma_urate,                  sign: "-", label: Hypouricemia }
+  HP:0004923: { node: plasma_phenylalanine,          sign: "+", label: Hyperphenylalaninemia }
+  HP:0003235: { node: plasma_methionine,             sign: "+", label: Hypermethioninemia }
+  HP:0001987: { node: plasma_ammonia,                sign: "+", label: Hyperammonemia }
+  HP:0002908: { node: plasma_conjugated_bilirubin,   sign: "+", label: Conjugated hyperbilirubinemia }
+  HP:0008282: { node: plasma_unconjugated_bilirubin, sign: "+", label: Unconjugated hyperbilirubinemia }
+  HP:0012463: { node: transferrin_saturation,        sign: "+", label: Elevated transferrin saturation }
+  HP:0012464: { node: transferrin_saturation,        sign: "-", label: Decreased transferrin saturation }
+  HP:0003281: { node: ferritin_stores,               sign: "+", label: Increased circulating ferritin concentration }
+  HP:0012343: { node: ferritin_stores,               sign: "-", label: Decreased circulating ferritin concentration }
+  HP:0003452: { node: plasma_iron,                   sign: "+", label: Increased circulating iron concentration }
+  HP:0040303: { node: plasma_iron,                   sign: "-", label: Decreased circulating iron concentration }
+  HP:0010837: { node: plasma_ceruloplasmin,          sign: "-", label: Decreased circulating ceruloplasmin concentration }
+  HP:0002917: { node: plasma_magnesium,              sign: "-", label: Hypomagnesemia }
+  HP:0001662: { node: heart_rate,                    sign: "-", label: Bradycardia }
+  HP:0001649: { node: heart_rate,                    sign: "+", label: Tachycardia }
+  HP:0002925: { node: tsh,                           sign: "+", label: Elevated circulating thyroid-stimulating hormone concentration }
+  HP:0031098: { node: tsh,                           sign: "-", label: Decreased thyroid-stimulating hormone level }
+  HP:0003118: { node: cortisol,                      sign: "+", label: Increased circulating cortisol level }
+  HP:0008163: { node: cortisol,                      sign: "-", label: Decreased circulating cortisol level }
+  HP:0000848: { node: renin,                         sign: "+", label: Increased circulating renin concentration }
+  HP:0003351: { node: renin,                         sign: "-", label: Decreased circulating renin concentration }
+  HP:0000859: { node: aldosterone,                   sign: "+", label: Increased circulating aldosterone concentration }
+  HP:0004319: { node: aldosterone,                   sign: "-", label: Decreased circulating aldosterone concentration }
+  HP:0003165: { node: pth,                           sign: "+", label: Elevated circulating parathyroid hormone level }
+  HP:0031817: { node: pth,                           sign: "-", label: Decreased circulating parathyroid hormone level }
+  HP:0000842: { node: plasma_insulin,                sign: "+", label: Hyperinsulinemia }
+  HP:0040216: { node: plasma_insulin,                sign: "-", label: Hypoinsulinemia }
+  HP:0030688: { node: plasma_glucagon,               sign: "+", label: Increased glucagon level }
+  HP:0030689: { node: plasma_glucagon,               sign: "-", label: Decreased glucagon level }
+  HP:0000845: { node: pituitary_gh,                  sign: "+", label: Elevated circulating growth hormone concentration }
+  HP:0034323: { node: pituitary_gh,                  sign: "-", label: Reduced circulating growth hormone concentration }
+  HP:0030269: { node: hepatic_igf1,                  sign: "+", label: Increased circulating insulin-like growth factor 1 concentration }
+  HP:0031877: { node: hepcidin,                      sign: "+", label: Elevated circulating hepcidin concentration }
+  HP:0031876: { node: hepcidin,                      sign: "-", label: Decreased circulating hepcidin concentration }
+  HP:0003128: { node: plasma_lactate,                sign: "+", label: Lactic acidosis }
+  HP:0001946: { node: plasma_ketone_bodies,          sign: "+", label: Ketosis }
+
+  # ---------------------------------------------------------------------------
+  # Grown from scripts/hpo_align.py confident candidates (v0.6.0), each reviewed:
+  # only terms whose analyte == the node's quantity with a matching direction were
+  # kept; false friends (transferrin concentration vs *saturation*, free T3 vs T4,
+  # IGF-2/3 vs IGF-1, gonadotropin vs GnRH, total vs conjugated bilirubin, C-peptide,
+  # hepatic-iron, purine pool vs flux) were rejected. Labels verified vs hp.obo at
+  # build time. DRAFT for domain review.
+  # ---------------------------------------------------------------------------
+  # hormones — pituitary / adrenal / gonadal / other endocrine
+  HP:0003154: { node: acth,                          sign: "+", label: Increased circulating ACTH level }
+  HP:0002920: { node: acth,                          sign: "-", label: Decreased circulating ACTH concentration }
+  HP:0034897: { node: adh,                           sign: "-", label: Decreased circulating antidiuretic hormone concentration }
+  HP:0033644: { node: erythropoietin,                sign: "+", label: Elevated circulating erythropoietin concentration }
+  HP:0034443: { node: erythropoietin,                sign: "-", label: Reduced circulating erythropoietin concentration }
+  HP:0025134: { node: estradiol,                     sign: "+", label: Increased serum estradiol }
+  HP:0008214: { node: estradiol,                     sign: "-", label: Decreased serum estradiol }
+  HP:0030088: { node: testosterone,                  sign: "+", label: Increased serum testosterone level }
+  HP:0040171: { node: testosterone,                  sign: "-", label: Decreased serum testosterone concentration }
+  HP:0008233: { node: progesterone,                  sign: "-", label: Decreased circulating progesterone }
+  HP:0031216: { node: progesterone,                  sign: "+", label: Increased circulating progesterone }
+  HP:0008232: { node: fsh,                           sign: "+", label: Elevated circulating follicle stimulating hormone level }
+  HP:0030341: { node: fsh,                           sign: "-", label: Decreased circulating follicle stimulating hormone concentration }
+  HP:0011969: { node: lh,                            sign: "+", label: Elevated circulating luteinizing hormone level }
+  HP:0030344: { node: lh,                            sign: "-", label: Decreased circulating luteinizing hormone level }
+  HP:0003164: { node: gnrh,                          sign: "-", label: Gonadotropin-releasing hormone deficiency }
+  HP:6000519: { node: inhibin,                       sign: "+", label: Elevated circulating inhibin A concentration }
+  HP:6000520: { node: inhibin,                       sign: "+", label: Increased circulating inhibin B concentration }
+  HP:0031100: { node: inhibin,                       sign: "-", label: Decreased circulating inhibin B concentration }
+  HP:0034898: { node: ghrh,                          sign: "+", label: Elevated circulating growth hormone-releasing hormone concentration }
+  HP:0030353: { node: hepatic_igf1,                  sign: "-", label: Decreased circulating serum insulin-like growth factor 1 concentration }
+  HP:6000436: { node: ghrelin,                       sign: "+", label: Elevated circulating ghrelin concentration }
+  HP:0034873: { node: epinephrine,                   sign: "-", label: Decreased circulating epinephrine concentration }
+  HP:0034874: { node: norepinephrine,                sign: "-", label: Decreased circulating norepinephrine concentration }
+  HP:0012052: { node: calcitriol,                    sign: "-", label: Low serum calcitriol }
+  HP:0031415: { node: calcitriol,                    sign: "+", label: High serum calcitriol }
+  HP:6000407: { node: fgf23,                         sign: "+", label: Elevated circulating fibroblast growth factor 23 concentration }
+  HP:6000488: { node: fgf23,                         sign: "-", label: Reduced circulating fibroblast growth factor 23 concentration }
+  HP:0033078: { node: free_t4,                       sign: "-", label: Decreased circulating free T4 concentration }
+  HP:0033077: { node: free_t4,                       sign: "+", label: Increased circulating free T4 concentration }
+  # metabolites / lipids / electrolytes
+  HP:0003141: { node: ldl_cholesterol,               sign: "+", label: Increased LDL cholesterol concentration }
+  HP:0003563: { node: ldl_cholesterol,               sign: "-", label: Decreased LDL cholesterol concentration }
+  HP:0012184: { node: hdl_cholesterol,               sign: "+", label: Increased HDL cholesterol concentration }
+  HP:0003233: { node: hdl_cholesterol,               sign: "-", label: Decreased HDL cholesterol concentration }
+  HP:0012153: { node: plasma_triglycerides,          sign: "-", label: Hypotriglyceridemia }
+  HP:0030781: { node: plasma_free_fatty_acids,       sign: "+", label: Increased circulating free fatty acid level }
+  HP:0040299: { node: plasma_free_fatty_acids,       sign: "-", label: Decreased circulating free fatty acid level }
+  HP:0002151: { node: plasma_lactate,                sign: "+", label: Increased circulating lactate concentration }
+  HP:0100493: { node: plasma_ammonia,                sign: "-", label: Hypoammonemia }
+  HP:0003658: { node: plasma_methionine,             sign: "-", label: Hypomethioninemia }
+  HP:0500141: { node: plasma_phenylalanine,          sign: "-", label: Hypophenylalaninemia }
+  HP:0008344: { node: plasma_branched_chain_amino_acids, sign: "+", label: Elevated circulating branched chain amino acid concentration }
+  HP:0012202: { node: plasma_bile_acids,             sign: "+", label: Increased serum bile acid concentration }
+  HP:0030985: { node: plasma_bile_acids,             sign: "-", label: Decreased serum bile acid concentration }
+  HP:0032067: { node: plasma_bicarbonate,            sign: "+", label: Elevated serum bicarbonate concentration }
+  HP:0032066: { node: plasma_bicarbonate,            sign: "-", label: Decreased serum bicarbonate concentration }
+  HP:6000681: { node: plasma_osmolality,             sign: "+", label: High serum osmolality }
+  HP:6000680: { node: plasma_osmolality,             sign: "-", label: Low serum osmolality }
+  HP:0002918: { node: plasma_magnesium,              sign: "+", label: Hypermagnesemia }
+  HP:0011424: { node: plasma_zinc,                   sign: "+", label: Increased serum zinc }
+  HP:0031831: { node: plasma_zinc,                   sign: "-", label: Decreased serum zinc }
+  HP:0032254: { node: plasma_copper,                 sign: "+", label: Increased circulating copper concentration }
+  HP:0011967: { node: plasma_copper,                 sign: "-", label: Decreased circulating copper concentration }
+  HP:0033145: { node: plasma_ceruloplasmin,          sign: "+", label: Increased circulating ceruloplasmin concentration }
+  # enzyme activities / markers
+  HP:0003155: { node: alkaline_phosphatase,          sign: "+", label: Elevated circulating alkaline phosphatase concentration }
+  HP:0003282: { node: alkaline_phosphatase,          sign: "-", label: Decreased circulating alkaline phosphatase activity }
+  HP:0010679: { node: alkaline_phosphatase,          sign: "+", label: Elevated tissue non-specific alkaline phosphatase }
+  HP:0010683: { node: alkaline_phosphatase,          sign: "-", label: Low tissue non-specific alkaline phosphatase }
+  HP:0011227: { node: c_reactive_protein,            sign: "+", label: Elevated circulating C-reactive protein concentration }
+  HP:0005982: { node: pah_enzyme_activity,           sign: "-", label: Reduced phenylalanine hydroxylase level }
+  HP:0031822: { node: hgprt_activity,                sign: "+", label: Elevated hypoxanthine-guanine phosphoribosyltransferase level }
+  HP:0031823: { node: hgprt_activity,                sign: "-", label: Reduced hypoxanthine-guanine phosphoribosyltransferase level }
+  HP:6000200: { node: g6pase_activity,               sign: "-", label: Reduced hepatic glucose-6-phosphatase activity }
+  HP:6000218: { node: xanthine_oxidase_activity,     sign: "-", label: Reduced circulating xanthine oxidase activity }
+  # cardiovascular physiology
+  HP:0004972: { node: mean_arterial_pressure,        sign: "+", label: Elevated mean arterial pressure }
+  HP:0033533: { node: cardiac_output,                sign: "+", label: Increased cardiac output }
+  HP:0033532: { node: cardiac_output,                sign: "-", label: Decreased cardiac output }
+  HP:0012664: { node: ejection_fraction,             sign: "-", label: Reduced left ventricular ejection fraction }
+  HP:0033755: { node: end_diastolic_volume,          sign: "+", label: Increased left ventricular end-diastolic volume }
+  HP:0033756: { node: end_diastolic_volume,          sign: "-", label: Decreased left ventricular end-diastolic volume }
+
+  # ===========================================================================
+  # HPO gap-fill (v0.8.0): 1179 directional terms mapped onto nodes added by the
+  # multi-agent fan-out (22 themed fragments). Each term was authored from DB/
+  # literature/textbook review, INDEPENDENTLY adversarially verified (sign + IRI +
+  # analyte match), and its label checked verbatim against hp.obo. DRAFT for review.
+  # ===========================================================================
+  HP:6000037: { node: aadc_activity, sign: "-", label: "Reduced circulating aromatic L-amino acid decarboxylase activity" }
+  HP:6000430: { node: acetyl_coa_carboxylase_activity, sign: "-", label: "Reduced tissue acetyl-CoA carboxylase activity" }
+  HP:0034932: { node: acid_alpha_glucosidase_activity, sign: "-", label: "Decreased circulating acid maltase activity" }
+  HP:6000088: { node: acid_alpha_glucosidase_activity, sign: "-", label: "Reduced muscle alpha-1,4-glucosidase activity" }
+  HP:0034053: { node: acid_ceramidase_activity, sign: "-", label: "Decreased acid ceramidase activity" }
+  HP:0034300: { node: acid_sphingomyelinase_activity, sign: "-", label: "Decreased acid sphingomyelinase activity" }
+  HP:6000217: { node: acyl_coa_oxidase_activity, sign: "-", label: "Reduced circulating acyl-CoA oxidase activity" }
+  HP:6000562: { node: ada2_activity, sign: "-", label: "Reduced circulating adenosine deaminase-2 activity" }
+  HP:6001276: { node: adamts13_activity, sign: "-", label: "Decreased circulating ADAMTS13 activity" }
+  HP:0030270: { node: adenosine_deaminase_activity, sign: "+", label: "Elevated red cell adenosine deaminase activity" }
+  HP:0030273: { node: adenosine_deaminase_activity, sign: "-", label: "Reduced red cell adenosine deaminase level" }
+  HP:6000558: { node: adenylate_kinase_activity, sign: "-", label: "Reduced erythrocyte adenylate kinase activity" }
+  HP:6000572: { node: agat_activity, sign: "-", label: "Reduced tissue arginine:glycine amidinotransferase activity" }
+  HP:0035005: { node: agt_activity, sign: "-", label: "Reduced hepatic alanine-glyoxylate aminotransferase activity" }
+  HP:6000349: { node: aicar_transformylase_activity, sign: "-", label: "Reduced tissue tissue AICAR transformylase activity" }
+  HP:0034544: { node: ala_dehydratase_activity, sign: "-", label: "Decreased delta-aminolevulinate dehydratase activity" }
+  HP:0003533: { node: aldehyde_dehydrogenase_activity, sign: "-", label: "Reduced acetaldehyde dehydrogenase level" }
+  HP:0002932: { node: aldehyde_oxidase_activity, sign: "-", label: "Aldehyde oxidase deficiency" }
+  HP:0034830: { node: aldolase_b_activity, sign: "-", label: "Reduced hepatic fructose-1,6-phosphate aldolase activity" }
+  HP:6000427: { node: alkyl_dhap_synthase_activity, sign: "-", label: "Reduced alkyl-dihydroxyacetonephosphate synthase activity in cultured fibroblasts" }
+  HP:6000512: { node: alpha_1_3_fucosyltransferase_activity, sign: "-", label: "Reduced circulating alpha-1,3-fucosyltransferase activity" }
+  HP:6000081: { node: alpha_aminoadipic_semialdehyde_synthase_activity, sign: "-", label: "Reduced alpha-aminoadipic semialdehyde synthase activity in cultured fibroblasts" }
+  HP:0034864: { node: alpha_galactosidase_a_activity, sign: "-", label: "Decreased alpha-galactosidase A activity" }
+  HP:0034727: { node: alpha_l_fucosidase_activity, sign: "-", label: "Reduced circulating alpha-L-fucosidase activity" }
+  HP:0034729: { node: alpha_l_fucosidase_activity, sign: "+", label: "Elevated circulating alpha-L-fucosidase activity" }
+  HP:0034860: { node: alpha_l_fucosidase_activity, sign: "-", label: "Reduced leukocyte alpha-L-fucosidase activity" }
+  HP:0034712: { node: alpha_mannosidase_activity, sign: "-", label: "Decreased circulating alpha-mannosidase activity" }
+  HP:4000190: { node: alpha_mannosidase_activity, sign: "-", label: "Reduced leukocyte alpha-mannosidase activity" }
+  HP:4000202: { node: alpha_n_acetylgalactosaminidase_activity, sign: "-", label: "Reduced tissue alpha-N-acetylgalactosaminidase activity" }
+  HP:6000360: { node: alpha_n_acetylglucosaminidase_activity, sign: "-", label: "Reduced tissue alpha-N-acetylglucosaminidase activity" }
+  HP:6000971: { node: alpha_n_acetylglucosaminidase_activity, sign: "+", label: "Elevated tissue alpha-N-acetylglucosaminidase activity" }
+  HP:6000134: { node: amacr_activity, sign: "-", label: "Reduced alpha-methylacyl-CoA racemase activity in cultured fibroblasts" }
+  HP:0020183: { node: anp, sign: "+", label: "Increased circulating A-type natriuretic peptide concentration" }
+  HP:0020184: { node: anp, sign: "-", label: "Decreased circulating A-type natriuretic peptide concentration" }
+  HP:6000226: { node: aortic_transvalvular_gradient, sign: "+", label: "Elevated aortic transvalvular pressure gradient" }
+  HP:4000203: { node: arginase_activity, sign: "-", label: "Reduced erythrocyte arginase activity" }
+  HP:6000353: { node: argininosuccinate_synthetase_activity, sign: "-", label: "Reduced tissue argininosuccinate synthetase activity" }
+  HP:0034699: { node: aromatase_activity, sign: "+", label: "Elevated aromatase activity" }
+  HP:0034700: { node: aromatase_activity, sign: "-", label: "Reduced aromatase activity" }
+  HP:0034863: { node: arylsulfatase_a_activity, sign: "-", label: "Reduced leukocyte arylsulfatase A activity" }
+  HP:6001112: { node: arylsulfatase_a_activity, sign: "+", label: "Elevated tissue arylsulfatase A activity" }
+  HP:0034861: { node: arylsulfatase_b_activity, sign: "-", label: "Reduced leukocyte arylsulfatase B activity" }
+  HP:6000354: { node: aspartoacylase_activity, sign: "-", label: "Reduced aspartoacylase activity in cultured fibroblasts" }
+  HP:6000573: { node: aspartylglucosaminidase_activity, sign: "-", label: "Reduced tissue aspartylglucosaminidase activity" }
+  HP:4000207: { node: bckdh_enzyme_activity, sign: "-", label: "Reduced branched-chain alpha-keto acid dehydrogenase activity in cultured fibroblasts" }
+  HP:0008166: { node: beta_galactosidase_activity, sign: "-", label: "Decreased beta-galactosidase activity" }
+  HP:0034859: { node: beta_glucuronidase_activity, sign: "-", label: "Reduced tissue beta-glucuronidase activity" }
+  HP:6000819: { node: beta_glucuronidase_activity, sign: "+", label: "Elevated circulating beta-glucuronidase activity" }
+  HP:0025754: { node: beta_hexosaminidase_a_activity, sign: "-", label: "Reduced beta-hexosaminidase A activity" }
+  HP:0033978: { node: beta_hexosaminidase_b_activity, sign: "-", label: "Reduced beta-hexosaminidase B activity" }
+  HP:0034367: { node: beta_mannosidase_activity, sign: "-", label: "Decreased circulating beta-mannosidase activity" }
+  HP:0034726: { node: beta_mannosidase_activity, sign: "+", label: "Elevated circulating beta-mannosidase activity" }
+  HP:4000205: { node: beta_mannosidase_activity, sign: "-", label: "Reduced tissue beta-mannosidase activity" }
+  HP:6000082: { node: beta_ureidopropionase_activity, sign: "-", label: "Reduced hepatic beta-ureidopropionase activity" }
+  HP:0410145: { node: biotinidase_activity, sign: "-", label: "Decreased circulating biotinidase concentration" }
+  HP:0410146: { node: biotinidase_activity, sign: "+", label: "Elevated circulating biotinidase concentration" }
+  HP:6000557: { node: bisphosphoglycerate_mutase_activity, sign: "-", label: "Reduced erythrocyte bisphosphoglycerate mutase activity" }
+  HP:0032281: { node: blood_base_excess, sign: "+", label: "Abnormal base excess" }
+  HP:6000887: { node: blood_bismuth, sign: "+", label: "Elevated blood bismuth concentration" }
+  HP:6000444: { node: blood_cadmium, sign: "+", label: "Elevated blood cadmiun concentration" }
+  HP:6000568: { node: blood_ethylene_glycol, sign: "+", label: "Elevated blood ethylene glycol concentration" }
+  HP:6000443: { node: blood_mercury, sign: "+", label: "Elevated blood mercury concentration" }
+  HP:0003138: { node: blood_urea_nitrogen, sign: "+", label: "Increased blood urea nitrogen" }
+  HP:0031969: { node: blood_urea_nitrogen, sign: "-", label: "Reduced blood urea nitrogen" }
+  HP:0011105: { node: blood_volume, sign: "+", label: "Hypervolemia" }
+  HP:0041077: { node: body_fluid_immunoglobulin, sign: "+", label: "Increased immunoglobulin level in body fluid" }
+  HP:6000700: { node: breast_milk_zinc, sign: "-", label: "Reduced breast milk zinc concentration" }
+  HP:6000825: { node: c27_3beta_hsd_activity, sign: "-", label: "Reduced C27 3beta-HSD activity in cultured fibroblasts" }
+  HP:0032437: { node: c_reactive_protein, sign: "-", label: "Reduced circulating C-reactive protein concecntration" }
+  HP:6000574: { node: cact_activity, sign: "-", label: "Reduced tissue carnitine-acylcarnitine translocase activity" }
+  HP:0034996: { node: carbamoylphosphate_synthetase_1_activity, sign: "-", label: "Reduced hepatic carbamoylphosphate synthetase 1 activity" }
+  HP:0034923: { node: carboxylesterase_1_activity, sign: "-", label: "Reduced liver carboxylesterase 1 activity" }
+  HP:6000560: { node: carboxypeptidase_n_activity, sign: "-", label: "Decreased circulating carboxypeptidase N activity" }
+  HP:0033530: { node: cardiac_index, sign: "+", label: "Increased cardiac index" }
+  HP:0033531: { node: cardiac_index, sign: "-", label: "Decreased cardiac index" }
+  HP:0012517: { node: catalase_activity, sign: "-", label: "Reduced circulating catalase activity" }
+  HP:4000192: { node: cathepsin_d_activity, sign: "-", label: "Reduced leukocyte cathepsin D activity" }
+  HP:6000357: { node: cbs_enzyme_activity, sign: "-", label: "Reduced cystathionine beta-synthase activity in cultured fibroblasts" }
+  HP:0034985: { node: cellular_cobalamin_uptake, sign: "-", label: "Reduced cellular cobalamin uptake" }
+  HP:6000611: { node: chitotriosidase_activity, sign: "+", label: "Elevated circulating chitotriosidase activity" }
+  HP:0003349: { node: cholesterol_esterification_rate, sign: "-", label: "Low cholesterol esterification rate" }
+  HP:6000195: { node: citrate_synthase_activity, sign: "+", label: "Elevated mitochondrial citrate synthase activity" }
+  HP:0002045: { node: core_temperature, sign: "-", label: "Hypothermia" }
+  HP:0033014: { node: cortisol, sign: "-", label: "Decreased salivary cortisol level" }
+  HP:0033015: { node: cortisol, sign: "+", label: "Increased salivary cortisol level" }
+  HP:0012380: { node: cpt2_activity, sign: "-", label: "Reduced tissue carnitine O-palmitoyltransferase 2 activity" }
+  HP:6000689: { node: csf_14_3_3, sign: "+", label: "Elevated CSF 14-3-3 protein concentration" }
+  HP:6000246: { node: csf_2_hydroxyglutarate, sign: "+", label: "Elevated CSF D-2-hydroxyglutaric acid concentration" }
+  HP:0032532: { node: csf_4_hydroxybutyrate, sign: "+", label: "Elevated CSF 4-hydroxybutyric acid concentration" }
+  HP:6000208: { node: csf_5_hydroxymethyluracil, sign: "+", label: "Elevated CSF 5-hydroxymethyluracil concentration" }
+  HP:0020020: { node: csf_5hiaa, sign: "-", label: "Decreased CSF 5-hydroxyindoleacetic acid concentration" }
+  HP:0025455: { node: csf_5hiaa, sign: "-", label: "Decreased CSF 5-hydroxyindolacetic acid concentration" }
+  HP:6000823: { node: csf_5hiaa, sign: "+", label: "Elevated CSF 5-hydroxyindoleacetic acid concentration" }
+  HP:0012446: { node: csf_5mthf, sign: "-", label: "Decreased CSF 5-methyltetrahydrofolate concentration" }
+  HP:0034406: { node: csf_ace, sign: "+", label: "Elevated CSF angiotensin-converting enzyme concentration" }
+  HP:6000238: { node: csf_aica, sign: "+", label: "Elevated CSF 5-amino-4-imidazolecarboxyamide concentration" }
+  HP:0500233: { node: csf_alanine, sign: "+", label: "Increased CSF alanine concentration" }
+  HP:0500234: { node: csf_alanine, sign: "-", label: "Decreased CSF alanine concentration" }
+  HP:0025458: { node: csf_albumin, sign: "-", label: "Decreased CSF albumin concentration" }
+  HP:0500239: { node: csf_albumin, sign: "+", label: "Increased CSF albumin concentration" }
+  HP:0034462: { node: csf_alloisoleucine, sign: "+", label: "Increased CSF L-alloisoleucine concentration" }
+  HP:0500248: { node: csf_alpha_aminobutyrate, sign: "+", label: "Increased CSF alpha-aminobutyrate concentration" }
+  HP:6000399: { node: csf_alpha_crystallin_b, sign: "+", label: "Elevated CSF alpha-crystallin B chain concentration" }
+  HP:6000468: { node: csf_alpha_ketoglutarate, sign: "+", label: "Elevated CSF alpha-ketoglutarate concentration" }
+  HP:6000394: { node: csf_ammonia, sign: "+", label: "Elevated CSF ammonia concentration" }
+  HP:0030861: { node: csf_amyloid_beta, sign: "-", label: "Decreased CSF amyloid concentration" }
+  HP:0030862: { node: csf_amyloid_beta, sign: "+", label: "Elevated CSF amyloid concentration" }
+  HP:0025687: { node: csf_amyloid_beta_40, sign: "+", label: "Increased amyloid beta 40 peptide CSF concentration" }
+  HP:0025684: { node: csf_amyloid_beta_42, sign: "-", label: "Decreased amyloid beta 42 peptide CSF concentration" }
+  HP:0025685: { node: csf_amyloid_beta_42, sign: "+", label: "Increased amyloid beta 42 peptide CSF concentration" }
+  HP:6000204: { node: csf_apolipoprotein_b, sign: "+", label: "Elevated CSF apolipoprotein B concentration" }
+  HP:0500203: { node: csf_arginine, sign: "+", label: "Increased CSF arginine concentration" }
+  HP:0500204: { node: csf_arginine, sign: "-", label: "Decreased CSF arginine concentration" }
+  HP:0034734: { node: csf_argininosuccinate, sign: "+", label: "Elevated CSF argininosuccinic acid concentration" }
+  HP:6000408: { node: csf_asparagine, sign: "-", label: "Reduced CSF asparagine concentration" }
+  HP:0500217: { node: csf_aspartate, sign: "+", label: "Increased CSF aspartate concentration" }
+  HP:0034735: { node: csf_aspartylglucosamine, sign: "+", label: "Elevated CSF aspartylglucosamine concentration" }
+  HP:6000277: { node: csf_beta_alanine, sign: "+", label: "Elevated CSF beta-alanine concentration" }
+  HP:6001299: { node: csf_beta_hcg, sign: "+", label: "Elevated CSF beta chorionic gonadotropin concentration" }
+  HP:0040208: { node: csf_biopterin, sign: "+", label: "Elevated CSF biopterin level" }
+  HP:0040209: { node: csf_biopterin, sign: "-", label: "Decreased CSF biopterin level" }
+  HP:0032651: { node: csf_chi3l1, sign: "+", label: "Elevated CSF chitinase-3-like protein 1 concentration" }
+  HP:0032652: { node: csf_chitotriosidase, sign: "+", label: "Elevated CSF chitotriosidase 1 concentration" }
+  HP:6000203: { node: csf_cholestanol, sign: "+", label: "Elevated CSF cholestanol concentration" }
+  HP:0500246: { node: csf_citrulline, sign: "+", label: "Increased CSF citrulline concentration" }
+  HP:6000400: { node: csf_creatine, sign: "-", label: "Reduced CSF creatine concentration" }
+  HP:0034597: { node: csf_creatinine, sign: "-", label: "Decreased CSF creatinine concentration" }
+  HP:6000280: { node: csf_cystathionine, sign: "+", label: "Elevated CSF cystathionine concentration" }
+  HP:0034724: { node: csf_cystine, sign: "-", label: "Reduced CSF cystine concentration" }
+  HP:6000372: { node: csf_d_glycerate, sign: "+", label: "Elevated CSF D-glyceric acid concentration" }
+  HP:0410058: { node: csf_d_threitol, sign: "+", label: "Increased CSF D-threitol concentration" }
+  HP:6000690: { node: csf_dihydrobiopterin, sign: "+", label: "Elevated CSF dihydrobiopterin concentration" }
+  HP:6000212: { node: csf_dihydrothymine, sign: "+", label: "Elevated CSF dihydrothymine concentration" }
+  HP:6000211: { node: csf_dihydrouracil, sign: "+", label: "Elevated CSF dihydrouracil concentration" }
+  HP:0034605: { node: csf_dopa, sign: "+", label: "Elevated CSF DOPA concentration" }
+  HP:0012655: { node: csf_dopamine, sign: "+", label: "Elevated CSF dopamine concentration" }
+  HP:0012656: { node: csf_dopamine, sign: "-", label: "Reduced CSF dopamine concentration" }
+  HP:0034872: { node: csf_epinephrine, sign: "-", label: "Decreased CSF epinephrine concentration" }
+  HP:0410056: { node: csf_erythritol, sign: "-", label: "Decreased CSF erythritol concentration" }
+  HP:0410209: { node: csf_folate, sign: "-", label: "Folate deficiency in CSF" }
+  HP:0033503: { node: csf_fumarate, sign: "+", label: "Elevated CSF fumarate concentration" }
+  HP:0032531: { node: csf_gaba, sign: "+", label: "Elevated CSF gamma-aminobutyric acid concentration" }
+  HP:0032650: { node: csf_gfap, sign: "+", label: "Elevated CSF glial fibrillary acidic protein concentration" }
+  HP:0011972: { node: csf_glucose, sign: "-", label: "Hypoglycorrhachia" }
+  HP:0031885: { node: csf_glucose, sign: "+", label: "Hyperglycorrhachia" }
+  HP:0500200: { node: csf_glutamate, sign: "+", label: "Increased CSF glutamate concentration" }
+  HP:0500201: { node: csf_glutamate, sign: "-", label: "Decreased CSF glutamate concentration" }
+  HP:0500197: { node: csf_glutamine, sign: "+", label: "Increased CSF glutamine concentration" }
+  HP:0500198: { node: csf_glutamine, sign: "-", label: "Decreased CSF glutamine concentration" }
+  HP:0034390: { node: csf_glycine, sign: "-", label: "Decreased CSF glycine concentration" }
+  HP:0500230: { node: csf_glycine, sign: "+", label: "Increased CSF glycine concentration" }
+  HP:0020005: { node: csf_guanidinoacetate, sign: "-", label: "Decreased CSF guanidinoacetic acid concentration" }
+  HP:6000396: { node: csf_guanidinoacetate, sign: "+", label: "Elevated CSF guanidinoacetic acid concentration" }
+  HP:0500236: { node: csf_histidine, sign: "+", label: "Increased CSF histidine concentration" }
+  HP:0500237: { node: csf_histidine, sign: "-", label: "Decreased CSF histidine concentration" }
+  HP:0500242: { node: csf_homocarnosine, sign: "+", label: "Increased CSF homocarnosine concentration" }
+  HP:0003785: { node: csf_homovanillic_acid, sign: "-", label: "Decreased CSF homovanillic acid concentration" }
+  HP:0034201: { node: csf_hva, sign: "+", label: "Increased CSF homovanillic acid concentration" }
+  HP:0034723: { node: csf_hydroxyproline, sign: "+", label: "Elevated CSF hydroxyproline concentration" }
+  HP:0009709: { node: csf_interferon_alpha, sign: "+", label: "Increased CSF interferon alpha" }
+  HP:0500193: { node: csf_isoleucine, sign: "+", label: "Increased CSF isoleucine concentration" }
+  HP:0500194: { node: csf_isoleucine, sign: "-", label: "Decreased CSF isoleucine concentration" }
+  HP:6000509: { node: csf_l_2_hydroxyglutarate, sign: "+", label: "Elevated CSF L-2-hydroxyglutaric acid concentration" }
+  HP:0002490: { node: csf_lactate, sign: "+", label: "Increased CSF lactate" }
+  HP:0030086: { node: csf_lactate, sign: "-", label: "Reduced CSF lactate" }
+  HP:0500190: { node: csf_leucine, sign: "-", label: "Decreased CSF leucine concentration" }
+  HP:0500191: { node: csf_leucine, sign: "+", label: "Increased CSF leucine concentration" }
+  HP:0500207: { node: csf_lysine, sign: "-", label: "Decreased CSF lysine concentration" }
+  HP:0500208: { node: csf_lysine, sign: "+", label: "Increased CSF lysine concentration" }
+  HP:6000205: { node: csf_mbp, sign: "+", label: "Elevated CSF myelin basic protein concentration" }
+  HP:0034877: { node: csf_metanephrine, sign: "-", label: "Decreased CSF metanephrine concentration" }
+  HP:0034740: { node: csf_methionine, sign: "-", label: "Reduced CSF methionine concentration" }
+  HP:0500210: { node: csf_methionine, sign: "+", label: "Increased CSF methionine concentration" }
+  HP:6000398: { node: csf_mhpg_aldehyde, sign: "-", label: "Decreased CSF 3-methoxy-4-hydroxyphenylglycolaldehyde concentration" }
+  HP:0032274: { node: csf_n_acetylaspartate, sign: "+", label: "Increased CSF N-acetylaspartic acid concentration" }
+  HP:6000674: { node: csf_n_acetylaspartate, sign: "-", label: "Decreased CSF N-acetylaspartic acid concentration" }
+  HP:6000210: { node: csf_n_carbamyl_beta_alanine, sign: "+", label: "Elevated CSF N-carbamyl-beta-alanine concentration" }
+  HP:6000209: { node: csf_n_carbamyl_beta_aminoisobutyrate, sign: "+", label: "Elevated CSF N-carbamyl-beta-aminoisobutyric acid concentration" }
+  HP:6000765: { node: csf_naag, sign: "-", label: "Decreased CSF N-acetyl-aspartyl-glutamate concentration" }
+  HP:0040204: { node: csf_neopterin, sign: "+", label: "Elevated CSF neopterin level" }
+  HP:0040205: { node: csf_neopterin, sign: "-", label: "Decreased CSF neopterin level" }
+  HP:0032928: { node: csf_nfl, sign: "+", label: "Elevated CSF neurofilament light chain concentration" }
+  HP:0500244: { node: csf_ornithine, sign: "+", label: "Increased CSF ornithine concentration" }
+  HP:0500223: { node: csf_phenylalanine, sign: "+", label: "Increased CSF phenylalanine concentration" }
+  HP:0500224: { node: csf_phenylalanine, sign: "-", label: "Decreased CSF phenylalanine concentration" }
+  HP:0034743: { node: csf_proline, sign: "+", label: "Elevated CSF proline concentration" }
+  HP:0002922: { node: csf_protein, sign: "+", label: "Increased CSF protein concentration" }
+  HP:0025457: { node: csf_protein, sign: "-", label: "Decreased CSF protein concentration" }
+  HP:6000206: { node: csf_pyridoxal_phosphate, sign: "-", label: "Reduced CSF pyridoxal-5'-phosphate concentration" }
+  HP:0410071: { node: csf_ribitol, sign: "+", label: "Increased CSF ribitol concentration" }
+  HP:0410073: { node: csf_ribose, sign: "+", label: "Increased CSF ribose concentration" }
+  HP:6000270: { node: csf_saccharopine, sign: "+", label: "Elevated CSF saccharopine concentration" }
+  HP:0034739: { node: csf_sarcosine, sign: "+", label: "Elevated CSF sarcosine concentration" }
+  HP:6000975: { node: csf_sepiapterin, sign: "+", label: "Elevated CSF sepiapterin concentration" }
+  HP:0500227: { node: csf_serine, sign: "+", label: "Increased CSF serine concentration" }
+  HP:0500228: { node: csf_serine, sign: "-", label: "Decreased CSF serine concentration" }
+  HP:0034455: { node: csf_taurine, sign: "+", label: "Increased CSF taurine concentration" }
+  HP:6000764: { node: csf_tetrahydrobiopterin, sign: "-", label: "Decreased CSF tetrahydrobiopterin level" }
+  HP:6000822: { node: csf_tetrahydrobiopterin, sign: "+", label: "Elevated CSF tetrahydrobiopterin level" }
+  HP:0500212: { node: csf_threonine, sign: "+", label: "Increased CSF threonine concentration" }
+  HP:0500213: { node: csf_threonine, sign: "-", label: "Decreased CSF threonine concentration" }
+  HP:6000207: { node: csf_thymine, sign: "+", label: "Elevated CSF thymine concentration" }
+  HP:0500222: { node: csf_tryptophan, sign: "+", label: "Increased CSF tryptophan concentration" }
+  HP:0500220: { node: csf_tyrosine, sign: "+", label: "Increased CSF tyrosine concentration" }
+  HP:0500221: { node: csf_tyrosine, sign: "-", label: "Decreased CSF tyrosine concentration" }
+  HP:0034460: { node: csf_uracil, sign: "+", label: "Increased CSF uracil concentration" }
+  HP:0410199: { node: csf_urate, sign: "+", label: "Increased CSF urate concentration" }
+  HP:0500187: { node: csf_valine, sign: "+", label: "Increased CSF valine concentration" }
+  HP:0500188: { node: csf_valine, sign: "-", label: "Decreased CSF valine concentration" }
+  HP:0410075: { node: csf_xylitol, sign: "+", label: "Increased CSF xylitol concentration" }
+  HP:0034929: { node: cystathionine_gamma_lyase_activity, sign: "-", label: "Reduced hepatic cystathionine gamma-lyase activity" }
+  HP:6000133: { node: cytochrome_b5_reductase_activity, sign: "-", label: "Decreased erythrocyte nicotinamide adenine dinucleotide-cytochrome b5 reductase activity" }
+  HP:4000164: { node: d_bifunctional_protein_activity, sign: "-", label: "Reduced bifunctional protein activity" }
+  HP:6000556: { node: dbh_activity, sign: "-", label: "Reduced circulating dopamine beta-hydroxylase activity" }
+  HP:6000426: { node: dhapat_activity, sign: "-", label: "Reduced Acyl-CoA:dihydroxyacetone phosphate acyltransferase activity in cultured fibroblasts" }
+  HP:0005117: { node: diastolic_blood_pressure, sign: "+", label: "Elevated diastolic blood pressure" }
+  HP:0034918: { node: dienoyl_coa_reductase_activity, sign: "-", label: "Reduced muscle 2,4-dienoyl-CoA reductase activity" }
+  HP:0034919: { node: dienoyl_coa_reductase_activity, sign: "-", label: "Reduced liver 2,4-dienoyl-CoA reductase activity" }
+  HP:6000083: { node: dihydropyrimidinase_activity, sign: "-", label: "Reduced hepatic dihydropyrimidinase activity" }
+  HP:0003654: { node: dihydropyrimidine_dehydrogenase_activity, sign: "-", label: "Reduced dihydropyrimidine dehydrogenase level" }
+  HP:0025077: { node: ecg_qrs_voltage, sign: "-", label: "Decreased QRS voltage" }
+  HP:0034633: { node: enolase_activity, sign: "-", label: "Reduced muscle enolase activity" }
+  HP:0034909: { node: erythrocyte_coproporphyrin, sign: "+", label: "Increased erythrocyte coproporphyrin concentration" }
+  HP:0034869: { node: erythrocyte_free_porphyrin, sign: "-", label: "Reduced erythrocyte free porphyrin concentration" }
+  HP:0410064: { node: erythrocyte_galactitol, sign: "+", label: "Increased level of galactitol in red blood cells" }
+  HP:0410063: { node: erythrocyte_galactonate, sign: "+", label: "Increased level of galactonate in red blood cells" }
+  HP:6001314: { node: erythrocyte_glutathione_peroxidase_activity, sign: "-", label: "Reduced erythrocyte glutathione peroxidase" }
+  HP:0012187: { node: erythrocyte_protoporphyrin, sign: "+", label: "Increased erythrocyte protoporphyrin concentration" }
+  HP:6000561: { node: erythrocyte_pyruvate_kinase_activity, sign: "+", label: "Elevated red cell pyruvate kinase activity" }
+  HP:0003565: { node: erythrocyte_sedimentation_rate, sign: "+", label: "Elevated erythrocyte sedimentation rate" }
+  HP:0034910: { node: erythrocyte_uroporphyrin, sign: "+", label: "Increased erythrocyte uroproporphyrin concentration" }
+  HP:6001016: { node: erythropoietin, sign: "-", label: "Inappropriate normal or low erythropoietin" }
+  HP:6000720: { node: fatty_aldehyde_dehydrogenase_activity, sign: "-", label: "Reduced tissue fatty aldehyde dehydrogenase activity" }
+  HP:0031686: { node: fecal_alpha1_antitrypsin, sign: "+", label: "Increased stool alpha1-antitrypsin concentration" }
+  HP:0034043: { node: fecal_bile_acids, sign: "+", label: "Increased fecal bile acid" }
+  HP:0034056: { node: fecal_calprotectin, sign: "+", label: "Increased fecal calprotectin level" }
+  HP:0033009: { node: fecal_coproporphyrin, sign: "+", label: "Increased fecal coproporphyrin 1" }
+  HP:0033010: { node: fecal_coproporphyrin, sign: "+", label: "Increased fecal coproporphyrin 3" }
+  HP:0034469: { node: fecal_pancreatic_elastase, sign: "-", label: "Decreased stool elastase level" }
+  HP:0032490: { node: fecal_ph, sign: "-", label: "Decreased fecal pH" }
+  HP:0034283: { node: fecal_protoporphyrin, sign: "+", label: "Increased fecal protoporphyrin concentration" }
+  HP:0032484: { node: fecal_sodium, sign: "+", label: "Elevated fecal sodium" }
+  HP:6000697: { node: ferrochelatase_activity, sign: "-", label: "Low tissue ferrochelatase activity" }
+  HP:6000755: { node: fgf23, sign: "+", label: "Elevated circulating C-terminal fibroblast growth factor 23 concentration" }
+  HP:0034995: { node: fructose_1_6_bisphosphatase_activity, sign: "-", label: "Reduced tissue fructose-1,6-bisphosphatase activity" }
+  HP:0003536: { node: fumarate_hydratase_activity, sign: "-", label: "Decreased fumarate hydratase activity" }
+  HP:0410178: { node: g6pd_activity, sign: "+", label: "Increased glucose-6-phosphate dehydrogenase level in blood" }
+  HP:0410179: { node: g6pd_activity, sign: "-", label: "Decreased glucose-6-phosphate dehydrogenase level in blood" }
+  HP:0410181: { node: g6pd_activity, sign: "+", label: "Increased glucose-6-phosphate dehydrogenase level in dried blood spot" }
+  HP:0410182: { node: g6pd_activity, sign: "-", label: "Decreased glucose-6-phosphate dehydrogenase level in dried blood spot" }
+  HP:0410186: { node: g6pd_activity, sign: "+", label: "Increased glucose-6-phosphate dehydrogenase level in tissue" }
+  HP:0410187: { node: g6pd_activity, sign: "-", label: "Decreased glucose-6-phosphate dehydrogenase level in tissue" }
+  HP:0410188: { node: g6pd_activity, sign: "-", label: "Decreased glucose-6-phosphate dehydrogenase level in red blood cells" }
+  HP:0410189: { node: g6pd_activity, sign: "+", label: "Increased glucose-6-phosphate dehydrogenase level in red blood cells" }
+  HP:0410190: { node: g6pd_activity, sign: "-", label: "Decreased glucose-6-phosphate dehydrogenase level in leukocytes" }
+  HP:0410191: { node: g6pd_activity, sign: "+", label: "Increased glucose-6-phosphate dehydrogenase level in leukocytes" }
+  HP:0034322: { node: galactocerebrosidase_activity, sign: "-", label: "Reduced tissue galactocerebrosidase activity" }
+  HP:6000723: { node: galactokinase_activity, sign: "-", label: "Reduced erythrocyte galactokinase activity" }
+  HP:4000208: { node: galt_activity, sign: "-", label: "Reduced erythrocyte galactose-1-phosphate uridylyltransferase activity" }
+  HP:6000132: { node: gamma_glutamylcysteine_synthetase_activity, sign: "-", label: "Reduced erythrocyte gamma-glutamyl cysteine synthetase activity" }
+  HP:6000578: { node: gamma_glutamyltransferase_activity, sign: "-", label: "Reduced tissue gamma-glutamyltransferase activity" }
+  HP:6000722: { node: gamt_activity, sign: "-", label: "Reduced tissue guanidinoacetate methyltransferase activity" }
+  HP:0500167: { node: gastrin, sign: "+", label: "Hypergastrinemia" }
+  HP:0003264: { node: glcnac_phosphotransferase_activity, sign: "-", label: "Deficiency of N-acetylglucosamine-1-phosphotransferase" }
+  HP:0003656: { node: glucocerebrosidase_activity, sign: "-", label: "Decreased beta-glucocerebrosidase level" }
+  HP:6000201: { node: glucose_6_phosphate_translocase_activity, sign: "-", label: "Reduced hepatic glucose-6-phosphate translocase activity" }
+  HP:0003568: { node: glucose_phosphate_isomerase_activity, sign: "-", label: "Decreased glucosephosphate isomerase level" }
+  HP:0034688: { node: glutaryl_coa_oxidase_activity, sign: "-", label: "Reduced peroxisomal glutaryl-CoA oxidase activity" }
+  HP:6000525: { node: glutathione_reductase_activity, sign: "-", label: "Reduced erythrocyte glutathione reductase activity" }
+  HP:0003343: { node: glutathione_synthetase_activity, sign: "-", label: "Reduced glutathione synthetase level" }
+  HP:0034706: { node: glycerate_kinase_activity, sign: "-", label: "Reduced hepatic D-glycerate kinase activity" }
+  HP:4000211: { node: glycerol_kinase_activity, sign: "-", label: "Reduced glycerol kinase activity in cultured fibroblasts" }
+  HP:6000829: { node: glycine_cleavage_enzyme_activity, sign: "-", label: "Reduced tissue glycine cleavage enzyme activity" }
+  HP:0034957: { node: glycogen_debrancher_activity, sign: "-", label: "Reduced hepatic glycogen debrancher enzyme activity" }
+  HP:6000616: { node: glycogen_debrancher_activity, sign: "-", label: "Reduced muscle glycogen debrancher enzyme activity" }
+  HP:6000979: { node: glycogen_phosphorylase_activity, sign: "-", label: "Reduced hepatic glycogen phosphorylase activity" }
+  HP:0003258: { node: glyoxalase_activity, sign: "-", label: "Glyoxalase deficiency" }
+  HP:6000638: { node: glyoxylate_reductase_activity, sign: "-", label: "Reduced hepatic glyoxylate reductase activity" }
+  HP:0034716: { node: heme_oxygenase_activity, sign: "-", label: "Reduced heme oxygenase activity" }
+  HP:4000196: { node: heparan_alpha_glucosaminide_n_acetyltransferase_activity, sign: "-", label: "Reduced heparan-alpha-glucosaminide N-acetyltransferase activity in cultured fibroblasts" }
+  HP:0045061: { node: hepatic_carnitine, sign: "-", label: "Decreased carnitine level in liver" }
+  HP:6000559: { node: hexokinase_activity, sign: "-", label: "Reduced erythrocyte hexokinase activity" }
+  HP:6000214: { node: hibadh_activity, sign: "-", label: "Decreased 3-hydroxyisobutyrate dehydrogenase activity" }
+  HP:6000215: { node: hibch_activity, sign: "-", label: "Reduced circulating 3-hydroxyisobutyryl-CoA hydrolase activity" }
+  HP:6000216: { node: hmg_coa_lyase_activity, sign: "-", label: "Reduced HMG-CoA lyase activity in cultured fibroblasts" }
+  HP:4000200: { node: holocarboxylase_synthetase_activity, sign: "-", label: "Reduced holocarboxylase synthetase activity in cultured fibroblasts" }
+  HP:0100950: { node: hydroxyacyl_coa_dehydrogenase_activity, sign: "-", label: "Decreased 3-hydroxyacyl-CoA dehydrogenase level" }
+  HP:0003637: { node: hydroxyphenylpyruvate_dioxygenase_activity, sign: "-", label: "Reduced circulating 4-Hydroxyphenylpyruvate dioxygenase activity" }
+  HP:0003538: { node: iduronate_sulfatase_activity, sign: "+", label: "Increased iduronate sulfatase level" }
+  HP:0034203: { node: iduronate_sulfatase_activity, sign: "-", label: "Decreased iduronate sulfatase level" }
+  HP:0025130: { node: intestinal_lactase_activity, sign: "-", label: "Decreased small intestinal mucosa lactase level" }
+  HP:0003358: { node: intracellular_cystine, sign: "+", label: "Elevated intracellular cystine" }
+  HP:4000210: { node: isovaleryl_coa_dehydrogenase_activity, sign: "-", label: "Reduced isovaleryl CoA dehydrogenase activity in cultured fibroblasts" }
+  HP:6000511: { node: itpase_activity, sign: "-", label: "Reduced erythrocyte inosine triphosphatase activity" }
+  HP:0030848: { node: jugular_venous_pressure, sign: "+", label: "Elevated jugular venous pressure" }
+  HP:0025433: { node: lcat_activity, sign: "-", label: "Decreased lecithin cholesterol acyl transferase level" }
+  HP:0031299: { node: left_atrial_pressure, sign: "+", label: "Elevated left atrial pressure" }
+  HP:0032639: { node: leukocyte_cystine, sign: "+", label: "Elevated leukocyte cystine" }
+  HP:0034307: { node: lv_end_diastolic_diameter, sign: "+", label: "Elevated left ventricular end-diastolic diameter" }
+  HP:0031205: { node: lysosomal_acid_lipase_activity, sign: "-", label: "Reduced lysosomal acid lipase activity" }
+  HP:6000826: { node: lysyl_hydroxylase_1_activity, sign: "-", label: "Reduced procollagen-lysine,2-oxoglutarate 5-dioxygenase 1 activity in cultured fibroblasts" }
+  HP:0003232: { node: malic_enzyme_activity, sign: "-", label: "Mitochondrial malic enzyme reduced" }
+  HP:6000355: { node: malonyl_coa_decarboxylase_activity, sign: "-", label: "Reduced malonyl-CoA decarboxylase activity in cultured fibroblasts" }
+  HP:6000576: { node: mannosyl_oligosaccharide_glucosidase_activity, sign: "-", label: "Reduced tissue mannosyl-oligosaccharide glucosidase activity" }
+  HP:6000356: { node: mcad_activity, sign: "-", label: "Reduced tissue medium-chain acyl-CoA dehydrogenase activity" }
+  HP:0012340: { node: metabolic_rate, sign: "-", label: "Decreased resting energy expenditure" }
+  HP:0034693: { node: methionine_adenosyltransferase_activity, sign: "-", label: "Reduced hepatic methionine adenosyltransferase activity" }
+  HP:0003524: { node: methionine_synthase_activity, sign: "-", label: "Decreased methionine synthase activity" }
+  HP:4000206: { node: methylcrotonyl_coa_carboxylase_activity, sign: "-", label: "Reduced 3-methylcrotonyl CoA carboxylase activity in cultured fibroblasts" }
+  HP:6000577: { node: methylglutaconyl_coa_hydratase_activity, sign: "-", label: "Reduced tissue 3-methylglutaconyl-CoA hydratase activity" }
+  HP:0003210: { node: methylmalonyl_coa_mutase_activity, sign: "-", label: "Decreased methylmalonyl-CoA mutase activity" }
+  HP:0033168: { node: mevalonate_kinase_activity, sign: "-", label: "Reduced mevalonate kinase activity" }
+  HP:0011925: { node: mitochondrial_atp_synthase_activity, sign: "-", label: "Decreased activity of mitochondrial ATP synthase complex" }
+  HP:0011923: { node: mitochondrial_complex_i_activity, sign: "-", label: "Decreased activity of mitochondrial complex I" }
+  HP:0008314: { node: mitochondrial_complex_ii_activity, sign: "-", label: "Decreased activity of mitochondrial complex II" }
+  HP:0011924: { node: mitochondrial_complex_iii_activity, sign: "-", label: "Decreased activity of mitochondrial complex III" }
+  HP:0008347: { node: mitochondrial_complex_iv_activity, sign: "-", label: "Decreased activity of mitochondrial complex IV" }
+  HP:0008972: { node: mitochondrial_respiratory_chain_activity, sign: "-", label: "Decreased activity of mitochondrial respiratory chain" }
+  HP:0040015: { node: mitochondrial_respiratory_chain_activity, sign: "+", label: "Increased activity of mitochondrial respiratory chain" }
+  HP:6000219: { node: mmsdh_activity, sign: "-", label: "Reduced methylmalonate semialdehyde dehydrogenase activity in cultured fibroblasts" }
+  HP:0030362: { node: muscle_carnitine, sign: "-", label: "Reduced muscle carnitine level" }
+  HP:6000230: { node: muscle_caveolin_3, sign: "-", label: "Decreased muscle caveolin-3 level" }
+  HP:0034369: { node: muscle_coenzyme_q10, sign: "-", label: "Decreased level of coenzyme Q10 in skeletal muscle" }
+  HP:0009051: { node: muscle_glycogen_content, sign: "+", label: "Increased muscle glycogen content" }
+  HP:0012270: { node: muscle_glycogen_content, sign: "-", label: "Decreased muscle glycogen content" }
+  HP:0030232: { node: muscle_glycogen_content, sign: "+", label: "Increased sarcoplasmic glycogen" }
+  HP:6000196: { node: muscle_lactate_dehydrogenase_activity, sign: "-", label: "Reduced muscle lactate dehydrogenase activity" }
+  HP:0034928: { node: muscle_lipoic_acid, sign: "-", label: "Decreased muscle lipoic acid content" }
+  HP:6000375: { node: myeloperoxidase_activity, sign: "-", label: "Reduced neutrophil myeloperoxidase activity" }
+  HP:0034529: { node: myoadenylate_deaminase_activity, sign: "-", label: "Reduced muscle myoadenylate deaminase activity" }
+  HP:0006673: { node: myocardial_contractility, sign: "-", label: "Reduced systolic function" }
+  HP:6000358: { node: myophosphorylase_activity, sign: "-", label: "Reduced muscle glycogen phosphorylase activity" }
+  HP:4000197: { node: n_acetylgalactosamine_6_sulfatase_activity, sign: "-", label: "Reduced N-acetylgalactosamine-6-sulfatase in cultured fibroblasts" }
+  HP:4000198: { node: n_acetylglucosamine_6_sulfatase_activity, sign: "-", label: "Reduced acetylglucosamine-6-sulfatase activity in cultured fibroblasts" }
+  HP:6000161: { node: nags_activity, sign: "-", label: "Reduced hepatic N-acetylglutamate synthase activity" }
+  HP:6000911: { node: neuraminidase_activity, sign: "-", label: "Reduced tissue neuraminidase activity" }
+  HP:6000615: { node: ocrl1_activity, sign: "-", label: "Reduced Inositol polyphosphate 5-phosphatase OCRL-1 activity in cultured fibroblasts" }
+  HP:6000334: { node: otc_activity, sign: "-", label: "Reduced hepatic ornithine transcarbamylase activity" }
+  HP:0040142: { node: oxoprolinase_activity, sign: "-", label: "Reduced circulating 5-oxoprolinase activity" }
+  HP:6000695: { node: p5c_dehydrogenase_activity, sign: "-", label: "Reduced tissue delta-1-pyrroline-5-carboxylate dehydrogenase activity" }
+  HP:0040175: { node: paf_acetylhydrolase_activity, sign: "-", label: "Platelet-activating factor acetylhydrolase deficiency" }
+  HP:6000721: { node: pancreatic_amylase_activity, sign: "-", label: "Decreased circulating pancreatic isoamylase activity" }
+  HP:6000619: { node: pepck_activity, sign: "-", label: "Reduced phosphoenolpyruvate carboxykinase activity in cultured fibroblasts" }
+  HP:6000359: { node: phosphofructokinase_activity, sign: "-", label: "Reduced muscle 6-phosphofructokinase activity" }
+  HP:0034691: { node: phosphoglycerate_dehydrogenase_activity, sign: "-", label: "Reduced 3-phosphoglycerate dehydrogenase activity" }
+  HP:0034527: { node: phosphoglycerate_kinase_activity, sign: "-", label: "Reduced muscle phosphoglycerate kinase activity" }
+  HP:6000197: { node: phosphoglycerate_mutase_activity, sign: "-", label: "Reduced muscle phosphoglycerate mutase activity" }
+  HP:6000781: { node: phosphomannomutase_activity, sign: "-", label: "Reduced tissue phosphomannomutase activity" }
+  HP:6000782: { node: phosphomannose_isomerase_activity, sign: "-", label: "Reduced tissue phosphomannose isomerase activity" }
+  HP:6000198: { node: phosphorylase_kinase_activity, sign: "-", label: "Reduced muscle phosphorylase kinase activity" }
+  HP:6000333: { node: phosphorylase_kinase_activity, sign: "-", label: "Reduced hepatic phosphorylase kinase activity" }
+  HP:6000832: { node: phosphorylase_kinase_activity, sign: "-", label: "Reduced tissue phosphorylase kinase activity" }
+  HP:6000080: { node: phosphoserine_phosphatase_activity, sign: "-", label: "Reduced phosphoserine phosphatase activity in cultured fibroblasts" }
+  HP:4000163: { node: phytanoyl_coa_hydroxylase_activity, sign: "-", label: "Reduced phytanic acid oxidase activity in cultured fibroblasts" }
+  HP:0032575: { node: plasma_12_hete, sign: "-", label: "Decreased circulating 12-HETE" }
+  HP:0033809: { node: plasma_17_hydroxypregnenolone, sign: "+", label: "Increased circulating 17 hydroxypregnenolone concentration" }
+  HP:0020199: { node: plasma_18_hydroxycortisone, sign: "-", label: "Decreased circulating 18-hydroxycortisone level" }
+  HP:0020200: { node: plasma_18_hydroxycortisone, sign: "+", label: "Increased circulating 18-hydroxycortisone level" }
+  HP:0033301: { node: plasma_1_methylhistidine, sign: "+", label: "Elevated circulating 1-methylhistidine concentration" }
+  HP:0012053: { node: plasma_25oh_vitamin_d, sign: "-", label: "Decreased circulating calcifediol concentration" }
+  HP:0031414: { node: plasma_25oh_vitamin_d, sign: "+", label: "High serum calcifediol" }
+  HP:6000402: { node: plasma_27_hydroxycholesterol, sign: "+", label: "Elevated circulating 27-hydroxycholesterol concentration" }
+  HP:6000278: { node: plasma_2_aminoadipate, sign: "+", label: "Elevated circulating 2-aminoadipic acid concentration" }
+  HP:0033418: { node: plasma_2_hydroxybutyrate, sign: "+", label: "Elevated circulating 2-hydroxybutyric acid concentration" }
+  HP:6000703: { node: plasma_3_hydroxyanthranilate, sign: "+", label: "Elevated circulating 3-hydroxyanthranilic acid concentration" }
+  HP:0033419: { node: plasma_3_hydroxybutyrate, sign: "+", label: "Elevated circulating 3-hydroxybutyric acid concentration" }
+  HP:6000236: { node: plasma_3_hydroxybutyrate, sign: "-", label: "Inappropriately low concentration of beta-hydroxybutyrate" }
+  HP:6000237: { node: plasma_3_hydroxybutyrylcarnitine, sign: "+", label: "Elevated circulating 3-hydroxybutyryl-carnitine concentration" }
+  HP:0035025: { node: plasma_3_hydroxyhexadecanoylcarnitine, sign: "+", label: "Elevated circulating 3-hydroxyhexadecanoylcarnitine concentration" }
+  HP:0035029: { node: plasma_3_hydroxyhexanoylcarnitine, sign: "+", label: "Elevated circulating 3-hydroxyhexanoylcarnitine concentration" }
+  HP:0035028: { node: plasma_3_hydroxyisovalerylcarnitine, sign: "+", label: "Elevated circulating 3-hydroxyisovalerylcarnitine concentration" }
+  HP:6000776: { node: plasma_3_hydroxykynurenine, sign: "+", label: "Elevated circulating 3-hydroxykynurenine concentration" }
+  HP:0033461: { node: plasma_3_hydroxylinoleylcarnitine, sign: "+", label: "Elevated circulating 3-hydroxylinoleylcarnitine concentration" }
+  HP:0033464: { node: plasma_3_hydroxypalmitoleylcarnitine, sign: "+", label: "Elevated circulating 3-hydroxypalmitoleylcarnitine concentration" }
+  HP:0034407: { node: plasma_3_ketoacyl_coa_thiolase, sign: "-", label: "Reduced circulating 3-ketoacyl-CoA thiolase concentration" }
+  HP:0033436: { node: plasma_3_methyl_2_oxovalerate, sign: "+", label: "Elevated circulating 3-methyl-2-oxovaleric acid concentration" }
+  HP:0033157: { node: plasma_3_methylhistidine, sign: "+", label: "Elevated circulating 3-methylhistidine concentration" }
+  HP:6000991: { node: plasma_4_hydroxybutyrate, sign: "+", label: "Elevated circulating 4-hydroxybutyric acid concentration" }
+  HP:0033302: { node: plasma_4_hydroxyphenylacetate, sign: "+", label: "Elevated circulating 4-hydroxyphenylacetic acid concentration" }
+  HP:0033326: { node: plasma_4_hydroxyphenyllactate, sign: "+", label: "Elevated circulating hydroxyphenlyllactic acid concentration" }
+  HP:0033437: { node: plasma_4_methyl_2_oxopentanoate, sign: "+", label: "Elevated circulating 4-methyl-2-oxopentanoic acid concentration" }
+  HP:0034596: { node: plasma_5_hydroxymethyluracil, sign: "+", label: "Elevated ciculating 5-hydroxymethyluracil concentration" }
+  HP:0410217: { node: plasma_5_methyltetrahydrofolate, sign: "-", label: "Reduced blood 5-methyltetrahydrofolate level" }
+  HP:0033175: { node: plasma_5_oxoproline, sign: "+", label: "Elevated circulating 5-oxoproline concentration" }
+  HP:0010569: { node: plasma_7_dehydrocholesterol, sign: "+", label: "Elevated circulating 7-dehydrocholesterol concentration" }
+  HP:0034935: { node: plasma_7_dehydrocholesterol, sign: "-", label: "Decreased circulating 7-dehydrocholesterol concentration" }
+  HP:0003465: { node: plasma_8_9_cholestenol, sign: "+", label: "Elevated 8(9)-cholestenol" }
+  HP:0003462: { node: plasma_8_dehydrocholesterol, sign: "+", label: "Elevated 8-dehydrocholesterol" }
+  HP:6000213: { node: plasma_ace, sign: "+", label: "Elevated circulating Angiotensin-converting enzyme concentration" }
+  HP:6000235: { node: plasma_acetoacetate, sign: "-", label: "Inappropriately low concentration of acetoacetate" }
+  HP:0035023: { node: plasma_acetylcarnitine, sign: "+", label: "Elevated circulating acetylcarnitine concentration" }
+  HP:0035032: { node: plasma_acetylcarnitine, sign: "-", label: "Reduced circulating acetylcarnitine concentration" }
+  HP:0003148: { node: plasma_acid_phosphatase, sign: "+", label: "Elevated serum acid phosphatase" }
+  HP:0033179: { node: plasma_aconitate, sign: "+", label: "Elevated circulating aconitic acid concentration" }
+  HP:0033445: { node: plasma_acylcarnitine, sign: "-", label: "Reduced circulating acylcarnitine concentration" }
+  HP:0045045: { node: plasma_acylcarnitine, sign: "+", label: "Elevated circulating acylcarnitine concentration" }
+  HP:0003145: { node: plasma_adenosylcobalamin, sign: "-", label: "Decreased circulating adenosylcobalamin concentration" }
+  HP:0030685: { node: plasma_adiponectin, sign: "-", label: "Decreased adiponectin level" }
+  HP:0030686: { node: plasma_adiponectin, sign: "+", label: "Increased adiponectin level" }
+  HP:0020158: { node: plasma_adrenic_acid, sign: "+", label: "Increased circulating adrenic acid concentration" }
+  HP:0003348: { node: plasma_alanine, sign: "+", label: "Hyperalaninemia" }
+  HP:0500154: { node: plasma_alanine, sign: "-", label: "Hypoalaninemia" }
+  HP:0003073: { node: plasma_albumin, sign: "-", label: "Hypoalbuminemia" }
+  HP:0012117: { node: plasma_albumin, sign: "+", label: "Hyperalbuminemia" }
+  HP:0012544: { node: plasma_aldolase, sign: "+", label: "Elevated circulating aldolase concentration" }
+  HP:0012545: { node: plasma_aldolase, sign: "-", label: "Reduced circulating aldolase concentration" }
+  HP:0410052: { node: plasma_allantoin, sign: "+", label: "Increased level of allantoin in serum" }
+  HP:0032336: { node: plasma_allergen_specific_ige, sign: "+", label: "Increased circulating specific IgE antibody concentration" }
+  HP:0410220: { node: plasma_allergen_specific_ige, sign: "+", label: "Increased anti-dairy protein IgE antibody level" }
+  HP:0410221: { node: plasma_allergen_specific_ige, sign: "+", label: "Increased anti-animal protein IgE antibody level" }
+  HP:0410222: { node: plasma_allergen_specific_ige, sign: "+", label: "Increased anti-seafood IgE antibody level" }
+  HP:0410223: { node: plasma_allergen_specific_ige, sign: "+", label: "Increased anti-dust mite IgE antibody level" }
+  HP:0410224: { node: plasma_allergen_specific_ige, sign: "+", label: "Increased anti-bacteria IgE antibody level" }
+  HP:0410225: { node: plasma_allergen_specific_ige, sign: "+", label: "Increased anti-drug IgE antibody level" }
+  HP:0410226: { node: plasma_allergen_specific_ige, sign: "+", label: "Increased anti-feather IgE antibody level" }
+  HP:0410227: { node: plasma_allergen_specific_ige, sign: "+", label: "Increased anti-food allergen IgE antibody level" }
+  HP:0410228: { node: plasma_allergen_specific_ige, sign: "+", label: "Increased anti-plant based food allergen IgE antibody level" }
+  HP:0410229: { node: plasma_allergen_specific_ige, sign: "+", label: "Increased anti-gluten IgE antibody level" }
+  HP:0410230: { node: plasma_allergen_specific_ige, sign: "+", label: "Increased anti-nut food product IgE antibody level" }
+  HP:0410231: { node: plasma_allergen_specific_ige, sign: "+", label: "Increased anti-egg IgE antibody level" }
+  HP:0410232: { node: plasma_allergen_specific_ige, sign: "+", label: "Increased anti-fungi IgE antibody level" }
+  HP:0410233: { node: plasma_allergen_specific_ige, sign: "+", label: "Increased anti-meat allergen IgE antibody level" }
+  HP:0410234: { node: plasma_allergen_specific_ige, sign: "+", label: "Increased anti-parasite IgE antibody level" }
+  HP:0410235: { node: plasma_allergen_specific_ige, sign: "+", label: "Increased anti-insect IgE antibody level" }
+  HP:0410236: { node: plasma_allergen_specific_ige, sign: "+", label: "Increased anti-venom IgE antibody level" }
+  HP:0410238: { node: plasma_allergen_specific_ige, sign: "+", label: "Increased anti-plant product IgE antibody level" }
+  HP:0410247: { node: plasma_allergen_specific_ige, sign: "+", label: "Increased anti-animal dander IgE antibody level" }
+  HP:0410248: { node: plasma_allergen_specific_ige, sign: "+", label: "Increased anti-house dust mite IgE antibody level" }
+  HP:0410249: { node: plasma_allergen_specific_ige, sign: "+", label: "Increased anti-alpha-gal IgE antibody level" }
+  HP:0033155: { node: plasma_alloisoleucine, sign: "+", label: "Elevated circulating L-alloisoleucine concentration" }
+  HP:0032025: { node: plasma_alpha1_antitrypsin, sign: "-", label: "Reduced circulating alpha-1-antitrypsin concentration" }
+  HP:0034736: { node: plasma_alpha_aminoadipate, sign: "+", label: "Elevated circulating alpha-oxoadipic acid concentration" }
+  HP:0033110: { node: plasma_alpha_aminobutyrate, sign: "+", label: "Elevated circulating alpha-aminobutyric acid concentration" }
+  HP:0006254: { node: plasma_alpha_fetoprotein, sign: "+", label: "Elevated circulating alpha-fetoprotein concentration" }
+  HP:0045057: { node: plasma_alpha_fetoprotein, sign: "-", label: "Decreased circulating alpha-fetoprotein concentration" }
+  HP:0005413: { node: plasma_alpha_globulin, sign: "+", label: "Elevated circulating alpha-globulin concentration" }
+  HP:6000435: { node: plasma_alpha_ketoglutarate, sign: "+", label: "Elevated circulating alpha-ketoglutarate concentration" }
+  HP:0031964: { node: plasma_alt, sign: "+", label: "Elevated circulating alanine aminotransferase concentration" }
+  HP:0031102: { node: plasma_amh, sign: "+", label: "Increased circulating antimullerian hormone concentration" }
+  HP:0031103: { node: plasma_amh, sign: "-", label: "Decreased circulating antimullerian hormone circulation" }
+  HP:0034365: { node: plasma_aminoadipic_semialdehyde, sign: "+", label: "Elevated circulating alpha-aminoadipic semialdehyde concentration" }
+  HP:0410288: { node: plasma_amylase, sign: "+", label: "Hyperamylasemia" }
+  HP:0410289: { node: plasma_amylase, sign: "-", label: "Hypoamylasemia" }
+  HP:0030348: { node: plasma_androgen, sign: "+", label: "Increased circulating androgen concentration" }
+  HP:0030349: { node: plasma_androgen, sign: "-", label: "Decreased circulating androgen concentration" }
+  HP:0025380: { node: plasma_androstenedione, sign: "+", label: "Increased circulating androstenedione concentration" }
+  HP:0033812: { node: plasma_androstenedione, sign: "-", label: "Decreased circulating androstenedione concentration" }
+  HP:0410050: { node: plasma_anhydroglucitol, sign: "-", label: "Decreased level of 1,5 anhydroglucitol in serum" }
+  HP:0033459: { node: plasma_apolipoprotein, sign: "-", label: "Decreased circulating apolipoprotein concentration" }
+  HP:0033460: { node: plasma_apolipoprotein, sign: "+", label: "Increased circulating apolipoprotein circulation" }
+  HP:0031799: { node: plasma_apolipoprotein_a1, sign: "-", label: "Decreased circulating apolipoprotein A-I concentration" }
+  HP:0031800: { node: plasma_apolipoprotein_a2, sign: "+", label: "Elevated circulating apolipoprotein A-II concentration" }
+  HP:0034602: { node: plasma_apolipoprotein_a2, sign: "-", label: "Decreased circulating apolipoprotein A-II concentration" }
+  HP:0025202: { node: plasma_apolipoprotein_a4, sign: "+", label: "Elevated circulating apolipoprotein A-IV concentration" }
+  HP:0031798: { node: plasma_apolipoprotein_b, sign: "+", label: "Elevated circulating apolipoprotein B concentration" }
+  HP:0034075: { node: plasma_apolipoprotein_b, sign: "-", label: "Decreased circulating apolipoprotein B concentration" }
+  HP:0033983: { node: plasma_apolipoprotein_c2, sign: "-", label: "Decreased circulating apolipoprotein C-II concentration" }
+  HP:0033112: { node: plasma_apolipoprotein_c3, sign: "+", label: "Elevated circulating apolipoprotein C-III concentration" }
+  HP:0034911: { node: plasma_apolipoprotein_e, sign: "-", label: "Decreased circulating apolipoprotein E concentration" }
+  HP:0034912: { node: plasma_apolipoprotein_e, sign: "+", label: "Elevated circulating apolipoprotein E concentration" }
+  HP:0034611: { node: plasma_arabinitol, sign: "+", label: "Elevated circulating arabinitol concentration" }
+  HP:0020197: { node: plasma_arachidonic_acid, sign: "+", label: "Increased circulating arachidonic acid concentration" }
+  HP:0005961: { node: plasma_arginine, sign: "-", label: "Hypoargininemia" }
+  HP:0500153: { node: plasma_arginine, sign: "+", label: "Hyperargininemia" }
+  HP:0032491: { node: plasma_argininosuccinate, sign: "+", label: "Increased circulating argininosuccinic acid" }
+  HP:0500156: { node: plasma_asparagine, sign: "+", label: "Hyperasparaginemia" }
+  HP:0500157: { node: plasma_asparagine, sign: "-", label: "Hypoasparaginemia" }
+  HP:0034441: { node: plasma_aspartate, sign: "-", label: "Decreased circulating aspartic acid concentration" }
+  HP:0500159: { node: plasma_aspartate, sign: "+", label: "Increased circulating aspartic acid concentration" }
+  HP:6000282: { node: plasma_aspartylglucosamine, sign: "+", label: "Elevated circulating aspartylglucosamine concentration" }
+  HP:0031956: { node: plasma_ast, sign: "+", label: "Elevated circulating aspartate aminotransferase concentration" }
+  HP:0430136: { node: plasma_ast, sign: "-", label: "Reduced circulating aspartate aminotransferase concentration" }
+  HP:0025346: { node: plasma_beta2_microglobulin, sign: "+", label: "Increased circulating beta-2-microglobulin level" }
+  HP:0025347: { node: plasma_beta2_microglobulin, sign: "-", label: "Decreased circulating beta-2-microglobulin level" }
+  HP:0012556: { node: plasma_beta_alanine, sign: "+", label: "Hyperbeta-alaninemia" }
+  HP:0034592: { node: plasma_beta_aminoisobutyrate, sign: "+", label: "Elevated circulating beta-aminoisobutyric acid concentration" }
+  HP:0430073: { node: plasma_beta_carotene, sign: "-", label: "Decreased circulating beta-carotene concentration" }
+  HP:0430074: { node: plasma_beta_carotene, sign: "+", label: "Increased circulating beta-carotene concentration" }
+  HP:0031425: { node: plasma_beta_ctx, sign: "+", label: "Elevated circulating beta-CTX concentration" }
+  HP:0031426: { node: plasma_beta_ctx, sign: "-", label: "Decreased circulating beta-CTX concentration" }
+  HP:6001412: { node: plasma_beta_ctx, sign: "+", label: "Elevated circulating C-terminal telopeptide cross-link of type1 collagen concentration" }
+  HP:6000485: { node: plasma_beta_hcg, sign: "+", label: "Elevated circulating beta chorionic gonadotropin concentration" }
+  HP:0003333: { node: plasma_beta_hexosaminidase, sign: "+", label: "Increased serum beta-hexosaminidase" }
+  HP:6000821: { node: plasma_bile_alcohol, sign: "+", label: "Elevated circulating bile alcohol concentration" }
+  HP:0034383: { node: plasma_biliverdin, sign: "+", label: "Elevated circulating biliverdin concentration" }
+  HP:0034599: { node: plasma_biotin, sign: "-", label: "Decreased circulating biotin concentration" }
+  HP:0033534: { node: plasma_bnp, sign: "+", label: "Increased circulating brain natriuretic peptide concentration" }
+  HP:0033446: { node: plasma_butyrylcarnitine, sign: "+", label: "Elevated circulating butyrylcarnitine concentration" }
+  HP:0430143: { node: plasma_c12_acylcarnitine, sign: "+", label: "Elevated circulating C12 acylcarnitine concentration" }
+  HP:0035021: { node: plasma_c16_acylcarnitine, sign: "+", label: "Elevated circulating C16 acylcarnitine concentration" }
+  HP:0035020: { node: plasma_c18_acylcarnitine, sign: "+", label: "Elevated circulating C18 acylcarnitine concentration" }
+  HP:0035016: { node: plasma_c4_acylcarnitine, sign: "+", label: "Elevated circulating C4 acylcarnitine concentration" }
+  HP:0035019: { node: plasma_c5_acylcarnitine, sign: "+", label: "Elevated circulating C5 acylcarnitine concentration" }
+  HP:0031030: { node: plasma_ca125, sign: "+", label: "Elevated circulating carcinoma antigen 125 concentration" }
+  HP:0032345: { node: plasma_ca19_9, sign: "+", label: "Elevated cancer Ag 19-9 level" }
+  HP:0034603: { node: plasma_ca19_9, sign: "+", label: "Elevated circulating CA19-9 concentration" }
+  HP:0003528: { node: plasma_calcitonin, sign: "+", label: "Elevated circulating calcitonin concentration" }
+  HP:0034903: { node: plasma_calcitonin, sign: "-", label: "Decreased circulating calcitonin concentration" }
+  HP:6000502: { node: plasma_calprotectin, sign: "+", label: "Elevated circulating calprotectin concentration" }
+  HP:0003234: { node: plasma_carnitine, sign: "-", label: "Decreased circulating carnitine concentration" }
+  HP:0011936: { node: plasma_carnitine, sign: "-", label: "Decreased plasma total carnitine" }
+  HP:0500161: { node: plasma_carnosine, sign: "+", label: "Increased circulating carnosine concentration" }
+  HP:0500162: { node: plasma_carnosine, sign: "-", label: "Decreased circulating carnosine concentration" }
+  HP:0003334: { node: plasma_catecholamines, sign: "+", label: "Elevated circulating catecholamine level" }
+  HP:6000482: { node: plasma_catecholamines, sign: "-", label: "Decreased circulating catecholamine concentration" }
+  HP:0033182: { node: plasma_cathepsin_d, sign: "+", label: "Increased circulating cathepsin D level" }
+  HP:6000243: { node: plasma_cbg, sign: "-", label: "Reduced circulating corticosteroid-binding globulin concentration" }
+  HP:0034619: { node: plasma_cd46, sign: "-", label: "Decreased circulating membrane cofactor protein concentration" }
+  HP:0034620: { node: plasma_cd46, sign: "+", label: "Elevated circulating membrane cofactor protein concentration" }
+  HP:0031029: { node: plasma_cea, sign: "+", label: "Elevated circulating CEA concentration" }
+  HP:0033299: { node: plasma_cfhr1, sign: "-", label: "Reduced circulating complement factor H related protein 1 concentration" }
+  HP:0033300: { node: plasma_cfhr1, sign: "+", label: "Increased circulating complement factor H related protein 1 concentration" }
+  HP:0033103: { node: plasma_chi3l1, sign: "+", label: "Elevated circulating CHI3L1 level" }
+  HP:0001995: { node: plasma_chloride, sign: "+", label: "Hyperchloremic acidosis" }
+  HP:0003113: { node: plasma_chloride, sign: "-", label: "Hypochloremia" }
+  HP:0004918: { node: plasma_chloride, sign: "+", label: "Hyperchloremic metabolic acidosis" }
+  HP:0005977: { node: plasma_chloride, sign: "-", label: "Hypochloremic metabolic alkalosis" }
+  HP:0011423: { node: plasma_chloride, sign: "+", label: "Hyperchloremia" }
+  HP:6001353: { node: plasma_cholestane_triol, sign: "+", label: "Elevated circulating C-triol concentration" }
+  HP:6000527: { node: plasma_cholestanol, sign: "+", label: "Elevated circulating cholestanol concentration" }
+  HP:0031211: { node: plasma_cholesterol_esters, sign: "+", label: "Elevated cholesterol ester level" }
+  HP:6000565: { node: plasma_cholesterol_sulfate, sign: "+", label: "Elevated circulating cholesterol sulfate concentration" }
+  HP:0020175: { node: plasma_cholinesterase_activity, sign: "-", label: "Reduced circulating cholinesterase activity" }
+  HP:0012238: { node: plasma_chylomicron, sign: "+", label: "Increased circulating chylomicron concentration" }
+  HP:0031242: { node: plasma_chylomicrons, sign: "-", label: "Decreased circulating chylomicron concentration" }
+  HP:0003572: { node: plasma_citrulline, sign: "-", label: "Low plasma citrulline" }
+  HP:0011966: { node: plasma_citrulline, sign: "+", label: "Elevated plasma citrulline" }
+  HP:0032232: { node: plasma_ck_mb, sign: "+", label: "Elevated circulating CK-MB concentration" }
+  HP:0032234: { node: plasma_ck_mm, sign: "+", label: "Increased circulating creatine kinase MM isoform" }
+  HP:0033410: { node: plasma_comp, sign: "+", label: "Elevated circulating cartilage oligomeric matrix protein concentration" }
+  HP:0032362: { node: plasma_corticosterone, sign: "+", label: "Increased circulating corticosterone level" }
+  HP:0032363: { node: plasma_corticosterone, sign: "-", label: "Decreased circulating corticosterone level" }
+  HP:0410171: { node: plasma_cotinine, sign: "+", label: "Increased cotinine level" }
+  HP:0034291: { node: plasma_creatine, sign: "+", label: "Elevated circulating creatine concentration" }
+  HP:0034292: { node: plasma_creatine, sign: "-", label: "Reduced circulating creatine concentration" }
+  HP:0003236: { node: plasma_creatine_kinase, sign: "+", label: "Elevated circulating creatine kinase concentration" }
+  HP:0008180: { node: plasma_creatine_kinase, sign: "+", label: "Mildly elevated creatine kinase" }
+  HP:0008331: { node: plasma_creatine_kinase, sign: "+", label: "Elevated creatine kinase after exercise" }
+  HP:0030234: { node: plasma_creatine_kinase, sign: "+", label: "Highly elevated creatine kinase" }
+  HP:0030235: { node: plasma_creatine_kinase, sign: "+", label: "Extremely elevated creatine kinase" }
+  HP:0032233: { node: plasma_creatine_kinase_bb, sign: "+", label: "Increased circulating creatine kinase BB isoform" }
+  HP:0003259: { node: plasma_creatinine, sign: "+", label: "Elevated circulating creatinine concentration" }
+  HP:0012101: { node: plasma_creatinine, sign: "-", label: "Decreased serum creatinine" }
+  HP:0032997: { node: plasma_cystatin_c, sign: "-", label: "Decreased circulating cystatin C concentration" }
+  HP:0032998: { node: plasma_cystatin_c, sign: "+", label: "Increased cystatin C level" }
+  HP:0500151: { node: plasma_cystine, sign: "+", label: "Hypercystinemia" }
+  HP:0500152: { node: plasma_cystine, sign: "-", label: "Hypocystinemia" }
+  HP:6000371: { node: plasma_d_glycerate, sign: "+", label: "Elevated circulating D-glyceric acid concentration" }
+  HP:0410057: { node: plasma_d_threitol, sign: "+", label: "Increased level of D-threitol in plasma" }
+  HP:6000478: { node: plasma_decadienoylcarnitine, sign: "+", label: "Elevated circulating 2-trans,4-cis-decadienoylcarnitine concentration" }
+  HP:6000273: { node: plasma_decanoylcarnitine, sign: "+", label: "Elevated circulating decanoylcarnitine concentration" }
+  HP:0033439: { node: plasma_decenoylcarnitine, sign: "+", label: "Elevated circulating decenoylcarnitine concentration" }
+  HP:0033154: { node: plasma_deoxypyridinoline, sign: "+", label: "Elevated circulating deoxypyridinoline concentration" }
+  HP:0034277: { node: plasma_deoxyuridine, sign: "+", label: "Elevated circulating deoxyuridine concentration" }
+  HP:0034937: { node: plasma_desmosterol, sign: "+", label: "Elevated circulating desmosterol concentration" }
+  HP:0031214: { node: plasma_dhea, sign: "-", label: "Decreased circulating dehydroepiandrosterone concentration" }
+  HP:0034908: { node: plasma_dhea, sign: "+", label: "Increased circulating dehydroepiandrosterone concentration" }
+  HP:0031215: { node: plasma_dheas, sign: "-", label: "Decreased circulating dehydroepiandrosterone-sulfate concentration" }
+  HP:0034589: { node: plasma_dheas, sign: "+", label: "Increased circulating dehydroepiandrosterone-sulfate concentration" }
+  HP:0033810: { node: plasma_dihydrotestosterone, sign: "-", label: "Decreased circulating dihydrotestosterone concentration" }
+  HP:0034594: { node: plasma_dihydrothymine, sign: "+", label: "Elevated circulating dihydrothymine concentration" }
+  HP:0034593: { node: plasma_dihydrouracil, sign: "+", label: "Elevated circulating dihydrouracil concentration" }
+  HP:0031945: { node: plasma_dimethylglycine, sign: "+", label: "Elevated circulating N,N-dimethylglycine concentration" }
+  HP:6000754: { node: plasma_dimethylsterol, sign: "+", label: "Elevated circulating dimethyl sterol concentration" }
+  HP:6000001: { node: plasma_dnajb9, sign: "+", label: "Elevated circulating DNAJB9 protein concentration" }
+  HP:0033444: { node: plasma_dodecanoylcarnitine, sign: "+", label: "Elevated circulating dodecanoylcarnitine concentration" }
+  HP:0033153: { node: plasma_dodecenoylcarnitine, sign: "+", label: "Elevated circulating dodecenoylcarnitine concentration" }
+  HP:0034604: { node: plasma_dopa, sign: "+", label: "Elevated circulating DOPA concentration" }
+  HP:6000234: { node: plasma_dopac, sign: "+", label: "Elevated circulating dihydroxyphenylacetic acid concentration" }
+  HP:0032240: { node: plasma_e_selectin, sign: "+", label: "Elevated circulating E selectin level" }
+  HP:0034614: { node: plasma_erythritol, sign: "+", label: "Elevated circulating erythritol concentration" }
+  HP:0025136: { node: plasma_estriol, sign: "+", label: "Increased serum estriol" }
+  HP:0025137: { node: plasma_estriol, sign: "-", label: "Decreased serum estriol" }
+  HP:0025139: { node: plasma_estrone, sign: "+", label: "Increased serum estrone" }
+  HP:0025140: { node: plasma_estrone, sign: "-", label: "Decreased serum estrone" }
+  HP:6000986: { node: plasma_ethanol, sign: "+", label: "Substantially elevated circulating ethanol concentration" }
+  HP:0500250: { node: plasma_ethanolamine, sign: "+", label: "Increased circulating ethanolamine concentration" }
+  HP:0033083: { node: plasma_farnesol, sign: "+", label: "Increased circulating farnesol concentration" }
+  HP:0033306: { node: plasma_fetuin_a, sign: "-", label: "Decreased circulating fetuin A concentration" }
+  HP:0033307: { node: plasma_fetuin_a, sign: "+", label: "Increased circulating fetuin A concentration" }
+  HP:0032463: { node: plasma_fibronectin, sign: "-", label: "Reduced circulating fibronectin level" }
+  HP:6000189: { node: plasma_ficolin_3, sign: "-", label: "Decreased circulating ficolin 3 concentration" }
+  HP:0032164: { node: plasma_folate, sign: "+", label: "Increased blood folate concentration" }
+  HP:0100507: { node: plasma_folate, sign: "-", label: "Reduced blood folate concentration" }
+  HP:0008315: { node: plasma_free_carnitine, sign: "-", label: "Decreased plasma free carnitine" }
+  HP:0035030: { node: plasma_free_carnitine, sign: "+", label: "Elevated circulating carnitine concentration" }
+  HP:0033504: { node: plasma_fumarate, sign: "+", label: "Elevated circulating fumarate concentration" }
+  HP:0410053: { node: plasma_gaba, sign: "+", label: "Elevated circulating gamma-aminobutyric acid concentration" }
+  HP:0410054: { node: plasma_gaba, sign: "-", label: "Decreased circulating GABA concentration" }
+  HP:0410061: { node: plasma_galactitol, sign: "+", label: "Increased level of galactitol in plasma" }
+  HP:0012024: { node: plasma_galactose, sign: "+", label: "Hypergalactosemia" }
+  HP:0032205: { node: plasma_galectin_3, sign: "+", label: "Increased circulating galectin-3 level" }
+  HP:0030948: { node: plasma_ggt, sign: "+", label: "Elevated gamma-glutamyltransferase level" }
+  HP:0033595: { node: plasma_globotriaosylceramide, sign: "+", label: "Elevated circulating globotriaosylceramide concentration" }
+  HP:0032311: { node: plasma_globulin, sign: "+", label: "Elevated circulating globulin concentration" }
+  HP:0032312: { node: plasma_globulin, sign: "-", label: "Decreased circulating globulin concentration" }
+  HP:6001185: { node: plasma_glucosylsphingosine, sign: "+", label: "Elevated circulating glucosylsphingosine concentration" }
+  HP:0500149: { node: plasma_glutamate, sign: "+", label: "Hyperglutamatemia" }
+  HP:0500150: { node: plasma_glutamate, sign: "-", label: "Hypoglutamatemia" }
+  HP:0003217: { node: plasma_glutamine, sign: "+", label: "Hyperglutaminemia" }
+  HP:0500147: { node: plasma_glutamine, sign: "-", label: "Hypoglutaminemia" }
+  HP:0003530: { node: plasma_glutaric_acid, sign: "+", label: "Elevated circulating glutaric acid concentration" }
+  HP:0033442: { node: plasma_glutarylcarnitine, sign: "+", label: "Elevated circulating glutarylcarnitine concentration" }
+  HP:0034456: { node: plasma_glutathione, sign: "+", label: "Elevated circulating glutathione concentration" }
+  HP:0040302: { node: plasma_glycerol, sign: "+", label: "Hyperglycerolemia" }
+  HP:0002154: { node: plasma_glycine, sign: "+", label: "Hyperglycinemia" }
+  HP:0012277: { node: plasma_glycine, sign: "-", label: "Hypoglycinemia" }
+  HP:0025641: { node: plasma_glycolate, sign: "+", label: "Elevated circulating glycolate concentration" }
+  HP:0031208: { node: plasma_glycoprotein_hormone_alpha_subunit, sign: "+", label: "Increased pituitary glycoprotein hormone alpha subunit level" }
+  HP:0032482: { node: plasma_glycoprotein_hormone_alpha_subunit, sign: "-", label: "Decreased pituitary glycoprotein hormone alpha subunit level" }
+  HP:6000271: { node: plasma_glycylproline, sign: "+", label: "Elevated circulating glycylproline concentration" }
+  HP:6000974: { node: plasma_glyoxylate, sign: "+", label: "Elevated circulating glyoxylic acid concentration" }
+  HP:6000245: { node: plasma_gm_csf, sign: "+", label: "Elevated circulating granulocyte-macrophage colony-stimulating factor concentration" }
+  HP:0034321: { node: plasma_guanidinoacetate, sign: "+", label: "Elevated circulating guanidinoacetic acid concentration" }
+  HP:6001352: { node: plasma_guanidinoacetate, sign: "-", label: "Decreased circulating guanidinoacetic acid concentration" }
+  HP:0033340: { node: plasma_guanosine, sign: "+", label: "Increased circulating guanosine concentration" }
+  HP:0020180: { node: plasma_haptoglobin, sign: "+", label: "Elevated haptoglobin level" }
+  HP:0020181: { node: plasma_haptoglobin, sign: "-", label: "Reduced haptoglobin level" }
+  HP:0032420: { node: plasma_hdl2a, sign: "+", label: "Increased HDL2a concentration" }
+  HP:0032424: { node: plasma_hdl2b, sign: "+", label: "Increased HDL2b concentration" }
+  HP:0032428: { node: plasma_hdl3a, sign: "+", label: "Increased HDL3a concentration" }
+  HP:0032430: { node: plasma_hdl3b, sign: "+", label: "Increased HDL3b concentration" }
+  HP:0032432: { node: plasma_hdl3c, sign: "+", label: "Increased HDL3c concentration" }
+  HP:0410342: { node: plasma_heparan_sulfate, sign: "+", label: "Increased circulating heparan sulfate level" }
+  HP:6000698: { node: plasma_heptacarboxylporphyrin, sign: "+", label: "Elevated circulating heptacarboxylporphyrin concentration" }
+  HP:0034298: { node: plasma_hexacosanoic_acid, sign: "+", label: "Elevated circulating hexacosanoic acid concentration" }
+  HP:0033441: { node: plasma_hexanoylcarnitine, sign: "+", label: "Elevated circulating hexanoylcarnitine concentration" }
+  HP:0035026: { node: plasma_hexanoylcarnitine, sign: "+", label: "Elevated circulating C6 acylcarnitine concentration" }
+  HP:0410065: { node: plasma_hippuric_acid, sign: "+", label: "Increased level of hippuric acid in blood" }
+  HP:0034446: { node: plasma_histamine, sign: "+", label: "Elevated circulating histamine concentration" }
+  HP:0010906: { node: plasma_histidine, sign: "+", label: "Hyperhistidinemia" }
+  HP:0500145: { node: plasma_histidine, sign: "-", label: "Hypohistidinemia" }
+  HP:0034741: { node: plasma_homoarginine, sign: "+", label: "Elevated circulating homoarginine concentration" }
+  HP:0002160: { node: plasma_homocysteine, sign: "+", label: "Hyperhomocystinemia" }
+  HP:0020222: { node: plasma_homocysteine, sign: "-", label: "Hypohomocysteinemia" }
+  HP:0033324: { node: plasma_homovanillate, sign: "+", label: "Elevated circulating homovanillic acid concentration" }
+  HP:4000213: { node: plasma_hyaluronic_acid, sign: "+", label: "Elevated circulating hyaluronic acid concentration" }
+  HP:0033417: { node: plasma_hydroxybutyrate, sign: "+", label: "Elevated circulating hydroxybutyric acid concentration" }
+  HP:0500140: { node: plasma_hydroxyproline, sign: "-", label: "Decreased circulating hydroxyproline concentration" }
+  HP:0002720: { node: plasma_iga, sign: "-", label: "Decreased circulating IgA concentration" }
+  HP:0003261: { node: plasma_iga, sign: "+", label: "Increased circulating IgA concentration" }
+  HP:0003460: { node: plasma_iga, sign: "-", label: "Decreased circulating total IgA" }
+  HP:0004433: { node: plasma_iga, sign: "-", label: "Secretory IgA deficiency" }
+  HP:0011837: { node: plasma_iga, sign: "-", label: "Partial IgA deficiency" }
+  HP:0033024: { node: plasma_iga, sign: "-", label: "Transient decreased circulating IgA" }
+  HP:0033016: { node: plasma_igd, sign: "-", label: "Chronic decreased circulating IgD" }
+  HP:0033017: { node: plasma_igd, sign: "-", label: "Transient decreased circulating IgD" }
+  HP:0410245: { node: plasma_igd, sign: "-", label: "Decreased circulating IgD concentration" }
+  HP:0410246: { node: plasma_igd, sign: "+", label: "Increased circulating IgD concentration" }
+  HP:0003212: { node: plasma_ige, sign: "+", label: "Increased circulating IgE concentration" }
+  HP:0005479: { node: plasma_ige, sign: "-", label: "Decreased circulating IgE concentration" }
+  HP:0032337: { node: plasma_ige, sign: "+", label: "Monoclonal elevated circulating IgE concentration" }
+  HP:0032338: { node: plasma_ige, sign: "+", label: "Oligoclonal elevated circulating IgE concentration" }
+  HP:0032339: { node: plasma_ige, sign: "+", label: "Polyclonal elevated circulating IgE concentration" }
+  HP:0033021: { node: plasma_ige, sign: "-", label: "Transient decreased circulating IgE concentration" }
+  HP:0033022: { node: plasma_ige, sign: "-", label: "Chronic decreased circulating IgE concentration" }
+  HP:0034184: { node: plasma_igfals, sign: "+", label: "Increased insulin like growth factor binding protein acid labile subunit concentration" }
+  HP:0045046: { node: plasma_igfals, sign: "-", label: "Reduced insulin like growth factor binding protein acid labile subunit concentration" }
+  HP:0003237: { node: plasma_igg, sign: "+", label: "Increased circulating IgG concentration" }
+  HP:0004315: { node: plasma_igg, sign: "-", label: "Decreased circulating IgG concentration" }
+  HP:0032132: { node: plasma_igg, sign: "-", label: "Decreased circulating total IgG concentration" }
+  HP:0032133: { node: plasma_igg, sign: "-", label: "Transient decreased circulating total IgG" }
+  HP:0032134: { node: plasma_igg, sign: "-", label: "Chronic decreased circulating total IgG" }
+  HP:0032136: { node: plasma_igg1, sign: "-", label: "Decreased circulating IgG1 concentration" }
+  HP:0032298: { node: plasma_igg1, sign: "+", label: "Increased circulating IgG1 level" }
+  HP:0041067: { node: plasma_igg1, sign: "-", label: "Transient decreased circulating IgG1" }
+  HP:0041068: { node: plasma_igg1, sign: "-", label: "Chronic decreased circulating IgG1" }
+  HP:0041070: { node: plasma_igg1, sign: "-", label: "Chronic partially decreased circulating IgG1" }
+  HP:0008348: { node: plasma_igg2, sign: "-", label: "Decreased circulating IgG2 concentration" }
+  HP:0032299: { node: plasma_igg2, sign: "+", label: "Increased circulating IgG2 level" }
+  HP:0041062: { node: plasma_igg2, sign: "-", label: "Transient decreased circulating IgG2" }
+  HP:0041063: { node: plasma_igg2, sign: "-", label: "Chronic decreased circulating IgG2" }
+  HP:0041066: { node: plasma_igg2, sign: "-", label: "Chronic partially decreased circulating IgG2" }
+  HP:0032137: { node: plasma_igg3, sign: "-", label: "Decreased circulating IgG3 concentration" }
+  HP:0032297: { node: plasma_igg3, sign: "+", label: "Increased circulating IgG3 level" }
+  HP:0041071: { node: plasma_igg3, sign: "-", label: "Transient decreased circulating IgG3" }
+  HP:0041072: { node: plasma_igg3, sign: "-", label: "Chronic decreased circulating IgG3" }
+  HP:0041075: { node: plasma_igg3, sign: "-", label: "Chronic partially decreased circulating IgG3" }
+  HP:0032138: { node: plasma_igg4, sign: "-", label: "Decreased circulating IgG4 concentration" }
+  HP:0032300: { node: plasma_igg4, sign: "+", label: "Increased circulating IgG4 level" }
+  HP:0041057: { node: plasma_igg4, sign: "-", label: "Transient decreased circulating IgG4" }
+  HP:0041058: { node: plasma_igg4, sign: "-", label: "Chronic decreased circulating IgG4" }
+  HP:0041060: { node: plasma_igg4, sign: "-", label: "Chronic partially decreased circulating IgG4" }
+  HP:0002850: { node: plasma_igm, sign: "-", label: "Decreased circulating total IgM" }
+  HP:0003496: { node: plasma_igm, sign: "+", label: "Increased circulating IgM level" }
+  HP:0004313: { node: plasma_immunoglobulin, sign: "-", label: "Decreased circulating immunoglobulin concentration" }
+  HP:0010702: { node: plasma_immunoglobulin, sign: "+", label: "Increased circulating immunoglobulin concentration" }
+  HP:0033339: { node: plasma_inosine, sign: "+", label: "Increased circulating inosine concentration" }
+  HP:0010913: { node: plasma_isoleucine, sign: "+", label: "Hyperisoleucinemia" }
+  HP:0500144: { node: plasma_isoleucine, sign: "-", label: "Hypoisoleucinemia" }
+  HP:0033148: { node: plasma_isovalerate, sign: "+", label: "Increased circulating isovaleric acid concentration" }
+  HP:0033447: { node: plasma_isovalerylcarnitine, sign: "+", label: "Elevated circulating isovalerylcarnitine concentration" }
+  HP:0005527: { node: plasma_kininogen, sign: "-", label: "Reduced kininogen activity" }
+  HP:0034936: { node: plasma_lathosterol, sign: "+", label: "Elevated circulating lathosterol concentration" }
+  HP:0025435: { node: plasma_ldh, sign: "+", label: "Increased circulating lactate dehydrogenase concentration" }
+  HP:0010911: { node: plasma_leucine, sign: "+", label: "Hyperleucinemia" }
+  HP:0500143: { node: plasma_leucine, sign: "-", label: "Hypoleucinemia" }
+  HP:0030390: { node: plasma_leukotriene_c4, sign: "-", label: "Reduced circulating leukotriene C4 concentration" }
+  HP:0033484: { node: plasma_linoleylcarnitine, sign: "+", label: "Elevated circulating linoleylcarnitine concentration" }
+  HP:0010980: { node: plasma_lipoprotein, sign: "+", label: "Hyperlipoproteinemia" }
+  HP:0010981: { node: plasma_lipoprotein, sign: "-", label: "Hypolipoproteinemia" }
+  HP:0033478: { node: plasma_lipoprotein_lipase, sign: "+", label: "Increased circulating lipoprotein lipase concentration" }
+  HP:0035018: { node: plasma_long_chain_acylcarnitine, sign: "+", label: "Elevated circulating long-chain acylcarnitine concentration" }
+  HP:0003455: { node: plasma_long_chain_fatty_acid, sign: "+", label: "Elevated circulating long chain fatty acid concentration" }
+  HP:0002161: { node: plasma_lysine, sign: "+", label: "Hyperlysinemia" }
+  HP:0500142: { node: plasma_lysine, sign: "-", label: "Hypolysinemia" }
+  HP:0032657: { node: plasma_lyso_gb3, sign: "+", label: "Elevated circulating lyso-globotriaosylsphingosine concentration" }
+  HP:6000403: { node: plasma_lysophosphatidylcholine, sign: "+", label: "Elevated circulating lysophosphatidylcholine concentration" }
+  HP:6001380: { node: plasma_lysosphingomyelin, sign: "+", label: "Elevated circulating lysosphingomyelin concentration" }
+  HP:6001315: { node: plasma_malonylcarnitine, sign: "+", label: "Elevated circulating malonyl carnitine concentration" }
+  HP:0032097: { node: plasma_manganese, sign: "+", label: "Hypermanganesemia" }
+  HP:0032098: { node: plasma_manganese, sign: "-", label: "Hypomanganesemia" }
+  HP:0032305: { node: plasma_mbl, sign: "-", label: "Decreased circulating mannose-binding protein concentration" }
+  HP:0032306: { node: plasma_mbl, sign: "+", label: "Elevated circulating mannose-binding protein concentration" }
+  HP:0020148: { node: plasma_mead_acid, sign: "+", label: "Increased circulating mead acid level" }
+  HP:0035017: { node: plasma_medium_chain_acylcarnitine, sign: "+", label: "Elevated circulating medium-chain acylcarnitine concentration" }
+  HP:0034878: { node: plasma_metanephrine, sign: "-", label: "Decreased circulating metanephrine concentration" }
+  HP:6000267: { node: plasma_methionine_sulfoxide, sign: "+", label: "Elevated circulating methionine sulfoxide concentration" }
+  HP:0003223: { node: plasma_methylcobalamin, sign: "-", label: "Decreased circulating methylcobalamin concentration" }
+  HP:0035027: { node: plasma_methylglutarylcarnitine, sign: "+", label: "Elevated circulating methylglutarylcarnitine concentration" }
+  HP:0035024: { node: plasma_methylmalonylcarnitine, sign: "+", label: "Elevated circulating methylmalonylcarnitine concentration" }
+  HP:6001113: { node: plasma_methylsterol, sign: "+", label: "Elevated circulating methysterol concentration" }
+  HP:0033146: { node: plasma_methylsuccinate, sign: "+", label: "Elevated circulating methylsuccinic acid concentration" }
+  HP:0034615: { node: plasma_mmp2, sign: "-", label: "Reduced circulating matrix metalloproteinase 2 concentration" }
+  HP:6000753: { node: plasma_monomethylsterol, sign: "+", label: "Elevated circulating monomethyl sterol concentration" }
+  HP:0034610: { node: plasma_myo_inositol, sign: "-", label: "Decreased circulating myo-inositol concentration" }
+  HP:0033438: { node: plasma_myoglobin, sign: "+", label: "Elevated circulating myoglobin concentration" }
+  HP:0410154: { node: plasma_myristic_acid, sign: "+", label: "Increased level of myristic acid in serum" }
+  HP:0025628: { node: plasma_myristoleate, sign: "+", label: "Increased circulating myristoleate level" }
+  HP:0032273: { node: plasma_n_acetylaspartate, sign: "+", label: "Increased circulating N-acetylaspartic acid concentration" }
+  HP:0410157: { node: plasma_n_acetylneuraminic_acid, sign: "+", label: "Increased level of N-acetylneuraminic acid in fibroblasts" }
+  HP:0034595: { node: plasma_n_carbamyl_beta_alanine, sign: "+", label: "Elevated circulating N-carbamoyl-beta-alanine concentration" }
+  HP:6000696: { node: plasma_n_carbamyl_beta_aminoisobutyrate, sign: "+", label: "Elevated circulating N-carbamyl-beta-aminoisobutyric acid concentration" }
+  HP:6000405: { node: plasma_nad, sign: "-", label: "Decreased circulating nicotinamide adenine dinucleotide concentration" }
+  HP:6000406: { node: plasma_nadh, sign: "-", label: "Diminished circulating reduced nicotinamide adenine dinucleotide (NADH) concentration" }
+  HP:4000189: { node: plasma_neuron_specific_enolase, sign: "+", label: "Elevated circulating neuron-specific enolase concentration" }
+  HP:0410206: { node: plasma_nicotinurate, sign: "+", label: "Increased circulating nicotinurate level" }
+  HP:0033626: { node: plasma_non_hdl_cholesterol, sign: "+", label: "Increased non-HDL cholesterol concentration" }
+  HP:0010838: { node: plasma_nonceruloplasmin_copper, sign: "+", label: "High nonceruloplasmin-bound serum copper" }
+  HP:6000693: { node: plasma_nt_proanp, sign: "-", label: "Decreased circulating NT-proANP concentration" }
+  HP:0031185: { node: plasma_nt_probnp, sign: "+", label: "Elevated circulating NT-proBNP concentration" }
+  HP:0025627: { node: plasma_octadecanoate, sign: "+", label: "Increased circulating octadecanoate level" }
+  HP:0035033: { node: plasma_octadecenoylcarnitine, sign: "-", label: "Reduced circulating octadecenoylcarnitine concentration" }
+  HP:6000272: { node: plasma_octanoylcarnitine, sign: "+", label: "Elevated circulating octanoylcarnitine concentration" }
+  HP:0033440: { node: plasma_octenoylcarnitine, sign: "+", label: "Elevated circulating octenoylcarnitine concentration" }
+  HP:0025626: { node: plasma_oleate, sign: "+", label: "Increased circulating oleate level" }
+  HP:0033462: { node: plasma_oleylcarnitine, sign: "+", label: "Elevated circulating oleylcarnitine concentration" }
+  HP:0012026: { node: plasma_ornithine, sign: "+", label: "Hyperornithinemia" }
+  HP:0500163: { node: plasma_ornithine, sign: "-", label: "Hypoornithinemia" }
+  HP:0031428: { node: plasma_osteocalcin, sign: "+", label: "Increased circulating osteocalcin level" }
+  HP:0031429: { node: plasma_osteocalcin, sign: "-", label: "Decreased circulating osteocalcin level" }
+  HP:0033123: { node: plasma_osteopontin, sign: "+", label: "Elevated circulating osteopontin level" }
+  HP:6000567: { node: plasma_oxalate, sign: "+", label: "Elevated circulating oxalate concentration" }
+  HP:0040179: { node: plasma_paf, sign: "-", label: "Decreased level of platelet-activating factor" }
+  HP:0032462: { node: plasma_palmitate, sign: "+", label: "Increased circulating palmitate level" }
+  HP:0031544: { node: plasma_palmitoleylcarnitine, sign: "+", label: "Elevated circulating palmitoleylcarnitine concentration" }
+  HP:0033382: { node: plasma_palmitoylcarnitine, sign: "+", label: "Elevated circulating palmitoylcarnitine concentration" }
+  HP:0032932: { node: plasma_pancreatic_lipase, sign: "+", label: "Increased circulating pancreatic triacylglycerol lipase level" }
+  HP:0034545: { node: plasma_pancreatic_secretory_trypsin_inhibitor, sign: "+", label: "Elevated circulating pancreatic secretory trypsin inhibitor activity" }
+  HP:0003238: { node: plasma_pepsinogen_i, sign: "+", label: "Hyperpepsinogenemia I" }
+  HP:0033406: { node: plasma_phosphoethanolamine, sign: "+", label: "Elevated circulating phosphoethanolamine concentration" }
+  HP:0033356: { node: plasma_phosphoserine, sign: "+", label: "Elevated circulating o-phosphoserine concentration" }
+  HP:0010571: { node: plasma_phytanic_acid, sign: "+", label: "Elevated circulating phytanic acid concentration" }
+  HP:6000749: { node: plasma_pinp, sign: "+", label: "Elevated circulating PINP concentration" }
+  HP:6000268: { node: plasma_pipecolate, sign: "+", label: "Elevated circulating pipecolic acid concentration" }
+  HP:0045063: { node: plasma_pivka_ii, sign: "+", label: "Increased PIVKA-II" }
+  HP:4000165: { node: plasma_plasmalogen, sign: "-", label: "Decreased circulating plasmalogen concentration" }
+  HP:0040228: { node: plasma_plasminogen, sign: "-", label: "Decreased level of plasminogen" }
+  HP:0034606: { node: plasma_porphyrin, sign: "+", label: "Elevated circulating porphyrin concentration" }
+  HP:0001949: { node: plasma_potassium, sign: "-", label: "Hypokalemic alkalosis" }
+  HP:0001960: { node: plasma_potassium, sign: "-", label: "Hypokalemic metabolic alkalosis" }
+  HP:0004909: { node: plasma_potassium, sign: "-", label: "Hypokalemic hypochloremic metabolic alkalosis" }
+  HP:6000833: { node: plasma_potassium, sign: "+", label: "Hyperkalemia while symptomatic" }
+  HP:0031085: { node: plasma_prealbumin, sign: "-", label: "Decreased circulating prealbumin concentration" }
+  HP:0033451: { node: plasma_prealbumin, sign: "+", label: "Increased circulating prealbumin concentration" }
+  HP:0033039: { node: plasma_precipitin, sign: "+", label: "Increased circulating precipitin level" }
+  HP:0034371: { node: plasma_prekallikrein, sign: "-", label: "Decreased circulating prekallikrein concentration" }
+  HP:0034721: { node: plasma_pristanic_acid, sign: "+", label: "Elevated circulating pristanic acid concentration" }
+  HP:6001095: { node: plasma_pristanic_acid, sign: "+", label: "Elevated circulating pristanic acid concentration following branched-chain fatty acid ingestion" }
+  HP:0032308: { node: plasma_procalcitonin, sign: "+", label: "Increased circulating procalcitonin concentration" }
+  HP:6001187: { node: plasma_progranulin, sign: "-", label: "Reduced circulating progranulin concentration" }
+  HP:6000419: { node: plasma_proinsulin, sign: "+", label: "Elevated circulating proinsulin concentration" }
+  HP:0008358: { node: plasma_proline, sign: "+", label: "Hyperprolinemia" }
+  HP:0500139: { node: plasma_proline, sign: "-", label: "Hypoprolinemia" }
+  HP:0033443: { node: plasma_propionylcarnitine, sign: "+", label: "Elevated circulating propionylcarnitine concentration" }
+  HP:0410069: { node: plasma_propylene_glycol, sign: "+", label: "Increased level of propylene glycol in blood" }
+  HP:0003566: { node: plasma_prostaglandin_e2, sign: "+", label: "Increased serum prostaglandin E2" }
+  HP:0025020: { node: plasma_prostate_specific_antigen, sign: "+", label: "Elevated prostate-specific antigen level" }
+  HP:0033387: { node: plasma_pyridinoline, sign: "+", label: "Elevated circulating pyridinoline concentration" }
+  HP:0011864: { node: plasma_pyrophosphate, sign: "+", label: "Elevated plasma pyrophosphate" }
+  HP:6000694: { node: plasma_pyrroline_5_carboxylate, sign: "+", label: "Elevated circulating 1-pyrroline-5-carboxylic acid concentration" }
+  HP:0003542: { node: plasma_pyruvate, sign: "+", label: "Increased circulating pyruvate concentration" }
+  HP:0031032: { node: plasma_retinol_binding_protein, sign: "-", label: "Decreased circulating retinol-binding protein concentration" }
+  HP:0034288: { node: plasma_reverse_t3, sign: "+", label: "Elevated circulating reverse T3 concentration" }
+  HP:6001334: { node: plasma_reverse_t3, sign: "-", label: "Decreased circulating reverse T3 concentration" }
+  HP:0025550: { node: plasma_ribitol, sign: "+", label: "Elevated circulating ribitol concentration" }
+  HP:0034745: { node: plasma_s_sulfocysteine, sign: "+", label: "Elevated circulating S-sulfocysteine concentration" }
+  HP:0034026: { node: plasma_saccharopine, sign: "+", label: "Elevated circulating saccharopine concentration" }
+  HP:0034730: { node: plasma_sah, sign: "+", label: "Elevated circulating S-adenosyl-L-homocysteine concentration" }
+  HP:0034617: { node: plasma_sam, sign: "+", label: "Elevated circulating S-adenosyl methionine concentration" }
+  HP:0034731: { node: plasma_sam, sign: "+", label: "Elevated circulating S-adenosyl-L-methionine concentration" }
+  HP:0010896: { node: plasma_sarcosine, sign: "+", label: "Hypersarcosinemia" }
+  HP:6000385: { node: plasma_scd163, sign: "+", label: "Elevated circulating sCD163 concentration" }
+  HP:0033325: { node: plasma_sebacate, sign: "+", label: "Elevated circulating sebacic acid concentration" }
+  HP:0033191: { node: plasma_selenium, sign: "+", label: "Increased circulating selenium concentration" }
+  HP:0033192: { node: plasma_selenium, sign: "-", label: "Decreased circulating selenium concentration" }
+  HP:0012279: { node: plasma_serine, sign: "-", label: "Hyposerinemia" }
+  HP:0500138: { node: plasma_serine, sign: "+", label: "Hyperserinemia" }
+  HP:0003144: { node: plasma_serotonin, sign: "+", label: "Increased serum serotonin" }
+  HP:0033332: { node: plasma_serum_amyloid_a, sign: "+", label: "Elevated circulating amyloid A concentration" }
+  HP:0031419: { node: plasma_shbg, sign: "-", label: "Reduced sex -hormone binding protein level" }
+  HP:0035015: { node: plasma_short_chain_acylcarnitine, sign: "+", label: "Elevated circulating short-chain acylcarnitine concentration" }
+  HP:0034938: { node: plasma_sialic_acid, sign: "-", label: "Decreased circulating sialic acid concentration" }
+  HP:0033341: { node: plasma_sitosterol, sign: "+", label: "Elevated circulating sitosterol concentration" }
+  HP:0033124: { node: plasma_sorbitol, sign: "+", label: "Increased serum sorbitol concentration" }
+  HP:0012475: { node: plasma_specific_antibody, sign: "-", label: "Decreased circulating level of specific antibody" }
+  HP:6000440: { node: plasma_squalene, sign: "-", label: "Reduced circulating squalene concentration" }
+  HP:0033381: { node: plasma_stearoylcarnitine, sign: "+", label: "Elevated circulating stearoylcarnitine concentration" }
+  HP:6000437: { node: plasma_stearoylcarnitine, sign: "-", label: "Reduced circulating stearoylcarnitine concentration" }
+  HP:0033177: { node: plasma_suberate, sign: "+", label: "Elevated circulating suberic acid concentration" }
+  HP:0020149: { node: plasma_succinate, sign: "+", label: "Elevated circulating succinate" }
+  HP:6001410: { node: plasma_succinylacetone, sign: "+", label: "Elevated circulating succinylacetone concentration" }
+  HP:6000854: { node: plasma_sulfate, sign: "-", label: "Decreased circulating sulfate concentration" }
+  HP:0031836: { node: plasma_superoxide_dismutase, sign: "+", label: "Increased circulating superoxide dismutase concentration" }
+  HP:0032094: { node: plasma_surfactant_protein, sign: "+", label: "Elevated circulating surfactant protein concentration" }
+  HP:0031506: { node: plasma_t4, sign: "+", label: "Increased circulating T4 concentration" }
+  HP:0031507: { node: plasma_t4, sign: "-", label: "Decreased circulating T4 concentration" }
+  HP:0500181: { node: plasma_taurine, sign: "+", label: "Hypertaurinemia" }
+  HP:0500182: { node: plasma_taurine, sign: "-", label: "Hypotaurinemia" }
+  HP:0033115: { node: plasma_tenascin_c, sign: "+", label: "Elevated circulating tenascin-C concentration" }
+  HP:0034297: { node: plasma_tetracosanoic_acid, sign: "+", label: "Elevated circulating tetracosanoic acid concentration" }
+  HP:0033465: { node: plasma_tetradecanoylcarnitine, sign: "+", label: "Elevated circulating tetradecanoylcarnitine concentration" }
+  HP:6000476: { node: plasma_tetradecenoylcarnitine, sign: "+", label: "Elevated circulating tetradecenoylcarnitine concentration" }
+  HP:6000445: { node: plasma_thallium, sign: "+", label: "Elevated thallium concentration" }
+  HP:6000757: { node: plasma_thiosulfate, sign: "+", label: "Elevated circulating thiosulfate concentration" }
+  HP:0003354: { node: plasma_threonine, sign: "+", label: "Hyperthreoninemia" }
+  HP:0500136: { node: plasma_threonine, sign: "-", label: "Hypothreoninemia" }
+  HP:0034600: { node: plasma_thrombopoietin, sign: "+", label: "Elevated circulating thrombopoietin concentration" }
+  HP:6000021: { node: plasma_thrombopoietin, sign: "-", label: "Decreased circulating thrombopoietin concentration" }
+  HP:0032244: { node: plasma_thromboxane_b2, sign: "-", label: "Decreased serum thromboxane B2" }
+  HP:0034276: { node: plasma_thymidine, sign: "+", label: "Elevated circulating thymidine concentration" }
+  HP:4000095: { node: plasma_thymine, sign: "+", label: "Elevated circulating thymine concentration" }
+  HP:0025484: { node: plasma_thyroglobulin, sign: "+", label: "Increased circulating thyroglobulin concentration" }
+  HP:6000244: { node: plasma_thyroglobulin, sign: "-", label: "Decreased circulating thyroglobulin concentration" }
+  HP:0031222: { node: plasma_thyroxine_binding_globulin, sign: "+", label: "Increased circulating thyroxine-binding globulin level" }
+  HP:0034591: { node: plasma_thyroxine_binding_globulin, sign: "-", label: "Decreased circulating thyroxine-binding globulin concentration" }
+  HP:0035031: { node: plasma_tiglylcarnitine, sign: "+", label: "Elevated circulating tiglylcarnitine concentration" }
+  HP:0034290: { node: plasma_tiglylglycine, sign: "+", label: "Elevated circulating tiglylglycine concentration" }
+  HP:0003077: { node: plasma_total_lipids, sign: "+", label: "Hyperlipidemia" }
+  HP:0045014: { node: plasma_total_lipids, sign: "-", label: "Hypolipidemia" }
+  HP:0002910: { node: plasma_transaminases, sign: "+", label: "Elevated circulating hepatic transaminase concentration" }
+  HP:6000967: { node: plasma_transcobalamin_1, sign: "-", label: "Decreased circulating transcobalamin I concentration" }
+  HP:0034608: { node: plasma_transcobalamin_2, sign: "-", label: "Decreased circulating transcobalamin II concentration" }
+  HP:6000973: { node: plasma_trihydroxycholestanoic_acid, sign: "+", label: "Elevated circulating trihydroxycholestanoic acid concentration" }
+  HP:0032493: { node: plasma_trypsinogen, sign: "+", label: "Elevated circulating trypsinogen concentration" }
+  HP:0031901: { node: plasma_tryptase, sign: "+", label: "Elevated total serum tryptase" }
+  HP:0500134: { node: plasma_tryptophan, sign: "+", label: "Hypertryptophanemia" }
+  HP:0500135: { node: plasma_tryptophan, sign: "-", label: "Hypotryptophanemia" }
+  HP:0003231: { node: plasma_tyrosine, sign: "+", label: "Hypertyrosinemia" }
+  HP:0500133: { node: plasma_tyrosine, sign: "-", label: "Hypotyrosinemia" }
+  HP:0033139: { node: plasma_uracil, sign: "+", label: "Elevated circulating uracil concentration" }
+  HP:0034870: { node: plasma_urocanic_acid, sign: "-", label: "Reduced circulating urocanic acid concentration" }
+  HP:0034905: { node: plasma_uroporphyrin, sign: "+", label: "Elevated circulating uroporphyrin concentration" }
+  HP:0010910: { node: plasma_valine, sign: "+", label: "Hypervalinemia" }
+  HP:0500132: { node: plasma_valine, sign: "-", label: "Hypovalinemia" }
+  HP:6000564: { node: plasma_vasoactive_intestinal_peptide, sign: "+", label: "Elevated circulating vasoactive intestinal peptide concentration" }
+  HP:0031052: { node: plasma_vegf, sign: "+", label: "Elevated vascular endothelial growth factor level" }
+  HP:0035022: { node: plasma_very_long_chain_acylcarnitine, sign: "+", label: "Elevated circulating very long-chain acylcarnitine concentration" }
+  HP:0100502: { node: plasma_vitamin_b12, sign: "-", label: "Decreased circulating vitamin B12 concentration" }
+  HP:6000016: { node: plasma_vitamin_b12, sign: "+", label: "Elevated circulating vitamin B12 concentration" }
+  HP:0033643: { node: plasma_vlcfa, sign: "+", label: "Increased circulating very long-chain fatty acid concentration" }
+  HP:0003362: { node: plasma_vldl, sign: "+", label: "Increased VLDL cholesterol concentration" }
+  HP:0010933: { node: plasma_xanthine, sign: "+", label: "Hyperxanthinemia" }
+  HP:4000199: { node: porphobilinogen_deaminase_activity, sign: "-", label: "Reduced erythrocyte porphobilinogen deaminase activity" }
+  HP:6000783: { node: ppt1_activity, sign: "-", label: "Reduced tissue palmitoyl-protein thioesterase activity" }
+  HP:6000828: { node: prolidase_activity, sign: "-", label: "Reduced tissue peptidase D activity" }
+  HP:0003353: { node: propionyl_coa_carboxylase_activity, sign: "-", label: "Propionyl-CoA carboxylase deficiency" }
+  HP:0003240: { node: prpp_synthetase_activity, sign: "+", label: "Increased phosphoribosylpyrophosphate synthetase level" }
+  HP:0032460: { node: prpp_synthetase_activity, sign: "-", label: "Decreased phosphoribosylpyrophosphate synthetase level" }
+  HP:6000575: { node: ptps_activity, sign: "-", label: "Reduced circulating 6-pyruvoyltetrahydropterin synthase activity" }
+  HP:0004890: { node: pulmonary_artery_pressure, sign: "+", label: "Elevated pulmonary artery pressure" }
+  HP:0030876: { node: pulmonary_capillary_wedge_pressure, sign: "+", label: "Increased pulmonary capillary wedge pressure" }
+  HP:0005317: { node: pulmonary_vascular_resistance, sign: "+", label: "Increased pulmonary vascular resistance" }
+  HP:0030851: { node: pulse_pressure, sign: "-", label: "Low pulse pressure" }
+  HP:0030852: { node: pulse_pressure, sign: "+", label: "High pulse pressure" }
+  HP:6000240: { node: pyrimidine_5_nucleotidase_activity, sign: "-", label: "Reduced circulating pyrimidine 5-prime-nucleotidase activity" }
+  HP:0003209: { node: pyruvate_carboxylase_activity, sign: "-", label: "Decreased pyruvate carboxylase activity" }
+  HP:0002928: { node: pyruvate_dehydrogenase_activity, sign: "-", label: "Decreased activity of the pyruvate dehydrogenase complex" }
+  HP:0025109: { node: pyruvate_kinase_activity, sign: "-", label: "Reduced red cell pyruvate kinase level" }
+  HP:0003529: { node: renal_calcium_reabsorption, sign: "+", label: "Parathormone-independent increased renal tubular calcium reabsorption" }
+  HP:0012339: { node: resting_energy_expenditure, sign: "+", label: "Increased resting energy expenditure" }
+  HP:0005168: { node: right_atrial_pressure, sign: "+", label: "Elevated right atrial pressure" }
+  HP:0033119: { node: right_ventricular_systolic_pressure, sign: "+", label: "Elevated right ventricular systolic pressure" }
+  HP:6000750: { node: sah_hydrolase_activity, sign: "-", label: "Decreased tissue S-adenosylhomocysteine hydrolase activity" }
+  HP:4000162: { node: scot_activity, sign: "-", label: "Decreased Succinyl-CoA 3-ketoacid CoA transferase activity" }
+  HP:6000361: { node: scot_activity, sign: "-", label: "Reduced succinyl-CoA:3-oxoacid-CoA transferase activity in cultured fibroblasts" }
+  HP:6000563: { node: sepiapterin_reductase_activity, sign: "-", label: "Reduced sepiapterin reductase activity in cultured fibroblasts" }
+  HP:0031962: { node: serum_anion_gap, sign: "+", label: "Elevated serum anion gap" }
+  HP:0031963: { node: serum_anion_gap, sign: "-", label: "Decreased serum anion gap" }
+  HP:6000820: { node: serum_osmolal_gap, sign: "+", label: "Elevated osmolality gap" }
+  HP:4000193: { node: sgsh_activity, sign: "-", label: "Reduced leukocyte N-sulfoglucosamine sulfohydrolase activity" }
+  HP:0034690: { node: short_chain_acyl_coa_dehydrogenase_activity, sign: "-", label: "Reduced short-chain acyl-CoA dehydrogenase activity" }
+  HP:0032530: { node: ssadh_activity, sign: "-", label: "Decreased tissue succinic semialdehyde dehydrogenase activity" }
+  HP:0034862: { node: steroid_sulfatase_activity, sign: "-", label: "Reduced leukocyte steroid sulfatase activity" }
+  HP:0034689: { node: sterol_27_hydroxylase_activity, sign: "-", label: "Reduced sterol 27-hydroxylase activity" }
+  HP:0034470: { node: stool_chloride, sign: "+", label: "Elevated stool chloride content" }
+  HP:0500115: { node: stool_urobilinogen, sign: "+", label: "Increased stool urobilinogen concentration" }
+  HP:0033597: { node: sucrase_isomaltase_activity, sign: "-", label: "Decreased mucosal sucrase-isomaltase activity" }
+  HP:0034555: { node: sulfide_quinone_oxidoreductase_activity, sign: "-", label: "Reduced sulfide:quinone oxidoreductase activity" }
+  HP:0003643: { node: sulfite_oxidase_activity, sign: "-", label: "Sulfite oxidase deficiency" }
+  HP:0031837: { node: superoxide_dismutase_activity, sign: "-", label: "Decreased circulating superoxide dismutase concentration" }
+  HP:0012236: { node: sweat_chloride, sign: "+", label: "Elevated sweat chloride" }
+  HP:0004421: { node: systolic_blood_pressure, sign: "+", label: "Elevated systolic blood pressure" }
+  HP:4000204: { node: t2_thiolase_activity, sign: "-", label: "Reduced mitochondrial acetyl-CoA acetyltransferase activity in cultured fibroblasts" }
+  HP:6000199: { node: three_beta_hsd_delta5_desaturase_activity, sign: "-", label: "Reduced 3-beta-hydroxysteroid-delta-5-desaturase activity in cultured fibroblasts" }
+  HP:6000570: { node: thymidine_phosphorylase_activity, sign: "-", label: "Reduced tissue thymidine phosphorylase activity" }
+  HP:6000292: { node: tissue_sphingomyelin, sign: "+", label: "Elevated tissue sphingomyelin concentration" }
+  HP:0032655: { node: tissue_tocopherol, sign: "-", label: "Decreased adipose tissue tocopherol level" }
+  HP:0410372: { node: tn_antigen_level, sign: "+", label: "Increased Tn-antigen level" }
+  HP:0025196: { node: total_iron_binding_capacity, sign: "+", label: "Increased total iron binding capacity" }
+  HP:0033211: { node: total_iron_binding_capacity, sign: "-", label: "Decreased total iron binding capacity" }
+  HP:6000571: { node: tpp1_activity, sign: "-", label: "Reduced tissue tripeptidyl peptidase 1 activity" }
+  HP:6000719: { node: type_2_deiodinase_activity, sign: "-", label: "Reduced tissue type II iodothyronine deiodinase activity" }
+  HP:0410194: { node: udp_glucose_4_epimerase_activity, sign: "+", label: "Increased circulating UDP glucose-4-epimerase concentration" }
+  HP:0410195: { node: udp_glucose_4_epimerase_activity, sign: "-", label: "Decreased circulating UDP glucose-4-epimerase concentration" }
+  HP:0410197: { node: udp_glucose_4_epimerase_activity, sign: "+", label: "Increased erythrocyte UDP glucose-4-epimerase concentration" }
+  HP:0410198: { node: udp_glucose_4_epimerase_activity, sign: "-", label: "Decreased erythrocyte UDP glucose-4-epimerase concentration" }
+  HP:6000617: { node: ugt1a1_activity, sign: "-", label: "Reduced tissue UDP-glucuronyl-transferase activity" }
+  HP:0003267: { node: umps_activity, sign: "-", label: "Reduced orotidine 5-prime phosphate decarboxylase level" }
+  HP:0410314: { node: urinary_1_methylhistidine, sign: "-", label: "Decreased urinary 1-methylhistidine" }
+  HP:0410315: { node: urinary_1_methylhistidine, sign: "+", label: "Increased urinary 1-methylhistidine" }
+  HP:6000469: { node: urinary_2_3_dihydroxy_2_methylbutyrate, sign: "+", label: "Elevated urine 2,3-dihydroxy-2-methylbutanoic acid level" }
+  HP:6000992: { node: urinary_2_4_dihydroxybutyric_acid, sign: "+", label: "Elevated urinary 2,4-dihydroxybutyric acid level" }
+  HP:6001081: { node: urinary_2_4_dihydroxyglutarate, sign: "+", label: "Elevated urinary 2,4-dihydroxyglutarate level" }
+  HP:6000803: { node: urinary_2_8_dihydroxyadenine, sign: "+", label: "Elevated urinary 2,8-dihydroxyadenine level" }
+  HP:0025753: { node: urinary_2_aminoisobutyric_acid, sign: "+", label: "Elevated urinary 2-aminoisobutyric acid" }
+  HP:0034664: { node: urinary_2_hydroxy_3_methylvaleric_acid, sign: "+", label: "Elevated urine 2-hydroxy-3-methylvaleric acid level" }
+  HP:0033409: { node: urinary_2_hydroxybutyric_acid, sign: "+", label: "Elevated urinary 2-hydroxybutyric acid" }
+  HP:6000601: { node: urinary_2_hydroxyisocaproic_acid, sign: "+", label: "Elevated urinary 2-hydroxyisocaproic acid level" }
+  HP:6000603: { node: urinary_2_methyl_3_hydroxybutyrate, sign: "+", label: "Elevated urinary 2-methyl-3-hydroxybutyric acid level" }
+  HP:0034660: { node: urinary_2_methylacetoacetic_acid, sign: "+", label: "Elevated urine 2-methylacetoacetic acid level" }
+  HP:0034662: { node: urinary_2_methylcitrate, sign: "+", label: "Elevated urine 2-methylcitric acid level" }
+  HP:6000599: { node: urinary_2_oxoisocaproic_acid, sign: "+", label: "Elevated urinary 2-oxoisocaproic level" }
+  HP:6000600: { node: urinary_2_oxovaleric_acid, sign: "+", label: "Elevated urinary 2-oxovaleric acid level" }
+  HP:6000608: { node: urinary_3_4_dihydroxybutyrate, sign: "+", label: "Elevated urinary 3,4-Dihydroxybutyric acid level" }
+  HP:0034960: { node: urinary_3_6_epoxydicarboxylic_acid, sign: "+", label: "Elevated urine 3,6-epoxydicarboxylic acid level" }
+  HP:0045034: { node: urinary_3_aminoisobutyrate, sign: "+", label: "Elevated urinary 3-aminoisobutyric acid" }
+  HP:0410051: { node: urinary_3_hydroxy_3_methylglutarate, sign: "+", label: "Increased level of 3-hydroxy-3-methylglutaric acid in urine" }
+  HP:6000609: { node: urinary_3_hydroxyadipic_acid, sign: "+", label: "Elevated urinary 3-hydroxyadipic acid level" }
+  HP:0040155: { node: urinary_3_hydroxybutyrate, sign: "+", label: "Elevated urinary 3-hydroxybutyric acid" }
+  HP:0034656: { node: urinary_3_hydroxyglutarate, sign: "+", label: "Elevated urine 3-hydroxyglutaric level" }
+  HP:6000607: { node: urinary_3_hydroxyisobutyrate, sign: "+", label: "Elevated urinary 3-hydroxyisobutyric acid level" }
+  HP:6000265: { node: urinary_3_hydroxykynurenine, sign: "+", label: "Elevated urinary 3-hydroxykynurenine level" }
+  HP:6000604: { node: urinary_3_hydroxypentanoic_acid, sign: "+", label: "Elevated urinary 3-hydroxypentanoic acid level" }
+  HP:0034661: { node: urinary_3_hydroxypropionate, sign: "+", label: "Elevated urine 3-hydroxypropionic acid level" }
+  HP:6001001: { node: urinary_3_hydroxysebacic_acid, sign: "+", label: "Elevated urine 3-hydroxysebacic acid level" }
+  HP:0033457: { node: urinary_3_methyl_2_oxovaleric_acid, sign: "+", label: "Elevated urine 3-methyl-2-oxovaleric acid level" }
+  HP:0033596: { node: urinary_3_methylcrotonylglycine, sign: "+", label: "Elevated urinary 3-methylcrotonylglycine level" }
+  HP:0410317: { node: urinary_3_methylhistidine, sign: "+", label: "Increased urinary 3-methylhistidine" }
+  HP:0410318: { node: urinary_3_methylhistidine, sign: "-", label: "Decreased urinary 3-methylhistidine" }
+  HP:6001003: { node: urinary_4_5_dihydroxyhexanoic_acid, sign: "+", label: "Elevated urine 4,5-dihydroxyhexanoic acid level" }
+  HP:6001009: { node: urinary_4_hydroxy_2_oxoglutarate, sign: "+", label: "Increased urine 4-hydroxy-2-oxoglutarate level" }
+  HP:0032528: { node: urinary_4_hydroxybutyrate, sign: "+", label: "Elevated urinary 4-hydroxybutyric acid" }
+  HP:0034663: { node: urinary_4_hydroxyisovaleric_acid, sign: "+", label: "Elevated urine 4-hydroxyisovaleric acid level" }
+  HP:0033458: { node: urinary_4_methyl_2_oxopentanoic_acid, sign: "+", label: "Elevated urine 4-methyl-2-oxopentanoic acid level" }
+  HP:0025734: { node: urinary_5_hydroxyhexanoate, sign: "+", label: "Elevated urinary 5-hydroxyhexanoic acid level" }
+  HP:6000114: { node: urinary_5_hydroxymethyluracil, sign: "+", label: "Elevated urinary 5-hydroxymethyluracil level" }
+  HP:6000756: { node: urinary_5hiaa, sign: "+", label: "Elevated urinary 5-hydroxyindoleacetic acid level" }
+  HP:0033594: { node: urinary_7_biopterin, sign: "+", label: "Elevated urinary 7-biopterin level" }
+  HP:6000605: { node: urinary_7_hydroxyoctanoate, sign: "+", label: "Elevated urinary 7-hydroxyoctanoic acid level" }
+  HP:0033984: { node: urinary_8_oxoguanosine, sign: "+", label: "Increased urinary 8-oxo-7,8-dihydroguanosine level" }
+  HP:0033407: { node: urinary_acetoacetate, sign: "+", label: "Elevated urine acetoacetic acid level" }
+  HP:0033101: { node: urinary_aconitic_acid, sign: "+", label: "Elevated urine aconitic acid level" }
+  HP:6001114: { node: urinary_adipic_acid, sign: "+", label: "Elevated urinary adipic acid" }
+  HP:0034565: { node: urinary_aicar, sign: "+", label: "Elevated urinary 5-amino-4-imidazolecarboxamide-riboside level" }
+  HP:0003163: { node: urinary_ala, sign: "+", label: "Elevated urinary delta-aminolevulinic acid" }
+  HP:0033156: { node: urinary_alloisoleucine, sign: "+", label: "Elevated urine L-alloisoleucine level" }
+  HP:0012402: { node: urinary_alpha_ketoglutarate, sign: "+", label: "Increased urine alpha-ketoglutarate concentration" }
+  HP:0012403: { node: urinary_alpha_ketoglutarate, sign: "-", label: "Decreased urine alpha-ketoglutarate concentration" }
+  HP:0033090: { node: urinary_amino_acids, sign: "+", label: "Increased aromatic amino acid level in urine" }
+  HP:0033093: { node: urinary_amino_acids, sign: "+", label: "Increased glutamine family amino acid level in urine" }
+  HP:0033095: { node: urinary_amino_acids, sign: "+", label: "Increased sulfur amino acid level in urine" }
+  HP:0033096: { node: urinary_amino_acids, sign: "+", label: "Increased aspartate family amino acid level in urine" }
+  HP:0033097: { node: urinary_amino_acids, sign: "+", label: "Increased urine proteinogenic amino acid derivative level" }
+  HP:0033099: { node: urinary_amino_acids, sign: "+", label: "Increased serine family amino acid in urine" }
+  HP:0033100: { node: urinary_amino_acids, sign: "+", label: "Increased proteinogenic amino acid level in urine" }
+  HP:0034612: { node: urinary_arabitol, sign: "+", label: "Elevated urine arabitol level" }
+  HP:6000126: { node: urinary_bile_acids, sign: "-", label: "Decreased urinary bile acid level" }
+  HP:6000701: { node: urinary_bile_acids, sign: "+", label: "Elevated urinary bile acid level" }
+  HP:6001007: { node: urinary_bile_alcohol, sign: "+", label: "Elevated urinary bile alcohol level" }
+  HP:0025743: { node: urinary_biliverdin, sign: "+", label: "Elevated urine biliverdin level" }
+  HP:0040417: { node: urinary_biopterin, sign: "-", label: "Decreased urinary biopterin level" }
+  HP:6000433: { node: urinary_butyric_acid, sign: "+", label: "Elevated urinary butyric acid level" }
+  HP:0002150: { node: urinary_calcium, sign: "+", label: "Hypercalciuria" }
+  HP:0011976: { node: urinary_catecholamines, sign: "+", label: "Elevated urinary catecholamine level" }
+  HP:0045012: { node: urinary_catecholamines, sign: "-", label: "Decreased urinary catecholamine concentration" }
+  HP:0002914: { node: urinary_chloride, sign: "+", label: "Hyperchloriduria" }
+  HP:0012601: { node: urinary_chloride, sign: "-", label: "Hypochloriduria" }
+  HP:0012405: { node: urinary_citrate, sign: "-", label: "Hypocitraturia" }
+  HP:0012406: { node: urinary_citrate, sign: "+", label: "Hypercitraturia" }
+  HP:0010839: { node: urinary_copper, sign: "+", label: "Increased urinary copper concentration" }
+  HP:0045035: { node: urinary_copper, sign: "-", label: "Decreased urinary copper concentration" }
+  HP:6000536: { node: urinary_coproporphyrin, sign: "+", label: "Elevated urinary coproporphyrin level" }
+  HP:0034598: { node: urinary_creatine, sign: "+", label: "Elevated urinary creatine level" }
+  HP:6000748: { node: urinary_creatine, sign: "-", label: "Decreased urinary creatine level" }
+  HP:6000115: { node: urinary_creatinine, sign: "-", label: "Decreased urine creatinine level" }
+  HP:0034467: { node: urinary_cysteine, sign: "+", label: "Increased urinary cysteine level" }
+  HP:0032573: { node: urinary_cytidine, sign: "+", label: "Elevated urinary cytidine" }
+  HP:6000606: { node: urinary_d_glycerate, sign: "+", label: "Elevated urinary D-glyceric acid level" }
+  HP:6000467: { node: urinary_d_lactate, sign: "+", label: "Elevated urine D-lactate level" }
+  HP:0410059: { node: urinary_d_threitol, sign: "+", label: "Increased level of D-threitol in urine" }
+  HP:6000477: { node: urinary_decadienoylcarnitine, sign: "+", label: "Elevated urine 2-trans,4-cis-decadienoylcarnitine level" }
+  HP:6000123: { node: urinary_deoxyadenosine, sign: "+", label: "Elevated urinary 2'-deoxyadenosine level" }
+  HP:6000116: { node: urinary_deoxyuridine, sign: "+", label: "Elevated urinary deoxyuridine level" }
+  HP:6000119: { node: urinary_dihydrothymine, sign: "+", label: "Elevated urinary dihydrothymine level" }
+  HP:6000118: { node: urinary_dihydrouracil, sign: "+", label: "Elevated urinary dihydrouracil level" }
+  HP:6001006: { node: urinary_dihydroxycholestanoic_acid, sign: "+", label: "Elevated urine dihydroxycholestanoic acid level" }
+  HP:0031946: { node: urinary_dimethylglycine, sign: "+", label: "Elevated urinary N,N-dimethylglycine level" }
+  HP:0012066: { node: urinary_disaccharides, sign: "+", label: "Increased urinary disaccharide excretion" }
+  HP:0025744: { node: urinary_dodecanedioic_acid, sign: "+", label: "Elevated urine dodecanedioic acid level" }
+  HP:6000125: { node: urinary_dolichol, sign: "+", label: "Elevated urinary dolichol level" }
+  HP:0011979: { node: urinary_dopamine, sign: "+", label: "Elevated urinary dopamine level" }
+  HP:6000751: { node: urinary_dopamine, sign: "-", label: "Decreased urinary dopamine level" }
+  HP:0003639: { node: urinary_epinephrine, sign: "+", label: "Elevated urinary epinephrine level" }
+  HP:0034871: { node: urinary_epinephrine, sign: "-", label: "Decreased urinary epinephrine level" }
+  HP:0034613: { node: urinary_erythritol, sign: "+", label: "Elevated urine erythritol level" }
+  HP:0410055: { node: urinary_erythritol, sign: "-", label: "Decreased level of erythritol in urine" }
+  HP:0034742: { node: urinary_figlu, sign: "+", label: "Elevated urinary formiminoglutamic acid level" }
+  HP:6000804: { node: urinary_fructose, sign: "+", label: "Elevated urine fructose level" }
+  HP:0410067: { node: urinary_fucose, sign: "+", label: "Increased level of L-fucose in urine" }
+  HP:0034648: { node: urinary_fumarate, sign: "+", label: "Elevated urine fumaric acid level" }
+  HP:0500253: { node: urinary_gaba, sign: "+", label: "Increased level of gamma-aminobutyric acid in urine" }
+  HP:0410062: { node: urinary_galactitol, sign: "+", label: "Increased level of galactitol in urine" }
+  HP:0031991: { node: urinary_galactosyl_hydroxylysine, sign: "+", label: "Increased urinary excretion of galactosyl hydroxylysine" }
+  HP:0410346: { node: urinary_galactosylated_oligosaccharide, sign: "+", label: "Increased urinary galactosylated oligosaccharide" }
+  HP:6000834: { node: urinary_gamma_glutamylcysteine, sign: "+", label: "Elevated urinary gamma-glutamylcysteine level" }
+  HP:6000281: { node: urinary_gamma_glutamylphenylalanine, sign: "+", label: "Elevated urinary gamma-glutamylphenylalanine level" }
+  HP:6000122: { node: urinary_glcnac_oligosaccharide, sign: "+", label: "Increased urinary N-acetylglucosamine-rich oligosaccharide level" }
+  HP:6001008: { node: urinary_glucose_tetrasaccharide, sign: "+", label: "Elevated urine glucose tetrasaccharide level" }
+  HP:0034655: { node: urinary_glutaconic_acid, sign: "+", label: "Elevated urine glutaconic acid level" }
+  HP:0033094: { node: urinary_glutamate, sign: "+", label: "Increased urine glutamate level" }
+  HP:0025376: { node: urinary_glutamine, sign: "+", label: "Hyperglutaminuria" }
+  HP:6000129: { node: urinary_glutarylglycine, sign: "+", label: "Elevated urinary glutarylglycine level" }
+  HP:0040301: { node: urinary_glycerol, sign: "+", label: "Increased urinary glycerol" }
+  HP:0003108: { node: urinary_glycine, sign: "+", label: "Hyperglycinuria" }
+  HP:0031981: { node: urinary_glycolate, sign: "+", label: "Elevated urine glycolate" }
+  HP:6000431: { node: urinary_glycolate, sign: "+", label: "Elevated urinary glycolic acid level" }
+  HP:6000702: { node: urinary_glyoxylate, sign: "+", label: "Elevated urinary glyoxylic acid level" }
+  HP:0034888: { node: urinary_guanidinoacetate, sign: "-", label: "Decreased urine guanidinoacetic acid level" }
+  HP:0040419: { node: urinary_guanidinoacetate, sign: "+", label: "Elevated urine guanidinoacetic acid level" }
+  HP:0033160: { node: urinary_guanosine, sign: "-", label: "Decreased urinary guanosine level" }
+  HP:0040424: { node: urinary_guanosine, sign: "+", label: "Elevated urinary guanosine level" }
+  HP:0034907: { node: urinary_hexacarboxylporphyrin, sign: "+", label: "Increased urine hexacarboxylporphyrin level" }
+  HP:0034497: { node: urinary_hexanoic_acid, sign: "+", label: "Increased urinary hexanoic acid level" }
+  HP:0500255: { node: urinary_hexanoylglycine, sign: "+", label: "Increased level of hexanoylglycine in urine" }
+  HP:0410066: { node: urinary_hippuric_acid, sign: "+", label: "Increased level of hippuric acid in urine" }
+  HP:6000532: { node: urinary_histamine, sign: "+", label: "Elevated urinary histamine level" }
+  HP:0033704: { node: urinary_homogentisate, sign: "+", label: "Elevated urinary homogentisic acid" }
+  HP:0011977: { node: urinary_homovanillic_acid, sign: "+", label: "Elevated urinary homovanillic acid" }
+  HP:6000391: { node: urinary_hyaluronic_acid, sign: "+", label: "Elevated urine hyaluronic acid level" }
+  HP:6001004: { node: urinary_hydroxyphenyllactate, sign: "+", label: "Elevated urine hydroxyphenyllactic acid level" }
+  HP:0011814: { node: urinary_hypoxanthine, sign: "+", label: "Increased urinary hypoxanthine level" }
+  HP:0040426: { node: urinary_hypoxanthine, sign: "-", label: "Decreased urinary hypoxanthine level" }
+  HP:0033187: { node: urinary_imidodipeptides, sign: "+", label: "Hyperimidodipeptiduria" }
+  HP:6000130: { node: urinary_indican, sign: "+", label: "Elevated urinary indican level" }
+  HP:6000332: { node: urinary_indoleacetate, sign: "+", label: "Elevated urinary indoleacetic acid level" }
+  HP:0033159: { node: urinary_inosine, sign: "-", label: "Reduced urinary inosine level" }
+  HP:0040422: { node: urinary_inosine, sign: "+", label: "Elevated urinary inosine level" }
+  HP:6000438: { node: urinary_iodine, sign: "-", label: "Reduced urinary iodine level" }
+  HP:0500257: { node: urinary_isobutyrylglycine, sign: "+", label: "Increased urine isobutyrylglycine concentration" }
+  HP:6000434: { node: urinary_isovaleric_acid, sign: "+", label: "Elevated urinary isovaleric acid level" }
+  HP:6000602: { node: urinary_isovalerylglycine, sign: "+", label: "Elevated urinary isovalerylglycine level" }
+  HP:0033456: { node: urinary_ketoacids, sign: "+", label: "Elevated urine keto acid level" }
+  HP:0034461: { node: urinary_kynurenine, sign: "+", label: "Elevated urine kynurenine level" }
+  HP:6000670: { node: urinary_l_glycerate, sign: "+", label: "Elevated urinary L-glycerate level" }
+  HP:0025742: { node: urinary_l_xylulose, sign: "+", label: "Elevated urine L-xylulose level" }
+  HP:0003297: { node: urinary_lysine, sign: "+", label: "Hyperlysinuria" }
+  HP:0012608: { node: urinary_magnesium, sign: "+", label: "Hypermagnesiuria" }
+  HP:0012609: { node: urinary_magnesium, sign: "-", label: "Hypomagnesiuria" }
+  HP:6001000: { node: urinary_malic_acid, sign: "+", label: "Elevated urine malic acid level" }
+  HP:0034657: { node: urinary_malonate, sign: "+", label: "Elevated urine malonic acid level" }
+  HP:6000999: { node: urinary_mandelic_acid, sign: "+", label: "Elevated urinary mandelic acid" }
+  HP:6000480: { node: urinary_manganese, sign: "+", label: "Elevated urine manganese level" }
+  HP:6000481: { node: urinary_manganese, sign: "-", label: "Reduced urinary manganese level" }
+  HP:6000465: { node: urinary_mesaconate, sign: "+", label: "Elevated urine mesaconic acid level" }
+  HP:0034876: { node: urinary_metanephrine, sign: "-", label: "Decreased urinary metaepinephrine level" }
+  HP:6000392: { node: urinary_methylmalonylcarnitine, sign: "+", label: "Elevated urinary methylmalonylcarnitine level" }
+  HP:0410153: { node: urinary_methylsuccinate, sign: "+", label: "Increased level of methylsuccinic acid in urine" }
+  HP:0032638: { node: urinary_mevalonate, sign: "+", label: "Elevated urine mevalonic acid level" }
+  HP:6000675: { node: urinary_mevalonate, sign: "+", label: "Elevated urinary mevalonate lactone level" }
+  HP:0034649: { node: urinary_n_acetylaspartate, sign: "+", label: "Elevated urine N-acetylaspartic acid level" }
+  HP:0410156: { node: urinary_n_acetylneuraminate, sign: "+", label: "Increased level of N-acetylneuraminic acid in urine" }
+  HP:6000479: { node: urinary_n_acetyltyrosine, sign: "+", label: "Elevated urine N-acetyltyrosine level" }
+  HP:0025638: { node: urinary_n_butyrylglycine, sign: "+", label: "Elevated urinary N-butyrylglycine" }
+  HP:6000279: { node: urinary_n_carbamyl_beta_alanine, sign: "+", label: "Elevated urinary N-carbamoyl-beta-alanine level" }
+  HP:6000623: { node: urinary_n_carbamyl_beta_aminoisobutyrate, sign: "+", label: "Elevated urinary N-carbamyl-beta-aminoisobutyric acid level" }
+  HP:6000533: { node: urinary_n_methylhistamine, sign: "+", label: "Elevated urinary N-methylhistamine level" }
+  HP:0020130: { node: urinary_ngal, sign: "+", label: "Increased urinary neutrophil gelatinase-associated lipocalin" }
+  HP:0003345: { node: urinary_norepinephrine, sign: "+", label: "Elevated urinary norepinephrine level" }
+  HP:0034875: { node: urinary_norepinephrine, sign: "-", label: "Decreased urinary norepinephrine level" }
+  HP:0034654: { node: urinary_octanoic_acid, sign: "+", label: "Elevated urine octanoic acid level" }
+  HP:0034652: { node: urinary_octenedioic_acid, sign: "+", label: "Elevated urine octenedioic acid level" }
+  HP:0033303: { node: urinary_organic_acids, sign: "+", label: "Elevated urinary monocarboxylic acid level" }
+  HP:0040156: { node: urinary_organic_acids, sign: "+", label: "Elevated urinary carboxylic acid" }
+  HP:0032377: { node: urinary_orosomucoid, sign: "+", label: "Increased urinary orosomucoid" }
+  HP:0003159: { node: urinary_oxalate, sign: "+", label: "Hyperoxaluria" }
+  HP:0034906: { node: urinary_pentacarboxylporphyrin, sign: "+", label: "Increased urine pentacarboxylporphyrin level" }
+  HP:0034049: { node: urinary_pge2, sign: "+", label: "Elevated urinary prostaglandin E2 level" }
+  HP:0034050: { node: urinary_pge2_metabolite, sign: "+", label: "Elevated urinary prostaglandin E2 metabolite level" }
+  HP:0034887: { node: urinary_phenylacetylglutamine, sign: "+", label: "Increased urine phenylacetylglutamine level" }
+  HP:0034651: { node: urinary_phenylpropionylglycine, sign: "+", label: "Elevated urine phenylpropionylglycine level" }
+  HP:0034458: { node: urinary_phenylpyruvate, sign: "+", label: "Elevated urinary phenylpyruvic acid level" }
+  HP:0003109: { node: urinary_phosphate, sign: "+", label: "Hyperphosphaturia" }
+  HP:0012365: { node: urinary_phosphate, sign: "-", label: "Hypophosphaturia" }
+  HP:6000806: { node: urinary_phosphohydroxylysine, sign: "+", label: "Elevated urinary phosphohydroxylysine level" }
+  HP:0032405: { node: urinary_phosphoserine, sign: "+", label: "Increased urinary phosphoserine level" }
+  HP:6000269: { node: urinary_pipecolic_acid, sign: "+", label: "Elevated urinary pipecolic acid level" }
+  HP:0012217: { node: urinary_porphobilinogen, sign: "+", label: "Increased urinary porphobilinogen" }
+  HP:6000535: { node: urinary_porphyrin, sign: "+", label: "Elevated urinary porphyrin level" }
+  HP:0003081: { node: urinary_potassium, sign: "+", label: "Increased urinary potassium" }
+  HP:0012364: { node: urinary_potassium, sign: "-", label: "Decreased urinary potassium" }
+  HP:6000432: { node: urinary_propionic_acid, sign: "+", label: "Elevated urine propionic acid level" }
+  HP:0034658: { node: urinary_propionylglycine, sign: "+", label: "Elevated urine propionylglycine level" }
+  HP:0033385: { node: urinary_pyridinoline, sign: "+", label: "Elevated urine pyridinoline level" }
+  HP:0410132: { node: urinary_pyroglutamate, sign: "+", label: "Increased level of L-pyroglutamic acid in urine" }
+  HP:0003491: { node: urinary_pyrophosphate, sign: "+", label: "Elevated urine pyrophosphate" }
+  HP:6000620: { node: urinary_pyrroline_hydroxycarboxylate, sign: "+", label: "Elevated urinary pyrroline hydroxycarboxylic acid level" }
+  HP:6000335: { node: urinary_quinolinate, sign: "+", label: "Elevated urinary quinolinic acid level" }
+  HP:0410070: { node: urinary_ribitol, sign: "+", label: "Increased level of ribitol in urine" }
+  HP:0410072: { node: urinary_ribose, sign: "+", label: "Increased level of ribose in urine" }
+  HP:6000621: { node: urinary_ribosylhistidine, sign: "+", label: "Elevated urinary N-tau-ribosylhistidine level" }
+  HP:0034744: { node: urinary_s_sulfocysteine, sign: "+", label: "Elevated urinary S-sulfocysteine level" }
+  HP:6000283: { node: urinary_saccharopine, sign: "+", label: "Elevated urinary saccharopine level" }
+  HP:6000390: { node: urinary_saicar_riboside, sign: "+", label: "Elevated urinary succinylaminoimidazole carboxamide riboside level" }
+  HP:0010897: { node: urinary_sarcosine, sign: "+", label: "Hypersarcosinuria" }
+  HP:0500252: { node: urinary_sebacic_acid, sign: "+", label: "Increased urine sebacic acid concentration" }
+  HP:0025157: { node: urinary_sedoheptulose, sign: "+", label: "Increased urinary sedoheptulose" }
+  HP:0012604: { node: urinary_sodium, sign: "-", label: "Hyponatriuria" }
+  HP:0012605: { node: urinary_sodium, sign: "+", label: "Hypernatriuria" }
+  HP:0033213: { node: urinary_suberic_acid, sign: "+", label: "Elevated urine suberic acid level" }
+  HP:0034650: { node: urinary_suberylglycine, sign: "+", label: "Elevated urine suberylglycine level" }
+  HP:0033092: { node: urinary_succinate, sign: "+", label: "Increased urine succinate level" }
+  HP:0430137: { node: urinary_succinic_acid, sign: "+", label: "Elevated urine succinic acid level" }
+  HP:6000598: { node: urinary_succinylacetone, sign: "+", label: "Elevated urinary succinylacetone level" }
+  HP:6000113: { node: urinary_succinyladenosine, sign: "+", label: "Elevated urinary succinyladenosine level" }
+  HP:0003359: { node: urinary_sulfate, sign: "-", label: "Decreased urinary sulfate" }
+  HP:0012613: { node: urinary_sulfate, sign: "+", label: "Increased urinary sulfate" }
+  HP:6000120: { node: urinary_sulfatide, sign: "+", label: "Elevated urinary sulfatide level" }
+  HP:0011942: { node: urinary_sulfite, sign: "+", label: "Increased urinary sulfite level" }
+  HP:0003166: { node: urinary_taurine, sign: "+", label: "Increased urinary taurine" }
+  HP:0011943: { node: urinary_thiosulfate, sign: "+", label: "Increased urinary thiosulfate" }
+  HP:0003296: { node: urinary_threonine, sign: "+", label: "Hyperthreoninuria" }
+  HP:6000128: { node: urinary_thymidine, sign: "+", label: "Elevated urinary thymidine level" }
+  HP:6000331: { node: urinary_thymine, sign: "+", label: "Elevated urinary thymine level" }
+  HP:0034659: { node: urinary_tiglylglycine, sign: "+", label: "Elevated urine tiglylglycine level" }
+  HP:6000393: { node: urinary_trihydroxycholestanoate, sign: "+", label: "Elevated urine trihydroxycholestanoic acid level" }
+  HP:6000775: { node: urinary_tyramine, sign: "+", label: "Elevated urinary 4-tyramine level" }
+  HP:0003149: { node: urinary_urate, sign: "+", label: "Hyperuricosuria" }
+  HP:0011935: { node: urinary_urate, sign: "-", label: "Decreased urinary urate" }
+  HP:6000622: { node: urinary_ureidoisobutyrate, sign: "+", label: "Elevated urinary ureidoisobutyric acid level" }
+  HP:6000534: { node: urinary_ureidopropionate, sign: "+", label: "Elevated urinary ureidopropionic acid level" }
+  HP:0032574: { node: urinary_uridine, sign: "+", label: "Elevated urinary uridine level" }
+  HP:0031890: { node: urinary_urobilinogen, sign: "+", label: "Increased urine urobilinogen" }
+  HP:0020150: { node: urinary_uromodulin, sign: "+", label: "Elevated urinary uromodulin level" }
+  HP:0034886: { node: urinary_uromodulin, sign: "-", label: "Decreased urinary uromodulin level" }
+  HP:6000805: { node: urinary_uroporphyrin, sign: "+", label: "Elevated urinary uroporphyrin level" }
+  HP:6001002: { node: urinary_vanillactate, sign: "+", label: "Elevated urinary vanillactic acid level" }
+  HP:0011978: { node: urinary_vanillylmandelic_acid, sign: "+", label: "Elevated urinary vanillylmandelic acid" }
+  HP:6000121: { node: urinary_xanthurenate, sign: "+", label: "Elevated urinary xanthurenic acid level" }
+  HP:0410074: { node: urinary_xylitol, sign: "+", label: "Increased level of xylitol in urine" }
+  HP:0025639: { node: urinary_zinc, sign: "+", label: "Increased urinary zinc level" }
+  HP:0045011: { node: urine_bicarbonate, sign: "-", label: "Decreased urine bicarbonate concentration" }
+  HP:0003158: { node: urine_osmolality, sign: "-", label: "Hyposthenuria" }
+  HP:6001079: { node: urine_osmolality, sign: "-", label: "Inappropriately low urine osmolality following challenge" }
+  HP:0032473: { node: urine_urobilinogen, sign: "-", label: "Decreased urine urobilinogen" }
+  HP:0034686: { node: urocanase_activity, sign: "-", label: "Reduced hepatic urocanase activity" }
+  HP:0034715: { node: uroporphyrinogen_decarboxylase_activity, sign: "-", label: "Reduced uroporphyrinogen decarboxylase activity" }
+  HP:6000514: { node: uroporphyrinogen_iii_synthase_activity, sign: "-", label: "Reduced erythrocyte uroporphyrinogen III cosynthase activity" }
+  HP:0031243: { node: vldl_cholesterol, sign: "-", label: "Decreased VLDL cholesterol concentration" }

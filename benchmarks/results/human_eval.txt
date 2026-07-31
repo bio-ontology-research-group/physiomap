@@ -1,0 +1,106 @@
+========================================================================
+PhysioMap benchmark — qualitative comparative-statics signs
+========================================================================
+
+### type1_diabetes  —  Type 1 diabetes (insulin deficiency)
+  OK  peripheral_glucose_uptake      expected=-  predicted=-
+   ?  hepatic_glucose_production     expected=+  predicted=?
+   ?  plasma_glucose                 expected=+  predicted=?
+   -> correct=1 wrong=0 ambiguous=2   (loop-critical 0/0)
+
+### type2_diabetes  —  Insulin resistance / T2D (reduced peripheral glucose uptake)
+   ?  plasma_glucose                 expected=+  predicted=?
+   -> correct=0 wrong=0 ambiguous=1   (loop-critical 0/0)
+
+### hyperthyroidism  —  Hyperthyroidism (thyroid hormone excess)
+  OK  free_t3                        expected=+  predicted=+
+  OK  metabolic_rate                 expected=+  predicted=+
+  OK  core_temperature               expected=+  predicted=+
+  OK  tsh                            expected=-  predicted=- [loop]
+   -> correct=4 wrong=0 ambiguous=0   (loop-critical 1/1)
+
+### hypothyroidism  —  Hypothyroidism (thyroid hormone deficiency)
+  OK  free_t3                        expected=-  predicted=-
+  OK  metabolic_rate                 expected=-  predicted=-
+  OK  core_temperature               expected=-  predicted=-
+  OK  tsh                            expected=+  predicted=+ [loop]
+   -> correct=4 wrong=0 ambiguous=0   (loop-critical 1/1)
+
+### cushings_syndrome  —  Cushing's syndrome (cortisol excess)
+   ?  hepatic_glucose_production     expected=+  predicted=?
+   ?  peripheral_glucose_uptake      expected=-  predicted=?
+   ?  plasma_glucose                 expected=+  predicted=?
+  OK  acth                           expected=-  predicted=- [loop]
+   -> correct=1 wrong=0 ambiguous=3   (loop-critical 1/1)
+
+### addisons_disease  —  Addison's disease (cortisol deficiency)
+   ?  hepatic_glucose_production     expected=-  predicted=?
+   ?  plasma_glucose                 expected=-  predicted=?
+  OK  acth                           expected=+  predicted=+ [loop]
+   -> correct=1 wrong=0 ambiguous=2   (loop-critical 1/1)
+
+### primary_hyperparathyroidism  —  Primary hyperparathyroidism (autonomous PTH excess)
+  OK  plasma_calcium                 expected=+  predicted=+
+   ?  plasma_phosphate               expected=-  predicted=?
+  OK  calcitriol                     expected=+  predicted=+
+   -> correct=2 wrong=0 ambiguous=1   (loop-critical 0/0)
+
+### hypoparathyroidism  —  Hypoparathyroidism (PTH deficiency)
+  OK  plasma_calcium                 expected=-  predicted=-
+   ?  plasma_phosphate               expected=+  predicted=?
+  OK  calcitriol                     expected=-  predicted=-
+   -> correct=2 wrong=0 ambiguous=1   (loop-critical 0/0)
+
+### chronic_hypoventilation  —  Chronic hypoventilation (respiratory acidosis)
+  OK  arterial_pco2                  expected=+  predicted=+
+  OK  arterial_ph                    expected=-  predicted=-
+  OK  plasma_bicarbonate             expected=+  predicted=+
+  OK  chemoreceptor_drive            expected=+  predicted=+ [loop]
+   -> correct=4 wrong=0 ambiguous=0   (loop-critical 1/1)
+
+### metabolic_acidosis  —  Primary metabolic acidosis (bicarbonate loss)
+  OK  arterial_ph                    expected=-  predicted=-
+  OK  chemoreceptor_drive            expected=+  predicted=+
+  OK  alveolar_ventilation           expected=+  predicted=+ [loop]
+  OK  arterial_pco2                  expected=-  predicted=- [loop]
+   -> correct=4 wrong=0 ambiguous=0   (loop-critical 2/2)
+
+### heat_exposure  —  Environmental heat exposure
+  OK  sweating                       expected=+  predicted=+
+  OK  skin_blood_flow                expected=+  predicted=+
+   -> correct=2 wrong=0 ambiguous=0   (loop-critical 0/0)
+
+### fever_pyrogen  —  Pyrogen-driven fever (raised heat production)
+  OK  core_temperature               expected=+  predicted=+
+  OK  sweating                       expected=+  predicted=+ [loop]
+  OK  skin_blood_flow                expected=+  predicted=+ [loop]
+   -> correct=3 wrong=0 ambiguous=0   (loop-critical 2/2)
+
+### chronic_hypoxia_altitude  —  Chronic hypoxia (high-altitude exposure)
+   ?  renal_tissue_oxygenation       expected=-  predicted=?
+   ?  erythropoietin                 expected=+  predicted=? [loop]
+   ?  red_cell_mass                  expected=+  predicted=? [loop]
+   ?  hematocrit                     expected=+  predicted=?
+   -> correct=0 wrong=0 ambiguous=4   (loop-critical 0/2)
+
+### epo_administration  —  Exogenous erythropoietin (doping / therapy)
+  OK  red_cell_mass                  expected=+  predicted=+
+  OK  hematocrit                     expected=+  predicted=+
+  OK  blood_viscosity                expected=+  predicted=+
+   -> correct=3 wrong=0 ambiguous=0   (loop-critical 0/0)
+
+### siadh  —  SIADH (inappropriate ADH excess)
+   ?  plasma_osmolality              expected=-  predicted=?
+   ?  plasma_sodium_concentration    expected=-  predicted=?
+   -> correct=0 wrong=0 ambiguous=2   (loop-critical 0/0)
+
+### primary_polydipsia  —  Primary polydipsia / acute water load
+   ?  plasma_osmolality              expected=-  predicted=?
+   ?  plasma_sodium_concentration    expected=-  predicted=?
+   -> correct=0 wrong=0 ambiguous=2   (loop-critical 0/0)
+
+------------------------------------------------------------------------
+TOTAL  scored=31  correct=31  wrong=0  ambiguous=18
+Directional accuracy (correct / scored) = 100.0%   |  ambiguous = 18/49
+Loop-critical net signs correct = 9/11
+------------------------------------------------------------------------

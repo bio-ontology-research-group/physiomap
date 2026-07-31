@@ -1,0 +1,536 @@
+# =============================================================================
+# E1a — IEM enzyme -> disease-metabolite reaction edges   *** DRAFT FOR REVIEW ***
+# Wires existing enzyme-activity nodes (in the "enzyme_needs_wiring" coverage bucket) to
+# their disease metabolites via authoritative Rhea reactions, so a single-gene do() clamp
+# (LoF = activity DOWN; a few GoF, e.g. GLUD1) propagates to abnormal-quantity HPO phenotypes.
+# SIGN CONVENTION (comparative statics, d[metabolite]/d[enzyme_activity]):
+#   enzyme_activity -(-)-> SUBSTRATE  (LoF => substrate ACCUMULATES)
+#   enzyme_activity -(+)-> PRODUCT    (LoF => product FALLS)
+# Physiological flux direction was curated per enzyme (can reverse the canonical Rhea
+# equation, e.g. CPT2 vs CPT1A on plasma_palmitoylcarnitine -> opposite signs).
+# Provenance: mechanism = Rhea reaction (+EC); evidence = IEM + OMIM. Fan-out validated;
+# every sign self-checked against the textbook IEM accumulation/depletion.
+# 29 genes / 54 edges / 4 new nodes. See benchmarks/results/e1_coverage_scan.md.
+# =============================================================================
+name: e1a_iem_reactions
+description: DRAFT — IEM enzyme->metabolite reaction edges wiring existing PhysioMap enzyme-activity nodes
+  to their disease metabolites (Rhea/EC grounded), so a monogenic LoF/GoF clamp on the enzyme propagates
+  to abnormal-quantity phenotypes. Built by the E1a fan-out (Rhea reactions + per-edge sign verification
+  vs known IEM direction); causal_evidence=curated_mechanistic (the Rhea reaction is the mechanism). FOR
+  REVIEW.
+nodes:
+- id: plasma_cortisone
+  label: plasma cortisone concentration
+  scale: organ_system
+  entity_iri: CHEBI:16962
+  quality_iri: PATO:0000033
+- id: plasma_methylmalonate
+  label: plasma methylmalonate concentration
+  scale: organ_system
+  entity_iri: CHEBI:17453
+  quality_iri: PATO:0000033
+- id: erythrocyte_nadph
+  label: erythrocyte NADPH concentration
+  scale: organ_system
+  entity_iri: CHEBI:57783
+  quality_iri: PATO:0000033
+- id: plasma_mannose
+  label: plasma free mannose concentration
+  scale: organ_system
+  entity_iri: CHEBI:16024
+  quality_iri: PATO:0000033
+causal_edges:
+- source: cyp21a2_activity
+  target: plasma_17ohp
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:50308 (EC 1.14.15.15): 17alpha-hydroxyprogesterone + reduced [NADPH--hemoprotein reductase]
+    + O2 = 11-deoxycortisol + oxidized [NADPH--hemoprotein reductase] + H2O + H(+); 17alpha-hydroxyprogesterone
+    is the substrate'
+  evidence: 21-hydroxylase deficiency (congenital adrenal hyperplasia), OMIM:201910 — LoF causes massive
+    17-hydroxyprogesterone accumulation in plasma
+- source: cyp21a2_activity
+  target: progesterone
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:50304 (EC 1.14.15.15): progesterone + reduced [NADPH--hemoprotein reductase] + O2 =
+    21-hydroxyprogesterone + oxidized [NADPH--hemoprotein reductase] + H2O + H(+); progesterone is the
+    substrate'
+  evidence: 21-hydroxylase deficiency (congenital adrenal hyperplasia), OMIM:201910 — LoF causes progesterone
+    accumulation (mineralocorticoid pathway shunt)
+- source: cyp21a2_activity
+  target: plasma_11_deoxycortisol
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:50308 (EC 1.14.15.15): 17alpha-hydroxyprogesterone + reduced [NADPH--hemoprotein reductase]
+    + O2 = 11-deoxycortisol + oxidized [NADPH--hemoprotein reductase] + H2O + H(+); 11-deoxycortisol is
+    the product'
+  evidence: 21-hydroxylase deficiency (congenital adrenal hyperplasia), OMIM:201910 — LoF causes decreased
+    11-deoxycortisol (and consequently cortisol) synthesis
+- source: cyp21a2_activity
+  target: plasma_11_deoxycorticosterone
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:50304 (EC 1.14.15.15): progesterone + reduced [NADPH--hemoprotein reductase] + O2 =
+    21-hydroxyprogesterone (11-deoxycorticosterone) + oxidized [NADPH--hemoprotein reductase] + H2O +
+    H(+); 11-deoxycorticosterone is the product'
+  evidence: 21-hydroxylase deficiency (congenital adrenal hyperplasia), OMIM:201910 — LoF causes decreased
+    mineralocorticoid synthesis (aldosterone deficiency in salt-wasting form)
+- source: adipose_hsl_activity
+  target: plasma_triglycerides
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:12044 (EC 3.1.1.79): a triacylglycerol + H2O = a diacylglycerol + a fatty acid + H(+);
+    triacylglycerol is the substrate; LIPE is rate-limiting for adipose lipolysis'
+  evidence: Hormone-sensitive lipase deficiency, OMIM:615085 — LoF causes hypertriglyceridaemia due to
+    impaired adipose TG mobilization
+- source: adipose_hsl_activity
+  target: plasma_glycerol
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:15245 (EC 3.1.1.79): a monoacylglycerol + H2O = glycerol + a fatty acid + H(+); glycerol
+    is the product of complete hydrolysis; LIPE catalyses DAG->MAG step and contributes to MAG->glycerol
+    flux'
+  evidence: Hormone-sensitive lipase deficiency, OMIM:615085 — LoF causes reduced plasma glycerol release
+    from adipose tissue (impaired lipolysis)
+- source: lysosomal_acid_lipase_activity
+  target: plasma_cholesterol_esters
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:33875 (EC 3.1.1.13): cholesteryl (9Z-octadecenoate) + H2O = cholesterol + (9Z)-octadecenoate
+    + H(+); cholesteryl ester is the substrate; LAL cleaves LDL-derived cholesteryl esters in lysosomes'
+  evidence: Lysosomal acid lipase deficiency (Wolman disease / cholesteryl ester storage disease), OMIM:278000
+    — LoF causes accumulation of cholesteryl esters in plasma and tissues (elevated LDL-C)
+- source: lysosomal_acid_lipase_activity
+  target: plasma_triglycerides
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:35667 (EC 3.1.1.13): a triacylglycerol + H2O = a 1,2-diacylglycerol + a fatty acid
+    + H(+); triacylglycerol is the substrate; LAL hydrolyses lysosomal TG from lipoproteins'
+  evidence: Lysosomal acid lipase deficiency (Wolman disease / cholesteryl ester storage disease), OMIM:278000
+    — LoF causes hypertriglyceridaemia
+- source: hsd11b2_activity
+  target: cortisol
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:50208 (EC 1.1.1.146): cortisol + NAD(+) = cortisone + NADH + H(+); cortisol is the
+    substrate; HSD11B2 inactivates cortisol to cortisone in the kidney'
+  evidence: Apparent mineralocorticoid excess syndrome, OMIM:218030 — LoF causes cortisol accumulation
+    in kidney, activating mineralocorticoid receptor (elevated plasma cortisol, elevated urinary free
+    cortisol)
+- source: hsd11b2_activity
+  target: plasma_cortisone
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:50208 (EC 1.1.1.146): cortisol + NAD(+) = cortisone + NADH + H(+); cortisone is the
+    product'
+  evidence: Apparent mineralocorticoid excess syndrome, OMIM:218030 — LoF causes decreased cortisone (reduced
+    cortisol inactivation); urinary THF/THFA:THE ratio elevated, cortisone low
+- source: hsd11b2_activity
+  target: plasma_corticosterone
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:42204 (EC 1.1.1.146): corticosterone + NAD(+) = 11-dehydrocorticosterone + NADH + H(+);
+    corticosterone is the substrate; HSD11B2 also inactivates corticosterone'
+  evidence: Apparent mineralocorticoid excess syndrome, OMIM:218030 — LoF causes corticosterone accumulation
+    (second glucocorticoid substrate of HSD11B2)
+- source: cpt2_activity
+  target: plasma_palmitoylcarnitine
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:12661 (EC 2.3.1.21), physiological direction reversed: O-hexadecanoyl-(R)-carnitine
+    (palmitoylcarnitine) + CoA = hexadecanoyl-CoA + (R)-carnitine; CPT2 cleaves acylcarnitines back to
+    acyl-CoA inside mitochondria; palmitoylcarnitine is the substrate'
+  evidence: Carnitine palmitoyltransferase 2 deficiency, OMIM:255110 — LoF causes accumulation of long-chain
+    acylcarnitines (C16, C18) in plasma (hallmark of newborn screening)
+- source: hmgcl_activity
+  target: urinary_3_hydroxy_3_methylglutarate
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:24404 (EC 4.1.3.4): (3S)-3-hydroxy-3-methylglutaryl-CoA = acetoacetate + acetyl-CoA;
+    HMG-CoA is the substrate; its free acid (3-hydroxy-3-methylglutaric acid) is excreted in urine'
+  evidence: 3-Hydroxy-3-methylglutaryl-CoA lyase deficiency, OMIM:246450 — LoF causes accumulation of
+    3-HMG and related organic acids in urine
+- source: hmgcl_activity
+  target: plasma_acetoacetate
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:24404 (EC 4.1.3.4): (3S)-3-hydroxy-3-methylglutaryl-CoA = acetoacetate + acetyl-CoA;
+    acetoacetate is the product; HMGCL is the sole mitochondrial ketogenic enzyme'
+  evidence: 3-Hydroxy-3-methylglutaryl-CoA lyase deficiency, OMIM:246450 — LoF causes hypoketotic hypoglycaemia;
+    ketone body synthesis is abolished
+- source: cpt1_activity
+  target: plasma_palmitoylcarnitine
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:12661 (EC 2.3.1.21): (R)-carnitine + hexadecanoyl-CoA = O-hexadecanoyl-(R)-carnitine
+    + CoA; palmitoylcarnitine is the product of CPT1A; enzyme transfers acyl group from cytoplasmic acyl-CoA
+    to carnitine for mitochondrial import'
+  evidence: Carnitine palmitoyltransferase 1A deficiency, OMIM:255120 — LoF causes LOW long-chain acylcarnitines
+    and elevated free carnitine (C0) on newborn screening
+- source: mttp_activity
+  target: plasma_cholesterol_esters
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:39007 (EC 2.3.1.51 / lipid transfer): a cholesterol ester(in ER lumen) = a cholesterol
+    ester(in nascent VLDL/chylomicron); cholesterol ester is transferred into apoB-containing lipoprotein
+    particles for plasma secretion; the plasma lipoprotein-bound cholesterol ester is the product'
+  evidence: Abetalipoproteinaemia (microsomal triglyceride transfer protein deficiency), OMIM:200100 —
+    LoF causes near-absent plasma cholesterol esters due to failure to assemble VLDL and chylomicrons
+- source: mttp_activity
+  target: plasma_triglycerides
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:39011 (EC 2.3.1.51 / lipid transfer): a triacyl-sn-glycerol(in ER lumen) = a triacyl-sn-glycerol(in
+    nascent VLDL/chylomicron); triglyceride is transferred into apoB-containing lipoprotein particles
+    for plasma secretion; the plasma lipoprotein-bound TG is the product'
+  evidence: Abetalipoproteinaemia (microsomal triglyceride transfer protein deficiency), OMIM:200100 —
+    LoF causes near-absent plasma triglycerides
+- source: ebp_activity
+  target: plasma_8_dehydrocholesterol
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:15281 (EC 5.3.3.5), physiological direction: 5alpha-cholest-8-en-3beta-ol (8-dehydrocholesterol)
+    -> lathosterol (5alpha-cholest-7-en-3beta-ol); EBP isomerises the Delta8 double bond to Delta7; 8-dehydrocholesterol
+    is the substrate'
+  evidence: X-linked chondrodysplasia punctata type 2 (Conradi-Hunermann-Happle syndrome) / CHILD syndrome,
+    OMIM:302960 — LoF causes accumulation of 8(9)-dehydrocholesterol and related Delta8 sterols in plasma
+    and skin
+- source: ebp_activity
+  target: plasma_lathosterol
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:15281 (EC 5.3.3.5), physiological direction: 5alpha-cholest-8-en-3beta-ol -> lathosterol
+    (5alpha-cholest-7-en-3beta-ol); lathosterol is the product that feeds forward to cholesterol synthesis'
+  evidence: X-linked chondrodysplasia punctata type 2 (Conradi-Hunermann-Happle syndrome) / CHILD syndrome,
+    OMIM:302960 — LoF reduces lathosterol synthesis from the Delta8 precursor
+- source: lchad_mtp_activity
+  target: plasma_3_hydroxyhexadecanoylcarnitine
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:31159 (EC 1.1.1.211): (3S)-hydroxyhexadecanoyl-CoA + NAD(+) = 3-oxohexadecanoyl-CoA
+    + NADH + H(+); (3S)-3-hydroxyhexadecanoyl-CoA is the substrate of the LCHAD dehydrogenase step; its
+    carnitine ester (3-OH-C16-acylcarnitine) accumulates in plasma when flux is blocked'
+  evidence: Long-chain 3-hydroxyacyl-CoA dehydrogenase / MTP deficiency, OMIM:609016 — LoF causes accumulation
+    of C16-OH and other long-chain 3-hydroxyacylcarnitines (primary NBS marker)
+- source: mlycd_activity
+  target: malonyl_coa_level
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:18781 (EC 4.1.1.9): malonyl-CoA + H(+) = acetyl-CoA + CO2; malonyl-CoA is the substrate'
+  evidence: Malonyl-CoA decarboxylase deficiency, OMIM:248360 — LoF causes malonyl-CoA accumulation in
+    hepatocytes
+- source: mlycd_activity
+  target: plasma_malonylcarnitine
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:18781 (EC 4.1.1.9): malonyl-CoA + H(+) = acetyl-CoA + CO2; malonyl-CoA is the substrate;
+    plasma malonylcarnitine (C3-DC) is the measurable acylcarnitine surrogate of malonyl-CoA accumulation'
+  evidence: Malonyl-CoA decarboxylase deficiency, OMIM:248360 — LoF causes elevated plasma malonylcarnitine
+    (C3-DC), the cardinal NBS biomarker
+- source: myophosphorylase_activity
+  target: muscle_glycogen_content
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:41732 (EC 2.4.1.1): [(1->4)-alpha-D-glucosyl](n) + phosphate = [(1->4)-alpha-D-glucosyl](n-1)
+    + alpha-D-glucose 1-phosphate; glycogen (CHEBI:15444) is the substrate of phosphorolysis'
+  evidence: McArdle disease (GSD type V), OMIM:232600 — LoF causes muscle glycogen accumulation (failure
+    of exercise-induced glycogenolysis)
+- source: mannosyl_oligosaccharide_glucosidase_activity
+  target: urinary_mannose_oligosaccharides
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:55988 (EC 3.2.1.106): N(4)-(Glc3Man9GlcNAc2)-L-asparaginyl-[protein] + H2O = N(4)-(Glc2Man9GlcNAc2)-L-asparaginyl-[protein]
+    + beta-D-glucose; the Glc3Man9GlcNAc2-protein substrate (CHEBI:132537) accumulates as free glucosylated
+    high-mannose oligosaccharides excreted in urine'
+  evidence: MOGS-CDG (congenital disorder of glycosylation type IIb), OMIM:606056 — LoF causes accumulation
+    of glucosylated high-mannose N-glycan oligosaccharides in urine
+- source: echs1_activity
+  target: plasma_tiglylcarnitine
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:26558 (EC 4.2.1.17): (3S)-3-hydroxybutanoyl-CoA = (2E)-butenoyl-CoA + H2O; physiological
+    direction is hydration of (2E)-enoyl-CoA to (3S)-3-hydroxyacyl-CoA; tiglyl-CoA (2-methylcrotonoyl-CoA,
+    the isoleucine catabolism intermediate) is an ECHS1 substrate; plasma tiglylcarnitine (O-tiglylcarnitine,
+    CHEBI:71179) is the measurable acylcarnitine surrogate'
+  evidence: ECHS1 deficiency (Leigh syndrome with valine/isoleucine catabolism block), OMIM:616277 — LoF
+    causes elevated plasma tiglylcarnitine (C5:1), the characteristic newborn-screening and plasma acylcarnitine
+    marker
+- source: echs1_activity
+  target: urinary_3_hydroxyisobutyrate
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:31175 (EC 4.2.1.17): 2-methylpropenoyl-CoA (methacrylyl-CoA) + H2O = (S)-3-hydroxyisobutanoyl-CoA;
+    physiological direction: methacrylyl-CoA is the valine-pathway substrate of ECHS1; (S)-3-hydroxyisobutanoyl-CoA
+    -> 3-hydroxyisobutyrate (CHEBI:18064); LoF accumulates methacrylyl-CoA upstream and shunts to urinary
+    3-hydroxyisobutyrate via alternative routes'
+  evidence: ECHS1 deficiency, OMIM:616277 — LoF is associated with elevated urinary 3-hydroxyisobutyric
+    acid, a valine catabolism marker
+- source: msmo1_activity
+  target: plasma_dimethylsterol
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:55220 (EC 1.14.18.9): 4,4-dimethyl-5alpha-cholest-7-en-3beta-ol (CHEBI:16455) + 6 Fe(II)-[cytochrome
+    b5] + 3 O2 + 5 H(+) = 4alpha-carboxy-4beta-methyl product + 6 Fe(III)-[cytochrome b5] + 4 H2O; 4,4-dimethylsterols
+    are the substrates of the first C4-demethylation step'
+  evidence: SC4MOL / MSMO1 deficiency (methylsterolosis), OMIM:616834 — LoF causes accumulation of 4,4-dimethylsterols
+    in plasma
+- source: msmo1_activity
+  target: plasma_monomethylsterol
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:47056 (EC 1.14.18.9): 4alpha-methylzymosterol (CHEBI:1949) + 6 Fe(II)-[cytochrome b5]
+    + 3 O2 + 5 H(+) = 4alpha-carboxyzymosterol + 6 Fe(III)-[cytochrome b5] + 4 H2O; 4alpha-methylsterols
+    (monomethylsterols) are also substrates of MSMO1'
+  evidence: SC4MOL / MSMO1 deficiency (methylsterolosis), OMIM:616834 — LoF causes accumulation of 4-methylsterols
+    (monomethylsterols) alongside 4,4-dimethylsterols
+- source: alpha_galactosidase_a_activity
+  target: plasma_globotriaosylceramide
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:48020 (EC 3.2.1.22): a globoside Gb3Cer (CHEBI:88154) + H2O = a beta-D-galactosyl-(1->4)-beta-D-glucosyl-(1<->1)-ceramide
+    (LacCer) + D-galactose; Gb3Cer (globotriaosylceramide) is the primary substrate'
+  evidence: Fabry disease (alpha-galactosidase A deficiency), OMIM:301500 — LoF causes massive Gb3 accumulation
+    in plasma, urine, and lysosomes of vascular endothelia
+- source: alpha_galactosidase_a_activity
+  target: plasma_lyso_gb3
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:48020 (EC 3.2.1.22): Gb3Cer + H2O = LacCer + D-galactose; lyso-Gb3 (globotriaosylsphingosine)
+    is the deacylated form of Gb3, a secondary metabolite that accumulates proportionally with Gb3 buildup
+    in GLA LoF'
+  evidence: Fabry disease, OMIM:301500 — LoF causes marked elevation of plasma lyso-Gb3, which is more
+    sensitive than Gb3 and is used as a biomarker in female carriers and treated patients
+- source: glutamine_synthetase_activity
+  target: plasma_glutamine
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:16169 (EC 6.3.1.2): L-glutamate + NH4(+) + ATP = L-glutamine + ADP + phosphate + H(+);
+    L-glutamine (CHEBI:58359) is the product of glutamine synthetase'
+  evidence: Congenital glutamine synthetase deficiency, OMIM:610015 — LoF causes markedly low plasma glutamine,
+    a defining metabolic feature
+- source: glutamine_synthetase_activity
+  target: plasma_glutamate
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:16169 (EC 6.3.1.2): L-glutamate (CHEBI:29985) + NH4(+) + ATP = L-glutamine + ADP +
+    phosphate + H(+); L-glutamate is the primary substrate'
+  evidence: Congenital glutamine synthetase deficiency, OMIM:610015 — LoF causes elevated plasma glutamate
+    as the unconverted substrate accumulates
+- source: glutamine_synthetase_activity
+  target: plasma_ammonia
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:16169 (EC 6.3.1.2): L-glutamate + NH4(+) (CHEBI:28938) + ATP = L-glutamine + ADP +
+    phosphate + H(+); ammonium/ammonia is a substrate consumed in glutamine synthesis'
+  evidence: Congenital glutamine synthetase deficiency, OMIM:610015 — LoF reduces ammonia disposal via
+    glutamine synthesis, causing hyperammonemia
+- source: glutamine_synthetase_activity
+  target: csf_glutamine
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:16169 (EC 6.3.1.2): L-glutamate + NH4(+) + ATP = L-glutamine + ADP + phosphate + H(+);
+    CSF glutamine is low because brain GLUL is the primary enzyme maintaining CSF glutamine levels'
+  evidence: Congenital glutamine synthetase deficiency, OMIM:610015 — LoF causes markedly reduced CSF
+    glutamine, which is the primary clinical feature causing neonatal encephalopathy
+- source: hepatic_glycogen_synthase_activity
+  target: hepatic_glycogen_content
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:18549 (EC 2.4.1.11): [(1->4)-alpha-D-glucosyl](n) + UDP-alpha-D-glucose (CHEBI:58885)
+    = [(1->4)-alpha-D-glucosyl](n+1) + UDP + H(+); glycogen (CHEBI:15444) is the product (chain extension);
+    GYS2 is the rate-limiting enzyme for hepatic glycogen synthesis'
+  evidence: Hepatic glycogen synthase deficiency (GSD type 0a), OMIM:240600 — LoF causes severely reduced
+    liver glycogen content (failure to store postprandial glucose as glycogen)
+- source: hepatic_glycogen_synthase_activity
+  target: plasma_glucose
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:18549 (EC 2.4.1.11): postprandial glucose is stored as hepatic glycogen via GYS2; failure
+    to store glycogen means fasting glucose supply from glycogenolysis is absent, leading to fasting hypoglycemia'
+  evidence: Hepatic glycogen synthase deficiency (GSD type 0a), OMIM:240600 — LoF causes fasting hypoglycemia
+    (low plasma glucose after overnight fast) due to absent hepatic glycogen stores
+- source: hmg_coa_reductase_activity
+  target: hepatic_cholesterol_synthesis
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:15989 (EC 1.1.1.34): (3S)-3-hydroxy-3-methylglutaryl-CoA (CHEBI:43074) + 2 NADPH +
+    2 H(+) = (R)-mevalonate (CHEBI:36464) + 2 NADP(+) + CoA [physiological direction; Rhea equation is
+    written in reverse]; mevalonate is the committed product of the rate-limiting cholesterol synthesis
+    step; hepatic cholesterol synthesis is the downstream process'
+  evidence: HMGCR is the rate-limiting enzyme of cholesterol biosynthesis; rare LoF variants cause reduced
+    cholesterol synthesis (statin pharmacology mimics LoF); reduced hepatic cholesterol synthesis on activity
+    reduction
+- source: hmg_coa_reductase_activity
+  target: ldl_cholesterol
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:15989 (EC 1.1.1.34): HMG-CoA + 2 NADPH + 2 H(+) = (R)-mevalonate + 2 NADP(+) + CoA;
+    mevalonate -> (multi-step) -> cholesterol -> VLDL/LDL; HMGCR activity is rate-limiting for endogenous
+    LDL-cholesterol synthesis'
+  evidence: HMGCR rare LoF variants (Mendelian evidence from population studies) — LoF associated with
+    reduced plasma LDL-cholesterol; statin (HMGCR inhibitor) pharmacology confirms LDL reduction
+- source: hmg_coa_reductase_activity
+  target: urinary_mevalonate
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:15989 (EC 1.1.1.34): HMG-CoA + 2 NADPH + 2 H(+) = (R)-mevalonate + 2 NADP(+) + CoA;
+    urinary mevalonate reflects the rate of HMGCR-catalysed mevalonate production; LoF => less mevalonate
+    produced => lower urinary mevalonate excretion'
+  evidence: HMGCR inhibition (statin pharmacology) — statin treatment reduces urinary mevalonate, confirming
+    HMGCR-activity-to-mevalonate product relationship
+- source: muscle_glycogen_synthase_activity
+  target: muscle_glycogen_content
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:18549 (EC 2.4.1.11): [(1->4)-alpha-D-glucosyl](n) + UDP-alpha-D-glucose = [(1->4)-alpha-D-glucosyl](n+1)
+    + UDP + H(+); muscle glycogen is the direct polymer product of GYS1 elongation'
+  evidence: Glycogen storage disease type 0b (muscle), OMIM:611556 — GYS1 LoF causes severe muscle glycogen
+    deficiency; patients present with exercise intolerance and fasting hypoglycemia due to absent muscle
+    glycogen stores
+- source: mut_activity
+  target: plasma_methylmalonate
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:22888 (EC 5.4.99.2): (R)-methylmalonyl-CoA = succinyl-CoA; methylmalonyl-CoA is the
+    substrate; plasma methylmalonate reflects the intracellular accumulation of methylmalonyl-CoA and
+    its hydrolysis product methylmalonate'
+  evidence: Methylmalonic acidemia (MMA), OMIM:251000 — MMUT LoF causes massive accumulation of methylmalonate
+    in plasma and urine; plasma methylmalonate is the canonical diagnostic biomarker
+- source: mut_activity
+  target: plasma_methylmalonylcarnitine
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:22888 (EC 5.4.99.2): (R)-methylmalonyl-CoA = succinyl-CoA; methylmalonyl-CoA substrate
+    accumulates and is conjugated to carnitine, producing methylmalonylcarnitine (C4-DC) detectable in
+    plasma'
+  evidence: Methylmalonic acidemia (MMA), OMIM:251000 — plasma methylmalonylcarnitine is a key newborn-screen
+    acylcarnitine marker for MMUT deficiency
+- source: g6pd_activity
+  target: erythrocyte_nadph
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:15841 (EC 1.1.1.49): D-glucose 6-phosphate + NADP(+) = 6-phospho-D-glucono-1,5-lactone
+    + NADPH + H(+); NADPH is the direct product of G6PD; the pentose phosphate pathway is the SOLE source
+    of NADPH in mature erythrocytes'
+  evidence: G6PD deficiency, OMIM:300908 — LoF reduces erythrocyte NADPH; the resulting oxidative stress
+    causes hemolytic episodes; erythrocyte NADPH assay is a diagnostic measure
+- source: beta_cell_glucokinase_activity
+  target: plasma_glucose
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:17825 (EC 2.7.1.2): D-glucose + ATP = D-glucose 6-phosphate + ADP + H(+); glucose is
+    the substrate; GCK phosphorylates glucose trapping it intracellularly and acting as the pancreatic
+    glucose sensor; LoF impairs glucose sensing and hepatic glucose uptake, raising plasma glucose'
+  evidence: Glucokinase-MODY (MODY2), OMIM:125851 — heterozygous GCK LoF causes mild stable fasting hyperglycemia;
+    plasma glucose is elevated 5-8 mmol/L throughout life
+- source: phosphomannose_isomerase_activity
+  target: plasma_mannose
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:12356 (EC 5.3.1.8): D-mannose 6-phosphate = D-fructose 6-phosphate; MPI converts fructose-6-P
+    to mannose-6-P (the reverse direction feeds the glycosylation pathway); MPI activity is required for
+    endogenous mannose synthesis; LoF reduces the mannose-6-phosphate pool and, consequently, plasma free
+    mannose'
+  evidence: MPI-CDG (CDG-Ib), OMIM:602579 — MPI LoF causes congenital disorder of glycosylation; plasma
+    mannose tends low and oral mannose supplementation (bypassing MPI) is therapeutic, confirming MPI
+    generates plasma-accessible mannose
+- source: isobutyryl_coa_dehydrogenase_activity
+  target: urinary_isobutyrylglycine
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:44180 (EC 1.3.8.5): 2-methylpropanoyl-CoA + oxidized [electron-transfer flavoprotein]
+    = 2-methylpropenoyl-CoA + reduced [electron-transfer flavoprotein]; isobutyryl-CoA (2-methylpropanoyl-CoA)
+    is the substrate; it accumulates in LoF and is conjugated with glycine by glycine-N-acyltransferase
+    to form urinary isobutyrylglycine'
+  evidence: Isobutyryl-CoA dehydrogenase deficiency, OMIM:611283 — ACAD8 LoF causes elevated urinary isobutyrylglycine;
+    detected by newborn screening and urine organic acid analysis
+- source: isobutyryl_coa_dehydrogenase_activity
+  target: plasma_c4_acylcarnitine
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:44180 (EC 1.3.8.5): 2-methylpropanoyl-CoA is the substrate; accumulated isobutyryl-CoA
+    is transesterified to carnitine by CPT enzymes, producing isobutyrylcarnitine (C4-acylcarnitine) measurable
+    in plasma by tandem MS'
+  evidence: Isobutyryl-CoA dehydrogenase deficiency, OMIM:611283 — plasma C4 acylcarnitine (isobutyrylcarnitine)
+    is the primary NBS flag for ACAD8 deficiency
+- source: nsdhl_activity
+  target: plasma_methylsterol
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:34771 (EC 1.1.1.170): a 3beta-hydroxysteroid-4alpha-carboxylate + NADP(+) = a 3-oxosteroid
+    + CO2 + NADPH; the 3beta-hydroxysteroid-4alpha-carboxylate (4-carboxysterol = methylsterol) is the
+    substrate; NSDHL LoF blocks the decarboxylation step, causing 4-methylsterols to accumulate'
+  evidence: CK syndrome, OMIM:308050; CHILD syndrome, OMIM:308050 — NSDHL LoF causes accumulation of 4-methylsterols
+    in plasma and tissue; elevated plasma methylsterols are the biochemical hallmark
+- source: aspartylglucosaminidase_activity
+  target: plasma_aspartylglucosamine
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:11544 (EC 3.5.1.26): N(4)-(beta-N-acetyl-D-glucosaminyl)-L-asparagine (CHEBI:17261)
+    + H2O = N-acetyl-beta-D-glucosaminylamine + L-aspartate + H(+); aspartylglucosamine (the N-glycan
+    core aspartamide) is the substrate; AGA LoF causes lysosomal accumulation and urinary/plasma overflow'
+  evidence: Aspartylglucosaminuria (AGU), OMIM:208400 — AGA LoF causes progressive accumulation of aspartylglucosamine
+    in plasma and urine; plasma aspartylglucosamine is the diagnostic biomarker
+- source: aspartylglucosaminidase_activity
+  target: csf_aspartylglucosamine
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:11544 (EC 3.5.1.26): N(4)-(beta-N-acetyl-D-glucosaminyl)-L-asparagine + H2O = N-acetyl-beta-D-glucosaminylamine
+    + L-aspartate; substrate accumulates in lysosomes of CNS cells and is detectable in CSF'
+  evidence: Aspartylglucosaminuria (AGU), OMIM:208400 — AGA LoF causes neurodegeneration with CSF aspartylglucosamine
+    elevation, reflecting CNS lysosomal storage
+- source: renal_glutaminase_activity
+  target: plasma_glutamine
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:15889 (EC 3.5.1.2): L-glutamine + H2O = L-glutamate + NH4(+); L-glutamine is the substrate;
+    GLS LoF impairs glutamine catabolism, causing systemic glutamine accumulation'
+  evidence: Glutaminase deficiency (EIEE71), OMIM:617924 — GLS LoF causes markedly elevated plasma glutamine;
+    patients present with severe neurodevelopmental disorder and hyperammonemia
+- source: renal_glutaminase_activity
+  target: csf_glutamine
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:15889 (EC 3.5.1.2): L-glutamine + H2O = L-glutamate + NH4(+); glutamine is the substrate;
+    impaired neuronal/glial glutaminase causes CNS glutamine accumulation detectable in CSF'
+  evidence: Glutaminase deficiency (EIEE71), OMIM:617924 — CSF glutamine is markedly elevated, consistent
+    with impaired neuronal glutamine metabolism
+- source: glutamate_dehydrogenase_activity
+  target: plasma_ammonia
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:11612 (EC 1.4.1.3): L-glutamate + NADP(+) + H2O = 2-oxoglutarate + NH4(+) + NADPH +
+    H(+); NH4+ (ammonia) is the direct product; GLUD1 gain-of-function (activating mutation) increases
+    enzyme flux and NH4+ production; edge sign reflects enzyme_activity -> product relationship (applicable
+    for both GoF assessment and the underlying physiology)'
+  evidence: 'Hyperinsulinism-hyperammonemia syndrome (HI/HA), OMIM:606762 — GLUD1 GoF causes hyperammonemia;
+    plasma ammonia chronically elevated (100-200 μmol/L) due to over-active glutamate dehydrogenase; the
+    same edge direction applies: more GLUD1 activity -> more ammonia'
+- source: glutamate_dehydrogenase_activity
+  target: plasma_glutamine
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:11612 (EC 1.4.1.3): L-glutamate + NADP(+) + H2O = 2-oxoglutarate + NH4(+) + NADPH;
+    L-glutamate is the substrate; increased GLUD1 flux (GoF) depletes glutamate; glutamate is the immediate
+    precursor of glutamine (via glutamine synthetase) so glutamate depletion leads to relative glutamine
+    reduction or prevents its rise'
+  evidence: Hyperinsulinism-hyperammonemia syndrome (HI/HA), OMIM:606762 — GLUD1 GoF increases glutamate
+    catabolism; plasma glutamine may be mildly reduced or normal; edge encodes the physiological relationship
+    (more enzyme -> less substrate)
+- source: methionine_synthase_activity
+  target: plasma_methionine
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:11172 (EC 2.1.1.13): 5-methyltetrahydrofolate + L-homocysteine = tetrahydrofolate
+    + L-methionine; L-methionine is the PRODUCT, so LoF lowers methionine (corrects the prior
+    homocysteine->methionine-only path that mis-predicted methionine up under MTR LoF)'
+  evidence: Methionine synthase deficiency / homocystinuria-megaloblastic anemia cblG (OMIM:250940)
+    — MTR LoF causes LOW plasma methionine with elevated homocysteine
+- source: methionine_synthase_activity
+  target: plasma_homocysteine
+  sign: '-'
+  causal_evidence: curated_mechanistic
+  mechanism: 'RHEA:11172 (EC 2.1.1.13): L-homocysteine is the SUBSTRATE remethylated to methionine,
+    so LoF causes homocysteine to accumulate'
+  evidence: Methionine synthase deficiency cblG (OMIM:250940) — MTR LoF causes hyperhomocysteinemia

@@ -1,0 +1,197 @@
+# =============================================================================
+# Cardiac pump function — Frank-Starling, contractility, afterload, EF
+#                                                   *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Hand-encoded, single-scale (ORGAN: left ventricle / heart). Each edge sign is the
+# sign of the partial derivative of the target w.r.t. the source at steady state, all
+# else equal (interventionist partial). ROBERT: please correct signs/edges.
+#
+# This fragment REFINES the lumped `cardiac_output` term of the Guyton CV core by
+# resolving the pump into its determinants:
+#     CO = stroke_volume x heart_rate,   SV = f(preload[+], contractility[+], afterload[-])
+#     EF = stroke_volume / end_diastolic_volume
+#
+# Sources for canonical signs / mechanisms:
+#   - Guyton & Hall, Textbook of Medical Physiology (13th ed.): Ch. on "Heart Muscle;
+#     The Heart as a Pump" — Frank-Starling law (EDV/preload -> SV, +), the Starling
+#     ventricular function curves, and effect of afterload (aortic pressure) on SV.
+#   - Boron & Boulpaep, Medical Physiology (3rd ed.): "The Heart as a Pump" / cardiac-
+#     cycle chapters — SV = EDV - ESV; EF = SV/EDV; preload, contractility and afterload
+#     as the three determinants of stroke volume; sympathetic positive inotropy.
+#   - legacy/examples/example-frank-starling.json (PhysioMap prior art): venous_return ->
+#     end_diastolic_volume -> (sarcomere length / Ca sensitivity) -> force -> stroke_volume,
+#     with afterload reducing stroke_volume. GO mechanism terms: GO:0060047 (heart contraction),
+#     GO:0086002 (cardiac muscle cell action potential / EC coupling), GO:0055117 (regulation
+#     of cardiac muscle contraction), GO:0086004 / GO:0002026 (regulation of blood pressure /
+#     vascular tone) referenced there.
+#   - BioModels MODEL2202160001 (Kutumova, Kiselev, Sharipov, Lifshits, "Thoroughly
+#     Calibrated Modular Agent-Based Model of the Human Cardiovascular and Renal Systems
+#     for Blood Pressure Regulation in Health and Disease", Frontiers in Physiology 2021,
+#     doi:10.3389/fphys.2021.746300) — cardiovascular module relating preload, contractility,
+#     SV, HR and arterial pressure.
+#
+# Real feedback present in the pump:
+#   - cardiac_output -> mean_arterial_pressure -> afterload -> stroke_volume -> cardiac_output
+#     is a NEGATIVE loop (rising MAP raises afterload, which lowers SV/CO). Getting the net
+#     afterload effect right needs loop reasoning, not forward propagation.
+#   - higher stroke_volume empties the ventricle more, lowering residual end_diastolic_volume
+#     at fixed filling (the SV -> EDV draining arm), coupling EDV and SV into an SCC.
+#
+# Boundary nodes (defined in the Guyton CV core; referenced, NOT redefined here):
+#   venous_return, cardiac_output, heart_rate, sympathetic_tone,
+#   mean_arterial_pressure, total_peripheral_resistance
+# A standalone load of this file alone resolves them against the corpus on merge().
+# =============================================================================
+
+name: cardiac_function
+description: >-
+  DRAFT cardiac pump function as a PhysioMap signed cyclic causal graph: the
+  Frank-Starling relation (preload -> stroke volume), myocardial contractility,
+  afterload, stroke volume and ejection fraction, resolving the lumped Guyton
+  cardiac_output term into its pump determinants. Single-scale (organ; left ventricle).
+
+nodes:
+  - id: end_diastolic_volume
+    label: left-ventricular end-diastolic volume (preload)
+    scale: organ
+    entity_iri: UBERON:0002084        # heart left ventricle
+    quality_iri: PATO:0000918         # volume
+  - id: myocardial_contractility
+    label: myocardial contractility (intrinsic inotropic state / end-systolic elastance)
+    scale: organ
+    entity_iri: UBERON:0002084        # heart left ventricle
+    quality_iri: PATO:0001579  # contractility
+  - id: stroke_volume
+    label: left-ventricular stroke volume (SV = EDV - ESV)
+    scale: organ
+    entity_iri: UBERON:0002084        # heart left ventricle
+    quality_iri: PATO:0000918         # volume (ejected per beat)
+  - id: afterload
+    label: left-ventricular afterload (systolic wall stress / aortic ejection load)
+    scale: organ
+    entity_iri: UBERON:0002084        # heart left ventricle
+    quality_iri: PATO:0001025  # pressure (afterload as ventricular load)
+  - id: ejection_fraction
+    label: left-ventricular ejection fraction (EF = SV / EDV)
+    scale: organ
+    entity_iri: UBERON:0002084        # heart left ventricle
+    quality_iri: PATO:0001023         # fraction / proportion
+
+causal_edges:
+  # --- Frank-Starling: preload -> stroke volume ----------------------------
+  - source: venous_return
+    target: end_diastolic_volume
+    sign: "+"
+    mechanism: >-
+      venous return / diastolic filling raises ventricular end-diastolic volume
+      (quality: filling flow -> disposition: ventricular compliance -> process: heart
+      process (diastolic filling) GO:0003015 -> quality: end-diastolic volume)
+    evidence: "Guyton & Hall Textbook of Medical Physiology, 'The Heart as a Pump' (venous return sets EDV); legacy example-frank-starling.json (venous_return -> end_diastolic_volume) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-108 (19.4: Cardiac Cycle): 'Approximately 70–80 percent of ventricular filling occurs by this method' (passive inflow from veins during diastole before atrial kick); OpenStax Anatomy & Physiology 2e §anp-109 (19.5: Cardiac Physiology): 'Any sympathetic stimulation to the venous system will increase venous return to the heart, which contributes to ventricular filling, and EDV and preload.'; OpenStax Anatomy & Physiology 2e §anp-110 (19.6: Development of the Heart) — chapter review 19.4: 'Venous return determines preload … Preload then impacts both EDV and ESV.' (lines 413–415).; OpenStax Anatomy & Physiology 2e §anp-114 (20.5: Homeostatic Regulation of the Vascular System): 'As blood returns to the heart more quickly, preload rises and the Frank-Starling principle tells us that contraction of the cardiac muscle in the atria and ventricles will be more forceful.'"
+  - source: end_diastolic_volume
+    target: stroke_volume
+    sign: "+"
+    mechanism: >-
+      Frank-Starling law — greater diastolic fibre stretch (sarcomere length) increases
+      myofilament overlap and calcium sensitivity, raising contractile force and ejected
+      volume (quality: EDV/fibre length -> disposition: length-dependent activation
+      GO:0055117 -> process: cardiac muscle contraction GO:0060048 -> quality: stroke volume)
+    evidence: "Guyton & Hall, Frank-Starling law of the heart (ventricular function curve); Boron & Boulpaep 'The Heart as a Pump' (preload -> SV); legacy example-frank-starling.json | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-108 (19.4: Cardiac Cycle): 'At the end of atrial systole and just prior to ventricular contraction, the ventricles contain approximately 130 mL blood... Stroke volume will normally be in the range of 70–80 mL... there is still 50–60 mL of blood remaining in the ventricle following contraction (end systolic volume)'; OpenStax Anatomy & Physiology 2e §anp-110 (19.6: Development of the Heart) — key terms: 'Frank-Starling mechanism: relationship between ventricular stretch and contraction in which the force of heart contraction is directly proportional to the initial length of the muscle fiber.' (lines 178–180); chapter review: 'SV is the difference between EDV and ESV.' (line 417).; OpenStax Anatomy & Physiology 2e §anp-114 (20.5: Homeostatic Regulation of the Vascular System): 'As blood returns to the heart more quickly, preload rises and the Frank-Starling principle tells us that contraction of the cardiac muscle in the atria and ventricles will be more forceful.'"
+  - source: myocardial_contractility
+    target: stroke_volume
+    sign: "+"
+    mechanism: >-
+      increased inotropic state raises systolic elastance / force at given preload and
+      afterload, ejecting more volume (quality: contractility -> disposition: crossbridge
+      cycling capacity -> process: regulation of cardiac muscle contraction GO:0055117 ->
+      quality: stroke volume)
+    evidence: "Boron & Boulpaep, Medical Physiology (contractility as a determinant of SV; Suga end-systolic elastance); Guyton & Hall (sympathetic inotropy shifts the function curve up)"
+  - source: afterload
+    target: stroke_volume
+    sign: "-"
+    mechanism: >-
+      higher ejection load (systolic wall stress / aortic pressure) opposes shortening,
+      raising end-systolic volume and reducing ejected volume at fixed preload and
+      contractility (quality: afterload -> disposition: load-dependent shortening ->
+      process: cardiac muscle contraction GO:0060048 -> quality: stroke volume)
+    evidence: "Guyton & Hall (raised aortic/arterial pressure reduces stroke volume at constant filling); Boron & Boulpaep (afterload inversely related to SV); legacy example-frank-starling.json (afterload reduces stroke_volume)"
+
+  # --- afterload determinants (boundary -> new) ----------------------------
+  - source: mean_arterial_pressure
+    target: afterload
+    sign: "+"
+    mechanism: >-
+      arterial pressure during ejection sets the load the ventricle ejects against; by
+      Laplace systolic wall stress rises with chamber pressure (quality: arterial pressure
+      -> disposition: ventricular wall mechanics -> quality: afterload)
+    evidence: "Guyton & Hall (aortic/arterial pressure is the principal afterload); Boron & Boulpaep (afterload ~ systolic wall stress, rises with arterial pressure)"
+  - source: total_peripheral_resistance
+    target: afterload
+    sign: "+"
+    mechanism: >-
+      higher systemic vascular resistance raises the pressure the ventricle must develop
+      to eject, increasing afterload (quality: peripheral resistance -> disposition:
+      impedance to ejection -> quality: afterload)
+    evidence: "Guyton & Hall (peripheral resistance contributes to the impedance load on the ventricle); Boron & Boulpaep (afterload reflects aortic input impedance / TPR)"
+
+  # --- contractility drivers (boundary -> new) -----------------------------
+  - source: sympathetic_tone
+    target: myocardial_contractility
+    sign: "+"
+    causal_evidence: pharmacological
+    mechanism: >-
+      beta-1 adrenergic stimulation increases cytosolic Ca2+ transients and crossbridge
+      force (positive inotropy) (quality: sympathetic tone -> disposition: beta-adrenergic
+      responsiveness -> process: regulation of heart contraction GO:0008016 -> quality:
+      contractility)
+    evidence: "Boron & Boulpaep, Medical Physiology (sympathetic / beta-adrenergic positive inotropy); Guyton & Hall (autonomic control of cardiac contractility) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-109 (19.5: Cardiac Physiology): 'sympathetic stimulation is a positive inotrope … NE … increase metabolic rate and the force of contraction.'"
+
+  # --- ventricular emptying couples SV back onto EDV (pump SCC) ------------
+  - source: stroke_volume
+    target: end_diastolic_volume
+    sign: "-"
+    mechanism: >-
+      at a given filling rate, greater ejection lowers the residual (end-systolic) volume
+      carried into the next diastole, reducing end-diastolic volume — the volume-draining
+      arm that, with venous filling, closes the ventricular volume balance
+    evidence: "Boron & Boulpaep (EDV = ESV + venous filling; greater emptying lowers carried-over volume); Guyton & Hall (ventricular volume balance over the cardiac cycle)"
+
+  # --- ejection fraction = SV / EDV ----------------------------------------
+  - source: myocardial_contractility
+    target: ejection_fraction
+    sign: "+"
+    mechanism: >-
+      EF is a load-dependent index of contractility; raising inotropy increases the
+      fraction of EDV ejected (quality: contractility -> process: regulation of cardiac
+      muscle contraction GO:0055117 -> quality: ejection fraction)
+    evidence: "Boron & Boulpaep (EF rises with contractility); Guyton & Hall (inotropic state and ejection fraction)"
+  - source: afterload
+    target: ejection_fraction
+    sign: "-"
+    mechanism: >-
+      increased ejection load reduces the fraction of end-diastolic volume ejected
+      (quality: afterload -> disposition: load-dependent shortening -> quality: ejection fraction)
+    evidence: "Boron & Boulpaep (afterload lowers EF); Guyton & Hall (raised arterial pressure reduces ejection fraction)"
+  - source: end_diastolic_volume
+    target: ejection_fraction
+    sign: "?"
+    mechanism: >-
+      EF = SV / EDV: by Frank-Starling a larger EDV raises the numerator SV (+), but EDV
+      is also the denominator (-); the net sign of EF w.r.t. EDV is genuinely ambiguous and
+      context-dependent (depends on the slope of the function curve vs. the volume ratio)
+    evidence: "Boron & Boulpaep (EF = SV/EDV; in dilated ventricles SV may rise while EF falls — net direction not determinate); Guyton & Hall (ventricular function curve)"
+
+constitutive_edges: []   # none yet — single organ scale (left ventricle)
+
+# Cardiac output is an algebraic product, not an evidence-bearing causal influence.
+quantitative_definitions:
+  - kind: product
+    result: cardiac_output
+    arguments:
+      - node: heart_rate
+        role: factor
+        derivative_sign: "+"
+      - node: stroke_volume
+        role: factor
+        derivative_sign: "+"
+    mechanism: "cardiac output = heart rate × stroke volume"
+    evidence: "Guyton & Hall and Boron & Boulpaep (cardiac output identity); OpenStax Anatomy & Physiology 2e §19.5: CO = HR × SV"

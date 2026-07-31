@@ -1,0 +1,69 @@
+# =============================================================================
+# Multi-scale GRN/signalling import: HJV / TMPRSS6 / HFE-TFR2 -> BMP-SMAD -> hepcidin
+#                                                       *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Causal-evidence-gated import (causal_evidence on every edge; interventional only).
+# Adds the upstream regulator proteins of the BMP-SMAD hepcidin pathway as molecular nodes
+# feeding the EXISTING `bmp_smad_signaling` node (benchmarks/multiscale/hepcidin_signaling.yaml),
+# which already drives hepcidin_transcription -> hepcidin. Each sign is established by a human
+# Mendelian loss-of-function (a natural do()) and/or KO.
+#
+#   hjv_coreceptor_activity      --(+)--> bmp_smad_signaling   (HJV is a BMP co-receptor)
+#   hfe_tfr2_iron_sensing        --(+)--> bmp_smad_signaling   (transferrin-saturation sensing)
+#   tmprss6_cleavage_activity    --(-)--> hjv_coreceptor_activity (matriptase-2 sheds HJV)
+#
+# INTERVENTIONAL GROUNDING (genetic LoF = do()):
+#   - HJV/HFE2 LoF -> juvenile hemochromatosis, LOW hepcidin + iron overload
+#     [Papanikolaou 2004 PMID 14647275; HJV as BMP co-receptor: Babitt 2006 PMID 16604075]
+#   - TMPRSS6 LoF -> iron-refractory iron-deficiency anemia (IRIDA), inappropriately HIGH hepcidin
+#     [Finberg 2008 PMID 18408718; Tmprss6 KO high hepcidin: Du 2008 PMID 18451267]
+#   - HFE LoF (C282Y) / TFR2 LoF -> hereditary hemochromatosis, LOW hepcidin
+#   - Bmp6 KO -> LOW hepcidin + iron overload
+# (Per-edge PMIDs were checked against PubMed by scripts/verify_citations.py; any that did not
+#  resolve to an on-topic paper were stripped. Disease names without OMIM numbers by design;
+#  fragment is a DRAFT for domain review.)
+#
+# NOTE: this fan-out also surfaced and FIXED a bug in hepcidin_signaling.yaml — `bmp6_ligand`
+# had entity_iri PR:000004801 (B-Raf); corrected to PR:000000167 (bone morphogenetic protein 6).
+#
+# BOUNDARY NODES (exist; not redefined): bmp_smad_signaling
+# =============================================================================
+name: hepcidin_bmp_smad_axis
+nodes:
+- id: hjv_coreceptor_activity
+  label: hemojuvelin (HJV/HFE2) BMP co-receptor activity (hepatocyte surface)
+  scale: molecular
+  entity_iri: PR:000008532      # hemojuvelin
+  quality_iri: PATO:0002354     # active
+  bearer_entity_iri: CL:0000182 # hepatocyte
+- id: tmprss6_cleavage_activity
+  label: TMPRSS6 (matriptase-2) hemojuvelin-cleavage activity (hepatocyte)
+  scale: molecular
+  entity_iri: PR:000016460      # transmembrane protease serine 6 (matriptase-2)
+  quality_iri: PATO:0001414     # catalytic activity
+  bearer_entity_iri: CL:0000182
+- id: hfe_tfr2_iron_sensing
+  label: HFE/TFR2 transferrin-saturation sensing activity (hepatocyte)
+  scale: molecular
+  entity_iri: PR:000016282      # transferrin receptor protein 2 (functionally dominant sensor)
+  quality_iri: PATO:0002354     # active
+  bearer_entity_iri: CL:0000182
+causal_edges:
+- source: tmprss6_cleavage_activity
+  target: hjv_coreceptor_activity
+  sign: '-'
+  causal_evidence: genetic_lof_gof
+  mechanism: 'TMPRSS6/matriptase-2 proteolytically sheds membrane hemojuvelin, lowering HJV co-receptor density (quality: TMPRSS6 activity -> disposition: HJV cleavage -> process: loss of surface HJV -> quality: reduced HJV co-receptor activity)'
+  evidence: 'INTERVENTIONAL (genetic LoF). TMPRSS6 loss-of-function -> iron-refractory iron-deficiency anemia (IRIDA) with inappropriately HIGH hepcidin (cannot shed HJV; BMP-SMAD constitutively high) [Finberg et al. 2008, PMID 18408718]; Tmprss6 KO mouse shows high BMP-SMAD/hepcidin [Du et al. 2008, PMID 18451267]. DRAFT for domain review. [citations PubMed-verified]'
+- source: hjv_coreceptor_activity
+  target: bmp_smad_signaling
+  sign: +
+  causal_evidence: genetic_lof_gof
+  mechanism: 'membrane HJV presents BMP6 to BMP type I/II receptors, amplifying SMAD1/5/8 phosphorylation (quality: HJV co-receptor activity -> disposition: BMP-receptor complex assembly -> process: SMAD1/5/8 phosphorylation -> quality: BMP-SMAD signalling)'
+  evidence: 'INTERVENTIONAL (genetic LoF). HJV/HFE2 loss-of-function -> juvenile hemochromatosis with LOW hepcidin and iron overload [Papanikolaou et al. 2004, PMID 14647275]; HJV identified as a BMP co-receptor that amplifies SMAD signalling and hepcidin. DRAFT for domain review. [citations PubMed-verified]'
+- source: hfe_tfr2_iron_sensing
+  target: bmp_smad_signaling
+  sign: +
+  causal_evidence: genetic_lof_gof
+  mechanism: 'HFE (with beta-2-microglobulin) and TFR2 sense diferric-transferrin saturation and potentiate BMP-SMAD signal amplitude (quality: HFE/TFR2 sensing activity -> disposition: co-receptor potentiation -> process: increased SMAD1/5/8 phosphorylation -> quality: BMP-SMAD signalling)'
+  evidence: 'INTERVENTIONAL (genetic LoF). HFE (C282Y) loss-of-function and TFR2 loss-of-function each cause hereditary hemochromatosis with inappropriately LOW hepcidin and iron overload — establishing that HFE/TFR2 sensing is required for normal BMP-SMAD-driven hepcidin induction. DRAFT for domain review.'

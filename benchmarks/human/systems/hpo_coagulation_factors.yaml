@@ -1,0 +1,140 @@
+# =============================================================================
+# Coagulation factors / contact system / fibrinolysis analytes
+#                                    — PhysioMap fragment  *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Purpose: provide PhysioMap NODES (grounded variables) for HPO directional
+# "abnormal coagulation-factor concentration / activity" terms in the
+# coagulation_factors theme, so the HPO forward/backward benchmark can map each term
+# to a physiological variable + a PATO direction. This is predominantly an *ISLAND*
+# fragment (grounded nodes, with only ONE defensible boundary causal edge into the
+# existing coagulation_hemostasis fragment). By PhysioMap policy a grounded node with
+# no defensible cited mechanism is valuable and safe (it abstains under the solver)
+# and is strongly preferred over a fabricated edge.  ROBERT: please correct nodes/IRIs.
+#
+# Provenance / textbooks + databases consulted for each analyte's identity & biology:
+#   - Boron & Boulpaep Medical Physiology ("Hemostasis": coagulation cascade, the
+#     contact/intrinsic pathway, fibrinolysis — plasminogen -> plasmin).
+#   - Harrison's Principles of Internal Medicine ("Disorders of Coagulation":
+#     plasminogen deficiency / ligneous conjunctivitis; HMWK/prekallikrein contact-factor
+#     deficiencies — prolonged aPTT WITHOUT bleeding; TTP / ADAMTS13 deficiency).
+#   - Williams Hematology (contact activation system: factor XII, prekallikrein
+#     [Fletcher factor], high-molecular-weight kininogen [Fitzgerald factor]; ADAMTS13
+#     and von Willebrand factor multimer cleavage; PIVKA-II / des-gamma-carboxy
+#     prothrombin in vitamin-K deficiency and warfarin therapy).
+#   - Lehninger Principles of Biochemistry (zymogen activation; vitamin-K-dependent
+#     gamma-carboxylation of glutamate residues on factors II/VII/IX/X).
+#   - Protein Ontology (ontology/.obo_cache/PR.obo) for protein-class IRIs (exact
+#     'name:'/'synonym:' match verified).
+#
+# IRI policy: protein analytes grounded in PRO (PR:) where an exact OBO 'name:' or
+# 'synonym:' match was verified vs ontology/.obo_cache/PR.obo. PIVKA-II
+# (des-gamma-carboxy prothrombin / undercarboxylated factor II) has NO exact PR or
+# CHEBI class — entity_iri left NULL rather than fabricated (it is nonetheless a real,
+# measurable plasma analyte / tumor- & vitamin-K-status marker, so it is a legitimate
+# grounded node, not a rejection).
+#   plasminogen          -> PR:000012867  (verified 'name: plasminogen')
+#   plasma prekallikrein -> PR:000009420  (plasma kallikrein; PR exact synonym
+#                            "plasma prekallikrein" — prekallikrein IS the zymogen of
+#                            plasma kallikrein, same PR protein class)
+#   kininogen (HMWK)     -> PR:000009430  (verified 'name: kininogen-1'; the high-MW
+#                            kininogen contact factor is the kininogen-1 gene product)
+#   ADAMTS13             -> PR:000003728  (verified 'name: a disintegrin and
+#                            metalloproteinase with thrombospondin motifs 13',
+#                            PRO-short-label "ADAMTS13")
+#   PIVKA-II             -> NULL
+#   PATO: concentration = PATO:0000033, catalytic/enzyme activity = PATO:0001414.
+#
+# EXISTING corpus node reused (NOT redefined here): plasmin_fibrinolysis
+#   (PR:000013480, "plasmin / fibrinolytic activity") in coagulation_hemostasis.yaml.
+#   plasma_plasminogen (the circulating ZYMOGEN pool, a concentration) is a DISTINCT
+#   quantity from plasmin_fibrinolysis (the active-enzyme ACTIVITY), and feeds it.
+#
+# DIRECTIONAL HPO terms covered (each -> node + PATO sign):
+#   HP:0040228  Decreased level of plasminogen                  -> plasma_plasminogen   (-)
+#   HP:0034371  Decreased circulating prekallikrein concentration-> plasma_prekallikrein (-)
+#   HP:0005527  Reduced kininogen activity                      -> plasma_kininogen     (-)
+#   HP:6001276  Decreased circulating ADAMTS13 activity         -> adamts13_activity    (-)
+#   HP:0045063  Increased PIVKA-II                              -> plasma_pivka_ii      (+)
+#
+# Single-scale: organ_system for the plasma protein concentrations; cellular for the
+# ADAMTS13 enzyme-ACTIVITY node (bearer = hepatic stellate cell, the principal site of
+# ADAMTS13 synthesis — verified CL id below).
+# =============================================================================
+
+name: hpo_coagulation_factors
+description: >-
+  DRAFT PhysioMap nodes for coagulation-factor / contact-system / fibrinolysis analytes
+  referenced by HPO abnormal-concentration / abnormal-activity terms in the
+  coagulation_factors theme: plasminogen (fibrinolytic zymogen), plasma prekallikrein
+  (Fletcher factor) and high-molecular-weight kininogen (Fitzgerald factor) of the
+  contact/intrinsic pathway, ADAMTS13 (von Willebrand factor cleaving protease), and
+  PIVKA-II (des-gamma-carboxy prothrombin, a vitamin-K-deficiency / antagonism marker).
+  Mostly a grounded ISLAND with one defensible boundary edge (plasminogen -> plasmin
+  activity). Single-scale (organ_system / cellular), Phase 1, DRAFT for review.
+
+nodes:
+  # --- fibrinolysis zymogen pool --------------------------------------------
+  # Plasminogen: circulating zymogen synthesized by hepatocytes, activated (tPA/uPA)
+  # to plasmin which degrades fibrin. HP:0040228 = decreased plasminogen LEVEL (a
+  # concentration), the DISTINCT precursor pool feeding the existing plasmin_fibrinolysis
+  # ACTIVITY node. (Harrison's: plasminogen deficiency -> ligneous conjunctivitis.)
+  - id: plasma_plasminogen
+    label: plasma plasminogen (fibrinolytic zymogen) concentration
+    scale: organ_system
+    entity_iri: PR:000012867          # plasminogen (verified PR 'name: plasminogen')
+    quality_iri: PATO:0000033         # concentration
+
+  # --- contact (intrinsic) pathway factors ----------------------------------
+  # Plasma prekallikrein (Fletcher factor): contact-activation zymogen; reciprocal
+  # activation with factor XIIa. Deficiency prolongs aPTT WITHOUT a bleeding tendency
+  # (Harrison's / Williams Hematology). HP:0034371 = decreased prekallikrein conc.
+  - id: plasma_prekallikrein
+    label: plasma prekallikrein (Fletcher factor) concentration
+    scale: organ_system
+    entity_iri: PR:000009420          # plasma kallikrein (PR exact synonym "plasma prekallikrein")
+    quality_iri: PATO:0000033         # concentration
+
+  # High-molecular-weight kininogen (HMWK, Fitzgerald factor): contact-pathway
+  # cofactor; deficiency prolongs aPTT without bleeding. HP:0005527 = reduced kininogen
+  # ACTIVITY (the functional contact-cofactor activity of HMWK).
+  - id: plasma_kininogen
+    label: plasma (high-molecular-weight) kininogen activity
+    scale: organ_system
+    entity_iri: PR:000009430          # kininogen-1 (HMWK gene product; verified PR 'name: kininogen-1')
+    quality_iri: PATO:0001414         # catalytic / functional (contact-cofactor) activity
+
+  # --- VWF-cleaving protease -------------------------------------------------
+  # ADAMTS13: von Willebrand factor cleaving protease; cleaves ultralarge VWF multimers.
+  # Severe deficiency (congenital Upshaw-Schulman, or autoantibody) -> thrombotic
+  # thrombocytopenic purpura (TTP) (Harrison's / Williams Hematology). HP:6001276 =
+  # decreased circulating ADAMTS13 ACTIVITY. Synthesized mainly by hepatic stellate cells.
+  - id: adamts13_activity
+    label: circulating ADAMTS13 (VWF-cleaving protease) activity
+    scale: cellular
+    entity_iri: PR:000003728          # a disintegrin and metalloproteinase with thrombospondin motifs 13 (verified PR)
+    quality_iri: PATO:0001414         # catalytic / enzyme activity
+    bearer_entity_iri: CL:0000632     # hepatic stellate cell (principal ADAMTS13 synthesis site)
+
+  # --- vitamin-K status / undercarboxylated prothrombin ----------------------
+  # PIVKA-II (Protein Induced by Vitamin K Absence/antagonism II) = des-gamma-carboxy
+  # prothrombin: undercarboxylated factor II that accumulates when vitamin-K-dependent
+  # gamma-carboxylation is impaired (vitamin-K deficiency, warfarin, or hepatocellular
+  # carcinoma). HP:0045063 = INCREASED PIVKA-II ("+"). No exact PR/CHEBI class for the
+  # undercarboxylated form -> entity_iri NULL (NOT fabricated); still a real measurable
+  # plasma analyte, hence a legitimate grounded node.
+  - id: plasma_pivka_ii
+    label: plasma PIVKA-II (des-gamma-carboxy prothrombin) concentration
+    scale: organ_system
+    entity_iri:                       # no verified PR/CHEBI class for undercarboxylated prothrombin
+    quality_iri: PATO:0000033         # concentration
+
+causal_edges:
+  # Plasminogen is the substrate/precursor activated to plasmin; more circulating
+  # zymogen supports more plasmin generation (all else equal). Sign "+".
+  # (Existing boundary node plasmin_fibrinolysis is owned by coagulation_hemostasis.yaml.)
+  - source: plasma_plasminogen
+    target: plasmin_fibrinolysis
+    sign: "+"
+    causal_evidence: genetic_lof_gof
+    mechanism: plasminogen is the circulating zymogen converted by tPA/uPA to active plasmin; a larger plasminogen pool supports greater plasmin (fibrinolytic) activity at steady state
+    evidence: "Boron & Boulpaep Medical Physiology, 'Hemostasis' (plasminogen -> plasmin activation, fibrinolysis); Harrison's Principles of Internal Medicine (human congenital plasminogen deficiency [type I hypoplasminogenemia] -> impaired fibrinolysis, ligneous conjunctivitis: a natural loss-of-function of the source reducing the target in the asserted direction) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-104 (18.6: Hemostasis): 'the inactive protein plasminogen is converted into the active plasmin, which gradually breaks down the fibrin of the clot'"

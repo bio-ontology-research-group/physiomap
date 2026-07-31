@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PhysioMap Editor — curate nodes &amp; edges</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230d1117'/%3E%3Ccircle cx='9' cy='10' r='3' fill='%233fb950'/%3E%3Ccircle cx='23' cy='12' r='3' fill='%234493f8'/%3E%3Ccircle cx='16' cy='24' r='3' fill='%23f85149'/%3E%3Cpath d='M9 10 L23 12 M23 12 L16 24 M16 24 L9 10' stroke='%238b949e' stroke-width='1.5' fill='none'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    #app { grid-template-columns: 340px 1fr 360px; }
+    .form-row { display:flex; flex-direction:column; gap:3px; margin:8px 0; }
+    .form-row label { font-size:12px; color:#8b949e; }
+    .form-row .req { color:#f85149; }
+    input, select, textarea { background:#0d1117; color:#e6edf3; border:1px solid #30363d;
+      border-radius:6px; padding:6px 8px; font-size:13px; font-family:inherit; }
+    textarea { min-height:48px; resize:vertical; }
+    .tabs { display:flex; gap:4px; flex-wrap:wrap; margin-bottom:8px; }
+    .tab { padding:5px 10px; border-radius:6px 6px 0 0; background:#161b22; border:1px solid #30363d;
+      cursor:pointer; font-size:12px; }
+    .tab.active { background:#1f6feb; border-color:#1f6feb; color:#fff; }
+    .panel { display:none; } .panel.active { display:block; }
+    .item { background:#161b22; border:1px solid #30363d; border-radius:6px; padding:7px 9px;
+      margin:6px 0; font-size:12px; position:relative; }
+    .item .x { position:absolute; right:7px; top:6px; cursor:pointer; color:#f85149; font-weight:700; }
+    .gate { border-left:3px solid #30363d; padding:5px 9px; margin:5px 0; font-size:12px; }
+    .gate.ok { border-color:#3fb950; } .gate.bad { border-color:#f85149; }
+    .gate .g-err { color:#f85149; } .gate .g-warn { color:#d29922; }
+    .pill { display:inline-block; padding:1px 7px; border-radius:10px; font-size:11px; }
+    .pill.pending{background:#9e6a03}.pill.validated{background:#1f6feb}.pill.approved{background:#238636}
+    .pill.rejected{background:#da3633}.pill.merged{background:#8957e5}
+    button.primary { background:#238636; border-color:#238636; color:#fff; font-weight:600; }
+    button.primary:disabled { background:#30363d; border-color:#30363d; color:#8b949e; cursor:not-allowed; }
+    .muted2 { color:#6e7681; font-size:11px; }
+    code.k { color:#79c0ff; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>PhysioMap Editor</h1>
+    <span class="tagline">curate nodes &amp; edges — validated by the same gates we deploy on</span>
+    <span id="apistat" class="stats"></span>
+    <a href="./" style="margin-left:auto;color:#58a6ff;text-decoration:none;font-size:13px">&larr; back to viewer</a>
+  </header>
+
+  <div id="app">
+    <!-- LEFT: identity + contribution builder -->
+    <aside id="controls">
+      <section>
+        <label>Curator</label>
+        <div class="form-row"><input id="curator" placeholder="your name (recorded as provenance)" /></div>
+        <div class="form-row"><label>Edit token</label>
+          <input id="token" type="password" placeholder="shared editor token" /></div>
+        <div class="muted2">Token + name are needed only to <b>submit</b>. Validating is open. The
+          token is stored in this browser only.</div>
+      </section>
+
+      <section>
+        <label>Add to contribution</label>
+        <div class="tabs">
+          <div class="tab active" data-tab="node">Node</div>
+          <div class="tab" data-tab="causal">Causal edge</div>
+          <div class="tab" data-tab="production">Production</div>
+          <div class="tab" data-tab="constitutive">Constitutive</div>
+          <div class="tab" data-tab="modulation">Modulation</div>
+          <div class="tab" data-tab="ratio">Ratio</div>
+        </div>
+
+        <!-- NODE -->
+        <div class="panel active" id="panel-node">
+          <div class="form-row"><label>id <span class="req">*</span></label><input id="n-id" placeholder="plasma_xyz (stable key, snake_case)" /></div>
+          <div class="form-row"><label>label <span class="req">*</span></label><input id="n-label" placeholder="plasma XYZ concentration" /></div>
+          <div class="form-row"><label>scale <span class="req">*</span></label>
+            <select id="n-scale">
+              <option value="molecular">molecular</option><option value="subcellular">subcellular</option>
+              <option value="cellular">cellular</option><option value="tissue">tissue</option>
+              <option value="organ">organ</option><option value="organ_system" selected>organ_system</option>
+              <option value="organism">organism</option>
+            </select></div>
+          <div class="form-row"><label>entity_iri (Uberon/GO/CL/CHEBI/PR)</label><input id="n-entity" placeholder="CHEBI:17234" /></div>
+          <div class="form-row"><label>quality_iri (PATO determinable)</label><input id="n-quality" placeholder="PATO:0000033" /></div>
+          <div class="form-row"><label>bearer_entity_iri (cell/organ that bears a molecular quality)</label><input id="n-bearer" placeholder="optional" /></div>
+          <div class="form-row"><label>local ontology lookup</label>
+            <div style="display:flex;gap:4px"><input id="term-query" placeholder="glucose, CHEBI:17234…" style="flex:1" /><button class="mini" id="term-search">search</button></div>
+            <div id="term-results" class="muted2"></div></div>
+          <label class="chk"><input type="checkbox" id="n-exo" /> exogenous (forcing/boundary input)</label>
+          <button class="mini" id="add-node">+ add node</button>
+        </div>
+
+        <!-- CAUSAL -->
+        <div class="panel" id="panel-causal">
+          <div class="muted2">An edge means <b>do(source) → Δtarget</b>. Prefer <code class="k">core → new analyte</code> (sink) so it can't perturb the diagnostic core.</div>
+          <div class="form-row"><label>source <span class="req">*</span></label><input id="c-src" list="nodelist" placeholder="node id" /></div>
+          <div class="form-row"><label>target <span class="req">*</span></label><input id="c-tgt" list="nodelist" placeholder="node id" /></div>
+          <div class="form-row"><label>sign <span class="req">*</span></label>
+            <select id="c-sign"><option>+</option><option>-</option><option>?</option></select></div>
+          <div class="form-row"><label>context id (optional stable regime selector)</label><input id="c-context-id" placeholder="fed-state" /></div>
+          <div class="form-row"><label>context label</label><input id="c-context-label" placeholder="fed state" /></div>
+          <div class="form-row"><label>context kind</label><select id="c-context-kind">
+            <option value="physiological-regime">physiological-regime</option>
+            <option value="life-stage">life-stage</option>
+            <option value="modulator-regime">modulator-regime</option>
+            <option value="source-regime">source-regime</option>
+            <option value="dynamic">dynamic (must use sign ?)</option>
+          </select></div>
+          <div class="form-row"><label>causal_evidence <span class="req">*</span> (interventional only)</label>
+            <select id="c-ce">
+              <option value="perturbation">perturbation (KO/KD/CRISPR/overexpression)</option>
+              <option value="pharmacological">pharmacological (agonist/antagonist)</option>
+              <option value="genetic_lof_gof">genetic_lof_gof (Mendelian LoF/GoF)</option>
+              <option value="mendelian_randomization">mendelian_randomization</option>
+              <option value="mechanistic_model">mechanistic_model (ODE Jacobian)</option>
+              <option value="curated_mechanistic">curated_mechanistic (SIGNOR/INDRA/GO-CAM)</option>
+            </select></div>
+          <div class="form-row"><label>mechanism</label><textarea id="c-mech" placeholder="quality→disposition→process→quality mechanism"></textarea></div>
+          <div class="form-row"><label>evidence <span class="req">*</span> (citation / PMID / textbook anchor)</label><textarea id="c-ev" placeholder="Author Year, PMID ..."></textarea></div>
+          <button class="mini" id="add-causal">+ add causal edge</button>
+        </div>
+
+        <!-- PRODUCTION -->
+        <div class="panel" id="panel-production">
+          <div class="muted2">A typed process output or consumption relation. It is neither material constitution nor an authored causal influence.</div>
+          <div class="form-row"><label>source process/activity <span class="req">*</span></label><input id="p-src" list="nodelist" placeholder="node id" /></div>
+          <div class="form-row"><label>target pool/output <span class="req">*</span></label><input id="p-tgt" list="nodelist" placeholder="node id" /></div>
+          <div class="form-row"><label>sign <span class="req">*</span></label>
+            <select id="p-sign"><option>+</option><option>-</option></select></div>
+          <div class="form-row"><label>production_evidence <span class="req">*</span></label>
+            <select id="p-pe">
+              <option value="curated_source_statement">curated_source_statement</option>
+              <option value="experimental_perturbation">experimental_perturbation</option>
+              <option value="mechanistic_model">mechanistic_model</option>
+            </select></div>
+          <div class="form-row"><label>mechanism <span class="req">*</span></label><textarea id="p-mech" placeholder="production, release, conversion, or consumption mechanism"></textarea></div>
+          <div class="form-row"><label>evidence <span class="req">*</span></label><textarea id="p-ev" placeholder="traceable citation or model source"></textarea></div>
+          <button class="mini" id="add-production">+ add production edge</button>
+        </div>
+
+        <!-- CONSTITUTIVE -->
+        <div class="panel" id="panel-constitutive">
+          <div class="muted2">Cross-scale <b>constitutive</b> (not causal): micro ▷ macro. Validated against <code class="k">ontology/partof.yaml</code>.</div>
+          <div class="form-row"><label>micro (finer) <span class="req">*</span></label><input id="k-micro" list="nodelist" placeholder="node id" /></div>
+          <div class="form-row"><label>macro (coarser) <span class="req">*</span></label><input id="k-macro" list="nodelist" placeholder="node id" /></div>
+          <div class="form-row"><label>relation <span class="req">*</span></label>
+            <select id="k-rel">
+              <option value="part_of+determination">part_of+determination (structural)</option>
+              <option value="aggregation">aggregation (mereological sum, sign +)</option>
+              <option value="participation">participation</option>
+            </select></div>
+          <div class="form-row"><label>sign <span class="req">*</span></label>
+            <select id="k-sign"><option>+</option><option>-</option></select></div>
+          <button class="mini" id="add-const">+ add constitutive edge</button>
+        </div>
+
+        <!-- MODULATION -->
+        <div class="panel" id="panel-modulation">
+          <div class="muted2">A <b>gain</b>: modulator scales the strength of an <i>existing</i> causal edge. Gated harder — needs interventional <b>interaction</b> evidence.</div>
+          <div class="form-row"><label>modulator <span class="req">*</span></label><input id="m-mod" list="nodelist" placeholder="node id" /></div>
+          <div class="form-row"><label>influence_id <span class="req">*</span> (exact modulated influence)</label><input id="m-influence" list="influencelist" placeholder="influence:source:positive:target" /></div>
+          <div class="form-row"><label>sign <span class="req">*</span> (of d(gain)/d(modulator))</label>
+            <select id="m-sign"><option>+</option><option>-</option></select></div>
+          <div class="form-row"><label>causal_evidence <span class="req">*</span></label>
+            <select id="m-ce">
+              <option value="mechanistic_model">mechanistic_model (cross term)</option>
+              <option value="perturbation">perturbation (2-factor do())</option>
+              <option value="pharmacological">pharmacological (2-factor)</option>
+              <option value="genetic_lof_gof">genetic_lof_gof</option>
+              <option value="mendelian_randomization">mendelian_randomization</option>
+              <option value="curated_mechanistic">curated_mechanistic</option>
+            </select></div>
+          <div class="form-row"><label>mechanism</label><textarea id="m-mech"></textarea></div>
+          <div class="form-row"><label>evidence <span class="req">*</span> (interaction evidence)</label><textarea id="m-ev" placeholder="two-factor do() whose slope changes with the modulator"></textarea></div>
+          <label class="chk"><input type="checkbox" id="m-flip" /> can_flip_sign (gain can cross zero)</label>
+          <button class="mini" id="add-modul">+ add modulation edge</button>
+        </div>
+
+        <!-- RATIO -->
+        <div class="panel" id="panel-ratio">
+          <div class="muted2">A measurement identity <b>ratio = numerator / denominator</b>; this is quantitative definition, not constitution.</div>
+          <div class="form-row"><label>ratio/result <span class="req">*</span></label><input id="r-result" list="nodelist" placeholder="concentration node id" /></div>
+          <div class="form-row"><label>numerator <span class="req">*</span></label><input id="r-num" list="nodelist" placeholder="amount/count/mass node id" /></div>
+          <div class="form-row"><label>denominator <span class="req">*</span></label><input id="r-den" list="nodelist" placeholder="volume/duration node id" /></div>
+          <div class="form-row"><label>mechanism / definition</label><textarea id="r-mech"></textarea></div>
+          <div class="form-row"><label>evidence</label><textarea id="r-ev"></textarea></div>
+          <button class="mini" id="add-ratio">+ add ratio definition</button>
+        </div>
+        <div id="form-err" class="g-err" style="color:#f85149;font-size:12px"></div>
+      </section>
+    </aside>
+
+    <!-- MIDDLE: current contribution + validation -->
+    <main style="overflow:auto;padding:16px">
+      <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
+        <label style="font-weight:600">Current contribution</label>
+        <button class="mini" id="btn-validate">Validate (live gates)</button>
+        <button class="mini" id="btn-preview">OWL axiom preview</button>
+        <button class="mini primary" id="btn-submit" disabled>Submit for review</button>
+        <button class="mini" id="btn-clear">clear</button>
+      </div>
+      <div id="contribution"></div>
+      <details id="preview-box" style="margin-top:10px"><summary>OWL axiom preview</summary><code id="axiom-preview" class="small"></code></details>
+      <h3 style="margin:16px 0 4px;font-size:14px">Validation</h3>
+      <div id="validation"><div class="muted2">Add items, then click <b>Validate</b>. Every gate below is the same check we run before deployment — a contribution can only be submitted when all are green.</div></div>
+    </main>
+
+    <!-- RIGHT: review queue -->
+    <aside id="detail">
+      <div style="display:flex;gap:8px;align-items:center">
+        <h2 style="margin:0">Review queue</h2>
+        <button class="mini" id="btn-refresh">refresh</button>
+      </div>
+      <div class="muted2" id="admin-hint"></div>
+      <div id="queue"></div>
+    </aside>
+  </div>
+
+  <datalist id="nodelist"></datalist>
+  <datalist id="influencelist"></datalist>
+  <script src="editor.js?v=20260714-1"></script>
+</body>
+</html>

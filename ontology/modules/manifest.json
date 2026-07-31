@@ -1,0 +1,67 @@
+{
+  "abox_policy": "excluded",
+  "module_type": "BOT",
+  "modules": [
+    {
+      "axiom_count": 27009,
+      "extraction_seconds": 32.431,
+      "module": "CHEBI.owl",
+      "module_sha256": "c98b75d85c1235f6b6c8308a191c65d4b6e81686dbad6502f11a1b658344e43a",
+      "signature": "CHEBI.signature.txt",
+      "signature_sha256": "631c6213fa2833b300da83f5be65029a05e6f7fcf027620e92c277f5b34f6399",
+      "source": "CHEBI.obo",
+      "source_sha256": "6b6ea5ebf3787b74ddfaa7f79cd96e8e879a3fcb49dbd626c96fc44980cebee4"
+    },
+    {
+      "axiom_count": 4776,
+      "extraction_seconds": 6.841,
+      "module": "CL.owl",
+      "module_sha256": "f436f45f086092171e13602de2e881bc20718db0ea8d7d0273f67abd59f2d20b",
+      "signature": "CL.signature.txt",
+      "signature_sha256": "61e317142311f4237002dbe0d9c65df618992b394f549305c47f97031dccfdd2",
+      "source": "CL.obo",
+      "source_sha256": "8b1cd2daacc8abd9a877596d759aa348f39da37bb78ce7f3c8da36c854b8f8b0"
+    },
+    {
+      "axiom_count": 5793,
+      "extraction_seconds": 17.216,
+      "module": "GO.owl",
+      "module_sha256": "15d51a3f5a762f1561624be5d010d33d19e40f17d3beeabc93c2fddff1feaa60",
+      "signature": "GO.signature.txt",
+      "signature_sha256": "4a8f452149fba036636f7079723304f4e347836573902f300aaa57e95849209a",
+      "source": "GO.obo",
+      "source_sha256": "923645000afcb1df0e72e252b64950b1c2bcc98c9393fec8c1dd1a0f7c9d4d77"
+    },
+    {
+      "axiom_count": 681,
+      "extraction_seconds": 4.998,
+      "module": "PATO.owl",
+      "module_sha256": "8b5e5dad66ffe1889bd953c09dbad77bd3c16e3b71276b5cf44dab5ee355ed03",
+      "signature": "PATO.signature.txt",
+      "signature_sha256": "e011519e7337c626d1902c846bcd3ac8139fb6095ee4109c9abb801f750a4ba4",
+      "source": "PATO.obo",
+      "source_sha256": "9b65efdf7d8d96bafd54637041cc615404ac2c88608efbcf54efa0a369bb1f75"
+    },
+    {
+      "axiom_count": 38142,
+      "extraction_seconds": 129.487,
+      "module": "PR.owl",
+      "module_sha256": "89bde664a0173c1ecaea63182411cffd22c8380eeae894d49bd6d1c71142da67",
+      "signature": "PR.signature.txt",
+      "signature_sha256": "a6ad20f528fb8fc3cf71e24759716db12bb141ee3ee0dee75d36a2f460569f6d",
+      "source": "PR.obo",
+      "source_sha256": "96b4c3a983ae3d15f8baa3b6cbe94aebfa9d40fd55349c1c383d34b74be3e3f0"
+    },
+    {
+      "axiom_count": 13260,
+      "extraction_seconds": 9.568,
+      "module": "UBERON.owl",
+      "module_sha256": "63df9e3f21a934fe42077440f64fdcb0e6f8b6989e16f7fa6a35d16fe52ba837",
+      "signature": "UBERON.signature.txt",
+      "signature_sha256": "1afa995f6af34ae6305cc21057a4483b5fe29da775d78bb48540ad91c1639894",
+      "source": "UBERON.obo",
+      "source_sha256": "3bb924f16f3452d77c48a8e1de818d8a4b749db59d6f9b279b12f3d6099fcc1c"
+    }
+  ],
+  "schema_version": "1.0.0"
+}

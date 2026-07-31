@@ -1,0 +1,128 @@
+# =============================================================================
+# part_of backbone for PhysioMap constitution validation   *** curated, ontology-grounded ***
+# =============================================================================
+# A small, versioned mereology (BFO:0000050 part_of) over the anatomical/cell entities used
+# by PhysioMap nodes, taken from Uberon and the Cell Ontology (CL) and used by
+# physiomap_core/constitution.py to VALIDATE constitutive `part_of+determination` (and
+# `aggregation`) edges: a structural constitutive edge micro ▷ macro should have a part_of
+# path from the micro node's (bearer) entity to the macro node's entity. Labels were verified
+# verbatim against the downloaded canonical OBO files (PATO/CL/Uberon/ChEBI/GO/PR, 2026-06);
+# part_of facts are textbook anatomy as encoded in Uberon/CL.
+#
+# This is NOT the full OWL import (the ontology/ ELK module is a later phase) — it is the
+# minimal mereological scaffold needed to check that the constitution we assert is consistent
+# with real part-whole structure, to derive/check scale, and to expose missing rungs.
+#
+# Each entry: <IRI>: { label, scale, part_of: [parent IRIs] }  (part_of = "is part of").
+# =============================================================================
+
+entities:
+  # ---- cells (CL) → tissue/organ -------------------------------------------
+  CL:0000359: { label: vascular associated smooth muscle cell, scale: cellular, part_of: [UBERON:0002049] }
+  CL:1000850: { label: macula densa epithelial cell,           scale: cellular, part_of: [UBERON:0002113] }
+  CL:0000648: { label: kidney granular cell,                  scale: cellular, part_of: [UBERON:0002113] }
+  CL:0002173: { label: extraglomerular mesangial cell,          scale: cellular, part_of: [UBERON:0002113] }
+  CL:0000169: { label: type B pancreatic cell,                scale: cellular, part_of: [UBERON:0000006] }
+  CL:0000171: { label: pancreatic A cell,                       scale: cellular, part_of: [UBERON:0000006] }  # alpha cell
+  CL:0000173: { label: pancreatic D cell,                       scale: cellular, part_of: [UBERON:0000006] }  # delta cell
+  CL:0000092: { label: osteoclast,                              scale: cellular, part_of: [UBERON:0001474] }
+  CL:0000062: { label: osteoblast,                              scale: cellular, part_of: [UBERON:0001474] }
+  CL:0000137: { label: osteocyte,                               scale: cellular, part_of: [UBERON:0001474] }
+  CL:0000765: { label: erythroblast,                            scale: cellular, part_of: [UBERON:0002371] }
+  CL:0000038: { label: erythroid progenitor cell,               scale: cellular, part_of: [UBERON:0002371] }
+  CL:0000235: { label: macrophage,                              scale: cellular, part_of: [UBERON:0002405] }
+  CL:0000115: { label: endothelial cell,                        scale: cellular, part_of: [UBERON:0002049] }
+  CL:0000746: { label: cardiac muscle cell,                   scale: cellular, part_of: [UBERON:0002349] }
+  CL:0000188: { label: cell of skeletal muscle,                 scale: cellular, part_of: [UBERON:0001134] }
+
+  # ---- producer/bearer cells of origin (CL) → tissue/organ (added 2026-06) ----
+  # Each cell of origin grounded with a verified part_of path to the organism. Labels
+  # verified verbatim vs OLS4 (CL). NB CL:0000437's canonical label is "gonadtroph" (sic).
+  CL:0002136: { label: type II cell of adrenal cortex,          scale: cellular, part_of: [UBERON:0001235] }
+  CL:0002099: { label: type I cell of adrenal cortex,           scale: cellular, part_of: [UBERON:0001235] }
+  CL:0000336: { label: adrenal medulla chromaffin cell,         scale: cellular, part_of: [UBERON:0001236] }
+  CL:0002309: { label: corticotroph,                            scale: cellular, part_of: [UBERON:0002196] }
+  CL:0000476: { label: thyrotroph,                              scale: cellular, part_of: [UBERON:0002196] }
+  CL:0002312: { label: somatotroph,                             scale: cellular, part_of: [UBERON:0002196] }
+  CL:0000437: { label: gonadtroph,                              scale: cellular, part_of: [UBERON:0002196] }
+  CL:1001505: { label: parvocellular neurosecretory cell,       scale: cellular, part_of: [UBERON:0001930] }
+  CL:0011003: { label: magnocellular neurosecretory cell,       scale: cellular, part_of: [UBERON:0001898] }
+  CL:0002373: { label: growth hormone releasing hormone secreting cell, scale: cellular, part_of: [UBERON:0001898] }
+  CL:0011111: { label: hypothalamic gonadotropin-releasing hormone neuron, scale: cellular, part_of: [UBERON:0001898] }
+  CL:0002258: { label: thyroid follicular cell,                 scale: cellular, part_of: [UBERON:0002046] }
+  CL:0000182: { label: hepatocyte,                              scale: cellular, part_of: [UBERON:0002107] }
+  CL:0000501: { label: granulosa cell,                          scale: cellular, part_of: [UBERON:0000992] }
+  CL:0000175: { label: luteal cell,                             scale: cellular, part_of: [UBERON:0000992] }
+  CL:0000178: { label: Leydig cell,                             scale: cellular, part_of: [UBERON:0000473] }
+  CL:0000216: { label: Sertoli cell,                            scale: cellular, part_of: [UBERON:0000473] }
+  CL:0000446: { label: chief cell of parathyroid gland,         scale: cellular, part_of: [UBERON:0001132] }
+  CL:0000508: { label: type G enteroendocrine cell,             scale: cellular, part_of: [UBERON:0000945] }
+  CL:0005018: { label: ghrelin secreting cell,                  scale: cellular, part_of: [UBERON:0000945] }
+  CL:0002278: { label: GIP cell,                                scale: cellular, part_of: [UBERON:0002114] }
+  CL:0002279: { label: type L enteroendocrine cell,             scale: cellular, part_of: [UBERON:0002108] }
+  CL:0000136: { label: adipocyte,                               scale: cellular, part_of: [UBERON:0001013] }
+  CL:0002129: { label: regular atrial cardiac myocyte,          scale: cellular, part_of: [UBERON:0002081] }
+  CL:3000002: { label: sympathetic noradrenergic neuron,        scale: cellular, part_of: [UBERON:0000013] }
+
+  # ---- tissues / sub-organ structures (Uberon) → organ ---------------------
+  UBERON:0002349: { label: myocardium,             scale: tissue, part_of: [UBERON:0000948] }
+  UBERON:0000006: { label: islet of Langerhans,    scale: tissue, part_of: [UBERON:0001264] }
+  UBERON:0002371: { label: bone marrow,            scale: tissue, part_of: [UBERON:0001474] }
+  UBERON:0001134: { label: skeletal muscle tissue, scale: tissue, part_of: [UBERON:0001630] }
+  # sub-organ structures for the new cells of origin (added 2026-06)
+  UBERON:0001235: { label: adrenal cortex,                 scale: tissue, part_of: [UBERON:0002369] }
+  UBERON:0001236: { label: adrenal medulla,                scale: tissue, part_of: [UBERON:0002369] }
+  UBERON:0002196: { label: adenohypophysis,                scale: tissue, part_of: [UBERON:0000007] }
+  UBERON:0001930: { label: paraventricular nucleus of hypothalamus, scale: tissue, part_of: [UBERON:0002271] }
+  UBERON:0002271: { label: periventricular zone of hypothalamus,    scale: tissue, part_of: [UBERON:0001898] }
+  UBERON:0001898: { label: hypothalamus,                   scale: tissue, part_of: [UBERON:0000955] }
+  UBERON:0002081: { label: cardiac atrium,                 scale: tissue, part_of: [UBERON:0000948] }
+  UBERON:0001013: { label: adipose tissue,                 scale: tissue, part_of: [UBERON:0000468] }
+
+  # ---- organs (Uberon) → organ systems -------------------------------------
+  UBERON:0000948: { label: heart,            scale: organ, part_of: [UBERON:0001009] }
+  UBERON:0002049: { label: vasculature,      scale: organ, part_of: [UBERON:0001009] }
+  UBERON:0002113: { label: kidney,           scale: organ, part_of: [UBERON:0001008] }
+  UBERON:0001264: { label: pancreas,         scale: organ, part_of: [UBERON:0000949] }
+  UBERON:0001474: { label: bone element,     scale: organ, part_of: [UBERON:0001434] }
+  UBERON:0001630: { label: muscle organ,     scale: organ, part_of: [UBERON:0002204] }
+  # organs hosting the new cells of origin (added 2026-06)
+  UBERON:0002369: { label: adrenal gland,     scale: organ, part_of: [UBERON:0000949] }
+  UBERON:0000007: { label: pituitary gland,   scale: organ, part_of: [UBERON:0000949] }
+  UBERON:0000955: { label: brain,             scale: organ, part_of: [UBERON:0001017] }
+  UBERON:0002046: { label: thyroid gland,     scale: organ, part_of: [UBERON:0000949] }
+  UBERON:0001132: { label: parathyroid gland, scale: organ, part_of: [UBERON:0000949] }
+  UBERON:0002107: { label: liver,             scale: organ, part_of: [UBERON:0001007] }
+  UBERON:0000992: { label: ovary,             scale: organ, part_of: [UBERON:0000474] }
+  UBERON:0000473: { label: testis,            scale: organ, part_of: [UBERON:0000079] }
+  UBERON:0000945: { label: stomach,           scale: organ, part_of: [UBERON:0001007] }
+  UBERON:0002114: { label: duodenum,          scale: organ, part_of: [UBERON:0002108] }
+  UBERON:0002108: { label: small intestine,   scale: organ, part_of: [UBERON:0000160] }
+  UBERON:0000160: { label: intestine,         scale: organ, part_of: [UBERON:0001007] }
+
+  # ---- organ systems (Uberon) → organism -----------------------------------
+  UBERON:0001009: { label: circulatory system,   scale: organ_system, part_of: [UBERON:0000468] }
+  UBERON:0001008: { label: renal system,         scale: organ_system, part_of: [UBERON:0000468] }
+  UBERON:0000949: { label: endocrine system,     scale: organ_system, part_of: [UBERON:0000468] }
+  UBERON:0001434: { label: skeletal system,      scale: organ_system, part_of: [UBERON:0000468] }
+  UBERON:0002204: { label: musculoskeletal system, scale: organ_system, part_of: [UBERON:0000468] }
+  UBERON:0002405: { label: immune system,        scale: organ_system, part_of: [UBERON:0000468] }
+  # organ systems for the new cells of origin (added 2026-06)
+  UBERON:0001007: { label: digestive system,      scale: organ_system, part_of: [UBERON:0000468] }
+  UBERON:0001016: { label: nervous system,        scale: organ_system, part_of: [UBERON:0000468] }
+  UBERON:0000990: { label: reproductive system,   scale: organ_system, part_of: [UBERON:0000468] }
+  UBERON:0000474: { label: female reproductive system, scale: organ_system, part_of: [UBERON:0000990] }
+  UBERON:0000079: { label: male reproductive system,   scale: organ_system, part_of: [UBERON:0000990] }
+  # nervous-system subdivisions linking sympathetic neuron and brain up to nervous system
+  UBERON:0001017: { label: central nervous system,    scale: organ_system, part_of: [UBERON:0001016] }
+  UBERON:0000010: { label: peripheral nervous system, scale: organ_system, part_of: [UBERON:0001016] }
+  UBERON:0002410: { label: autonomic nervous system,  scale: organ_system, part_of: [UBERON:0000010] }
+  UBERON:0000013: { label: sympathetic nervous system, scale: organ_system, part_of: [UBERON:0002410] }
+
+  # ---- blood + plasma (for blood-volume aggregation) -----------------------
+  UBERON:0000178: { label: blood,        scale: organ_system, part_of: [UBERON:0001009] }
+  UBERON:0001969: { label: blood plasma, scale: organ_system, part_of: [UBERON:0000178] }
+  CL:0000232:     { label: erythrocyte,  scale: cellular,     part_of: [UBERON:0000178] }
+
+  # ---- organism ------------------------------------------------------------
+  UBERON:0000468: { label: multicellular organism, scale: organism, part_of: [] }

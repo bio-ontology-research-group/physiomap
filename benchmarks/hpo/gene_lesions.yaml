@@ -1,0 +1,31 @@
+# =============================================================================
+# Gene (loss/gain-of-function) -> primary PhysioMap node + sign   *** curated, DRAFT ***
+# =============================================================================
+# The do() a monogenic variant imposes: which PhysioMap node the gene product directly clamps,
+# and the direction (LoF of an enzyme/activator/channel -> "-"; activating/GoF or LoF-of-an-
+# inhibitor -> "+"). Gene symbols match HPO genes_to_phenotype. Used to validate PhysioMap
+# against the REAL HPO gene->phenotype annotations (scripts/build_hpo_observations.py +
+# physiomap_core/hpo_validate.py). Mechanisms are textbook; OMIM/provenance in disorders.yaml.
+# =============================================================================
+genes:
+  SCNN1B:  { primary: { sodium_water_reabsorption: "+" }, note: "Liddle ENaC gain-of-function" }
+  SCNN1G:  { primary: { sodium_water_reabsorption: "+" }, note: "Liddle ENaC gain-of-function" }
+  SLC12A3: { primary: { sodium_water_reabsorption: "-" }, note: "Gitelman NCC loss-of-function (salt wasting)" }
+  SLC12A1: { primary: { sodium_water_reabsorption: "-" }, note: "Bartter NKCC2 loss-of-function (salt wasting)" }
+  CYP11B2: { primary: { aldosterone: "+" },               note: "aldosterone synthase / GRA -> aldosterone excess" }
+  CYP21A2: { primary: { cortisol: "-" },                  note: "21-hydroxylase deficiency -> cortisol (and aldosterone) deficiency" }
+  LDLR:    { primary: { hepatic_ldl_receptor_activity: "-" }, note: "familial hypercholesterolemia" }
+  HFE:     { primary: { hepcidin: "-" },                  note: "hereditary hemochromatosis -> inappropriately low hepcidin" }
+  HAMP:    { primary: { hepcidin: "-" },                  note: "juvenile hemochromatosis (hepcidin gene)" }
+  AVP:     { primary: { adh: "-" },                       note: "central diabetes insipidus -> ADH deficiency" }
+  TPO:     { primary: { free_t4: "-" },                   note: "thyroid dyshormonogenesis -> low T4" }
+  TSHR:    { primary: { free_t4: "-" },                   note: "TSH-resistance / congenital hypothyroidism -> low T4" }
+  PAH:     { primary: { pah_enzyme_activity: "-" },       note: "phenylketonuria" }
+  CBS:     { primary: { cbs_enzyme_activity: "-" },       note: "classic homocystinuria" }
+  HPRT1:   { primary: { hgprt_activity: "-" },            note: "Lesch-Nyhan -> urate overproduction" }
+  XDH:     { primary: { xanthine_oxidase_activity: "-" }, note: "hereditary xanthinuria" }
+  G6PC:    { primary: { g6pase_activity: "-" },           note: "GSD Ia (von Gierke)" }
+  UGT1A1:  { primary: { ugt1a1_activity: "-" },           note: "Gilbert / Crigler-Najjar" }
+  ATP7B:   { primary: { atp7b_activity: "-" },            note: "Wilson disease" }
+  PHEX:    { primary: { fgf23: "+" },                     note: "X-linked hypophosphatemia -> excess FGF23" }
+  TRPM6:   { primary: { trpm6_activity: "-" },            note: "familial hypomagnesemia" }

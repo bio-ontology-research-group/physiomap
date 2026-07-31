@@ -1,0 +1,151 @@
+# =============================================================================
+# Iron homeostasis / hepcidin–ferroportin axis — PhysioMap fragment  *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Hand-encoded, single-scale (ORGAN_SYSTEM / ORGAN). Each edge sign is the sign of
+# the partial derivative of the target w.r.t. the source at steady state, all else
+# equal (interventionist partial). ROBERT: please correct signs/edges.
+#
+# Sources for canonical signs / mechanisms:
+#   - Parmar JH, Mendes P (2019) "A computational model to understand mouse iron
+#     physiology and disease." PLoS Comput Biol; BioModels MODEL1805140003
+#     (Parmar2019 - Iron Mouse PV3); PMID 30608934. Whole-body iron model with
+#     hepcidin control of ferroportin / plasma (transferrin-bound) iron.
+#   - Masison J, Mendes P (2023) "Modeling the iron storage protein ferritin..."
+#     PLoS ONE; BioModels MODEL2211030002 (Masison2022 - Liver Iron Metabolism with
+#     updated ferritin); doi:10.1371/journal.pone.0281401. Ferritin iron storage.
+#   - Kautz L, Jung G, Valore EV, Rivella S, Nemeth E, Ganz T (2014) "Identification
+#     of erythroferrone as an erythroid regulator of iron metabolism." Nat Genet
+#     46:678-684; PMID 24880340. EPO -> erythroblast ERFE -> suppresses hepcidin.
+#   - Nemeth E et al. (2004) "Hepcidin regulates cellular iron efflux by binding to
+#     ferroportin and inducing its internalization." Science 306:2090-2093;
+#     PMID 15514116. Hepcidin -> ferroportin degradation.
+#   - Ganz T, Nemeth E (2012) "Hepcidin and iron homeostasis." Biochim Biophys Acta
+#     1823:1434-1443 (review); Boron & Boulpaep Medical Physiology (iron handling).
+#
+# FEEDBACK LOOPS encoded:
+#   (1) Iron-sensing negative feedback (the central homeostatic loop):
+#       plasma_iron --(+)--> transferrin_saturation --(+)--> hepcidin
+#         --(-)--> ferroportin_activity --(+)--> plasma_iron
+#       (one positive + one positive + one negative + one positive => NET NEGATIVE)
+#   (2) Erythropoietic demand (erythroferrone) feedback closing through EPO axis:
+#       erythropoietin --(+)--> erythropoietic_iron_demand --(-)--> hepcidin
+#         --(-)--> ferroportin_activity --(+)--> plasma_iron --(+)--> red_cell_mass
+#       supplies iron for erythropoiesis on demand.
+#
+# Boundary nodes (defined in sibling fragments; referenced, NOT redefined here):
+#   erythropoietin            (hematology_epo)
+#   red_cell_mass             (hematology_epo)
+#   renal_tissue_oxygenation  (hematology_epo)
+# A standalone load of this file alone will flag those as unknown — EXPECTED; they
+# resolve on merge() with the sibling fragments.
+# =============================================================================
+
+name: iron_hepcidin
+description: >-
+  DRAFT iron homeostasis / hepcidin–ferroportin axis as a PhysioMap signed cyclic
+  causal graph. Encodes the central iron-sensing negative-feedback loop (plasma iron
+  -> transferrin saturation -> hepcidin -> ferroportin -> plasma iron) and the
+  erythroferrone-mediated suppression of hepcidin by erythropoietic iron demand,
+  connecting to the erythropoietin / red-cell-mass / renal-oxygenation axis.
+  Single-scale (Phase 1).
+
+nodes:
+- id: hepcidin
+  label: plasma hepcidin (HAMP)
+  scale: organ_system
+  entity_iri: CHEBI:75475             # hepcidin
+  quality_iri: PATO:0000033           # concentration
+- id: plasma_iron
+  label: plasma (transferrin-bound) iron concentration
+  scale: organ_system
+  entity_iri: CHEBI:24875             # iron(2+)/iron cation
+  quality_iri: PATO:0000033           # concentration
+- id: transferrin_saturation
+  label: transferrin saturation (TSAT)
+  scale: organ_system
+  entity_iri: PR:P02787               # serotransferrin (human), UniProtKB:P02787 (bearer of the saturation)
+  quality_iri: PATO:0001019           # fractional saturation
+- id: ferritin_stores
+  label: tissue (hepatic/macrophage) ferritin iron stores
+  scale: organ_system
+  entity_iri: GO:0070288    # ferritin complex
+  quality_iri: PATO:0000125           # mass / amount
+- id: ferroportin_activity
+  label: ferroportin (SLC40A1) iron-export activity
+  scale: cellular
+  entity_iri: PR:000013983            # ferroportin / SLC40A1
+  quality_iri: PATO:0001414           # activity
+- id: erythropoietic_iron_demand
+  label: erythropoietic iron demand (erythroferrone signal)
+  scale: organ_system
+  quality_iri: PATO:0001414           # activity / signaling rate
+
+causal_edges:
+  # --- central iron-sensing negative-feedback loop -------------------------
+- source: hepcidin
+  target: ferroportin_activity
+  sign: "-"
+  causal_evidence: perturbation
+  mechanism: hepcidin binds ferroportin on enterocytes/macrophages/hepatocytes, triggering its internalization and degradation, lowering cellular iron export
+  evidence: 'Nemeth et al. 2004 Science 306:2090 (PMID 15514116); Parmar2019 BioModels MODEL1805140003 (PMID 30608934); Ganz & Nemeth 2012 BBA review | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-098 (17.11: Organs with Secondary Endocrine Functions): ''Hepcidins block the release of iron from cells in the body, helping to regulate iron homeostasis''; OpenStax Anatomy & Physiology 2e §anp-137 (23.8: Chemical Digestion and Absorption - A Closer Look): ''When the body needs iron...there is increased uptake of iron from the intestine and accelerated release of iron into the bloodstream'' — low body iron reduces hepcidin, releasing ferroportin-mediated export (implied mechanism) [citations PubMed-verified]'
+- source: ferroportin_activity
+  target: plasma_iron
+  sign: "+"
+  causal_evidence: mechanistic_model
+  mechanism: ferroportin is the sole cellular iron exporter; higher export from duodenal enterocytes and reticuloendothelial macrophages raises transferrin-bound plasma iron
+  evidence: 'Parmar2019 BioModels MODEL1805140003 (ferroportin flux -> plasma Fe; PMID 30608934); Boron & Boulpaep Medical Physiology [citations PubMed-verified]'
+- source: plasma_iron
+  target: transferrin_saturation
+  sign: "+"
+  mechanism: plasma iron circulates bound to transferrin; rising plasma iron at fixed transferrin raises fractional transferrin saturation (TSAT)
+  evidence: "TSAT = serum iron / TIBC by definition; Boron & Boulpaep Medical Physiology (iron transport)"
+- source: transferrin_saturation
+  target: hepcidin
+  sign: "+"
+  causal_evidence: mechanistic_model
+  mechanism: high diferric-transferrin saturation signals via TfR2/HFE and BMP6-HJV-SMAD to upregulate hepatic HAMP transcription (closes the iron-sensing negative-feedback loop)
+  evidence: 'Ganz & Nemeth 2012 BBA 1823:1434 review; Parmar2019 BioModels MODEL1805140003 (transferrin-saturation sensing of hepcidin; PMID 30608934) [citations PubMed-verified]'
+
+  # --- iron stores sensing of hepcidin -------------------------------------
+- source: plasma_iron
+  target: ferritin_stores
+  sign: "+"
+  causal_evidence: mechanistic_model
+  mechanism: surplus plasma iron is taken up by hepatocytes and macrophages and sequestered as ferritin; higher iron availability raises stored iron and ferritin
+  evidence: "Masison2022 BioModels MODEL2211030002 (ferritin iron sequestration; doi:10.1371/journal.pone.0281401); Boron & Boulpaep"
+- source: ferritin_stores
+  target: hepcidin
+  sign: "+"
+  causal_evidence: mechanistic_model
+  mechanism: high hepatic iron stores increase BMP6 expression and BMP-SMAD signaling, raising hepcidin transcription (stores-regulator of hepcidin)
+  evidence: "Ganz & Nemeth 2012 BBA 1823:1434 review (stores regulator via BMP6); Parmar2019 BioModels MODEL1805140003 [citations PubMed-verified]"
+- source: hepcidin
+  target: ferritin_stores
+  sign: "+"
+  causal_evidence: mechanistic_model
+  mechanism: by degrading ferroportin, hepcidin traps iron inside macrophages and hepatocytes, increasing intracellular ferritin-bound iron stores
+  evidence: 'Nemeth et al. 2004 Science 306:2090 (PMID 15514116); Masison2022 BioModels MODEL2211030002 (doi:10.1371/journal.pone.0281401) [citations PubMed-verified]'
+
+  # --- erythroferrone: erythropoietic demand suppresses hepcidin -----------
+- source: erythropoietic_iron_demand
+  target: hepcidin
+  sign: "-"
+  causal_evidence: perturbation
+  mechanism: erythroblasts secrete erythroferrone (ERFE) which sequesters BMP2/6 and inhibits hepatic BMP-SMAD signaling, suppressing hepcidin transcription to mobilize iron for erythropoiesis
+  evidence: 'Kautz et al. 2014 Nat Genet 46:678-684 (PMID 24880340); Arezes et al. 2018/2020 (ERFE sequesters BMP2/6); Ganz & Nemeth review [citations PubMed-verified]'
+- source: erythropoietin
+  target: erythropoietic_iron_demand
+  sign: "+"
+  causal_evidence: perturbation
+  mechanism: EPO drives erythroblast proliferation and, via STAT5, induces erythroferrone secretion — raising the erythropoietic iron-demand signal
+  evidence: 'Kautz et al. 2014 Nat Genet 46:678-684 (EPO/STAT5-dependent ERFE; PMID 24880340) [citations PubMed-verified]'
+
+  # --- iron supply to erythropoiesis (couples into hematology axis) --------
+- source: plasma_iron
+  target: red_cell_mass
+  sign: "+"
+  causal_evidence: mechanistic_model
+  mechanism: transferrin-bound iron is the obligatory substrate for hemoglobin synthesis in erythroid precursors; iron availability is rate-limiting for effective erythropoiesis and red-cell production
+  evidence: "Boron & Boulpaep Medical Physiology (iron-limited erythropoiesis); Ganz & Nemeth 2012 BBA review; Parmar2019 BioModels MODEL1805140003 [citations PubMed-verified]"
+
+constitutive_edges: []   # none yet — multi-scale expansion is the next step

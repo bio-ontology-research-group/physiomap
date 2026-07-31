@@ -1,0 +1,199 @@
+# =============================================================================
+# Lipoprotein / cholesterol metabolism — PhysioMap fragment   *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Hand-encoded canonical lipid physiology. Every causal edge sign is the sign of
+# the partial derivative of the target w.r.t. the source at steady state, all
+# else equal (interventionist partial). Within-scale (organ / organ_system) signed
+# cyclic causal edges.
+#
+# CORE FEEDBACK STRUCTURE (the point of this fragment) — the Brown & Goldstein
+# LDL-receptor sterol-regulatory control system. There are TWO distinct loops on
+# the hepatocyte regulatory cholesterol pool; their sign products differ, so the
+# structure must be reasoned about per-loop, not labelled with a single sign:
+#
+#   (A) SYNTHESIS ARM — genuine NEGATIVE / stabilizing feedback on the pool:
+#       hepatocyte_cholesterol_content --(-)--> hepatic_cholesterol_synthesis
+#       hepatic_cholesterol_synthesis  --(+)--> hepatocyte_cholesterol_content
+#       => sign product (-)(+) = (-): a rise in intracellular cholesterol
+#          suppresses de novo synthesis (SREBP + HMG-CoA reductase), damping the pool.
+#
+#   (B) LDLR ARM — homeostatic control of PLASMA LDL; ALSO a stabilizing loop on the pool:
+#       hepatocyte_cholesterol_content --(-)--> hepatic_ldl_receptor_activity (SREBP)
+#       hepatic_ldl_receptor_activity  --(+)--> hepatocyte_cholesterol_content (RECEPTOR-GATED uptake)
+#       => sign product (-)(+) = (-): a second negative/stabilizing loop on the pool.
+#       and separately  hepatic_ldl_receptor_activity --(-)--> ldl_cholesterol (clearance),
+#       so high intracellular cholesterol downregulates LDLR, which RAISES plasma LDL
+#       (FH = LDLR loss -> high LDL, AND a cholesterol-depleted hepatocyte -> synthesis up).
+#       NOTE: hepatocyte uptake is modelled from LDLR ACTIVITY (the regulated, rate-limiting
+#       step), not directly from plasma LDL — so an LDLR-loss intervention correctly DEPLETES
+#       the hepatocyte pool even as plasma LDL rises (the receptor gates the flux).
+#
+#    Getting the net sign of an LDLR-loss or synthesis-block (statin) intervention
+#    right REQUIRES loop reasoning, not forward propagation.
+#
+# SOURCES (all verified):
+#   - BioModels BIOMD0000000434  McAuley2012 - Whole-body Cholesterol Metabolism
+#     (McAuley MT, Wilkinson DJ, Jones JJL, Kirkwood TBL. "A whole-body mathematical
+#      model of cholesterol metabolism and its age-associated dysregulation."
+#      BMC Systems Biology 2012; 6:130. PubMed 23046614). Provides hepatic synthesis,
+#      LDL/HDL pools, LDL-receptor uptake, and the SREBP sterol-feedback structure.
+#   - Brown MS, Goldstein JL. "A receptor-mediated pathway for cholesterol homeostasis."
+#     Science 1986; 232:34-47 (Nobel lecture). Classic LDL-receptor feedback pathway:
+#     intracellular cholesterol downregulates LDLR and HMG-CoA reductase via SREBP.
+#   - Boron WF, Boulpaep EL. Medical Physiology, 3rd ed., Ch. on lipid metabolism /
+#     lipoprotein transport (VLDL->IDL->LDL cascade; HDL reverse transport; insulin
+#     and hepatic VLDL-triglyceride secretion).
+#
+# BOUNDARY NODE (existing vocabulary, referenced not redefined):
+#   - plasma_insulin  (from systems/glucose_insulin.yaml) — couples carbohydrate/insulin
+#     status to hepatic VLDL-triglyceride secretion (canonical; Boron & Boulpaep).
+#
+# ROBERT: please correct signs/edges.
+# =============================================================================
+
+name: lipid_metabolism
+description: >-
+  DRAFT lipoprotein / cholesterol metabolism as a PhysioMap signed cyclic causal
+  graph. Encodes hepatic de novo synthesis (HMG-CoA reductase flux), the VLDL ->
+  LDL cascade, HDL reverse cholesterol transport, and the Brown & Goldstein
+  LDL-receptor sterol-regulatory control system (a stabilizing negative loop on the
+  hepatocyte pool via synthesis, plus correctly signed homeostatic control of plasma
+  LDL via LDLR: intracellular cholesterol -| LDLR -| plasma LDL). Couples to
+  plasma_insulin for hepatic VLDL/TG secretion.
+  Sources: BioModels BIOMD0000000434 (McAuley2012); Brown & Goldstein 1986; Boron
+  & Boulpaep Medical Physiology. Single-scale (Phase 1).
+
+nodes:
+  - id: hepatic_cholesterol_synthesis
+    label: hepatic de novo cholesterol synthesis (HMG-CoA reductase flux)
+    scale: organ
+    entity_iri: GO:0006695              # cholesterol biosynthetic process
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0002107  # liver
+  - id: hepatocyte_cholesterol_content
+    label: hepatocyte intracellular (regulatory) cholesterol content
+    scale: cellular
+    entity_iri: CHEBI:16113             # cholesterol
+    quality_iri: PATO:0000033           # concentration
+  - id: hepatic_ldl_receptor_activity
+    label: hepatic LDL-receptor (LDLR) surface activity
+    scale: organ
+    entity_iri: UBERON:0002107          # liver
+    quality_iri: PATO:0000161           # rate (receptor-mediated uptake activity)
+  - id: vldl_secretion
+    label: hepatic VLDL secretion rate
+    scale: organ
+    entity_iri: UBERON:0002107          # liver
+    quality_iri: PATO:0000161           # rate
+  - id: ldl_cholesterol
+    label: plasma LDL-cholesterol concentration
+    scale: organ_system
+    entity_iri: CHEBI:47774             # low-density lipoprotein
+    quality_iri: PATO:0000033           # concentration
+  - id: hdl_cholesterol
+    label: plasma HDL-cholesterol concentration
+    scale: organ_system
+    entity_iri: CHEBI:39025             # high-density lipoprotein
+    quality_iri: PATO:0000033           # concentration
+  - id: plasma_triglycerides
+    label: plasma triglyceride concentration
+    scale: organ_system
+    entity_iri: CHEBI:17855             # triglyceride
+    quality_iri: PATO:0000033           # concentration
+
+  # --- cellular producer node (constitutive grounding of a secreted substance) ---
+  - id: hepatocyte_apoa1_hdl_secretion
+    label: hepatocyte apoA-I / nascent-HDL synthesis-secretion rate
+    scale: cellular
+    entity_iri: GO:0034380              # high-density lipoprotein particle assembly
+    quality_iri: PATO:0000161
+    bearer_entity_iri: CL:0000182  # hepatocyte
+
+causal_edges:
+  # --- synthesis + uptake fill the hepatic regulatory cholesterol pool --------
+  - source: hepatic_cholesterol_synthesis
+    target: hepatocyte_cholesterol_content
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: HMG-CoA reductase flux -> disposition to produce sterol -> de novo synthesis process -> raised hepatocyte cholesterol content
+    evidence: "BioModels BIOMD0000000434 (McAuley2012 whole-body cholesterol, hepatic synthesis term); Brown & Goldstein Science 1986; Boron & Boulpaep Medical Physiology"
+  - source: hepatic_ldl_receptor_activity
+    target: hepatocyte_cholesterol_content
+    sign: "+"
+    causal_evidence: genetic_lof_gof
+    mechanism: >-
+      hepatic LDL uptake is RECEPTOR-GATED: LDLR-mediated endocytosis -> lysosomal hydrolysis
+      -> free cholesterol delivered to the hepatocyte regulatory pool. The rate-limiting,
+      regulated determinant of uptake is LDLR surface activity (not plasma LDL directly):
+      with LDLR lost (FH) the hepatocyte is cholesterol-DEPLETED despite high plasma LDL.
+    evidence: "Brown & Goldstein Science 1986 (receptor-mediated LDL uptake delivers cholesterol intracellularly; LDLR is the regulated step); BioModels BIOMD0000000434 (McAuley2012) | textbook corroboration: Wong, Cells: Molecules and Mechanisms §wong-11.7 (Receptor-mediated Endocytosis - Undeclared): LDL receptor-mediated endocytosis delivers LDL to lysosome → acid hydrolases liberate free cholesterol and amino acids from lipoprotein → cholesterol delivered to hepatocyte"
+
+  # --- the Brown & Goldstein STEROL-REGULATORY negative feedback --------------
+  - source: hepatocyte_cholesterol_content
+    target: hepatic_ldl_receptor_activity
+    sign: "-"
+    causal_evidence: perturbation
+    mechanism: high intracellular cholesterol -> SREBP cleavage suppressed -> reduced LDLR transcription -> lower LDLR surface activity
+    evidence: "Brown & Goldstein Science 1986 (sterol feedback downregulates LDLR via SREBP); BioModels BIOMD0000000434 (McAuley2012)"
+  - source: hepatocyte_cholesterol_content
+    target: hepatic_cholesterol_synthesis
+    sign: "-"
+    causal_evidence: perturbation
+    mechanism: high intracellular cholesterol -> SREBP suppression + HMG-CoA reductase degradation -> reduced de novo synthesis flux
+    evidence: "Brown & Goldstein Science 1986 (sterol feedback on HMG-CoA reductase); Boron & Boulpaep Medical Physiology"
+
+  # --- LDLR clearance lowers plasma LDL (loop closure) ------------------------
+  - source: hepatic_ldl_receptor_activity
+    target: ldl_cholesterol
+    sign: "-"
+    mechanism: higher hepatic LDLR activity -> increased receptor-mediated clearance of circulating LDL -> lower plasma LDL concentration
+    evidence: "Brown & Goldstein Science 1986 (LDLR sets plasma LDL clearance; FH = LDLR loss -> high LDL); BioModels BIOMD0000000434 (McAuley2012) | textbook corroboration: Wong, Cells: Molecules and Mechanisms §wong-11.7 (Receptor-mediated Endocytosis - Undeclared): LDL binds LDL receptor → clathrin-coated vesicle → endosomal/lysosomal breakdown of LDL; receptor recycled to plasma membrane; mechanism for hepatic LDL clearance from plasma; OpenStax Biology 2e §bio-5.4 (5.4: Bulk Transport): Receptor-mediated endocytosis removes LDL ('bad' cholesterol) from the blood via LDL receptors; in familial hypercholesterolemia, defective or absent LDL receptors cause life-threatening cholesterol elevation because cells cannot clear LDL particles — confirming that higher LDL-receptor activity drives lower plasma LDL concentration."
+
+  # --- VLDL -> LDL cascade and triglyceride carriage --------------------------
+  - source: vldl_secretion
+    target: ldl_cholesterol
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: secreted VLDL -> lipolysis to IDL -> further delipidation to LDL (the lipoprotein cascade) -> raised plasma LDL
+    evidence: "Boron & Boulpaep Medical Physiology (VLDL->IDL->LDL delipidation cascade); BioModels BIOMD0000000434 (McAuley2012)"
+  - source: vldl_secretion
+    target: plasma_triglycerides
+    sign: "+"
+    mechanism: VLDL is the principal triglyceride-carrying lipoprotein; higher hepatic VLDL output raises circulating triglycerides
+    evidence: "Boron & Boulpaep Medical Physiology (VLDL transports endogenous triglyceride)"
+
+  # --- HDL reverse cholesterol transport --------------------------------------
+  - source: hdl_cholesterol
+    target: hepatocyte_cholesterol_content
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: HDL reverse cholesterol transport -> SR-BI selective hepatic uptake of HDL cholesteryl esters -> delivery to hepatocyte pool
+    evidence: "Boron & Boulpaep Medical Physiology (HDL reverse transport to liver via SR-BI); BioModels BIOMD0000000434 (McAuley2012)"
+
+  # --- cross-fragment coupling (boundary node: plasma_insulin) ----------------
+  - source: plasma_insulin
+    target: vldl_secretion
+    sign: "+"
+    context:
+      id: fed-state-hepatic-lipogenesis
+      label: fed-state hepatic lipogenesis and substrate supply
+      kind: physiological-regime
+    mechanism: insulin/carbohydrate status drives hepatic de novo lipogenesis and substrate supply -> increased hepatic VLDL-triglyceride assembly and secretion
+    evidence: "Boron & Boulpaep Medical Physiology (insulin promotes hepatic lipogenesis / VLDL-TG output); insulin-resistant hypertriglyceridaemia clinical phenotype"
+  - source: plasma_insulin
+    target: hepatic_cholesterol_synthesis
+    sign: "+"
+    mechanism: insulin activates SREBP-1/2 and induces HMG-CoA reductase -> increased hepatic cholesterol synthesis flux
+    evidence: "Brown & Goldstein / SREBP regulation; Boron & Boulpaep Medical Physiology (insulin upregulates lipogenic/cholesterogenic program)"
+
+production_edges:
+  # --- PRODUCTION (cell of origin grounds a secreted substance) ----------------
+  # Nascent HDL / apoA-I is synthesised and secreted principally by hepatocytes
+  # (and, dually, by intestinal enterocytes — the dominant source is grounded here
+  # via the hepatocyte; the intestinal contribution is noted but not separately
+  # modelled). The apoA-I / nascent-HDL secretion rate sets plasma HDL-cholesterol.
+  # Boron & Boulpaep, Medical Physiology (hepatic + intestinal apoA-I/HDL synthesis).
+  - source: hepatocyte_apoa1_hdl_secretion
+    target: hdl_cholesterol
+    sign: "+"
+    production_evidence: legacy-evidence-unclassified

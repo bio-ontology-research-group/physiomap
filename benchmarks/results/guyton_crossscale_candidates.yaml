@@ -1,0 +1,212 @@
+_about: Guyton & Hall (11th ed.) CROSS-scale relations surfaced during extraction — recorded as candidate CONSTITUTIVE
+  lifts (production / part_of+determination / aggregation), NOT causal edges (PhysioMap causation is within-scale).
+  For review against ontology/partof.yaml.
+candidates:
+- micro: synaptic_acetylcholine_concentration
+  macro: parasympathetic_tone
+  relation: production
+  sign: +
+  section: Parasympathetic (Vagal) Stimulation
+  quote: Stimulation of the parasympathetic nerves to the heart (the vagi) causes the hormone acetylcholine to be
+    released at the vagal endings
+  _ch: '10'
+- micro: adrenal_chromaffin_cell_epinephrine_secretion
+  macro: epinephrine
+  relation: production
+  sign: +
+  section: Adrenal Medullae and Their Relation to the Sympathetic Vasoconstrictor System
+  quote: They cause the medullae to secrete both epinephrine and norepinephrine into the circulating blood.
+  _ch: '18'
+- micro: jg_granular_renin_secretion
+  macro: renin
+  relation: production
+  sign: +
+  section: Components of the Renin-Angiotensin System
+  quote: Renin is synthesized and stored in an inactive form called prorenin in the juxtaglomerular cells (JG cells)
+    of the kidneys
+  _ch: '19'
+- micro: zona_glomerulosa_cell_aldosterone_secretion
+  macro: aldosterone
+  relation: production
+  sign: +
+  section: Stimulation of Aldosterone Secretion by Angiotensin
+  quote: one of the most powerful stimulators of aldosterone secretion by the adrenal glands
+  _ch: '19'
+- micro: skeletal_muscle_blood_flow
+  macro: venous_return
+  relation: aggregation
+  sign: +
+  section: Cardiac Output Regulation Is the Sum of Blood Flow Regulation in All the Local Tissues
+  quote: The venous return to the heart is the sum of all the local blood flows through all the individual tissue
+    segments of the peripheral circulation.
+  _ch: '20'
+- micro: renal_interstitial_fibroblast_epo_secretion
+  macro: erythropoietin
+  relation: production
+  sign: +
+  section: Regulation of Erythrocyte Production
+  quote: The kidneys secrete erythropoietin, which stimulates the production of red blood cells ... The kidneys
+    normally account for almost all the erythropoietin secreted into the circulation.
+  _ch: '26'
+- micro: magnocellular_neuron_adh_secretion
+  macro: adh
+  relation: production
+  sign: +
+  section: ADH Synthesis in Supraoptic and Paraventricular Nuclei
+  quote: magnocellular (large) neurons that synthesize ADH ... ADH stored in the secretory granules ... of the nerve
+    endings is released ... carried away in the capillary blood of the posterior pituitary into the systemic circulation
+  _ch: '28'
+- micro: renal_interstitial_fibroblast_epo_secretion
+  macro: erythropoietin
+  relation: production
+  sign: +
+  section: Anemia in Chronic Renal Failure Caused by Decreased Erythropoietin Secretion
+  quote: decreased renal secretion of erythropoietin, which stimulates the bone marrow to produce red blood cells
+  _ch: '31'
+- micro: renal_interstitial_fibroblast_epo_secretion
+  macro: erythropoietin
+  relation: production
+  sign: +
+  section: Role of the Kidneys in Formation of Erythropoietin
+  quote: about 90 per cent of all erythropoietin is formed in the kidneys; the remainder is formed mainly in the
+    liver
+  _ch: '32'
+- micro: parietal_cell_intrinsic_factor_secretion
+  macro: intestinal_b12_absorption
+  relation: production
+  sign: +
+  section: Maturation Failure Caused by Poor Absorption of Vitamin B12 from the Gastrointestinal Tract—Pernicious
+    Anemia
+  quote: The parietal cells of the gastric glands secrete a glycoprotein called intrinsic factor, which combines
+    with vitamin B12 in food and makes the B12 available for absorption
+  _ch: '32'
+- micro: type_ii_pneumocyte_surfactant_secretion
+  macro: alveolar_surfactant_amount
+  relation: production
+  sign: +
+  section: Surfactant and Its Effect on Surface Tension
+  quote: It is secreted by special surfactant-secreting epithelial cells called type II alveolar epithelial cells,
+    which constitute about 10 per cent of the surface area of the alveoli.
+  _ch: '37'
+- micro: erythrocyte_carbonic_anhydrase_activity
+  macro: plasma_bicarbonate
+  relation: production
+  sign: +
+  section: Reaction of Carbon Dioxide with Water in the Red Blood Cells
+  quote: inside the red blood cells is a protein enzyme called carbonic anhydrase, which catalyzes the reaction
+    between carbon dioxide and water and accelerates its reaction rate about 5000-fold
+  _ch: '40'
+- micro: lipoprotein_lipase_activity
+  macro: plasma_free_fatty_acids
+  relation: production
+  sign: +
+  section: Removal of the Chylomicrons from the Blood
+  quote: it hydrolyzes the triglycerides of chylomicrons as they come in contact with the endothelial wall, thus
+    releasing fatty acids and glycerol
+  _ch: '68'
+- micro: hepatocyte_apoa1_hdl_secretion
+  macro: hdl_cholesterol
+  relation: production
+  sign: +
+  section: Formation and Function of Lipoproteins
+  quote: Almost all the lipoproteins are formed in the liver ... small quantities of high-density lipoproteins are
+    synthesized in the intestinal epithelium
+  _ch: '68'
+- micro: adipocyte_leptin_secretion
+  macro: leptin
+  relation: production
+  sign: +
+  section: Feedback Signals from Adipose Tissue Regulate Food Intake
+  quote: the hypothalamus senses energy storage through the actions of leptin, a peptide hormone released from adipocytes
+  _ch: '71'
+- micro: ghrelin_cell_ghrelin_secretion
+  macro: ghrelin
+  relation: production
+  sign: +
+  section: Ghrelin—a Gastrointestinal Hormone—Increases Feeding
+  quote: Ghrelin is a hormone released mainly by the oxyntic cells of the stomach but also, to a much less extent,
+    by the intestine.
+  _ch: '71'
+- micro: magnocellular_neuron_adh_secretion
+  macro: adh
+  relation: production
+  sign: +
+  section: Posterior Pituitary Gland
+  quote: 'they secrete two posterior pituitary hormones: (1) antidiuretic hormone (ADH), also called vasopressin'
+  comment: hypothalamic magnocellular neuron secretion sets plasma ADH level
+  _ch: '75'
+- micro: somatotroph_gh_secretion
+  macro: pituitary_gh
+  relation: production
+  sign: +
+  section: Anterior Pituitary Gland Cell Types
+  quote: Somatotropes—human growth hormone (hGH) ... somatotropes that secrete growth hormone
+  comment: anterior-pituitary somatotroph secretion sets plasma GH level
+  _ch: '75'
+- micro: thyroid_follicular_t4_secretion
+  macro: plasma_t4
+  relation: production
+  sign: +
+  section: Release of Thyroxine and Triiodothyronine from the Thyroid Gland
+  quote: Multiple proteases among the enzymes digest the thyroglobulin molecules and release thyroxine and triiodothyronine
+    in free form... the thyroid hormones are released into the blood
+  _ch: '76'
+- micro: thyrotroph_tsh_secretion
+  macro: tsh
+  relation: production
+  sign: +
+  section: TSH (from the Anterior Pituitary Gland) Increases Thyroid Secretion
+  quote: TSH, also known as thyrotropin, is an anterior pituitary hormone, a glycoprotein with a molecular weight
+    of about 28,000.
+  _ch: '76'
+- micro: zona_glomerulosa_cell_aldosterone_secretion
+  macro: aldosterone
+  relation: production
+  sign: +
+  section: Synthesis and Secretion of Adrenocortical Hormones
+  quote: The zona glomerulosa ... cells are the only ones in the adrenal gland capable of secreting significant
+    amounts of aldosterone
+  _ch: '77'
+- micro: zona_fasciculata_cortisol_secretion
+  macro: cortisol
+  relation: production
+  sign: +
+  section: Synthesis and Secretion of Adrenocortical Hormones
+  quote: The zona fasciculata ... secretes the glucocorticoids cortisol and corticosterone
+  _ch: '77'
+- micro: corticotroph_acth_secretion
+  macro: acth
+  relation: production
+  sign: +
+  section: Regulation of Cortisol Secretion by ACTH
+  quote: secretion of cortisol is controlled almost entirely by ACTH secreted by the anterior pituitary gland
+  _ch: '77'
+- micro: parvocellular_crh_secretion
+  macro: crh
+  relation: production
+  sign: +
+  section: ACTH Secretion Is Controlled by CRF
+  quote: The cell bodies of the neurons that secrete CRF are located mainly in the paraventricular nucleus of the
+    hypothalamus.
+  _ch: '77'
+- micro: beta_cell_insulin_secretion
+  macro: plasma_insulin
+  relation: production
+  sign: +
+  section: Insulin Chemistry and Synthesis
+  quote: the islets of Langerhans, which secrete insulin and glucagon directly into the blood
+  _ch: '78'
+- micro: alpha_cell_glucagon_secretion
+  macro: plasma_glucagon
+  relation: production
+  sign: +
+  section: Physiologic Anatomy of the Pancreas
+  quote: The alpha cells, about 25 per cent of the total, secrete glucagon
+  _ch: '78'
+- micro: delta_cell_somatostatin_secretion
+  macro: somatostatin
+  relation: production
+  sign: +
+  section: Somatostatin Inhibits Glucagon and Insulin Secretion
+  quote: The delta cells of the islets of Langerhans secrete the hormone somatostatin
+  _ch: '78'

@@ -1,0 +1,5077 @@
+{
+ "hpo_purine_pyrimidine.yaml": {
+  "isolated": [
+   {
+    "id": "plasma_inosine",
+    "label": "plasma inosine concentration",
+    "entity_iri": "CHEBI:17596",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_guanosine",
+    "label": "plasma guanosine concentration",
+    "entity_iri": "CHEBI:16750",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_allantoin",
+    "label": "serum allantoin concentration",
+    "entity_iri": "CHEBI:15676",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_hypoxanthine",
+    "label": "urinary hypoxanthine concentration",
+    "entity_iri": "CHEBI:17368",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_inosine",
+    "label": "urinary inosine concentration",
+    "entity_iri": "CHEBI:17596",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_guanosine",
+    "label": "urinary guanosine concentration",
+    "entity_iri": "CHEBI:16750",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_2_8_dihydroxyadenine",
+    "label": "urinary 2,8-dihydroxyadenine concentration",
+    "entity_iri": "CHEBI:183641",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_succinyladenosine",
+    "label": "urinary succinyladenosine concentration",
+    "entity_iri": "CHEBI:71169",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_saicar_riboside",
+    "label": "urinary succinylaminoimidazolecarboxamide riboside (SAICAr) concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_aicar",
+    "label": "urinary 5-amino-4-imidazolecarboxamide riboside (AICA-riboside) concentration",
+    "entity_iri": "CHEBI:28498",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_8_oxoguanosine",
+    "label": "urinary 8-oxo-7,8-dihydroguanosine concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_5_hydroxymethyluracil",
+    "label": "plasma 5-hydroxymethyluracil concentration",
+    "entity_iri": "CHEBI:16964",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_thymine",
+    "label": "urinary thymine concentration",
+    "entity_iri": "CHEBI:17821",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_dihydrouracil",
+    "label": "urinary dihydrouracil concentration",
+    "entity_iri": "CHEBI:15901",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_dihydrothymine",
+    "label": "urinary dihydrothymine concentration",
+    "entity_iri": "CHEBI:27468",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_ureidopropionate",
+    "label": "urinary 3-ureidopropionate (N-carbamoyl-beta-alanine) concentration",
+    "entity_iri": "CHEBI:18261",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_ureidoisobutyrate",
+    "label": "urinary 3-ureidoisobutyrate (N-carbamoyl-beta-aminoisobutyrate) concentration",
+    "entity_iri": "CHEBI:1670",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_n_carbamyl_beta_alanine",
+    "label": "urinary N-carbamoyl-beta-alanine concentration",
+    "entity_iri": "CHEBI:18261",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_n_carbamyl_beta_aminoisobutyrate",
+    "label": "urinary N-carbamoyl-beta-aminoisobutyrate concentration",
+    "entity_iri": "CHEBI:1670",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_uridine",
+    "label": "urinary uridine concentration",
+    "entity_iri": "CHEBI:16704",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_cytidine",
+    "label": "urinary cytidine concentration",
+    "entity_iri": "CHEBI:17562",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_5_hydroxymethyluracil",
+    "label": "urinary 5-hydroxymethyluracil concentration",
+    "entity_iri": "CHEBI:16964",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_dihydrouracil",
+    "label": "CSF dihydrouracil concentration",
+    "entity_iri": "CHEBI:15901",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_n_carbamyl_beta_alanine",
+    "label": "CSF N-carbamoyl-beta-alanine concentration",
+    "entity_iri": "CHEBI:18261",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_n_carbamyl_beta_aminoisobutyrate",
+    "label": "CSF N-carbamoyl-beta-aminoisobutyrate concentration",
+    "entity_iri": "CHEBI:1670",
+    "scale": "organ_system"
+   },
+   {
+    "id": "aldehyde_oxidase_activity",
+    "label": "aldehyde oxidase (AOX1) catalytic activity",
+    "entity_iri": "PR:Q06278",
+    "scale": "cellular"
+   },
+   {
+    "id": "ada2_activity",
+    "label": "circulating adenosine deaminase 2 (ADA2/CECR1) catalytic activity",
+    "entity_iri": "PR:Q9NZK5",
+    "scale": "cellular"
+   },
+   {
+    "id": "prpp_synthetase_activity",
+    "label": "phosphoribosylpyrophosphate (PRPP) synthetase (PRPS1) catalytic activity",
+    "entity_iri": "PR:P60891",
+    "scale": "cellular"
+   },
+   {
+    "id": "aicar_transformylase_activity",
+    "label": "AICAR transformylase / IMP cyclohydrolase (ATIC) catalytic activity",
+    "entity_iri": null,
+    "scale": "cellular"
+   },
+   {
+    "id": "umps_activity",
+    "label": "UMP synthase / orotidine-5'-phosphate decarboxylase (UMPS) catalytic activity",
+    "entity_iri": "PR:P11172",
+    "scale": "cellular"
+   },
+   {
+    "id": "pyrimidine_5_nucleotidase_activity",
+    "label": "pyrimidine 5'-nucleotidase 1 (NT5C3A) catalytic activity",
+    "entity_iri": null,
+    "scale": "cellular"
+   },
+   {
+    "id": "adenylate_kinase_activity",
+    "label": "erythrocyte adenylate kinase 1 (AK1) catalytic activity",
+    "entity_iri": "PR:P00568",
+    "scale": "cellular"
+   },
+   {
+    "id": "itpase_activity",
+    "label": "erythrocyte inosine triphosphate pyrophosphatase (ITPA) catalytic activity",
+    "entity_iri": "PR:Q9BY32",
+    "scale": "cellular"
+   },
+   {
+    "id": "myoadenylate_deaminase_activity",
+    "label": "muscle AMP deaminase 1 (AMPD1, myoadenylate deaminase) catalytic activity",
+    "entity_iri": "PR:P23109",
+    "scale": "cellular"
+   }
+  ],
+  "connected_anchors_in_fragment": [
+   "urinary_deoxyadenosine",
+   "plasma_uracil",
+   "plasma_thymine",
+   "plasma_dihydrouracil",
+   "plasma_dihydrothymine",
+   "plasma_n_carbamyl_beta_alanine",
+   "plasma_n_carbamyl_beta_aminoisobutyrate",
+   "plasma_thymidine",
+   "plasma_deoxyuridine",
+   "urinary_thymidine",
+   "urinary_deoxyuridine",
+   "dihydropyrimidine_dehydrogenase_activity",
+   "dihydropyrimidinase_activity",
+   "beta_ureidopropionase_activity",
+   "thymidine_phosphorylase_activity",
+   "adenosine_deaminase_activity"
+  ]
+ },
+ "hpo_immunoglobulins_complement.yaml": {
+  "isolated": [
+   {
+    "id": "plasma_immunoglobulin",
+    "label": "plasma total immunoglobulin concentration",
+    "entity_iri": "GO:0019814",
+    "scale": "organ_system"
+   },
+   {
+    "id": "body_fluid_immunoglobulin",
+    "label": "body-fluid immunoglobulin concentration",
+    "entity_iri": "GO:0042571",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_igg",
+    "label": "plasma IgG concentration",
+    "entity_iri": "GO:0071736",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_iga",
+    "label": "plasma IgA concentration",
+    "entity_iri": "GO:0071746",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_igm",
+    "label": "plasma IgM concentration",
+    "entity_iri": "GO:0071754",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_ige",
+    "label": "plasma IgE concentration",
+    "entity_iri": "GO:0071743",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_igd",
+    "label": "plasma IgD concentration",
+    "entity_iri": "GO:0071739",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_igg1",
+    "label": "plasma IgG1 concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_igg2",
+    "label": "plasma IgG2 concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_igg3",
+    "label": "plasma IgG3 concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_igg4",
+    "label": "plasma IgG4 concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_precipitin",
+    "label": "plasma precipitin (precipitating antibody) concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_ficolin_3",
+    "label": "plasma ficolin-3 concentration",
+    "entity_iri": "PR:000007439",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_mbl",
+    "label": "plasma mannose-binding lectin (MBL) concentration",
+    "entity_iri": "PR:000010220",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_cd46",
+    "label": "plasma membrane cofactor protein (CD46) concentration",
+    "entity_iri": "PR:000001401",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_cfhr1",
+    "label": "plasma complement factor H-related protein 1 (CFHR1) concentration",
+    "entity_iri": "PR:000005379",
+    "scale": "organ_system"
+   }
+  ],
+  "connected_anchors_in_fragment": [
+   "plasma_specific_antibody",
+   "plasma_allergen_specific_ige"
+  ]
+ },
+ "hpo_other_endocrine_hormones.yaml": {
+  "isolated": [
+   {
+    "id": "plasma_dhea",
+    "label": "plasma dehydroepiandrosterone (DHEA) concentration",
+    "entity_iri": "CHEBI:28689",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_dheas",
+    "label": "plasma dehydroepiandrosterone-sulfate (DHEA-S) concentration",
+    "entity_iri": "CHEBI:16814",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_dihydrotestosterone",
+    "label": "plasma dihydrotestosterone (DHT) concentration",
+    "entity_iri": "CHEBI:16330",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_17_hydroxypregnenolone",
+    "label": "plasma 17-hydroxypregnenolone concentration",
+    "entity_iri": "CHEBI:28750",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_estriol",
+    "label": "plasma estriol concentration",
+    "entity_iri": "CHEBI:27974",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_corticosterone",
+    "label": "plasma corticosterone concentration",
+    "entity_iri": "CHEBI:16827",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_18_hydroxycortisone",
+    "label": "plasma 18-hydroxycortisone concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_reverse_t3",
+    "label": "plasma reverse triiodothyronine (reverse T3) concentration",
+    "entity_iri": "CHEBI:28774",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_thyroglobulin",
+    "label": "plasma thyroglobulin concentration",
+    "entity_iri": "PR:000016283",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_amh",
+    "label": "plasma anti-Mullerian hormone (AMH) concentration",
+    "entity_iri": "PR:000000073",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_glycoprotein_hormone_alpha_subunit",
+    "label": "plasma glycoprotein hormone alpha subunit concentration",
+    "entity_iri": "PR:000005388",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_bnp",
+    "label": "plasma B-type (brain) natriuretic peptide (BNP) concentration",
+    "entity_iri": "PR:000011375",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_nt_probnp",
+    "label": "plasma N-terminal pro-B-type natriuretic peptide (NT-proBNP) concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_nt_proanp",
+    "label": "plasma N-terminal pro-A-type natriuretic peptide (NT-proANP) concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_vasoactive_intestinal_peptide",
+    "label": "plasma vasoactive intestinal peptide (VIP) concentration",
+    "entity_iri": "PR:000017299",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_vegf",
+    "label": "plasma vascular endothelial growth factor (VEGF) concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_proinsulin",
+    "label": "plasma proinsulin concentration",
+    "entity_iri": "PR:000020310",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_osteopontin",
+    "label": "plasma osteopontin concentration",
+    "entity_iri": "PR:000015561",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_beta_ctx",
+    "label": "plasma beta-CTX (C-terminal collagen type-I telopeptide) concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   }
+  ],
+  "connected_anchors_in_fragment": [
+   "plasma_androgen",
+   "plasma_androstenedione",
+   "plasma_estrone",
+   "aromatase_activity",
+   "plasma_t4",
+   "plasma_calcitonin",
+   "type_2_deiodinase_activity",
+   "plasma_beta_hcg",
+   "plasma_adiponectin",
+   "plasma_thrombopoietin",
+   "plasma_osteocalcin"
+  ]
+ },
+ "hpo_mitochondrial_enzymes.yaml": {
+  "isolated": [
+   {
+    "id": "mitochondrial_complex_iii_activity",
+    "label": "mitochondrial respiratory chain complex III (ubiquinol:cytochrome c oxidoreductase) activity",
+    "entity_iri": "GO:0045275",
+    "scale": "cellular"
+   },
+   {
+    "id": "mitochondrial_complex_iv_activity",
+    "label": "mitochondrial respiratory chain complex IV (cytochrome c oxidase, COX) activity",
+    "entity_iri": "GO:0045277",
+    "scale": "cellular"
+   },
+   {
+    "id": "fumarate_hydratase_activity",
+    "label": "fumarate hydratase (fumarase) activity",
+    "entity_iri": "GO:0004333",
+    "scale": "cellular"
+   },
+   {
+    "id": "pyruvate_carboxylase_activity",
+    "label": "pyruvate carboxylase activity",
+    "entity_iri": "GO:0004736",
+    "scale": "cellular"
+   },
+   {
+    "id": "malic_enzyme_activity",
+    "label": "mitochondrial malic enzyme (malate dehydrogenase, decarboxylating) activity",
+    "entity_iri": "GO:0004470",
+    "scale": "cellular"
+   },
+   {
+    "id": "ferrochelatase_activity",
+    "label": "ferrochelatase (protoheme ferro-lyase) activity",
+    "entity_iri": "GO:0004325",
+    "scale": "cellular"
+   },
+   {
+    "id": "dhapat_activity",
+    "label": "dihydroxyacetone-phosphate acyltransferase (DHAPAT, glyceronephosphate O-acyltransferase / GNPAT) activity",
+    "entity_iri": "GO:0016287",
+    "scale": "cellular"
+   },
+   {
+    "id": "alkyl_dhap_synthase_activity",
+    "label": "alkyl-dihydroxyacetonephosphate synthase (alkylglycerone-phosphate synthase, AGPS) activity",
+    "entity_iri": "GO:0008609",
+    "scale": "cellular"
+   },
+   {
+    "id": "hmg_coa_lyase_activity",
+    "label": "3-hydroxy-3-methylglutaryl-CoA (HMG-CoA) lyase activity",
+    "entity_iri": "GO:0004419",
+    "scale": "cellular"
+   },
+   {
+    "id": "t2_thiolase_activity",
+    "label": "mitochondrial acetoacetyl-CoA thiolase (T2 / acetyl-CoA C-acetyltransferase, ACAT1) activity",
+    "entity_iri": "GO:0003985",
+    "scale": "cellular"
+   },
+   {
+    "id": "erythrocyte_glutathione_peroxidase_activity",
+    "label": "erythrocyte glutathione peroxidase activity",
+    "entity_iri": "GO:0004602",
+    "scale": "cellular"
+   },
+   {
+    "id": "sulfide_quinone_oxidoreductase_activity",
+    "label": "sulfide:quinone oxidoreductase (SQOR) activity",
+    "entity_iri": "GO:0070224",
+    "scale": "cellular"
+   }
+  ],
+  "connected_anchors_in_fragment": [
+   "mitochondrial_respiratory_chain_activity",
+   "mitochondrial_complex_i_activity",
+   "mitochondrial_complex_ii_activity",
+   "mitochondrial_atp_synthase_activity",
+   "pyruvate_dehydrogenase_activity",
+   "citrate_synthase_activity"
+  ]
+ },
+ "hpo_amino_acids.yaml": {
+  "isolated": [
+   {
+    "id": "plasma_alanine",
+    "label": "plasma alanine concentration",
+    "entity_iri": "CHEBI:16977",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_threonine",
+    "label": "plasma threonine concentration",
+    "entity_iri": "CHEBI:16857",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_histidine",
+    "label": "plasma histidine concentration",
+    "entity_iri": "CHEBI:15971",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_tryptophan",
+    "label": "plasma tryptophan concentration",
+    "entity_iri": "CHEBI:16828",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_asparagine",
+    "label": "plasma asparagine concentration",
+    "entity_iri": "CHEBI:17196",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_aspartate",
+    "label": "plasma aspartate (aspartic acid) concentration",
+    "entity_iri": "CHEBI:17053",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_leucine",
+    "label": "plasma leucine concentration",
+    "entity_iri": "CHEBI:15603",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_isoleucine",
+    "label": "plasma isoleucine concentration",
+    "entity_iri": "CHEBI:17191",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_valine",
+    "label": "plasma valine concentration",
+    "entity_iri": "CHEBI:16414",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_taurine",
+    "label": "plasma taurine concentration",
+    "entity_iri": "CHEBI:15891",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_cystine",
+    "label": "plasma cystine concentration",
+    "entity_iri": "CHEBI:16283",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_2_aminoadipate",
+    "label": "plasma 2-aminoadipic acid concentration",
+    "entity_iri": "CHEBI:37024",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_3_hydroxykynurenine",
+    "label": "plasma 3-hydroxykynurenine concentration",
+    "entity_iri": "CHEBI:1547",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_alloisoleucine",
+    "label": "plasma L-alloisoleucine concentration",
+    "entity_iri": "CHEBI:43433",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_dimethylglycine",
+    "label": "plasma N,N-dimethylglycine concentration",
+    "entity_iri": "CHEBI:17724",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_aminoadipic_semialdehyde",
+    "label": "plasma alpha-aminoadipic semialdehyde concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_pipecolate",
+    "label": "plasma pipecolic acid concentration",
+    "entity_iri": "CHEBI:17964",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_s_sulfocysteine",
+    "label": "plasma S-sulfocysteine concentration",
+    "entity_iri": "CHEBI:27891",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_alpha_aminobutyrate",
+    "label": "plasma alpha-aminobutyric acid concentration",
+    "entity_iri": "CHEBI:35621",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_beta_aminoisobutyrate",
+    "label": "plasma beta-aminoisobutyric acid concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_glycylproline",
+    "label": "plasma glycylproline concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_homoarginine",
+    "label": "plasma homoarginine concentration",
+    "entity_iri": "CHEBI:27747",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_methionine_sulfoxide",
+    "label": "plasma methionine sulfoxide concentration",
+    "entity_iri": "CHEBI:49031",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_1_methylhistidine",
+    "label": "plasma 1-methylhistidine concentration",
+    "entity_iri": "CHEBI:70958",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_3_methylhistidine",
+    "label": "plasma 3-methylhistidine concentration",
+    "entity_iri": "CHEBI:70959",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_3_hydroxyanthranilate",
+    "label": "plasma 3-hydroxyanthranilic acid concentration",
+    "entity_iri": "CHEBI:15793",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_beta_alanine",
+    "label": "plasma beta-alanine concentration",
+    "entity_iri": "CHEBI:16958",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_carnosine",
+    "label": "plasma carnosine concentration",
+    "entity_iri": "CHEBI:15727",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_hydroxyproline",
+    "label": "plasma hydroxyproline concentration",
+    "entity_iri": "CHEBI:18095",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_ethanolamine",
+    "label": "plasma ethanolamine concentration",
+    "entity_iri": "CHEBI:16000",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_sarcosine",
+    "label": "plasma sarcosine concentration",
+    "entity_iri": "CHEBI:15611",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_arginine",
+    "label": "CSF arginine concentration",
+    "entity_iri": "CHEBI:16467",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_glutamine",
+    "label": "CSF glutamine concentration",
+    "entity_iri": "CHEBI:18050",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_isoleucine",
+    "label": "CSF isoleucine concentration",
+    "entity_iri": "CHEBI:17191",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_leucine",
+    "label": "CSF leucine concentration",
+    "entity_iri": "CHEBI:15603",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_valine",
+    "label": "CSF valine concentration",
+    "entity_iri": "CHEBI:16414",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_glutamate",
+    "label": "CSF glutamate concentration",
+    "entity_iri": "CHEBI:16015",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_methionine",
+    "label": "CSF methionine concentration",
+    "entity_iri": "CHEBI:16811",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_phenylalanine",
+    "label": "CSF phenylalanine concentration",
+    "entity_iri": "CHEBI:28044",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_argininosuccinate",
+    "label": "CSF argininosuccinate concentration",
+    "entity_iri": "CHEBI:184023",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_saccharopine",
+    "label": "CSF saccharopine concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_amino_acids",
+    "label": "urinary (total proteinogenic) amino-acid excretion",
+    "entity_iri": "CHEBI:33709",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_lysine",
+    "label": "urinary lysine excretion",
+    "entity_iri": "CHEBI:18019",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_taurine",
+    "label": "urinary taurine excretion",
+    "entity_iri": "CHEBI:15891",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_threonine",
+    "label": "urinary threonine excretion",
+    "entity_iri": "CHEBI:16857",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_glutamine",
+    "label": "urinary glutamine excretion",
+    "entity_iri": "CHEBI:18050",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_glutamate",
+    "label": "urinary glutamate excretion",
+    "entity_iri": "CHEBI:16015",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_cysteine",
+    "label": "urinary cysteine excretion",
+    "entity_iri": "CHEBI:17561",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_sarcosine",
+    "label": "urinary sarcosine excretion",
+    "entity_iri": "CHEBI:15611",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_3_hydroxykynurenine",
+    "label": "urinary 3-hydroxykynurenine excretion",
+    "entity_iri": "CHEBI:1547",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_dimethylglycine",
+    "label": "urinary N,N-dimethylglycine excretion",
+    "entity_iri": "CHEBI:17724",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_ribosylhistidine",
+    "label": "urinary N-tau-ribosylhistidine excretion",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_s_sulfocysteine",
+    "label": "urinary S-sulfocysteine excretion",
+    "entity_iri": "CHEBI:27891",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_figlu",
+    "label": "urinary formiminoglutamic acid (FIGLU) excretion",
+    "entity_iri": "CHEBI:7274",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_gamma_glutamylcysteine",
+    "label": "urinary gamma-glutamylcysteine excretion",
+    "entity_iri": "CHEBI:17515",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_gamma_glutamylphenylalanine",
+    "label": "urinary gamma-glutamylphenylalanine excretion",
+    "entity_iri": "CHEBI:82966",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_phosphohydroxylysine",
+    "label": "urinary phosphohydroxylysine excretion",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_pyrroline_hydroxycarboxylate",
+    "label": "urinary pyrroline hydroxycarboxylic acid excretion",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_quinolinate",
+    "label": "urinary quinolinic acid excretion",
+    "entity_iri": "CHEBI:16675",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_xanthurenate",
+    "label": "urinary xanthurenic acid excretion",
+    "entity_iri": "CHEBI:10072",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_n_acetyltyrosine",
+    "label": "urinary N-acetyltyrosine excretion",
+    "entity_iri": "CHEBI:68561",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_imidodipeptides",
+    "label": "urinary imidodipeptide excretion",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_3_aminoisobutyrate",
+    "label": "urinary 3-aminoisobutyric acid excretion",
+    "entity_iri": "CHEBI:27389",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_2_aminoisobutyric_acid",
+    "label": "urinary 2-aminoisobutyric acid excretion",
+    "entity_iri": "CHEBI:27971",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_pipecolic_acid",
+    "label": "urinary pipecolic acid excretion",
+    "entity_iri": "CHEBI:17964",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_saccharopine",
+    "label": "urinary saccharopine excretion",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_alloisoleucine",
+    "label": "urinary L-alloisoleucine excretion",
+    "entity_iri": "CHEBI:43433",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_kynurenine",
+    "label": "urinary kynurenine excretion",
+    "entity_iri": "CHEBI:28683",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_1_methylhistidine",
+    "label": "urinary 1-methylhistidine excretion",
+    "entity_iri": "CHEBI:70958",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_3_methylhistidine",
+    "label": "urinary 3-methylhistidine excretion",
+    "entity_iri": "CHEBI:70959",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_galactosyl_hydroxylysine",
+    "label": "urinary galactosyl hydroxylysine excretion",
+    "entity_iri": "CHEBI:165859",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_phosphoserine",
+    "label": "urinary phosphoserine excretion",
+    "entity_iri": "CHEBI:15811",
+    "scale": "organ_system"
+   },
+   {
+    "id": "intracellular_cystine",
+    "label": "intracellular (lysosomal) cystine concentration",
+    "entity_iri": "CHEBI:16283",
+    "scale": "cellular"
+   },
+   {
+    "id": "leukocyte_cystine",
+    "label": "leukocyte cystine concentration",
+    "entity_iri": "CHEBI:16283",
+    "scale": "cellular"
+   },
+   {
+    "id": "aspartoacylase_activity",
+    "label": "aspartoacylase (ASPA) catalytic activity",
+    "entity_iri": null,
+    "scale": "cellular"
+   },
+   {
+    "id": "nags_activity",
+    "label": "N-acetylglutamate synthase (NAGS) catalytic activity",
+    "entity_iri": null,
+    "scale": "cellular"
+   },
+   {
+    "id": "prolidase_activity",
+    "label": "prolidase / peptidase D (PEPD) catalytic activity",
+    "entity_iri": null,
+    "scale": "cellular"
+   },
+   {
+    "id": "carbamoylphosphate_synthetase_1_activity",
+    "label": "carbamoylphosphate synthetase 1 (CPS1) catalytic activity",
+    "entity_iri": null,
+    "scale": "cellular"
+   },
+   {
+    "id": "cystathionine_gamma_lyase_activity",
+    "label": "cystathionine gamma-lyase (CTH) catalytic activity",
+    "entity_iri": null,
+    "scale": "cellular"
+   }
+  ],
+  "connected_anchors_in_fragment": [
+   "plasma_glycine",
+   "plasma_citrulline",
+   "plasma_proline",
+   "plasma_arginine",
+   "plasma_ornithine",
+   "plasma_serine",
+   "plasma_lysine",
+   "plasma_glutamate",
+   "plasma_guanidinoacetate",
+   "plasma_argininosuccinate",
+   "plasma_pyrroline_5_carboxylate",
+   "plasma_sah",
+   "plasma_sam",
+   "plasma_glutathione",
+   "plasma_saccharopine",
+   "plasma_5_oxoproline",
+   "plasma_phosphoserine",
+   "plasma_urocanic_acid",
+   "csf_glycine",
+   "csf_serine",
+   "csf_guanidinoacetate",
+   "urinary_glycine",
+   "urinary_guanidinoacetate",
+   "glycine_cleavage_enzyme_activity",
+   "sah_hydrolase_activity",
+   "phosphoglycerate_dehydrogenase_activity",
+   "oxoprolinase_activity",
+   "arginase_activity",
+   "gamma_glutamylcysteine_synthetase_activity",
+   "glutathione_synthetase_activity",
+   "otc_activity",
+   "agat_activity",
+   "argininosuccinate_synthetase_activity",
+   "p5c_dehydrogenase_activity",
+   "gamt_activity",
+   "alpha_aminoadipic_semialdehyde_synthase_activity",
+   "hydroxyphenylpyruvate_dioxygenase_activity",
+   "methionine_adenosyltransferase_activity",
+   "urocanase_activity",
+   "phosphoserine_phosphatase_activity"
+  ]
+ },
+ "hpo_hematology_indices.yaml": {
+  "isolated": [
+   {
+    "id": "erythrocyte_sedimentation_rate",
+    "label": "erythrocyte sedimentation rate (ESR)",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "total_iron_binding_capacity",
+    "label": "total iron-binding capacity (TIBC)",
+    "entity_iri": "PR:000016261",
+    "scale": "organ_system"
+   },
+   {
+    "id": "cytochrome_b5_reductase_activity",
+    "label": "erythrocyte NADH-cytochrome b5 reductase (CYB5R3) activity",
+    "entity_iri": "GO:0090524",
+    "scale": "cellular"
+   }
+  ],
+  "connected_anchors_in_fragment": []
+ },
+ "hpo_liver_function_enzymes.yaml": {
+  "isolated": [
+   {
+    "id": "plasma_ggt",
+    "label": "plasma gamma-glutamyltransferase concentration",
+    "entity_iri": "PR:000001458",
+    "scale": "organ_system"
+   },
+   {
+    "id": "aldehyde_dehydrogenase_activity",
+    "label": "hepatocyte mitochondrial aldehyde (acetaldehyde) dehydrogenase ALDH2 activity",
+    "entity_iri": "PR:000003925",
+    "scale": "cellular"
+   },
+   {
+    "id": "gamma_glutamyltransferase_activity",
+    "label": "tissue gamma-glutamyltransferase (GGT1) catalytic activity",
+    "entity_iri": "PR:000001458",
+    "scale": "cellular"
+   },
+   {
+    "id": "carboxylesterase_1_activity",
+    "label": "liver carboxylesterase 1 (CES1) catalytic activity",
+    "entity_iri": "PR:000005365",
+    "scale": "cellular"
+   },
+   {
+    "id": "plasma_cholinesterase_activity",
+    "label": "plasma (serum) cholinesterase (BCHE / pseudocholinesterase) activity",
+    "entity_iri": "PR:000004685",
+    "scale": "organ_system"
+   }
+  ],
+  "connected_anchors_in_fragment": [
+   "plasma_transaminases",
+   "plasma_ast",
+   "plasma_alt",
+   "plasma_pancreatic_lipase"
+  ]
+ },
+ "hpo_carbohydrate_metabolites.yaml": {
+  "isolated": [
+   {
+    "id": "plasma_galactitol",
+    "label": "plasma galactitol concentration",
+    "entity_iri": "CHEBI:16813",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_galactitol",
+    "label": "urinary galactitol excretion (concentration)",
+    "entity_iri": "CHEBI:16813",
+    "scale": "organ_system"
+   },
+   {
+    "id": "erythrocyte_galactitol",
+    "label": "erythrocyte galactitol concentration",
+    "entity_iri": "CHEBI:16813",
+    "scale": "cellular"
+   },
+   {
+    "id": "erythrocyte_galactonate",
+    "label": "erythrocyte galactonate concentration",
+    "entity_iri": "CHEBI:24148",
+    "scale": "cellular"
+   },
+   {
+    "id": "plasma_sorbitol",
+    "label": "serum sorbitol concentration",
+    "entity_iri": "CHEBI:17924",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_anhydroglucitol",
+    "label": "serum 1,5-anhydroglucitol concentration",
+    "entity_iri": "CHEBI:16070",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_fructose",
+    "label": "urine fructose concentration",
+    "entity_iri": "CHEBI:28757",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_fucose",
+    "label": "urinary L-fucose concentration",
+    "entity_iri": "CHEBI:18287",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_n_acetylneuraminate",
+    "label": "urinary N-acetylneuraminic acid concentration",
+    "entity_iri": "CHEBI:17012",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_l_xylulose",
+    "label": "urine L-xylulose concentration",
+    "entity_iri": "CHEBI:17399",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_ribose",
+    "label": "urine ribose concentration",
+    "entity_iri": "CHEBI:33942",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_ribose",
+    "label": "CSF ribose concentration",
+    "entity_iri": "CHEBI:33942",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_ribitol",
+    "label": "circulating ribitol concentration",
+    "entity_iri": "CHEBI:15963",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_ribitol",
+    "label": "urine ribitol concentration",
+    "entity_iri": "CHEBI:15963",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_ribitol",
+    "label": "CSF ribitol concentration",
+    "entity_iri": "CHEBI:15963",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_arabinitol",
+    "label": "circulating arabinitol concentration",
+    "entity_iri": "CHEBI:22605",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_arabitol",
+    "label": "urine arabitol concentration",
+    "entity_iri": "CHEBI:22605",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_xylitol",
+    "label": "urine xylitol concentration",
+    "entity_iri": "CHEBI:17151",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_xylitol",
+    "label": "CSF xylitol concentration",
+    "entity_iri": "CHEBI:17151",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_erythritol",
+    "label": "circulating erythritol concentration",
+    "entity_iri": "CHEBI:17113",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_erythritol",
+    "label": "urine erythritol concentration",
+    "entity_iri": "CHEBI:17113",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_erythritol",
+    "label": "CSF erythritol concentration",
+    "entity_iri": "CHEBI:17113",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_d_threitol",
+    "label": "plasma D-threitol concentration",
+    "entity_iri": "CHEBI:48300",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_d_threitol",
+    "label": "urine D-threitol concentration",
+    "entity_iri": "CHEBI:48300",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_d_threitol",
+    "label": "CSF D-threitol concentration",
+    "entity_iri": "CHEBI:48300",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_sedoheptulose",
+    "label": "urinary sedoheptulose concentration",
+    "entity_iri": "CHEBI:16802",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_disaccharides",
+    "label": "urinary disaccharide excretion (concentration)",
+    "entity_iri": "CHEBI:36233",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_glucose_tetrasaccharide",
+    "label": "urine glucose tetrasaccharide (Glc4) concentration",
+    "entity_iri": "CHEBI:50126",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_glcnac_oligosaccharide",
+    "label": "urinary N-acetylglucosamine-rich oligosaccharide concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_galactosylated_oligosaccharide",
+    "label": "urinary galactosylated oligosaccharide concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "glycogen_phosphorylase_activity",
+    "label": "hepatic glycogen phosphorylase (PYGL) catalytic activity",
+    "entity_iri": "PR:000013521",
+    "scale": "cellular"
+   },
+   {
+    "id": "glycogen_debrancher_activity",
+    "label": "glycogen debranching enzyme (AGL) catalytic activity",
+    "entity_iri": "PR:000003832",
+    "scale": "cellular"
+   },
+   {
+    "id": "glucose_6_phosphate_translocase_activity",
+    "label": "hepatic glucose-6-phosphate translocase (SLC37A4) transport activity",
+    "entity_iri": "PR:000015117",
+    "scale": "cellular"
+   },
+   {
+    "id": "galt_activity",
+    "label": "galactose-1-phosphate uridylyltransferase (GALT) catalytic activity",
+    "entity_iri": "PR:000007834",
+    "scale": "cellular"
+   },
+   {
+    "id": "galactokinase_activity",
+    "label": "galactokinase (GALK1) catalytic activity",
+    "entity_iri": "PR:000007813",
+    "scale": "cellular"
+   },
+   {
+    "id": "udp_glucose_4_epimerase_activity",
+    "label": "UDP-glucose 4-epimerase (GALE) catalytic activity",
+    "entity_iri": "PR:000007812",
+    "scale": "cellular"
+   },
+   {
+    "id": "hexokinase_activity",
+    "label": "erythrocyte hexokinase-1 (HK1) catalytic activity",
+    "entity_iri": "PR:000008608",
+    "scale": "cellular"
+   },
+   {
+    "id": "glucose_phosphate_isomerase_activity",
+    "label": "glucose-6-phosphate isomerase (GPI) catalytic activity",
+    "entity_iri": "PR:000008175",
+    "scale": "cellular"
+   },
+   {
+    "id": "aldolase_b_activity",
+    "label": "fructose-bisphosphate aldolase B (ALDOB) catalytic activity",
+    "entity_iri": "PR:000003935",
+    "scale": "cellular"
+   },
+   {
+    "id": "bisphosphoglycerate_mutase_activity",
+    "label": "erythrocyte bisphosphoglycerate mutase (BPGM) catalytic activity",
+    "entity_iri": "PR:000004792",
+    "scale": "cellular"
+   },
+   {
+    "id": "pyruvate_kinase_activity",
+    "label": "erythrocyte pyruvate kinase (PKLR) catalytic activity",
+    "entity_iri": "PR:000012782",
+    "scale": "cellular"
+   },
+   {
+    "id": "g6pd_activity",
+    "label": "glucose-6-phosphate dehydrogenase (G6PD) catalytic activity",
+    "entity_iri": "PR:000007749",
+    "scale": "cellular"
+   },
+   {
+    "id": "fructose_1_6_bisphosphatase_activity",
+    "label": "fructose-1,6-bisphosphatase 1 (FBP1) catalytic activity",
+    "entity_iri": "PR:000007365",
+    "scale": "cellular"
+   },
+   {
+    "id": "pepck_activity",
+    "label": "cytosolic phosphoenolpyruvate carboxykinase (PCK1) catalytic activity",
+    "entity_iri": "PR:000012416",
+    "scale": "cellular"
+   },
+   {
+    "id": "phosphomannomutase_activity",
+    "label": "phosphomannomutase 2 (PMM2) catalytic activity",
+    "entity_iri": "PR:000012908",
+    "scale": "cellular"
+   },
+   {
+    "id": "phosphomannose_isomerase_activity",
+    "label": "mannose-6-phosphate isomerase (MPI, phosphomannose isomerase) catalytic activity",
+    "entity_iri": "PR:000010540",
+    "scale": "cellular"
+   },
+   {
+    "id": "alpha_1_3_fucosyltransferase_activity",
+    "label": "alpha-(1,3)-fucosyltransferase catalytic activity",
+    "entity_iri": "PR:000001320",
+    "scale": "cellular"
+   },
+   {
+    "id": "glycerol_kinase_activity",
+    "label": "glycerol kinase (GK) catalytic activity",
+    "entity_iri": "PR:000008010",
+    "scale": "cellular"
+   }
+  ],
+  "connected_anchors_in_fragment": [
+   "plasma_galactose",
+   "muscle_glycogen_content",
+   "phosphorylase_kinase_activity",
+   "myophosphorylase_activity",
+   "phosphofructokinase_activity",
+   "intestinal_lactase_activity",
+   "sucrase_isomaltase_activity"
+  ]
+ },
+ "hpo_neurotransmitter_metabolites.yaml": {
+  "isolated": [
+   {
+    "id": "urinary_catecholamines",
+    "label": "urinary catecholamine concentration",
+    "entity_iri": "CHEBI:33567",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_dopamine",
+    "label": "urinary dopamine concentration",
+    "entity_iri": "CHEBI:18243",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_norepinephrine",
+    "label": "urinary norepinephrine concentration",
+    "entity_iri": "CHEBI:33569",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_epinephrine",
+    "label": "urinary epinephrine concentration",
+    "entity_iri": "CHEBI:33568",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_metanephrine",
+    "label": "urinary metanephrine concentration",
+    "entity_iri": "CHEBI:89633",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_homovanillic_acid",
+    "label": "urinary homovanillic acid concentration",
+    "entity_iri": "CHEBI:545959",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_vanillylmandelic_acid",
+    "label": "urinary vanillylmandelic acid concentration",
+    "entity_iri": "CHEBI:20106",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_5hiaa",
+    "label": "urinary 5-hydroxyindoleacetic acid concentration",
+    "entity_iri": "CHEBI:27823",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_gaba",
+    "label": "urinary gamma-aminobutyric acid concentration",
+    "entity_iri": "CHEBI:16865",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_tyramine",
+    "label": "urinary tyramine concentration",
+    "entity_iri": "CHEBI:15760",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_vanillactate",
+    "label": "urinary vanillactic acid concentration",
+    "entity_iri": "CHEBI:88526",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_catecholamines",
+    "label": "plasma catecholamine concentration",
+    "entity_iri": "CHEBI:33567",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_gaba",
+    "label": "plasma gamma-aminobutyric acid concentration",
+    "entity_iri": "CHEBI:16865",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_dopac",
+    "label": "plasma 3,4-dihydroxyphenylacetic acid (DOPAC) concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_homovanillate",
+    "label": "plasma homovanillic acid concentration",
+    "entity_iri": "CHEBI:545959",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_metanephrine",
+    "label": "plasma metanephrine concentration",
+    "entity_iri": "CHEBI:89633",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_hva",
+    "label": "CSF homovanillic acid concentration",
+    "entity_iri": "CHEBI:545959",
+    "scale": "organ_system"
+   },
+   {
+    "id": "ssadh_activity",
+    "label": "succinic semialdehyde dehydrogenase (ALDH5A1) activity",
+    "entity_iri": "PR:P51649",
+    "scale": "cellular"
+   }
+  ],
+  "connected_anchors_in_fragment": [
+   "plasma_serotonin",
+   "plasma_dopa",
+   "aadc_activity",
+   "dbh_activity"
+  ]
+ },
+ "hpo_renal_function_markers.yaml": {
+  "isolated": [
+   {
+    "id": "urinary_chloride",
+    "label": "urinary chloride excretion rate",
+    "entity_iri": "CHEBI:17996",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urine_bicarbonate",
+    "label": "urine bicarbonate concentration",
+    "entity_iri": "CHEBI:17544",
+    "scale": "organ_system"
+   },
+   {
+    "id": "serum_osmolal_gap",
+    "label": "serum osmolal gap (measured minus calculated osmolality)",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_uromodulin",
+    "label": "urinary uromodulin (Tamm-Horsfall protein) concentration",
+    "entity_iri": "PR:000017081",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_ngal",
+    "label": "urinary neutrophil gelatinase-associated lipocalin (NGAL/LCN2) concentration",
+    "entity_iri": "PR:000009725",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_orosomucoid",
+    "label": "urinary orosomucoid (alpha-1-acid glycoprotein) concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   }
+  ],
+  "connected_anchors_in_fragment": [
+   "urinary_calcium",
+   "urinary_phosphate",
+   "urinary_urate",
+   "urinary_sodium",
+   "urinary_potassium",
+   "urinary_magnesium",
+   "plasma_creatinine",
+   "urinary_creatinine",
+   "blood_urea_nitrogen",
+   "plasma_cystatin_c",
+   "urine_osmolality",
+   "renal_calcium_reabsorption"
+  ]
+ },
+ "hpo_fatty_acid_oxidation.yaml": {
+  "isolated": [
+   {
+    "id": "plasma_carnitine",
+    "label": "plasma total carnitine concentration",
+    "entity_iri": "CHEBI:17126",
+    "scale": "organ_system"
+   },
+   {
+    "id": "hepatic_carnitine",
+    "label": "hepatic (liver) carnitine concentration",
+    "entity_iri": "CHEBI:17126",
+    "scale": "organ"
+   },
+   {
+    "id": "muscle_carnitine",
+    "label": "skeletal-muscle carnitine concentration",
+    "entity_iri": "CHEBI:17126",
+    "scale": "tissue"
+   },
+   {
+    "id": "plasma_acylcarnitine",
+    "label": "plasma total acylcarnitine concentration",
+    "entity_iri": "CHEBI:17387",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_short_chain_acylcarnitine",
+    "label": "plasma short-chain acylcarnitine concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_very_long_chain_acylcarnitine",
+    "label": "plasma very-long-chain acylcarnitine concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_acetylcarnitine",
+    "label": "plasma acetylcarnitine (C2) concentration",
+    "entity_iri": "CHEBI:73024",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_propionylcarnitine",
+    "label": "plasma propionylcarnitine (C3) concentration",
+    "entity_iri": "CHEBI:28867",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_butyrylcarnitine",
+    "label": "plasma butyrylcarnitine (C4) concentration",
+    "entity_iri": "CHEBI:7676",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_c4_acylcarnitine",
+    "label": "plasma C4 acylcarnitine concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_c5_acylcarnitine",
+    "label": "plasma C5 acylcarnitine concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_isovalerylcarnitine",
+    "label": "plasma isovalerylcarnitine (C5) concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_glutarylcarnitine",
+    "label": "plasma glutarylcarnitine (C5-DC) concentration",
+    "entity_iri": "CHEBI:165628",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_methylmalonylcarnitine",
+    "label": "plasma methylmalonylcarnitine concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_malonylcarnitine",
+    "label": "plasma malonylcarnitine (C3-DC) concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_methylglutarylcarnitine",
+    "label": "plasma methylglutarylcarnitine (C6-DC) concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_hexanoylcarnitine",
+    "label": "plasma hexanoylcarnitine (C6) concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_octenoylcarnitine",
+    "label": "plasma octenoylcarnitine (C8:1) concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_decanoylcarnitine",
+    "label": "plasma decanoylcarnitine (C10) concentration",
+    "entity_iri": "CHEBI:68830",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_decenoylcarnitine",
+    "label": "plasma decenoylcarnitine (C10:1) concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_decadienoylcarnitine",
+    "label": "plasma 2-trans,4-cis-decadienoylcarnitine (C10:2) concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_dodecanoylcarnitine",
+    "label": "plasma dodecanoylcarnitine (C12) concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_c12_acylcarnitine",
+    "label": "plasma C12 acylcarnitine concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_dodecenoylcarnitine",
+    "label": "plasma dodecenoylcarnitine (C12:1) concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_tetradecanoylcarnitine",
+    "label": "plasma tetradecanoylcarnitine (C14) concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_tetradecenoylcarnitine",
+    "label": "plasma tetradecenoylcarnitine (C14:1) concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_c16_acylcarnitine",
+    "label": "plasma C16 acylcarnitine concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_palmitoylcarnitine",
+    "label": "plasma palmitoylcarnitine (C16) concentration",
+    "entity_iri": "CHEBI:17490",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_palmitoleylcarnitine",
+    "label": "plasma palmitoleylcarnitine (C16:1) concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_c18_acylcarnitine",
+    "label": "plasma C18 acylcarnitine concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_stearoylcarnitine",
+    "label": "plasma stearoylcarnitine (C18) concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_octadecenoylcarnitine",
+    "label": "plasma octadecenoylcarnitine (C18:1) concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_oleylcarnitine",
+    "label": "plasma oleylcarnitine (C18:1) concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_linoleylcarnitine",
+    "label": "plasma linoleylcarnitine (C18:2) concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_3_hydroxybutyrylcarnitine",
+    "label": "plasma 3-hydroxybutyrylcarnitine (C4-OH) concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_3_hydroxyhexanoylcarnitine",
+    "label": "plasma 3-hydroxyhexanoylcarnitine (C6-OH) concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_3_hydroxyisovalerylcarnitine",
+    "label": "plasma 3-hydroxyisovalerylcarnitine (C5-OH) concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_3_hydroxyhexadecanoylcarnitine",
+    "label": "plasma 3-hydroxyhexadecanoylcarnitine (C16-OH) concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_3_hydroxypalmitoleylcarnitine",
+    "label": "plasma 3-hydroxypalmitoleylcarnitine (C16:1-OH) concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_3_hydroxylinoleylcarnitine",
+    "label": "plasma 3-hydroxylinoleylcarnitine (C18:2-OH) concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_long_chain_fatty_acid",
+    "label": "plasma long-chain fatty acid concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_hexacosanoic_acid",
+    "label": "plasma hexacosanoic acid (C26:0) concentration",
+    "entity_iri": "CHEBI:31009",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_tetracosanoic_acid",
+    "label": "plasma tetracosanoic acid (C24:0) concentration",
+    "entity_iri": "CHEBI:28866",
+    "scale": "organ_system"
+   },
+   {
+    "id": "short_chain_acyl_coa_dehydrogenase_activity",
+    "label": "short-chain acyl-CoA dehydrogenase (SCAD/ACADS) activity",
+    "entity_iri": "PR:000006373",
+    "scale": "cellular"
+   },
+   {
+    "id": "hydroxyacyl_coa_dehydrogenase_activity",
+    "label": "3-hydroxyacyl-CoA dehydrogenase activity",
+    "entity_iri": null,
+    "scale": "cellular"
+   },
+   {
+    "id": "dienoyl_coa_reductase_activity",
+    "label": "2,4-dienoyl-CoA reductase activity",
+    "entity_iri": null,
+    "scale": "cellular"
+   },
+   {
+    "id": "acetyl_coa_carboxylase_activity",
+    "label": "acetyl-CoA carboxylase activity",
+    "entity_iri": "PR:000003596",
+    "scale": "cellular"
+   },
+   {
+    "id": "fatty_aldehyde_dehydrogenase_activity",
+    "label": "fatty aldehyde dehydrogenase (ALDH3A2) activity",
+    "entity_iri": null,
+    "scale": "cellular"
+   },
+   {
+    "id": "glutaryl_coa_oxidase_activity",
+    "label": "peroxisomal glutaryl-CoA oxidase activity",
+    "entity_iri": null,
+    "scale": "cellular"
+   },
+   {
+    "id": "three_beta_hsd_delta5_desaturase_activity",
+    "label": "3-beta-hydroxysteroid-delta-5-desaturase activity",
+    "entity_iri": null,
+    "scale": "cellular"
+   },
+   {
+    "id": "plasma_3_ketoacyl_coa_thiolase",
+    "label": "circulating 3-ketoacyl-CoA thiolase concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   }
+  ],
+  "connected_anchors_in_fragment": [
+   "plasma_free_carnitine",
+   "plasma_medium_chain_acylcarnitine",
+   "plasma_long_chain_acylcarnitine",
+   "plasma_octanoylcarnitine",
+   "plasma_vlcfa",
+   "plasma_phytanic_acid",
+   "plasma_pristanic_acid",
+   "urinary_trihydroxycholestanoate",
+   "mcad_activity",
+   "cpt2_activity",
+   "cact_activity",
+   "phytanoyl_coa_hydroxylase_activity",
+   "amacr_activity",
+   "acyl_coa_oxidase_activity",
+   "d_bifunctional_protein_activity"
+  ]
+ },
+ "hpo_muscle_enzymes.yaml": {
+  "isolated": [
+   {
+    "id": "plasma_creatine_kinase",
+    "label": "plasma (serum) total creatine kinase concentration",
+    "entity_iri": "GO:0002185",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_ck_mm",
+    "label": "plasma creatine kinase MM isoform concentration",
+    "entity_iri": "PR:000005515",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_ck_mb",
+    "label": "plasma creatine kinase MB isoform concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_creatine_kinase_bb",
+    "label": "plasma creatine kinase BB isoform concentration",
+    "entity_iri": "PR:000005513",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_ldh",
+    "label": "plasma (serum) lactate dehydrogenase concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "lactate_dehydrogenase_activity",
+    "label": "circulating (serum) lactate dehydrogenase activity",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_aldolase",
+    "label": "plasma (serum) aldolase concentration",
+    "entity_iri": "PR:000003934",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_myoglobin",
+    "label": "plasma (serum) myoglobin concentration",
+    "entity_iri": "PR:000010213",
+    "scale": "organ_system"
+   },
+   {
+    "id": "creatine_kinase_activity",
+    "label": "circulating (serum) creatine kinase activity",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_creatine",
+    "label": "plasma (serum) creatine concentration",
+    "entity_iri": "CHEBI:16919",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_creatine",
+    "label": "urinary creatine excretion (concentration)",
+    "entity_iri": "CHEBI:16919",
+    "scale": "organ_system"
+   },
+   {
+    "id": "enolase_activity",
+    "label": "skeletal-muscle beta-enolase (ENO3) catalytic activity",
+    "entity_iri": "PR:000007082",
+    "scale": "cellular"
+   },
+   {
+    "id": "phosphoglycerate_kinase_activity",
+    "label": "skeletal-muscle phosphoglycerate kinase 1 (PGK1) catalytic activity",
+    "entity_iri": "PR:000012607",
+    "scale": "cellular"
+   },
+   {
+    "id": "phosphoglycerate_mutase_activity",
+    "label": "skeletal-muscle phosphoglycerate mutase 2 (PGAM2) catalytic activity",
+    "entity_iri": "PR:000012593",
+    "scale": "cellular"
+   },
+   {
+    "id": "erythrocyte_pyruvate_kinase_activity",
+    "label": "erythrocyte pyruvate kinase (PKLR) catalytic activity",
+    "entity_iri": "PR:000012782",
+    "scale": "cellular"
+   },
+   {
+    "id": "muscle_caveolin_3",
+    "label": "skeletal-muscle caveolin-3 (CAV3) level",
+    "entity_iri": "PR:000005065",
+    "scale": "cellular"
+   }
+  ],
+  "connected_anchors_in_fragment": [
+   "muscle_lactate_dehydrogenase_activity"
+  ]
+ },
+ "hpo_lysosomal_enzymes.yaml": {
+  "isolated": [
+   {
+    "id": "beta_galactosidase_activity",
+    "label": "lysosomal acid beta-galactosidase (GLB1) activity",
+    "entity_iri": "PR:000008016",
+    "scale": "cellular"
+   },
+   {
+    "id": "glucocerebrosidase_activity",
+    "label": "lysosomal acid glucocerebrosidase (GBA, glucosylceramidase) activity",
+    "entity_iri": "PR:000007867",
+    "scale": "cellular"
+   },
+   {
+    "id": "galactocerebrosidase_activity",
+    "label": "galactocerebrosidase (GALC, galactosylceramidase) activity",
+    "entity_iri": "PR:000007811",
+    "scale": "cellular"
+   },
+   {
+    "id": "acid_ceramidase_activity",
+    "label": "acid ceramidase (ASAH1) activity",
+    "entity_iri": "PR:000004336",
+    "scale": "cellular"
+   },
+   {
+    "id": "acid_sphingomyelinase_activity",
+    "label": "acid sphingomyelinase (SMPD1) activity",
+    "entity_iri": "PR:000015292",
+    "scale": "cellular"
+   },
+   {
+    "id": "alpha_galactosidase_a_activity",
+    "label": "alpha-galactosidase A (GLA) activity",
+    "entity_iri": "PR:000008015",
+    "scale": "cellular"
+   },
+   {
+    "id": "beta_hexosaminidase_a_activity",
+    "label": "beta-hexosaminidase A (HEXA, alpha-subunit) activity",
+    "entity_iri": "PR:000008524",
+    "scale": "cellular"
+   },
+   {
+    "id": "beta_hexosaminidase_b_activity",
+    "label": "beta-hexosaminidase B (HEXB, beta-subunit) activity",
+    "entity_iri": "PR:000008525",
+    "scale": "cellular"
+   },
+   {
+    "id": "plasma_beta_hexosaminidase",
+    "label": "serum total beta-hexosaminidase concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "iduronate_sulfatase_activity",
+    "label": "iduronate 2-sulfatase (IDS) activity / level",
+    "entity_iri": "PR:000008894",
+    "scale": "cellular"
+   },
+   {
+    "id": "n_acetylglucosamine_6_sulfatase_activity",
+    "label": "N-acetylglucosamine-6-sulfatase (GNS) activity",
+    "entity_iri": "PR:000008129",
+    "scale": "cellular"
+   },
+   {
+    "id": "n_acetylgalactosamine_6_sulfatase_activity",
+    "label": "N-acetylgalactosamine-6-sulfatase (GALNS) activity",
+    "entity_iri": "PR:000007817",
+    "scale": "cellular"
+   },
+   {
+    "id": "arylsulfatase_b_activity",
+    "label": "arylsulfatase B / N-acetylgalactosamine-4-sulfatase (ARSB) activity",
+    "entity_iri": "PR:000004322",
+    "scale": "cellular"
+   },
+   {
+    "id": "beta_glucuronidase_activity",
+    "label": "beta-glucuronidase (GUSB) activity",
+    "entity_iri": "PR:000008358",
+    "scale": "cellular"
+   },
+   {
+    "id": "sgsh_activity",
+    "label": "N-sulfoglucosamine sulfohydrolase / heparan-N-sulfatase (SGSH) activity",
+    "entity_iri": "PR:000014803",
+    "scale": "cellular"
+   },
+   {
+    "id": "alpha_n_acetylglucosaminidase_activity",
+    "label": "alpha-N-acetylglucosaminidase (NAGLU) activity",
+    "entity_iri": "PR:000010962",
+    "scale": "cellular"
+   },
+   {
+    "id": "heparan_alpha_glucosaminide_n_acetyltransferase_activity",
+    "label": "heparan-alpha-glucosaminide N-acetyltransferase (HGSNAT) activity",
+    "entity_iri": "PR:000008537",
+    "scale": "cellular"
+   },
+   {
+    "id": "alpha_mannosidase_activity",
+    "label": "lysosomal alpha-mannosidase (MAN2B1) activity",
+    "entity_iri": "PR:000010107",
+    "scale": "cellular"
+   },
+   {
+    "id": "beta_mannosidase_activity",
+    "label": "beta-mannosidase (MANBA) activity / level",
+    "entity_iri": "PR:000010110",
+    "scale": "cellular"
+   },
+   {
+    "id": "alpha_l_fucosidase_activity",
+    "label": "tissue alpha-L-fucosidase (FUCA1) activity / level",
+    "entity_iri": "PR:000007697",
+    "scale": "cellular"
+   },
+   {
+    "id": "alpha_n_acetylgalactosaminidase_activity",
+    "label": "alpha-N-acetylgalactosaminidase (NAGA) activity",
+    "entity_iri": "PR:000010959",
+    "scale": "cellular"
+   },
+   {
+    "id": "aspartylglucosaminidase_activity",
+    "label": "aspartylglucosaminidase (AGA) activity",
+    "entity_iri": "PR:000003812",
+    "scale": "cellular"
+   },
+   {
+    "id": "neuraminidase_activity",
+    "label": "lysosomal sialidase / neuraminidase-1 (NEU1) activity",
+    "entity_iri": "PR:000011145",
+    "scale": "cellular"
+   },
+   {
+    "id": "mannosyl_oligosaccharide_glucosidase_activity",
+    "label": "mannosyl-oligosaccharide glucosidase (MOGS) activity",
+    "entity_iri": "PR:000010518",
+    "scale": "cellular"
+   },
+   {
+    "id": "arylsulfatase_a_activity",
+    "label": "arylsulfatase A (ARSA) activity",
+    "entity_iri": "PR:000004321",
+    "scale": "cellular"
+   },
+   {
+    "id": "steroid_sulfatase_activity",
+    "label": "steroid sulfatase / steryl-sulfatase (STS) activity",
+    "entity_iri": "PR:000015781",
+    "scale": "cellular"
+   },
+   {
+    "id": "glcnac_phosphotransferase_activity",
+    "label": "UDP-GlcNAc lysosomal-enzyme N-acetylglucosamine-1-phosphotransferase (GNPTAB) activity",
+    "entity_iri": "PR:000008125",
+    "scale": "cellular"
+   },
+   {
+    "id": "lysosomal_acid_lipase_activity",
+    "label": "lysosomal acid lipase (LIPA, LAL) activity",
+    "entity_iri": "PR:000009832",
+    "scale": "cellular"
+   },
+   {
+    "id": "acid_alpha_glucosidase_activity",
+    "label": "lysosomal acid alpha-glucosidase / acid maltase (GAA) activity",
+    "entity_iri": "PR:000007752",
+    "scale": "cellular"
+   },
+   {
+    "id": "ppt1_activity",
+    "label": "palmitoyl-protein thioesterase 1 (PPT1, CLN1) activity",
+    "entity_iri": "PR:000013160",
+    "scale": "cellular"
+   },
+   {
+    "id": "tpp1_activity",
+    "label": "tripeptidyl peptidase 1 (TPP1, CLN2) activity",
+    "entity_iri": "PR:000016585",
+    "scale": "cellular"
+   },
+   {
+    "id": "chitotriosidase_activity",
+    "label": "chitotriosidase (CHIT1) activity",
+    "entity_iri": "PR:000005426",
+    "scale": "cellular"
+   },
+   {
+    "id": "cathepsin_d_activity",
+    "label": "cathepsin D (CTSD) activity",
+    "entity_iri": "PR:000006025",
+    "scale": "cellular"
+   },
+   {
+    "id": "plasma_cathepsin_d",
+    "label": "circulating (plasma) cathepsin D concentration",
+    "entity_iri": "PR:000006025",
+    "scale": "organ_system"
+   }
+  ],
+  "connected_anchors_in_fragment": []
+ },
+ "hpo_coagulation_factors.yaml": {
+  "isolated": [
+   {
+    "id": "plasma_prekallikrein",
+    "label": "plasma prekallikrein (Fletcher factor) concentration",
+    "entity_iri": "PR:000009420",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_kininogen",
+    "label": "plasma (high-molecular-weight) kininogen activity",
+    "entity_iri": "PR:000009430",
+    "scale": "organ_system"
+   },
+   {
+    "id": "adamts13_activity",
+    "label": "circulating ADAMTS13 (VWF-cleaving protease) activity",
+    "entity_iri": "PR:000003728",
+    "scale": "cellular"
+   },
+   {
+    "id": "plasma_pivka_ii",
+    "label": "plasma PIVKA-II (des-gamma-carboxy prothrombin) concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   }
+  ],
+  "connected_anchors_in_fragment": [
+   "plasma_plasminogen"
+  ]
+ },
+ "hpo_csf_markers.yaml": {
+  "isolated": [
+   {
+    "id": "csf_lactate",
+    "label": "CSF lactate concentration",
+    "entity_iri": "CHEBI:422",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_glucose",
+    "label": "CSF glucose concentration",
+    "entity_iri": "CHEBI:17234",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_ammonia",
+    "label": "CSF ammonia concentration",
+    "entity_iri": "CHEBI:16134",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_urate",
+    "label": "CSF urate concentration",
+    "entity_iri": "CHEBI:17145",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_epinephrine",
+    "label": "CSF epinephrine concentration",
+    "entity_iri": "CHEBI:33568",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_metanephrine",
+    "label": "CSF metanephrine concentration",
+    "entity_iri": "CHEBI:89633",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_mhpg_aldehyde",
+    "label": "CSF 3-methoxy-4-hydroxyphenylglycolaldehyde concentration",
+    "entity_iri": "CHEBI:27932",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_biopterin",
+    "label": "CSF biopterin concentration",
+    "entity_iri": "CHEBI:15373",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_neopterin",
+    "label": "CSF neopterin concentration",
+    "entity_iri": "CHEBI:28670",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_5mthf",
+    "label": "CSF 5-methyltetrahydrofolate concentration",
+    "entity_iri": "CHEBI:15641",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_alanine",
+    "label": "CSF alanine concentration",
+    "entity_iri": "CHEBI:16977",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_beta_alanine",
+    "label": "CSF beta-alanine concentration",
+    "entity_iri": "CHEBI:16958",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_lysine",
+    "label": "CSF lysine concentration",
+    "entity_iri": "CHEBI:18019",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_histidine",
+    "label": "CSF histidine concentration",
+    "entity_iri": "CHEBI:15971",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_threonine",
+    "label": "CSF threonine concentration",
+    "entity_iri": "CHEBI:16857",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_tyrosine",
+    "label": "CSF tyrosine concentration",
+    "entity_iri": "CHEBI:17895",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_aspartate",
+    "label": "CSF aspartate concentration",
+    "entity_iri": "CHEBI:17053",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_asparagine",
+    "label": "CSF asparagine concentration",
+    "entity_iri": "CHEBI:17196",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_citrulline",
+    "label": "CSF citrulline concentration",
+    "entity_iri": "CHEBI:16349",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_ornithine",
+    "label": "CSF ornithine concentration",
+    "entity_iri": "CHEBI:15729",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_taurine",
+    "label": "CSF taurine concentration",
+    "entity_iri": "CHEBI:15891",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_proline",
+    "label": "CSF proline concentration",
+    "entity_iri": "CHEBI:17203",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_hydroxyproline",
+    "label": "CSF hydroxyproline concentration",
+    "entity_iri": "CHEBI:18095",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_sarcosine",
+    "label": "CSF sarcosine concentration",
+    "entity_iri": "CHEBI:15611",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_cystine",
+    "label": "CSF cystine concentration",
+    "entity_iri": "CHEBI:16283",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_cystathionine",
+    "label": "CSF cystathionine concentration",
+    "entity_iri": "CHEBI:17482",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_alloisoleucine",
+    "label": "CSF L-alloisoleucine concentration",
+    "entity_iri": "CHEBI:43433",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_alpha_aminobutyrate",
+    "label": "CSF alpha-aminobutyrate concentration",
+    "entity_iri": "CHEBI:35619",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_homocarnosine",
+    "label": "CSF homocarnosine concentration",
+    "entity_iri": "CHEBI:28050",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_gaba",
+    "label": "CSF gamma-aminobutyric acid concentration",
+    "entity_iri": "CHEBI:16865",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_2_hydroxyglutarate",
+    "label": "CSF D-2-hydroxyglutaric acid concentration",
+    "entity_iri": "CHEBI:32796",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_n_acetylaspartate",
+    "label": "CSF N-acetylaspartic acid concentration",
+    "entity_iri": "CHEBI:16953",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_naag",
+    "label": "CSF N-acetyl-aspartyl-glutamate concentration",
+    "entity_iri": "CHEBI:191259",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_uracil",
+    "label": "CSF uracil concentration",
+    "entity_iri": "CHEBI:17568",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_thymine",
+    "label": "CSF thymine concentration",
+    "entity_iri": "CHEBI:17821",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_dihydrothymine",
+    "label": "CSF dihydrothymine concentration",
+    "entity_iri": "CHEBI:27468",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_5_hydroxymethyluracil",
+    "label": "CSF 5-hydroxymethyluracil concentration",
+    "entity_iri": "CHEBI:16964",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_aica",
+    "label": "CSF 5-amino-4-imidazolecarboxyamide concentration",
+    "entity_iri": "CHEBI:2030",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_aspartylglucosamine",
+    "label": "CSF aspartylglucosamine concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_protein",
+    "label": "CSF protein concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_albumin",
+    "label": "CSF albumin concentration",
+    "entity_iri": "PR:000003918",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_amyloid_beta",
+    "label": "CSF amyloid-beta peptide concentration",
+    "entity_iri": "PR:000036193",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_amyloid_beta_42",
+    "label": "CSF amyloid-beta 42 peptide concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_amyloid_beta_40",
+    "label": "CSF amyloid-beta 40 peptide concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_14_3_3",
+    "label": "CSF 14-3-3 protein concentration",
+    "entity_iri": "PR:000003236",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_gfap",
+    "label": "CSF glial fibrillary acidic protein concentration",
+    "entity_iri": "PR:000007939",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_nfl",
+    "label": "CSF neurofilament light chain concentration",
+    "entity_iri": "PR:000011119",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_mbp",
+    "label": "CSF myelin basic protein concentration",
+    "entity_iri": "PR:000010228",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_chi3l1",
+    "label": "CSF chitinase-3-like protein 1 concentration",
+    "entity_iri": "PR:000005423",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_chitotriosidase",
+    "label": "CSF chitotriosidase 1 concentration",
+    "entity_iri": "PR:000005426",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_alpha_crystallin_b",
+    "label": "CSF alpha-crystallin B chain concentration",
+    "entity_iri": "PR:000005908",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_ace",
+    "label": "CSF angiotensin-converting enzyme concentration",
+    "entity_iri": "PR:000001322",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_apolipoprotein_b",
+    "label": "CSF apolipoprotein B concentration",
+    "entity_iri": "PR:000004145",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_beta_hcg",
+    "label": "CSF beta chorionic gonadotropin concentration",
+    "entity_iri": "PR:000005391",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_interferon_alpha",
+    "label": "CSF interferon alpha concentration",
+    "entity_iri": "PR:000029555",
+    "scale": "organ_system"
+   }
+  ],
+  "connected_anchors_in_fragment": [
+   "csf_creatinine",
+   "csf_creatine",
+   "csf_homovanillic_acid",
+   "csf_5hiaa",
+   "csf_dopamine",
+   "csf_dopa",
+   "csf_tetrahydrobiopterin",
+   "csf_dihydrobiopterin",
+   "csf_sepiapterin",
+   "csf_tryptophan"
+  ]
+ },
+ "hpo_other_metabolites.yaml": {
+  "isolated": [
+   {
+    "id": "sweat_chloride",
+    "label": "sweat chloride concentration",
+    "entity_iri": "CHEBI:17996",
+    "scale": "organ_system"
+   },
+   {
+    "id": "stool_chloride",
+    "label": "stool (fecal) chloride concentration",
+    "entity_iri": "CHEBI:17996",
+    "scale": "organ_system"
+   },
+   {
+    "id": "fecal_sodium",
+    "label": "fecal sodium concentration",
+    "entity_iri": "CHEBI:29101",
+    "scale": "organ_system"
+   },
+   {
+    "id": "serum_anion_gap",
+    "label": "serum anion gap",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "fecal_ph",
+    "label": "fecal (stool) pH",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_porphyrin",
+    "label": "plasma (circulating) total porphyrin concentration",
+    "entity_iri": "CHEBI:8337",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_porphyrin",
+    "label": "urinary total porphyrin concentration",
+    "entity_iri": "CHEBI:8337",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_coproporphyrin",
+    "label": "urinary coproporphyrin concentration",
+    "entity_iri": "CHEBI:23388",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_pentacarboxylporphyrin",
+    "label": "urinary pentacarboxylporphyrin concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_hexacarboxylporphyrin",
+    "label": "urinary hexacarboxylporphyrin concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_uroporphyrin",
+    "label": "plasma uroporphyrin concentration",
+    "entity_iri": "CHEBI:27259",
+    "scale": "organ_system"
+   },
+   {
+    "id": "erythrocyte_protoporphyrin",
+    "label": "erythrocyte protoporphyrin concentration",
+    "entity_iri": "CHEBI:15430",
+    "scale": "organ_system"
+   },
+   {
+    "id": "erythrocyte_coproporphyrin",
+    "label": "erythrocyte coproporphyrin concentration",
+    "entity_iri": "CHEBI:23388",
+    "scale": "organ_system"
+   },
+   {
+    "id": "erythrocyte_free_porphyrin",
+    "label": "erythrocyte free porphyrin concentration",
+    "entity_iri": "CHEBI:8337",
+    "scale": "organ_system"
+   },
+   {
+    "id": "fecal_coproporphyrin",
+    "label": "fecal (stool) coproporphyrin concentration",
+    "entity_iri": "CHEBI:23388",
+    "scale": "organ_system"
+   },
+   {
+    "id": "fecal_protoporphyrin",
+    "label": "fecal (stool) protoporphyrin concentration",
+    "entity_iri": "CHEBI:15430",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_biliverdin",
+    "label": "urinary biliverdin concentration",
+    "entity_iri": "CHEBI:17033",
+    "scale": "organ_system"
+   },
+   {
+    "id": "stool_urobilinogen",
+    "label": "stool (fecal) urobilinogen concentration",
+    "entity_iri": "CHEBI:29026",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_urobilinogen",
+    "label": "urinary urobilinogen concentration",
+    "entity_iri": "CHEBI:29026",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urine_urobilinogen",
+    "label": "urine urobilinogen concentration (decreased)",
+    "entity_iri": "CHEBI:29026",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_thiosulfate",
+    "label": "plasma (circulating) thiosulfate concentration",
+    "entity_iri": "CHEBI:26977",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_pge2",
+    "label": "urinary prostaglandin E2 concentration",
+    "entity_iri": "CHEBI:15551",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_pge2_metabolite",
+    "label": "urinary prostaglandin E2 metabolite concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_thromboxane_b2",
+    "label": "plasma (serum) thromboxane B2 concentration",
+    "entity_iri": "CHEBI:28728",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_12_hete",
+    "label": "plasma (circulating) 12-HETE concentration",
+    "entity_iri": "CHEBI:19138",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_paf",
+    "label": "plasma platelet-activating factor concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_glucosylsphingosine",
+    "label": "plasma (circulating) glucosylsphingosine concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_lyso_gb3",
+    "label": "plasma (circulating) lyso-globotriaosylsphingosine concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "tissue_sphingomyelin",
+    "label": "tissue sphingomyelin concentration",
+    "entity_iri": "CHEBI:64583",
+    "scale": "tissue"
+   },
+   {
+    "id": "plasma_heparan_sulfate",
+    "label": "plasma (circulating) heparan sulfate concentration",
+    "entity_iri": "CHEBI:28815",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_hyaluronic_acid",
+    "label": "urinary hyaluronic acid concentration",
+    "entity_iri": "CHEBI:16336",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_aspartylglucosamine",
+    "label": "plasma (circulating) aspartylglucosamine concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "tn_antigen_level",
+    "label": "Tn-antigen level",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_sialic_acid",
+    "label": "plasma (circulating) sialic acid concentration",
+    "entity_iri": "CHEBI:26667",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_n_acetylneuraminic_acid",
+    "label": "N-acetylneuraminic acid level (fibroblasts/plasma)",
+    "entity_iri": "CHEBI:17012",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_dolichol",
+    "label": "urinary dolichol concentration",
+    "entity_iri": "CHEBI:16091",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_pinp",
+    "label": "plasma (circulating) PINP (procollagen type I N-propeptide) concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_deoxypyridinoline",
+    "label": "plasma (circulating) deoxypyridinoline concentration",
+    "entity_iri": "CHEBI:89510",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_pyridinoline",
+    "label": "plasma (circulating) pyridinoline concentration",
+    "entity_iri": "CHEBI:88539",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_pyridinoline",
+    "label": "urinary pyridinoline concentration",
+    "entity_iri": "CHEBI:88539",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_bile_acids",
+    "label": "urinary bile-acid concentration",
+    "entity_iri": "CHEBI:3098",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_trihydroxycholestanoic_acid",
+    "label": "plasma (circulating) trihydroxycholestanoic acid concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_dihydroxycholestanoic_acid",
+    "label": "urinary dihydroxycholestanoic acid concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_histamine",
+    "label": "urinary histamine concentration",
+    "entity_iri": "CHEBI:18295",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_n_methylhistamine",
+    "label": "urinary N-methylhistamine concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_cotinine",
+    "label": "plasma cotinine concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_nicotinurate",
+    "label": "plasma (circulating) nicotinurate concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_ethanol",
+    "label": "plasma (circulating) ethanol concentration",
+    "entity_iri": "CHEBI:16236",
+    "scale": "organ_system"
+   },
+   {
+    "id": "blood_ethylene_glycol",
+    "label": "blood ethylene glycol concentration",
+    "entity_iri": "CHEBI:30742",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_propylene_glycol",
+    "label": "blood propylene glycol concentration",
+    "entity_iri": "CHEBI:16997",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_glycerol",
+    "label": "urinary glycerol concentration",
+    "entity_iri": "CHEBI:17754",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_myo_inositol",
+    "label": "plasma (circulating) myo-inositol concentration",
+    "entity_iri": "CHEBI:17268",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_phosphoethanolamine",
+    "label": "plasma (circulating) phosphoethanolamine concentration",
+    "entity_iri": "CHEBI:36711",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_pyrophosphate",
+    "label": "plasma pyrophosphate (diphosphate) concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_pyrophosphate",
+    "label": "urinary pyrophosphate (diphosphate) concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_acetoacetate",
+    "label": "plasma acetoacetate concentration",
+    "entity_iri": "CHEBI:13705",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_biopterin",
+    "label": "urinary biopterin concentration",
+    "entity_iri": "CHEBI:15373",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_7_biopterin",
+    "label": "urinary 7-biopterin concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_indican",
+    "label": "urinary indican concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_ca19_9",
+    "label": "plasma (serum) carbohydrate antigen 19-9 (CA19-9) concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_amylase",
+    "label": "plasma (serum) amylase activity concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_pepsinogen_i",
+    "label": "plasma (serum) pepsinogen I concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_acid_phosphatase",
+    "label": "plasma (serum) acid phosphatase activity concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_tryptase",
+    "label": "plasma (serum) total tryptase concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "fecal_pancreatic_elastase",
+    "label": "fecal pancreatic elastase concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_gm_csf",
+    "label": "plasma (circulating) GM-CSF concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "systolic_blood_pressure",
+    "label": "systolic blood pressure",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "diastolic_blood_pressure",
+    "label": "diastolic blood pressure",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "jugular_venous_pressure",
+    "label": "jugular venous pressure",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "lv_end_diastolic_diameter",
+    "label": "left ventricular end-diastolic diameter",
+    "entity_iri": "UBERON:0002084",
+    "scale": "organ"
+   },
+   {
+    "id": "aortic_transvalvular_gradient",
+    "label": "aortic transvalvular pressure gradient",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "ecg_qrs_voltage",
+    "label": "ECG QRS voltage",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "resting_energy_expenditure",
+    "label": "resting energy expenditure",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "methylmalonyl_coa_mutase_activity",
+    "label": "methylmalonyl-CoA mutase (MMUT) catalytic activity",
+    "entity_iri": "PR:000023912",
+    "scale": "cellular"
+   },
+   {
+    "id": "glyoxalase_activity",
+    "label": "glyoxalase catalytic activity",
+    "entity_iri": null,
+    "scale": "cellular"
+   },
+   {
+    "id": "catalase_activity",
+    "label": "catalase (CAT) catalytic activity (erythrocyte/circulating)",
+    "entity_iri": "PR:000005061",
+    "scale": "cellular"
+   },
+   {
+    "id": "superoxide_dismutase_activity",
+    "label": "superoxide dismutase catalytic activity",
+    "entity_iri": null,
+    "scale": "cellular"
+   },
+   {
+    "id": "glutathione_reductase_activity",
+    "label": "glutathione reductase (GSR) catalytic activity (erythrocyte)",
+    "entity_iri": "PR:000022829",
+    "scale": "cellular"
+   },
+   {
+    "id": "myeloperoxidase_activity",
+    "label": "myeloperoxidase (MPO) catalytic activity (neutrophil)",
+    "entity_iri": "PR:000010543",
+    "scale": "cellular"
+   },
+   {
+    "id": "c27_3beta_hsd_activity",
+    "label": "C27 3beta-hydroxysteroid dehydrogenase (HSD3B7) activity (cultured fibroblasts)",
+    "entity_iri": null,
+    "scale": "cellular"
+   },
+   {
+    "id": "ocrl1_activity",
+    "label": "inositol polyphosphate 5-phosphatase OCRL-1 activity (cultured fibroblasts)",
+    "entity_iri": null,
+    "scale": "cellular"
+   },
+   {
+    "id": "lysyl_hydroxylase_1_activity",
+    "label": "procollagen-lysine 2-oxoglutarate 5-dioxygenase 1 (PLOD1) activity (cultured fibroblasts)",
+    "entity_iri": null,
+    "scale": "cellular"
+   },
+   {
+    "id": "pancreatic_amylase_activity",
+    "label": "pancreatic isoamylase catalytic activity (pancreatic acinar cell)",
+    "entity_iri": null,
+    "scale": "cellular"
+   }
+  ],
+  "connected_anchors_in_fragment": [
+   "plasma_chloride",
+   "urinary_uroporphyrin",
+   "plasma_heptacarboxylporphyrin",
+   "erythrocyte_uroporphyrin",
+   "urinary_porphobilinogen",
+   "urinary_ala",
+   "plasma_biliverdin",
+   "urinary_sulfite",
+   "urinary_sulfate",
+   "plasma_sulfate",
+   "urinary_thiosulfate",
+   "plasma_prostaglandin_e2",
+   "plasma_leukotriene_c4",
+   "plasma_histamine",
+   "plasma_glycerol",
+   "cardiac_index",
+   "methionine_synthase_activity",
+   "sulfite_oxidase_activity",
+   "porphobilinogen_deaminase_activity",
+   "uroporphyrinogen_iii_synthase_activity",
+   "uroporphyrinogen_decarboxylase_activity",
+   "ala_dehydratase_activity",
+   "heme_oxygenase_activity"
+  ]
+ },
+ "hpo_pulmonary_bloodgas.yaml": {
+  "isolated": [
+   {
+    "id": "blood_base_excess",
+    "label": "blood base excess",
+    "entity_iri": null,
+    "scale": "organ_system"
+   }
+  ],
+  "connected_anchors_in_fragment": [
+   "pulmonary_artery_pressure",
+   "pulmonary_vascular_resistance",
+   "right_atrial_pressure",
+   "pulmonary_capillary_wedge_pressure",
+   "left_atrial_pressure",
+   "right_ventricular_systolic_pressure",
+   "pulse_pressure"
+  ]
+ },
+ "hpo_organic_acids.yaml": {
+  "isolated": [
+   {
+    "id": "urinary_organic_acids",
+    "label": "urinary total organic-acid (carboxylic / monocarboxylic acid) level",
+    "entity_iri": "CHEBI:64709",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_ketoacids",
+    "label": "urinary keto acid level",
+    "entity_iri": "CHEBI:35910",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_citrate",
+    "label": "urinary citrate level",
+    "entity_iri": "CHEBI:30769",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_aconitic_acid",
+    "label": "urinary aconitic acid level",
+    "entity_iri": "CHEBI:22211",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_aconitate",
+    "label": "plasma aconitic acid concentration",
+    "entity_iri": "CHEBI:22211",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_alpha_ketoglutarate",
+    "label": "urinary alpha-ketoglutarate (2-oxoglutarate) level",
+    "entity_iri": "CHEBI:30915",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_alpha_ketoglutarate",
+    "label": "CSF alpha-ketoglutarate (2-oxoglutarate) concentration",
+    "entity_iri": "CHEBI:30915",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_succinate",
+    "label": "plasma succinate concentration",
+    "entity_iri": "CHEBI:15741",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_succinate",
+    "label": "urinary succinate level",
+    "entity_iri": "CHEBI:15741",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_succinic_acid",
+    "label": "urinary succinic acid level",
+    "entity_iri": "CHEBI:15741",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_fumarate",
+    "label": "plasma fumarate concentration",
+    "entity_iri": "CHEBI:18012",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_fumarate",
+    "label": "urinary fumarate level",
+    "entity_iri": "CHEBI:18012",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_fumarate",
+    "label": "CSF fumarate concentration",
+    "entity_iri": "CHEBI:18012",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_malic_acid",
+    "label": "urinary malic acid level",
+    "entity_iri": "CHEBI:6650",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_3_hydroxybutyrate",
+    "label": "urinary 3-hydroxybutyric acid level",
+    "entity_iri": "CHEBI:20067",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_hydroxybutyrate",
+    "label": "plasma hydroxybutyric acid concentration",
+    "entity_iri": "CHEBI:20067",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_2_hydroxybutyrate",
+    "label": "plasma 2-hydroxybutyric acid concentration",
+    "entity_iri": "CHEBI:1148",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_2_hydroxybutyric_acid",
+    "label": "urinary 2-hydroxybutyric acid level",
+    "entity_iri": "CHEBI:1148",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_4_hydroxybutyrate",
+    "label": "urinary 4-hydroxybutyric acid level",
+    "entity_iri": "CHEBI:30830",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_4_hydroxybutyrate",
+    "label": "plasma 4-hydroxybutyric acid concentration",
+    "entity_iri": "CHEBI:30830",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_4_hydroxybutyrate",
+    "label": "CSF 4-hydroxybutyric acid concentration",
+    "entity_iri": "CHEBI:30830",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_oxalate",
+    "label": "plasma oxalate concentration",
+    "entity_iri": "CHEBI:16995",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_glycolate",
+    "label": "plasma glycolate concentration",
+    "entity_iri": "CHEBI:17497",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_glyoxylate",
+    "label": "urinary glyoxylic acid level",
+    "entity_iri": "CHEBI:16891",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_d_glycerate",
+    "label": "CSF D-glyceric acid concentration",
+    "entity_iri": "CHEBI:32398",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_glutaric_acid",
+    "label": "plasma glutaric acid concentration",
+    "entity_iri": "CHEBI:17859",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_3_hydroxyglutarate",
+    "label": "urinary 3-hydroxyglutaric acid level",
+    "entity_iri": "CHEBI:39980",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_glutarylglycine",
+    "label": "urinary glutarylglycine level",
+    "entity_iri": "CHEBI:165861",
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_l_2_hydroxyglutarate",
+    "label": "CSF L-2-hydroxyglutaric acid concentration",
+    "entity_iri": "CHEBI:17084",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_2_4_dihydroxyglutarate",
+    "label": "urinary 2,4-dihydroxyglutarate level",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_alpha_aminoadipate",
+    "label": "plasma alpha-aminoadipic (alpha-oxoadipic) acid concentration",
+    "entity_iri": "CHEBI:37024",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_propionic_acid",
+    "label": "urinary propionic acid level",
+    "entity_iri": "CHEBI:30768",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_methylmalonylcarnitine",
+    "label": "urinary methylmalonylcarnitine level",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_4_hydroxyisovaleric_acid",
+    "label": "urinary 4-hydroxyisovaleric acid level",
+    "entity_iri": "CHEBI:90005",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_2_methyl_3_hydroxybutyrate",
+    "label": "urinary 2-methyl-3-hydroxybutyric acid level",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_2_methylacetoacetic_acid",
+    "label": "urinary 2-methylacetoacetic acid level",
+    "entity_iri": "CHEBI:37079",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_tiglylglycine",
+    "label": "plasma tiglylglycine concentration",
+    "entity_iri": "CHEBI:73018",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_tiglylglycine",
+    "label": "urinary tiglylglycine level",
+    "entity_iri": "CHEBI:73018",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_tiglylcarnitine",
+    "label": "plasma tiglylcarnitine concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_2_hydroxy_3_methylvaleric_acid",
+    "label": "urinary 2-hydroxy-3-methylvaleric acid level",
+    "entity_iri": "CHEBI:60645",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_3_methyl_2_oxovalerate",
+    "label": "plasma 3-methyl-2-oxovaleric acid concentration",
+    "entity_iri": "CHEBI:35932",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_3_methyl_2_oxovaleric_acid",
+    "label": "urinary 3-methyl-2-oxovaleric acid level",
+    "entity_iri": "CHEBI:35932",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_4_methyl_2_oxopentanoate",
+    "label": "plasma 4-methyl-2-oxopentanoic acid concentration",
+    "entity_iri": "CHEBI:48430",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_4_methyl_2_oxopentanoic_acid",
+    "label": "urinary 4-methyl-2-oxopentanoic acid level",
+    "entity_iri": "CHEBI:48430",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_2_oxoisocaproic_acid",
+    "label": "urinary 2-oxoisocaproic level",
+    "entity_iri": "CHEBI:48430",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_2_hydroxyisocaproic_acid",
+    "label": "urinary 2-hydroxyisocaproic acid level",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_2_oxovaleric_acid",
+    "label": "urinary 2-oxovaleric acid level",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_isobutyrylglycine",
+    "label": "urinary isobutyrylglycine level",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_n_butyrylglycine",
+    "label": "urinary N-butyrylglycine level",
+    "entity_iri": "CHEBI:89963",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_suberic_acid",
+    "label": "urinary suberic acid level",
+    "entity_iri": "CHEBI:9300",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_suberate",
+    "label": "plasma suberic acid concentration",
+    "entity_iri": "CHEBI:9300",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_suberylglycine",
+    "label": "urinary suberylglycine level",
+    "entity_iri": "CHEBI:88811",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_sebacate",
+    "label": "plasma sebacic acid concentration",
+    "entity_iri": "CHEBI:41865",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_sebacic_acid",
+    "label": "urinary sebacic acid level",
+    "entity_iri": "CHEBI:41865",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_adipic_acid",
+    "label": "urinary adipic acid level",
+    "entity_iri": "CHEBI:30832",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_3_hydroxyadipic_acid",
+    "label": "urinary 3-hydroxyadipic acid level",
+    "entity_iri": "CHEBI:89205",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_dodecanedioic_acid",
+    "label": "urinary dodecanedioic acid level",
+    "entity_iri": "CHEBI:4676",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_octenedioic_acid",
+    "label": "urinary octenedioic acid level",
+    "entity_iri": "CHEBI:36174",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_octanoic_acid",
+    "label": "urinary octanoic acid level",
+    "entity_iri": "CHEBI:28837",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_hexanoic_acid",
+    "label": "urinary hexanoic acid level",
+    "entity_iri": "CHEBI:30776",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_hexanoylglycine",
+    "label": "urinary hexanoylglycine level",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_butyric_acid",
+    "label": "urinary butyric acid level",
+    "entity_iri": "CHEBI:30772",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_decadienoylcarnitine",
+    "label": "urinary 2-trans,4-cis-decadienoylcarnitine level",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_5_hydroxyhexanoate",
+    "label": "urinary 5-hydroxyhexanoic acid level",
+    "entity_iri": "CHEBI:131434",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_3_hydroxypentanoic_acid",
+    "label": "urinary 3-hydroxypentanoic acid level",
+    "entity_iri": "CHEBI:139272",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_7_hydroxyoctanoate",
+    "label": "urinary 7-hydroxyoctanoic acid level",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_3_hydroxysebacic_acid",
+    "label": "urinary 3-hydroxysebacic acid level",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_4_5_dihydroxyhexanoic_acid",
+    "label": "urinary 4,5-dihydroxyhexanoic acid level",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_3_6_epoxydicarboxylic_acid",
+    "label": "urinary 3,6-epoxydicarboxylic acid level",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_phenylpropionylglycine",
+    "label": "urinary phenylpropionylglycine level",
+    "entity_iri": "CHEBI:88550",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_3_4_dihydroxybutyrate",
+    "label": "urinary 3,4-Dihydroxybutyric acid level",
+    "entity_iri": "CHEBI:86371",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_2_4_dihydroxybutyric_acid",
+    "label": "urinary 2,4-dihydroxybutyric acid level",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_2_3_dihydroxy_2_methylbutyrate",
+    "label": "urine 2,3-dihydroxy-2-methylbutanoic acid level",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_mesaconate",
+    "label": "urinary mesaconic acid level",
+    "entity_iri": "CHEBI:16600",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_methylsuccinate",
+    "label": "plasma methylsuccinic acid concentration",
+    "entity_iri": "CHEBI:89843",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_methylsuccinate",
+    "label": "urinary methylsuccinic acid level",
+    "entity_iri": "CHEBI:89843",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_mevalonate",
+    "label": "urinary mevalonic acid / mevalonate lactone level",
+    "entity_iri": "CHEBI:25351",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_4_hydroxy_2_oxoglutarate",
+    "label": "urinary 4-hydroxy-2-oxoglutarate level",
+    "entity_iri": "CHEBI:30923",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_d_lactate",
+    "label": "urinary D-lactate level",
+    "entity_iri": "CHEBI:42111",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_phenylpyruvate",
+    "label": "urinary phenylpyruvic acid level",
+    "entity_iri": "CHEBI:30851",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_homogentisate",
+    "label": "urinary homogentisic acid level",
+    "entity_iri": "CHEBI:44747",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_4_hydroxyphenylacetate",
+    "label": "plasma 4-hydroxyphenylacetic acid concentration",
+    "entity_iri": "CHEBI:18101",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_4_hydroxyphenyllactate",
+    "label": "plasma 4-hydroxyphenyllactic acid concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_hydroxyphenyllactate",
+    "label": "urinary hydroxyphenyllactic acid level",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_indoleacetate",
+    "label": "urinary indoleacetic acid level",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_mandelic_acid",
+    "label": "urinary mandelic acid level",
+    "entity_iri": "CHEBI:35825",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_hippuric_acid",
+    "label": "urinary hippuric acid level",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_hippuric_acid",
+    "label": "plasma hippuric acid concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_phenylacetylglutamine",
+    "label": "urinary phenylacetylglutamine level",
+    "entity_iri": "CHEBI:25982",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_n_acetylaspartate",
+    "label": "urinary N-acetylaspartic acid level",
+    "entity_iri": "CHEBI:21547",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_n_acetylaspartate",
+    "label": "plasma N-acetylaspartic acid concentration",
+    "entity_iri": "CHEBI:21547",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_pyroglutamate",
+    "label": "urinary L-pyroglutamic acid level",
+    "entity_iri": "CHEBI:18183",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_succinylacetone",
+    "label": "plasma succinylacetone concentration",
+    "entity_iri": "CHEBI:87897",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_succinylacetone",
+    "label": "urinary succinylacetone level",
+    "entity_iri": "CHEBI:87897",
+    "scale": "organ_system"
+   },
+   {
+    "id": "mmsdh_activity",
+    "label": "methylmalonate semialdehyde dehydrogenase (ALDH6A1) activity",
+    "entity_iri": null,
+    "scale": "cellular"
+   },
+   {
+    "id": "hibch_activity",
+    "label": "3-hydroxyisobutyryl-CoA hydrolase (HIBCH) activity",
+    "entity_iri": null,
+    "scale": "cellular"
+   }
+  ],
+  "connected_anchors_in_fragment": [
+   "plasma_pyruvate",
+   "plasma_alpha_ketoglutarate",
+   "plasma_3_hydroxybutyrate",
+   "urinary_acetoacetate",
+   "urinary_oxalate",
+   "urinary_glycolate",
+   "plasma_glyoxylate",
+   "urinary_d_glycerate",
+   "plasma_d_glycerate",
+   "urinary_l_glycerate",
+   "urinary_glutaconic_acid",
+   "urinary_propionylglycine",
+   "urinary_3_hydroxypropionate",
+   "urinary_2_methylcitrate",
+   "plasma_isovalerate",
+   "urinary_isovaleric_acid",
+   "urinary_isovalerylglycine",
+   "urinary_3_methylcrotonylglycine",
+   "urinary_3_hydroxy_3_methylglutarate",
+   "urinary_3_hydroxyisobutyrate",
+   "urinary_malonate",
+   "propionyl_coa_carboxylase_activity",
+   "methylcrotonyl_coa_carboxylase_activity",
+   "isovaleryl_coa_dehydrogenase_activity",
+   "malonyl_coa_decarboxylase_activity",
+   "scot_activity",
+   "methylglutaconyl_coa_hydratase_activity",
+   "hibadh_activity",
+   "glycerate_kinase_activity",
+   "agt_activity",
+   "glyoxylate_reductase_activity"
+  ]
+ },
+ "hpo_plasma_proteins.yaml": {
+  "isolated": [
+   {
+    "id": "plasma_alpha_fetoprotein",
+    "label": "plasma alpha-fetoprotein concentration",
+    "entity_iri": "PR:000003809",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_haptoglobin",
+    "label": "plasma haptoglobin concentration",
+    "entity_iri": "PR:000008725",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_beta2_microglobulin",
+    "label": "plasma beta-2-microglobulin concentration",
+    "entity_iri": "PR:000004580",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_prealbumin",
+    "label": "plasma prealbumin (transthyretin) concentration",
+    "entity_iri": "PR:000016801",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_globulin",
+    "label": "plasma globulin concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_alpha_globulin",
+    "label": "plasma alpha-globulin concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_calprotectin",
+    "label": "plasma calprotectin (S100A8/A9) concentration",
+    "entity_iri": "GO:1990660",
+    "scale": "organ_system"
+   },
+   {
+    "id": "fecal_calprotectin",
+    "label": "fecal calprotectin (S100A8/A9) concentration",
+    "entity_iri": "GO:1990660",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_cea",
+    "label": "plasma carcinoembryonic antigen (CEA) concentration",
+    "entity_iri": "PR:000001330",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_serum_amyloid_a",
+    "label": "plasma serum amyloid A concentration",
+    "entity_iri": "PR:000050391",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_retinol_binding_protein",
+    "label": "plasma retinol-binding protein concentration",
+    "entity_iri": "PR:000013821",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_thyroxine_binding_globulin",
+    "label": "plasma thyroxine-binding globulin concentration",
+    "entity_iri": "PR:000014687",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_ca125",
+    "label": "plasma carcinoma antigen 125 concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_surfactant_protein",
+    "label": "plasma surfactant protein concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_procalcitonin",
+    "label": "plasma procalcitonin concentration",
+    "entity_iri": "PR:000050333",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_igfals",
+    "label": "plasma insulin-like growth factor binding protein acid labile subunit concentration",
+    "entity_iri": "PR:000008946",
+    "scale": "organ_system"
+   },
+   {
+    "id": "fecal_alpha1_antitrypsin",
+    "label": "fecal alpha-1-antitrypsin concentration",
+    "entity_iri": "PR:000014678",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_alpha1_antitrypsin",
+    "label": "plasma alpha-1-antitrypsin concentration",
+    "entity_iri": "PR:000014678",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_cbg",
+    "label": "plasma corticosteroid-binding globulin concentration",
+    "entity_iri": "PR:000014686",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_progranulin",
+    "label": "plasma progranulin concentration",
+    "entity_iri": "PR:000008271",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_fetuin_a",
+    "label": "plasma fetuin A concentration",
+    "entity_iri": "PR:000003862",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_ace",
+    "label": "plasma angiotensin-converting enzyme concentration",
+    "entity_iri": "PR:000001322",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_chi3l1",
+    "label": "plasma chitinase-3-like protein 1 (CHI3L1/YKL-40) concentration",
+    "entity_iri": "PR:000005423",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_dnajb9",
+    "label": "plasma DNAJB9 protein concentration",
+    "entity_iri": "PR:000006578",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_e_selectin",
+    "label": "plasma E-selectin concentration",
+    "entity_iri": "PR:000001415",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_comp",
+    "label": "plasma cartilage oligomeric matrix protein concentration",
+    "entity_iri": "PR:000000085",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_hyaluronic_acid",
+    "label": "plasma hyaluronic acid concentration",
+    "entity_iri": "CHEBI:16336",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_neuron_specific_enolase",
+    "label": "plasma neuron-specific enolase concentration",
+    "entity_iri": "PR:000007081",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_pancreatic_secretory_trypsin_inhibitor",
+    "label": "plasma pancreatic secretory trypsin inhibitor concentration",
+    "entity_iri": "PR:000015532",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_scd163",
+    "label": "plasma soluble CD163 concentration",
+    "entity_iri": "PR:000001925",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_tenascin_c",
+    "label": "plasma tenascin-C concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_trypsinogen",
+    "label": "plasma trypsinogen concentration",
+    "entity_iri": "PR:000013318",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_prostate_specific_antigen",
+    "label": "plasma prostate-specific antigen concentration",
+    "entity_iri": "PR:000003015",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_galectin_3",
+    "label": "plasma galectin-3 concentration",
+    "entity_iri": "PR:000009771",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_superoxide_dismutase",
+    "label": "plasma superoxide dismutase concentration",
+    "entity_iri": "PR:000015401",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_fibronectin",
+    "label": "plasma fibronectin concentration",
+    "entity_iri": "PR:000007581",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_mmp2",
+    "label": "plasma matrix metalloproteinase 2 concentration",
+    "entity_iri": "PR:000010479",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_shbg",
+    "label": "plasma sex hormone-binding globulin concentration",
+    "entity_iri": "PR:000014836",
+    "scale": "organ_system"
+   },
+   {
+    "id": "carboxypeptidase_n_activity",
+    "label": "carboxypeptidase N activity",
+    "entity_iri": "PR:000005814",
+    "scale": "cellular"
+   }
+  ],
+  "connected_anchors_in_fragment": []
+ },
+ "hpo_vitamins_cofactors.yaml": {
+  "isolated": [
+   {
+    "id": "plasma_transcobalamin_1",
+    "label": "plasma transcobalamin I (haptocorrin) concentration",
+    "entity_iri": "PR:000016196",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_beta_carotene",
+    "label": "plasma beta-carotene concentration",
+    "entity_iri": "CHEBI:17579",
+    "scale": "organ_system"
+   },
+   {
+    "id": "tissue_tocopherol",
+    "label": "adipose-tissue tocopherol (vitamin E) concentration",
+    "entity_iri": "CHEBI:27013",
+    "scale": "tissue"
+   },
+   {
+    "id": "plasma_nad",
+    "label": "blood nicotinamide adenine dinucleotide (NAD) concentration",
+    "entity_iri": "CHEBI:13389",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_nadh",
+    "label": "blood reduced nicotinamide adenine dinucleotide (NADH) concentration",
+    "entity_iri": "CHEBI:16908",
+    "scale": "organ_system"
+   },
+   {
+    "id": "muscle_coenzyme_q10",
+    "label": "skeletal-muscle coenzyme Q10 (ubiquinone) concentration",
+    "entity_iri": "CHEBI:46245",
+    "scale": "tissue"
+   },
+   {
+    "id": "muscle_lipoic_acid",
+    "label": "skeletal-muscle lipoic acid content",
+    "entity_iri": "CHEBI:16494",
+    "scale": "tissue"
+   },
+   {
+    "id": "csf_pyridoxal_phosphate",
+    "label": "cerebrospinal-fluid pyridoxal-5'-phosphate concentration",
+    "entity_iri": "CHEBI:18405",
+    "scale": "tissue"
+   },
+   {
+    "id": "holocarboxylase_synthetase_activity",
+    "label": "holocarboxylase synthetase (HLCS / biotin--protein ligase) activity",
+    "entity_iri": "PR:000008617",
+    "scale": "cellular"
+   },
+   {
+    "id": "ptps_activity",
+    "label": "6-pyruvoyltetrahydropterin synthase (PTPS) activity",
+    "entity_iri": "PR:000013485",
+    "scale": "cellular"
+   },
+   {
+    "id": "sepiapterin_reductase_activity",
+    "label": "sepiapterin reductase activity",
+    "entity_iri": "PR:000015567",
+    "scale": "cellular"
+   }
+  ],
+  "connected_anchors_in_fragment": [
+   "plasma_vitamin_b12",
+   "plasma_methylcobalamin",
+   "plasma_adenosylcobalamin",
+   "cellular_cobalamin_uptake",
+   "plasma_transcobalamin_2",
+   "plasma_folate",
+   "plasma_5_methyltetrahydrofolate",
+   "csf_folate",
+   "plasma_biotin",
+   "biotinidase_activity"
+  ]
+ },
+ "hpo_trace_metals.yaml": {
+  "isolated": [
+   {
+    "id": "plasma_manganese",
+    "label": "plasma (whole-blood) manganese concentration",
+    "entity_iri": "CHEBI:18291",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_manganese",
+    "label": "urinary manganese concentration",
+    "entity_iri": "CHEBI:18291",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_selenium",
+    "label": "plasma (serum) selenium concentration",
+    "entity_iri": "CHEBI:27568",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_zinc",
+    "label": "urinary zinc concentration",
+    "entity_iri": "CHEBI:29105",
+    "scale": "organ_system"
+   },
+   {
+    "id": "breast_milk_zinc",
+    "label": "breast milk zinc concentration",
+    "entity_iri": "CHEBI:29105",
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_iodine",
+    "label": "urinary iodine (iodide) concentration",
+    "entity_iri": "CHEBI:16382",
+    "scale": "organ_system"
+   },
+   {
+    "id": "blood_bismuth",
+    "label": "blood bismuth concentration",
+    "entity_iri": "CHEBI:33301",
+    "scale": "organ_system"
+   },
+   {
+    "id": "blood_cadmium",
+    "label": "blood cadmium concentration",
+    "entity_iri": "CHEBI:22977",
+    "scale": "organ_system"
+   },
+   {
+    "id": "blood_mercury",
+    "label": "blood mercury concentration",
+    "entity_iri": "CHEBI:25195",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_thallium",
+    "label": "plasma (blood) thallium concentration",
+    "entity_iri": "CHEBI:30440",
+    "scale": "organ_system"
+   }
+  ],
+  "connected_anchors_in_fragment": [
+   "plasma_nonceruloplasmin_copper",
+   "urinary_copper"
+  ]
+ },
+ "textbook_extracted.yaml": {
+  "isolated": [
+   {
+    "id": "adipose_hsl_activity",
+    "label": "adipose hormone-sensitive lipase (HSL/LIPE) activity",
+    "entity_iri": "PR:000009834",
+    "scale": "cellular"
+   },
+   {
+    "id": "cellular_replicative_capacity",
+    "label": "cellular replicative capacity (number of cell divisions before senescence/apoptosis)",
+    "entity_iri": null,
+    "scale": "cellular"
+   },
+   {
+    "id": "mtor_activity",
+    "label": "mTOR (serine/threonine-protein kinase mTOR) kinase activity",
+    "entity_iri": "PR:000003041",
+    "scale": "molecular"
+   },
+   {
+    "id": "cellular_autophagy_rate",
+    "label": "cellular autophagy rate",
+    "entity_iri": "GO:0006914",
+    "scale": "cellular"
+   },
+   {
+    "id": "phospholamban_level",
+    "label": "cardiac sarcoplasmic-reticulum phospholamban (PLN) protein level / inhibitory association with SERCA2a",
+    "entity_iri": "PR:000012875",
+    "scale": "subcellular"
+   },
+   {
+    "id": "neutrophil_extravasation",
+    "label": "neutrophil extravasation rate (tissue recruitment)",
+    "entity_iri": "UBERON:0002049",
+    "scale": "tissue"
+   },
+   {
+    "id": "vsm_cgmp_level",
+    "label": "vascular smooth muscle cyclic GMP (cGMP) concentration",
+    "entity_iri": "CHEBI:16356",
+    "scale": "subcellular"
+   },
+   {
+    "id": "skeletal_muscle_contraction_rate",
+    "label": "skeletal muscle contraction rate",
+    "entity_iri": "UBERON:0001134",
+    "scale": "tissue"
+   },
+   {
+    "id": "plasma_anandamide",
+    "label": "anandamide (N-arachidonoylethanolamine) concentration",
+    "entity_iri": "CHEBI:2700",
+    "scale": "molecular"
+   },
+   {
+    "id": "plasma_oleylethanolamide",
+    "label": "oleylethanolamide (OEA) concentration",
+    "entity_iri": null,
+    "scale": "molecular"
+   },
+   {
+    "id": "sodium_calcium_exchanger_activity",
+    "label": "sodium-calcium exchanger (NCX/SLC8A1) transport activity",
+    "entity_iri": "PR:000015207",
+    "scale": "subcellular"
+   },
+   {
+    "id": "skin_melanin_content",
+    "label": "skin melanin content (epidermal melanin amount)",
+    "entity_iri": "UBERON:0002097",
+    "scale": "tissue"
+   },
+   {
+    "id": "skin_cholecalciferol_synthesis",
+    "label": "cutaneous cholecalciferol (vitamin D3) synthesis rate",
+    "entity_iri": "UBERON:0001003",
+    "scale": "organ"
+   },
+   {
+    "id": "sebaceous_gland_sebum_secretion_rate",
+    "label": "sebaceous gland sebum secretion rate",
+    "entity_iri": "UBERON:0001821",
+    "scale": "organ"
+   },
+   {
+    "id": "skeletal_muscle_lactate",
+    "label": "skeletal-muscle intracellular lactate concentration",
+    "entity_iri": "CHEBI:24996",
+    "scale": "cellular"
+   },
+   {
+    "id": "motor_neuron_firing_rate",
+    "label": "skeletal muscle motor neuron action potential firing rate",
+    "entity_iri": "CL:0000100",
+    "scale": "cellular"
+   },
+   {
+    "id": "skeletal_muscle_sarcoplasmic_calcium",
+    "label": "sarcoplasmic free Ca2+ concentration in skeletal muscle fiber",
+    "entity_iri": null,
+    "scale": "subcellular"
+   },
+   {
+    "id": "skeletal_muscle_tone",
+    "label": "resting skeletal muscle tone (low-level tonic contractile state)",
+    "entity_iri": "UBERON:0001134",
+    "scale": "tissue"
+   },
+   {
+    "id": "uterine_smooth_muscle_mass",
+    "label": "uterine smooth muscle (myometrium) mass",
+    "entity_iri": "UBERON:0001296",
+    "scale": "organ"
+   },
+   {
+    "id": "skeletal_muscle_blood_flow",
+    "label": "skeletal muscle blood flow",
+    "entity_iri": "UBERON:0001134",
+    "scale": "organ"
+   },
+   {
+    "id": "pupil_diameter",
+    "label": "pupil diameter",
+    "entity_iri": "UBERON:0001771",
+    "scale": "organ"
+   },
+   {
+    "id": "salivation_rate",
+    "label": "salivation rate",
+    "entity_iri": "UBERON:0001044",
+    "scale": "organ"
+   },
+   {
+    "id": "bronchial_smooth_muscle_tone",
+    "label": "bronchial smooth muscle contractile tone",
+    "entity_iri": "UBERON:0002185",
+    "scale": "organ"
+   },
+   {
+    "id": "parafollicular_cell_calcitonin_secretion",
+    "label": "thyroid parafollicular cell (C cell) calcitonin secretion rate",
+    "entity_iri": "CL:0000570",
+    "scale": "cellular"
+   },
+   {
+    "id": "intestinal_calcium_absorption",
+    "label": "intestinal dietary calcium absorption rate",
+    "entity_iri": "UBERON:0002108",
+    "scale": "organ"
+   },
+   {
+    "id": "plasma_melatonin",
+    "label": "plasma melatonin concentration",
+    "entity_iri": "CHEBI:16796",
+    "scale": "organ_system"
+   },
+   {
+    "id": "spermatogenesis_rate",
+    "label": "testicular spermatogenesis rate",
+    "entity_iri": "GO:0007283",
+    "scale": "organ"
+   },
+   {
+    "id": "thymic_mass",
+    "label": "thymus mass",
+    "entity_iri": "UBERON:0002370",
+    "scale": "organ"
+   },
+   {
+    "id": "tissue_interstitial_fluid_volume",
+    "label": "tissue interstitial fluid volume (local edema)",
+    "entity_iri": "UBERON:0000913",
+    "scale": "organ"
+   },
+   {
+    "id": "th2_cell_activation",
+    "label": "Th2 cell activation / IL-4, IL-6, IL-10 cytokine secretion rate",
+    "entity_iri": "CL:0000546",
+    "scale": "cellular"
+   },
+   {
+    "id": "cd4_t_cell_count",
+    "label": "circulating CD4+ helper T cell count",
+    "entity_iri": "CL:0000492",
+    "scale": "organ_system"
+   },
+   {
+    "id": "mast_cell_degranulation",
+    "label": "mast cell degranulation rate",
+    "entity_iri": "CL:0000097",
+    "scale": "cellular"
+   },
+   {
+    "id": "airway_resistance",
+    "label": "airway resistance",
+    "entity_iri": "UBERON:0002185",
+    "scale": "organ"
+   },
+   {
+    "id": "erythrocyte_2_3_bpg",
+    "label": "erythrocyte 2,3-bisphosphoglycerate (BPG) concentration",
+    "entity_iri": "CHEBI:19324",
+    "scale": "cellular"
+   },
+   {
+    "id": "gi_sympathetic_tone",
+    "label": "sympathetic efferent outflow to GI tract",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "gi_parasympathetic_tone",
+    "label": "parasympathetic (vagal/pelvic) efferent outflow to GI tract",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "gi_tract_motility",
+    "label": "gastrointestinal tract motility (contractile activity / peristalsis rate)",
+    "entity_iri": "UBERON:0001555",
+    "scale": "organ"
+   },
+   {
+    "id": "gi_tract_secretion",
+    "label": "gastrointestinal tract digestive secretion rate",
+    "entity_iri": "UBERON:0001555",
+    "scale": "organ"
+   },
+   {
+    "id": "pancreatic_enzyme_secretion",
+    "label": "pancreatic digestive enzyme secretion rate",
+    "entity_iri": "UBERON:0001264",
+    "scale": "organ"
+   },
+   {
+    "id": "gastric_motility",
+    "label": "gastric smooth muscle contraction rate (motility)",
+    "entity_iri": "UBERON:0000945",
+    "scale": "organ"
+   },
+   {
+    "id": "plasma_motilin",
+    "label": "plasma motilin concentration",
+    "entity_iri": "PR:P12872",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_cholecystokinin",
+    "label": "plasma cholecystokinin (CCK) concentration",
+    "entity_iri": "PR:P06307",
+    "scale": "organ_system"
+   },
+   {
+    "id": "small_intestine_motility",
+    "label": "small intestine motility (peristalsis / migrating motility complex) rate",
+    "entity_iri": null,
+    "scale": "organ"
+   },
+   {
+    "id": "pancreatic_exocrine_secretion",
+    "label": "pancreatic exocrine (enzyme + bicarbonate juice) secretion rate",
+    "entity_iri": null,
+    "scale": "organ"
+   },
+   {
+    "id": "trypsin_activity",
+    "label": "trypsin proteolytic activity in duodenum",
+    "entity_iri": "PR:000027795",
+    "scale": "organ_system"
+   },
+   {
+    "id": "intestinal_lipid_emulsification",
+    "label": "bile salt-mediated lipid emulsification rate in small intestine",
+    "entity_iri": "UBERON:0002108",
+    "scale": "organ"
+   },
+   {
+    "id": "hepatic_lipogenesis",
+    "label": "hepatic de novo lipogenesis rate (acetyl-CoA to fatty acids/triglycerides)",
+    "entity_iri": null,
+    "scale": "organ"
+   },
+   {
+    "id": "gallbladder_bile_secretion",
+    "label": "gallbladder bile secretion rate (bile salts released into intestine)",
+    "entity_iri": "UBERON:0002110",
+    "scale": "organ"
+   },
+   {
+    "id": "muscle_protein_synthesis_rate",
+    "label": "skeletal muscle protein synthesis rate",
+    "entity_iri": "UBERON:0001134",
+    "scale": "tissue"
+   },
+   {
+    "id": "endometrial_thickness",
+    "label": "uterine endometrial lining thickness",
+    "entity_iri": "UBERON:0001295",
+    "scale": "organ"
+   },
+   {
+    "id": "uterine_contractility",
+    "label": "uterine myometrial contractility (contraction frequency and strength)",
+    "entity_iri": "UBERON:0000995",
+    "scale": "organ"
+   },
+   {
+    "id": "nipple_suckling_stimulation",
+    "label": "nipple/areolar mechanosensory (suckling) stimulation rate",
+    "entity_iri": null,
+    "scale": "organ"
+   },
+   {
+    "id": "mammary_milk_production_rate",
+    "label": "mammary gland milk synthesis and secretion rate",
+    "entity_iri": "UBERON:0001911",
+    "scale": "organ"
+   },
+   {
+    "id": "cell_membrane_potential",
+    "label": "cell (plasma) membrane potential",
+    "entity_iri": null,
+    "scale": "cellular"
+   },
+   {
+    "id": "intracellular_adp",
+    "label": "intracellular ADP concentration",
+    "entity_iri": "CHEBI:16761",
+    "scale": "subcellular"
+   },
+   {
+    "id": "mitochondrial_proton_gradient",
+    "label": "mitochondrial inner-membrane proton (H+) electrochemical gradient (proton-motive force)",
+    "entity_iri": "GO:0005743",
+    "scale": "subcellular"
+   },
+   {
+    "id": "salivary_amylase_activity",
+    "label": "salivary alpha-amylase (AMY1) catalytic activity in oral cavity",
+    "entity_iri": "PR:000037015",
+    "scale": "cellular"
+   },
+   {
+    "id": "hepatic_glycogen_content",
+    "label": "hepatic (liver) glycogen content",
+    "entity_iri": "CHEBI:28087",
+    "scale": "organ"
+   },
+   {
+    "id": "plasma_iodide",
+    "label": "plasma iodide concentration",
+    "entity_iri": "CHEBI:16382",
+    "scale": "organ_system"
+   },
+   {
+    "id": "pancreatic_lipase_activity",
+    "label": "pancreatic triacylglycerol lipase catalytic activity in small intestine",
+    "entity_iri": "PR:000012925",
+    "scale": "cellular"
+   },
+   {
+    "id": "postsynaptic_ampa_receptor_density",
+    "label": "postsynaptic membrane AMPA glutamate receptor density",
+    "entity_iri": null,
+    "scale": "subcellular"
+   },
+   {
+    "id": "presynaptic_neurotransmitter_release_rate",
+    "label": "presynaptic neurotransmitter release rate (vesicle exocytosis)",
+    "entity_iri": null,
+    "scale": "cellular"
+   },
+   {
+    "id": "csf_production_rate",
+    "label": "cerebrospinal fluid production rate",
+    "entity_iri": "UBERON:0001886",
+    "scale": "organ"
+   },
+   {
+    "id": "intracranial_pressure",
+    "label": "intracranial (CSF) pressure",
+    "entity_iri": "UBERON:0001359",
+    "scale": "organ_system"
+   },
+   {
+    "id": "monoamine_oxidase_activity",
+    "label": "monoamine oxidase (MAO) catalytic activity",
+    "entity_iri": "GO:0097621",
+    "scale": "molecular"
+   },
+   {
+    "id": "synaptic_dopamine_concentration",
+    "label": "synaptic dopamine concentration (brain, substantia nigra pathway)",
+    "entity_iri": "CHEBI:18243",
+    "scale": "organ_system"
+   },
+   {
+    "id": "synaptic_serotonin_concentration",
+    "label": "synaptic serotonin concentration (brain)",
+    "entity_iri": "CHEBI:28790",
+    "scale": "organ_system"
+   },
+   {
+    "id": "scn_output_rate",
+    "label": "suprachiasmatic nucleus (SCN) neural output signal rate",
+    "entity_iri": "UBERON:0002034",
+    "scale": "organ"
+   },
+   {
+    "id": "bone_mass",
+    "label": "bone tissue mass (skeletal mass)",
+    "entity_iri": "UBERON:0002481",
+    "scale": "organ"
+   },
+   {
+    "id": "skeletal_muscle_force",
+    "label": "skeletal muscle contractile force",
+    "entity_iri": "UBERON:0001134",
+    "scale": "tissue"
+   },
+   {
+    "id": "pulmonary_perfusion",
+    "label": "pulmonary capillary perfusion rate (blood flow through lung capillaries)",
+    "entity_iri": "UBERON:0002048",
+    "scale": "organ"
+   },
+   {
+    "id": "coronary_blood_flow",
+    "label": "coronary artery blood flow rate",
+    "entity_iri": "UBERON:0001621",
+    "scale": "organ"
+   },
+   {
+    "id": "renal_tubular_ammonia_secretion",
+    "label": "renal proximal tubule ammonia (NH3) secretion rate into filtrate",
+    "entity_iri": "UBERON:0002113",
+    "scale": "organ"
+   },
+   {
+    "id": "bone_mineral_density",
+    "label": "skeletal bone mineral density",
+    "entity_iri": "UBERON:0001474",
+    "scale": "organ"
+   },
+   {
+    "id": "erythrocyte_23_bpg",
+    "label": "erythrocyte 2,3-bisphosphoglycerate concentration",
+    "entity_iri": "CHEBI:19324",
+    "scale": "organ_system"
+   },
+   {
+    "id": "skeletal_muscle_sr_calcium_release",
+    "label": "skeletal-muscle sarcoplasmic-reticulum Ca2+ release flux (RyR1-mediated)",
+    "entity_iri": "GO:0016529",
+    "scale": "subcellular"
+   },
+   {
+    "id": "cox_1_activity",
+    "label": "COX-1 (PTGS1) cyclooxygenase catalytic activity (platelet)",
+    "entity_iri": "PR:000013427",
+    "scale": "cellular"
+   },
+   {
+    "id": "cox_2_activity",
+    "label": "COX-2 (PTGS2) cyclooxygenase catalytic activity (endothelial)",
+    "entity_iri": "PR:000013428",
+    "scale": "cellular"
+   },
+   {
+    "id": "dietary_linoleic_acid_intake",
+    "label": "dietary linoleic acid (18:2 n-6) intake",
+    "entity_iri": "CHEBI:17351",
+    "scale": "organism"
+   },
+   {
+    "id": "dietary_linolenic_acid_intake",
+    "label": "dietary alpha-linolenic acid (18:3 n-3) intake",
+    "entity_iri": "CHEBI:27432",
+    "scale": "organism"
+   },
+   {
+    "id": "plasma_epa",
+    "label": "plasma eicosapentaenoic acid (EPA, 20:5 n-3) concentration",
+    "entity_iri": "CHEBI:28364",
+    "scale": "organ_system"
+   },
+   {
+    "id": "vkgc_activity",
+    "label": "vitamin K-dependent gamma-carboxylase (GGCX) activity",
+    "entity_iri": "PR:000007956",
+    "scale": "molecular"
+   },
+   {
+    "id": "membrane_pip2_vsmc",
+    "label": "phosphatidylinositol 4,5-bisphosphate concentration in vascular smooth muscle cell membrane",
+    "entity_iri": "CHEBI:232300",
+    "scale": "subcellular"
+   }
+  ],
+  "connected_anchors_in_fragment": [
+   "intracellular_atp",
+   "na_k_atpase_activity",
+   "cardiomyocyte_intracellular_sodium",
+   "glutamate_dehydrogenase_activity",
+   "glutamine_synthetase_activity",
+   "tert_expression",
+   "telomerase_activity",
+   "telomere_length",
+   "helper_t_cell_activation",
+   "b_cell_proliferation",
+   "synaptic_acetylcholine",
+   "nmj_ache_activity",
+   "plasma_oxytocin",
+   "uterine_contraction_rate",
+   "cervical_distension",
+   "skeletal_muscle_atp",
+   "skeletal_muscle_creatine_phosphate",
+   "skeletal_muscle_tension",
+   "motor_unit_recruitment",
+   "respiratory_rate",
+   "splanchnic_blood_flow",
+   "stomach_volume",
+   "stomach_motility",
+   "trh",
+   "plasma_prolactin",
+   "platelet_count",
+   "blood_platelet_count",
+   "plasma_heparin",
+   "plasma_bradykinin",
+   "intrapericardial_pressure",
+   "capillary_hydrostatic_pressure",
+   "interstitial_fluid_volume",
+   "arterial_compliance",
+   "blood_colloidal_osmotic_pressure",
+   "net_filtration_pressure",
+   "lymphatic_flow",
+   "capillary_filtration_rate",
+   "lymph_drainage_rate",
+   "blood_viral_load",
+   "t_cell_immune_activity",
+   "bronchiole_smooth_muscle_tone",
+   "bronchiole_airflow",
+   "alveolar_surfactant_concentration",
+   "alveolar_surface_tension",
+   "alveolar_po2",
+   "alveolar_pco2",
+   "bronchiole_diameter",
+   "pulmonary_arteriole_diameter",
+   "plasma_secretin",
+   "plasma_cck",
+   "pancreatic_bicarbonate_secretion",
+   "lower_esophageal_sphincter_tone",
+   "esophageal_luminal_pressure",
+   "duodenal_chyme_acidity",
+   "s_cell_secretin_secretion",
+   "i_cell_cck_secretion",
+   "urinary_glucose",
+   "alveolar_surfactant_amount",
+   "urinary_protein",
+   "plasma_oncotic_pressure",
+   "hmg_coa_reductase_activity",
+   "cellular_atp_level",
+   "cellular_adp_level",
+   "isocitrate_dehydrogenase_activity",
+   "alpha_ketoglutarate_dehydrogenase_activity",
+   "cellular_nadh",
+   "cellular_fadh2",
+   "muscle_glycogen_synthase_activity",
+   "gastric_pepsin_activity",
+   "synaptic_acetylcholine_concentration",
+   "synaptic_gaba_concentration",
+   "postsynaptic_membrane_potential",
+   "acetylcholinesterase_activity",
+   "nociceptive_afferent_activity",
+   "synaptic_ach_concentration",
+   "tidal_volume",
+   "blood_carbon_monoxide",
+   "erythrocyte_carbonic_anhydrase_activity",
+   "plasma_vitamin_k",
+   "calcineurin_activity",
+   "t_cell_activation_rate",
+   "molecular_chaperone_activity",
+   "amyloid_protein_aggregate_amount",
+   "cgas_activity",
+   "cgamp_concentration",
+   "sting_activity",
+   "oas_activity",
+   "oligoadenylate_25_concentration",
+   "rnasel_activity",
+   "caspase_1_activity",
+   "il18",
+   "interferon_gamma",
+   "macrophage_caspase1_activity",
+   "macrophage_nlrp3_inflammasome_assembly",
+   "enteropeptidase_activity",
+   "duodenal_trypsin_activity",
+   "duodenal_chymotrypsin_activity",
+   "duodenal_elastase_activity",
+   "duodenal_carboxypeptidase_activity",
+   "duodenal_lipase_activity"
+  ]
+ },
+ "hpo_lipids_lipoproteins.yaml": {
+  "isolated": [
+   {
+    "id": "plasma_total_lipids",
+    "label": "plasma total lipid concentration",
+    "entity_iri": "CHEBI:18059",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_lipoprotein",
+    "label": "plasma (total) lipoprotein particle concentration",
+    "entity_iri": "GO:0034358",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_apolipoprotein",
+    "label": "plasma (total) apolipoprotein concentration",
+    "entity_iri": "CHEBI:39015",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_non_hdl_cholesterol",
+    "label": "plasma non-HDL cholesterol concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_vldl",
+    "label": "plasma VLDL (cholesterol) concentration",
+    "entity_iri": "GO:0034361",
+    "scale": "organ_system"
+   },
+   {
+    "id": "vldl_cholesterol",
+    "label": "plasma VLDL cholesterol concentration",
+    "entity_iri": "GO:0034361",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_chylomicrons",
+    "label": "plasma chylomicron concentration (decreased-term node)",
+    "entity_iri": "GO:0042627",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_hdl2a",
+    "label": "plasma HDL2a subfraction concentration",
+    "entity_iri": "GO:0034364",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_hdl2b",
+    "label": "plasma HDL2b subfraction concentration",
+    "entity_iri": "GO:0034364",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_hdl3a",
+    "label": "plasma HDL3a subfraction concentration",
+    "entity_iri": "GO:0034364",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_hdl3b",
+    "label": "plasma HDL3b subfraction concentration",
+    "entity_iri": "GO:0034364",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_hdl3c",
+    "label": "plasma HDL3c subfraction concentration",
+    "entity_iri": "GO:0034364",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_apolipoprotein_a1",
+    "label": "plasma apolipoprotein A-I concentration",
+    "entity_iri": "PR:000004140",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_apolipoprotein_a2",
+    "label": "plasma apolipoprotein A-II concentration",
+    "entity_iri": "PR:000004142",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_apolipoprotein_a4",
+    "label": "plasma apolipoprotein A-IV concentration",
+    "entity_iri": "PR:000004143",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_apolipoprotein_b",
+    "label": "plasma apolipoprotein B concentration",
+    "entity_iri": "PR:000004145",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_apolipoprotein_e",
+    "label": "plasma apolipoprotein E concentration",
+    "entity_iri": "PR:000004155",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_desmosterol",
+    "label": "plasma desmosterol concentration",
+    "entity_iri": "CHEBI:17737",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_7_dehydrocholesterol",
+    "label": "plasma 7-dehydrocholesterol concentration",
+    "entity_iri": "CHEBI:17759",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_8_dehydrocholesterol",
+    "label": "plasma 8-dehydrocholesterol concentration",
+    "entity_iri": "CHEBI:89982",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_lathosterol",
+    "label": "plasma lathosterol concentration",
+    "entity_iri": "CHEBI:17168",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_8_9_cholestenol",
+    "label": "plasma 8(9)-cholestenol concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_dimethylsterol",
+    "label": "plasma dimethyl sterol concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_monomethylsterol",
+    "label": "plasma monomethyl sterol concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_methylsterol",
+    "label": "plasma methylsterol concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_sitosterol",
+    "label": "plasma sitosterol concentration",
+    "entity_iri": "CHEBI:27693",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_cholestanol",
+    "label": "plasma cholestanol concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "csf_cholestanol",
+    "label": "CSF cholestanol concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_cholestane_triol",
+    "label": "plasma cholestane-triol (C-triol) concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_bile_alcohol",
+    "label": "urinary bile alcohol concentration",
+    "entity_iri": "CHEBI:50420",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_farnesol",
+    "label": "plasma farnesol concentration",
+    "entity_iri": "CHEBI:28600",
+    "scale": "organ_system"
+   },
+   {
+    "id": "fecal_bile_acids",
+    "label": "fecal bile acid concentration",
+    "entity_iri": "CHEBI:3098",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_cholesterol_sulfate",
+    "label": "plasma cholesterol sulfate concentration",
+    "entity_iri": "CHEBI:41321",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_globotriaosylceramide",
+    "label": "plasma globotriaosylceramide concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_lysosphingomyelin",
+    "label": "plasma lysosphingomyelin concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "urinary_sulfatide",
+    "label": "urinary sulfatide concentration",
+    "entity_iri": "CHEBI:18318",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_plasmalogen",
+    "label": "plasma plasmalogen concentration",
+    "entity_iri": null,
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_lysophosphatidylcholine",
+    "label": "plasma lysophosphatidylcholine concentration",
+    "entity_iri": "CHEBI:60479",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_adrenic_acid",
+    "label": "plasma adrenic acid concentration",
+    "entity_iri": "CHEBI:53487",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_arachidonic_acid",
+    "label": "plasma arachidonic acid concentration",
+    "entity_iri": "CHEBI:15843",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_mead_acid",
+    "label": "plasma Mead acid concentration",
+    "entity_iri": "CHEBI:165475",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_myristoleate",
+    "label": "plasma myristoleate concentration",
+    "entity_iri": "CHEBI:27781",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_octadecanoate",
+    "label": "plasma octadecanoate concentration",
+    "entity_iri": "CHEBI:28842",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_oleate",
+    "label": "plasma oleate concentration",
+    "entity_iri": "CHEBI:16196",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_palmitate",
+    "label": "plasma palmitate concentration",
+    "entity_iri": "CHEBI:15756",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_myristic_acid",
+    "label": "serum myristic acid concentration",
+    "entity_iri": "CHEBI:28875",
+    "scale": "organ_system"
+   },
+   {
+    "id": "plasma_lipoprotein_lipase",
+    "label": "plasma lipoprotein lipase concentration",
+    "entity_iri": "PR:000009897",
+    "scale": "organ_system"
+   },
+   {
+    "id": "paf_acetylhydrolase_activity",
+    "label": "platelet-activating factor acetylhydrolase (PAF-AH) activity",
+    "entity_iri": "PR:000012812",
+    "scale": "cellular"
+   }
+  ],
+  "connected_anchors_in_fragment": [
+   "plasma_chylomicron",
+   "plasma_apolipoprotein_c2",
+   "plasma_apolipoprotein_c3",
+   "plasma_squalene",
+   "plasma_27_hydroxycholesterol",
+   "plasma_bile_alcohol",
+   "plasma_cholesterol_esters",
+   "cholesterol_esterification_rate",
+   "lcat_activity",
+   "lipoprotein_lipase_activity",
+   "mevalonate_kinase_activity",
+   "sterol_27_hydroxylase_activity"
+  ]
+ }
+}

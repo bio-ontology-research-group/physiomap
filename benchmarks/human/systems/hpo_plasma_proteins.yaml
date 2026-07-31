@@ -1,0 +1,344 @@
+# =============================================================================
+# Plasma / circulating protein analytes  — PhysioMap fragment  *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Purpose: provide PhysioMap NODES (grounded variables) for the HPO directional
+# "abnormal circulating/secreted protein concentration (or activity)" terms in the
+# plasma_proteins theme, so the HPO forward/backward benchmark can map each term to a
+# physiological variable + a PATO direction. This is predominantly an *ISLAND* fragment
+# (mostly grounded nodes with NO causal edges) — by PhysioMap policy a grounded node
+# with no defensible cited mechanism is valuable and safe (it abstains under the solver),
+# and is strongly preferred over a fabricated edge.  ROBERT: please correct nodes/IRIs.
+#
+# Provenance / textbooks consulted for each analyte's identity and biology:
+#   - Burtis & Ashwood, Tietz Textbook of Clinical Chemistry & Molecular Diagnostics
+#     (serum protein electrophoresis: albumin / alpha-1 / alpha-2 / beta / gamma fractions;
+#      acute-phase reactants; tumor markers).
+#   - Harrison's Principles of Internal Medicine (acute-phase response, tumor markers,
+#     nephrotic syndrome / protein-losing enteropathy, alpha-1-antitrypsin deficiency).
+#   - Boron & Boulpaep Medical Physiology (plasma protein synthesis, oncotic pressure,
+#     thyroid/steroid transport proteins).
+#   - Williams Textbook of Endocrinology (TBG, CBG, SHBG, thyroglobulin, IGFALS/IGF axis).
+#   - Lehninger Principles of Biochemistry (enzyme/transport-protein roles).
+#
+# IRI policy: protein analytes grounded in PRO (PR:) where an exact OBO 'name:'/'synonym:'
+# match was verified against ontology/.obo_cache/PR.obo; small molecules in CHEBI; protein
+# complexes in GO. Where no exact verified class exists (e.g. "total globulin",
+# "alpha-globulin fraction", "tenascin-C" — PRO has only the 'tenascin' family class),
+# entity_iri is left NULL rather than fabricated. PATO: concentration = PATO:0000033,
+# catalytic/enzyme activity = PATO:0001414.
+#
+# EXISTING corpus nodes reused (NOT redefined here): plasma_albumin (CHEBI:166964) and
+# c_reactive_protein (PR:000005991) — the albumin (HP:0003073 / HP:0012117) and CRP
+# (HP:0032437) terms map onto those existing nodes; they are NOT in this file's `nodes`.
+#
+# Single-scale: organ_system for plasma/serum/fecal analyte concentrations; cellular for
+# the one enzyme-ACTIVITY analyte (carboxypeptidase N activity), with a bearer_entity_iri.
+# =============================================================================
+
+name: hpo_plasma_proteins
+description: >-
+  DRAFT PhysioMap nodes for circulating / secreted / fecal protein analytes referenced by
+  HPO abnormal-concentration (and one abnormal-activity) terms in the plasma_proteins theme:
+  alpha-fetoprotein, haptoglobin, beta-2-microglobulin, transthyretin/prealbumin, the serum
+  protein-electrophoresis globulin fractions (total + alpha), calprotectin (plasma + fecal),
+  CEA, serum amyloid A, retinol-binding protein, thyroglobulin, thyroxine-binding globulin,
+  CA-125, surfactant protein, procalcitonin, IGFALS, fecal alpha-1-antitrypsin, plasma
+  alpha-1-antitrypsin, corticosteroid-binding globulin, progranulin, fetuin A, ACE, CHI3L1,
+  DNAJB9, E-selectin, COMP, hyaluronic acid, neuron-specific enolase, pancreatic secretory
+  trypsin inhibitor, sCD163, tenascin-C, trypsinogen, PSA, galectin-3, superoxide dismutase,
+  fibronectin, MMP-2, SHBG, and carboxypeptidase N activity. Mostly a grounded ISLAND
+  (no fabricated edges). Single-scale (organ_system / cellular), Phase 1, DRAFT for review.
+
+nodes:
+  # --- alpha-fetoprotein (PR:000003809) ; HP:0006254 (+) / HP:0045057 (-) ----------
+  - id: plasma_alpha_fetoprotein
+    label: plasma alpha-fetoprotein concentration
+    scale: organ_system
+    entity_iri: PR:000003809           # alpha-fetoprotein (PR.obo verified)
+    quality_iri: PATO:0000033
+
+  # --- haptoglobin (PR:000008725) ; HP:0020181 (-) / HP:0020180 (+) ----------------
+  - id: plasma_haptoglobin
+    label: plasma haptoglobin concentration
+    scale: organ_system
+    entity_iri: PR:000008725           # haptoglobin (PR.obo verified)
+    quality_iri: PATO:0000033
+
+  # --- beta-2-microglobulin (PR:000004580) ; HP:0025347 (-) / HP:0025346 (+) -------
+  # NOTE: the task lists two node-name hints (plasma_beta2_microglobulin /
+  # plasma_beta_2_microglobulin) for the SAME analyte -> ONE node, both signs.
+  - id: plasma_beta2_microglobulin
+    label: plasma beta-2-microglobulin concentration
+    scale: organ_system
+    entity_iri: PR:000004580           # beta-2-microglobulin (PR.obo verified)
+    quality_iri: PATO:0000033
+
+  # --- transthyretin / prealbumin (PR:000016801) ; HP:0031085 (-) / HP:0033451 (+) -
+  - id: plasma_prealbumin
+    label: plasma prealbumin (transthyretin) concentration
+    scale: organ_system
+    entity_iri: PR:000016801           # transthyretin (= prealbumin) (PR.obo verified)
+    quality_iri: PATO:0000033
+
+  # --- total globulin (SPE) ; HP:0032311 (+) / HP:0032312 (-) ----------------------
+  # No single protein: total globulin = the non-albumin serum protein fraction on
+  # electrophoresis (alpha+beta+gamma). entity_iri NULL (not fabricated).
+  - id: plasma_globulin
+    label: plasma globulin concentration
+    scale: organ_system
+    quality_iri: PATO:0000033
+
+  # --- alpha-globulin fraction (SPE) ; HP:0005413 (+) ------------------------------
+  # SPE alpha-1+alpha-2 fraction (e.g. AAT, AAG, haptoglobin, alpha-2-macroglobulin).
+  # No single protein class -> entity_iri NULL.
+  - id: plasma_alpha_globulin
+    label: plasma alpha-globulin concentration
+    scale: organ_system
+    quality_iri: PATO:0000033
+
+  # --- calprotectin (GO:1990660 S100A8/A9 complex) ; PLASMA HP:6000502 (+) ---------
+  - id: plasma_calprotectin
+    label: plasma calprotectin (S100A8/A9) concentration
+    scale: organ_system
+    entity_iri: GO:1990660             # calprotectin complex (GO.obo verified)
+    quality_iri: PATO:0000033
+  # --- fecal calprotectin ; HP:0034056 (+) -- distinct compartment (stool) ---------
+  - id: fecal_calprotectin
+    label: fecal calprotectin (S100A8/A9) concentration
+    scale: organ_system
+    entity_iri: GO:1990660             # calprotectin complex (GO.obo verified)
+    quality_iri: PATO:0000033
+
+  # --- carcinoembryonic antigen (CEA, CEACAM5) PR:000001330 ; HP:0031029 (+) -------
+  - id: plasma_cea
+    label: plasma carcinoembryonic antigen (CEA) concentration
+    scale: organ_system
+    entity_iri: PR:000001330           # carcinoembryonic antigen (PR.obo verified)
+    quality_iri: PATO:0000033
+
+  # --- serum amyloid A protein (human) PR:000050391 ; HP:0033332 (+) ---------------
+  - id: plasma_serum_amyloid_a
+    label: plasma serum amyloid A concentration
+    scale: organ_system
+    entity_iri: PR:000050391           # serum amyloid A protein (human) (PR.obo verified)
+    quality_iri: PATO:0000033
+
+  # --- retinol-binding protein 4 (PR:000013821) ; HP:0031032 (-) -------------------
+  - id: plasma_retinol_binding_protein
+    label: plasma retinol-binding protein concentration
+    scale: organ_system
+    entity_iri: PR:000013821           # retinol-binding protein 4 (PR.obo verified)
+    quality_iri: PATO:0000033
+
+  - id: plasma_thyroxine_binding_globulin
+    label: plasma thyroxine-binding globulin concentration
+    scale: organ_system
+    entity_iri: PR:000014687           # thyroxine-binding globulin (PR.obo verified)
+    quality_iri: PATO:0000033
+
+  # --- CA-125 / MUC16 ; HP:0031030 (+) ---------------------------------------------
+  # PRO bare-class for CA-125 / mucin-16 not verified by exact name match -> NULL.
+  - id: plasma_ca125
+    label: plasma carcinoma antigen 125 concentration
+    scale: organ_system
+    entity_iri: PR:Q8WXI7            # mucin-16 (human), MUC16; CA-125 is a glycan epitope on MUC16, clinical analyte = MUC16 protein
+    quality_iri: PATO:0000033
+
+  # --- surfactant protein ; HP:0032094 (+) -----------------------------------------
+  # HPO term is generic "surfactant protein"; PRO has specific SP-A/B/C/D. No single
+  # exact "surfactant protein" class -> entity_iri NULL (not fabricated).
+  - id: plasma_surfactant_protein
+    label: plasma surfactant protein concentration
+    scale: organ_system
+    quality_iri: PATO:0000033
+
+  # --- procalcitonin (PR:000050333) ; HP:0032308 (+) -------------------------------
+  - id: plasma_procalcitonin
+    label: plasma procalcitonin concentration
+    scale: organ_system
+    entity_iri: PR:000050333           # procalcitonin (PR.obo verified)
+    quality_iri: PATO:0000033
+
+  # --- IGFALS (acid-labile subunit) PR:000008946 ; HP:0034184 (+) / HP:0045046 (-) -
+  - id: plasma_igfals
+    label: plasma insulin-like growth factor binding protein acid labile subunit concentration
+    scale: organ_system
+    entity_iri: PR:000008946           # IGF-binding protein complex acid labile chain (PR.obo verified)
+    quality_iri: PATO:0000033
+
+  # --- fecal alpha-1-antitrypsin (SERPINA1 PR:000014678) ; HP:0031686 (+) ----------
+  - id: fecal_alpha1_antitrypsin
+    label: fecal alpha-1-antitrypsin concentration
+    scale: organ_system
+    entity_iri: PR:000014678           # alpha-1-antitrypsin (SERPINA1) (PR.obo verified)
+    quality_iri: PATO:0000033
+
+  # --- plasma alpha-1-antitrypsin (SERPINA1 PR:000014678) ; HP:0032025 (-) ---------
+  - id: plasma_alpha1_antitrypsin
+    label: plasma alpha-1-antitrypsin concentration
+    scale: organ_system
+    entity_iri: PR:000014678           # alpha-1-antitrypsin (SERPINA1) (PR.obo verified)
+    quality_iri: PATO:0000033
+
+  # --- corticosteroid-binding globulin (PR:000014686) ; HP:6000243 (-) -------------
+  - id: plasma_cbg
+    label: plasma corticosteroid-binding globulin concentration
+    scale: organ_system
+    entity_iri: PR:000014686           # corticosteroid-binding globulin (PR.obo verified)
+    quality_iri: PATO:0000033
+
+  # --- progranulin (PR:000008271) ; HP:6001187 (-) ---------------------------------
+  - id: plasma_progranulin
+    label: plasma progranulin concentration
+    scale: organ_system
+    entity_iri: PR:000008271           # progranulin (PR.obo verified)
+    quality_iri: PATO:0000033
+
+  # --- fetuin A (alpha-2-HS-glycoprotein, AHSG PR:000003862) ; HP:0033306(-)/HP:0033307(+)
+  - id: plasma_fetuin_a
+    label: plasma fetuin A concentration
+    scale: organ_system
+    entity_iri: PR:000003862           # alpha-2-HS-glycoprotein = fetuin-A (PR.obo verified)
+    quality_iri: PATO:0000033
+
+  # --- angiotensin-converting enzyme (ACE, PR:000001322) ; HP:6000213 (+) ----------
+  # Term is "ACE concentration" (sarcoidosis marker) -> concentration, not activity.
+  - id: plasma_ace
+    label: plasma angiotensin-converting enzyme concentration
+    scale: organ_system
+    entity_iri: PR:000001322           # angiotensin-converting enzyme (PR.obo verified)
+    quality_iri: PATO:0000033
+
+  # --- CHI3L1 / YKL-40 (PR:000005423) ; HP:0033103 (+) -----------------------------
+  - id: plasma_chi3l1
+    label: plasma chitinase-3-like protein 1 (CHI3L1/YKL-40) concentration
+    scale: organ_system
+    entity_iri: PR:000005423           # chitinase-3-like protein 1 (PR.obo verified)
+    quality_iri: PATO:0000033
+
+  # --- DNAJB9 (ERdj4, PR:000006578) ; HP:6000001 (+) -------------------------------
+  - id: plasma_dnajb9
+    label: plasma DNAJB9 protein concentration
+    scale: organ_system
+    entity_iri: PR:000006578           # DnaJ homolog subfamily B member 9 (PR.obo verified)
+    quality_iri: PATO:0000033
+
+  # --- E-selectin (SELE, PR:000001415) ; HP:0032240 (+) ----------------------------
+  - id: plasma_e_selectin
+    label: plasma E-selectin concentration
+    scale: organ_system
+    entity_iri: PR:000001415           # E-selectin (PR.obo verified)
+    quality_iri: PATO:0000033
+
+  # --- cartilage oligomeric matrix protein (COMP, PR:000000085) ; HP:0033410 (+) ---
+  - id: plasma_comp
+    label: plasma cartilage oligomeric matrix protein concentration
+    scale: organ_system
+    entity_iri: PR:000000085           # cartilage oligomeric matrix protein (PR.obo verified)
+    quality_iri: PATO:0000033
+
+  # --- hyaluronic acid (CHEBI:16336) ; HP:4000213 (+) ------------------------------
+  - id: plasma_hyaluronic_acid
+    label: plasma hyaluronic acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:16336            # hyaluronic acid (CHEBI.obo verified)
+    quality_iri: PATO:0000033
+
+  # --- neuron-specific (gamma) enolase (ENO2, PR:000007081) ; HP:4000189 (+) -------
+  - id: plasma_neuron_specific_enolase
+    label: plasma neuron-specific enolase concentration
+    scale: organ_system
+    entity_iri: PR:000007081           # gamma-enolase = neuron-specific enolase (PR.obo verified)
+    quality_iri: PATO:0000033
+
+  # --- pancreatic secretory trypsin inhibitor (SPINK1, PR:000015532) ; HP:0034545 (+)
+  # HPO term wording is "activity"; SPINK1 is a trypsin inhibitor measured as a serum
+  # analyte -> grounded as a circulating-protein quantity (concentration).
+  - id: plasma_pancreatic_secretory_trypsin_inhibitor
+    label: plasma pancreatic secretory trypsin inhibitor concentration
+    scale: organ_system
+    entity_iri: PR:000015532           # serine protease inhibitor Kazal-type 1 = PSTI (PR.obo verified)
+    quality_iri: PATO:0000033
+
+  # --- soluble CD163 / M130 (PR:000001925) ; HP:6000385 (+) ------------------------
+  - id: plasma_scd163
+    label: plasma soluble CD163 concentration
+    scale: organ_system
+    entity_iri: PR:000001925           # scavenger receptor cysteine-rich type 1 protein M130 = CD163 (PR.obo verified)
+    quality_iri: PATO:0000033
+
+  # --- tenascin-C ; HP:0033115 (+) -------------------------------------------------
+  # PRO has only the family class 'tenascin' (PR:000016471), not tenascin-C specifically
+  # -> entity_iri NULL (not fabricated to avoid label/identity mismatch).
+  - id: plasma_tenascin_c
+    label: plasma tenascin-C concentration
+    scale: organ_system
+    entity_iri: PR:P24821            # tenascin (human), TNC = tenascin-C (founding family member)
+    quality_iri: PATO:0000033
+
+  # --- trypsinogen (cationic, PRSS1, PR:000013318) ; HP:0032493 (+) ----------------
+  - id: plasma_trypsinogen
+    label: plasma trypsinogen concentration
+    scale: organ_system
+    entity_iri: PR:000013318           # trypsin-1 / cationic trypsinogen (PRSS1) (PR.obo verified)
+    quality_iri: PATO:0000033
+
+  # --- prostate-specific antigen (KLK3, PR:000003015) ; HP:0025020 (+) -------------
+  - id: plasma_prostate_specific_antigen
+    label: plasma prostate-specific antigen concentration
+    scale: organ_system
+    entity_iri: PR:000003015           # prostate-specific antigen (KLK3) (PR.obo verified)
+    quality_iri: PATO:0000033
+
+  # --- galectin-3 (LGALS3, PR:000009771) ; HP:0032205 (+) --------------------------
+  - id: plasma_galectin_3
+    label: plasma galectin-3 concentration
+    scale: organ_system
+    entity_iri: PR:000009771           # galectin-3 (PR.obo verified)
+    quality_iri: PATO:0000033
+
+  # --- superoxide dismutase (extracellular SOD3, PR:000015401) ; HP:0031836 (+) ----
+  # Circulating SOD = extracellular Cu/Zn SOD (SOD3); use that PR class.
+  - id: plasma_superoxide_dismutase
+    label: plasma superoxide dismutase concentration
+    scale: organ_system
+    entity_iri: PR:000015401           # extracellular superoxide dismutase [Cu-Zn] = SOD3 (PR.obo verified)
+    quality_iri: PATO:0000033
+
+  # --- fibronectin (FN1, PR:000007581) ; HP:0032463 (-) ----------------------------
+  - id: plasma_fibronectin
+    label: plasma fibronectin concentration
+    scale: organ_system
+    entity_iri: PR:000007581           # fibronectin (PR.obo verified)
+    quality_iri: PATO:0000033
+
+  # --- matrix metalloproteinase-2 (MMP2, PR:000010479) ; HP:0034615 (-) ------------
+  - id: plasma_mmp2
+    label: plasma matrix metalloproteinase 2 concentration
+    scale: organ_system
+    entity_iri: PR:000010479           # matrix metalloproteinase-2 / 72 kDa type IV collagenase (PR.obo verified)
+    quality_iri: PATO:0000033
+
+  # --- sex hormone-binding globulin (SHBG, PR:000014836) ; HP:0031419 (-) ----------
+  - id: plasma_shbg
+    label: plasma sex hormone-binding globulin concentration
+    scale: organ_system
+    entity_iri: PR:000014836           # sex hormone-binding globulin (PR.obo verified)
+    quality_iri: PATO:0000033
+
+  # --- carboxypeptidase N ACTIVITY (CPN, catalytic chain PR:000005814) ; HP:6000560 (-)
+  # The HPO term is an ENZYME-ACTIVITY analyte -> scale cellular, catalytic-activity PATO,
+  # bearer = hepatocyte (CPN is synthesized by the liver / hepatocytes).
+  - id: carboxypeptidase_n_activity
+    label: carboxypeptidase N activity
+    scale: cellular
+    entity_iri: PR:000005814           # carboxypeptidase N catalytic chain (PR.obo verified)
+    bearer_entity_iri: CL:0000182      # hepatocyte (CL.obo)
+    quality_iri: PATO:0001414          # catalytic (enzyme) activity
+
+# No causal_edges: each analyte is an isolated marker with no defensible single-source
+# cited within-fragment mechanism that does not risk a fabricated sign. Grounded island
+# nodes are valid (they abstain under the comparative-statics solver). Edges may be added
+# in review (e.g. acute-phase coupling of SAA/CRP/haptoglobin, hepatic synthesis of the
+# transport proteins) once a curated mechanism + citation is agreed.
+constitutive_edges: []

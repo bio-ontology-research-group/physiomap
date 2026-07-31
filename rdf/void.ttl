@@ -1,0 +1,35 @@
+@prefix dcat:    <http://www.w3.org/ns/dcat#> .
+@prefix void:    <http://rdfs.org/ns/void#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf:    <http://xmlns.com/foaf/0.1/> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+<https://w3id.org/physiomap/> a dcat:Dataset, void:Dataset ;
+    dcterms:title "PhysioMap: a signed, multi-scale causal knowledge graph of human physiology" ;
+    dcterms:description "A typed causal knowledge graph of human physiology: 1,695 (entity, PATO quality, scale) variables, 2,172 signed causal influences, 68 production relations, 6 constitutive constraints, 8 quantitative expressions, and 16 modulations. Entities and qualities are grounded in OBO Foundry ontologies; relation types remain explicit in the canonical SCM." ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:creator
+        [ a foaf:Person ; foaf:name "Robert Hoehndorf" ; dcterms:identifier <https://orcid.org/0000-0001-8149-5890> ] ,
+        [ a foaf:Person ; foaf:name "Paul N. Schofield" ] ,
+        [ a foaf:Person ; foaf:name "Georgios V. Gkoutos" ] ;
+    dcterms:publisher [ a foaf:Organization ; foaf:name "Bio-Ontology Research Group, KAUST" ] ;
+    dcat:landingPage <https://bio2vec.net/physiomap/> ;
+    dcterms:source <https://github.com/bio-ontology-research-group/physiomap> ;
+    dcat:keyword "causal knowledge graph", "human physiology", "comparative statics",
+        "feedback", "perturbation phenotypes", "OBO Foundry", "PATO", "Relation Ontology", "SIO" ;
+    void:uriSpace "https://w3id.org/physiomap/" ;
+    void:triples "27836"^^xsd:integer ;
+    void:entities "1695"^^xsd:integer ;
+    void:sparqlEndpoint <https://bio2vec.net/physiomap/sparql> ;
+    void:vocabulary
+        <http://purl.obolibrary.org/obo/> ,
+        <http://semanticscience.org/resource/> ,
+        <http://www.w3.org/2002/07/owl#> ,
+        <https://w3id.org/physiomap/ontology#> ;
+    dcat:distribution [
+        a dcat:Distribution ;
+        dcterms:title "PhysioMap RDF (Turtle)" ;
+        dcat:mediaType "text/turtle" ;
+        dcat:downloadURL <https://bio2vec.net/physiomap/rdf/physiomap.ttl> ;
+        dcterms:license <https://creativecommons.org/licenses/by/4.0/>
+    ] .

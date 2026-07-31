@@ -1,0 +1,5 @@
+name = "physiomap-signs"
+defaultTargets = ["PhysioMapSigns"]
+
+[[lean_lib]]
+name = "PhysioMapSigns"

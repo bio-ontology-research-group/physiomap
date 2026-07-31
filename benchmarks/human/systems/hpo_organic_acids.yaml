@@ -1,0 +1,897 @@
+# =============================================================================
+# Organic acids — urinary / plasma / CSF organic-acid analytes + the organic-acidemia
+# enzyme-activity roots                       — PhysioMap fragment  *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Hand-encoded coverage fragment for the HPO "organic acids" directional gap terms.
+# These are abnormal-quantity terms used in clinical organic-acid analysis (urine
+# GC-MS organic-acid profiling, plasma/CSF metabolomics) and the cultured-fibroblast /
+# tissue enzyme assays that define the classic organic acidemias.
+#
+# DESIGN: This is deliberately an almost-pure ISLAND of grounded analyte/activity nodes.
+# Each organic acid is a measurable physiological VARIABLE (concentration in a body fluid,
+# or an enzyme activity). A grounded node with NO edges is valuable — under a do() clamp
+# it abstains rather than guessing. We add causal edges ONLY for the small number of
+# enzyme -> substrate/product relations whose sign is unambiguous from a cited, textbook
+# biochemical mechanism (enzyme activity DOWN => substrate UP). We do NOT attempt to wire
+# the full intermediary-metabolism network here (that would require guessed signs through
+# branched, looped pathways).  ROBERT: please correct nodes / signs / IRIs.
+#
+# Provenance (textbooks / DBs consulted per analyte cluster):
+#   - Lehninger Principles of Biochemistry (citric-acid cycle intermediates: citrate,
+#     aconitate, alpha-ketoglutarate/2-oxoglutarate, succinate, fumarate, malate;
+#     ketone bodies acetoacetate/3-hydroxybutyrate; glyoxylate/oxalate; BCAA catabolism).
+#   - Scriver's The Metabolic & Molecular Bases of Inherited Disease (OMMBID) / Saudubray,
+#     Inborn Metabolic Diseases — the canonical reference for the organic acidemias and
+#     their diagnostic organic-acid signatures.
+#   - Blau, Physician's Guide to the Diagnosis, Treatment, and Follow-up of Inherited
+#     Metabolic Diseases (urinary organic-acid GC-MS markers).
+#   - Boron & Boulpaep Medical Physiology (renal handling of organic acids; citrate;
+#     oxalate). Harrison's Principles of Internal Medicine (organic acidemias, oxalosis).
+#   - ChEBI for small-molecule entity IRIs (verified by exact `name:`/synonym match in the
+#     downloaded CHEBI.obo; null where no exact class was found — never fabricated).
+#
+# Disease anchors (cited as REAL OMIM #, encoded only as enzyme-activity roots, not nodes):
+#   Propionic acidemia (PCC, OMIM 606054), isovaleric acidemia (IVD, OMIM 243500),
+#   3-methylcrotonyl-CoA carboxylase deficiency (MCCC1/2, OMIM 210200/210210),
+#   primary hyperoxaluria type 1 (AGXT/AGT, OMIM 259900), type 2 (GRHPR, OMIM 260000),
+#   D-glyceric aciduria (GLYCTK, OMIM 220120), SSADH deficiency (ALDH5A1; GHB/4-OH-butyrate,
+#   OMIM 271980), malonic aciduria (MLYCD, OMIM 248360), Canavan disease (ASPA; NAA,
+#   OMIM 271900), beta-ketothiolase / SCOT deficiency (OXCT1, OMIM 245050), HIBCH and
+#   HIBADH defects, MMSDH (ALDH6A1) deficiency, 3-methylglutaconic aciduria (AUH).
+# =============================================================================
+
+name: hpo_organic_acids
+description: >-
+  DRAFT coverage fragment for HPO organic-acid abnormal-quantity terms: urinary, plasma,
+  and CSF organic-acid analytes (TCA-cycle intermediates, ketone bodies, glyoxylate/oxalate
+  pathway, BCAA-catabolite acylglycines/acylcarnitines, dicarboxylic and aromatic acids) and
+  the organic-acidemia enzyme-activity roots. Predominantly an island of grounded analyte and
+  enzyme-activity nodes; a few enzyme->substrate/product causal edges with textbook-defensible
+  signs. Scales: organ_system (body-fluid concentrations), cellular (enzyme activities, with a
+  bearer cell). Phase 1, single-scale-per-node.
+
+nodes:
+  # ---------------------------------------------------------------------------
+  # Aggregate / class analytes
+  # ---------------------------------------------------------------------------
+  - id: urinary_organic_acids
+    label: urinary total organic-acid (carboxylic / monocarboxylic acid) level
+    scale: organ_system
+    entity_iri: CHEBI:64709          # organic acid
+    quality_iri: PATO:0000033        # concentration
+  - id: urinary_ketoacids
+    label: urinary keto acid level
+    scale: organ_system
+    entity_iri: CHEBI:35910          # 2-oxo monocarboxylic acid (keto acid)
+    quality_iri: PATO:0000033
+
+  # ---------------------------------------------------------------------------
+  # TCA-cycle intermediates (plasma / urine / CSF)
+  # ---------------------------------------------------------------------------
+  - id: plasma_pyruvate
+    label: plasma pyruvate concentration
+    scale: organ_system
+    entity_iri: CHEBI:32816          # pyruvic acid
+    quality_iri: PATO:0000033
+  - id: urinary_citrate
+    label: urinary citrate level
+    scale: organ_system
+    entity_iri: CHEBI:30769          # citric acid
+    quality_iri: PATO:0000033
+  - id: urinary_aconitic_acid
+    label: urinary aconitic acid level
+    scale: organ_system
+    entity_iri: CHEBI:22211          # aconitic acid
+    quality_iri: PATO:0000033
+  - id: plasma_aconitate
+    label: plasma aconitic acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:22211          # aconitic acid
+    quality_iri: PATO:0000033
+  - id: urinary_alpha_ketoglutarate
+    label: urinary alpha-ketoglutarate (2-oxoglutarate) level
+    scale: organ_system
+    entity_iri: CHEBI:30915          # 2-oxoglutaric acid
+    quality_iri: PATO:0000033
+  - id: plasma_alpha_ketoglutarate
+    label: plasma alpha-ketoglutarate (2-oxoglutarate) concentration
+    scale: organ_system
+    entity_iri: CHEBI:30915          # 2-oxoglutaric acid
+    quality_iri: PATO:0000033
+  - id: csf_alpha_ketoglutarate
+    label: CSF alpha-ketoglutarate (2-oxoglutarate) concentration
+    scale: organ_system
+    entity_iri: CHEBI:30915          # 2-oxoglutaric acid
+    quality_iri: PATO:0000033
+  - id: plasma_succinate
+    label: plasma succinate concentration
+    scale: organ_system
+    entity_iri: CHEBI:15741          # succinic acid
+    quality_iri: PATO:0000033
+  - id: urinary_succinate
+    label: urinary succinate level
+    scale: organ_system
+    entity_iri: CHEBI:15741          # succinic acid
+    quality_iri: PATO:0000033
+  - id: urinary_succinic_acid
+    label: urinary succinic acid level
+    scale: organ_system
+    entity_iri: CHEBI:15741          # succinic acid
+    quality_iri: PATO:0000033
+  - id: plasma_fumarate
+    label: plasma fumarate concentration
+    scale: organ_system
+    entity_iri: CHEBI:18012          # fumaric acid
+    quality_iri: PATO:0000033
+  - id: urinary_fumarate
+    label: urinary fumarate level
+    scale: organ_system
+    entity_iri: CHEBI:18012          # fumaric acid
+    quality_iri: PATO:0000033
+  - id: csf_fumarate
+    label: CSF fumarate concentration
+    scale: organ_system
+    entity_iri: CHEBI:18012          # fumaric acid
+    quality_iri: PATO:0000033
+  - id: urinary_malic_acid
+    label: urinary malic acid level
+    scale: organ_system
+    entity_iri: CHEBI:6650           # malic acid
+    quality_iri: PATO:0000033
+
+  # ---------------------------------------------------------------------------
+  # Ketone bodies & related short hydroxy/keto acids
+  # ---------------------------------------------------------------------------
+  - id: urinary_3_hydroxybutyrate
+    label: urinary 3-hydroxybutyric acid level
+    scale: organ_system
+    entity_iri: CHEBI:20067          # 3-hydroxybutyric acid
+    quality_iri: PATO:0000033
+  - id: plasma_3_hydroxybutyrate
+    label: plasma 3-hydroxybutyric acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:20067          # 3-hydroxybutyric acid
+    quality_iri: PATO:0000033
+  - id: plasma_hydroxybutyrate
+    label: plasma hydroxybutyric acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:20067          # 3-hydroxybutyric acid (generic hydroxybutyrate)
+    quality_iri: PATO:0000033
+  - id: plasma_2_hydroxybutyrate
+    label: plasma 2-hydroxybutyric acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:1148           # 2-hydroxybutyric acid
+    quality_iri: PATO:0000033
+  - id: urinary_2_hydroxybutyric_acid
+    label: urinary 2-hydroxybutyric acid level
+    scale: organ_system
+    entity_iri: CHEBI:1148           # 2-hydroxybutyric acid
+    quality_iri: PATO:0000033
+  - id: urinary_acetoacetate
+    label: urinary acetoacetic acid level
+    scale: organ_system
+    entity_iri: CHEBI:15344          # acetoacetic acid
+    quality_iri: PATO:0000033
+
+  # --- GHB / 4-hydroxybutyrate (SSADH deficiency) ---
+  - id: urinary_4_hydroxybutyrate
+    label: urinary 4-hydroxybutyric acid level
+    scale: organ_system
+    entity_iri: CHEBI:30830          # 4-hydroxybutyric acid
+    quality_iri: PATO:0000033
+  - id: plasma_4_hydroxybutyrate
+    label: plasma 4-hydroxybutyric acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:30830          # 4-hydroxybutyric acid
+    quality_iri: PATO:0000033
+  - id: csf_4_hydroxybutyrate
+    label: CSF 4-hydroxybutyric acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:30830          # 4-hydroxybutyric acid
+    quality_iri: PATO:0000033
+
+  # ---------------------------------------------------------------------------
+  # Glyoxylate / oxalate / glycerate pathway (primary hyperoxalurias, D-glyceric)
+  # ---------------------------------------------------------------------------
+  - id: urinary_oxalate
+    label: urinary oxalate level (hyperoxaluria)
+    scale: organ_system
+    entity_iri: CHEBI:16995          # oxalic acid
+    quality_iri: PATO:0000033
+  - id: plasma_oxalate
+    label: plasma oxalate concentration
+    scale: organ_system
+    entity_iri: CHEBI:16995          # oxalic acid
+    quality_iri: PATO:0000033
+  - id: urinary_glycolate
+    label: urinary glycolic acid (glycolate) level
+    scale: organ_system
+    entity_iri: CHEBI:17497          # glycolic acid
+    quality_iri: PATO:0000033
+  - id: plasma_glycolate
+    label: plasma glycolate concentration
+    scale: organ_system
+    entity_iri: CHEBI:17497          # glycolic acid
+    quality_iri: PATO:0000033
+  - id: urinary_glyoxylate
+    label: urinary glyoxylic acid level
+    scale: organ_system
+    entity_iri: CHEBI:16891          # glyoxylic acid
+    quality_iri: PATO:0000033
+  - id: plasma_glyoxylate
+    label: plasma glyoxylic acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:16891          # glyoxylic acid
+    quality_iri: PATO:0000033
+  - id: urinary_d_glycerate
+    label: urinary D-glyceric acid level
+    scale: organ_system
+    entity_iri: CHEBI:32398          # D-glyceric acid
+    quality_iri: PATO:0000033
+  - id: plasma_d_glycerate
+    label: plasma D-glyceric acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:32398          # D-glyceric acid
+    quality_iri: PATO:0000033
+  - id: csf_d_glycerate
+    label: CSF D-glyceric acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:32398          # D-glyceric acid
+    quality_iri: PATO:0000033
+  - id: urinary_l_glycerate
+    label: urinary L-glycerate level
+    scale: organ_system
+    entity_iri: CHEBI:74324          # L-glyceric acid
+    quality_iri: PATO:0000033
+
+  # ---------------------------------------------------------------------------
+  # Glutaric / hydroxyglutaric / aminoadipic (glutaric aciduria spectrum)
+  # ---------------------------------------------------------------------------
+  - id: plasma_glutaric_acid
+    label: plasma glutaric acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:17859          # glutaric acid
+    quality_iri: PATO:0000033
+  - id: urinary_3_hydroxyglutarate
+    label: urinary 3-hydroxyglutaric acid level
+    scale: organ_system
+    entity_iri: CHEBI:39980          # 3-hydroxyglutaric acid
+    quality_iri: PATO:0000033
+  - id: urinary_glutaconic_acid
+    label: urinary glutaconic acid level
+    scale: organ_system
+    entity_iri: CHEBI:24309          # glutaconic acid
+    quality_iri: PATO:0000033
+  - id: urinary_glutarylglycine
+    label: urinary glutarylglycine level
+    scale: organ_system
+    entity_iri: CHEBI:165861         # glutarylglycine
+    quality_iri: PATO:0000033
+  - id: csf_l_2_hydroxyglutarate
+    label: CSF L-2-hydroxyglutaric acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:17084          # 2-hydroxyglutaric acid
+    quality_iri: PATO:0000033
+  - id: urinary_2_4_dihydroxyglutarate
+    label: urinary 2,4-dihydroxyglutarate level
+    scale: organ_system
+    quality_iri: PATO:0000033
+  - id: plasma_alpha_aminoadipate
+    label: plasma alpha-aminoadipic (alpha-oxoadipic) acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:37024          # 2-aminoadipic acid
+    quality_iri: PATO:0000033
+
+  # ---------------------------------------------------------------------------
+  # Propionate / methylmalonate / methylcitrate (propionic & methylmalonic acidemia)
+  # ---------------------------------------------------------------------------
+  - id: urinary_propionic_acid
+    label: urinary propionic acid level
+    scale: organ_system
+    entity_iri: CHEBI:30768          # propionic acid
+    quality_iri: PATO:0000033
+  - id: urinary_propionylglycine
+    label: urinary propionylglycine level
+    scale: organ_system
+    entity_iri: CHEBI:89836          # propionylglycine
+    quality_iri: PATO:0000033
+  - id: urinary_3_hydroxypropionate
+    label: urinary 3-hydroxypropionic acid level
+    scale: organ_system
+    entity_iri: CHEBI:33404          # 3-hydroxypropionic acid
+    quality_iri: PATO:0000033
+  - id: urinary_2_methylcitrate
+    label: urinary 2-methylcitric acid level
+    scale: organ_system
+    entity_iri: CHEBI:30835          # 2-methylcitric acid
+    quality_iri: PATO:0000033
+  - id: urinary_methylmalonylcarnitine
+    label: urinary methylmalonylcarnitine level
+    scale: organ_system
+    entity_iri: CHEBI:73031          # O-methylmalonylcarnitine
+    quality_iri: PATO:0000033
+
+  # ---------------------------------------------------------------------------
+  # Isovalerate / leucine catabolism (isovaleric acidemia, 3-MCC, 3-MGA)
+  # ---------------------------------------------------------------------------
+  - id: plasma_isovalerate
+    label: plasma isovaleric acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:28484          # isovaleric acid
+    quality_iri: PATO:0000033
+  - id: urinary_isovaleric_acid
+    label: urinary isovaleric acid level
+    scale: organ_system
+    entity_iri: CHEBI:28484          # isovaleric acid
+    quality_iri: PATO:0000033
+  - id: urinary_isovalerylglycine
+    label: urinary isovalerylglycine level
+    scale: organ_system
+    entity_iri: CHEBI:70984          # N-isovalerylglycine
+    quality_iri: PATO:0000033
+  - id: urinary_3_methylcrotonylglycine
+    label: urinary 3-methylcrotonylglycine level
+    scale: organ_system
+    entity_iri: CHEBI:68499          # 3-methylcrotonyl glycine
+    quality_iri: PATO:0000033
+  - id: urinary_4_hydroxyisovaleric_acid
+    label: urinary 4-hydroxyisovaleric acid level
+    scale: organ_system
+    entity_iri: CHEBI:90005          # 4-hydroxyisovaleric acid
+    quality_iri: PATO:0000033
+  - id: urinary_3_hydroxy_3_methylglutarate
+    label: urinary 3-hydroxy-3-methylglutaric acid level
+    scale: organ_system
+    entity_iri: CHEBI:16831          # 3-hydroxy-3-methylglutaric acid
+    quality_iri: PATO:0000033
+
+  # ---------------------------------------------------------------------------
+  # Branched-chain (valine / isoleucine) catabolites
+  # ---------------------------------------------------------------------------
+  - id: urinary_3_hydroxyisobutyrate
+    label: urinary 3-hydroxyisobutyric acid level
+    scale: organ_system
+    entity_iri: CHEBI:18064          # 3-hydroxyisobutyric acid
+    quality_iri: PATO:0000033
+  - id: urinary_2_methyl_3_hydroxybutyrate
+    label: urinary 2-methyl-3-hydroxybutyric acid level
+    scale: organ_system
+    entity_iri: CHEBI:37051          # 3-hydroxy-2-methylbutanoic acid
+    quality_iri: PATO:0000033
+  - id: urinary_2_methylacetoacetic_acid
+    label: urinary 2-methylacetoacetic acid level
+    scale: organ_system
+    entity_iri: CHEBI:37079          # 2-methylacetoacetic acid
+    quality_iri: PATO:0000033
+  - id: plasma_tiglylglycine
+    label: plasma tiglylglycine concentration
+    scale: organ_system
+    entity_iri: CHEBI:73018          # tiglylglycine
+    quality_iri: PATO:0000033
+  - id: urinary_tiglylglycine
+    label: urinary tiglylglycine level
+    scale: organ_system
+    entity_iri: CHEBI:73018          # tiglylglycine
+    quality_iri: PATO:0000033
+  - id: plasma_tiglylcarnitine
+    label: plasma tiglylcarnitine concentration
+    scale: organ_system
+    entity_iri: CHEBI:71179          # O-tiglylcarnitine
+    quality_iri: PATO:0000033
+  - id: urinary_2_hydroxy_3_methylvaleric_acid
+    label: urinary 2-hydroxy-3-methylvaleric acid level
+    scale: organ_system
+    entity_iri: CHEBI:60645          # 2-hydroxy-3-methylbutyric acid (closest verified class)
+    quality_iri: PATO:0000033
+  - id: plasma_3_methyl_2_oxovalerate
+    label: plasma 3-methyl-2-oxovaleric acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:35932          # 3-methyl-2-oxovaleric acid
+    quality_iri: PATO:0000033
+  - id: urinary_3_methyl_2_oxovaleric_acid
+    label: urinary 3-methyl-2-oxovaleric acid level
+    scale: organ_system
+    entity_iri: CHEBI:35932          # 3-methyl-2-oxovaleric acid
+    quality_iri: PATO:0000033
+  - id: plasma_4_methyl_2_oxopentanoate
+    label: plasma 4-methyl-2-oxopentanoic acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:48430          # 4-methyl-2-oxopentanoic acid
+    quality_iri: PATO:0000033
+  - id: urinary_4_methyl_2_oxopentanoic_acid
+    label: urinary 4-methyl-2-oxopentanoic acid level
+    scale: organ_system
+    entity_iri: CHEBI:48430          # 4-methyl-2-oxopentanoic acid
+    quality_iri: PATO:0000033
+  - id: urinary_2_oxoisocaproic_acid
+    label: urinary 2-oxoisocaproic level
+    scale: organ_system
+    entity_iri: CHEBI:48430          # 4-methyl-2-oxopentanoic acid (= 2-oxoisocaproate)
+    quality_iri: PATO:0000033
+  - id: urinary_2_hydroxyisocaproic_acid
+    label: urinary 2-hydroxyisocaproic acid level
+    scale: organ_system
+    quality_iri: PATO:0000033
+  - id: urinary_2_oxovaleric_acid
+    label: urinary 2-oxovaleric acid level
+    scale: organ_system
+    entity_iri: CHEBI:33033          # 2-oxopentanoic acid (2-oxovaleric acid)
+    quality_iri: PATO:0000033
+  - id: urinary_isobutyrylglycine
+    label: urinary isobutyrylglycine level
+    scale: organ_system
+    entity_iri: CHEBI:70979          # N-isobutyrylglycine
+    quality_iri: PATO:0000033
+  - id: urinary_n_butyrylglycine
+    label: urinary N-butyrylglycine level
+    scale: organ_system
+    entity_iri: CHEBI:89963          # butyrylglycine
+    quality_iri: PATO:0000033
+
+  # ---------------------------------------------------------------------------
+  # Dicarboxylic / hydroxy-fatty (fatty-acid oxidation defects)
+  # ---------------------------------------------------------------------------
+  - id: urinary_suberic_acid
+    label: urinary suberic acid level
+    scale: organ_system
+    entity_iri: CHEBI:9300           # suberic acid
+    quality_iri: PATO:0000033
+  - id: plasma_suberate
+    label: plasma suberic acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:9300           # suberic acid
+    quality_iri: PATO:0000033
+  - id: urinary_suberylglycine
+    label: urinary suberylglycine level
+    scale: organ_system
+    entity_iri: CHEBI:88811          # suberylglycine
+    quality_iri: PATO:0000033
+  - id: plasma_sebacate
+    label: plasma sebacic acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:41865          # sebacic acid
+    quality_iri: PATO:0000033
+  - id: urinary_sebacic_acid
+    label: urinary sebacic acid level
+    scale: organ_system
+    entity_iri: CHEBI:41865          # sebacic acid
+    quality_iri: PATO:0000033
+  - id: urinary_adipic_acid
+    label: urinary adipic acid level
+    scale: organ_system
+    entity_iri: CHEBI:30832          # adipic acid
+    quality_iri: PATO:0000033
+  - id: urinary_3_hydroxyadipic_acid
+    label: urinary 3-hydroxyadipic acid level
+    scale: organ_system
+    entity_iri: CHEBI:89205          # 3-hydroxyadipic acid
+    quality_iri: PATO:0000033
+  - id: urinary_dodecanedioic_acid
+    label: urinary dodecanedioic acid level
+    scale: organ_system
+    entity_iri: CHEBI:4676           # dodecanedioic acid
+    quality_iri: PATO:0000033
+  - id: urinary_octenedioic_acid
+    label: urinary octenedioic acid level
+    scale: organ_system
+    entity_iri: CHEBI:36174          # octenedioic acid
+    quality_iri: PATO:0000033
+  - id: urinary_octanoic_acid
+    label: urinary octanoic acid level
+    scale: organ_system
+    entity_iri: CHEBI:28837          # octanoic acid
+    quality_iri: PATO:0000033
+  - id: urinary_hexanoic_acid
+    label: urinary hexanoic acid level
+    scale: organ_system
+    entity_iri: CHEBI:30776          # hexanoic acid
+    quality_iri: PATO:0000033
+  - id: urinary_hexanoylglycine
+    label: urinary hexanoylglycine level
+    scale: organ_system
+    entity_iri: CHEBI:64390          # N-hexanoylglycine
+    quality_iri: PATO:0000033
+  - id: urinary_butyric_acid
+    label: urinary butyric acid level
+    scale: organ_system
+    entity_iri: CHEBI:30772          # butyric acid
+    quality_iri: PATO:0000033
+  - id: urinary_decadienoylcarnitine
+    label: urinary 2-trans,4-cis-decadienoylcarnitine level
+    scale: organ_system
+    entity_iri: CHEBI:156419         # 2-trans,4-cis-decadienoylcarnitine
+    quality_iri: PATO:0000033
+  - id: urinary_5_hydroxyhexanoate
+    label: urinary 5-hydroxyhexanoic acid level
+    scale: organ_system
+    entity_iri: CHEBI:131434         # 5-hydroxyhexanoic acid
+    quality_iri: PATO:0000033
+  - id: urinary_3_hydroxypentanoic_acid
+    label: urinary 3-hydroxypentanoic acid level
+    scale: organ_system
+    entity_iri: CHEBI:139272         # 3-hydroxypentanoic acid
+    quality_iri: PATO:0000033
+  - id: urinary_7_hydroxyoctanoate
+    label: urinary 7-hydroxyoctanoic acid level
+    scale: organ_system
+    quality_iri: PATO:0000033
+  - id: urinary_3_hydroxysebacic_acid
+    label: urinary 3-hydroxysebacic acid level
+    scale: organ_system
+    entity_iri: CHEBI:89182          # 3-hydroxysebacic acid
+    quality_iri: PATO:0000033
+  - id: urinary_4_5_dihydroxyhexanoic_acid
+    label: urinary 4,5-dihydroxyhexanoic acid level
+    scale: organ_system
+    quality_iri: PATO:0000033
+  - id: urinary_3_6_epoxydicarboxylic_acid
+    label: urinary 3,6-epoxydicarboxylic acid level
+    scale: organ_system
+    quality_iri: PATO:0000033
+  - id: urinary_phenylpropionylglycine
+    label: urinary phenylpropionylglycine level
+    scale: organ_system
+    entity_iri: CHEBI:88550          # phenylpropionylglycine
+    quality_iri: PATO:0000033
+
+  # ---------------------------------------------------------------------------
+  # Other hydroxy/dicarboxy short-chain organic acids
+  # ---------------------------------------------------------------------------
+  - id: urinary_3_4_dihydroxybutyrate
+    label: urinary 3,4-Dihydroxybutyric acid level
+    scale: organ_system
+    entity_iri: CHEBI:86371          # 3,4-dihydroxybutyric acid
+    quality_iri: PATO:0000033
+  - id: urinary_2_4_dihydroxybutyric_acid
+    label: urinary 2,4-dihydroxybutyric acid level
+    scale: organ_system
+    entity_iri: CHEBI:86348          # 2,4-dihydroxybutanoic acid
+    quality_iri: PATO:0000033
+  - id: urinary_2_3_dihydroxy_2_methylbutyrate
+    label: urine 2,3-dihydroxy-2-methylbutanoic acid level
+    scale: organ_system
+    entity_iri: CHEBI:173559         # 2,3-dihydroxy-2-methylbutanoic acid
+    quality_iri: PATO:0000033
+  - id: urinary_malonate
+    label: urinary malonic acid level
+    scale: organ_system
+    entity_iri: CHEBI:30794          # malonic acid
+    quality_iri: PATO:0000033
+  - id: urinary_mesaconate
+    label: urinary mesaconic acid level
+    scale: organ_system
+    entity_iri: CHEBI:16600          # mesaconic acid
+    quality_iri: PATO:0000033
+  - id: plasma_methylsuccinate
+    label: plasma methylsuccinic acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:89843          # methylsuccinic acid
+    quality_iri: PATO:0000033
+  - id: urinary_methylsuccinate
+    label: urinary methylsuccinic acid level
+    scale: organ_system
+    entity_iri: CHEBI:89843          # methylsuccinic acid
+    quality_iri: PATO:0000033
+  - id: urinary_mevalonate
+    label: urinary mevalonic acid / mevalonate lactone level
+    scale: organ_system
+    entity_iri: CHEBI:25351          # mevalonic acid
+    quality_iri: PATO:0000033
+  - id: urinary_4_hydroxy_2_oxoglutarate
+    label: urinary 4-hydroxy-2-oxoglutarate level
+    scale: organ_system
+    entity_iri: CHEBI:30923          # 4-hydroxy-2-oxoglutaric acid
+    quality_iri: PATO:0000033
+  - id: urinary_d_lactate
+    label: urinary D-lactate level
+    scale: organ_system
+    entity_iri: CHEBI:42111          # (R)-lactic acid (D-lactic acid)
+    quality_iri: PATO:0000033
+
+  # ---------------------------------------------------------------------------
+  # Aromatic organic acids (tyrosine / phenylalanine / gut-microbial)
+  # ---------------------------------------------------------------------------
+  - id: urinary_phenylpyruvate
+    label: urinary phenylpyruvic acid level
+    scale: organ_system
+    entity_iri: CHEBI:30851          # keto-phenylpyruvic acid
+    quality_iri: PATO:0000033
+  - id: urinary_homogentisate
+    label: urinary homogentisic acid level
+    scale: organ_system
+    entity_iri: CHEBI:44747          # homogentisic acid
+    quality_iri: PATO:0000033
+  - id: plasma_4_hydroxyphenylacetate
+    label: plasma 4-hydroxyphenylacetic acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:18101          # 4-hydroxyphenylacetic acid
+    quality_iri: PATO:0000033
+  - id: plasma_4_hydroxyphenyllactate
+    label: plasma 4-hydroxyphenyllactic acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:17385          # 3-(4-hydroxyphenyl)lactic acid
+    quality_iri: PATO:0000033
+  - id: urinary_hydroxyphenyllactate
+    label: urinary hydroxyphenyllactic acid level
+    scale: organ_system
+    entity_iri: CHEBI:17385          # 3-(4-hydroxyphenyl)lactic acid (4-OH isomer, tyrosine block)
+    quality_iri: PATO:0000033
+  - id: urinary_indoleacetate
+    label: urinary indoleacetic acid level
+    scale: organ_system
+    entity_iri: CHEBI:16411          # indole-3-acetic acid
+    quality_iri: PATO:0000033
+  - id: urinary_mandelic_acid
+    label: urinary mandelic acid level
+    scale: organ_system
+    entity_iri: CHEBI:35825          # mandelic acid
+    quality_iri: PATO:0000033
+  - id: urinary_hippuric_acid
+    label: urinary hippuric acid level
+    scale: organ_system
+    entity_iri: CHEBI:18089          # N-benzoylglycine (hippuric acid)
+    quality_iri: PATO:0000033
+  - id: plasma_hippuric_acid
+    label: plasma hippuric acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:18089          # N-benzoylglycine (hippuric acid)
+    quality_iri: PATO:0000033
+  - id: urinary_phenylacetylglutamine
+    label: urinary phenylacetylglutamine level
+    scale: organ_system
+    entity_iri: CHEBI:25982          # phenylacetylglutamine
+    quality_iri: PATO:0000033
+
+  # ---------------------------------------------------------------------------
+  # N-acetylaspartate (Canavan), pyroglutamate, guanidinoacetate, succinylacetone
+  # ---------------------------------------------------------------------------
+  - id: urinary_n_acetylaspartate
+    label: urinary N-acetylaspartic acid level
+    scale: organ_system
+    entity_iri: CHEBI:21547          # N-acetyl-L-aspartic acid
+    quality_iri: PATO:0000033
+  - id: plasma_n_acetylaspartate
+    label: plasma N-acetylaspartic acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:21547          # N-acetyl-L-aspartic acid
+    quality_iri: PATO:0000033
+  - id: urinary_pyroglutamate
+    label: urinary L-pyroglutamic acid level
+    scale: organ_system
+    entity_iri: CHEBI:18183          # 5-oxo-L-proline (L-pyroglutamic acid)
+    quality_iri: PATO:0000033
+  - id: plasma_succinylacetone
+    label: plasma succinylacetone concentration
+    scale: organ_system
+    entity_iri: CHEBI:87897          # 4,6-dioxoheptanoic acid (succinylacetone)
+    quality_iri: PATO:0000033
+  - id: urinary_succinylacetone
+    label: urinary succinylacetone level
+    scale: organ_system
+    entity_iri: CHEBI:87897          # 4,6-dioxoheptanoic acid (succinylacetone)
+    quality_iri: PATO:0000033
+
+  # ---------------------------------------------------------------------------
+  # Enzyme / transporter ACTIVITY roots (cellular scale; bearer = hepatocyte or
+  # cultured fibroblast as assayed). entity_iri left null — PR multi-subunit
+  # complexes not exact-matched in PR.obo; never fabricated.
+  # ---------------------------------------------------------------------------
+  - id: propionyl_coa_carboxylase_activity
+    label: propionyl-CoA carboxylase (PCC) activity
+    scale: cellular
+    quality_iri: PATO:0001414        # catalytic activity
+    bearer_entity_iri: CL:0000057    # fibroblast (clinical assay substrate)
+  - id: methylcrotonyl_coa_carboxylase_activity
+    label: 3-methylcrotonyl-CoA carboxylase (MCC) activity
+    scale: cellular
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000057    # fibroblast
+  - id: isovaleryl_coa_dehydrogenase_activity
+    label: isovaleryl-CoA dehydrogenase (IVD) activity
+    scale: cellular
+    entity_iri: PR:P26440            # isovaleryl-CoA dehydrogenase, mitochondrial (human), IVD
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000057    # fibroblast
+  - id: malonyl_coa_decarboxylase_activity
+    label: malonyl-CoA decarboxylase (MLYCD) activity
+    scale: cellular
+    entity_iri: PR:O95822            # malonyl-CoA decarboxylase, mitochondrial (human), MLYCD
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000057    # fibroblast
+  - id: mmsdh_activity
+    label: methylmalonate semialdehyde dehydrogenase (ALDH6A1) activity
+    scale: cellular
+    entity_iri: PR:Q02252            # methylmalonate-semialdehyde dehydrogenase [acylating], mitochondrial (human), ALDH6A1
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000057    # fibroblast
+  - id: scot_activity
+    label: succinyl-CoA:3-oxoacid-CoA transferase (SCOT / OXCT1) activity
+    scale: cellular
+    entity_iri: PR:P55809            # succinyl-CoA:3-ketoacid coenzyme A transferase 1, mitochondrial (human), OXCT1
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000057    # fibroblast
+  - id: methylglutaconyl_coa_hydratase_activity
+    label: 3-methylglutaconyl-CoA hydratase (AUH) activity
+    scale: cellular
+    entity_iri: PR:Q13825            # methylglutaconyl-CoA hydratase, mitochondrial (human), AUH
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000057    # cultured fibroblast / tissue
+  - id: hibch_activity
+    label: 3-hydroxyisobutyryl-CoA hydrolase (HIBCH) activity
+    scale: cellular
+    entity_iri: PR:Q6NVY1            # 3-hydroxyisobutyryl-CoA hydrolase, mitochondrial (human), HIBCH
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000057    # fibroblast
+  - id: hibadh_activity
+    label: 3-hydroxyisobutyrate dehydrogenase (HIBADH) activity
+    scale: cellular
+    entity_iri: PR:P31937            # 3-hydroxyisobutyrate dehydrogenase, mitochondrial (human), HIBADH
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000057    # fibroblast
+  - id: glycerate_kinase_activity
+    label: D-glycerate kinase (GLYCTK) activity
+    scale: cellular
+    entity_iri: PR:Q8IVS8            # glycerate kinase (human), GLYCTK
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000182    # hepatocyte (hepatic enzyme)
+  - id: agt_activity
+    label: alanine-glyoxylate aminotransferase (AGT / AGXT) activity
+    scale: cellular
+    entity_iri: PR:000030629         # alanine--glyoxylate aminotransferase
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000182    # hepatocyte (peroxisomal, liver)
+  - id: glyoxylate_reductase_activity
+    label: glyoxylate reductase (GRHPR) activity
+    scale: cellular
+    entity_iri: PR:Q9UBQ7            # glyoxylate reductase/hydroxypyruvate reductase (human), GRHPR
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000182    # hepatocyte
+
+causal_edges:
+  # --- Primary hyperoxaluria type 1: AGT deficiency. AGT detoxifies glyoxylate
+  #     (-> glycine); loss raises glyoxylate, which is oxidised to oxalate. ---
+  - source: agt_activity
+    target: plasma_glyoxylate
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: peroxisomal alanine-glyoxylate aminotransferase transaminates glyoxylate to glycine; reduced AGT activity leaves glyoxylate unconsumed, raising it (substrate consumption => enzyme down raises substrate)
+    evidence: "Scriver's OMMBID / Saudubray, Inborn Metabolic Diseases — primary hyperoxaluria type 1 (AGXT, OMIM 259900): AGT deficiency causes glyoxylate accumulation; Lehninger (glyoxylate metabolism)"
+  - source: agt_activity
+    target: urinary_oxalate
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: glyoxylate not detoxified by AGT is oxidised (LDH) to oxalate; reduced AGT activity therefore raises oxalate production and urinary oxalate excretion (hyperoxaluria)
+    evidence: "Harrison's Principles of Internal Medicine (primary hyperoxaluria / oxalosis); Scriver's OMMBID — PH1 (AGXT, OMIM 259900) is the canonical hyperoxaluria-causing AGT deficiency"
+  - source: agt_activity
+    target: urinary_glycolate
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: in PH1 the diverted glyoxylate is also reduced to glycolate, raising urinary glycolate; reduced AGT activity raises it
+    evidence: "Scriver's OMMBID / Saudubray — PH1 (AGXT, OMIM 259900): elevated urinary glycolate + oxalate is the diagnostic signature"
+
+  # --- Primary hyperoxaluria type 2: GRHPR (glyoxylate reductase / hydroxypyruvate
+  #     reductase) deficiency => glyoxylate -> oxalate, and L-glycerate accumulates. ---
+  - source: glyoxylate_reductase_activity
+    target: urinary_oxalate
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: GRHPR reduces glyoxylate to glycolate (detoxification); loss diverts glyoxylate to oxalate, raising urinary oxalate (hyperoxaluria type 2)
+    evidence: "Scriver's OMMBID / Saudubray — primary hyperoxaluria type 2 (GRHPR, OMIM 260000)"
+  - source: glyoxylate_reductase_activity
+    target: urinary_l_glycerate
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: GRHPR also reduces hydroxypyruvate to D-glycerate; in deficiency hydroxypyruvate is instead reduced by LDH to L-glycerate, which accumulates and is excreted (L-glyceric aciduria) — reduced GRHPR activity raises L-glycerate
+    evidence: "Scriver's OMMBID — PH2 (GRHPR, OMIM 260000) presents with L-glyceric aciduria"
+
+  # --- D-glyceric aciduria: GLYCTK (D-glycerate kinase) deficiency => D-glycerate
+  #     accumulates (not phosphorylated). ---
+  - source: glycerate_kinase_activity
+    target: urinary_d_glycerate
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: D-glycerate kinase phosphorylates D-glycerate to 2-phosphoglycerate; loss leaves D-glycerate unconsumed, raising it (D-glyceric aciduria) — reduced activity raises substrate
+    evidence: "Saudubray, Inborn Metabolic Diseases — D-glyceric aciduria (GLYCTK, OMIM 220120)"
+  - source: glycerate_kinase_activity
+    target: plasma_d_glycerate
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: unphosphorylated D-glycerate accumulates systemically when D-glycerate kinase is deficient
+    evidence: "Saudubray, Inborn Metabolic Diseases — D-glyceric aciduria (GLYCTK, OMIM 220120)"
+
+  # --- Propionic acidemia: PCC deficiency => propionyl-CoA accumulation, diagnostic
+  #     3-hydroxypropionate, 2-methylcitrate, propionylglycine. ---
+  - source: propionyl_coa_carboxylase_activity
+    target: urinary_3_hydroxypropionate
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: PCC carboxylates propionyl-CoA to methylmalonyl-CoA; deficiency backs up propionyl-CoA, diverted to 3-hydroxypropionate which is excreted — reduced PCC activity raises this marker
+    evidence: "Scriver's OMMBID / Saudubray — propionic acidemia (PCCA/PCCB, OMIM 606054): urinary 3-hydroxypropionate + 2-methylcitrate diagnostic"
+  - source: propionyl_coa_carboxylase_activity
+    target: urinary_2_methylcitrate
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: accumulated propionyl-CoA condenses with oxaloacetate to 2-methylcitrate; reduced PCC activity raises urinary 2-methylcitrate
+    evidence: "Scriver's OMMBID — propionic acidemia (OMIM 606054): 2-methylcitrate is a hallmark organic-acid marker"
+  - source: propionyl_coa_carboxylase_activity
+    target: urinary_propionylglycine
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: excess propionyl-CoA is conjugated with glycine to propionylglycine; reduced PCC activity raises it
+    evidence: "Saudubray, Inborn Metabolic Diseases — propionic acidemia (OMIM 606054)"
+
+  # --- Isovaleric acidemia: IVD deficiency => isovaleryl-CoA accumulation =>
+  #     isovalerylglycine, isovaleric acid. ---
+  - source: isovaleryl_coa_dehydrogenase_activity
+    target: urinary_isovalerylglycine
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: IVD dehydrogenates isovaleryl-CoA in leucine catabolism; deficiency accumulates isovaleryl-CoA, conjugated with glycine to isovalerylglycine (the most reliable marker) — reduced IVD activity raises it
+    evidence: "Scriver's OMMBID / Saudubray — isovaleric acidemia (IVD, OMIM 243500): urinary isovalerylglycine is the diagnostic marker"
+  - source: isovaleryl_coa_dehydrogenase_activity
+    target: plasma_isovalerate
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: hydrolysis of accumulated isovaleryl-CoA yields free isovaleric acid; reduced IVD activity raises plasma isovaleric acid
+    evidence: "Scriver's OMMBID — isovaleric acidemia (OMIM 243500)"
+  - source: isovaleryl_coa_dehydrogenase_activity
+    target: urinary_isovaleric_acid
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: free isovaleric acid from accumulated isovaleryl-CoA is excreted; reduced IVD activity raises urinary isovaleric acid
+    evidence: "Scriver's OMMBID — isovaleric acidemia (OMIM 243500)"
+
+  # --- 3-MCC deficiency: MCC => 3-methylcrotonylglycine and 3-hydroxyisovalerate. ---
+  - source: methylcrotonyl_coa_carboxylase_activity
+    target: urinary_3_methylcrotonylglycine
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: MCC carboxylates 3-methylcrotonyl-CoA in leucine catabolism; deficiency accumulates 3-methylcrotonyl-CoA, conjugated with glycine to 3-methylcrotonylglycine — reduced activity raises it
+    evidence: "Scriver's OMMBID / Saudubray — 3-methylcrotonyl-CoA carboxylase deficiency (MCCC1/MCCC2, OMIM 210200/210210)"
+
+  # --- Malonic aciduria: MLYCD deficiency => malonyl-CoA / malonate accumulation. ---
+  - source: malonyl_coa_decarboxylase_activity
+    target: urinary_malonate
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: malonyl-CoA decarboxylase converts malonyl-CoA to acetyl-CoA; deficiency accumulates malonyl-CoA hydrolysed to malonic acid (malonic aciduria) — reduced activity raises urinary malonate
+    evidence: "Scriver's OMMBID / Saudubray — malonic aciduria (MLYCD, OMIM 248360)"
+
+  # --- 3-methylglutaconyl-CoA hydratase (AUH) deficiency => 3-methylglutaconic +
+  #     3-hydroxy-3-methylglutaric (3-MGA type I). ---
+  - source: methylglutaconyl_coa_hydratase_activity
+    target: urinary_glutaconic_acid
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: AUH hydrates 3-methylglutaconyl-CoA in leucine catabolism; deficiency accumulates 3-methylglutaconate (excreted as glutaconic/methylglutaconic acid) — reduced activity raises it
+    evidence: "Scriver's OMMBID / Saudubray — 3-methylglutaconic aciduria type I (AUH, OMIM 250950)"
+  - source: methylglutaconyl_coa_hydratase_activity
+    target: urinary_3_hydroxy_3_methylglutarate
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: blocked 3-methylglutaconyl-CoA is diverted to 3-hydroxy-3-methylglutarate; reduced AUH activity raises urinary 3-hydroxy-3-methylglutarate
+    evidence: "Scriver's OMMBID — 3-methylglutaconic aciduria type I (AUH, OMIM 250950)"
+
+  # --- HIBCH deficiency => methacrylyl-CoA toxicity; HIBADH => 3-hydroxyisobutyrate.
+  #     Both valine pathway: loss raises 3-hydroxyisobutyrate excretion. ---
+  - source: hibadh_activity
+    target: urinary_3_hydroxyisobutyrate
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: 3-hydroxyisobutyrate dehydrogenase oxidises 3-hydroxyisobutyrate in valine catabolism; deficiency leaves 3-hydroxyisobutyrate unconsumed, raising urinary 3-hydroxyisobutyrate — reduced activity raises substrate
+    evidence: "Saudubray, Inborn Metabolic Diseases — 3-hydroxyisobutyrate dehydrogenase (HIBADH) deficiency: 3-hydroxyisobutyric aciduria"
+
+  # --- SCOT / OXCT1 deficiency => permanent ketosis (cannot use ketone bodies);
+  #     acetoacetate / 3-hydroxybutyrate accumulate. ---
+  - source: scot_activity
+    target: urinary_acetoacetate
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: SCOT (OXCT1) activates acetoacetate to acetoacetyl-CoA for peripheral ketone-body utilisation; deficiency blocks ketolysis, so acetoacetate accumulates — reduced SCOT activity raises ketone-body markers
+    evidence: "Scriver's OMMBID / Saudubray — SCOT (succinyl-CoA:3-oxoacid CoA transferase, OXCT1) deficiency (OMIM 245050): persistent ketosis / ketoaciduria"
+  - source: scot_activity
+    target: plasma_3_hydroxybutyrate
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: impaired ketolysis raises circulating ketone bodies including 3-hydroxybutyrate; reduced SCOT activity raises plasma 3-hydroxybutyrate
+    evidence: "Scriver's OMMBID — SCOT/OXCT1 deficiency (OMIM 245050): persistent non-fasting ketosis"

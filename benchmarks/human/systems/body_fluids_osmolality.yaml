@@ -1,0 +1,136 @@
+# =============================================================================
+# Body-fluid osmolality / plasma Na+ concentration / K+ / thirst — PhysioMap fragment
+# *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Hand-encoded canonical osmoregulatory physiology. Every edge sign is the sign
+# of the partial derivative of the target w.r.t. the source at steady state,
+# all else equal. This fragment couples to the CV/renal/RAAS core via the
+# boundary nodes adh, aldosterone, extracellular_fluid_volume, angiotensin_II.
+#
+# KEY DISTINCTION: plasma_sodium_CONCENTRATION (mEq/L) is a WATER-balance
+# variable, NOT a total-body-sodium / ECF-volume variable. Water retention
+# DILUTES both osmolality and Na+ concentration. All signs below concern
+# concentration/osmolality, not total solute content.
+#
+# Core osmoregulatory negative-feedback loop (required):
+#   plasma_osmolality -> adh (+, osmoreceptors)
+#   adh -> plasma_osmolality (-, renal water retention dilutes plasma)
+#   AND  plasma_osmolality -> water_intake (+, thirst)
+#        water_intake -> plasma_osmolality (-, dilution)
+#   => both arms are negative feedback that defend osmolality.
+# Potassium loop: plasma_potassium -> aldosterone (+, hyperkalemia stimulates)
+#                 aldosterone -> plasma_potassium (-, renal kaliuresis).
+#
+# Sources: Boron & Boulpaep, Medical Physiology (osmoreceptor-ADH-thirst axis);
+# Bourque 2008 Nat Rev Neurosci (central osmoreception); Guyton & Hall, Textbook
+# of Medical Physiology (osmoregulation, K+-aldosterone); HumMod electrolytes /
+# ADH / osmoregulation modules.
+# ROBERT: please correct signs/edges.
+# =============================================================================
+
+name: body_fluids_osmolality
+description: >-
+  DRAFT body-fluid osmolality, plasma sodium concentration, potassium, and
+  thirst as a PhysioMap signed cyclic causal graph. Canonical osmoregulatory
+  physiology (Boron & Boulpaep; Bourque 2008; Guyton & Hall; HumMod). Couples
+  to the CV/renal/RAAS core via boundary nodes. Includes the osmoregulatory
+  negative-feedback loop (osmolality -> ADH/thirst -> water -> osmolality) and
+  the K+-aldosterone loop.
+
+nodes:
+  - id: plasma_osmolality
+    label: plasma osmolality
+    scale: organ_system
+    entity_iri: UBERON:0001969         # blood plasma (bearer of the osmolality quality)
+    quality_iri: PATO:0001655          # osmolality
+  - id: plasma_sodium_concentration
+    label: plasma sodium concentration
+    scale: organ_system
+    entity_iri: CHEBI:29101            # sodium(1+)
+    quality_iri: PATO:0000033          # concentration
+  - id: plasma_potassium
+    label: plasma potassium concentration
+    scale: organ_system
+    entity_iri: CHEBI:29103            # potassium(1+)
+    quality_iri: PATO:0000033
+  - id: water_intake
+    label: water intake (drinking / thirst-driven ingestion)
+    scale: organ_system
+    entity_iri: CHEBI:15377            # water
+    quality_iri: PATO:0001823          # intake amount
+    exogenous: true                    # dietary/behavioural forcing input (not constituted by micro config)
+
+causal_edges:
+  # --- Na+ concentration is the dominant determinant of osmolality ----------
+  - source: plasma_sodium_concentration
+    target: plasma_osmolality
+    sign: "+"
+    mechanism: sodium (with accompanying anions) is the principal extracellular osmole
+    evidence: "Boron & Boulpaep; Guyton & Hall; osmolality ~= 2*[Na+] + glucose/18 + BUN/2.8"
+
+  # --- osmoregulatory negative-feedback loop: ADH arm ----------------------
+  - source: plasma_osmolality
+    target: adh
+    sign: "+"
+    causal_evidence: curated_mechanistic
+    mechanism: hypothalamic osmoreceptors stimulate ADH (vasopressin) release as osmolality rises; hypertonic-saline infusion (a controlled osmotic stimulus) raises plasma ADH
+    evidence: "StatPearls NBK526069 (Physiology, Vasopressin): hypothalamic osmoreceptors respond to changes as small as ~2 mOsm/L; slight elevations in osmolarity trigger ADH secretion. Bourque 2008 Nat Rev Neurosci; Boron & Boulpaep; HumMod ADH module | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-090 (17.3: Hormones): 'If blood osmolarity is too high... osmoreceptors signal the hypothalamus to release ADH'; OpenStax Anatomy & Physiology 2e §anp-091 (17.4: The Pituitary Gland and Hypothalamus): 'In response to high blood osmolarity... the osmoreceptors signal the posterior pituitary to release antidiuretic hormone (ADH).'; OpenStax Anatomy & Physiology 2e §anp-114 (20.5: Homeostatic Regulation of the Vascular System): 'The primary trigger prompting the hypothalamus to release ADH is increasing osmolarity of tissue fluid, usually in response to significant loss of blood volume.'; OpenStax Anatomy & Physiology 2e §anp-150 (25.7: Tubular Reabsorption): 'With mild dehydration, plasma osmolarity rises slightly. This increase is detected by osmoreceptors in the hypothalamus, which stimulates the release of ADH from the posterior pituitary.'; OpenStax Anatomy & Physiology 2e §anp-156 (26.3: Water Balance): 'If blood osmolality increases above its ideal value, the hypothalamus transmits signals that result in... the hypothalamus of a dehydrated person also releases antidiuretic hormone (ADH) through the posterior pituitary gland.'; OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): 'Dehydration or physiological stress can cause an increase of osmolarity above 300 mOsm/L, which in turn, raises ADH secretion'; osmoreceptors in hypothalamus detect rising electrolyte concentration and trigger ADH release.; OpenStax Biology 2e §bio-5.2 (5.2: Passive Transport): 'Osmoreceptors are specialized cells in the brain that monitor solute concentration in the blood. If the solute levels increase beyond a certain range, a hormone releases that slows water loss through the kidney and dilutes the blood to safer levels.' — supports osmolality-driven ADH release."
+  - source: adh
+    target: plasma_osmolality
+    sign: "-"
+    causal_evidence: curated_mechanistic
+    mechanism: ADH increases renal collecting-duct water reabsorption (aquaporin-2), retaining free water that dilutes plasma; desmopressin/vaptan pharmacology corroborates the direction
+    evidence: "StatPearls NBK526069 (Physiology, Vasopressin): ADH inserts collecting-duct water channels, increasing renal water reabsorption and lowering plasma osmolarity toward baseline. Boron & Boulpaep; Guyton & Hall — closes osmoregulatory negative feedback | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-145 (25.2: Physical Characteristics of Urine): ADH increases collecting-duct aquaporin-2 insertion, driving water reabsorption that retains free water and dilutes plasma osmolality; insufficient ADH causes polyuria and failure to dilute plasma."
+  - source: adh
+    target: plasma_sodium_concentration
+    sign: "-"
+    causal_evidence: curated_mechanistic
+    mechanism: ADH-driven free-water retention produces dilutional hyponatremia (hallmark of SIADH); vaptan reversal of SIADH corroborates the direction
+    evidence: "StatPearls NBK526069 (Physiology, Vasopressin): SIADH causes excess water reabsorption and thus dilutional hyponatremia. Boron & Boulpaep; clinical SIADH hyponatremia; HumMod"
+
+  # --- osmoregulatory negative-feedback loop: thirst arm -------------------
+  - source: plasma_osmolality
+    target: water_intake
+    sign: "+"
+    causal_evidence: curated_mechanistic
+    mechanism: rising osmolality/hypernatremia is sensed by OVLT and SFO osmosensing neurons (Nax) that drive hypothalamic thirst and water intake; OVLT lesion alters drinking
+    evidence: "PMC10507174 (OVLT/SFO regulation of thirst review): increased plasma osmolality is sensed by OVLT and SFO neurons to drive thirst and water intake; OVLT ablation alters drinking. Bourque 2008; Boron & Boulpaep (osmotic thirst); Guyton & Hall | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-156 (26.3: Water Balance): 'If blood osmolality increases above its ideal value, the hypothalamus transmits signals that result in a conscious awareness of thirst.'"
+  - source: water_intake
+    target: plasma_osmolality
+    sign: "-"
+    mechanism: ingested free water dilutes body fluids, lowering osmolality
+    evidence: "Boron & Boulpaep; Guyton & Hall — closes osmoregulatory negative feedback"
+  - source: water_intake
+    target: plasma_sodium_concentration
+    sign: "-"
+    causal_evidence: curated_mechanistic
+    mechanism: ingested free water dilutes plasma solutes including sodium concentration (a water-balance variable) — the direct inverse of dehydration-driven concentration
+    evidence: "StatPearls NBK544365 (Physiology, Plasma Osmolality): free water dilutes plasma solutes including [Na+]. Boron & Boulpaep; Guyton & Hall (water-balance control of [Na+])"
+  - source: water_intake
+    target: extracellular_fluid_volume
+    sign: "+"
+    mechanism: ingested water is distributed into and expands the extracellular fluid
+    evidence: "Boron & Boulpaep; Guyton & Hall — coupling to volume core"
+
+  # --- dipsogenic coupling from RAAS ---------------------------------------
+  - source: angiotensin_II
+    target: water_intake
+    sign: "+"
+    causal_evidence: curated_mechanistic
+    mechanism: circulating angiotensin II acts on subfornical-organ AT1 receptors to induce thirst and drinking (ICV/systemic ANG II is a potent dipsogen; AT1 antagonists block it)
+    evidence: "PMC10507174 (OVLT/SFO thirst review): ANG II induces thirst/drinking via the SFO; ICV/systemic ANG II is a potent dipsogen. Bourque 2008; Boron & Boulpaep (AngII-induced thirst); HumMod | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-114 (20.5: Homeostatic Regulation of the Vascular System): 'Angiotensin II also stimulates the thirst center in the hypothalamus, so an individual will likely consume more fluids, again increasing blood volume and pressure.'; OpenStax Anatomy & Physiology 2e §anp-156 (26.3: Water Balance): 'angiotensin II... helps stimulate thirst'; OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): 'Angiotensin II in addition to being a potent vasoconstrictor also causes an increase in ADH and increased thirst, both of which help to raise blood pressure.'"
+
+  # --- potassium / aldosterone negative-feedback loop ----------------------
+  - source: aldosterone
+    target: plasma_potassium
+    sign: "-"
+    causal_evidence: curated_mechanistic
+    mechanism: aldosterone stimulates renal distal/collecting-duct K+ secretion (kaliuresis), lowering plasma K+; spironolactone->hyperkalemia and Addison/Conn corroborate the direction
+    evidence: "StatPearls NBK470339 (Physiology, Aldosterone): aldosterone increases distal/collecting-duct potassium secretion/excretion, lowering plasma potassium. Boron & Boulpaep; Guyton & Hall; HumMod aldosterone module"
+  - source: plasma_potassium
+    target: aldosterone
+    sign: "+"
+    mechanism: hyperkalemia directly stimulates adrenal zona glomerulosa aldosterone secretion
+    evidence: "Boron & Boulpaep; Guyton & Hall — closes K+-aldosterone negative feedback | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-094 (17.7: The Adrenal Glands): 'it is released in response to elevated blood K+, low blood Na+, low blood pressure, or low blood volume.'; OpenStax Anatomy & Physiology 2e §anp-152 (25.9: Endocrine Regulation of Kidney Function): 'Aldosterone...is released from the adrenal cortex in response to angiotensin II or directly in response to increased plasma K+.'; OpenStax Anatomy & Physiology 2e §anp-157 (26.4: Electrolyte Balance): 'Aldosterone is released if blood levels of potassium increase.'; OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): 'Aldosterone release is stimulated by a decrease in blood sodium levels, blood volume, or blood pressure, or an increase in blood potassium levels.'; OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): 'Aldosterone release from the adrenal cortex is stimulated by a decrease in blood concentrations of sodium ions, blood volume, or blood pressure, or by an increase in blood potassium levels.'"
+
+constitutive_edges: []   # none yet — multi-scale expansion is the next step

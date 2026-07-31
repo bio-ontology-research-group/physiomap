@@ -1,0 +1,121 @@
+# =============================================================================
+# Molecular vertical: hepcidin transcription control        *** DRAFT FOR REVIEW ***
+# =============================================================================
+# The hepatocyte integrates two transcriptional inputs onto the HAMP (hepcidin)
+# gene, plus an erythropoietic suppression arm, all at the molecular/subcellular
+# scale. This vertical is intentionally self-contained on the iron axis (no iron
+# nodes exist in the map yet) and connects to the EXISTING map through the
+# erythropoietic-drive arm:
+#
+#   WITHIN-SCALE CAUSAL (molecular signal transduction -> transcription):
+#       bmp6_ligand            -> bmp_smad_signaling        (+)
+#       bmp_smad_signaling     -> hepcidin_transcription    (+)   iron / BMP arm
+#       il6_stat3_signaling    -> hepcidin_transcription    (+)   inflammation arm
+#       erythroferrone         -> bmp_smad_signaling        (-)   erythroid suppression
+#
+#   INTEGRATION WITH EXISTING MAP (boundary nodes, correct signs):
+#       renal_tissue_oxygenation -> erythropoietin           (-)  hypoxia drives EPO
+#       erythropoietin           -> erythroferrone           (+)  EPO induces ERFE in erythroblasts
+#   (=> low renal tissue O2 raises EPO, raises ERFE, suppresses BMP/SMAD, lowers
+#    hepcidin transcription: a real, loop-relevant physiological integration.)
+#
+#   CONSTITUTIVE (cross-scale): OMITTED ON PURPOSE. There is no existing macro
+#   organ/organ-system node that hepcidin_transcription constitutes (the systemic
+#   iron / serum-iron / ferroportin layer is not in the vocabulary yet). Per the
+#   assignment, this vertical is staged for a future `iron_hepcidin` system; the
+#   constitutive lift (hepcidin_transcription >> plasma_hepcidin / serum iron)
+#   should be added when that system lands.
+#
+# SOURCES (all verified):
+#   - BioModels BIOMD0000000734 (Parmar et al. 2017, BMC Syst Biol 11:57,
+#     PMID 28521769) "Modeling the dynamics of mouse iron body distribution:
+#     hepcidin is necessary but not sufficient" — hepcidin-centred iron model.
+#   - BioModels MODEL2307050001 (Sobotta et al. 2017, Front Physiol 8:775,
+#     PMID 29062282) "Model Based Targeting of IL-6-Induced Inflammatory Responses
+#     ... JAK1-STAT3-signaling" — IL-6 -> JAK1/STAT3 hepatocyte model.
+#   - Ganz & Nemeth 2011, "Hepcidin and disorders of iron metabolism",
+#     Annu Rev Med 62:347-360 (PMID 20887198).
+#   - Ganz & Nemeth 2012, "Hepcidin and iron homeostasis",
+#     Biochim Biophys Acta 1823:1434-1443 (PMID 22306005).
+#   - Kautz et al. 2014, "Identification of erythroferrone as an erythroid
+#     regulator of iron metabolism", Nat Genet 46:678-684 (PMID 24880340).
+#   - Arezes et al. 2018, "Erythroferrone inhibits the induction of hepcidin by
+#     BMP6", Blood 132:1473-1477 (PMID 30097509) — recombinant ERFE suppresses the
+#     hepatic BMP/SMAD pathway (mechanistic anchor for the ERFE -| BMP/SMAD edge).
+#   - Wang et al. 2020, "Erythroferrone lowers hepcidin by sequestering BMP2/6
+#     heterodimer from binding to the BMP type I receptor ALK3", Blood 135:453-456
+#     (PMID 31800957).
+#   - Boron & Boulpaep, Medical Physiology (iron / hepcidin regulation).
+#
+# BOUNDARY NODES (existing vocabulary, reused verbatim):
+#   renal_tissue_oxygenation, erythropoietin
+# =============================================================================
+# NOTE (integration fix): the downward macro->micro causal 'driver' edge was REMOVED.
+# PhysioMap models causation WITHIN scale and cross-scale dependence as CONSTITUTIVE
+# (upward determination) only (see MULTISCALE.md). This vertical's top molecular node is
+# therefore a root, exercised by molecular/drug interventions, and lifts UP via the
+# constitutive edge(s). This keeps the combined causal+constitutive meta-graph acyclic.
+
+name: hepcidin_signaling_multiscale
+nodes:
+- id: bmp6_ligand
+  label: hepatic BMP6 ligand availability
+  scale: molecular
+  entity_iri: PR:000000167  # bone morphogenetic protein 6 (was PR:000004801 = B-Raf — wrong protein, fixed)
+  quality_iri: PATO:0000033
+- id: bmp_smad_signaling
+  label: BMP receptor / SMAD1-5-8 signaling activity (hepatocyte)
+  scale: subcellular
+  quality_iri: PATO:0002354
+- id: il6_stat3_signaling
+  label: IL-6 / JAK1 / STAT3 signaling activity (hepatocyte)
+  scale: subcellular
+  quality_iri: PATO:0002354
+- id: erythroferrone
+  label: erythroferrone (ERFE) concentration
+  scale: molecular
+  entity_iri: PR:000044228
+  quality_iri: PATO:0000033
+- id: hepcidin_transcription
+  label: hepcidin (HAMP) gene transcription rate (hepatocyte)
+  scale: molecular
+  entity_iri: PR:000008978
+  quality_iri: PATO:0000161
+causal_edges:
+- source: bmp6_ligand
+  target: bmp_smad_signaling
+  sign: +
+  causal_evidence: perturbation
+  mechanism: 'BMP6 binds BMP type-I/II receptors with the co-receptor hemojuvelin on the hepatocyte; the activated receptor disposition phosphorylates SMAD1/5/8, which complex with SMAD4 (process), raising nuclear SMAD signaling activity.
+
+    '
+  evidence: 'Ganz & Nemeth 2012 (Biochim Biophys Acta 1823:1434-1443, PMID 22306005); BioModels BIOMD0000000734 (Parmar et al. 2017, BMC Syst Biol 11:57). Opened primary knockout: Bmp6-deficient mice have low phospho-SMAD1/5/8 and markedly reduced hepcidin with massive iron overload -- do(BMP6 down) lowers BMP-SMAD signaling (Meynard et al. 2009, Nat Genet, PMID 19252488). [citations PubMed-verified]'
+- source: bmp_smad_signaling
+  target: hepcidin_transcription
+  sign: +
+  causal_evidence: perturbation
+  mechanism: 'Phospho-SMAD1/5/8-SMAD4 complexes bind BMP-responsive elements in the HAMP promoter (disposition -> transcriptional activation process), increasing hepcidin mRNA synthesis rate.
+
+    '
+  evidence: 'Ganz & Nemeth 2011 (Annu Rev Med 62:347-360); Boron & Boulpaep, Medical Physiology (hepcidin/BMP-SMAD regulation). Opened primary conditional knockout: liver-specific Smad4 disruption markedly decreases hepcidin and abrogates its transcriptional activation by BMP/iron/IL-6 -- do(SMAD signaling down) lowers hepcidin transcription (Wang et al. 2005, Cell Metab, PMID 16330325). [citations PubMed-verified]'
+- source: il6_stat3_signaling
+  target: hepcidin_transcription
+  sign: +
+  causal_evidence: perturbation
+  mechanism: 'IL-6 binds IL6R/gp130, activating JAK1; phospho-STAT3 dimerizes and binds the STAT3 element of the HAMP promoter (disposition -> transcriptional activation process), raising hepcidin mRNA synthesis rate (basis of anemia of inflammation).
+
+    '
+  evidence: 'Sobotta et al. 2017 (Front Physiol 8:775, PMID 29062282; BioModels MODEL2307050001); Ganz & Nemeth 2011 (Annu Rev Med 62:347-360). Opened primary: STAT3 binds a conserved hepcidin-promoter element and is necessary and sufficient for IL-6 responsiveness; disrupting STAT3 abolishes induction (loss-of-function), corroborated by human IL-6 infusion (controlled stimulation) rapidly raising hepcidin -- do(IL-6/STAT3 signaling up) raises hepcidin transcription (Wrighting & Andrews 2006, Blood, PMID 16835372; Nemeth 2004). [citations PubMed-verified]'
+- source: erythroferrone
+  target: bmp_smad_signaling
+  sign: '-'
+  causal_evidence: perturbation
+  mechanism: 'Erythroblast-derived ERFE acts as a BMP ligand trap: it sequesters BMP6 (and the BMP2/6 heterodimer), preventing the ligand from binding the hepatocyte BMP type-I receptor ALK3 (disposition), which lowers SMAD1/5/8 phosphorylation and hepatic BMP-SMAD signaling activity.
+
+    '
+  evidence: 'Arezes et al. 2018, "Erythroferrone inhibits the induction of hepcidin by BMP6" (Blood 132:1473-1477, PMID 30097509) — recombinant ERFE suppresses the hepatic BMP/SMAD pathway; Kautz et al. 2014 (Nat Genet 46:678-684, PMID 24880340). [citations PubMed-verified]'
+production_edges:
+- source: hepcidin_transcription
+  target: hepcidin
+  sign: +
+  production_evidence: legacy-evidence-unclassified

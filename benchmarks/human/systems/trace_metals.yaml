@@ -1,0 +1,175 @@
+# =============================================================================
+# Trace-metal homeostasis (copper & magnesium) — PhysioMap fragment
+# *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Hand-encoded, single-scale (ORGAN_SYSTEM / ORGAN / CELLULAR). Each edge sign is the
+# sign of the partial derivative of the target w.r.t. the source at steady state, all
+# else equal (interventionist partial). An enzyme/transporter loss-of-function reduces
+# its activity node, which then propagates along the signed edges below. ROBERT: please
+# correct signs/edges.
+#
+# Sources for canonical signs / mechanisms:
+#   - Boron & Boulpaep, Medical Physiology (copper, magnesium, and trace-metal handling;
+#     intestinal absorption, hepatobiliary copper excretion, renal Mg2+ reabsorption in
+#     the distal convoluted tubule).
+#   - Harrison's Principles of Internal Medicine (Wilson disease; Menkes disease;
+#     disorders of magnesium balance).
+#   - Lehninger, Principles of Biochemistry (ceruloplasmin as the major copper-carrying
+#     ferroxidase; metalloprotein copper loading).
+#   - OMIM #277900 Wilson disease (ATP7B); OMIM #309400 Menkes disease (ATP7A);
+#     OMIM #602014 hypomagnesemia 1, intestinal (TRPM6).
+#
+# DISORDERS SUPPORTED (intervention -> expected signs):
+#   - Wilson disease (ATP7B LoF, OMIM 277900): atp7b_activity v
+#       -> hepatic_copper_excretion v  (biliary efflux fails)
+#       -> plasma_ceruloplasmin v      (apoceruloplasmin not Cu-loaded -> degraded)
+#       -> tissue/plasma free copper ^ (hepatic Cu accumulates, spills as non-Cp Cu)
+#     Note: total serum copper is usually LOW (most serum Cu rides on ceruloplasmin),
+#     while free/non-ceruloplasmin copper is HIGH. plasma_copper here tracks the
+#     ceruloplasmin-bound pool (the dominant measured serum fraction), so atp7b LoF
+#     lowers plasma_copper via lowered ceruloplasmin; the free-Cu rise is the clinical
+#     tissue toxicity, captured through plasma_ceruloplasmin v.
+#   - Menkes disease (ATP7A LoF, OMIM 309400): intestinal copper is absorbed into
+#     enterocytes but cannot be effluxed into portal blood -> plasma_copper v ->
+#     plasma_ceruloplasmin v (substrate-limited Cu loading). ATP7A also effluxes zinc-
+#     associated copper; plasma_zinc rises modestly (enterocyte metallothionein trap),
+#     encoded as a weak/ambiguous link.
+#   - Familial hypomagnesemia with secondary hypocalcaemia (TRPM6 LoF, OMIM 602014):
+#     trpm6_activity v -> renal_magnesium_reabsorption v -> plasma_magnesium v
+#       -> pth v (low Mg2+ impairs PTH secretion AND end-organ PTH action -> secondary
+#         hypocalcaemia).
+#
+# FEEDBACK / STRUCTURE: this is largely a feed-forward supply chain (transporters set
+# plasma pools); no strong physiological negative-feedback loop is asserted here beyond
+# the magnesium->PTH coupling into the calcium fragment. Marked DRAFT.
+#
+# Boundary node (defined in sibling fragment calcium_pth.yaml; referenced, NOT redefined):
+#   pth   (calcium_pth) — plasma parathyroid hormone concentration
+# A standalone load of this file alone resolves pth via the validator's stubbing.
+# =============================================================================
+
+name: trace_metals
+description: >-
+  DRAFT trace-metal homeostasis (copper and magnesium) as a PhysioMap signed causal
+  graph. Copper: ATP7B-driven hepatobiliary excretion and ceruloplasmin loading
+  (Wilson disease) plus ATP7A-dependent intestinal copper efflux (Menkes disease).
+  Magnesium: TRPM6-driven distal renal Mg2+ reabsorption setting plasma magnesium
+  (familial hypomagnesemia, TRPM6), coupled to PTH secretion. Single-scale (Phase 1).
+
+nodes:
+  # --- copper ---------------------------------------------------------------
+  - id: plasma_copper
+    label: plasma (predominantly ceruloplasmin-bound) copper concentration
+    scale: organ_system
+    entity_iri: CHEBI:29036           # copper(2+)
+    quality_iri: PATO:0000033         # concentration
+  - id: plasma_ceruloplasmin
+    label: plasma ceruloplasmin (holo-ceruloplasmin) concentration
+    scale: organ_system
+    entity_iri: PR:P00450             # ceruloplasmin (human), CP; clinical assay = total (apo+holo) ceruloplasmin
+    quality_iri: PATO:0000033         # concentration
+  - id: hepatic_copper_excretion
+    label: hepatobiliary copper excretion rate
+    scale: organ
+    entity_iri: GO:0060003            # copper ion export
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0002107  # liver
+  - id: atp7b_activity
+    label: hepatocyte ATP7B copper-transporting ATPase activity
+    scale: cellular
+    entity_iri: PR:P35670             # copper-transporting ATPase 2 (human), ATP7B
+    quality_iri: PATO:0001414         # activity
+  - id: atp7a_activity
+    label: enterocyte ATP7A copper-transporting ATPase (basolateral efflux) activity
+    scale: cellular
+    entity_iri: PR:Q04656             # copper-transporting ATPase 1 (human), ATP7A
+    quality_iri: PATO:0001414         # activity
+  - id: plasma_zinc
+    label: plasma zinc concentration
+    scale: organ_system
+    entity_iri: CHEBI:29105           # zinc(2+)
+    quality_iri: PATO:0000033         # concentration
+
+  # --- magnesium ------------------------------------------------------------
+  - id: plasma_magnesium
+    label: plasma (ionised) magnesium concentration
+    scale: organ_system
+    entity_iri: CHEBI:18420           # magnesium(2+)
+    quality_iri: PATO:0000033         # concentration
+  - id: renal_magnesium_reabsorption
+    label: renal (distal convoluted tubule) magnesium reabsorption rate
+    scale: organ
+    entity_iri: GO:1903830            # magnesium ion transmembrane transport
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0001292  # distal convoluted tubule
+  - id: trpm6_activity
+    label: distal-convoluted-tubule TRPM6 Mg2+ channel activity
+    scale: cellular
+    entity_iri: PR:Q9BX84             # transient receptor potential cation channel subfamily M member 6 (human), TRPM6 (channel-kinase)
+    quality_iri: PATO:0001414         # activity
+
+causal_edges:
+  # ===== COPPER: hepatic ATP7B axis (Wilson disease) ========================
+  - source: atp7b_activity
+    target: hepatic_copper_excretion
+    sign: "+"
+    causal_evidence: genetic_lof_gof
+    mechanism: hepatocyte ATP7B pumps copper into the bile canaliculus for biliary excretion (the major route of copper elimination); ATP7B loss-of-function abolishes biliary copper efflux and copper accumulates in the liver
+    evidence: "OMIM #277900 Wilson disease (ATP7B); Boron & Boulpaep Medical Physiology (hepatobiliary copper excretion); Harrison's Principles of Internal Medicine (Wilson disease)"
+  - source: atp7b_activity
+    target: plasma_ceruloplasmin
+    sign: "+"
+    causal_evidence: genetic_lof_gof
+    mechanism: ATP7B in the hepatocyte trans-Golgi network loads copper onto apoceruloplasmin to form secreted holo-ceruloplasmin; without copper loading, apoceruloplasmin is rapidly degraded, so ATP7B loss lowers circulating (holo-)ceruloplasmin
+    evidence: "OMIM #277900 Wilson disease (low serum ceruloplasmin); Lehninger Principles of Biochemistry (ceruloplasmin copper loading); Harrison's Principles of Internal Medicine"
+  - source: hepatic_copper_excretion
+    target: plasma_copper
+    sign: "?"
+    mechanism: hepatobiliary excretion removes copper from the body; in isolation higher excretion lowers the body copper pool, but in Wilson disease loss of excretion paradoxically LOWERS measured (ceruloplasmin-bound) serum copper while raising hepatic/free copper — the net sign on the ceruloplasmin-bound plasma pool is dominated by ceruloplasmin, so this direct edge is flagged ambiguous
+    evidence: "Harrison's Principles of Internal Medicine (Wilson disease: low total serum copper, raised free copper, hepatic accumulation); Boron & Boulpaep Medical Physiology"
+  - source: plasma_ceruloplasmin
+    target: plasma_copper
+    sign: "+"
+    mechanism: ceruloplasmin carries roughly 90% of circulating copper; measured (total) serum copper tracks holo-ceruloplasmin, so lower ceruloplasmin lowers the dominant ceruloplasmin-bound serum copper pool
+    evidence: "Lehninger Principles of Biochemistry (ceruloplasmin as major Cu carrier, ~90% of serum copper); Boron & Boulpaep Medical Physiology; Harrison's"
+
+  # ===== COPPER: intestinal ATP7A axis (Menkes disease) =====================
+  - source: atp7a_activity
+    target: plasma_copper
+    sign: "+"
+    causal_evidence: genetic_lof_gof
+    mechanism: enterocyte ATP7A effluxes absorbed dietary copper across the basolateral membrane into portal blood; ATP7A loss-of-function traps copper in enterocytes and blocks copper entry into the circulation, lowering plasma copper
+    evidence: "OMIM #309400 Menkes disease (ATP7A); Boron & Boulpaep Medical Physiology (intestinal copper absorption/efflux); Harrison's Principles of Internal Medicine"
+  - source: plasma_copper
+    target: plasma_ceruloplasmin
+    sign: "+"
+    causal_evidence: curated_mechanistic
+    mechanism: circulating copper is the substrate for hepatic copper loading of apoceruloplasmin; copper-deficient states (e.g. Menkes) provide insufficient copper for holo-ceruloplasmin formation, lowering secreted ceruloplasmin
+    evidence: "OMIM #309400 Menkes disease (low ceruloplasmin secondary to copper deficiency); Lehninger Principles of Biochemistry; Harrison's | opened authoritative source: StatPearls NBK554422 (Biochemistry, Ceruloplasmin): copper binding is essential for correct folding of ceruloplasmin; without sufficient copper, apo-ceruloplasmin is degraded, so copper deficiency lowers circulating holo-ceruloplasmin (copper-repletion reversibility and Menkes are interventional corroborations; held to curated_mechanistic on the opened primary)"
+  - source: atp7a_activity
+    target: plasma_zinc
+    sign: "?"
+    mechanism: copper deficiency derepresses enterocyte metallothionein, which can secondarily alter zinc handling; the direction of the effect on plasma zinc is not well established, so the sign is flagged ambiguous
+    evidence: "Harrison's Principles of Internal Medicine (copper–zinc antagonism in intestinal absorption); Boron & Boulpaep Medical Physiology"
+
+  # ===== MAGNESIUM: TRPM6 renal axis (familial hypomagnesemia) ==============
+  - source: trpm6_activity
+    target: renal_magnesium_reabsorption
+    sign: "+"
+    causal_evidence: genetic_lof_gof
+    mechanism: TRPM6 is the apical Mg2+ entry channel of the distal convoluted tubule that mediates active transcellular magnesium reabsorption; TRPM6 loss-of-function causes renal magnesium wasting (and impairs intestinal Mg2+ absorption)
+    evidence: "OMIM #602014 hypomagnesemia 1, intestinal (TRPM6); Boron & Boulpaep Medical Physiology (DCT magnesium reabsorption); Harrison's Principles of Internal Medicine"
+  - source: renal_magnesium_reabsorption
+    target: plasma_magnesium
+    sign: "+"
+    causal_evidence: curated_mechanistic
+    mechanism: the distal convoluted tubule sets final urinary magnesium excretion; greater tubular Mg2+ reabsorption retains magnesium and raises plasma magnesium, whereas renal wasting lowers it
+    evidence: "Boron & Boulpaep Medical Physiology (renal control of plasma magnesium); Harrison's Principles of Internal Medicine (disorders of magnesium balance) | opened authoritative review: PMC7816272 (Mechanisms coupling Na and Mg reabsorption in the DCT): the DCT is the final determinant of urinary Mg2+ (later segments cannot reabsorb Mg2+), so greater TRPM6-mediated DCT reabsorption raises plasma Mg while reduced reabsorption causes renal wasting/hypomagnesemia (TRPM6 LoF / diuretic renal-wasting are interventional corroborations; held to curated_mechanistic on the opened primary)"
+  - source: plasma_magnesium
+    target: pth
+    sign: "+"
+    causal_evidence: pharmacological
+    mechanism: moderate hypomagnesemia impairs PTH secretion and induces end-organ PTH resistance (low intracellular Mg2+ disrupts the Gs/adenylyl-cyclase signalling of the parathyroid CaSR), so falling plasma magnesium lowers effective PTH — the basis of secondary hypocalcaemia in severe Mg2+ depletion; magnesium-replacement therapy in symptomatic hypomagnesemic hypoparathyroidism reverses the PTH suppression, demonstrating the source-directed intervention
+    evidence: "Harrison's Principles of Internal Medicine (severe hypomagnesemia impairs PTH secretion/action -> hypocalcaemia, reversible with Mg repletion); OMIM #602014 (secondary hypocalcaemia); Boron & Boulpaep Medical Physiology"
+
+constitutive_edges: []   # none — single-scale fragment (Phase 1)

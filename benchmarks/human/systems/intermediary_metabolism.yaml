@@ -1,0 +1,269 @@
+# =============================================================================
+# Intermediary fuel metabolism — PhysioMap fragment      *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Hepatic and adipose fuel fluxes that set the circulating non-glucose fuels
+# (lactate, ketone bodies, free fatty acids) and feed the plasma-glucose pool.
+# Every edge sign is the sign of the partial derivative of the target w.r.t. the
+# source at steady state, all else equal. WITHIN-SCALE only (organ / organ_system);
+# no constitutive or macro->micro edges.
+#
+# Boundary nodes OWNED BY SIBLING FRAGMENTS, referenced by id only (NOT redefined):
+#   plasma_glucose, plasma_insulin, plasma_glucagon   (glucose_insulin.yaml)
+#   cortisol                                          (adrenal_cortisol.yaml)
+#   epinephrine                                       (autonomic_baroreflex.yaml)
+# This fragment therefore does not load standalone (expected); it composes via merge.
+#
+# Integration design (no conflict with the glucose_insulin loops):
+#   - This fragment adds NEW flux nodes that feed glucose (hepatic_glycogenolysis,
+#     hepatic_gluconeogenesis -> plasma_glucose "+"); it does NOT touch the existing
+#     hepatic_glucose_production node, so no duplicate / opposing edge is created.
+#   - Hormonal drivers point hormone -> flux (counter-regulation), so the only loops
+#     created run plasma_glucose -> {glucagon,insulin} -> flux -> plasma_glucose,
+#     which are sign-consistent negative-feedback loops (same SCC as glucose_insulin).
+#   - All nodes are organ / organ_system scale: the cross-scale (meta-) graph stays
+#     acyclic by construction.
+#
+# Clinical / phenotype targets supported (signs encoded to reproduce these):
+#   - Glycogen storage disease type Ia (von Gierke; G6PC, OMIM #232200): loss of
+#     glucose-6-phosphatase blocks the final step shared by glycogenolysis and
+#     gluconeogenesis -> fasting hypoglycemia (plasma_glucose down) with lactate up,
+#     and secondary ketosis / hyperlipidemia (ketones, FFA up).  -> intervene
+#     g6pase_activity "-".
+#   - Counter-regulatory fuel response: glucagon / epinephrine / cortisol drive
+#     glycogenolysis + gluconeogenesis + lipolysis + ketogenesis up -> glucose up,
+#     FFA up, ketones up.  Insulin suppresses lipolysis and gluconeogenesis (signs "-").
+#
+# References: Lehninger Principles of Biochemistry (Nelson & Cox), 7th ed.,
+# ch. 14-15 (glycolysis/gluconeogenesis/glycogen), ch. 17 (fatty-acid oxidation &
+# ketone bodies), ch. 23 (hormonal integration of metabolism); Boron & Boulpaep
+# Medical Physiology (3rd ed.), ch. 51 (metabolism) & ch. 58 (endocrine pancreas);
+# Harrison's Principles of Internal Medicine (von Gierke / GSD-Ia).
+# ROBERT: please correct signs/edges.
+# =============================================================================
+
+name: intermediary_metabolism
+description: >-
+  DRAFT intermediary fuel metabolism (glucose/glycogen, lactate, ketone bodies,
+  free fatty acids) as a PhysioMap signed within-scale causal graph. Encodes the
+  hepatic gluconeogenic / glycogenolytic / ketogenic fluxes and adipose lipolysis,
+  their counter-regulatory hormonal control (glucagon, epinephrine, cortisol) and
+  insulin suppression, and the glucose-6-phosphatase bottleneck (von Gierke /
+  GSD-Ia). Single-scale (organ / organ_system). Integrates with glucose_insulin.
+
+nodes:
+  # --- circulating non-glucose fuels (OWNED) -------------------------------
+  - id: plasma_lactate
+    label: plasma lactate concentration
+    scale: organ_system
+    entity_iri: CHEBI:16651            # (S)-lactate (physiological L-lactate)
+    quality_iri: PATO:0000033          # concentration
+  - id: plasma_ketone_bodies
+    label: plasma ketone body concentration (acetoacetate + 3-hydroxybutyrate)
+    scale: organ_system
+    entity_iri: CHEBI:73693            # ketone body
+    quality_iri: PATO:0000033
+  - id: plasma_free_fatty_acids
+    label: plasma (non-esterified) free fatty acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:35366            # fatty acid
+    quality_iri: PATO:0000033
+
+  # --- hepatic & adipose fuel fluxes (OWNED) -------------------------------
+  - id: hepatic_glycogenolysis
+    label: hepatic glycogenolysis rate (glycogen -> glucose-6-phosphate)
+    scale: organ
+    entity_iri: GO:0005980             # glycogen catabolic process
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0002107  # liver
+  - id: hepatic_gluconeogenesis
+    label: hepatic gluconeogenesis rate (lactate/glycerol/amino acids -> glucose-6-phosphate)
+    scale: organ
+    entity_iri: GO:0006094             # gluconeogenesis
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0002107  # liver
+  - id: hepatic_ketogenesis
+    label: hepatic ketogenesis rate (acetyl-CoA -> acetoacetate / 3-hydroxybutyrate)
+    scale: organ
+    entity_iri: GO:0046951             # ketone body biosynthetic process
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0002107  # liver
+  - id: lipolysis_rate
+    label: adipose lipolysis rate (triacylglycerol -> free fatty acids + glycerol)
+    scale: organ
+    entity_iri: GO:0019433             # triglyceride catabolic process
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0001013  # adipose tissue
+  - id: g6pase_activity
+    label: hepatic glucose-6-phosphatase activity (G6PC)
+    scale: organ
+    entity_iri: PR:000007746           # glucose-6-phosphatase catalytic subunit 1
+    quality_iri: PATO:0001414
+    bearer_entity_iri: UBERON:0002107  # liver
+
+causal_edges:
+  # =========================================================================
+  # 1. Glucose-6-phosphatase: the shared exit step from G6P to free glucose.
+  #    Both glycogenolysis and gluconeogenesis terminate in glucose-6-phosphate;
+  #    G6Pase hydrolyses it to glucose for export. Loss of G6Pase (GSD-Ia) blocks
+  #    both routes' contribution to plasma glucose while G6P accumulates and is
+  #    shunted to lactate / lipogenesis -> hypoglycemia + lactic acidosis.
+  # =========================================================================
+  - source: g6pase_activity
+    target: plasma_glucose
+    sign: "+"
+    causal_evidence: genetic_lof_gof
+    mechanism: glucose-6-phosphatase hydrolyses hepatic glucose-6-phosphate to free glucose for export
+    evidence: "Lehninger 7th ed. ch.15 (gluconeogenesis terminal step); GSD-Ia / von Gierke G6PC deficiency OMIM #232200 -> fasting hypoglycemia"
+  - source: g6pase_activity
+    target: hepatic_gluconeogenesis
+    sign: "+"
+    mechanism: G6Pase removes the gluconeogenic end-product (G6P->glucose); its loss back-pressures the pathway (functional throughput to glucose)
+    evidence: "Lehninger 7th ed. ch.15; Boron & Boulpaep 3rd ed. ch.51 (hepatic glucose output requires G6Pase)"
+  - source: g6pase_activity
+    target: hepatic_glycogenolysis
+    sign: "+"
+    mechanism: hepatic glycogenolysis yields glucose-6-phosphate; net glucose output to plasma requires G6Pase
+    evidence: "Lehninger 7th ed. ch.15; Harrison's (GSD-Ia: glycogenolysis cannot raise blood glucose without G6Pase)"
+  - source: g6pase_activity
+    target: plasma_lactate
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: with G6Pase active, hepatic G6P exits as glucose; when deficient (GSD-Ia) accumulated G6P is shunted to pyruvate -> lactate, so activity lowers lactate
+    evidence: "Harrison's; Boron & Boulpaep 3rd ed. ch.51 — GSD-Ia presents with lactic acidemia from diverted glucose-6-phosphate"
+
+  # =========================================================================
+  # 2. Hepatic fluxes feeding the plasma glucose pool.
+  # =========================================================================
+  # hepatic_glycogenolysis -> plasma_glucose and hepatic_gluconeogenesis -> plasma_glucose
+  # reclassified as process-output production_edges (see production_edges below): the hepatic
+  # process produces/exports glucose into the plasma pool, not an authored causal influence.
+  - source: plasma_lactate
+    target: hepatic_gluconeogenesis
+    sign: "+"
+    causal_evidence: curated_mechanistic
+    mechanism: lactate is a primary gluconeogenic substrate (Cori cycle); increased blood-lactate supply drives hepatic gluconeogenic flux
+    evidence: "StatPearls NBK541119 (Physiology, Gluconeogenesis): the liver uses blood lactate to produce glucose, so lactate supply supports gluconeogenic flux. Lehninger 7th ed. ch.14-15 (Cori cycle, lactate -> glucose) | textbook corroboration: OpenStax Biology 2e §bio-7.5 (7.5: Metabolism without Oxygen): 'once the lactic acid has been removed from the muscle and circulated to the liver, it can be reconverted into pyruvic acid and further catabolized for energy'"
+
+  # =========================================================================
+  # 3. Adipose lipolysis sets plasma FFA; FFA fuels hepatic ketogenesis.
+  # =========================================================================
+  # lipolysis_rate -> plasma_free_fatty_acids reclassified as a process-output production edge
+  # (see production_edges below): adipose lipolysis releases FFA into the circulating pool.
+  - source: plasma_free_fatty_acids
+    target: hepatic_ketogenesis
+    sign: "+"
+    causal_evidence: curated_mechanistic
+    mechanism: plasma FFA is transported to the liver where beta-oxidation generates acetyl-CoA directed into ketone-body synthesis; elevated FFA supply augments ketogenic flux
+    evidence: "StatPearls NBK493179 (Biochemistry, Ketogenesis): elevated FFA supply to the liver augments hepatic ketogenesis. Lehninger 7th ed. ch.17 (ketone bodies formed from fatty-acid-derived acetyl-CoA) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-142 (24.6: Metabolic States of the Body): 'fatty acids and triglyceride stores are used to create ketones for the body' during starvation.; Wong, Cells: Molecules and Mechanisms §wong-5.7 (5.7 Starch and Glycogen Depolymerization Undeclared): 'a large part of the acetyl-CoA generated by oxidation of fatty acids does not enter the TCA cycle. Instead, it is converted into acetoacetate or D-beta-hydroxybutyrate.'; Wong, Cells: Molecules and Mechanisms §wong-5.7 (5.7 Starch and Glycogen Depolymerization Undeclared): 'in liver especially, a large part of the acetyl-CoA generated by oxidation of fatty acids... is converted into acetoacetate or D-β-hydroxybutyrate' — fatty acid beta-oxidation (from plasma FFA) is the substrate supply for hepatic ketogenesis.; OpenStax Biology 2e §bio-7.6 (7.6: Connections of Carbohydrate, Protein, and Lipid Metabolic Pathways): 'The acetyl groups are picked up by CoA to form acetyl CoA that proceeds into the citric acid cycle.'"
+  # hepatic_ketogenesis -> plasma_ketone_bodies reclassified as a process-output production edge
+  # (see production_edges below): the liver exports ketone bodies into the circulating pool.
+
+  # =========================================================================
+  # 4. Counter-regulatory hormonal drive (glucagon, epinephrine, cortisol).
+  #    All raise hepatic output and fat mobilization (boundary -> owned flux).
+  # =========================================================================
+  - source: plasma_glucagon
+    target: hepatic_glycogenolysis
+    sign: "+"
+    causal_evidence: pharmacological
+    mechanism: glucagon (cAMP/PKA) activates glycogen phosphorylase, inhibits glycogen synthase
+    evidence: "Lehninger 7th ed. ch.15 & ch.23 (glucagon stimulates hepatic glycogenolysis); Boron & Boulpaep 3rd ed. ch.58 | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-097 (17.10: The Endocrine Pancreas): glucagon stimulates liver to convert glycogen back to glucose (glycogenolysis); OpenStax Anatomy & Physiology 2e §anp-142 (24.6: Metabolic States of the Body): 'Glucagon acts upon the liver cells, where it inhibits the synthesis of glycogen and stimulates the breakdown of stored glycogen back into glucose.'"
+  - source: plasma_glucagon
+    target: hepatic_gluconeogenesis
+    sign: "+"
+    causal_evidence: pharmacological
+    mechanism: glucagon induces PEPCK, lowers fructose-2,6-bisphosphate, driving gluconeogenesis
+    evidence: "Lehninger 7th ed. ch.15 & ch.23; Boron & Boulpaep 3rd ed. ch.58 | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-097 (17.10: The Endocrine Pancreas): glucagon stimulates liver to take up amino acids and convert them to glucose (gluconeogenesis); OpenStax Anatomy & Physiology 2e §anp-142 (24.6: Metabolic States of the Body): 'Gluconeogenesis will also begin in the liver to replace the glucose that has been used by the peripheral tissues.'"
+  - source: plasma_glucagon
+    target: hepatic_ketogenesis
+    sign: "+"
+    causal_evidence: curated_mechanistic
+    mechanism: glucagon disinhibits CPT-1 (malonyl-CoA falls) and increases FFA supply, raising hepatic beta-oxidation and ketogenic flux (permissive with low insulin)
+    evidence: "StatPearls NBK493179 (Biochemistry, Ketogenesis): ketogenesis is stimulated by counter-regulatory hormones including glucagon. Lehninger 7th ed. ch.17 & ch.23 (glucagon promotes ketogenesis in fasting/diabetes)"
+  - source: epinephrine
+    target: hepatic_glycogenolysis
+    sign: "+"
+    causal_evidence: pharmacological
+    mechanism: beta-adrenergic (cAMP/PKA) activation of hepatic glycogen phosphorylase
+    evidence: "Lehninger 7th ed. ch.15 & ch.23 (epinephrine stimulates glycogenolysis); Boron & Boulpaep 3rd ed. ch.58 | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-005 (1.6: Homeostasis): 'The brain also signals the adrenal glands to release epinephrine (adrenaline), a hormone that causes the breakdown of glycogen into glucose'; OpenStax Anatomy & Physiology 2e §anp-094 (17.7: The Adrenal Glands): 'Both epinephrine and norepinephrine signal the liver and skeletal muscle cells to convert glycogen into glucose, resulting in increased blood glucose levels.'; OpenStax Anatomy & Physiology 2e §anp-138 (24.2: Overview of Metabolic Reactions): 'adrenaline/epinephrine... stimulates gluconeogenesis' (catabolic role)"
+  - source: epinephrine
+    target: lipolysis_rate
+    sign: "+"
+    causal_evidence: pharmacological
+    mechanism: beta-adrenergic activation of hormone-sensitive lipase in adipocytes
+    evidence: "Lehninger 7th ed. ch.17 & ch.23 (epinephrine mobilizes fatty acids); Boron & Boulpaep 3rd ed. ch.51"
+  - source: cortisol
+    target: hepatic_gluconeogenesis
+    sign: "+"
+    causal_evidence: pharmacological
+    mechanism: glucocorticoid induction of gluconeogenic enzymes (PEPCK, G6Pase) + substrate (amino-acid/glycerol) supply
+    evidence: "Lehninger 7th ed. ch.23 (glucocorticoids promote gluconeogenesis); Harrison's (Cushing -> hyperglycemia) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-094 (17.7: The Adrenal Glands): 'cortisol promotes the catabolism of glycogen to glucose... These raw materials can then be used to synthesize additional glucose and ketones for use as body fuels.'; OpenStax Anatomy & Physiology 2e §anp-138 (24.2: Overview of Metabolic Reactions): 'cortisol... increase blood glucose levels by gluconeogenesis (breaking down fats and proteins)'; OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): 'The glucocorticoids mobilize lipid and protein reserves, stimulate gluconeogenesis... The glucocorticoids primarily affect glucose metabolism by stimulating glucose synthesis.'; OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): 'The glucocorticoids stimulate the synthesis of glucose and gluconeogenesis (converting a non-carbohydrate to glucose) by liver cells.'"
+  - source: cortisol
+    target: lipolysis_rate
+    sign: "+"
+    causal_evidence: pharmacological
+    mechanism: cortisol is permissive/additive for catecholamine-driven adipose lipolysis
+    evidence: "Boron & Boulpaep 3rd ed. ch.51; Harrison's (glucocorticoid lipolytic / fat-mobilizing effect) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-094 (17.7: The Adrenal Glands): 'cortisol promotes the catabolism of... stored triglycerides into fatty acids and glycerol.'; OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): 'These hormones target the breakdown of fat into fatty acids in the adipose tissue. The fatty acids are released into the bloodstream for other tissues to use for ATP production.'; OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): 'glucocorticoids... promote the release of fatty acids from adipose tissue.'"
+
+  # =========================================================================
+  # 5. Insulin suppression of the catabolic fuel fluxes (signs "-").
+  # =========================================================================
+  - source: plasma_insulin
+    target: lipolysis_rate
+    sign: "-"
+    causal_evidence: pharmacological
+    mechanism: insulin dephosphorylates/inactivates hormone-sensitive lipase, suppressing adipose lipolysis
+    evidence: "Lehninger 7th ed. ch.23 (insulin inhibits lipolysis); Boron & Boulpaep 3rd ed. ch.51 — strongest antilipolytic signal | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-142 (24.6: Metabolic States of the Body): 'Glycogen and triglyceride storage slows' as insulin drops in postabsorptive state."
+  - source: plasma_insulin
+    target: hepatic_gluconeogenesis
+    sign: "-"
+    causal_evidence: pharmacological
+    mechanism: insulin represses PEPCK/G6Pase transcription and raises fructose-2,6-bisphosphate, suppressing gluconeogenesis
+    evidence: "Lehninger 7th ed. ch.15 & ch.23 (insulin suppresses hepatic gluconeogenesis); Boron & Boulpaep 3rd ed. ch.58 | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-097 (17.10: The Endocrine Pancreas): insulin inhibits gluconeogenesis enzymes, reducing hepatic glucose production; OpenStax Anatomy & Physiology 2e §anp-142 (24.6: Metabolic States of the Body): postabsorptive state — 'Glycogen and triglyceride storage slows' (insulin drops with glucose)."
+  - source: plasma_insulin
+    target: hepatic_glycogenolysis
+    sign: "-"
+    causal_evidence: pharmacological
+    mechanism: insulin activates glycogen synthase / inactivates phosphorylase, net suppressing glycogenolysis
+    evidence: "Lehninger 7th ed. ch.15 & ch.23 (insulin promotes glycogen storage); Boron & Boulpaep 3rd ed. ch.58 | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-097 (17.10: The Endocrine Pancreas): insulin inhibits glycogenolysis, promoting glycogen storage in liver"
+  - source: plasma_insulin
+    target: hepatic_ketogenesis
+    sign: "-"
+    causal_evidence: pharmacological
+    mechanism: insulin (via raised malonyl-CoA, inhibited CPT-1) suppresses hepatic ketogenesis
+    evidence: "Lehninger 7th ed. ch.17 & ch.23 (insulin deficiency -> diabetic ketoacidosis); Boron & Boulpaep 3rd ed. ch.58 | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-145 (25.2: Physical Characteristics of Urine): 'without the action of insulin, the cells cannot take up [glucose], so...cells are forced to use fat as their energy source, and fat consumed at such a level produces excessive ketones as byproducts' — corroborates insulin suppression of ketogenesis."
+
+constitutive_edges: []   # within-scale fragment; cross-scale lifts are out of scope here
+
+# =============================================================================
+# Process-output (production) relations. A hepatic/adipose flux PRODUCES a molecular
+# pool exported into the circulation; this is neither an authored causal influence nor
+# constitution (PhysioMap taxonomy), so it is typed as a production_edges record with a
+# ProductionEvidenceClass. Reclassified from the legacy causal edges during the 621-item
+# legacy-evidence migration (curated source statements; no causal duplicate retained).
+# =============================================================================
+production_edges:
+  - source: hepatic_glycogenolysis
+    target: plasma_glucose
+    sign: "+"
+    production_evidence: curated_source_statement
+    mechanism: hepatic glycogenolysis yields glucose-6-phosphate which (via G6Pase) is released as free glucose into the bloodstream
+    evidence: "StatPearls NBK541119 (Physiology, Gluconeogenesis): hepatic pathways release glucose into circulation to maintain blood glucose. Lehninger 7th ed. ch.15 (glycogen metabolism); Boron & Boulpaep 3rd ed. ch.58."
+  - source: hepatic_gluconeogenesis
+    target: plasma_glucose
+    sign: "+"
+    production_evidence: curated_source_statement
+    mechanism: de novo hepatic gluconeogenesis produces glucose (G6Pase dephosphorylates glucose-6-phosphate to free glucose) that is exported into the bloodstream
+    evidence: "StatPearls NBK541119 (Physiology, Gluconeogenesis): gluconeogenesis maintains blood glucose; G6Pase-generated glucose enters the blood freely. Lehninger 7th ed. ch.15 (gluconeogenesis); Boron & Boulpaep 3rd ed. ch.51."
+  - source: lipolysis_rate
+    target: plasma_free_fatty_acids
+    sign: "+"
+    production_evidence: curated_source_statement
+    mechanism: adipose lipolysis (hormone-sensitive lipase) hydrolyses stored triacylglycerol and releases free fatty acids into the circulation
+    evidence: "StatPearls NBK493179 (Biochemistry, Ketogenesis): adipose lipolysis releases free fatty acids into the circulation. Lehninger 7th ed. ch.17 (mobilization of stored fats); Boron & Boulpaep 3rd ed. ch.51."
+  - source: hepatic_ketogenesis
+    target: plasma_ketone_bodies
+    sign: "+"
+    production_evidence: curated_source_statement
+    mechanism: the liver produces ketone bodies (acetoacetate, 3-hydroxybutyrate) exclusively for export into the circulation for peripheral tissues
+    evidence: "StatPearls NBK493179 (Biochemistry, Ketogenesis): hepatic ketone bodies are released into the circulation; hepatocytes cannot use them. Lehninger 7th ed. ch.17 (ketone bodies as exported hepatic fuel)."

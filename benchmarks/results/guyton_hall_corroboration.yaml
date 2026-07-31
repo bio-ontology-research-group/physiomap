@@ -1,0 +1,1924 @@
+_about: Guyton & Hall, Textbook of Medical Physiology (11th ed.) corroboration of EXISTING PhysioMap edges.
+  Each entry adds authoritative provenance (chapter/section anchor + verbatim quote) for an edge PhysioMap
+  already encodes. Mined by per-chapter agent fan-out over the institutional KAUST-library copy (read-only,
+  not redistributed); see benchmarks/results/guyton_extraction.md. Review before inlining into edge.evidence.
+edges:
+  acth->aldosterone:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.74 (Introduction to Endocrinology) §Table 74-1 (Anterior
+    pituitary): “Adrenocorticotropic hormone (ACTH) Stimulates synthesis and secretion of adrenocortical
+    hormones (cortisol, androgens, and aldosterone)”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.77 (Adrenocortical Hormones) §Regulation of Aldosterone
+    Secretion: “ACTH from the anterior pituitary gland is necessary for aldosterone secretion”'
+  acth->cortisol:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.67 (Metabolism of Carbohydrates, and Formation of
+    Adenosine Triphosphate) §Effect of Corticotropin and Glucocorticoids on Gluconeogenesis: “This stimulates
+    the adrenal cortex to produce large quantities of glucocorticoid hormones, especially cortisol.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.74 (Introduction to Endocrinology) §Coordination of
+    Body Functions (Table 74-1): “adrenocorticotropic hormone (ACTH) from the anterior pituitary gland
+    specifically stimulates the adrenal cortex, causing it to secrete adrenocortical hormones”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.77 (Adrenocortical Hormones) §Regulation of Cortisol
+    Secretion by ACTH: “secretion of cortisol is controlled almost entirely by ACTH secreted by the anterior
+    pituitary gland”'
+  acth->plasma_androgen:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.74 (Introduction to Endocrinology) §Table 74-1 (Anterior
+    pituitary): “Adrenocorticotropic hormone (ACTH) Stimulates synthesis and secretion of adrenocortical
+    hormones (cortisol, androgens, and aldosterone)”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.77 (Adrenocortical Hormones) §Regulation of Cortisol
+    Secretion by ACTH: “This hormone, also called corticotropin or adrenocorticotropin, also enhances
+    the production of adrenal androgens.”'
+  activated_protein_C->thrombin:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.36 (Hemostasis and Blood Coagulation) §Endothelial
+    Surface Factors: “protein C, that acts as an anticoagulant by inactivating activated Factors V and
+    VIII.”'
+  adh->plasma_osmolality:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.28 (Regulation of Extracellular Fluid Osmolarity and
+    Sodium Concentration) §Osmoreceptor-ADH Feedback System: “water is conserved in the body ... This
+    causes dilution of the solutes in the extracellular fluid, thereby correcting the initial excessively
+    concentrated extracellular fluid”'
+  adh->plasma_sodium_concentration:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.28 (Regulation of Extracellular Fluid Osmolarity and
+    Sodium Concentration) §Osmoreceptor-ADH Feedback System: “the renal tubules decrease their permeability
+    for water, less water is reabsorbed ... This in turn concentrates the body fluids and returns plasma
+    osmolarity toward normal”'
+  adh->sodium_water_reabsorption:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.19 (Dominant Role of the Kidney in Long-Term Pressure
+    Control) §Importance of Salt in the Renal-Body Fluid Schema: “The antidiuretic hormone then causes
+    the kidneys to reabsorb greatly increased quantities of water from the renal tubular fluid”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.22 (Cardiac Failure) §Increased aldosterone secretion:
+    “The antidiuretic hormone in turn promotes still greater increase in tubular reabsorption of water”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.25 (The Body Fluid Compartments: Extracellular and
+    Intracellular Fluids; Interstitial Fluid and Edema) §Causes of Hyponatremia: “excessive secretion
+    of antidiuretic hormone, which causes the kidney tubules to reabsorb more water”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.27 (Urine Formation by the Kidneys: II. Tubular Reabsorption
+    and Secretion) §ADH Increases Water Reabsorption: “The most important renal action of ADH is to increase
+    the water permeability of the distal tubule, collecting tubule, and collecting duct epithelia.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.28 (Regulation of Extracellular Fluid Osmolarity and
+    Sodium Concentration) §Requirements for Excreting a Concentrated Urine: “a high level of ADH, which
+    increases the permeability of the distal tubules and collecting ducts to water, thereby allowing these
+    tubular segments to avidly reabsorb water”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.74 (Introduction to Endocrinology) §Table 74-1 (Posterior
+    pituitary): “Antidiuretic hormone (ADH) ... Increases water reabsorption by the kidneys and causes
+    vasoconstriction and increased blood pressure”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.75 (Pituitary Hormones and Their Control by the Hypothalamus)
+    §Physiological Functions of ADH: “in the presence of ADH, the permeability of the collecting ducts
+    and tubules to water increases greatly and allows most of the water to be reabsorbed”'
+  adh->total_peripheral_resistance:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.17 (Local and Humoral Control of Blood Flow by the
+    Tissues) §Vasopressin: “Vasopressin ... is even more powerful than angiotensin II as a vasoconstrictor,
+    thus making it one of the body''s most potent vascular constrictor substances.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.24 (Circulatory Shock and Physiology of Its Treatment)
+    §Nonprogressive Shock—Compensated Shock: “Formation of vasopressin (antidiuretic hormone) by the posterior
+    pituitary gland, which constricts the peripheral arteries and veins”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.74 (Introduction to Endocrinology) §Table 74-1 (Posterior
+    pituitary): “Antidiuretic hormone (ADH) ... causes vasoconstriction and increased blood pressure”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.75 (Pituitary Hormones and Their Control by the Hypothalamus)
+    §Vasoconstrictor and Pressor Effects of ADH: “higher concentrations of ADH have a potent effect of
+    constricting the arterioles throughout the body”'
+  adh->urine_osmolality:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.27 (Urine Formation by the Kidneys: II. Tubular Reabsorption
+    and Secretion) §Medullary Collecting Duct: “With high levels of ADH, water is avidly reabsorbed into
+    the medullary interstitium, thereby reducing the urine volume and concentrating most of the solutes
+    in the urine.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.28 (Regulation of Extracellular Fluid Osmolarity and
+    Sodium Concentration) §Antidiuretic Hormone Controls Urine Concentration: “the rate of ADH secretion
+    determines, to a large extent, whether the kidney excretes a dilute or a concentrated urine”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.75 (Pituitary Hormones and Their Control by the Hypothalamus)
+    §Physiological Functions of ADH: “conserving water in the body and producing very concentrated urine”'
+  adipose_hsl_activity->lipolysis_rate:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.68 (Lipid Metabolism) §Free Fatty Acids Are Transported
+    in the Blood: “a hormone-sensitive cellular lipase can be activated by several hormones ... and this
+    also promotes rapid hydrolysis of triglycerides”'
+  adipose_tissue_mass->leptin:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.71 (Dietary Balances; Regulation of Feeding; Obesity
+    and Starvation; Vitamins and Minerals) §Feedback Signals from Adipose Tissue Regulate Food Intake:
+    “When the amount of adipose tissue increases (signaling excess energy storage), the adipocytes produce
+    increased amounts of leptin”'
+  afterload->stroke_volume:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.9 (Heart Muscle; The Heart as a Pump and Function
+    of the Heart Valves) §Concepts of Preload and Afterload: “The afterload of the ventricle is the pressure
+    in the artery leading from the ventricle.”'
+  agrp_npy_tone->mc4r_activity:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.71 (Dietary Balances; Regulation of Feeding; Obesity
+    and Starvation; Vitamins and Minerals) §Neurons and Neurotransmitters in the Hypothalamus: “AGRP released
+    from the orexigenic neurons of the hypothalamus is a natural antagonist of MCR-3 and MCR-4”'
+  airway_resistance->alveolar_ventilation:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.37 (Pulmonary Ventilation) §Resistance to Airflow
+    in the Bronchial Tree: “less than 1 centimeter of water pressure gradient from the alveoli to the
+    atmosphere is sufficient to cause enough airflow for quiet breathing”'
+  aldosterone->plasma_potassium:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.77 (Adrenocortical Hormones) §Excess Aldosterone Causes
+    Hypokalemia: “excessive secretion of aldosterone ... may cause a serious decrease in the plasma potassium
+    concentration”'
+  aldosterone->renal_potassium_excretion:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.27 (Urine Formation by the Kidneys: II. Tubular Reabsorption
+    and Secretion) §Aldosterone Increases Sodium Reabsorption and Increases Potassium Secretion: “Aldosterone,
+    secreted by the zona glomerulosa cells of the adrenal cortex, is an important regulator of sodium
+    reabsorption and potassium secretion”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.29 (Renal Regulation of Potassium, Calcium, Phosphate,
+    and Magnesium; Integration of Renal Mechanisms for Control of Blood Volume and Extracellular Fluid
+    Volume) §Aldosterone Stimulates Potassium Secretion: “aldosterone has a powerful effect to increase
+    potassium excretion”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.31 (Kidney Diseases and Diuretics) §Competitive Inhibitors
+    of Aldosterone Decrease Sodium Reabsorption: “these drugs also block the effect of aldosterone to
+    promote potassium secretion in the tubules, they decrease the excretion of potassium”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.74 (Introduction to Endocrinology) §Table 74-1 (Adrenal
+    cortex): “Aldosterone Increases renal sodium reabsorption, potassium secretion, and hydrogen ion secretion”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.77 (Adrenocortical Hormones) §Renal and Circulatory
+    Effects of Aldosterone: “aldosterone increases absorption of sodium and simultaneously increases secretion
+    of potassium by the renal tubular epithelial cells”'
+  aldosterone->sodium_water_reabsorption:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.19 (Dominant Role of the Kidney in Long-Term Pressure
+    Control) §Hypertension Caused by Primary Aldosteronism: “aldosterone increases the rate of reabsorption
+    of salt and water by the tubules of the kidneys”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.22 (Cardiac Failure) §Increased aldosterone secretion:
+    “The elevated aldosterone level further increases the reabsorption of sodium from the renal tubules”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.25 (The Body Fluid Compartments: Extracellular and
+    Intracellular Fluids; Interstitial Fluid and Edema) §Causes of Hypernatremia: “excessive secretion
+    of the sodium-retaining hormone aldosterone ... increased aldosterone secretion causes the kidneys
+    to reabsorb greater amounts of water as well as sodium.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.27 (Urine Formation by the Kidneys: II. Tubular Reabsorption
+    and Secretion) §Aldosterone Increases Sodium Reabsorption and Increases Potassium Secretion: “Aldosterone...
+    increases sodium reabsorption while at the same time increasing potassium secretion is by stimulating
+    the sodium-potassium ATPase pump”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.28 (Regulation of Extracellular Fluid Osmolarity and
+    Sodium Concentration) §Role of Angiotensin II and Aldosterone: “angiotensin II and aldosterone increase
+    both sodium and water reabsorption by the renal tubules, leading to increases in extracellular fluid
+    volume and sodium quantity”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.29 (Renal Regulation of Potassium, Calcium, Phosphate,
+    and Magnesium; Integration of Renal Mechanisms for Control of Blood Volume and Extracellular Fluid
+    Volume) §Role of Aldosterone in Controlling Renal Excretion: “Aldosterone increases sodium reabsorption,
+    especially in the cortical collecting tubules”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.31 (Kidney Diseases and Diuretics) §Renal Lesions
+    That Reduce the Ability of the Kidneys to Excrete Sodium and Water Promote Hypertension: “excessive
+    aldosterone secretion, which increases sodium reabsorption mainly in the cortical collecting tubules”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.74 (Introduction to Endocrinology) §Table 74-1 (Adrenal
+    cortex): “Aldosterone Increases renal sodium reabsorption, potassium secretion, and hydrogen ion secretion”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.77 (Adrenocortical Hormones) §Renal and Circulatory
+    Effects of Aldosterone: “aldosterone increases absorption of sodium ... aldosterone causes sodium
+    to be conserved in the extracellular fluid”'
+  alpha_msh->mc4r_activity:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.71 (Dietary Balances; Regulation of Feeding; Obesity
+    and Starvation; Vitamins and Minerals) §Neurons and Neurotransmitters in the Hypothalamus: “The POMC
+    neurons release a-MSH, which then acts on melanocortin receptors found especially in neurons of the
+    paraventricular nuclei.”'
+  alveolar_po2->pulmonary_arteriole_diameter:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.38 (Pulmonary Circulation, Pulmonary Edema, Pleural
+    Fluid) §Effect of Diminished Alveolar Oxygen on Local Alveolar Blood Flow: “When the concentration
+    of oxygen in the air of the alveoli decreases below normal ... the adjacent blood vessels constrict”'
+  alveolar_surface_tension->tidal_volume:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.37 (Pulmonary Ventilation) §Surfactant, Surface Tension,
+    and Collapse of the Alveoli: “important surfactant is in reducing alveolar surface tension and therefore
+    also reducing the effort required by the respiratory muscles to expand the lungs”'
+  alveolar_surfactant_amount->alveolar_surface_tension:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.37 (Pulmonary Ventilation) §Surfactant, Surface Tension,
+    and Collapse of the Alveoli: “The fluid-air surface tension elastic forces of the lungs also increase
+    tremendously when the substance called surfactant is not present in the alveolar fluid.”'
+  alveolar_surfactant_concentration->alveolar_surface_tension:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.37 (Pulmonary Ventilation) §Surfactant and Its Effect
+    on Surface Tension: “Surfactant is a surface active agent in water, which means that it greatly reduces
+    the surface tension of water.”'
+  alveolar_ventilation->arterial_pco2:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.30 (Regulation of Acid-Base Balance) §Increasing Alveolar
+    Ventilation Decreases Extracellular Fluid Hydrogen Ion Concentration and Raises pH: “The higher the
+    alveolar ventilation, the lower the Pco2; conversely, the lower the alveolar ventilation rate, the
+    higher the Pco2.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.41 (Regulation of Respiration) §Unimportance of Oxygen
+    for Control of the Respiratory Center: “both the blood and tissue Pco2 changes inversely with the
+    rate of pulmonary ventilation”'
+  angiotensin_II->aldosterone:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.19 (Dominant Role of the Kidney in Long-Term Pressure
+    Control) §Stimulation of Aldosterone Secretion by Angiotensin: “Angiotensin is also one of the most
+    powerful stimulators of aldosterone secretion by the adrenal glands”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.22 (Cardiac Failure) §Increased aldosterone secretion:
+    “the effect of angiotensin to stimulate aldosterone secretion by the adrenal cortex”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.27 (Urine Formation by the Kidneys: II. Tubular Reabsorption
+    and Secretion) §Angiotensin II Increases Sodium and Water Reabsorption: “Angiotensin II stimulates
+    aldosterone secretion, which in turn increases sodium reabsorption.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.29 (Renal Regulation of Potassium, Calcium, Phosphate,
+    and Magnesium; Integration of Renal Mechanisms for Control of Blood Volume and Extracellular Fluid
+    Volume) §Role of Aldosterone in Controlling Renal Excretion: “the increased angiotensin II levels
+    that occur stimulate aldosterone secretion”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.77 (Adrenocortical Hormones) §Regulation of Aldosterone
+    Secretion: “Increased activity of the renin-angiotensin system (increased levels of angiotensin II)
+    also greatly increases aldosterone secretion.”'
+  angiotensin_II->sodium_water_reabsorption:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.19 (Dominant Role of the Kidney in Long-Term Pressure
+    Control) §Effect of Angiotensin in the Kidneys: “Angiotensin acts directly on the kidneys to cause
+    salt and water retention”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.22 (Cardiac Failure) §Activation of the renin-angiotensin
+    system: “promoting greatly increased reabsorption of both water and salt from the tubules”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.24 (Circulatory Shock and Physiology of Its Treatment)
+    §Nonprogressive Shock—Compensated Shock: “decreased output of water and salt by the kidneys, both
+    of which help prevent progression of shock.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.27 (Urine Formation by the Kidneys: II. Tubular Reabsorption
+    and Secretion) §Angiotensin II Increases Sodium and Water Reabsorption: “Angiotensin II is perhaps
+    the body''s most powerful sodium-retaining hormone... increasing sodium and water reabsorption from
+    the renal tubules”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.28 (Regulation of Extracellular Fluid Osmolarity and
+    Sodium Concentration) §Role of Angiotensin II and Aldosterone: “increased levels of these hormones
+    stimulate sodium reabsorption by the kidneys ... they also increase the extracellular fluid volume
+    by increasing reabsorption of water along with the sodium”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.29 (Renal Regulation of Potassium, Calcium, Phosphate,
+    and Magnesium; Integration of Renal Mechanisms for Control of Blood Volume and Extracellular Fluid
+    Volume) §Role of Angiotensin II In Controlling Renal Excretion: “angiotensin II has several important
+    effects in increasing tubular reabsorption of sodium”'
+  angiotensin_II->total_peripheral_resistance:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.17 (Local and Humoral Control of Blood Flow by the
+    Tissues) §Angiotensin II: “it normally acts on many of the arterioles of the body at the same time
+    to increase the total peripheral resistance, thereby increasing the arterial pressure.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.19 (Dominant Role of the Kidney in Long-Term Pressure
+    Control) §Rapidity and Intensity of the Vasoconstrictor Response: “Constriction of the arterioles
+    increases the total peripheral resistance, thereby raising the arterial pressure”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.24 (Circulatory Shock and Physiology of Its Treatment)
+    §Nonprogressive Shock—Compensated Shock: “Formation of angiotensin by the kidneys, which constricts
+    the peripheral arteries”'
+  angiotensin_II->water_intake:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.28 (Regulation of Extracellular Fluid Osmolarity and
+    Sodium Concentration) §Stimuli for Thirst: “A third important stimulus for thirst is angiotensin II.
+    Studies in animals have shown that angiotensin II acts on the subfornical organ”'
+  anp->sodium_excretion:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.27 (Urine Formation by the Kidneys: II. Tubular Reabsorption
+    and Secretion) §Atrial Natriuretic Peptide Decreases Sodium and Water Reabsorption: “Increased levels
+    of this peptide in turn inhibit the reabsorption of sodium and water by the renal tubules... This
+    decreased sodium and water reabsorption increases urinary excretion”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.29 (Renal Regulation of Potassium, Calcium, Phosphate,
+    and Magnesium; Integration of Renal Mechanisms for Control of Blood Volume and Extracellular Fluid
+    Volume) §Role of Atrial Natriuretic Peptide: “These combined actions of ANP lead to increased excretion
+    of salt and water”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.74 (Introduction to Endocrinology) §Table 74-1 (Heart):
+    “Atrial natriuretic peptide (ANP) Increases sodium excretion by kidneys, reduces blood pressure”'
+  antithrombin->thrombin:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.36 (Hemostasis and Blood Coagulation) §Antithrombin
+    Action of Fibrin and Antithrombin III: “the thrombin... soon combines with antithrombin III, which
+    further blocks the effect of the thrombin... and then also inactivates the thrombin itself”'
+  arterial_compliance->pulse_pressure:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.15 (Vascular Distensibility and Functions of the Arterial
+    and Venous Systems) §Arterial Pressure Pulsations: “the less the compliance of the arterial system,
+    the greater the rise in pressure for a given stroke volume of blood pumped into the arteries”'
+  arterial_pco2->arterial_ph:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.30 (Regulation of Acid-Base Balance) §Respiratory
+    Regulation of Acid-Base Balance: “decreased ventilation increases CO2, thus also increasing H+ concentration
+    in the extracellular fluid.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.40 (Transport of Oxygen and Carbon Dioxide in Blood
+    and Tissue Fluids) §Change in Blood Acidity During Carbon Dioxide Transport: “The carbonic acid formed
+    when carbon dioxide enters the blood in the peripheral tissues decreases the blood pH”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.41 (Regulation of Respiration) §Carbon Dioxide Stimulates
+    the Chemosensitive Area: “it reacts with the water of the tissues to form carbonic acid, which dissociates
+    into hydrogen and bicarbonate ions”'
+  arterial_pco2->chemoreceptor_drive:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.41 (Regulation of Respiration) §Carbon Dioxide Stimulates
+    the Chemosensitive Area: “respiratory center activity is increased very strongly by changes in blood
+    carbon dioxide”'
+  arterial_pco2->hemoglobin_o2_saturation:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.40 (Transport of Oxygen and Carbon Dioxide in Blood
+    and Tissue Fluids) §The Bohr Effect: “an increase in carbon dioxide in the blood causes oxygen to
+    be displaced from the hemoglobin (the Bohr effect)”'
+  arterial_pco2->plasma_bicarbonate:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.30 (Regulation of Acid-Base Balance) §Table 30-2 /
+    Henderson-Hasselbalch: “the bicarbonate concentration is regulated mainly by the kidneys, whereas
+    the PCO2 in extracellular fluid is controlled by the rate of respiration.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.40 (Transport of Oxygen and Carbon Dioxide in Blood
+    and Tissue Fluids) §Transport of Carbon Dioxide in the Form of Bicarbonate Ion: “The dissolved carbon
+    dioxide in the blood reacts with water to form carbonic acid...dissociates into hydrogen and bicarbonate
+    ions (H+ and HCO3-)”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.41 (Regulation of Respiration) §Decreased Stimulatory
+    Effect of Carbon Dioxide After the First 1 to 2 Days: “The kidneys achieve this by increasing the
+    blood bicarbonate, which binds with the hydrogen ions in the blood and cerebrospinal fluid”'
+  arterial_ph->cellular_potassium_uptake:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.29 (Renal Regulation of Potassium, Calcium, Phosphate,
+    and Magnesium; Integration of Renal Mechanisms for Control of Blood Volume and Extracellular Fluid
+    Volume) §Acid-Base Abnormalities Can Cause Changes in Potassium Distribution: “one effect of increased
+    hydrogen ion concentration is to reduce the activity of the sodium-potassium adenosine triphosphatase
+    (ATPase) pump. This in turn decreases cellular uptake of potassium”'
+  arterial_ph->chemoreceptor_drive:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.30 (Regulation of Acid-Base Balance) §Increased Hydrogen
+    Ion Concentration Stimulates Alveolar Ventilation: “the alveolar ventilation rate increases four to
+    five times normal as the pH decreases from the normal value of 7.4 to the strongly acidic value of
+    7.0.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.41 (Regulation of Respiration) §Excitation of the
+    Chemosensitive Neurons by Hydrogen Ions: “The sensor neurons in the chemosensitive area are especially
+    excited by hydrogen ions; in fact, it is believed that hydrogen ions may be the only important direct
+    stimulus”'
+  arterial_ph->hemoglobin_o2_saturation:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.40 (Transport of Oxygen and Carbon Dioxide in Blood
+    and Tissue Fluids) §Factors That Shift the Dissociation Curve: “when the blood becomes slightly acidic,
+    with the pH decreasing from the normal value of 7.4 to 7.2, the oxygen-hemoglobin dissociation curve
+    shifts...to the right”'
+  arterial_ph->plasma_bicarbonate:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.30 (Regulation of Acid-Base Balance) §Renal Correction
+    of Alkalosis: “the HCO3- that cannot react with H+ is not reabsorbed and is excreted in the urine.
+    This results in a decrease in plasma HCO3- concentration”'
+  arterial_po2->arterial_o2_content:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.40 (Transport of Oxygen and Carbon Dioxide in Blood
+    and Tissue Fluids) §Transport of Oxygen in the Dissolved State: “At the normal arterial Po2 of 95
+    mm Hg, about 0.29 milliliter of oxygen is dissolved in every 100 milliliters of water in the blood”'
+  arterial_po2->chemoreceptor_drive:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.18 (Nervous Regulation of the Circulation, and Rapid
+    Control of Arterial Pressure) §Control of Arterial Pressure by the Carotid and Aortic Chemoreceptors:
+    “the chemoreceptors become stimulated because diminished blood flow causes decreased oxygen as well
+    as excess buildup of carbon dioxide and hydrogen ions”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.41 (Regulation of Respiration) §Stimulation of the
+    Chemoreceptors by Decreased Arterial Oxygen: “When the oxygen concentration in the arterial blood
+    falls below normal, the chemoreceptors become strongly stimulated.”'
+  arterial_po2->hemoglobin_o2_saturation:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.40 (Transport of Oxygen and Carbon Dioxide in Blood
+    and Tissue Fluids) §Oxygen-Hemoglobin Dissociation Curve: “demonstrates a progressive increase in
+    the percentage of hemoglobin bound with oxygen as blood Po2 increases”'
+  baroreceptor_firing_rate->parasympathetic_tone:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.18 (Nervous Regulation of the Circulation, and Rapid
+    Control of Arterial Pressure) §Circulatory Reflex Initiated by the Baroreceptors: “secondary signals
+    inhibit the vasoconstrictor center of the medulla and excite the vagal parasympathetic center.”'
+  baroreceptor_firing_rate->sympathetic_tone:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.18 (Nervous Regulation of the Circulation, and Rapid
+    Control of Arterial Pressure) §Circulatory Reflex Initiated by the Baroreceptors: “After the baroreceptor
+    signals have entered the tractus solitarius of the medulla, secondary signals inhibit the vasoconstrictor
+    center of the medulla”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.24 (Circulatory Shock and Physiology of Its Treatment)
+    §Sympathetic Reflex Compensations in Shock: “These reflexes stimulate the sympathetic vasoconstrictor
+    system throughout the body”'
+  beta_cell_insulin_secretion->alpha_cell_glucagon_secretion:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.78 (Insulin, Glucagon, and Diabetes Mellitus) §Physiologic
+    Anatomy of the Pancreas: “insulin inhibits glucagon secretion, amylin inhibits insulin secretion,
+    and somatostatin inhibits the secretion of both insulin and glucagon”'
+  blood_carbon_monoxide->hemoglobin_o2_saturation:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.40 (Transport of Oxygen and Carbon Dioxide in Blood
+    and Tissue Fluids) §Combination of Hemoglobin with Carbon Monoxide: “it can therefore displace oxygen
+    from the hemoglobin, thereby decreasing the oxygen carrying capacity of blood”'
+  blood_colloidal_osmotic_pressure->net_filtration_pressure:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.16 (The Microcirculation and the Lymphatic System:
+    Capillary Fluid Exchange, Interstitial Fluid, and Lymph Flow) §Four Primary Hydrostatic and Colloid
+    Osmotic Forces: “The capillary plasma colloid osmotic pressure (Pp), which tends to cause osmosis
+    of fluid inward through the capillary membrane.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.25 (The Body Fluid Compartments: Extracellular and
+    Intracellular Fluids; Interstitial Fluid and Edema) §Factors That Can Increase Capillary Filtration:
+    “any one of the following changes can increase the capillary filtration rate ... Decreased plasma
+    colloid osmotic pressure.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.26 (Urine Formation by the Kidneys: I. Glomerular
+    Filtration, Renal Blood Flow, and Their Control) §Determinants of the GFR: “the colloid osmotic pressure
+    of the glomerular capillary plasma proteins (pG), which opposes filtration”'
+  blood_viscosity->total_peripheral_resistance:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.14 (Overview of the Circulation; Medical Physics of
+    Pressure, Flow, and Resistance) §Effect of Blood Hematocrit and Blood Viscosity on Vascular Resistance
+    and Blood Flow: “The greater the viscosity, the less the flow in a vessel if all other factors are
+    constant.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.24 (Circulatory Shock and Physiology of Its Treatment)
+    §Hypovolemic Shock Caused by Plasma Loss: “the blood viscosity increases greatly as a result of increased
+    red blood cell concentration in the remaining blood, and this exacerbates the sluggishness of blood
+    flow.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.32 (Red Blood Cells, Anemia, and Polycythemia) §Effects
+    of Anemia on Function of the Circulatory System: “blood viscosity may fall... This decreases the resistance
+    to blood flow in the peripheral blood vessels”'
+  blood_volume->anp:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.29 (Renal Regulation of Potassium, Calcium, Phosphate,
+    and Magnesium; Integration of Renal Mechanisms for Control of Blood Volume and Extracellular Fluid
+    Volume) §Role of Atrial Natriuretic Peptide: “The stimulus for release of this peptide appears to
+    be overstretch of the atria, which can result from excess blood volume”'
+  blood_volume->venous_return:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.15 (Vascular Distensibility and Functions of the Arterial
+    and Venous Systems) §Venous Pressures—Right Atrial Pressure: “Some of the factors that can increase
+    this venous return (and thereby increase the right atrial pressure) are (1) increased blood volume”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.19 (Dominant Role of the Kidney in Long-Term Pressure
+    Control) §Increased Fluid Volume Can Elevate Arterial Pressure: “increases the mean cir-culatory filling
+    pressure, which (4) increases venous return of blood to the heart”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.20 (Cardiac Output, Venous Return, and Their Regulation)
+    §Effect of Blood Volume on Mean Circulatory Filling Pressure: “The greater the volume of blood in
+    the circulation, the greater is the mean circulatory filling pressure because extra blood volume stretches
+    the walls of the vasculature.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.22 (Cardiac Failure) §Moderate Fluid Retention in
+    Cardiac Failure Can Be Beneficial: “The increased blood volume increases venous return in two ways:
+    First, it increases the mean systemic filling pressure”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.24 (Circulatory Shock and Physiology of Its Treatment)
+    §Shock Caused by Hypovolemia—Hemorrhagic Shock: “Hemorrhage decreases the filling pressure of the
+    circulation and, as a consequence, decreases venous return.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.29 (Renal Regulation of Potassium, Calcium, Phosphate,
+    and Magnesium; Integration of Renal Mechanisms for Control of Blood Volume and Extracellular Fluid
+    Volume) §Pressure Natriuresis and Diuresis: “An increase in mean circulatory filling pressure raises
+    the pressure gradient for venous return”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.32 (Red Blood Cells, Anemia, and Polycythemia) §Effect
+    of Polycythemia on Function of the Circulatory System: “the blood volume is greatly increased in polycythemia,
+    which tends to increase venous return”'
+  bronchial_smooth_muscle_tone->airway_resistance:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.37 (Pulmonary Ventilation) §Muscular Wall of the Bronchi
+    and Bronchioles and Its Control: “Many obstructive diseases of the lung result from narrowing of the
+    smaller bronchi and larger bronchioles, often because of excessive contraction of the smooth muscle
+    itself.”'
+  bronchiole_diameter->alveolar_ventilation:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.37 (Pulmonary Ventilation) §Trachea, Bronchi, and
+    Bronchioles: “they are kept expanded mainly by the same transpulmonary pressures that expand the alveoli.
+    That is, as the alveoli enlarge, the bronchioles also enlarge”'
+  bronchiole_smooth_muscle_tone->airway_resistance:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.37 (Pulmonary Ventilation) §Resistance to Airflow
+    in the Bronchial Tree: “in disease conditions, the smaller bronchioles often play a far greater role
+    in determining airflow resistance because of their small size”'
+  calcitriol->intestinal_calcium_absorption:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.31 (Kidney Diseases and Diuretics) §Osteomalacia in
+    Chronic Renal Failure: “reduces the blood concentration of active vitamin D, which in turn decreases
+    intestinal absorption of calcium”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.74 (Introduction to Endocrinology) §Table 74-1 (Kidney):
+    “1,25-Dihydroxycholecalciferol Increases intestinal absorption of calcium and bone mineralization”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.79 (Parathyroid Hormone, Calcitonin, Calcium and Phosphate
+    Metabolism, Vitamin D, Bone, and Teeth) §Hormonal Effect of Vitamin D to Promote Intestinal Calcium
+    Absorption: “1,25-Dihydroxycholecalciferol itself functions as a type of hormone to promote intestinal
+    absorption of calcium”'
+  calcitriol->plasma_calcium:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.79 (Parathyroid Hormone, Calcitonin, Calcium and Phosphate
+    Metabolism, Vitamin D, Bone, and Teeth) §Actions of Vitamin D: “1,25-dihydroxycholecalciferol, has
+    several effects on the intestines, kidneys, and bones that increase absorption of calcium and phosphate
+    into the extracellular fluid”'
+  calcitriol->plasma_phosphate:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.79 (Parathyroid Hormone, Calcitonin, Calcium and Phosphate
+    Metabolism, Vitamin D, Bone, and Teeth) §Vitamin D Promotes Phosphate Absorption by the Intestines:
+    “phosphate flux through the gastrointestinal epithelium is enhanced by vitamin D... a direct effect
+    of 1,25-dihydroxycholecalciferol”'
+  calcitriol->pth:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.79 (Parathyroid Hormone, Calcitonin, Calcium and Phosphate
+    Metabolism, Vitamin D, Bone, and Teeth) §Control of Parathyroid Secretion by Calcium Ion Concentration:
+    “conditions that increase the calcium ion concentration above normal cause decreased activity and
+    reduced size of the parathyroid glands... (2) increased vitamin D in the diet”'
+  capillary_filtration_rate->interstitial_fluid_volume:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.16 (The Microcirculation and the Lymphatic System:
+    Capillary Fluid Exchange, Interstitial Fluid, and Lymph Flow) §Fluid Filtration Across Capillaries:
+    “there will be a net fluid filtration across the capillaries into the interstitial space in most organs”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.25 (The Body Fluid Compartments: Extracellular and
+    Intracellular Fluids; Interstitial Fluid and Edema) §Extracellular Edema: “The most common clinical
+    cause of interstitial fluid accumulation is excessive capillary fluid filtration.”'
+  capillary_hydrostatic_pressure->interstitial_fluid_volume:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.16 (The Microcirculation and the Lymphatic System:
+    Capillary Fluid Exchange, Interstitial Fluid, and Lymph Flow) §Effect of Abnormal Imbalance of Forces:
+    “If the mean capillary pressure rises above 17 mm Hg, the net force tending to cause filtration of
+    fluid into the tissue spaces rises.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.22 (Cardiac Failure) §Long-Term Fluid Retention by
+    the Kidneys: “causing loss of fluid into the tissues and development of severe edema”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.25 (The Body Fluid Compartments: Extracellular and
+    Intracellular Fluids; Interstitial Fluid and Edema) §Edema Caused by Heart Failure: “this raises venous
+    pressure and capillary pressure, causing increased capillary filtration.”'
+  capillary_hydrostatic_pressure->net_filtration_pressure:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.16 (The Microcirculation and the Lymphatic System:
+    Capillary Fluid Exchange, Interstitial Fluid, and Lymph Flow) §Four Primary Hydrostatic and Colloid
+    Osmotic Forces: “The capillary pressure (Pc), which tends to force fluid outward through the capillary
+    membrane.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.25 (The Body Fluid Compartments: Extracellular and
+    Intracellular Fluids; Interstitial Fluid and Edema) §Factors That Can Increase Capillary Filtration:
+    “Filtration = Kf x (Pc - Pif - pc + pif) ... Increased capillary hydrostatic pressure.”'
+  cardiac_output->mean_arterial_pressure:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.14 (Overview of the Circulation; Medical Physics of
+    Pressure, Flow, and Resistance) §Total Peripheral Vascular Resistance: “the resistance of the entire
+    systemic circulation, called the total peripheral resistance, is about 100/100, or 1 PRU.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.18 (Nervous Regulation of the Circulation, and Rapid
+    Control of Arterial Pressure) §Increased Cardiac Output and Arterial Pressure Caused by Skeletal Muscle
+    Contraction: “The increase in cardiac output in turn is an essential ingredient in increasing the
+    arterial pressure during exercise”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.19 (Dominant Role of the Kidney in Long-Term Pressure
+    Control) §Increased Fluid Volume Can Elevate Arterial Pressure: “the direct effect of increased cardiac
+    output to increase the pressure”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.21 (Muscle Blood Flow and Cardiac Output During Exercise;
+    the Coronary Circulation and Ischemic Heart Disease) §Increase in Arterial Pressure During Exercise:
+    “This results from multiple stimulatory effects, including ... (2) increased pumping activity by the
+    heart ... virtually always increase the arterial pressure during exercise”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.24 (Circulatory Shock and Physiology of Its Treatment)
+    §Relationship of Bleeding Volume to Cardiac Output and Arterial Pressure: “the arterial blood pressure
+    decreases at the same time as the cardiac output decreases, although usually not as much.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.29 (Renal Regulation of Potassium, Calcium, Phosphate,
+    and Magnesium; Integration of Renal Mechanisms for Control of Blood Volume and Extracellular Fluid
+    Volume) §Pressure Natriuresis and Diuresis: “An increased cardiac output raises arterial pressure”'
+  cardiac_output->pulmonary_perfusion:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.38 (Pulmonary Circulation, Pulmonary Edema, Pleural
+    Fluid) §Blood Flow Through the Lungs and Its Distribution: “The blood flow through the lungs is essentially
+    equal to the cardiac output.”'
+  cellular_adp_level->isocitrate_dehydrogenase_activity:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.72 (Energetics and Metabolic Rate) §ADP Concentration
+    as a Rate-Controlling Factor: “This ADP then automatically increases the rates of all the reactions
+    for the metabolic release of energy from food.”'
+  cellular_potassium_uptake->plasma_potassium:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.29 (Renal Regulation of Potassium, Calcium, Phosphate,
+    and Magnesium; Integration of Renal Mechanisms for Control of Blood Volume and Extracellular Fluid
+    Volume) §Regulation of Internal Potassium Distribution: “redistribution of potassium between the intra-
+    and extracellular fluid compartments provides a first line of defense against changes in extracellular
+    fluid potassium concentration”'
+  chemoreceptor_drive->alveolar_ventilation:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.30 (Regulation of Acid-Base Balance) §Feedback Control
+    of Hydrogen Ion Concentration by the Respiratory System: “whenever the H+ concentration increases
+    above normal, the respiratory system is stimulated, and alveolar ventilation increases.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.41 (Regulation of Respiration) §Chemical Control of
+    Respiration: “Excess carbon dioxide or excess hydrogen ions in the blood mainly act directly on the
+    respiratory center itself, causing greatly increased strength of both the inspiratory and the expiratory
+    motor signals”'
+  chemoreceptor_drive->sympathetic_tone:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.18 (Nervous Regulation of the Circulation, and Rapid
+    Control of Arterial Pressure) §Control of Arterial Pressure by the Carotid and Aortic Chemoreceptors:
+    “The signals transmitted from the chemoreceptors excite the vasomotor center, and this elevates the
+    arterial pressure back toward normal.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.41 (Regulation of Respiration) §Obstructive Sleep
+    Apnea: “These periods of apnea result in significant decreases in Po2 and increases in Pco2, which
+    greatly stimulate respiration ... including increased sympathetic activity”'
+  core_temperature->hemoglobin_o2_saturation:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.40 (Transport of Oxygen and Carbon Dioxide in Blood
+    and Tissue Fluids) §Factors That Shift the Dissociation Curve: “several other factors are known to
+    shift the curve...(2) increased blood temperature...all of which shift the curve to the right”'
+  core_temperature->metabolic_rate:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.72 (Energetics and Metabolic Rate) §Fever Increases
+    Metabolic Rate: “Fever, regardless of its cause, increases the chemical reactions of the body by an
+    average of about 120 per cent for every 10°C rise in temperature.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.73 (Body Temperature, Temperature Regulation, and
+    Fever) §Heat Production: “extra metabolism caused by increased chemical activity in the cells themselves,
+    especially when the cell temperature increases”'
+  core_temperature->sa_node_automaticity:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.9 (Heart Muscle; The Heart as a Pump and Function
+    of the Heart Valves) §Effect of Temperature on Heart Function: “heat increases the permeability of
+    the cardiac muscle membrane to ions that control heart rate, resulting in acceleration of the self-excitation
+    process”'
+  core_temperature->shivering:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.73 (Body Temperature, Temperature Regulation, and
+    Fever) §Hypothalamic Stimulation of Shivering: “this center becomes activated when the body temperature
+    falls even a fraction of a degree below a critical temperature level. It then transmits signals that
+    cause shivering”'
+  core_temperature->skin_blood_flow:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.73 (Body Temperature, Temperature Regulation, and
+    Fever) §Temperature-Decreasing Mechanisms When the Body Is Too Hot: “Vasodilation of skin blood vessels.
+    In almost all areas of the body, the skin blood vessels become intensely dilated.”'
+  core_temperature->sweating:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.73 (Body Temperature, Temperature Regulation, and
+    Fever) §Temperature-Decreasing Mechanisms When the Body Is Too Hot: “a sharp increase in the rate
+    of evaporative heat loss resulting from sweating when the body core temperature rises above the critical
+    level of 37°C”'
+  cortisol->acth:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.74 (Introduction to Endocrinology) §Negative Feedback
+    Prevents Overactivity: “the hormone (or one of its products) has a negative feedback effect to prevent
+    oversecretion of the hormone or overactivity at the target tissue”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.77 (Adrenocortical Hormones) §Inhibitory Effect of
+    Cortisol: “Cortisol has direct negative feedback effects on ... the anterior pituitary gland to decrease
+    the formation of ACTH”'
+  cortisol->crh:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.77 (Adrenocortical Hormones) §Inhibitory Effect of
+    Cortisol: “Cortisol has direct negative feedback effects on (1) the hypothalamus to decrease the formation
+    of CRF”'
+  cortisol->hepatic_gluconeogenesis:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.67 (Metabolism of Carbohydrates, and Formation of
+    Adenosine Triphosphate) §Effect of Corticotropin and Glucocorticoids on Gluconeogenesis: “one of the
+    most important means by which gluconeogenesis is promoted is through the release of glucocorticoids
+    from the adrenal cortex.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.77 (Adrenocortical Hormones) §Effects of Cortisol
+    on Carbohydrate Metabolism: “their ability to stimulate gluconeogenesis ... by the liver, often increasing
+    the rate of gluconeogenesis as much as 6- to 10-fold”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.78 (Insulin, Glucagon, and Diabetes Mellitus) §Insulin
+    Lack Causes Protein Depletion: “both growth hormone and cortisol are secreted in response to prolonged
+    hypoglycemia, and they both decrease the rate of glucose utilization”'
+  cortisol->lipolysis_rate:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.68 (Lipid Metabolism) §Hormonal Regulation of Fat
+    Utilization: “glucocorticoids ... activate either the same hormone-sensitive triglyceride lipase as
+    that activated by epinephrine and norepinephrine or a similar lipase”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.77 (Adrenocortical Hormones) §Effects of Cortisol
+    on Fat Metabolism: “it promotes mobilization of fatty acids from adipose tissue. This increases the
+    concentration of free fatty acids in the plasma”'
+  cortisol->peripheral_glucose_uptake:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.77 (Adrenocortical Hormones) §Decreased Glucose Utilization
+    by Cells: “high levels of glucocorticoid reduce the sensitivity of many tissues, especially skeletal
+    muscle and adipose tissue, to the stimulatory effects of insulin on glucose uptake”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.78 (Insulin, Glucagon, and Diabetes Mellitus) §Role
+    of Insulin (and Other Hormones) in Switching: “Both growth hormone and cortisol are secreted in response
+    to hypoglycemia, and both inhibit cellular utilization of glucose while promoting fat utilization”'
+  cortisol->plasma_glucose:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.77 (Adrenocortical Hormones) §Elevated Blood Glucose
+    and Adrenal Diabetes: “Both the increased rate of gluconeogenesis and the moderate reduction in the
+    rate of glucose utilization ... cause the blood glucose concentrations to rise.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.78 (Insulin, Glucagon, and Diabetes Mellitus) §Other
+    Factors That Can Cause Insulin Resistance: “Excess formation of glucocorticoids (Cushing''s syndrome)...
+    decreases the sensitivity of various tissues to the metabolic effects of insulin and can lead to development
+    of diabetes mellitus”'
+  cortisol->t_cell_immune_activity:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.77 (Adrenocortical Hormones) §Effect on Blood Cells
+    and Immunity: “decreases the output of both T cells and antibodies from the lymphoid tissue. As a
+    result, the level of immunity ... is decreased.”'
+  crh->acth:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.74 (Introduction to Endocrinology) §Table 74-1 (Hypothalamus):
+    “Corticotropin-releasing hormone (CRH) Causes release of ACTH”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.77 (Adrenocortical Hormones) §ACTH Secretion Is Controlled
+    by CRF: “carried to the anterior pituitary gland, where it induces ACTH secretion”'
+  cyp7a1_activity->fecal_bile_acids:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.68 (Lipid Metabolism) §Prevention of Atherosclerosis:
+    “any agent that combines with the bile acids ... causes far more of the liver cholesterol to be converted
+    into new bile acids”'
+  delta_cell_somatostatin_secretion->alpha_cell_glucagon_secretion:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.78 (Insulin, Glucagon, and Diabetes Mellitus) §Somatostatin
+    Inhibits Glucagon and Insulin Secretion: “Somatostatin acts locally within the islets of Langerhans
+    themselves to depress the secretion of both insulin and glucagon”'
+  delta_cell_somatostatin_secretion->beta_cell_insulin_secretion:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.78 (Insulin, Glucagon, and Diabetes Mellitus) §Somatostatin
+    Inhibits Glucagon and Insulin Secretion: “Somatostatin acts locally within the islets of Langerhans
+    themselves to depress the secretion of both insulin and glucagon”'
+  duodenal_chyme_acidity->s_cell_secretin_secretion:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.66 (Physiology of Gastrointestinal Disorders) §Peptic
+    Ulcer / Basic Cause of Peptic Ulceration: “The presence of acid in the small intestine liberates secretin
+    from the intestinal mucosa, which then passes by way of the blood to the pancreas”'
+  end_diastolic_volume->stroke_volume:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.9 (Heart Muscle; The Heart as a Pump and Function
+    of the Heart Valves) §Intrinsic Regulation of Heart Pumping—The Frank-Starling Mechanism: “the greater
+    the heart muscle is stretched during filling, the greater is the force of contraction and the greater
+    the quantity of blood pumped into the aorta”'
+  endothelial_et1_secretion->vascular_smooth_muscle_tone:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.17 (Local and Humoral Control of Blood Flow by the
+    Tissues) §Endothelin: “a large 21 amino acid peptide called endothelin, which requires only nanogram
+    quantities to cause powerful vasoconstriction.”'
+  endothelial_no_production->vascular_smooth_muscle_tone:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.17 (Local and Humoral Control of Blood Flow by the
+    Tissues) §The Endothelium-Derived Relaxing Factor (Nitric Oxide): “The most important of these is
+    a vasodilator substance called endothelium-derived relaxing factor (EDRF), which is composed principally
+    of nitric oxide ... The nitric oxide then relaxes the blood vessels.”'
+  endothelial_shear_stress->endothelial_no_production:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.17 (Local and Humoral Control of Blood Flow by the
+    Tissues) §The Endothelium-Derived Relaxing Factor (Nitric Oxide): “Rapid flow of blood through the
+    arteries and arterioles causes shear stress on the endothelial cells ... causes significant increase
+    in the release of nitric oxide.”'
+  enteropeptidase_activity->duodenal_trypsin_activity:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.66 (Physiology of Gastrointestinal Disorders) §Pancreatitis:
+    “a small quantity of trypsinogen becomes activated to form trypsin. Once this happens, the trypsin
+    activates still more trypsinogen as well as chymotrypsinogen and carboxypolypeptidase”'
+  epinephrine->hepatic_glycogenolysis:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.67 (Metabolism of Carbohydrates, and Formation of
+    Adenosine Triphosphate) §Activation of Phosphorylase by Epinephrine or by Glucagon: “Two hormones,
+    epinephrine and glucagon, can activate phosphorylase and thereby cause rapid glycogenolysis.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.78 (Insulin, Glucagon, and Diabetes Mellitus) §Role
+    of Insulin (and Other Hormones) in Switching: “epinephrine has the potent effect of causing glycogenolysis
+    in the liver, thus releasing within minutes large quantities of glucose into the blood”'
+  epinephrine->lipolysis_rate:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.68 (Lipid Metabolism) §Hormonal Regulation of Fat
+    Utilization: “release of epinephrine and norepinephrine ... directly activate hormone-sensitive triglyceride
+    lipase ... causes rapid breakdown of triglycerides and mobilization of fatty acids”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.78 (Insulin, Glucagon, and Diabetes Mellitus) §Role
+    of Insulin (and Other Hormones) in Switching: “it also has a direct lipolytic effect on the adipose
+    cells because it activates adipose tissue hormone-sensitive lipase, thus greatly enhancing the blood
+    concentration of fatty acids”'
+  epinephrine->total_peripheral_resistance:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.21 (Muscle Blood Flow and Cardiac Output During Exercise;
+    the Coronary Circulation and Ischemic Heart Disease) §Sympathetic Vasoconstrictor Nerves: “The epinephrine,
+    however, often has a slight vasodilator effect because epinephrine excites more of the beta adrenergic
+    receptors of the vessels, which are vasodilator receptors”'
+  erythrocyte_23_bpg->hemoglobin_o2_saturation:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.40 (Transport of Oxygen and Carbon Dioxide in Blood
+    and Tissue Fluids) §Effect of BPG: “the quantity of BPG in the blood increases considerably, thus
+    shifting the oxygen-hemoglobin dissociation curve even farther to the right”'
+  erythropoietin->red_cell_mass:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.31 (Kidney Diseases and Diuretics) §Anemia in Chronic
+    Renal Failure Caused by Decreased Erythropoietin Secretion: “decreased renal secretion of erythropoietin,
+    which stimulates the bone marrow to produce red blood cells”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.32 (Red Blood Cells, Anemia, and Polycythemia) §Effect
+    of Erythropoietin in Erythrogenesis: “the important effect of erythropoietin is to stimulate the production
+    of proerythroblasts from hematopoietic stem cells in the bone marrow”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.74 (Introduction to Endocrinology) §Table 74-1 (Kidney):
+    “Erythropoietin Increases erythrocyte production”'
+  estradiol->lh:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.74 (Introduction to Endocrinology) §Surges of Hormones
+    Can Occur with Positive Feedback: “the surge of luteinizing hormone (LH) that occurs as a result of
+    the stimulatory effect of estrogen on the anterior pituitary before ovulation”'
+  extracellular_fluid_volume->blood_volume:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.19 (Dominant Role of the Kidney in Long-Term Pressure
+    Control) §Increased Fluid Volume Can Elevate Arterial Pressure: “increased extracellular fluid volume
+    (2) increases the blood volume, which (3) increases the mean circulatory filling pressure”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.22 (Cardiac Failure) §Moderate Fluid Retention in
+    Cardiac Failure Can Be Beneficial: “a moderate increase in body fluid and blood volume is an important
+    factor”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.29 (Renal Regulation of Potassium, Calcium, Phosphate,
+    and Magnesium; Integration of Renal Mechanisms for Control of Blood Volume and Extracellular Fluid
+    Volume) §Distribution of Extracellular Fluid: “blood volume and extracellular fluid volume are usually
+    controlled in parallel with each other”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.77 (Adrenocortical Hormones) §Mineralocorticoid Deficiency:
+    “the total extracellular fluid volume and blood volume become greatly reduced”'
+  fibrin_clot->plasmin_fibrinolysis:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.36 (Hemostasis and Blood Coagulation) §Activation
+    of Plasminogen to Form Plasmin: “When a clot is formed, a large amount of plasminogen is trapped in
+    the clot... eventually converts plasminogen to plasmin”'
+  follicular_pka_activity->tpo_nis_organification_capacity:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.76 (Thyroid Metabolic Hormones) §Cyclic Adenosine
+    Monophosphate Mediates the Stimulatory Effect of TSH: “the cAMP acts as a second messenger to activate
+    protein kinase, which causes multiple phosphorylations throughout the cell. The result is both an
+    immediate increase in secretion of thyroid hormones”'
+  food_intake->body_weight:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.71 (Dietary Balances; Regulation of Feeding; Obesity
+    and Starvation; Vitamins and Minerals) §Energy Intake and Output Are Balanced: “When a person is overfed
+    and energy intake persistently exceeds expenditure, most of the excess energy is stored as fat, and
+    body weight increases”'
+  food_intake->ghrelin:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.71 (Dietary Balances; Regulation of Feeding; Obesity
+    and Starvation; Vitamins and Minerals) §Ghrelin—a Gastrointestinal Hormone—Increases Feeding: “Blood
+    levels of ghrelin rise during fasting, peak just before eating, and then fall rapidly after a meal”'
+  free_t3->beta1_adrenergic_chronotropic_responsiveness:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.76 (Thyroid Metabolic Hormones) §Increased Heart Rate:
+    “thyroid hormone seems to have a direct effect on the excitability of the heart, which in turn increases
+    the heart rate”'
+  free_t3->cardiac_output:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.76 (Thyroid Metabolic Hormones) §Increased Blood Flow
+    and Cardiac Output: “As a consequence of the increased blood flow, cardiac output also increases,
+    sometimes rising to 60 per cent or more above normal”'
+  free_t3->metabolic_rate:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.72 (Energetics and Metabolic Rate) §Thyroid Hormone
+    Increases Metabolic Rate: “thyroxine increases the rates of the chemical reactions of many cells in
+    the body and therefore increases metabolic rate”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.73 (Body Temperature, Temperature Regulation, and
+    Fever) §Increased Thyroxine Output as a Long-Term Cause of Increased Heat Production: “The increased
+    thyroxine increases the rate of cellular metabolism throughout the body, which is yet another mechanism
+    of chemical thermogenesis.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.76 (Thyroid Metabolic Hormones) §Increased Basal Metabolic
+    Rate: “thyroid hormone increases metabolism in almost all cells of the body, excessive quantities
+    of the hormone can... increase the basal metabolic rate 60 to 100 per cent above normal”'
+  free_t3->sa_node_automaticity:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.76 (Thyroid Metabolic Hormones) §Increased Heart Rate:
+    “thyroid hormone seems to have a direct effect on the excitability of the heart, which in turn increases
+    the heart rate”'
+  free_t3->tsh:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.76 (Thyroid Metabolic Hormones) §Feedback Effect of
+    Thyroid Hormone to Decrease Anterior Pituitary Secretion of TSH: “increased thyroid hormone inhibits
+    anterior pituitary secretion of TSH mainly by a direct effect on the anterior pituitary gland itself”'
+  free_t4->free_t3:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.76 (Thyroid Metabolic Hormones) §Most of the Thyroxine
+    Secreted by the Thyroid Is Converted to Triiodothyronine: “one iodide is removed from almost all the
+    thyroxine, thus forming triiodothyronine”'
+  free_t4->trh:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.76 (Thyroid Metabolic Hormones) §Feedback Effect of
+    Thyroid Hormone to Decrease Anterior Pituitary Secretion of TSH: “Increased thyroid hormone in the
+    body fluids decreases secretion of TSH by the anterior pituitary.”'
+  free_t4->tsh:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.76 (Thyroid Metabolic Hormones) §Feedback Effect of
+    Thyroid Hormone to Decrease Anterior Pituitary Secretion of TSH: “Increased thyroid hormone in the
+    body fluids decreases secretion of TSH by the anterior pituitary.”'
+  fsh->estradiol:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.74 (Introduction to Endocrinology) §Table 74-1 (Anterior
+    pituitary): “Luteinizing hormone (LH) Stimulates ... formation of corpus luteum, and estrogen and
+    progesterone synthesis in ovaries”'
+  fsh->inhibin:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.80 (Reproductive and Hormonal Functions of the Male
+    (and Function of the Pineal Gland)) §Negative Feedback Control of Seminiferous Tubule Activity: “secretion
+    by the Sertoli cells of still another hormone called inhibin”'
+  fsh->spermatogenesis_rate:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.74 (Introduction to Endocrinology) §Table 74-1 (Anterior
+    pituitary): “Follicle-stimulating hormone (FSH) Causes growth of follicles in the ovaries and sperm
+    maturation in Sertoli cells of testes”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.80 (Reproductive and Hormonal Functions of the Male
+    (and Function of the Pineal Gland)) §Hormonal Factors That Stimulate Spermatogenesis: “Follicle-stimulating
+    hormone ... stimulates the Sertoli cells; without this stimulation, the conversion of the spermatids
+    to sperm ... will not occur”'
+  gallbladder_bile_secretion->intestinal_lipid_emulsification:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.68 (Lipid Metabolism) §Specific Uses of Cholesterol
+    in the Body: “this is conjugated with other substances to form bile salts, which promote digestion
+    and absorption of fats”'
+  gastric_acid_secretion->gastric_pepsin_activity:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.66 (Physiology of Gastrointestinal Disorders) §Achlorhydria
+    (and Hypochlorhydria): “When acid is not secreted, pepsin also usually is not secreted; even when
+    it is, the lack of acid prevents it from functioning because pepsin requires an acid medium for activity”'
+  gastrin->gastric_acid_secretion:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.74 (Introduction to Endocrinology) §Table 74-1 (Stomach):
+    “Gastrin Stimulates HCl secretion by parietal cells”'
+  gfr->blood_urea_nitrogen:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.31 (Kidney Diseases and Diuretics) §Uremia—Increase
+    in Urea and Other Nonprotein Nitrogens: “the concentrations rise approximately in proportion to the
+    degree of reduction in functional nephrons”'
+  gfr->plasma_creatinine:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.31 (Kidney Diseases and Diuretics) §Nephron Function
+    in Chronic Renal Failure: “if GFR decreases, the creatinine excretion rate also transiently decreases,
+    causing accumulation of creatinine in the body fluids and raising plasma concentration”'
+  gfr->sodium_excretion:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.26 (Urine Formation by the Kidneys: I. Glomerular
+    Filtration, Renal Blood Flow, and Their Control) §Filtration, Reabsorption, and Secretion of Different
+    Substances: “an increase in glomerular filtration rate (GFR) of only 10 per cent (from 180 to 198
+    L/day) would raise urine volume 13-fold”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.27 (Urine Formation by the Kidneys: II. Tubular Reabsorption
+    and Secretion) §Effect of Arterial Pressure on Urine Output: “The slight increase in GFR that does
+    occur contributes in part to the effect of increased arterial pressure on urine output.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.29 (Renal Regulation of Potassium, Calcium, Phosphate,
+    and Magnesium; Integration of Renal Mechanisms for Control of Blood Volume and Extracellular Fluid
+    Volume) §Sodium Excretion Is Controlled by Altering Glomerular Filtration: “Excretion = Glomerular
+    filtration - Tubular reabsorption”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.31 (Kidney Diseases and Diuretics) §Prerenal Acute
+    Renal Failure: “decreased renal blood flow is usually accompanied by decreased GFR and decreased urine
+    output of water and solutes”'
+  ghrelin->hypothalamic_appetite_drive:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.71 (Dietary Balances; Regulation of Feeding; Obesity
+    and Starvation; Vitamins and Minerals) §Ghrelin—a Gastrointestinal Hormone—Increases Feeding: “Ghrelin
+    is released by the stomach, especially during fasting, and stimulates appetite.”'
+  ghrh->pituitary_gh:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.74 (Introduction to Endocrinology) §Table 74-1 (Hypothalamus):
+    “Growth hormone-releasing hormone (GHRH) Causes release of growth hormone”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.75 (Pituitary Hormones and Their Control by the Hypothalamus)
+    §Hypothalamic Releasing and Inhibitory Hormones: “Growth hormone–releasing hormone (GHRH), which causes
+    release of growth hormone”'
+  gip->plasma_insulin:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.78 (Insulin, Glucagon, and Diabetes Mellitus) §Gastrointestinal
+    Hormones: “A mixture of several important gastrointestinal hormones-gastrin, secretin, cholecystokinin,
+    and gastric inhibitory peptide... causes a moderate increase in insulin secretion”'
+  glp1->plasma_insulin:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.78 (Insulin, Glucagon, and Diabetes Mellitus) §Gastrointestinal
+    Hormones: “These gastrointestinal hormones generally act the same way as amino acids to increase the
+    sensitivity of insulin response to increased blood glucose”'
+  gnrh->fsh:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.74 (Introduction to Endocrinology) §Table 74-1 (Hypothalamus):
+    “Gonadotropin-releasing hormone (GnRH) Causes release of LH and FSH”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.80 (Reproductive and Hormonal Functions of the Male
+    (and Function of the Pineal Gland)) §GnRH and Its Effect in Increasing the Secretion of LH and FSH:
+    “GnRH ... stimulates the release of the two gonadotropins, LH and FSH”'
+  gnrh->lh:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.74 (Introduction to Endocrinology) §Table 74-1 (Hypothalamus):
+    “Gonadotropin-releasing hormone (GnRH) Causes release of LH and FSH”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.80 (Reproductive and Hormonal Functions of the Male
+    (and Function of the Pineal Gland)) §GnRH and Its Effect in Increasing the Secretion of LH and FSH:
+    “GnRH ... stimulates the release of the two gonadotropins, LH and FSH”'
+  heart_rate->cardiac_output:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.9 (Heart Muscle; The Heart as a Pump and Function
+    of the Heart Valves) §Work Output of the Heart: “this is equal to the stroke work output times the
+    heart rate per minute.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.20 (Cardiac Output, Venous Return, and Their Regulation)
+    §Control of Cardiac Output by Venous Return: “stretching the heart causes the heart to pump faster—at
+    an increased heart rate... the stretched right atrium initiates a nervous reflex called the Bainbridge
+    reflex... to increase the heart rate.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.21 (Muscle Blood Flow and Cardiac Output During Exercise;
+    the Coronary Circulation and Ischemic Heart Disease) §Graphical Analysis of the Changes in Cardiac
+    Output During Heavy Exercise: “increased heart rate, often up to rates as high as 170 to 190 beats/min
+    ... Without this increased level of the output curve, the increase in cardiac output would be limited”'
+  hematocrit->blood_viscosity:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.14 (Overview of the Circulation; Medical Physics of
+    Pressure, Flow, and Resistance) §Effect of Hematocrit on Blood Viscosity: “The viscosity of blood
+    increases drastically as the hematocrit increases, as shown in Figure 14-12.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.32 (Red Blood Cells, Anemia, and Polycythemia) §Effects
+    of Anemia on Function of the Circulatory System: “The viscosity of the blood... depends almost entirely
+    on the blood concentration of red blood cells”'
+  hemoglobin_o2_saturation->arterial_o2_content:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.40 (Transport of Oxygen and Carbon Dioxide in Blood
+    and Tissue Fluids) §Maximum Amount of Oxygen That Can Combine with the Hemoglobin: “the 15 grams of
+    hemoglobin in 100 milliliters of blood can combine with a total of almost exactly 20 milliliters of
+    oxygen if the hemoglobin is 100 per cent saturated”'
+  hepatic_albumin_synthesis->plasma_albumin:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.25 (The Body Fluid Compartments: Extracellular and
+    Intracellular Fluids; Interstitial Fluid and Edema) §Edema Caused by Decreased Plasma Proteins: “failure
+    of these cells to produce sufficient plasma proteins, leading to decreased plasma colloid osmotic
+    pressure”'
+  hepatic_cholesterol_synthesis->hepatocyte_cholesterol_content:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.68 (Lipid Metabolism) §Formation of Cholesterol: “an
+    even greater quantity is formed in the cells of the body, called endogenous cholesterol ... formed
+    by the liver”'
+  hepatic_ketogenesis->plasma_ketone_bodies:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.68 (Lipid Metabolism) §Formation of Acetoacetic Acid
+    in the Liver: “two molecules of acetyl-CoA condense to form one molecule of acetoacetic acid, which
+    is then transported in the blood to the other cells”'
+  hepatic_ldl_receptor_activity->hepatocyte_cholesterol_content:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.68 (Lipid Metabolism) §Familial Hypercholesterolemia:
+    “In the absence of these receptors, the liver cannot absorb either intermediate-density or low-density
+    lipoproteins”'
+  hepatic_ldl_receptor_activity->ldl_cholesterol:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.68 (Lipid Metabolism) §Prevention of Atherosclerosis:
+    “statins ... decreases cholesterol synthesis and increases low-density lipoprotein receptors in the
+    liver, usually causing a 25 to 50 per cent reduction in plasma levels of low-density lipoproteins”'
+  hepatocyte_cholesterol_content->hepatic_cholesterol_synthesis:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.68 (Lipid Metabolism) §Factors That Affect Plasma
+    Cholesterol Concentration: “the rising concentration of cholesterol inhibits the most essential enzyme
+    for endogenous synthesis of cholesterol, 3-hydroxy-3-methylglutaryl CoA reductase”'
+  hypothalamic_appetite_drive->food_intake:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.71 (Dietary Balances; Regulation of Feeding; Obesity
+    and Starvation; Vitamins and Minerals) §The Hypothalamus Contains Hunger and Satiety Centers: “The
+    lateral nuclei of the hypothalamus serve as a feeding center, and stimulation of this area causes
+    an animal to eat voraciously (hyperphagia).”'
+  il1beta->core_temperature:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.73 (Body Temperature, Temperature Regulation, and
+    Fever) §Mechanism of Action of Pyrogens in Causing Fever—Role of Interleukin-1: “The interleukin-1,
+    on reaching the hypothalamus, immediately activates the processes to produce fever”'
+  inhibin->fsh:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.80 (Reproductive and Hormonal Functions of the Male
+    (and Function of the Pineal Gland)) §Role of the Hormone Inhibin: “This hormone has a strong direct
+    effect on the anterior pituitary gland to inhibit the secretion of FSH”'
+  interstitial_fluid_volume->lymph_drainage_rate:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.16 (The Microcirculation and the Lymphatic System:
+    Capillary Fluid Exchange, Interstitial Fluid, and Lymph Flow) §Effect of Interstitial Fluid Pressure
+    on Lymph Flow: “any factor that increases interstitial fluid pressure also increases lymph flow if
+    the lymph vessels are functioning normally”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.25 (The Body Fluid Compartments: Extracellular and
+    Intracellular Fluids; Interstitial Fluid and Edema) §Increased Lymph Flow as a Safety Factor Against
+    Edema: “lymph flow can increase 10- to 50-fold when fluid begins to accumulate in the tissues.”'
+  intracellular_atp->phosphofructokinase_activity:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.67 (Metabolism of Carbohydrates, and Formation of
+    Adenosine Triphosphate) §Effect of ATP and ADP Cell Concentrations in Controlling the Rate of Glycolysis:
+    “One important way in which ATP helps control energy metabolism is to inhibit the enzyme phosphofructokinase.”'
+  lean_body_mass->metabolic_rate:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.72 (Energetics and Metabolic Rate) §Basal Metabolic
+    Rate (BMR): “Skeletal muscle, even under resting conditions, accounts for 20 to 30 per cent of the
+    BMR.”'
+  left_atrial_pressure->end_diastolic_volume:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.9 (Heart Muscle; The Heart as a Pump and Function
+    of the Heart Valves) §Ventricular Function Curves: “as the ventricles fill in response to higher atrial
+    pressures, each ventricular volume and strength of cardiac muscle contraction increase”'
+  left_atrial_pressure->pulmonary_capillary_wedge_pressure:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.38 (Pulmonary Circulation, Pulmonary Edema, Pleural
+    Fluid) §Left Atrial and Pulmonary Venous Pressures: “When the left atrial pressure rises to high values,
+    the pulmonary wedge pressure also rises.”'
+  lepr_signaling->agrp_npy_tone:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.71 (Dietary Balances; Regulation of Feeding; Obesity
+    and Starvation; Vitamins and Minerals) §Feedback Signals from Adipose Tissue Regulate Food Intake:
+    “Stimulation of leptin receptors in these hypothalamic nuclei initiates multiple actions that decrease
+    fat storage, including (1) decreased production in the hypothalamus of appetite stimulators, such
+    as NPY and AGRP”'
+  lepr_signaling->alpha_msh:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.71 (Dietary Balances; Regulation of Feeding; Obesity
+    and Starvation; Vitamins and Minerals) §Feedback Signals from Adipose Tissue Regulate Food Intake:
+    “(2) activation of POMC neurons, causing release of a-MSH and activation of melanocortin receptors”'
+  leptin->hypothalamic_appetite_drive:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.71 (Dietary Balances; Regulation of Feeding; Obesity
+    and Starvation; Vitamins and Minerals) §Feedback Signals from Adipose Tissue Regulate Food Intake:
+    “Leptin is a hormone produced in increasing amounts by fat cells as they increase in size; it inhibits
+    food intake.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.74 (Introduction to Endocrinology) §Table 74-1 (Adipocytes):
+    “Leptin Inhibits appetite, stimulates thermogenesis”'
+  leptin->metabolic_rate:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.71 (Dietary Balances; Regulation of Feeding; Obesity
+    and Starvation; Vitamins and Minerals) §Feedback Signals from Adipose Tissue Regulate Food Intake:
+    “(4) increased sympathetic nerve activity (through neural projections from the hypothalamus to the
+    vasomotor centers), which increases metabolic rate and energy expenditure”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.74 (Introduction to Endocrinology) §Table 74-1 (Adipocytes):
+    “Leptin Inhibits appetite, stimulates thermogenesis”'
+  lh->estradiol:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.74 (Introduction to Endocrinology) §Surges of Hormones
+    Can Occur with Positive Feedback: “The secreted LH then acts on the ovaries to stimulate additional
+    secretion of estrogen, which in turn causes more secretion of LH”'
+  lh->testosterone:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.74 (Introduction to Endocrinology) §Table 74-1 (Anterior
+    pituitary): “Luteinizing hormone (LH) Stimulates testosterone synthesis in Leydig cells of testes”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.80 (Reproductive and Hormonal Functions of the Male
+    (and Function of the Pineal Gland)) §Testosterone—Regulation of Its Production by LH: “Luteinizing
+    hormone, secreted by the anterior pituitary gland, stimulates the Leydig cells to secrete testosterone”'
+  lipolysis_rate->plasma_free_fatty_acids:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.68 (Lipid Metabolism) §Free Fatty Acids Are Transported
+    in the Blood: “It is transported mainly in the form of free fatty acids. This is achieved by hydrolysis
+    of the triglycerides back into fatty acids and glycerol”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.75 (Pituitary Hormones and Their Control by the Hypothalamus)
+    §Growth Hormone Enhances Fat Utilization: “the release of fatty acids from adipose tissue and, therefore,
+    increasing the concentration of fatty acids in the body fluids”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.78 (Insulin, Glucagon, and Diabetes Mellitus) §Insulin
+    Deficiency Causes Lipolysis of Storage Fat and Release of Free Fatty Acids: “the enzyme hormone-sensitive
+    lipase in the fat cells becomes strongly activated. This causes hydrolysis of the stored triglycerides,
+    releasing large quantities of fatty acids”'
+  lipoprotein_lipase_activity->plasma_chylomicrons:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.68 (Lipid Metabolism) §Removal of the Chylomicrons
+    from the Blood: “Most of the chylomicrons are removed from the circulating blood as they pass through
+    the capillaries of adipose tissue or the liver”'
+  lipoprotein_lipase_activity->plasma_triglycerides:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.68 (Lipid Metabolism) §Removal of the Chylomicrons
+    from the Blood: “the enzyme lipoprotein lipase ... hydrolyzes the triglycerides of chylomicrons as
+    they come in contact with the endothelial wall”'
+  lymphatic_flow->interstitial_fluid_volume:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.16 (The Microcirculation and the Lymphatic System:
+    Capillary Fluid Exchange, Interstitial Fluid, and Lymph Flow) §Role of the Lymphatic System in Controlling
+    Interstitial Fluid: “the return of protein and fluid by way of the lymphatic system becomes great
+    enough to balance exactly the rate of leakage of these into the interstitium”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.25 (The Body Fluid Compartments: Extracellular and
+    Intracellular Fluids; Interstitial Fluid and Edema) §Increased Lymph Flow as a Safety Factor Against
+    Edema: “the lymphatics to carry away large amounts of fluid and proteins ... preventing the interstitial
+    pressure from rising”'
+  macula_densa_nacl_signal->eg_mesangial_contraction:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.26 (Urine Formation by the Kidneys: I. Glomerular
+    Filtration, Renal Blood Flow, and Their Control) §Decreased Macula Densa Sodium Chloride Causes Dilation
+    of Afferent Arterioles and Increased Renin Release: “This decrease in sodium chloride concentration
+    ... decreases resistance to blood flow in the afferent arterioles, which raises glomerular hydrostatic
+    pressure”'
+  macula_densa_nacl_signal->jg_granular_renin_secretion:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.26 (Urine Formation by the Kidneys: I. Glomerular
+    Filtration, Renal Blood Flow, and Their Control) §Decreased Macula Densa Sodium Chloride Causes Dilation
+    of Afferent Arterioles and Increased Renin Release: “This decrease in sodium chloride concentration
+    ... increases renin release from the juxtaglomerular cells of the afferent and efferent arterioles”'
+  mean_arterial_pressure->adh:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.28 (Regulation of Extracellular Fluid Osmolarity and
+    Sodium Concentration) §Cardiovascular Reflex Stimulation of ADH Release: “two other stimuli increase
+    ADH secretion: (1) decreased arterial pressure and (2) decreased blood volume”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.75 (Pituitary Hormones and Their Control by the Hypothalamus)
+    §Increased ADH Secretion Caused by Low Blood Volume: “Decreased stretch of the baroreceptors of the
+    carotid, aortic, and pulmonary regions also stimulates ADH secretion”'
+  mean_arterial_pressure->baroreceptor_firing_rate:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.18 (Nervous Regulation of the Circulation, and Rapid
+    Control of Arterial Pressure) §The Baroreceptor Arterial Pressure Control System: “A rise in arterial
+    pressure stretches the baroreceptors and causes them to transmit signals into the central nervous
+    system.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.24 (Circulatory Shock and Physiology of Its Treatment)
+    §Sympathetic Reflex Compensations in Shock: “The decrease in arterial pressure after hemorrhage...causes
+    powerful sympathetic reflexes (initiated mainly by the arterial baroreceptors”'
+  mean_arterial_pressure->coronary_blood_flow:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.21 (Muscle Blood Flow and Cardiac Output During Exercise;
+    the Coronary Circulation and Ischemic Heart Disease) §Why Is the Arterial Pressure Increase During
+    Exercise Important?: “This 30 per cent increase causes 30 per cent more force to push blood through
+    the muscle tissue vessels”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.22 (Cardiac Failure) §Vicious Circle of Cardiac Deterioration
+    in Cardiogenic Shock: “the low arterial pressure that occurs during shock reduces the coronary blood
+    supply even more”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.24 (Circulatory Shock and Physiology of Its Treatment)
+    §Cardiac Depression: “When the arterial pressure falls low enough, coronary blood flow decreases below
+    that required for adequate nutrition of the myocardium.”'
+  mean_arterial_pressure->renal_perfusion_pressure:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.19 (Dominant Role of the Kidney in Long-Term Pressure
+    Control) §Renal-Body Fluid System: “The rising pressure in turn has a direct effect to cause the kidneys
+    to excrete the excess extracellular fluid”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.29 (Renal Regulation of Potassium, Calcium, Phosphate,
+    and Magnesium; Integration of Renal Mechanisms for Control of Blood Volume and Extracellular Fluid
+    Volume) §Importance of Pressure Natriuresis: “the effect of blood pressure on sodium and water excretion—called
+    the pressure natriuresis and pressure diuresis mechanisms”'
+  mean_arterial_pressure->sympathetic_tone:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.29 (Renal Regulation of Potassium, Calcium, Phosphate,
+    and Magnesium; Integration of Renal Mechanisms for Control of Blood Volume and Extracellular Fluid
+    Volume) §Sympathetic Nervous System Control of Renal Excretion: “further activation of the sympathetic
+    nervous system occurs because of decreased stretch of the arterial baroreceptors located in the carotid
+    sinus and aortic arch”'
+  metabolic_heat_production->core_temperature:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.73 (Body Temperature, Temperature Regulation, and
+    Fever) §Body Temperature Is Controlled by Balancing Heat Production Against Heat Loss: “When the rate
+    of heat production in the body is greater than the rate at which heat is being lost, heat builds up
+    in the body and the body temperature rises.”'
+  metabolic_rate->arterial_pco2:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.30 (Regulation of Acid-Base Balance) §Pulmonary Expiration
+    of CO2 Balances Metabolic Formation of CO2: “If the rate of metabolic formation of CO2 increases,
+    the Pco2 of the extracellular fluid is likewise increased.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.41 (Regulation of Respiration) §Control of Overall
+    Respiratory Center Activity: “during heavy exercise, the rates of oxygen usage and carbon dioxide
+    formation are often increased to as much as 20 times normal”'
+  myocardial_contractility->stroke_volume:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.9 (Heart Muscle; The Heart as a Pump and Function
+    of the Heart Valves) §Mechanisms of Excitation of the Heart by the Sympathetic Nerves: “sympathetic
+    stimulation increases the force of heart contraction to as much as double normal, thereby increasing
+    the volume of blood pumped”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.21 (Muscle Blood Flow and Cardiac Output During Exercise;
+    the Coronary Circulation and Ischemic Heart Disease) §Graphical Analysis of the Changes in Cardiac
+    Output During Heavy Exercise: “increased strength of contraction of the heart, often to as much as
+    twice normal”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.22 (Cardiac Failure) §Compensation for Acute Cardiac
+    Failure by Sympathetic Nervous Reflexes: “the heart, one way or another, becomes a stronger pump”'
+  net_filtration_pressure->interstitial_fluid_volume:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.16 (The Microcirculation and the Lymphatic System:
+    Capillary Fluid Exchange, Interstitial Fluid, and Lymph Flow) §Four Primary Hydrostatic and Colloid
+    Osmotic Forces: “If the sum of these forces, the net filtration pressure, is positive, there will
+    be a net fluid filtration across the capillaries.”'
+  nis_activity->thyroid_follicular_t4_secretion:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.76 (Thyroid Metabolic Hormones) §TSH (from the Anterior
+    Pituitary Gland) Increases Thyroid Secretion: “Increased activity of the iodide pump, which increases
+    the rate of "iodide trapping" in the glandular cells”'
+  norepinephrine->plasma_free_fatty_acids:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.68 (Lipid Metabolism) §Hormonal Regulation of Fat
+    Utilization: “epinephrine and norepinephrine ... directly activate hormone-sensitive triglyceride
+    lipase ... the free fatty acid concentration in the blood ... rises as much as eightfold”'
+  norepinephrine->total_peripheral_resistance:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.17 (Local and Humoral Control of Blood Flow by the
+    Tissues) §Norepinephrine and Epinephrine: “Norepinephrine is an especially powerful vasoconstrictor
+    hormone ... the sympathetic nerve endings in the individual tissues release norepinephrine, which
+    excites the heart and contracts the veins and arterioles.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.18 (Nervous Regulation of the Circulation, and Rapid
+    Control of Arterial Pressure) §Norepinephrine—The Sympathetic Vasoconstrictor Transmitter Substance:
+    “Norepinephrine acts directly on the alpha adrenergic receptors of the vascular smooth muscle to cause
+    vasoconstriction”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.21 (Muscle Blood Flow and Cardiac Output During Exercise;
+    the Coronary Circulation and Ischemic Heart Disease) §Sympathetic Vasoconstrictor Nerves: “The circulating
+    norepinephrine acts on the muscle vessels to cause a vasoconstrictor effect similar to that caused
+    by direct sympathetic nerve stimulation”'
+  osteoclast_activity->osteoblast_activity:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.79 (Parathyroid Hormone, Calcitonin, Calcium and Phosphate
+    Metabolism, Vitamin D, Bone, and Teeth) §Slow Phase of Bone Absorption-Activation of the Osteoclasts:
+    “osteoclastic resorption of bone leads secondarily to osteoblastic activity”'
+  pancreatic_bicarbonate_secretion->duodenal_chyme_acidity:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.66 (Physiology of Gastrointestinal Disorders) §Peptic
+    Ulcer / Basic Cause of Peptic Ulceration: “pancreatic secretion, which contains large quantities of
+    sodium bicarbonate that neutralize the hydrochloric acid of the gastric juice”'
+  parasympathetic_tone->heart_rate:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.9 (Heart Muscle; The Heart as a Pump and Function
+    of the Heart Valves) §Parasympathetic (Vagal) Stimulation of the Heart: “This explains the effect
+    of vagal stimulation mainly to decrease heart rate rather than to decrease greatly the strength of
+    heart contraction.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.10 (Rhythmical Excitation of the Heart) §Parasympathetic
+    (Vagal) Stimulation: “it decreases the rate of rhythm of the sinus node”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.10 (Rhythmical Excitation of the Heart) §Parasympathetic
+    (Vagal) Stimulation: “Weak to moderate vagal stimulation slows the rate of heart pumping, often to
+    as little as one half normal.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.18 (Nervous Regulation of the Circulation, and Rapid
+    Control of Arterial Pressure) §Parasympathetic Control of Heart Function: “parasympathetic stimulation
+    causes a marked decrease in heart rate and a slight decrease in heart muscle contractility.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.21 (Muscle Blood Flow and Cardiac Output During Exercise;
+    the Coronary Circulation and Ischemic Heart Disease) §Nervous Control of Coronary Blood Flow: “vagal
+    stimulation, with its release of acetylcholine, slows the heart and has a slight depressive effect
+    on heart contractility”'
+  peripheral_glucose_uptake->plasma_glucose:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.74 (Introduction to Endocrinology) §Coordination of
+    Body Functions: “without insulin from the pancreas, the body''s cells could use little of the food
+    carbohydrates for energy”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.78 (Insulin, Glucagon, and Diabetes Mellitus) §Feedback
+    Relation Between Blood Glucose Concentration and Insulin Secretion Rate: “the insulin in turn increases
+    transport of glucose into liver, muscle, and other cells, thereby reducing the blood glucose concentration
+    back toward the normal value”'
+  pituitary_gh->hepatic_glucose_production:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.75 (Pituitary Hormones and Their Control by the Hypothalamus)
+    §Growth Hormone Decreases Carbohydrate Utilization: “Growth hormone causes multiple effects ... (2)
+    increased glucose production by the liver”'
+  pituitary_gh->hepatic_igf1:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.75 (Pituitary Hormones and Their Control by the Hypothalamus)
+    §Somatomedins: “growth hormone causes the liver (and, to a much less extent, other tissues) to form
+    several small proteins called somatomedins”'
+  pituitary_gh->lean_body_mass:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.75 (Pituitary Hormones and Their Control by the Hypothalamus)
+    §Growth Hormone Enhances Fat Utilization: “Growth hormone''s ability to promote fat utilization, together
+    with its protein anabolic effect, causes an increase in lean body mass”'
+  pituitary_gh->metabolic_rate:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.72 (Energetics and Metabolic Rate) §Growth Hormone
+    Increases Metabolic Rate: “Growth hormone can increase the metabolic rate 15 to 20 per cent as a result
+    of direct stimulation of cellular metabolism.”'
+  pituitary_gh->peripheral_glucose_uptake:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.75 (Pituitary Hormones and Their Control by the Hypothalamus)
+    §Growth Hormone Decreases Carbohydrate Utilization: “(1) decreased glucose uptake in tissues such
+    as skeletal muscle and fat”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.78 (Insulin, Glucagon, and Diabetes Mellitus) §Role
+    of Insulin (and Other Hormones) in Switching: “Both growth hormone and cortisol are secreted in response
+    to hypoglycemia, and both inhibit cellular utilization of glucose while promoting fat utilization”'
+  plasma_25oh_vitamin_d->calcitriol:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.79 (Parathyroid Hormone, Calcitonin, Calcium and Phosphate
+    Metabolism, Vitamin D, Bone, and Teeth) §Formation of 1,25-Dihydroxycholecalciferol in the Kidneys:
+    “the conversion in the proximal tubules of the kidneys of 25-hydroxycholecalciferol to 1,25-dihydroxycholecalciferol”'
+  plasma_5_methyltetrahydrofolate->erythroblast_proliferation:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.32 (Red Blood Cells, Anemia, and Polycythemia) §Failure
+    of Maturation Caused by Deficiency of Folic Acid: “loss of any one of these can lead to slow reproduction
+    of erythroblasts in the bone marrow”'
+  plasma_albumin->blood_colloidal_osmotic_pressure:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.16 (The Microcirculation and the Lymphatic System:
+    Capillary Fluid Exchange, Interstitial Fluid, and Lymph Flow) §Effect of the Different Plasma Proteins
+    on Colloid Osmotic Pressure: “about 80 per cent of the total colloid osmotic pressure of the plasma
+    results from the albumin fraction”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.25 (The Body Fluid Compartments: Extracellular and
+    Intracellular Fluids; Interstitial Fluid and Edema) §Edema Caused by Decreased Plasma Proteins: “A
+    reduction in plasma concentration of proteins ... causes the plasma colloid osmotic pressure to fall.”'
+  plasma_albumin->plasma_oncotic_pressure:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.16 (The Microcirculation and the Lymphatic System:
+    Capillary Fluid Exchange, Interstitial Fluid, and Lymph Flow) §Plasma Colloid Osmotic Pressure: “Proteins
+    in the Plasma Cause Colloid Osmotic Pressure... it is mainly albumin that is important.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.25 (The Body Fluid Compartments: Extracellular and
+    Intracellular Fluids; Interstitial Fluid and Edema) §Edema Caused by Decreased Plasma Proteins: “A
+    reduction in plasma concentration of proteins ... causes the plasma colloid osmotic pressure to fall.”'
+  plasma_bicarbonate->arterial_ph:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.30 (Regulation of Acid-Base Balance) §Henderson-Hasselbalch
+    Equation: “an increase in HCO3- concentration causes the pH to rise, shifting the acid-base balance
+    toward alkalosis.”'
+  plasma_bicarbonate->urine_bicarbonate:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.30 (Regulation of Acid-Base Balance) §Alkalosis Increases
+    the Ratio of HCO3-/H+ in Renal Tubular Fluid: “the increase in HCO3- concentration in the extracellular
+    fluid leads to an increase in the filtered load of HCO3-... and it is excreted in the urine.”'
+  plasma_calcitonin->plasma_calcium:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.74 (Introduction to Endocrinology) §Table 74-1 (Thyroid):
+    “Calcitonin Promotes deposition of calcium in the bones and decreases extracellular fluid calcium
+    ion concentration”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.79 (Parathyroid Hormone, Calcitonin, Calcium and Phosphate
+    Metabolism, Vitamin D, Bone, and Teeth) §Calcitonin Decreases Plasma Calcium Concentration: “Calcitonin...
+    tends to decrease plasma calcium concentration and, in general, has effects opposite to those of PTH”'
+  plasma_calcium->parafollicular_cell_calcitonin_secretion:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.79 (Parathyroid Hormone, Calcitonin, Calcium and Phosphate
+    Metabolism, Vitamin D, Bone, and Teeth) §Increased Plasma Calcium Concentration Stimulates Calcitonin
+    Secretion: “an increase in plasma calcium concentration of about 10 per cent causes an immediate twofold
+    or more increase in the rate of secretion of calcitonin”'
+  plasma_calcium->plasma_calcitonin:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.79 (Parathyroid Hormone, Calcitonin, Calcium and Phosphate
+    Metabolism, Vitamin D, Bone, and Teeth) §Increased Plasma Calcium Concentration Stimulates Calcitonin
+    Secretion: “The primary stimulus for calcitonin secretion is increased plasma calcium ion concentration”'
+  plasma_calcium->pth:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.29 (Renal Regulation of Potassium, Calcium, Phosphate,
+    and Magnesium; Integration of Renal Mechanisms for Control of Blood Volume and Extracellular Fluid
+    Volume) §Control of Renal Calcium Excretion: “When calcium ion concentration falls below normal, the
+    parathyroid glands are directly stimulated by the low calcium levels to promote increased secretion
+    of PTH”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.79 (Parathyroid Hormone, Calcitonin, Calcium and Phosphate
+    Metabolism, Vitamin D, Bone, and Teeth) §Control of Parathyroid Secretion by Calcium Ion Concentration:
+    “Even the slightest decrease in calcium ion concentration in the extracellular fluid causes the parathyroid
+    glands to increase their rate of secretion within minutes”'
+  plasma_calcium->urinary_calcium:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.29 (Renal Regulation of Potassium, Calcium, Phosphate,
+    and Magnesium; Integration of Renal Mechanisms for Control of Blood Volume and Extracellular Fluid
+    Volume) §Control of Calcium Excretion by the Kidneys: “With an increase in calcium intake, there is
+    also increased renal calcium excretion”'
+  plasma_cck->gallbladder_bile_secretion:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.74 (Introduction to Endocrinology) §Table 74-1 (Small
+    intestine): “Cholecystokinin (CCK) Stimulates gallbladder contraction and release of pancreatic enzymes”'
+  plasma_free_fatty_acids->hepatic_ketogenesis:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.68 (Lipid Metabolism) §Formation of Acetoacetic Acid
+    in the Liver: “tremendous quantities of fatty acids become available ... to the liver cells, where
+    much of the fatty acids is converted to ketone bodies”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.78 (Insulin, Glucagon, and Diabetes Mellitus) §Excess
+    Usage of Fats During Insulin Lack Causes Ketosis and Acidosis: “in the presence of excess fatty acids
+    in the liver cells, the carnitine transport mechanism... beta oxidation of the fatty acids then proceeds
+    very rapidly, releasing extreme amounts of acetyl-CoA”'
+  plasma_glucagon->hepatic_gluconeogenesis:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.78 (Insulin, Glucagon, and Diabetes Mellitus) §Glucagon
+    Increases Gluconeogenesis: “glucagon to increase the rate of amino acid uptake by the liver cells
+    and then the conversion of many of the amino acids to glucose by gluconeogenesis”'
+  plasma_glucagon->hepatic_glucose_production:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.74 (Introduction to Endocrinology) §Table 74-1 (Pancreas):
+    “Glucagon (a cells) Increases synthesis and release of glucose from the liver into the body fluids”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.78 (Insulin, Glucagon, and Diabetes Mellitus) §Effects
+    on Glucose Metabolism: “The major effects of glucagon on glucose metabolism are (1) breakdown of liver
+    glycogen (glycogenolysis) and (2) increased gluconeogenesis in the liver”'
+  plasma_glucagon->hepatic_glycogenolysis:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.67 (Metabolism of Carbohydrates, and Formation of
+    Adenosine Triphosphate) §Activation of Phosphorylase by Epinephrine or by Glucagon: “this in turn
+    promotes conversion of liver glycogen into glucose and its release into the blood, thereby elevating
+    the blood glucose concentration.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.74 (Introduction to Endocrinology) §Table 74-1 (Pancreas):
+    “Glucagon (a cells) Increases synthesis and release of glucose from the liver into the body fluids”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.78 (Insulin, Glucagon, and Diabetes Mellitus) §Glucagon
+    Causes Glycogenolysis and Increased Blood Glucose Concentration: “The most dramatic effect of glucagon
+    is its ability to cause glycogenolysis in the liver, which in turn increases the blood glucose concentration
+    within minutes”'
+  plasma_glucagon->hepatic_ketogenesis:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.68 (Lipid Metabolism) §Ketosis in Starvation, Diabetes:
+    “increased secretion of glucagon by the pancreas ... further enhance the removal of fatty acids from
+    the fat tissues ... converted to ketone bodies”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.78 (Insulin, Glucagon, and Diabetes Mellitus) §Other
+    Effects of Glucagon: “glucagon activates adipose cell lipase... Glucagon also inhibits the storage
+    of triglycerides in the liver, which prevents the liver from removing fatty acids from the blood”'
+  plasma_glucose->hypothalamic_appetite_drive:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.71 (Dietary Balances; Regulation of Feeding; Obesity
+    and Starvation; Vitamins and Minerals) §Effect of Blood Concentrations of Glucose, Amino Acids, and
+    Lipids on Hunger: “a decrease in blood glucose concentration causes hunger, which has led to the so-called
+    glucostatic theory of hunger and feeding regulation”'
+  plasma_glucose->pituitary_gh:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.75 (Pituitary Hormones and Their Control by the Hypothalamus)
+    §Regulation of Growth Hormone Secretion: “Stimulate Growth Hormone Secretion: Decreased blood glucose
+    ... Inhibit Growth Hormone Secretion: Increased blood glucose”'
+  plasma_glucose->plasma_glucagon:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.67 (Metabolism of Carbohydrates, and Formation of
+    Adenosine Triphosphate) §Activation of Phosphorylase by Epinephrine or by Glucagon: “Glucagon is a
+    hormone secreted by the alpha cells of the pancreas when the blood glucose concentration falls too
+    low.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.78 (Insulin, Glucagon, and Diabetes Mellitus) §Increased
+    Blood Glucose Inhibits Glucagon Secretion: “increasing the blood glucose to hyperglycemic levels decreases
+    plasma glucagon”'
+  plasma_glucose->plasma_insulin:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.78 (Insulin, Glucagon, and Diabetes Mellitus) §Feedback
+    Relation Between Blood Glucose Concentration and Insulin Secretion Rate: “any rise in blood glucose
+    increases insulin secretion, and the insulin in turn increases transport of glucose into liver, muscle,
+    and other cells”'
+  plasma_glucose->urinary_glucose:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.78 (Insulin, Glucagon, and Diabetes Mellitus) §Increased
+    Blood Glucose Causes Loss of Glucose in the Urine: “The high blood glucose causes more glucose to
+    filter into the renal tubules than can be reabsorbed, and the excess glucose spills into the urine”'
+  plasma_heparin->antithrombin:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.36 (Hemostasis and Blood Coagulation) §Heparin: “when
+    it combines with antithrombin III, the effectiveness of antithrombin III for removing thrombin increases
+    by a hundredfold to a thousandfold”'
+  plasma_histamine->capillary_permeability:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.17 (Local and Humoral Control of Blood Flow by the
+    Tissues) §Histamine: “Histamine has a powerful vasodilator effect on the arterioles and, like bradykinin,
+    has the ability to increase greatly capillary porosity.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.24 (Circulatory Shock and Physiology of Its Treatment)
+    §Anaphylactic Shock and Histamine Shock: “greatly increased capillary permeability, with rapid loss
+    of fluid and protein into the tissue spaces.”'
+  plasma_histamine->total_peripheral_resistance:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.17 (Local and Humoral Control of Blood Flow by the
+    Tissues) §Histamine: “Histamine has a powerful vasodilator effect on the arterioles ... the intense
+    arteriolar dilation ... produced by histamine.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.24 (Circulatory Shock and Physiology of Its Treatment)
+    §Anaphylactic Shock and Histamine Shock: “dilation of the arterioles, resulting in greatly reduced
+    arterial pressure”'
+  plasma_insulin->cellular_potassium_uptake:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.29 (Renal Regulation of Potassium, Calcium, Phosphate,
+    and Magnesium; Integration of Renal Mechanisms for Control of Blood Volume and Extracellular Fluid
+    Volume) §Insulin Stimulates Potassium Uptake into Cells: “One of the most important factors that increase
+    cell potassium uptake after a meal is insulin”'
+  plasma_insulin->hepatic_gluconeogenesis:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.78 (Insulin, Glucagon, and Diabetes Mellitus) §Insulin
+    Promotes Conversion of Excess Glucose into Fatty Acids and Inhibits Gluconeogenesis in the Liver:
+    “Insulin also inhibits gluconeogenesis. It does this mainly by decreasing the quantities and activities
+    of the liver enzymes required for gluconeogenesis”'
+  plasma_insulin->hepatic_glucose_production:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.78 (Insulin, Glucagon, and Diabetes Mellitus) §Glucose
+    Is Released from the Liver Between Meals: “The lack of insulin then reverses all the effects listed
+    earlier for glycogen storage... activates the enzyme phosphorylase, which causes the splitting of
+    glycogen into glucose”'
+  plasma_insulin->hepatic_glycogenolysis:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.78 (Insulin, Glucagon, and Diabetes Mellitus) §Insulin
+    Promotes Liver Uptake, Storage, and Use of Glucose: “Insulin inactivates liver phosphorylase, the
+    principal enzyme that causes liver glycogen to split into glucose. This prevents breakdown of the
+    glycogen”'
+  plasma_insulin->hepatic_ketogenesis:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.78 (Insulin, Glucagon, and Diabetes Mellitus) §Excess
+    Usage of Fats During Insulin Lack Causes Ketosis and Acidosis: “Insulin lack also causes excessive
+    amounts of acetoacetic acid to be formed in the liver cells”'
+  plasma_insulin->hepatic_lipogenesis:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.68 (Lipid Metabolism) §Failure to Synthesize Fats
+    from Carbohydrates in the Absence of Insulin: “When no insulin is available ... fats are poorly synthesized,
+    if at all ... little of the acetyl-CoA and NADPH needed for fat synthesis can be derived from glucose”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.78 (Insulin, Glucagon, and Diabetes Mellitus) §Insulin
+    Promotes Fat Synthesis and Storage: “insulin promotes the conversion of all this excess glucose into
+    fatty acids. These fatty acids are subsequently packaged as triglycerides”'
+  plasma_insulin->hypothalamic_appetite_drive:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.71 (Dietary Balances; Regulation of Feeding; Obesity
+    and Starvation; Vitamins and Minerals) §Neurons and Neurotransmitters in the Hypothalamus: “Insulin,
+    leptin, and cholecystokinin (CCK) are hormones that inhibit AGRP-NPY neurons and stimulate adjacent
+    POMC-CART neurons, thereby reducing food intake.”'
+  plasma_insulin->lipolysis_rate:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.68 (Lipid Metabolism) §Acceleration of Fat Utilization
+    in the Absence of Carbohydrates: “a marked decrease in pancreatic secretion of insulin caused by the
+    absence of carbohydrates ... decreases fat storage, which further shifts the equilibrium in favor
+    of fat metabolism”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.78 (Insulin, Glucagon, and Diabetes Mellitus) §Role
+    of Insulin in Storage of Fat in the Adipose Cells: “Insulin inhibits the action of hormone-sensitive
+    lipase... the release of fatty acids from the adipose tissue into the circulating blood is inhibited”'
+  plasma_insulin->peripheral_glucose_uptake:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.67 (Metabolism of Carbohydrates, and Formation of
+    Adenosine Triphosphate) §Insulin Increases Facilitated Diffusion of Glucose: “The rate of glucose
+    transport as well as transport of some other monosaccharides is greatly increased by insulin.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.78 (Insulin, Glucagon, and Diabetes Mellitus) §Effect
+    of Insulin on Carbohydrate Metabolism: “Within seconds after insulin binds with its membrane receptors,
+    the membranes of about 80 per cent of the body''s cells markedly increase their uptake of glucose”'
+  plasma_iodide->plasma_t4:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.76 (Thyroid Metabolic Hormones) §Iodide Pump (Iodide
+    Trapping): “iodides... are selectively removed from the circulating blood by the cells of the thyroid
+    gland and used for synthesis of the thyroid hormones”'
+  plasma_iron->red_cell_mass:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.32 (Red Blood Cells, Anemia, and Polycythemia) §Iron
+    Metabolism: “iron is important for the formation not only of hemoglobin but also of other essential
+    elements”'
+  plasma_iron->transferrin_saturation:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.32 (Red Blood Cells, Anemia, and Polycythemia) §Transport
+    and Storage of Iron: “iron is absorbed... it immediately combines in the blood plasma with a beta
+    globulin, apotransferrin, to form transferrin”'
+  plasma_ketone_bodies->arterial_ph:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.68 (Lipid Metabolism) §Ketosis in Starvation, Diabetes:
+    “the blood concentrations of acetoacetic acid and b-hydroxybutyric acid sometimes rise to as high
+    as 20 times normal, thus leading to extreme acidosis”'
+  plasma_lactate->hepatic_gluconeogenesis:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.67 (Metabolism of Carbohydrates, and Formation of
+    Adenosine Triphosphate) §Gluconeogenesis: “by synthesizing glucose, mainly from lactate and amino
+    acids (gluconeogenesis).”'
+  plasma_methylcobalamin->erythroblast_proliferation:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.32 (Red Blood Cells, Anemia, and Polycythemia) §Maturation
+    of Red Blood Cells: “lack of either vitamin B12 or folic acid causes... failure of nuclear maturation
+    and cell division”'
+  plasma_osmolality->adh:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.19 (Dominant Role of the Kidney in Long-Term Pressure
+    Control) §Importance of Salt in the Renal-Body Fluid Schema: “The increase in osmolality caused by
+    the excess salt ... stimulates the hypothalamic-posterior pituitary gland secretory mechanism to secrete
+    increased quantities of antidiuretic hormone”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.28 (Regulation of Extracellular Fluid Osmolarity and
+    Sodium Concentration) §Antidiuretic Hormone Controls Urine Concentration: “When osmolarity of the
+    body fluids increases above normal ... the posterior pituitary gland secretes more ADH”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.75 (Pituitary Hormones and Their Control by the Hypothalamus)
+    §Osmotic Regulation: “concentrated body fluids stimulate the supraoptic nuclei ... to cause additional
+    ADH secretion”'
+  plasma_osmolality->water_intake:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.19 (Dominant Role of the Kidney in Long-Term Pressure
+    Control) §Importance of Salt in the Renal-Body Fluid Schema: “the osmolality of the fluid increases,
+    and this in turn stimulates the thirst center in the brain, making the person drink extra amounts
+    of water”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.28 (Regulation of Extracellular Fluid Osmolarity and
+    Sodium Concentration) §Stimuli for Thirst: “One of the most important is increased extracellular fluid
+    osmolarity, which causes intracellular dehydration in the thirst centers, thereby stimulating the
+    sensation of thirst”'
+  plasma_oxytocin->uterine_contractility:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.74 (Introduction to Endocrinology) §Table 74-1 (Posterior
+    pituitary): “Oxytocin Stimulates milk ejection from breasts and uterine contractions”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.75 (Pituitary Hormones and Their Control by the Hypothalamus)
+    §Oxytocic Hormone: “The hormone oxytocin ... powerfully stimulates contraction of the pregnant uterus,
+    especially toward the end of gestation”'
+  plasma_phosphate->pth:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.29 (Renal Regulation of Potassium, Calcium, Phosphate,
+    and Magnesium; Integration of Renal Mechanisms for Control of Blood Volume and Extracellular Fluid
+    Volume) §Regulation of Renal Phosphate Excretion: “An increase in plasma phosphate stimulates PTH,
+    which increases calcium reabsorption by the renal tubules”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.31 (Kidney Diseases and Diuretics) §Osteomalacia in
+    Chronic Renal Failure: “increased binding of phosphate with calcium in the plasma, thus decreasing
+    the plasma serum ionized calcium concentration, which in turn stimulates parathyroid hormone secretion”'
+  plasma_phosphate->urinary_phosphate:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.29 (Renal Regulation of Potassium, Calcium, Phosphate,
+    and Magnesium; Integration of Renal Mechanisms for Control of Blood Volume and Extracellular Fluid
+    Volume) §Regulation of Renal Phosphate Excretion: “phosphate normally begins to spill into the urine
+    when its concentration in the extracellular fluid rises above a threshold of about 0.8 mM/L”'
+  plasma_plasminogen->plasmin_fibrinolysis:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.36 (Hemostasis and Blood Coagulation) §Lysis of Blood
+    Clots—Plasmin: “The plasma proteins contain a euglobulin called plasminogen... that, when activated,
+    becomes a substance called plasmin”'
+  plasma_potassium->aldosterone:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.22 (Cardiac Failure) §Increased aldosterone secretion:
+    “Excess potassium is one of the most powerful stimuli known for aldosterone secretion”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.29 (Renal Regulation of Potassium, Calcium, Phosphate,
+    and Magnesium; Integration of Renal Mechanisms for Control of Blood Volume and Extracellular Fluid
+    Volume) §Increased Extracellular Potassium Ion Concentration Stimulates Aldosterone Secretion: “an
+    increase in plasma potassium concentration stimulates aldosterone secretion and, therefore, increases
+    the blood level of aldosterone”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.77 (Adrenocortical Hormones) §Regulation of Aldosterone
+    Secretion: “Increased potassium ion concentration in the extracellular fluid greatly increases aldosterone
+    secretion.”'
+  plasma_potassium->urinary_potassium:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.29 (Renal Regulation of Potassium, Calcium, Phosphate,
+    and Magnesium; Integration of Renal Mechanisms for Control of Blood Volume and Extracellular Fluid
+    Volume) §Increased Extracellular Fluid Potassium Concentration Stimulates Potassium Secretion: “The
+    rate of potassium secretion in the late distal and cortical collecting tubules is directly stimulated
+    by increased extracellular fluid potassium concentration, leading to increases in potassium excretion”'
+  plasma_secretin->pancreatic_exocrine_secretion:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.66 (Physiology of Gastrointestinal Disorders) §Peptic
+    Ulcer / Basic Cause of Peptic Ulceration: “secretin from the intestinal mucosa, which then passes
+    by way of the blood to the pancreas to promote rapid secretion of pancreatic juice”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.74 (Introduction to Endocrinology) §Table 74-1 (Small
+    intestine): “Secretin Stimulates pancreatic acinar cells to release bicarbonate and water”'
+  plasma_sodium_concentration->aldosterone:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.77 (Adrenocortical Hormones) §Regulation of Aldosterone
+    Secretion: “Increased sodium ion concentration in the extracellular fluid very slightly decreases
+    aldosterone secretion.”'
+  plasma_sodium_concentration->plasma_osmolality:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.25 (The Body Fluid Compartments: Extracellular and
+    Intracellular Fluids; Interstitial Fluid and Edema) §Hyponatremia and Hypernatremia: “sodium and its
+    associated anions (mainly chloride) account for more than 90 per cent of the solute in the extracellular
+    fluid”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.28 (Regulation of Extracellular Fluid Osmolarity and
+    Sodium Concentration) §Control of Extracellular Fluid Osmolarity and Sodium Concentration: “sodium
+    ions and associated anions (primarily bicarbonate and chloride) represent about 94 per cent of the
+    extracellular osmoles”'
+  plasma_thromboxane_b2->platelet_activation:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.36 (Hemostasis and Blood Coagulation) §Mechanism of
+    the Platelet Plug: “The ADP and thromboxane in turn act on nearby platelets to activate them as well”'
+  plasma_vitamin_k->thrombin:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.36 (Hemostasis and Blood Coagulation) §Decreased Prothrombin...
+    Caused by Vitamin K Deficiency: “Vitamin K is required by the liver for normal formation of prothrombin
+    as well as for formation of a few other clotting factors.”'
+  plasmin_fibrinolysis->fibrin_clot:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.36 (Hemostasis and Blood Coagulation) §Lysis of Blood
+    Clots—Plasmin: “Plasmin is a proteolytic enzyme... Plasmin digests fibrin fibers... whenever plasmin
+    is formed, it can cause lysis of a clot”'
+  platelet_activation->thrombin:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.36 (Hemostasis and Blood Coagulation) §Conversion
+    of Prothrombin to Thrombin: “much of the prothrombin first attaches to prothrombin receptors on the
+    platelets already bound to the damaged tissue.”'
+  pth->calcitriol:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.79 (Parathyroid Hormone, Calcitonin, Calcium and Phosphate
+    Metabolism, Vitamin D, Bone, and Teeth) §Formation of 1,25-Dihydroxycholecalciferol and Its Control
+    by Parathyroid Hormone: “the conversion of 25-hydroxycholecalciferol to 1,25-dihydroxycholecalciferol
+    requires PTH. In the absence of PTH, almost none of the 1,25-dihydroxycholecalciferol is formed”'
+  pth->plasma_calcium:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.29 (Renal Regulation of Potassium, Calcium, Phosphate,
+    and Magnesium; Integration of Renal Mechanisms for Control of Blood Volume and Extracellular Fluid
+    Volume) §Control of Renal Calcium Excretion: “This hormone then acts directly on the bones to increase
+    the resorption of bone salts... thereby returning calcium levels back toward normal”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.74 (Introduction to Endocrinology) §Table 74-1 (Parathyroid):
+    “Parathyroid hormone (PTH) Controls serum calcium ion concentration by increasing calcium absorption
+    by the gut and kidneys and releasing calcium from bones”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.79 (Parathyroid Hormone, Calcitonin, Calcium and Phosphate
+    Metabolism, Vitamin D, Bone, and Teeth) §Effect of Parathyroid Hormone on Calcium and Phosphate Concentrations:
+    “at the onset of infusion the calcium ion concentration begins to rise and reaches a plateau in about
+    4 hours”'
+  pth->plasma_phosphate:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.29 (Renal Regulation of Potassium, Calcium, Phosphate,
+    and Magnesium; Integration of Renal Mechanisms for Control of Blood Volume and Extracellular Fluid
+    Volume) §Regulation of Renal Phosphate Excretion: “whenever plasma PTH is increased, tubular phosphate
+    reabsorption is decreased and more phosphate is excreted”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.79 (Parathyroid Hormone, Calcitonin, Calcium and Phosphate
+    Metabolism, Vitamin D, Bone, and Teeth) §Parathyroid Hormone Decreases Calcium Excretion and Increases
+    Phosphate Excretion: “Administration of PTH causes rapid loss of phosphate in the urine owing to the
+    effect of the hormone to diminish proximal tubular reabsorption of phosphate”'
+  pulmonary_arteriole_diameter->pulmonary_vascular_resistance:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.38 (Pulmonary Circulation, Pulmonary Edema, Pleural
+    Fluid) §Effect of Diminished Alveolar Oxygen on Local Alveolar Blood Flow: “the adjacent blood vessels
+    constrict, with the vascular resistance increasing more than fivefold at extremely low oxygen levels”'
+  pulmonary_capillary_wedge_pressure->pulmonary_artery_pressure:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.38 (Pulmonary Circulation, Pulmonary Edema, Pleural
+    Fluid) §Function of the Pulmonary Circulation When the Left Atrial Pressure Rises: “further increases
+    in left atrial pressure above these levels cause almost equally great increases in pulmonary arterial
+    pressure”'
+  pulmonary_vascular_resistance->pulmonary_artery_pressure:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.38 (Pulmonary Circulation, Pulmonary Edema, Pleural
+    Fluid) §Effect of Increased Cardiac Output on Pulmonary Blood Flow: “the first two changes decrease
+    pulmonary vascular resistance so much that the pulmonary arterial pressure rises very little, even
+    during maximum exercise”'
+  red_cell_mass->blood_volume:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.32 (Red Blood Cells, Anemia, and Polycythemia) §Polycythemia
+    Vera (Erythremia): “not only does the hematocrit increase, but the total blood volume also increases,
+    on some occasions to almost twice normal”'
+  red_cell_mass->hematocrit:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.32 (Red Blood Cells, Anemia, and Polycythemia) §Effect
+    of Erythropoietin in Erythrogenesis: “increases red cell production, with a resultant increase in
+    hematocrit and usually total blood volume as well”'
+  red_cell_mass->renal_tissue_oxygenation:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.32 (Red Blood Cells, Anemia, and Polycythemia) §Tissue
+    Oxygenation Is the Most Essential Regulator of Red Blood Cell Production: “Any condition that causes
+    the quantity of oxygen transported to the tissues to decrease ordinarily increases the rate of red
+    blood cell production”'
+  renal_calcium_reabsorption->urinary_calcium:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.29 (Renal Regulation of Potassium, Calcium, Phosphate,
+    and Magnesium; Integration of Renal Mechanisms for Control of Blood Volume and Extracellular Fluid
+    Volume) §Control of Calcium Excretion by the Kidneys: “With increased levels of PTH, there is increased
+    calcium reabsorption... which reduces urinary excretion of calcium”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.79 (Parathyroid Hormone, Calcitonin, Calcium and Phosphate
+    Metabolism, Vitamin D, Bone, and Teeth) §Renal Excretion of Calcium and Phosphate: “When calcium concentration
+    is low, this reabsorption is great, so that almost no calcium is lost in the urine”'
+  renal_perfusion_pressure->gfr:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.26 (Urine Formation by the Kidneys: I. Glomerular
+    Filtration, Renal Blood Flow, and Their Control) §Increased Glomerular Capillary Hydrostatic Pressure
+    Increases GFR: “Increased arterial pressure tends to raise glomerular hydrostatic pressure and, therefore,
+    to increase GFR.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.31 (Kidney Diseases and Diuretics) §Hypertension and
+    Kidney Disease: “the GFR may still return to nearly normal levels after the arterial blood pressure
+    rises”'
+  renal_perfusion_pressure->renin:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.19 (Dominant Role of the Kidney in Long-Term Pressure
+    Control) §Components of the Renin-Angiotensin System: “Renin is a protein enzyme released by the kidneys
+    when the arterial pressure falls too low”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.26 (Urine Formation by the Kidneys: I. Glomerular
+    Filtration, Renal Blood Flow, and Their Control) §Role of Tubuloglomerular Feedback in Autoregulation
+    of GFR: “decreased GFR ... reducing the concentration of sodium chloride at the macula densa cells
+    ... increases renin release from the juxtaglomerular cells”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.29 (Renal Regulation of Potassium, Calcium, Phosphate,
+    and Magnesium; Integration of Renal Mechanisms for Control of Blood Volume and Extracellular Fluid
+    Volume) §Importance of Pressure Natriuresis: “the increased blood pressure also, after a short time
+    delay, suppresses renin release”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.31 (Kidney Diseases and Diuretics) §Hypertension Caused
+    by Patchy Renal Damage and Increased Renal Secretion of Renin: “the ischemic renal tissue secretes
+    large quantities of renin”'
+  renal_perfusion_pressure->sodium_excretion:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.19 (Dominant Role of the Kidney in Long-Term Pressure
+    Control) §Quantitation of Pressure Diuresis: “an increase in arterial pressure in the human of only
+    a few millimeters of mercury can double renal output of water, which is called pressure diuresis,
+    as well as double the output of salt”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.26 (Urine Formation by the Kidneys: I. Glomerular
+    Filtration, Renal Blood Flow, and Their Control) §Importance of GFR Autoregulation in Preventing Extreme
+    Changes in Renal Excretion: “changes in arterial pressure still have significant effects on renal
+    excretion of water and sodium; this is referred to as pressure diuresis or pressure natriuresis”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.27 (Urine Formation by the Kidneys: II. Tubular Reabsorption
+    and Secretion) §Pressure-Natriuresis and Pressure-Diuresis Mechanisms: “Even small increases in arterial
+    pressure often cause marked increases in urinary excretion of sodium and water, phenomena that are
+    referred to as pressure natriuresis and pressure diuresis.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.29 (Renal Regulation of Potassium, Calcium, Phosphate,
+    and Magnesium; Integration of Renal Mechanisms for Control of Blood Volume and Extracellular Fluid
+    Volume) §Importance of Pressure Natriuresis: “pressure natriuresis refers to the rise in sodium excretion
+    that occurs with elevated blood pressure”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.31 (Kidney Diseases and Diuretics) §Hypertension and
+    Kidney Disease: “the high arterial pressure causes pressure natriuresis and pressure diuresis, so
+    that intake and output of sodium and water become balanced once again”'
+  renal_phosphate_reabsorption->plasma_phosphate:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.79 (Parathyroid Hormone, Calcitonin, Calcium and Phosphate
+    Metabolism, Vitamin D, Bone, and Teeth) §Renal Excretion of Calcium and Phosphate: “the kidneys regulate
+    the phosphate concentration in the extracellular fluid by altering the rate of phosphate excretion”'
+  renal_potassium_excretion->plasma_potassium:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.29 (Renal Regulation of Potassium, Calcium, Phosphate,
+    and Magnesium; Integration of Renal Mechanisms for Control of Blood Volume and Extracellular Fluid
+    Volume) §Blockade of Aldosterone Feedback System: “The increased potassium excretion then reduces
+    the extracellular fluid potassium concentration back toward normal”'
+  renal_tissue_oxygenation->erythropoietin:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.32 (Red Blood Cells, Anemia, and Polycythemia) §Erythropoietin
+    Stimulates Red Cell Production, and Its Formation Increases in Response to Hypoxia: “hypoxia causes
+    a marked increase in erythropoietin production”'
+  renal_tubular_ammonia_secretion->arterial_ph:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.30 (Regulation of Acid-Base Balance) §Excretion of
+    Excess Hydrogen Ions by the Ammonia Buffer System: “for each NH4+ excreted, a new HCO3- is generated
+    and added to the blood.”'
+  renin->angiotensin_II:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.19 (Dominant Role of the Kidney in Long-Term Pressure
+    Control) §Components of the Renin-Angiotensin System: “renin acts enzymatically on another plasma
+    protein, a globulin called renin substrate (or angiotensinogen), to release a 10-amino acid peptide,
+    angiotensin I”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.22 (Cardiac Failure) §Activation of the renin-angiotensin
+    system: “marked increase in renin secretion by the kidneys, and this in turn causes the formation
+    of angiotensin”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.24 (Circulatory Shock and Physiology of Its Treatment)
+    §Nonprogressive Shock—Compensated Shock: “Formation of angiotensin by the kidneys, which constricts
+    the peripheral arteries”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.26 (Urine Formation by the Kidneys: I. Glomerular
+    Filtration, Renal Blood Flow, and Their Control) §Role of Tubuloglomerular Feedback in Autoregulation
+    of GFR: “Renin released from these cells then functions as an enzyme to increase the formation of
+    angiotensin I, which is converted to angiotensin II.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.29 (Renal Regulation of Potassium, Calcium, Phosphate,
+    and Magnesium; Integration of Renal Mechanisms for Control of Blood Volume and Extracellular Fluid
+    Volume) §Role of Angiotensin II In Controlling Renal Excretion: “renin secretion is decreased, causing
+    decreased angiotensin II formation”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.31 (Kidney Diseases and Diuretics) §Hypertension Caused
+    by Patchy Renal Damage: “the ischemic renal tissue secretes large quantities of renin. This secretion
+    leads to the formation of angiotensin II, which can cause hypertension”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.74 (Introduction to Endocrinology) §Table 74-1 (Kidney):
+    “Renin Catalyzes conversion of angiotensinogen to angiotensin I (acts as an enzyme)”'
+  respiratory_rate->alveolar_ventilation:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.37 (Pulmonary Ventilation) §Rate of Alveolar Ventilation:
+    “It is equal to the respiratory rate times the amount of new air that enters these areas with each
+    breath.”'
+  right_atrial_pressure->jugular_venous_pressure:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.15 (Vascular Distensibility and Functions of the Arterial
+    and Venous Systems) §Clinical Estimation of Venous Pressure: “when the right atrial pressure becomes
+    increased to as much as +10 mm Hg, the lower veins of the neck begin to protrude”'
+  sa_node_automaticity->heart_rate:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.10 (Rhythmical Excitation of the Heart) §Automatic
+    Electrical Rhythmicity of the Sinus Fibers: “the sinus node ordinarily controls the rate of beat of
+    the entire heart”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.10 (Rhythmical Excitation of the Heart) §The Sinus
+    Node as the Pacemaker of the Heart: “the sinus node controls the beat of the heart because its rate
+    of rhythmical discharge is faster than that of any other part of the heart”'
+  shivering->metabolic_heat_production:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.73 (Body Temperature, Temperature Regulation, and
+    Fever) §Hypothalamic Stimulation of Shivering: “During maximum shivering, body heat production can
+    rise to four to five times normal.”'
+  skeletal_muscle_blood_flow->cardiac_output:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.21 (Muscle Blood Flow and Cardiac Output During Exercise;
+    the Coronary Circulation and Ischemic Heart Disease) §Importance of the Increase in Cardiac Output
+    During Exercise: “the ability of the circulatory system to provide increased cardiac output for delivery
+    of oxygen and other nutrients to the muscles during exercise”'
+  skin_blood_flow->core_temperature:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.73 (Body Temperature, Temperature Regulation, and
+    Fever) §Blood Flow to the Skin from the Body Core Provides Heat Transfer: “A high rate of skin flow
+    causes heat to be conducted from the core of the body to the skin with great efficiency”'
+  skin_cholecalciferol_synthesis->calcitriol:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.79 (Parathyroid Hormone, Calcitonin, Calcium and Phosphate
+    Metabolism, Vitamin D, Bone, and Teeth) §Cholecalciferol (Vitamin D3) Is Formed in the Skin: “Vitamin
+    D3 (also called cholecalciferol)... is formed in the skin... by ultraviolet rays from the sun”'
+  sodium_excretion->extracellular_fluid_volume:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.19 (Dominant Role of the Kidney in Long-Term Pressure
+    Control) §Failure of Increased Total Peripheral Resistance to Elevate Pressure: “the kidneys immediately
+    begin to respond to the high arterial pressure, causing pressure diuresis and pressure natriuresis.
+    Within hours, large amounts of salt and water are lost from the body”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.29 (Renal Regulation of Potassium, Calcium, Phosphate,
+    and Magnesium; Integration of Renal Mechanisms for Control of Blood Volume and Extracellular Fluid
+    Volume) §Pressure Natriuresis and Diuresis: “the renal-body fluid feedback mechanism operates to prevent
+    continuous accumulation of salt and water in the body during increased salt and water intake”'
+  sodium_water_reabsorption->extracellular_fluid_volume:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.19 (Dominant Role of the Kidney in Long-Term Pressure
+    Control) §Effect of Angiotensin in the Kidneys: “decrease excretion of both salt and water by the
+    kidneys. This slowly increases the extracellular fluid volume”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.25 (The Body Fluid Compartments: Extracellular and
+    Intracellular Fluids; Interstitial Fluid and Edema) §Edema Caused by Decreased Kidney Excretion of
+    Salt and Water: “large amounts of sodium chloride and water are added to the extracellular fluid ...
+    widespread increases in interstitial fluid volume”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.29 (Renal Regulation of Potassium, Calcium, Phosphate,
+    and Magnesium; Integration of Renal Mechanisms for Control of Blood Volume and Extracellular Fluid
+    Volume) §Role of Aldosterone in Controlling Renal Excretion: “After 1 to 3 days of sodium and water
+    retention, the extracellular fluid volume rises by about 10 to 15 per cent”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.77 (Adrenocortical Hormones) §Excess Aldosterone Increases
+    ECF Volume: “when sodium is reabsorbed by the tubules, there is simultaneous osmotic absorption of
+    almost equivalent amounts of water”'
+  somatostatin->pituitary_gh:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.75 (Pituitary Hormones and Their Control by the Hypothalamus)
+    §Hypothalamic Releasing and Inhibitory Hormones: “growth hormone inhibitory hormone (GHIH), also called
+    somatostatin, which inhibits release of growth hormone”'
+  stroke_volume->cardiac_output:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.9 (Heart Muscle; The Heart as a Pump and Function
+    of the Heart Valves) §Work Output of the Heart: “Minute work output is the total amount of energy
+    converted to work in 1 minute; this is equal to the stroke work output times the heart rate per minute.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.21 (Muscle Blood Flow and Cardiac Output During Exercise;
+    the Coronary Circulation and Ischemic Heart Disease) §Causes of Death After Acute Coronary Occlusion:
+    “When some of the cardiac muscle fibers are not functioning ... the overall pumping ability of the
+    affected ventricle is proportionately depressed”'
+  stroke_volume->pulse_pressure:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.15 (Vascular Distensibility and Functions of the Arterial
+    and Venous Systems) §Arterial Pressure Pulsations: “In general, the greater the stroke volume output,
+    the greater the amount of blood that must be accommodated in the arterial tree”'
+  sweating->core_temperature:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.73 (Body Temperature, Temperature Regulation, and
+    Fever) §Evaporation: “When water evaporates from the body surface, 0.58 Calorie (kilocalorie) of heat
+    is lost for each gram of water that evaporates.”'
+  sympathetic_tone->cardiac_output:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.9 (Heart Muscle; The Heart as a Pump and Function
+    of the Heart Valves) §Control of the Heart by the Sympathetic and Parasympathetic Nerves: “the amount
+    of blood pumped each minute (cardiac output) often can be increased more than 100 per cent by sympathetic
+    stimulation”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.18 (Nervous Regulation of the Circulation, and Rapid
+    Control of Arterial Pressure) §Role of the Nervous System in Rapid Control of Arterial Pressure: “the
+    heart can pump about two times as much blood as under normal conditions. This contributes still more
+    to the acute rise in arterial pressure.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.20 (Cardiac Output, Venous Return, and Their Regulation)
+    §Effect of Sympathetic Stimulation on Cardiac Output: “Sympathetic stimulation affects both the heart
+    and the systemic circulation: (1) It makes the heart a stronger pump.”'
+  sympathetic_tone->epinephrine:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.18 (Nervous Regulation of the Circulation, and Rapid
+    Control of Arterial Pressure) §Adrenal Medullae and Their Relation to the Sympathetic Vasoconstrictor
+    System: “Sympathetic impulses are transmitted to the adrenal medullae...They cause the medullae to
+    secrete both epinephrine and norepinephrine into the circulating blood.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.67 (Metabolism of Carbohydrates, and Formation of
+    Adenosine Triphosphate) §Activation of Phosphorylase by Epinephrine or by Glucagon: “Epinephrine is
+    released by the adrenal medullae when the sympathetic nervous system is stimulated.”'
+  sympathetic_tone->heart_rate:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.9 (Heart Muscle; The Heart as a Pump and Function
+    of the Heart Valves) §Mechanisms of Excitation of the Heart by the Sympathetic Nerves: “Strong sympathetic
+    stimulation can increase the heart rate in young adult humans from the normal rate of 70 beats per
+    minute up to 180 to 200”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.10 (Rhythmical Excitation of the Heart) §Effect of
+    Sympathetic Stimulation: “it increases the rate of sinus nodal discharge”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.10 (Rhythmical Excitation of the Heart) §Mechanism
+    of the Sympathetic Effect: “increased rate of upward drift of the diastolic membrane potential toward
+    the threshold level for self-excitation ... increasing the heart rate”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.18 (Nervous Regulation of the Circulation, and Rapid
+    Control of Arterial Pressure) §Sympathetic Nerve Fibers to the Heart: “sympathetic stimulation markedly
+    increases the activity of the heart, both increasing the heart rate and enhancing its strength and
+    volume of pumping.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.20 (Cardiac Output, Venous Return, and Their Regulation)
+    §Effect of Nervous Excitation to Increase Heart Pumping: “sympathetic stimulation and (2) parasympathetic
+    inhibition does two things to increase the pumping effectiveness of the heart: (1) it greatly increases
+    the heart rate”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.21 (Muscle Blood Flow and Cardiac Output During Exercise;
+    the Coronary Circulation and Ischemic Heart Disease) §Effects of Mass Sympathetic Discharge: “the
+    heart is stimulated to greatly increased heart rate and increased pumping strength as a result of
+    the sympathetic drive to the heart”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.24 (Circulatory Shock and Physiology of Its Treatment)
+    §Sympathetic Reflex Compensations in Shock: “Heart activity increases markedly, sometimes increasing
+    the heart rate from the normal value of 72 beats/min to as high as 160 to 180 beats/min.”'
+  sympathetic_tone->myocardial_contractility:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.9 (Heart Muscle; The Heart as a Pump and Function
+    of the Heart Valves) §Mechanisms of Excitation of the Heart by the Sympathetic Nerves: “sympathetic
+    stimulation increases the force of heart contraction to as much as double normal, thereby increasing
+    the volume of blood pumped”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.10 (Rhythmical Excitation of the Heart) §Effect of
+    Sympathetic Stimulation: “it increases greatly the force of contraction of all the cardiac musculature,
+    both atrial and ventricular”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.18 (Nervous Regulation of the Circulation, and Rapid
+    Control of Arterial Pressure) §Role of the Skeletal Nerves: “sympathetic nervous signals have a significant
+    direct effect to increase contractile force of the heart muscle”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.20 (Cardiac Output, Venous Return, and Their Regulation)
+    §Effect of Nervous Excitation to Increase Heart Pumping: “(2) it increases the strength of heart contraction
+    (which is called increased “contractility”) to twice its normal strength.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.21 (Muscle Blood Flow and Cardiac Output During Exercise;
+    the Coronary Circulation and Ischemic Heart Disease) §Graphical Analysis of the Changes in Cardiac
+    Output During Heavy Exercise: “It results almost entirely from sympathetic stimulation of the heart
+    that causes (1) increased heart rate ... and (2) increased strength of contraction of the heart”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.22 (Cardiac Failure) §Compensation for Acute Cardiac
+    Failure by Sympathetic Nervous Reflexes: “sympathetic stimulation strengthens this damaged musculature”'
+  sympathetic_tone->norepinephrine:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.17 (Local and Humoral Control of Blood Flow by the
+    Tissues) §Norepinephrine and Epinephrine: “When the sympathetic nervous system is stimulated ... the
+    sympathetic nerve endings in the individual tissues release norepinephrine.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.18 (Nervous Regulation of the Circulation, and Rapid
+    Control of Arterial Pressure) §Norepinephrine—The Sympathetic Vasoconstrictor Transmitter Substance:
+    “The substance secreted at the endings of the vasoconstrictor nerves is almost entirely norepinephrine.”'
+  sympathetic_tone->renin:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.19 (Dominant Role of the Kidney in Long-Term Pressure
+    Control) §Primary (Essential) Hypertension: “increased sympathetic nerve stimulation, which increases
+    renin release by the kidneys and therefore formation of angiotensin II”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.24 (Circulatory Shock and Physiology of Its Treatment)
+    §Nonprogressive Shock—Compensated Shock: “Formation of angiotensin by the kidneys, which constricts
+    the peripheral arteries and also causes decreased output of water and salt by the kidneys”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.27 (Urine Formation by the Kidneys: II. Tubular Reabsorption
+    and Secretion) §Sympathetic Nervous System Activation Increases Sodium Reabsorption: “sympathetic
+    nervous system stimulation increases renin release and angiotensin II formation”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.29 (Renal Regulation of Potassium, Calcium, Phosphate,
+    and Magnesium; Integration of Renal Mechanisms for Control of Blood Volume and Extracellular Fluid
+    Volume) §Sympathetic Nervous System Control of Renal Excretion: “stimulation of renin release and
+    increased angiotensin II and aldosterone formation, both of which further increase tubular reabsorption”'
+  sympathetic_tone->total_peripheral_resistance:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.18 (Nervous Regulation of the Circulation, and Rapid
+    Control of Arterial Pressure) §Role of the Nervous System in Rapid Control of Arterial Pressure: “Almost
+    all arterioles of the systemic circulation are constricted. This greatly increases the total peripheral
+    resistance”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.21 (Muscle Blood Flow and Cardiac Output During Exercise;
+    the Coronary Circulation and Ischemic Heart Disease) §Effects of Mass Sympathetic Discharge: “most
+    of the arterioles of the peripheral circulation are strongly contracted, except for the arterioles
+    in the active muscles”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.24 (Circulatory Shock and Physiology of Its Treatment)
+    §Sympathetic Reflex Compensations in Shock: “The arterioles constrict in most parts of the systemic
+    circulation, thereby increasing the total peripheral resistance.”'
+  sympathetic_tone->venous_return:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.15 (Vascular Distensibility and Functions of the Arterial
+    and Venous Systems) §Venous Pressures—Right Atrial Pressure: “(2) increased large vessel tone throughout
+    the body with resultant increased peripheral venous pressures”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.18 (Nervous Regulation of the Circulation, and Rapid
+    Control of Arterial Pressure) §Role of the Nervous System in Rapid Control of Arterial Pressure: “The
+    veins especially...are strongly constricted. This displaces blood out of the large peripheral blood
+    vessels toward the heart”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.20 (Cardiac Output, Venous Return, and Their Regulation)
+    §Effect of Sympathetic Nervous Stimulation of the Circulation on Mean Circulatory Filling Pressure:
+    “Strong sympathetic stimulation constricts all the systemic blood vessels... the capacity of the system
+    decreases, so that at each level of blood volume, the mean circulatory filling pressure is increased.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.21 (Muscle Blood Flow and Cardiac Output During Exercise;
+    the Coronary Circulation and Ischemic Heart Disease) §Effects of Mass Sympathetic Discharge: “the
+    muscle walls of the veins ... are contracted powerfully, which greatly increases the mean systemic
+    filling pressure ... promoting increase in venous return”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.22 (Cardiac Failure) §Compensation for Acute Cardiac
+    Failure by Sympathetic Nervous Reflexes: “Sympathetic stimulation also increases venous return because
+    it increases the tone of most of the blood vessels of the circulation, especially the veins”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.24 (Circulatory Shock and Physiology of Its Treatment)
+    §Greater Effect of the Sympathetic Nervous Reflexes: “the sympathetic constriction of the veins is
+    important to keep venous return and cardiac output from falling too much”'
+  testosterone->gnrh:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.80 (Reproductive and Hormonal Functions of the Male
+    (and Function of the Pineal Gland)) §Negative Feedback Control of Testosterone Secretion: “Most of
+    this inhibition probably results from a direct effect of testosterone on the hypothalamus to decrease
+    the secretion of GnRH”'
+  testosterone->lean_body_mass:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.72 (Energetics and Metabolic Rate) §Male Sex Hormone
+    Increases Metabolic Rate: “Much of this effect of the male sex hormone is related to its anabolic
+    effect to increase skeletal muscle mass.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.80 (Reproductive and Hormonal Functions of the Male
+    (and Function of the Pineal Gland)) §Testosterone Increases Protein Formation and Muscle Development:
+    “development of increasing musculature after puberty, averaging about a 50 per cent increase in muscle
+    mass over that in the female”'
+  testosterone->lh:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.80 (Reproductive and Hormonal Functions of the Male
+    (and Function of the Pineal Gland)) §Negative Feedback Control of Testosterone Secretion: “The testosterone
+    secreted by the testes in response to LH has the reciprocal effect of inhibiting anterior pituitary
+    secretion of LH”'
+  thrombin->activated_protein_C:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.36 (Hemostasis and Blood Coagulation) §Endothelial
+    Surface Factors: “the thrombomodulin-thrombin complex also activates a plasma protein, protein C,
+    that acts as an anticoagulant by inactivating activated Factors V and VIII.”'
+  thrombin->fibrin_clot:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.36 (Hemostasis and Blood Coagulation) §Action of Thrombin
+    on Fibrinogen to Form Fibrin: “the thrombin acts as an enzyme to convert fibrinogen into fibrin fibers
+    that enmesh platelets, blood cells, and plasma to form the clot”'
+  thrombin->platelet_activation:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.36 (Hemostasis and Blood Coagulation) §Vicious Circle
+    of Clot Formation: “These effects... include acceleration of the actions of Factors VIII, IX, X, XI,
+    and XII and aggregation of platelets.”'
+  thrombin->thrombin:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.36 (Hemostasis and Blood Coagulation) §Vicious Circle
+    of Clot Formation: “thrombin has a direct proteolytic effect on prothrombin itself, tending to convert
+    this into still more thrombin”'
+  tidal_volume->alveolar_ventilation:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.37 (Pulmonary Ventilation) §Rate of Alveolar Ventilation:
+    “VA = Freq • (VT – VD) ... Freq is the frequency of respiration per minute, VT is the tidal volume,
+    and VD is the physiologic dead space volume”'
+  tissue_factor->thrombin:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.36 (Hemostasis and Blood Coagulation) §Extrinsic Pathway
+    for Initiating Clotting: “Tissue factor initiates the extrinsic pathway... activated Factor X is the
+    actual protease that causes splitting of prothrombin to form thrombin”'
+  total_peripheral_resistance->mean_arterial_pressure:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.14 (Overview of the Circulation; Medical Physics of
+    Pressure, Flow, and Resistance) §Interrelationships Among Pressure, Flow, and Resistance: “DP = F
+    x R”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.18 (Nervous Regulation of the Circulation, and Rapid
+    Control of Arterial Pressure) §Role of the Nervous System in Rapid Control of Arterial Pressure: “This
+    greatly increases the total peripheral resistance, thereby increasing the arterial pressure.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.19 (Dominant Role of the Kidney in Long-Term Pressure
+    Control) §Increased Fluid Volume Can Elevate Arterial Pressure: “because arterial pressure is equal
+    to cardiac output times total peripheral resistance, the secondary increase in total peripheral resistance
+    ... helps greatly in increas-ing the arterial pressure”'
+  trh->tsh:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.73 (Body Temperature, Temperature Regulation, and
+    Fever) §Increased Thyroxine Output as a Long-Term Cause of Increased Heat Production: “it stimulates
+    secretion of thyroid-stimulating hormone.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.74 (Introduction to Endocrinology) §Table 74-1 (Hypothalamus):
+    “Thyrotropin-releasing hormone (TRH) Stimulates secretion of TSH and prolactin”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.76 (Thyroid Metabolic Hormones) §Anterior Pituitary
+    Secretion of TSH Is Regulated by Thyrotropin-Releasing Hormone: “TRH directly affects the anterior
+    pituitary gland cells to increase their output of TSH.”'
+  tsh->free_t4:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.73 (Body Temperature, Temperature Regulation, and
+    Fever) §Increased Thyroxine Output as a Long-Term Cause of Increased Heat Production: “Thyroid-stimulating
+    hormone in turn stimulates increased output of thyroxine by the thyroid gland”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.74 (Introduction to Endocrinology) §Table 74-1 (Anterior
+    pituitary): “Thyroid-stimulating hormone (TSH) Stimulates synthesis and secretion of thyroid hormones
+    (thyroxine and triiodothyronine)”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.76 (Thyroid Metabolic Hormones) §TSH (from the Anterior
+    Pituitary Gland) Increases Thyroid Secretion: “This hormone... increases the secretion of thyroxine
+    and triiodothyronine by the thyroid gland.”'
+  tshr_activation->follicular_camp_level:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.76 (Thyroid Metabolic Hormones) §Cyclic Adenosine
+    Monophosphate Mediates the Stimulatory Effect of TSH: “binding of TSH with specific TSH receptors...
+    activates adenylyl cyclase in the membrane, which increases the formation of cAMP inside the cell”'
+  venous_return->capillary_hydrostatic_pressure:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.22 (Cardiac Failure) §Long-Term Fluid Retention by
+    the Kidneys: “returns the arterial pressure back toward normal. Therefore, the capillary pressure
+    now also rises markedly”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.25 (The Body Fluid Compartments: Extracellular and
+    Intracellular Fluids; Interstitial Fluid and Edema) §Edema Caused by Heart Failure: “the heart fails
+    to pump blood normally from the veins into the arteries; this raises venous pressure and capillary
+    pressure”'
+  venous_return->cardiac_output:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.9 (Heart Muscle; The Heart as a Pump and Function
+    of the Heart Valves) §Intrinsic Regulation of Heart Pumping—The Frank-Starling Mechanism: “Within
+    physiologic limits, the heart pumps all the blood that returns to it by the way of the veins.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.15 (Vascular Distensibility and Functions of the Arterial
+    and Venous Systems) §Venous Pressures—Right Atrial Pressure: “the amount of blood pumped by the heart
+    depends on both the ability of the heart to pump and the tendency for blood to flow into the heart
+    from the peripheral vessels”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.18 (Nervous Regulation of the Circulation, and Rapid
+    Control of Arterial Pressure) §Role of the Nervous System in Rapid Control of Arterial Pressure: “The
+    stretch of the heart then causes the heart to beat with far greater force and therefore to pump increased
+    quantities of blood.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.19 (Dominant Role of the Kidney in Long-Term Pressure
+    Control) §Increased Fluid Volume Can Elevate Arterial Pressure: “increases venous return of blood
+    to the heart, which (5) increases cardiac output, which (6) increases arterial pressure”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.20 (Cardiac Output, Venous Return, and Their Regulation)
+    §Control of Cardiac Output by Venous Return—Role of the Frank-Starling Mechanism: “when increased
+    quantities of blood flow into the heart, the increased blood stretches the walls of the heart chambers.
+    As a result of the stretch, the cardiac muscle contracts with increased force”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.21 (Muscle Blood Flow and Cardiac Output During Exercise;
+    the Coronary Circulation and Ischemic Heart Disease) §Graphical Analysis of the Changes in Cardiac
+    Output During Heavy Exercise: “the combination of increased mean systemic filling pressure and decreased
+    resistance to venous return raises the entire level of the venous return curve”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.22 (Cardiac Failure) §Moderate Fluid Retention in
+    Cardiac Failure Can Be Beneficial: “the increased venous return can often cause an entirely normal
+    cardiac output”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.24 (Circulatory Shock and Physiology of Its Treatment)
+    §Circulatory Shock Caused by Decreased Cardiac Output: “Factors that decrease venous return also decrease
+    cardiac output because the heart cannot pump blood that does not flow into it.”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.29 (Renal Regulation of Potassium, Calcium, Phosphate,
+    and Magnesium; Integration of Renal Mechanisms for Control of Blood Volume and Extracellular Fluid
+    Volume) §Pressure Natriuresis and Diuresis: “An increased pressure gradient for venous return elevates
+    cardiac output”'
+  venous_return->end_diastolic_volume:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.9 (Heart Muscle; The Heart as a Pump and Function
+    of the Heart Valves) §Filling of the Ventricles: “the moderately increased pressures that have developed
+    in the atria during ventricular systole immediately push the A-V valves open and allow blood to flow
+    rapidly into the ventricles”'
+  vessel_injury->tissue_factor:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.36 (Hemostasis and Blood Coagulation) §Extrinsic Pathway
+    for Initiating Clotting: “Traumatized tissue releases a complex of several factors called tissue factor
+    or tissue thromboplastin.”'
+  vldl_secretion->plasma_triglycerides:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.68 (Lipid Metabolism) §Formation and Function of Lipoproteins:
+    “The very low density lipoproteins transport triglycerides synthesized in the liver mainly to the
+    adipose tissue”'
+  water_intake->extracellular_fluid_volume:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.19 (Dominant Role of the Kidney in Long-Term Pressure
+    Control) §Importance of Salt in the Renal-Body Fluid Schema: “making the person drink extra amounts
+    of water to return the extracellular salt concentration to normal. This increases the extracellular
+    fluid volume”'
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.31 (Kidney Diseases and Diuretics) §Water Retention
+    and Development of Edema in Renal Failure: “If fluid intake is not limited and the patient drinks
+    in response to the normal thirst mechanisms, the body fluids begin to increase immediately and rapidly”'
+  water_intake->plasma_osmolality:
+  - 'Guyton & Hall, Medical Physiology, 11th ed. Ch.28 (Regulation of Extracellular Fluid Osmolarity and
+    Sodium Concentration) §Threshold for Osmolar Stimulus of Drinking: “even small increases in plasma
+    osmolarity are normally followed by water intake, which restores extracellular fluid osmolarity and
+    volume toward normal”'

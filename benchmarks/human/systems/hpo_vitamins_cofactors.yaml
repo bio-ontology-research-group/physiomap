@@ -1,0 +1,243 @@
+# =============================================================================
+# Vitamins & cofactors — circulating / tissue pools + cofactor-handling enzymes
+#                                    — PhysioMap fragment  *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Hand-encoded, mostly single-scale analyte pools (ORGAN_SYSTEM = plasma/serum/blood;
+# TISSUE = muscle/adipose/CSF pools) plus a handful of cofactor-handling ENZYME
+# ACTIVITY roots (scale CELLULAR, with a bearer cell/organ). Each node is a
+# physiological VARIABLE; HPO directional terms map to (node, sign). Edge signs are
+# the sign of the partial derivative of the target w.r.t. the source at steady state.
+# ROBERT: please correct signs / edges / IRIs.
+#
+# Provenance (textbooks / databases):
+#   - Lehninger Principles of Biochemistry (vitamins as coenzyme precursors;
+#     one-carbon / folate metabolism; biotin & biotin-dependent carboxylases;
+#     NAD biosynthesis; cobalamin coenzymes methyl-/adenosyl-Cbl).
+#   - Boron & Boulpaep Medical Physiology (intestinal absorption & plasma transport
+#     of B12 by haptocorrin / transcobalamin; vitamin D 25-hydroxylation).
+#   - Harrison's Principles of Internal Medicine ("Vitamin and Trace-Mineral
+#     Deficiency and Excess"; megaloblastic anemia / B12 & folate).
+#   - Williams Textbook of Endocrinology (vitamin D metabolism: 25-OH-D = calcifediol).
+#   - OMIM / GeneReviews for the monogenic loci that produce these directional
+#     phenotypes (cited per node where relevant), e.g.:
+#       BTD (biotinidase deficiency, OMIM 253260), HLCS / holocarboxylase synthetase
+#       deficiency (OMIM 253270), PTS / 6-pyruvoyltetrahydropterin synthase deficiency
+#       (OMIM 261640), SPR / sepiapterin reductase deficiency (OMIM 612716),
+#       TCN2 transcobalamin-II deficiency (OMIM 275350), TCN1 transcobalamin-I /
+#       haptocorrin deficiency (OMIM 193090), MTHFR / cerebral folate transport
+#       (FOLR1, OMIM 613068), primary CoQ10 deficiency, ataxia with vitamin-E
+#       deficiency (TTPA, OMIM 277460), NAD-dependent CNDD (NADSYN1/HAAO).
+#   - Ontology IRIs verified by grepping the local OBO caches
+#     (CHEBI.obo / PR.obo / UBERON.obo / CL.obo); null where not exactly matched.
+#
+# Existing-map node REUSED (no new node created):
+#   plasma_25oh_vitamin_d  (calcidiol / calcifediol) — HP:0012053 (-) & HP:0031414 (+)
+#
+# Most nodes are grounded ISLANDS (no causal edge) — a deliberately safe encoding that
+# abstains. A few defensible mechanistic edges are added with citations (see below).
+# validate_fragment will WARN "island; will not integrate" only if NO boundary ref is
+# used; here we add a boundary edge into the EXISTING node plasma_25oh_vitamin_d.
+# =============================================================================
+
+name: hpo_vitamins_cofactors
+description: >-
+  DRAFT vitamins & cofactors fragment: circulating / tissue pools (vitamin B12 and its
+  coenzyme forms methyl-/adenosyl-cobalamin, folate & 5-methyl-THF in blood and CSF,
+  25-OH vitamin D / calcifediol, beta-carotene, tocopherol, biotin, NAD/NADH, lipoic
+  acid, CoQ10, transcobalamins I & II, CSF pyridoxal-5'-phosphate) plus cofactor-handling
+  enzyme-activity roots (biotinidase, holocarboxylase synthetase, 6-pyruvoyltetrahydro-
+  pterin synthase, sepiapterin reductase) and cellular cobalamin uptake. Encodes the
+  HPO directional gap terms for the vitamins_cofactors theme as (node, sign). Mostly
+  single-scale analyte/activity nodes; only well-cited mechanistic edges added.
+
+nodes:
+  # --- cobalamin (vitamin B12) and its coenzyme forms ---
+  - id: plasma_vitamin_b12
+    label: plasma vitamin B12 (cobalamin) concentration
+    scale: organ_system
+    entity_iri: CHEBI:30411            # cobalamin (verified CHEBI.obo)
+    quality_iri: PATO:0000033          # concentration
+  - id: plasma_methylcobalamin
+    label: plasma methylcobalamin concentration
+    scale: organ_system
+    entity_iri: CHEBI:28115            # methylcobalamin (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_adenosylcobalamin
+    label: plasma adenosylcobalamin concentration
+    scale: organ_system
+    entity_iri: CHEBI:18408            # cobamamide = adenosylcobalamin (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: cellular_cobalamin_uptake
+    label: cellular (transcobalamin-II-mediated) cobalamin uptake rate
+    scale: cellular
+    entity_iri: GO:0015889             # cobalamin transport
+    quality_iri: PATO:0000161
+    bearer_entity_iri: CL:0000066      # epithelial cell
+  - id: plasma_transcobalamin_1
+    label: plasma transcobalamin I (haptocorrin) concentration
+    scale: organ_system
+    entity_iri: PR:000016196           # transcobalamin-1 (verified PR.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_transcobalamin_2
+    label: plasma transcobalamin II concentration
+    scale: organ_system
+    entity_iri: PR:000016197           # transcobalamin-2 (verified PR.obo)
+    quality_iri: PATO:0000033
+
+  # --- folate / one-carbon ---
+  - id: plasma_folate
+    label: blood folate concentration
+    scale: organ_system
+    entity_iri: CHEBI:27470            # folic acid (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_5_methyltetrahydrofolate
+    label: blood 5-methyltetrahydrofolate concentration
+    scale: organ_system
+    entity_iri: CHEBI:20612            # 5-methyltetrahydrofolate (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: csf_folate
+    label: cerebrospinal-fluid folate concentration
+    scale: tissue
+    entity_iri: CHEBI:27470            # folic acid (folate); bearer fluid CSF
+    quality_iri: PATO:0000033
+    bearer_entity_iri: UBERON:0001359  # cerebrospinal fluid (verified UBERON.obo)
+
+  # --- fat-soluble vitamins / pro-vitamins ---
+  # NOTE: plasma_25oh_vitamin_d (calcidiol/calcifediol) ALREADY EXISTS in the corpus —
+  # HP:0012053 (-) and HP:0031414 (+) map to that existing node; NOT redefined here.
+  - id: plasma_beta_carotene
+    label: plasma beta-carotene concentration
+    scale: organ_system
+    entity_iri: CHEBI:17579            # beta-carotene (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: tissue_tocopherol
+    label: adipose-tissue tocopherol (vitamin E) concentration
+    scale: tissue
+    entity_iri: CHEBI:27013            # tocopherol (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+    bearer_entity_iri: UBERON:0001013  # adipose tissue (verified UBERON.obo)
+
+  # --- water-soluble cofactors / coenzymes ---
+  - id: plasma_biotin
+    label: plasma biotin concentration
+    scale: organ_system
+    entity_iri: CHEBI:15956            # biotin (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_nad
+    label: blood nicotinamide adenine dinucleotide (NAD) concentration
+    scale: organ_system
+    entity_iri: CHEBI:13389            # NAD (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_nadh
+    label: blood reduced nicotinamide adenine dinucleotide (NADH) concentration
+    scale: organ_system
+    entity_iri: CHEBI:16908            # NADH (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: muscle_coenzyme_q10
+    label: skeletal-muscle coenzyme Q10 (ubiquinone) concentration
+    scale: tissue
+    entity_iri: CHEBI:46245            # coenzyme Q10 (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+    bearer_entity_iri: UBERON:0001134  # skeletal muscle tissue (verified UBERON.obo)
+  - id: muscle_lipoic_acid
+    label: skeletal-muscle lipoic acid content
+    scale: tissue
+    entity_iri: CHEBI:16494            # lipoic acid (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+    bearer_entity_iri: UBERON:0001134  # skeletal muscle tissue (verified UBERON.obo)
+  - id: csf_pyridoxal_phosphate
+    label: cerebrospinal-fluid pyridoxal-5'-phosphate concentration
+    scale: tissue
+    entity_iri: CHEBI:18405            # pyridoxal 5'-phosphate (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+    bearer_entity_iri: UBERON:0001359  # cerebrospinal fluid (verified UBERON.obo)
+
+  # --- cofactor-handling ENZYME ACTIVITY roots (scale cellular, with bearer) ---
+  - id: biotinidase_activity
+    label: serum biotinidase enzyme activity
+    scale: cellular
+    entity_iri: PR:000004838           # biotinidase (verified PR.obo)
+    quality_iri: PATO:0001414          # catalytic / enzyme activity
+    bearer_entity_iri: CL:0000182      # hepatocyte (principal source of serum biotinidase)
+  - id: holocarboxylase_synthetase_activity
+    label: holocarboxylase synthetase (HLCS / biotin--protein ligase) activity
+    scale: cellular
+    entity_iri: PR:000008617           # biotin--protein ligase = HLCS (verified PR.obo synonym HLCS)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000057      # fibroblast (assayed in cultured fibroblasts)
+  - id: ptps_activity
+    label: 6-pyruvoyltetrahydropterin synthase (PTPS) activity
+    scale: cellular
+    entity_iri: PR:000013485           # 6-pyruvoyl tetrahydrobiopterin synthase (verified PR.obo)
+    quality_iri: PATO:0001414
+  - id: sepiapterin_reductase_activity
+    label: sepiapterin reductase activity
+    scale: cellular
+    entity_iri: PR:000015567           # sepiapterin reductase (verified PR.obo)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000057      # fibroblast (assayed in cultured fibroblasts)
+
+causal_edges:
+  # --- cobalamin uptake / transport -> circulating coenzyme forms ---
+  # Transcobalamin-II is the functional plasma carrier that delivers cobalamin into
+  # cells (TCN2 deficiency, OMIM 275350, causes functional intracellular B12 deficiency
+  # despite normal total serum B12); higher TC-II raises cellular cobalamin uptake.
+  - source: plasma_transcobalamin_2
+    target: cellular_cobalamin_uptake
+    sign: "+"
+    causal_evidence: genetic_lof_gof
+    mechanism: transcobalamin-II is the plasma transport protein that binds cobalamin and is endocytosed via the TC-II receptor (CD320), delivering B12 into cells; more functional TC-II raises cellular cobalamin uptake (TCN2 LoF -> functional intracellular B12 deficiency)
+    evidence: "Boron & Boulpaep Medical Physiology (B12 plasma transport by transcobalamin II); OMIM 275350 (transcobalamin-II deficiency -> functional B12 deficiency); Harrison's, 'Megaloblastic Anemias'"
+  # Cellular cobalamin uptake supplies the intracellular cobalamin that is converted to
+  # the two coenzyme forms: cytosolic methylcobalamin (methionine synthase) and
+  # mitochondrial adenosylcobalamin (methylmalonyl-CoA mutase).
+  - source: cellular_cobalamin_uptake
+    target: plasma_methylcobalamin
+    sign: "+"
+    mechanism: intracellular cobalamin (from cellular uptake) is processed to methylcobalamin (the MTR / methionine-synthase coenzyme); reduced cobalamin uptake lowers methylcobalamin
+    evidence: "Lehninger Principles of Biochemistry (cobalamin coenzymes: methylcobalamin for methionine synthase); cblC/cblF/cblJ intracellular-cobalamin disorders reduce both coenzyme forms"
+  - source: cellular_cobalamin_uptake
+    target: plasma_adenosylcobalamin
+    sign: "+"
+    mechanism: intracellular cobalamin (from cellular uptake) is processed in mitochondria to adenosylcobalamin (the methylmalonyl-CoA-mutase coenzyme); reduced cobalamin uptake lowers adenosylcobalamin
+    evidence: "Lehninger Principles of Biochemistry (cobalamin coenzymes: adenosylcobalamin for methylmalonyl-CoA mutase); intracellular cobalamin-processing disorders (cblA/cblB) reduce adenosylcobalamin"
+  # Total plasma B12 is the precursor pool for both coenzyme forms.
+  - source: plasma_vitamin_b12
+    target: plasma_methylcobalamin
+    sign: "+"
+    mechanism: methylcobalamin is a coenzyme form derived from the body cobalamin pool; lower total cobalamin lowers the methylcobalamin available
+    evidence: "Lehninger Principles of Biochemistry (cobalamin vitamers / coenzyme forms derive from the cobalamin pool); Harrison's, 'Megaloblastic Anemias'"
+  - source: plasma_vitamin_b12
+    target: plasma_adenosylcobalamin
+    sign: "+"
+    mechanism: adenosylcobalamin is a coenzyme form derived from the body cobalamin pool; lower total cobalamin lowers the adenosylcobalamin available
+    evidence: "Lehninger Principles of Biochemistry (cobalamin vitamers / coenzyme forms derive from the cobalamin pool)"
+
+  # --- folate: 5-methyl-THF is the dominant circulating folate; CSF pool is supplied
+  #     from blood by the choroid-plexus folate receptor (FOLR1). ---
+  - source: plasma_folate
+    target: plasma_5_methyltetrahydrofolate
+    sign: "+"
+    mechanism: 5-methyltetrahydrofolate is the principal circulating form of folate; total blood folate and 5-methyl-THF move together (5-methyl-THF is ~the measured blood folate)
+    evidence: "Lehninger Principles of Biochemistry (5-methyl-THF is the dominant plasma folate); Harrison's, 'Folate deficiency'"
+  - source: plasma_folate
+    target: csf_folate
+    sign: "+"
+    mechanism: CSF folate is actively transported from blood across the choroid plexus by the folate receptor FOLR1 (cerebral folate transport); lower blood folate lowers CSF folate (and FOLR1 LoF causes isolated CSF folate deficiency)
+    evidence: "GeneReviews / OMIM 613068 (cerebral folate transport deficiency, FOLR1); Boron & Boulpaep Medical Physiology (choroid-plexus transport)"
+
+  # --- biotin recycling: biotinidase releases free biotin from biocytin/biotinylated
+  #     peptides; deficiency causes secondary biotin deficiency. ---
+  - source: biotinidase_activity
+    target: plasma_biotin
+    sign: "+"
+    causal_evidence: genetic_lof_gof
+    mechanism: biotinidase cleaves biocytin and biotinyl-peptides to release free biotin for recycling and intestinal absorption; reduced biotinidase activity lowers free biotin (biotinidase deficiency = secondary biotin deficiency)
+    evidence: "Lehninger Principles of Biochemistry (biotin recycling by biotinidase); OMIM 253260 (biotinidase deficiency); Harrison's, 'Vitamin deficiency'"
+
+  # --- vitamin D 25-hydroxylation (edge into EXISTING corpus node) ---
+  # boundary ref: plasma_25oh_vitamin_d is reused / shared with the existing map.
+  # NOTE: no defensible additional driver added here; the node is shared so its HPO
+  # directional terms attach to the existing node. (No fabricated edge.)
+
+constitutive_edges: []   # none — single-scale analyte/activity pools (Phase 1)

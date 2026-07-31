@@ -1,0 +1,516 @@
+# =============================================================================
+# Fatty-acid oxidation (FAO), carnitine cycle, peroxisomal & branched-chain
+# fatty-acid metabolism  — PhysioMap fragment  *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Covers the directional HPO "abnormal-quantity" gap terms for the fatty_acid_oxidation
+# theme: plasma/serum carnitine & acylcarnitine species (the acylcarnitine profile from
+# tandem-MS newborn screening), tissue carnitine pools, peroxisomal very-long-chain and
+# branched-chain fatty acids (VLCFA, phytanic/pristanic acid, THCA), and the enzyme/
+# transporter ACTIVITY roots of the mitochondrial carnitine cycle and beta-oxidation
+# spiral plus the peroxisomal beta-oxidation enzymes.
+#
+# Physiology / biochemistry provenance:
+#   - Lehninger Principles of Biochemistry (Nelson & Cox), "Fatty acid catabolism":
+#     long-chain fatty acids are activated to acyl-CoA, then shuttled into the
+#     mitochondrion by the CARNITINE CYCLE (CPT1 -> CACT/SLC25A20 -> CPT2), and
+#     degraded two carbons at a time by the beta-oxidation spiral
+#     (acyl-CoA dehydrogenase [SCAD/MCAD/VLCAD] -> enoyl-CoA hydratase ->
+#     3-hydroxyacyl-CoA dehydrogenase -> 3-ketoacyl-CoA thiolase).
+#   - Harrison's Principles of Internal Medicine, "Inherited disorders of fatty acid
+#     metabolism" / "Disorders of peroxisome biogenesis": MCAD/VLCAD/LCHAD/CPT-I/CPT-II/
+#     CACT deficiencies present with a characteristic plasma ACYLCARNITINE profile
+#     (chain-length-specific species accumulate proximal to the enzymatic block) and
+#     secondary CARNITINE DEFICIENCY; X-ALD and Zellweger-spectrum disorders accumulate
+#     VLCFA; Refsum disease accumulates phytanic acid (PHYH deficiency); AMACR / DBP
+#     defects accumulate pristanic acid and THCA bile-acid intermediates.
+#   - Williams Textbook of Endocrinology / standard clinical-biochemistry references
+#     (newborn-screening acylcarnitine panel) for the individual C-length species.
+#   - IEMbase / OMIM for the disorder-marker correspondences.
+#
+# MODELING NOTE — this is deliberately an ISLAND fragment (no edges into the existing
+# corpus). Each analyte is a GROUNDED node that ABSTAINS under the comparative-statics
+# solver, which is the safe and valuable behaviour for these screening metabolites: the
+# acylcarnitine "profile" is determined by which specific upstream enzyme is blocked, and
+# encoding determinate quantitative edges between dozens of individual chain-length
+# species would require fabricating signs that the literature does not pin down for an
+# arbitrary intervention. We therefore provide the NODES (so the HPO terms map and the
+# pipeline can attach disorder-specific do() clamps later) and only the small number of
+# enzyme->pool edges whose sign is unambiguous from the catalytic mechanism.
+#
+# BRIDGE ADDENDUM (reviewed 2026-07-18): one reviewed component-bridge edge now connects
+# this fragment to core — hydroxyacyl_coa_dehydrogenase_activity -(-)-> glutamate_dehydrogenase_activity
+# (CB-MET-012; the SCHAD-HI GDH-disinhibition mechanism). See the causal_edges section.
+#
+# PATO qualities used: concentration PATO:0000033; catalytic activity PATO:0001414;
+# amount PATO:0000070.
+# Entity IRIs: verified by grep against ontology/.obo_cache/{CHEBI,PR,CL,UBERON}.obo;
+# left null wherever no exact OBO 'name:'/synonym match exists (NOT fabricated).
+# =============================================================================
+
+name: hpo_fatty_acid_oxidation
+description: >-
+  DRAFT PhysioMap fragment for the fatty-acid-oxidation theme: plasma/tissue carnitine
+  and the tandem-MS acylcarnitine profile (free, total, short-/medium-/long-/very-long-
+  chain, and individual chain-length species), peroxisomal VLCFA / branched-chain
+  (phytanic, pristanic, THCA) markers, and the enzyme/transporter activity roots of the
+  carnitine cycle, mitochondrial beta-oxidation spiral, and peroxisomal beta-oxidation.
+  Island fragment: grounded analyte nodes (abstain under the solver) plus the few
+  unambiguous enzyme->substrate/product edges. Single + cellular scale, Phase 1.
+
+nodes:
+  # ---------------------------------------------------------------------------
+  # CARNITINE POOLS (plasma / liver / muscle)
+  # ---------------------------------------------------------------------------
+  - id: plasma_carnitine
+    label: plasma total carnitine concentration
+    scale: organ_system
+    entity_iri: CHEBI:17126            # carnitine (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_free_carnitine
+    label: plasma free (non-esterified) carnitine concentration
+    scale: organ_system
+    entity_iri: CHEBI:17126            # carnitine
+    quality_iri: PATO:0000033
+  - id: hepatic_carnitine
+    label: hepatic (liver) carnitine concentration
+    scale: organ
+    entity_iri: CHEBI:17126            # carnitine
+    bearer_entity_iri: UBERON:0002107  # liver (verified UBERON.obo)
+    quality_iri: PATO:0000033
+  - id: muscle_carnitine
+    label: skeletal-muscle carnitine concentration
+    scale: tissue
+    entity_iri: CHEBI:17126            # carnitine
+    bearer_entity_iri: UBERON:0001134  # skeletal muscle tissue (verified UBERON.obo)
+    quality_iri: PATO:0000033
+
+  # ---------------------------------------------------------------------------
+  # ACYLCARNITINE — chain-length CLASSES
+  # ---------------------------------------------------------------------------
+  - id: plasma_acylcarnitine
+    label: plasma total acylcarnitine concentration
+    scale: organ_system
+    entity_iri: CHEBI:17387            # O-acylcarnitine (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_short_chain_acylcarnitine
+    label: plasma short-chain acylcarnitine concentration
+    scale: organ_system
+    quality_iri: PATO:0000033
+  - id: plasma_medium_chain_acylcarnitine
+    label: plasma medium-chain acylcarnitine concentration
+    scale: organ_system
+    quality_iri: PATO:0000033
+  - id: plasma_long_chain_acylcarnitine
+    label: plasma long-chain acylcarnitine concentration
+    scale: organ_system
+    quality_iri: PATO:0000033
+  - id: plasma_very_long_chain_acylcarnitine
+    label: plasma very-long-chain acylcarnitine concentration
+    scale: organ_system
+    quality_iri: PATO:0000033
+
+  # ---------------------------------------------------------------------------
+  # ACYLCARNITINE — individual species (newborn-screening panel)
+  # ---------------------------------------------------------------------------
+  - id: plasma_acetylcarnitine
+    label: plasma acetylcarnitine (C2) concentration
+    scale: organ_system
+    entity_iri: CHEBI:73024            # O-acetylcarnitine (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_propionylcarnitine
+    label: plasma propionylcarnitine (C3) concentration
+    scale: organ_system
+    entity_iri: CHEBI:28867            # O-propanoylcarnitine (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_butyrylcarnitine
+    label: plasma butyrylcarnitine (C4) concentration
+    scale: organ_system
+    entity_iri: CHEBI:7676             # O-butanoylcarnitine (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_c4_acylcarnitine
+    label: plasma C4 acylcarnitine concentration
+    scale: organ_system
+    quality_iri: PATO:0000033
+  - id: plasma_c5_acylcarnitine
+    label: plasma C5 acylcarnitine concentration
+    scale: organ_system
+    quality_iri: PATO:0000033
+  - id: plasma_isovalerylcarnitine
+    label: plasma isovalerylcarnitine (C5) concentration
+    scale: organ_system
+    entity_iri: CHEBI:73025            # O-isovalerylcarnitine (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_glutarylcarnitine
+    label: plasma glutarylcarnitine (C5-DC) concentration
+    scale: organ_system
+    entity_iri: CHEBI:165628           # glutarylcarnitine (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_methylmalonylcarnitine
+    label: plasma methylmalonylcarnitine concentration
+    scale: organ_system
+    entity_iri: CHEBI:73031            # O-methylmalonylcarnitine (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_malonylcarnitine
+    label: plasma malonylcarnitine (C3-DC) concentration
+    scale: organ_system
+    entity_iri: CHEBI:73028            # O-malonylcarnitine (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_methylglutarylcarnitine
+    label: plasma methylglutarylcarnitine (C6-DC) concentration
+    scale: organ_system
+    entity_iri: CHEBI:86486            # O-methylglutarylcarnitine (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_hexanoylcarnitine
+    label: plasma hexanoylcarnitine (C6) concentration
+    scale: organ_system
+    entity_iri: CHEBI:70749            # O-hexanoylcarnitine (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_octanoylcarnitine
+    label: plasma octanoylcarnitine (C8) concentration
+    scale: organ_system
+    entity_iri: CHEBI:73039            # O-octanoylcarnitine (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_octenoylcarnitine
+    label: plasma octenoylcarnitine (C8:1) concentration
+    scale: organ_system
+    entity_iri: CHEBI:86052            # O-octenoylcarnitine (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_decanoylcarnitine
+    label: plasma decanoylcarnitine (C10) concentration
+    scale: organ_system
+    entity_iri: CHEBI:68830            # O-decanoylcarnitine (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_decenoylcarnitine
+    label: plasma decenoylcarnitine (C10:1) concentration
+    scale: organ_system
+    entity_iri: CHEBI:86063            # O-decenoylcarnitine (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_decadienoylcarnitine
+    label: plasma 2-trans,4-cis-decadienoylcarnitine (C10:2) concentration
+    scale: organ_system
+    entity_iri: CHEBI:156419           # 2-trans,4-cis-decadienoylcarnitine (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_dodecanoylcarnitine
+    label: plasma dodecanoylcarnitine (C12) concentration
+    scale: organ_system
+    entity_iri: CHEBI:73054            # O-dodecanoylcarnitine (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_c12_acylcarnitine
+    label: plasma C12 acylcarnitine concentration
+    scale: organ_system
+    quality_iri: PATO:0000033
+  - id: plasma_dodecenoylcarnitine
+    label: plasma dodecenoylcarnitine (C12:1) concentration
+    scale: organ_system
+    entity_iri: CHEBI:86065            # O-dodecenoylcarnitine (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_tetradecanoylcarnitine
+    label: plasma tetradecanoylcarnitine (C14) concentration
+    scale: organ_system
+    entity_iri: CHEBI:73061            # O-tetradecanoylcarnitine (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_tetradecenoylcarnitine
+    label: plasma tetradecenoylcarnitine (C14:1) concentration
+    scale: organ_system
+    entity_iri: CHEBI:86066            # O-tetradecenoylcarnitine (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_c16_acylcarnitine
+    label: plasma C16 acylcarnitine concentration
+    scale: organ_system
+    quality_iri: PATO:0000033
+  - id: plasma_palmitoylcarnitine
+    label: plasma palmitoylcarnitine (C16) concentration
+    scale: organ_system
+    entity_iri: CHEBI:17490            # O-palmitoyl-L-carnitine (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_palmitoleylcarnitine
+    label: plasma palmitoleylcarnitine (C16:1) concentration
+    scale: organ_system
+    entity_iri: CHEBI:73066            # O-palmitoleoylcarnitine (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_c18_acylcarnitine
+    label: plasma C18 acylcarnitine concentration
+    scale: organ_system
+    quality_iri: PATO:0000033
+  - id: plasma_stearoylcarnitine
+    label: plasma stearoylcarnitine (C18) concentration
+    scale: organ_system
+    entity_iri: CHEBI:73074            # O-stearoylcarnitine (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_octadecenoylcarnitine
+    label: plasma octadecenoylcarnitine (C18:1) concentration
+    scale: organ_system
+    entity_iri: CHEBI:86475            # O-octadecenoylcarnitine (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_oleylcarnitine
+    label: plasma oleylcarnitine (C18:1) concentration
+    scale: organ_system
+    entity_iri: CHEBI:72689            # O-oleoylcarnitine (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_linoleylcarnitine
+    label: plasma linoleylcarnitine (C18:2) concentration
+    scale: organ_system
+    entity_iri: CHEBI:73072            # O-linoleoylcarnitine (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_3_hydroxybutyrylcarnitine
+    label: plasma 3-hydroxybutyrylcarnitine (C4-OH) concentration
+    scale: organ_system
+    entity_iri: CHEBI:72995            # 3-hydroxybutyrylcarnitine (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_3_hydroxyhexanoylcarnitine
+    label: plasma 3-hydroxyhexanoylcarnitine (C6-OH) concentration
+    scale: organ_system
+    entity_iri: CHEBI:174063           # 3-hydroxyhexanoyl carnitine (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_3_hydroxyisovalerylcarnitine
+    label: plasma 3-hydroxyisovalerylcarnitine (C5-OH) concentration
+    scale: organ_system
+    entity_iri: CHEBI:73027            # 3-hydroxyisovalerylcarnitine (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_3_hydroxyhexadecanoylcarnitine
+    label: plasma 3-hydroxyhexadecanoylcarnitine (C16-OH) concentration
+    scale: organ_system
+    entity_iri: CHEBI:73070            # 3-hydroxyhexadecanoylcarnitine (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_3_hydroxypalmitoleylcarnitine
+    label: plasma 3-hydroxypalmitoleylcarnitine (C16:1-OH) concentration
+    scale: organ_system
+    entity_iri: CHEBI:73068            # 3-hydroxypalmitoleoylcarnitine (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_3_hydroxylinoleylcarnitine
+    label: plasma 3-hydroxylinoleylcarnitine (C18:2-OH) concentration
+    scale: organ_system
+    entity_iri: CHEBI:73075            # 3-hydroxylinoleoylcarnitine (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+
+  # ---------------------------------------------------------------------------
+  # FREE FATTY ACIDS — long-chain, very-long-chain, branched (peroxisomal)
+  # ---------------------------------------------------------------------------
+  - id: plasma_long_chain_fatty_acid
+    label: plasma long-chain fatty acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:15904            # long-chain fatty acid (ChEBI class; verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_vlcfa
+    label: plasma very-long-chain fatty acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:27283            # very long-chain fatty acid (ChEBI class; verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_hexacosanoic_acid
+    label: plasma hexacosanoic acid (C26:0) concentration
+    scale: organ_system
+    entity_iri: CHEBI:31009            # hexacosanoic acid (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_tetracosanoic_acid
+    label: plasma tetracosanoic acid (C24:0) concentration
+    scale: organ_system
+    entity_iri: CHEBI:28866            # tetracosanoic acid (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_phytanic_acid
+    label: plasma phytanic acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:16285            # phytanic acid (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: plasma_pristanic_acid
+    label: plasma pristanic acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:51340            # pristanic acid (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+  - id: urinary_trihydroxycholestanoate
+    label: urinary trihydroxycholestanoic acid (THCA) concentration
+    scale: organ_system
+    entity_iri: CHEBI:18402            # 3alpha,7alpha,12alpha-trihydroxy-5beta-cholestan-26-oic acid (verified CHEBI.obo)
+    quality_iri: PATO:0000033
+
+  # ---------------------------------------------------------------------------
+  # ENZYME / TRANSPORTER ACTIVITY ROOTS (cellular scale)
+  # ---------------------------------------------------------------------------
+  - id: mcad_activity
+    label: medium-chain acyl-CoA dehydrogenase (MCAD/ACADM) activity
+    scale: cellular
+    entity_iri: PR:P11310              # medium-chain specific acyl-CoA dehydrogenase (verified PR.obo)
+    bearer_entity_iri: CL:0000182      # hepatocyte (verified CL.obo)
+    quality_iri: PATO:0001414
+  - id: short_chain_acyl_coa_dehydrogenase_activity
+    label: short-chain acyl-CoA dehydrogenase (SCAD/ACADS) activity
+    scale: cellular
+    entity_iri: PR:000006373           # short-chain specific acyl-CoA dehydrogenase (verified PR.obo)
+    bearer_entity_iri: CL:0000182      # hepatocyte
+    quality_iri: PATO:0001414
+  - id: hydroxyacyl_coa_dehydrogenase_activity
+    label: 3-hydroxyacyl-CoA dehydrogenase activity
+    scale: cellular
+    entity_iri: PR:Q16836              # hydroxyacyl-coenzyme A dehydrogenase, mitochondrial / HADH (verified PR.obo)
+    bearer_entity_iri: CL:0000182      # hepatocyte
+    quality_iri: PATO:0001414
+  - id: cpt2_activity
+    label: carnitine O-palmitoyltransferase 2 (CPT2) activity
+    scale: cellular
+    entity_iri: PR:000005838           # carnitine O-palmitoyltransferase 2 (verified PR.obo)
+    bearer_entity_iri: CL:0000182      # hepatocyte
+    quality_iri: PATO:0001414
+  - id: cact_activity
+    label: carnitine-acylcarnitine translocase (SLC25A20/CACT) activity
+    scale: cellular
+    entity_iri: PR:Q04458              # carnitine-acylcarnitine translocase (verified PR.obo)
+    bearer_entity_iri: CL:0000182      # hepatocyte
+    quality_iri: PATO:0001414
+  - id: dienoyl_coa_reductase_activity
+    label: 2,4-dienoyl-CoA reductase activity
+    scale: cellular
+    entity_iri: PR:Q16698              # 2,4-dienoyl-CoA reductase, mitochondrial / DECR1 (verified PR.obo)
+    bearer_entity_iri: CL:0000187      # muscle cell (verified CL.obo)
+    quality_iri: PATO:0001414
+  - id: acetyl_coa_carboxylase_activity
+    label: acetyl-CoA carboxylase activity
+    scale: cellular
+    entity_iri: PR:000003596           # acetyl-CoA carboxylase (verified PR.obo)
+    bearer_entity_iri: CL:0000182      # hepatocyte
+    quality_iri: PATO:0001414
+  - id: fatty_aldehyde_dehydrogenase_activity
+    label: fatty aldehyde dehydrogenase (ALDH3A2) activity
+    scale: cellular
+    entity_iri: PR:P51648              # aldehyde dehydrogenase family 3 member A2 / ALDH3A2 (verified PR.obo)
+    bearer_entity_iri: CL:0000057      # fibroblast (assayed in cultured fibroblasts)
+    quality_iri: PATO:0001414
+
+  # --- peroxisomal beta-oxidation / branched-chain enzymes ---
+  - id: phytanoyl_coa_hydroxylase_activity
+    label: phytanoyl-CoA hydroxylase (PHYH, phytanic acid oxidase) activity
+    scale: cellular
+    entity_iri: PR:000012674           # phytanoyl-CoA dioxygenase (verified PR.obo)
+    bearer_entity_iri: CL:0000057      # fibroblast (assayed in cultured fibroblasts)
+    quality_iri: PATO:0001414
+  - id: amacr_activity
+    label: alpha-methylacyl-CoA racemase (AMACR) activity
+    scale: cellular
+    entity_iri: PR:000003984           # alpha-methylacyl-CoA racemase (verified PR.obo)
+    bearer_entity_iri: CL:0000057      # fibroblast (assayed in cultured fibroblasts)
+    quality_iri: PATO:0001414
+  - id: acyl_coa_oxidase_activity
+    label: acyl-CoA oxidase (ACOX1) activity
+    scale: cellular
+    entity_iri: PR:Q15067              # peroxisomal acyl-coenzyme A oxidase 1 / ACOX1 (verified PR.obo)
+    bearer_entity_iri: CL:0000057      # fibroblast
+    quality_iri: PATO:0001414
+  - id: glutaryl_coa_oxidase_activity
+    label: peroxisomal glutaryl-CoA oxidase activity
+    scale: cellular
+    bearer_entity_iri: CL:0000057      # fibroblast
+    quality_iri: PATO:0001414
+  - id: d_bifunctional_protein_activity
+    label: D-bifunctional protein (HSD17B4, peroxisomal multifunctional protein) activity
+    scale: cellular
+    entity_iri: PR:P51659              # peroxisomal multifunctional enzyme type 2 / HSD17B4 (verified PR.obo)
+    bearer_entity_iri: CL:0000057      # fibroblast
+    quality_iri: PATO:0001414
+  - id: three_beta_hsd_delta5_desaturase_activity
+    label: 3-beta-hydroxysteroid-delta-5-desaturase activity
+    scale: cellular
+    bearer_entity_iri: CL:0000057      # fibroblast (assayed in cultured fibroblasts)
+    quality_iri: PATO:0001414
+  - id: plasma_3_ketoacyl_coa_thiolase
+    label: circulating 3-ketoacyl-CoA thiolase concentration
+    scale: organ_system
+    quality_iri: PATO:0000033
+
+causal_edges:
+  # Only edges whose sign is UNAMBIGUOUS from the catalytic mechanism (enzyme consumes
+  # its substrate, so reduced activity raises the upstream substrate pool / the
+  # corresponding acylcarnitine that mirrors the blocked acyl-CoA species).
+
+  # MCAD (ACADM) oxidizes medium-chain acyl-CoA (C6-C10). Reduced MCAD -> accumulation of
+  # medium-chain acyl-CoA, trapped as medium-chain acylcarnitines (C8 octanoylcarnitine is
+  # the diagnostic marker), and secondary depletion of free carnitine.
+  - source: mcad_activity
+    target: plasma_medium_chain_acylcarnitine
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: MCAD dehydrogenates medium-chain acyl-CoA in the beta-oxidation spiral; reduced activity backs up medium-chain acyl-CoA, which is esterified to medium-chain acylcarnitine and exported to plasma (MCAD deficiency RAISES medium-chain acylcarnitines)
+    evidence: "Harrison's Principles of Internal Medicine, 'Inherited disorders of fatty acid metabolism' (MCAD deficiency, OMIM 201450; elevated C6-C10 acylcarnitines, esp. octanoylcarnitine C8); Lehninger Principles of Biochemistry, beta-oxidation spiral"
+  - source: mcad_activity
+    target: plasma_octanoylcarnitine
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: octanoylcarnitine (C8) is the principal acylcarnitine accumulating proximal to the MCAD block; reduced MCAD activity raises plasma C8
+    evidence: "Harrison's Principles of Internal Medicine (MCAD deficiency; C8 octanoylcarnitine is the diagnostic newborn-screening marker, OMIM 201450)"
+  - source: mcad_activity
+    target: plasma_free_carnitine
+    sign: "+"
+    causal_evidence: genetic_lof_gof
+    mechanism: chronic accumulation and urinary excretion of acylcarnitines depletes the free-carnitine pool (secondary carnitine deficiency); higher MCAD activity preserves free carnitine, lower activity lowers it
+    evidence: "Harrison's Principles of Internal Medicine (secondary carnitine deficiency in fatty-acid oxidation disorders); Williams Textbook of Endocrinology (carnitine homeostasis)"
+
+  # CPT2 reconverts acylcarnitine -> acyl-CoA inside the mitochondrion. Reduced CPT2 (or
+  # CACT) blocks the carnitine cycle and causes long-chain acylcarnitines to accumulate.
+  - source: cpt2_activity
+    target: plasma_long_chain_acylcarnitine
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: CPT2 regenerates long-chain acyl-CoA from acylcarnitine at the inner mitochondrial membrane; reduced CPT2 activity backs up long-chain acylcarnitines (C16/C18) into plasma (CPT-II deficiency RAISES long-chain acylcarnitines)
+    evidence: "Harrison's Principles of Internal Medicine, 'Inherited disorders of fatty acid metabolism' (CPT-II deficiency, OMIM 255110; elevated C16/C18 acylcarnitines); Lehninger Principles of Biochemistry, carnitine shuttle"
+  - source: cact_activity
+    target: plasma_long_chain_acylcarnitine
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: CACT (SLC25A20) imports acylcarnitine into the mitochondrial matrix in exchange for free carnitine; reduced translocase activity strands long-chain acylcarnitines in the cytosol/plasma (CACT deficiency RAISES long-chain acylcarnitines)
+    evidence: "Harrison's Principles of Internal Medicine (carnitine-acylcarnitine translocase deficiency, OMIM 212138; elevated long-chain acylcarnitines); Lehninger Principles of Biochemistry, carnitine shuttle"
+
+  # PHYH (phytanic acid oxidase) is the rate-limiting alpha-oxidation enzyme for phytanic
+  # acid. Reduced PHYH -> phytanic acid accumulates (Refsum disease).
+  - source: phytanoyl_coa_hydroxylase_activity
+    target: plasma_phytanic_acid
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: phytanic acid (3-methyl-branched) cannot undergo beta-oxidation and is first alpha-oxidized via PHYH; reduced PHYH activity blocks its degradation and raises plasma phytanic acid (Refsum disease)
+    evidence: "Harrison's Principles of Internal Medicine, 'Disorders of peroxisome metabolism' (Refsum disease, PHYH deficiency, OMIM 266500; phytanic acid accumulation); Lehninger Principles of Biochemistry, alpha-oxidation"
+
+  # AMACR racemizes (2R)-pristanoyl-CoA / branched bile-acid CoA to the (2S) form required
+  # for peroxisomal beta-oxidation. Reduced AMACR -> pristanic acid + THCA accumulate.
+  - source: amacr_activity
+    target: plasma_pristanic_acid
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: AMACR converts (2R)- to (2S)-methyl-branched acyl-CoA esters (pristanoyl-CoA, bile-acid intermediates) so they can be beta-oxidized; reduced AMACR activity blocks pristanic acid degradation and raises it
+    evidence: "Harrison's Principles of Internal Medicine, 'Disorders of peroxisome metabolism' (AMACR deficiency, OMIM 614307; elevated pristanic acid and bile-acid intermediates)"
+  - source: amacr_activity
+    target: urinary_trihydroxycholestanoate
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: AMACR is required to racemize trihydroxycholestanoyl-CoA (THCA-CoA) for peroxisomal beta-oxidation to the mature bile acids; reduced activity causes THCA bile-acid intermediates to accumulate and be excreted
+    evidence: "Harrison's Principles of Internal Medicine (AMACR / peroxisomal bile-acid synthesis defects; accumulation of C27 bile-acid intermediates / THCA, OMIM 614307)"
+
+  # ACOX1 / D-bifunctional protein catalyze peroxisomal beta-oxidation of VLCFA.
+  - source: acyl_coa_oxidase_activity
+    target: plasma_vlcfa
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: ACOX1 catalyzes the first, rate-limiting step of peroxisomal beta-oxidation of very-long-chain fatty acids; reduced activity blocks VLCFA degradation and raises plasma VLCFA
+    evidence: "Harrison's Principles of Internal Medicine, 'Disorders of peroxisome metabolism' (acyl-CoA oxidase deficiency, OMIM 264470; VLCFA accumulation)"
+  - source: d_bifunctional_protein_activity
+    target: plasma_vlcfa
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: D-bifunctional protein (HSD17B4) performs the hydratase/dehydrogenase steps of peroxisomal beta-oxidation of VLCFA and branched-chain acyl-CoA; reduced activity blocks VLCFA (and pristanic/THCA) degradation, raising plasma VLCFA
+    evidence: "Harrison's Principles of Internal Medicine, 'Disorders of peroxisome metabolism' (D-bifunctional protein deficiency, OMIM 261515; VLCFA and pristanic acid accumulation)"
+  - source: d_bifunctional_protein_activity
+    target: plasma_pristanic_acid
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: D-bifunctional protein also handles pristanoyl-CoA in peroxisomal beta-oxidation; reduced activity raises plasma pristanic acid
+    evidence: "Harrison's Principles of Internal Medicine (D-bifunctional protein deficiency, OMIM 261515; pristanic acid accumulation alongside VLCFA)"
+
+  # --- component bridge (CB-MET-012; reviewed 2026-07-18) ----------------------
+  # SCHAD/HADH moonlights as a direct inhibitor of glutamate dehydrogenase (GDH);
+  # HADH loss disinhibits GDH -> the SCHAD-hyperinsulinism axis. This is the
+  # uniquely-attributable HADH mechanism (NOT the confounded FAO->ketogenesis route,
+  # held as CB-MET-002). Lands into the existing GDH -(+)-> beta_cell_insulin_secretion
+  # edge, joining {HADH, plasma_3_hydroxybutyrylcarnitine, plasma_3_hydroxyhexanoylcarnitine} to core.
+  - source: hydroxyacyl_coa_dehydrogenase_activity
+    target: glutamate_dehydrogenase_activity     # boundary node (textbook_extracted.yaml)
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: HADH (short-chain 3-hydroxyacyl-CoA dehydrogenase) protein moonlights as a direct inhibitor of glutamate dehydrogenase (GLUD1) in the pancreatic beta cell; loss of HADH releases GDH from inhibition, raising GDH activity, glutamate-driven anaplerosis and insulin secretion, so HADH activity up lowers GDH activity
+    evidence: "genetic_lof_gof do(): HADH/SCHAD loss-of-function = SCHAD hyperinsulinism (HADH deficiency), a natural human do() on the enzyme. Intervention: germline HADH LoF; measured endpoint: disinhibited / increased GDH activity -> leucine/protein-sensitive hyperinsulinaemic hypoglycaemia; context: human pancreatic beta-cell / hepatocyte, chronic Mendelian. do(HADH up) => GDH activity down (sign -). PMID:20670938 (Filling C, Stanley CA et al., J Biol Chem 2010 — direct SCHAD-GDH inhibitory protein-protein interaction, the primary mechanistic proof); DOI:10.1172/JCI11294 (Clayton PT et al., J Clin Invest 2001;108:457-465); Orphanet J Rare Dis 2021, DOI:10.1186/s13023-021-02088-6 (PMC8567654, GDH-disinhibition mechanism). Lands into the existing glutamate_dehydrogenase_activity -(+)-> beta_cell_insulin_secretion axis; replaces the held CB-MET-002 (confounded HADH->hepatic_ketogenesis)."
+
+constitutive_edges: []   # none — island fragment (no cross-scale lift this phase)

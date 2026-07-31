@@ -1,0 +1,124 @@
+# =============================================================================
+# Liver-function / serum enzyme markers — PhysioMap fragment  *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Hand-encoded HPO-coverage fragment for the "liver_function_enzymes" theme.
+# Each node is a physiological VARIABLE: either a circulating ENZYME LEVEL
+# (organ_system; clinically a serum-activity / mass marker) or an intracellular /
+# tissue ENZYME-ACTIVITY root (cellular, with a bearer cell/organ).
+#
+# Provenance / textbooks:
+#   - Boron & Boulpaep, Medical Physiology — hepatobiliary function; hepatocyte
+#     injury releases cytosolic/mitochondrial enzymes (AST/ALT) into plasma.
+#   - Harrison's Principles of Internal Medicine — "Evaluation of Liver Function"
+#     (aminotransferases AST/ALT, GGT, cholinesterase as hepatic markers); GGT as a
+#     cholestatic/biliary marker.
+#   - Lehninger Principles of Biochemistry — transaminase reactions; aldehyde
+#     dehydrogenase (ALDH2) in ethanol/acetaldehyde metabolism; UGT glucuronidation.
+#   - Williams Textbook of Endocrinology / standard clinical chemistry (Tietz) —
+#     serum enzyme reference markers; pseudocholinesterase (BCHE) is liver-synthesized.
+#
+# Enzyme identities (UniProt / PRO / clinical chemistry):
+#   - AST = aspartate aminotransferase (GOT1/GOT2)            PR:000022172
+#   - ALT = alanine aminotransferase (GPT)                    PR:000050219
+#   - GGT = gamma-glutamyltransferase 1 (GGT1; PRO "glutathione hydrolase 1
+#           proenzyme", EXACT synonym "gamma-glutamyltransferase 1")  PR:000001458
+#   - "acetaldehyde dehydrogenase" = aldehyde dehydrogenase, mitochondrial (ALDH2),
+#           the principal acetaldehyde-oxidizing enzyme               PR:000003925
+#   - pancreatic triacylglycerol lipase (PNLIP)              PR:000012925
+#   - cholinesterase (serum/pseudocholinesterase, BCHE)      PR:000004685
+#   - liver carboxylesterase 1 (CES1)                        PR:000005365
+#   - UGT1A1 (bilirubin UDP-glucuronosyltransferase): node ALREADY in corpus
+#           (ugt1a1_activity, benchmarks/human/systems/bilirubin_liver_function.yaml)
+#           -> HP:6000617 maps to that EXISTING node; NOT redefined here.
+#
+# Scope / edges: most analytes here are grounded ROOTS (a LoF / induction directly
+# clamps the enzyme level), so they ABSTAIN safely with no edge — preferred over a
+# guessed sign. The ONLY defensible within-fragment edges are the definitional sum
+# "total serum transaminases = AST + ALT" (HP:0002910 is the generic transaminase
+# term; AST and ALT are its two clinical components). Single-scale + cellular roots.
+# This is an ISLAND fragment (no reference to an existing-map node other than the
+# mapped-only ugt1a1_activity); validate_fragment will WARN, not error.
+# =============================================================================
+
+name: hpo_liver_function_enzymes
+description: >-
+  DRAFT liver-function / serum enzyme markers as PhysioMap variables: circulating
+  aminotransferases (total, AST, ALT), gamma-glutamyltransferase, pancreatic lipase,
+  and serum cholinesterase (organ_system levels), plus intracellular/tissue enzyme
+  activities (mitochondrial aldehyde dehydrogenase ALDH2, tissue GGT, liver
+  carboxylesterase 1) as cellular roots with bearer cells/organs. Bilirubin UGT1A1
+  is covered by the existing ugt1a1_activity node (mapped, not redefined). Grounded
+  roots that abstain safely; only the AST+ALT->total-transaminases definitional sum
+  is encoded as edges. Single-scale (ORGAN_SYSTEM) + cellular, Phase 1.
+
+nodes:
+  # --- circulating aminotransferases (clinical serum markers) ---
+  - id: plasma_transaminases
+    label: plasma (serum) total aminotransferase concentration (AST + ALT)
+    scale: organ_system
+    # entity_iri omitted: "transaminases" is a generic umbrella (AST + ALT), no single
+    # exact PR/CHEBI class verified for the aggregate. Left null rather than fabricated.
+    quality_iri: PATO:0000033          # concentration
+  - id: plasma_ast
+    label: plasma aspartate aminotransferase concentration
+    scale: organ_system
+    entity_iri: PR:000022172           # aspartate aminotransferase (verified PR name)
+    quality_iri: PATO:0000033          # concentration
+  - id: plasma_alt
+    label: plasma alanine aminotransferase concentration
+    scale: organ_system
+    entity_iri: PR:000050219           # alanine aminotransferase (verified PR name)
+    quality_iri: PATO:0000033          # concentration
+  - id: plasma_ggt
+    label: plasma gamma-glutamyltransferase concentration
+    scale: organ_system
+    entity_iri: PR:000001458           # GGT1 (PRO name "glutathione hydrolase 1
+                                       # proenzyme"; EXACT synonym "gamma-glutamyltransferase 1")
+    quality_iri: PATO:0000033          # concentration
+
+  # --- intracellular / tissue enzyme-ACTIVITY roots (cellular) ---
+  - id: aldehyde_dehydrogenase_activity
+    label: hepatocyte mitochondrial aldehyde (acetaldehyde) dehydrogenase ALDH2 activity
+    scale: cellular
+    entity_iri: PR:000003925           # aldehyde dehydrogenase, mitochondrial (ALDH2)
+    bearer_entity_iri: CL:0000182      # hepatocyte (verified CL name)
+    quality_iri: PATO:0001414          # catalytic / enzyme activity
+  - id: gamma_glutamyltransferase_activity
+    label: tissue gamma-glutamyltransferase (GGT1) catalytic activity
+    scale: cellular
+    entity_iri: PR:000001458           # GGT1 (see plasma_ggt note)
+    bearer_entity_iri: CL:0000182      # hepatocyte (biliary/hepatocyte membrane GGT)
+    quality_iri: PATO:0001414          # catalytic / enzyme activity
+  - id: carboxylesterase_1_activity
+    label: liver carboxylesterase 1 (CES1) catalytic activity
+    scale: cellular
+    entity_iri: PR:000005365           # liver carboxylesterase 1 (verified PR name)
+    bearer_entity_iri: CL:0000182      # hepatocyte (verified CL name)
+    quality_iri: PATO:0001414          # catalytic / enzyme activity
+
+  # --- other circulating enzyme markers ---
+  - id: plasma_pancreatic_lipase
+    label: plasma pancreatic triacylglycerol lipase concentration
+    scale: organ_system
+    entity_iri: PR:000012925           # pancreatic triacylglycerol lipase (verified PR name)
+    quality_iri: PATO:0000033          # concentration
+  - id: plasma_cholinesterase_activity
+    label: plasma (serum) cholinesterase (BCHE / pseudocholinesterase) activity
+    scale: organ_system
+    entity_iri: PR:000004685           # cholinesterase (BCHE, serum pseudocholinesterase)
+    quality_iri: PATO:0001414          # catalytic / enzyme activity (serum enzyme activity marker)
+
+causal_edges:
+  # --- definitional sum: total serum transaminases = AST + ALT ---
+  - source: plasma_ast
+    target: plasma_transaminases
+    sign: "+"
+    mechanism: total serum "transaminases" (the generic hepatic-transaminase marker, HP:0002910) is the aggregate of AST and ALT; a rise in plasma AST raises the measured total transaminase level
+    evidence: "Harrison's Principles of Internal Medicine, 'Evaluation of Liver Function' (aminotransferases AST and ALT as the hepatic transaminases); standard clinical chemistry (Tietz) — total transaminase activity is the sum of AST + ALT"
+  - source: plasma_alt
+    target: plasma_transaminases
+    sign: "+"
+    mechanism: a rise in plasma ALT raises the measured total transaminase level (AST + ALT aggregate)
+    evidence: "Harrison's Principles of Internal Medicine, 'Evaluation of Liver Function' (ALT as a hepatic transaminase); standard clinical chemistry (Tietz)"
+
+constitutive_edges: []   # none — single-scale markers + cellular roots (no cross-scale lift this phase)

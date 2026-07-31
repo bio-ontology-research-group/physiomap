@@ -1,0 +1,179 @@
+# =============================================================================
+# Purine metabolism & urate (uric acid) homeostasis — PhysioMap fragment
+# *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Hand-encoded, single-scale (ORGAN_SYSTEM / ORGAN). Each edge sign is the sign of
+# the partial derivative of the target w.r.t. the source at steady state, all else
+# equal (interventionist partial). ROBERT: please correct signs/edges.
+#
+# SCOPE. A self-contained subsystem for human plasma urate homeostasis: de-novo
+# purine biosynthesis and salvage feed the purine catabolic pathway
+# (hypoxanthine -> xanthine -> uric acid, both steps catalysed by xanthine
+# oxidoreductase / XDH), the liver is the dominant site of net urate production,
+# and the kidney sets plasma urate by its (re)absorption/secretion balance
+# (URAT1/SLC22A12, GLUT9/SLC2A9). Plasma urate is the net balance of hepatic
+# production (source) and renal excretion (sink).
+#
+# DISORDERS THIS FRAGMENT SUPPORTS (intervention = clamp the lesioned node; the
+# expected downstream sign of plasma_urate follows from the edges below):
+#   * Lesch-Nyhan syndrome — HPRT1 loss of function (OMIM 300322). Loss of HGPRT
+#     salvage -> PRPP accumulates -> de-novo purine synthesis up + un-salvaged
+#     hypoxanthine routed to catabolism -> uric acid OVERPRODUCTION (urate UP).
+#       hgprt_activity --(-)--> purine_synthesis_rate ; hgprt_activity --(-)--> hepatic_urate_production
+#   * Hereditary xanthinuria — xanthine dehydrogenase/oxidase (XDH) deficiency
+#     (OMIM 278300). XO/XDH catalyses hypoxanthine->xanthine->urate; loss blocks
+#     the final two steps -> xanthine ACCUMULATES, urate FALLS (hypouricaemia).
+#       xanthine_oxidase_activity --(+)--> plasma_urate ; xanthine_oxidase_activity --(-)--> plasma_xanthine
+#   * Renal hypouricaemia type 1 — URAT1/SLC22A12 loss of function (OMIM 220150).
+#     URAT1 is the apical urate reabsorber; loss -> reabsorption falls -> renal
+#     urate EXCRETION rises -> plasma urate FALLS.
+#       (URAT1 loss) => renal_urate_excretion UP => plasma_urate DOWN
+#   * PRPP synthetase (PRPS1) superactivity (OMIM 300661). Excess PRPP drives the
+#     committed step of de-novo purine synthesis -> purine OVERPRODUCTION -> uric
+#     acid overproduction (urate UP).
+#       purine_synthesis_rate --(+)--> hepatic_urate_production
+#
+# SIGN-FIXED ANCHORS (from the task brief; all consistent with physiology):
+#   xanthine_oxidase_activity --(+)--> plasma_urate         (XO makes urate)
+#   renal_urate_excretion     --(-)--> plasma_urate         (kidney clears urate)
+#   hepatic_urate_production  --(+)--> plasma_urate          (liver is the source)
+#
+# ONTOLOGY IRIs (all OLS4-verified 2026-06; real terms only):
+#   uric acid / urate ......... CHEBI:27226  ("uric acid"; the physiological anion
+#                               at pH 7.4 is urate(1-) CHEBI:30848 — kept as a NOTE,
+#                               CHEBI:27226 is the standard clinical "uric acid/urate")
+#   xanthine .................. CHEBI:15318  ("xanthine")
+#   hypoxanthine .............. CHEBI:17368  ("hypoxanthine")
+#   PRPP (5-phospho-alpha-D-ribose 1-diphosphate) ... CHEBI:17111
+#   concentration (of) ........ PATO:0000033 ("concentration of")
+#   rate ...................... PATO:0000161 ("rate")          [production/excretion/synthesis]
+#   catalytic activity ........ PATO:0001414 ("catalytic activity")  [enzyme activity]
+# NOTE on PATO: the project-wide shorthand "rate/activity = PATO:0000161" does NOT
+# match OLS4 (PATO:0000161 resolves to "accumulation"; PATO:0001414 to "non-adhesive").
+# To honour the "real IRIs only / never fabricate" rule we use the OLS4-verified
+# PATO:0000161 (rate) and PATO:0001414 (catalytic activity) instead. Reviewer to
+# reconcile the shorthand if a different convention is intended.
+#
+# BOUNDARY / EXISTING-MAP LINK. A serum-urate -> blood-pressure (mean_arterial_pressure)
+# causal edge is PHYSIOLOGICALLY CONTESTED: Mendelian-randomisation evidence is mixed
+# and a robust causal effect of urate on BP is NOT established (see Hypertension 2021,
+# PMID 33356394, and conflicting MR studies). Per the task brief we DO NOT encode a
+# urate->MAP edge here; this stays a self-contained subsystem. The new node
+# `plasma_urate` is available for urate<->BP/BMI MR benchmark pairs without
+# committing the map to a contested sign.
+# This fragment therefore references NO existing-map (boundary) node by design and is
+# an INTENTIONAL island (validate_fragment will WARN about non-integration — expected).
+# =============================================================================
+
+name: purine_urate_metabolism
+description: >-
+  DRAFT purine metabolism & urate (uric acid) homeostasis as a PhysioMap signed
+  cyclic causal graph. Encodes de-novo purine synthesis + HGPRT salvage feeding the
+  xanthine-oxidase catabolic pathway (hypoxanthine -> xanthine -> urate), hepatic
+  urate production, and renal urate excretion; plasma urate is the net balance of
+  production (source, +) and renal excretion (sink, -). Supports Lesch-Nyhan,
+  hereditary xanthinuria, renal hypouricaemia (URAT1) and PRPP-synthetase
+  superactivity phenotypes. Single-scale (Phase 1); self-contained subsystem.
+
+nodes:
+  - id: plasma_urate
+    label: plasma urate (uric acid) concentration
+    scale: organ_system
+    entity_iri: CHEBI:27226           # uric acid (urate); physiological anion urate(1-) = CHEBI:30848
+    quality_iri: PATO:0000033         # concentration of
+  - id: hepatic_urate_production
+    label: hepatic net urate (uric acid) production rate
+    scale: organ
+    entity_iri: GO:0034418            # urate biosynthetic process
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0002107  # liver
+  - id: renal_urate_excretion
+    label: renal urate excretion rate (net of reabsorption)
+    scale: organ
+    entity_iri: GO:0015747            # urate transport
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0002113  # kidney
+  - id: xanthine_oxidase_activity
+    label: xanthine oxidoreductase (XDH/XO) catalytic activity
+    scale: organ
+    entity_iri: CHEBI:27226           # produces uric acid (final catabolic product)
+    quality_iri: PATO:0001414         # catalytic activity
+  - id: hgprt_activity
+    label: hypoxanthine-guanine phosphoribosyltransferase (HGPRT) catalytic activity
+    scale: organ
+    entity_iri: PR:P00492             # hypoxanthine-guanine phosphoribosyltransferase (human)
+    quality_iri: PATO:0001414         # catalytic activity
+  - id: plasma_xanthine
+    label: plasma xanthine (and hypoxanthine) concentration
+    scale: organ_system
+    entity_iri: CHEBI:15318           # xanthine (hypoxanthine = CHEBI:17368)
+    quality_iri: PATO:0000033         # concentration of
+  - id: purine_synthesis_rate
+    label: de-novo purine biosynthesis rate (PRPP-amidotransferase committed step)
+    scale: organ
+    entity_iri: GO:0006189            # 'de novo' IMP biosynthetic process
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0002107  # liver
+
+causal_edges:
+  # --- plasma urate = balance of production (source) and excretion (sink) ----
+  - source: hepatic_urate_production
+    target: plasma_urate
+    sign: "+"
+    mechanism: the liver is the dominant site of net uric acid production (terminal purine catabolism); higher hepatic urate output raises the circulating urate pool at fixed renal clearance (source term of the urate mass balance)
+    evidence: "Boron & Boulpaep Medical Physiology (purine catabolism / uric acid); Lehninger Principles of Biochemistry (purine degradation, xanthine oxidase pathway in liver); Harrison's Principles of Internal Medicine, hyperuricemia/gout chapter (urate overproduction)"
+  - source: renal_urate_excretion
+    target: plasma_urate
+    sign: "-"
+    mechanism: the kidney clears ~two-thirds of the daily urate load; net renal urate excretion (filtration minus URAT1/GLUT9-mediated reabsorption plus secretion) is the dominant sink, so higher excretion lowers steady-state plasma urate
+    evidence: "Boron & Boulpaep Medical Physiology (renal urate handling, URAT1/SLC22A12, GLUT9/SLC2A9); Harrison's Nephrology and Acid-Base Disorders (uric acid excretion); renal hypouricemia OMIM 220150"
+
+  # --- catabolic pathway: hypoxanthine/xanthine -> urate via XO -------------
+  - source: xanthine_oxidase_activity
+    target: hepatic_urate_production
+    sign: "+"
+    causal_evidence: pharmacological
+    mechanism: xanthine oxidoreductase (XDH/XO) catalyses hypoxanthine -> xanthine -> uric acid, the final and rate-limiting steps of purine catabolism; greater XO activity raises hepatic urate production (basis of allopurinol/febuxostat urate-lowering therapy)
+    evidence: "Lehninger Principles of Biochemistry (xanthine oxidase, purine degradation); Boron & Boulpaep Medical Physiology; Harrison's (allopurinol xanthine-oxidase inhibition lowers urate)"
+  - source: xanthine_oxidase_activity
+    target: plasma_xanthine
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: xanthine and hypoxanthine are the substrates consumed by xanthine oxidoreductase; higher XO activity consumes them faster, lowering plasma xanthine/hypoxanthine (XDH deficiency reverses this -> xanthinuria)
+    evidence: "Lehninger Principles of Biochemistry (xanthine oxidase substrates); hereditary xanthinuria OMIM 278300 (XDH deficiency -> xanthine accumulation, hypouricemia); Boron & Boulpaep Medical Physiology"
+
+  # --- de-novo synthesis and salvage feed the catabolic flux ----------------
+  - source: purine_synthesis_rate
+    target: hepatic_urate_production
+    sign: "+"
+    causal_evidence: curated_mechanistic
+    mechanism: de-novo purine biosynthesis (committed step is PRPP + glutamine -> phosphoribosylamine by PRPP-amidotransferase) expands the purine-nucleotide pool whose turnover terminates in uric acid; overproduction (e.g. PRPS1 superactivity) raises urate output
+    evidence: "Lehninger Principles of Biochemistry (de-novo purine biosynthesis, PRPP-amidotransferase committed step); PRPP synthetase (PRPS1) superactivity OMIM 300661 (purine overproduction -> hyperuricemia); Harrison's hyperuricemia/gout; StatPearls Lesch-Nyhan NBK556079 (opened: de-novo purine synthesis via PRPP -> IMP -> hypoxanthine -> uric acid; PRPS1 superactivity gain-of-function OMIM 300661 -> purine/urate overproduction)"
+  - source: purine_synthesis_rate
+    target: plasma_xanthine
+    sign: "+"
+    causal_evidence: curated_mechanistic
+    mechanism: increased de-novo purine production raises the upstream substrate pool (hypoxanthine/xanthine) entering catabolism, raising their plasma levels at fixed downstream XO activity
+    evidence: "Lehninger Principles of Biochemistry (purine biosynthesis -> nucleotide turnover -> hypoxanthine/xanthine); Boron & Boulpaep Medical Physiology; StatPearls Lesch-Nyhan NBK556079 (opened: de-novo synthesis and unsalvaged purines feed hypoxanthine/xanthine before catabolism to uric acid)"
+
+  # --- HGPRT salvage: loss disinhibits synthesis and overproduces urate -----
+  - source: hgprt_activity
+    target: purine_synthesis_rate
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: HGPRT salvages hypoxanthine/guanine using PRPP back to nucleotides; high HGPRT activity consumes PRPP and replenishes purine nucleotides that feed back to inhibit PRPP-amidotransferase, so it SUPPRESSES de-novo synthesis. HGPRT loss (Lesch-Nyhan) raises PRPP and de-represses de-novo synthesis (negative edge)
+    evidence: "Lehninger Principles of Biochemistry (purine salvage, HGPRT, PRPP availability and feedback inhibition of de-novo synthesis); Lesch-Nyhan HPRT1 OMIM 300322; Harrison's (HGPRT deficiency -> purine overproduction)"
+  - source: hgprt_activity
+    target: hepatic_urate_production
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: hypoxanthine/guanine not salvaged by HGPRT are diverted into the xanthine-oxidase catabolic pathway to uric acid; loss of HGPRT (Lesch-Nyhan) routes more substrate to urate, so HGPRT activity is inversely related to urate production
+    evidence: "Lehninger Principles of Biochemistry (salvage vs catabolic fate of hypoxanthine/guanine); Lesch-Nyhan HPRT1 OMIM 300322 (HGPRT loss -> uric acid overproduction); Harrison's hyperuricemia/gout"
+  - source: hgprt_activity
+    target: plasma_xanthine
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: HGPRT salvage consumes hypoxanthine/guanine; reduced HGPRT activity (Lesch-Nyhan) leaves more hypoxanthine/xanthine for catabolism, raising the upstream xanthine/hypoxanthine pool (inverse relation)
+    evidence: "Lehninger Principles of Biochemistry (HGPRT salvage of hypoxanthine/guanine); Lesch-Nyhan HPRT1 OMIM 300322; Boron & Boulpaep Medical Physiology; StatPearls Lesch-Nyhan NBK556079 (opened: HPRT loss of function -> accumulation of hypoxanthine and xanthine diverted to catabolism; HPRT1 LoF OMIM 300322 = natural do())"
+
+constitutive_edges: []   # none — single-scale subsystem (no constitutive/macro->micro lifts)

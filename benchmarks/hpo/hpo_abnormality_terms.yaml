@@ -1,0 +1,2951 @@
+# =============================================================================
+# PhysioMap node -> neutral HPO "Abnormality of X" term  *** GENERATED ***
+# =============================================================================
+# Built by scripts/build_abnormality_terms.py from hpo_term_map.yaml + hp.obo: for each
+# node, the nearest non-directional `Abnormal X` ancestor common to its increased/decreased
+# HP terms. Used to report a reachable-but-direction-undetermined ('?') trait as
+# "X affected" with a link to HPO's direction-neutral term. Labels verbatim from hp.obo.
+# Do not hand-edit; re-run the script (hp.obo is gitignored, so this file is committed).
+# =============================================================================
+abnormality_terms:
+  aadc_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  acetyl_coa_carboxylase_activity:
+    hpo: HP:6000231
+    label: Abnormal tissue enzyme concentration or activity
+  acid_alpha_glucosidase_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  acid_ceramidase_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  acid_sphingomyelinase_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  acth:
+    hpo: HP:0011043
+    label: Abnormal circulating adrenocorticotropin concentration
+  acyl_coa_oxidase_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  ada2_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  adamts13_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  adenosine_deaminase_activity:
+    hpo: HP:4000209
+    label: Abnormal erythrocyte adenosine deaminase activity
+  adenylate_kinase_activity:
+    hpo: HP:0030272
+    label: Abnormal erythrocyte enzyme concentration or activity
+  adh:
+    hpo: HP:0003117
+    label: Abnormal circulating hormone concentration
+  agat_activity:
+    hpo: HP:6000231
+    label: Abnormal tissue enzyme concentration or activity
+  agt_activity:
+    hpo: HP:0034685
+    label: Abnormal liver enzyme activity or concentration
+  aicar_transformylase_activity:
+    hpo: HP:6000231
+    label: Abnormal tissue enzyme concentration or activity
+  ala_dehydratase_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  aldehyde_dehydrogenase_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  aldehyde_oxidase_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  aldolase_b_activity:
+    hpo: HP:0034685
+    label: Abnormal liver enzyme activity or concentration
+  aldosterone:
+    hpo: HP:0040085
+    label: Abnormal circulating aldosterone concentration
+  alkaline_phosphatase:
+    hpo: HP:0004379
+    label: Abnormality of alkaline phosphatase level
+  alkyl_dhap_synthase_activity:
+    hpo: HP:4000195
+    label: Abnormal enzyme activity in cultured fibroblasts
+  alpha_1_3_fucosyltransferase_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  alpha_aminoadipic_semialdehyde_synthase_activity:
+    hpo: HP:4000195
+    label: Abnormal enzyme activity in cultured fibroblasts
+  alpha_galactosidase_a_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  alpha_l_fucosidase_activity:
+    hpo: HP:0034728
+    label: Abnormal circulating alpha-L-fucosidase activity
+  alpha_mannosidase_activity:
+    hpo: HP:4000201
+    label: Abnormal circulating alpha mannosidase activity
+  alpha_n_acetylgalactosaminidase_activity:
+    hpo: HP:4000195
+    label: Abnormal enzyme activity in cultured fibroblasts
+  alpha_n_acetylglucosaminidase_activity:
+    hpo: HP:6000231
+    label: Abnormal tissue enzyme concentration or activity
+  amacr_activity:
+    hpo: HP:4000195
+    label: Abnormal enzyme activity in cultured fibroblasts
+  anp:
+    hpo: HP:0020182
+    label: Abnormal circulating A-type atrial natriuretic peptide concentration
+  aortic_transvalvular_gradient:
+    hpo: HP:0030964
+    label: Abnormal aortic physiology
+  arginase_activity:
+    hpo: HP:0030272
+    label: Abnormal erythrocyte enzyme concentration or activity
+  argininosuccinate_synthetase_activity:
+    hpo: HP:6000231
+    label: Abnormal tissue enzyme concentration or activity
+  aromatase_activity:
+    hpo: HP:0034698
+    label: Abnormal aromatase activity
+  arylsulfatase_a_activity:
+    hpo: HP:0034858
+    label: Abnormal leukocyte enzyme concentration or activity
+  arylsulfatase_b_activity:
+    hpo: HP:0034858
+    label: Abnormal leukocyte enzyme concentration or activity
+  aspartoacylase_activity:
+    hpo: HP:4000195
+    label: Abnormal enzyme activity in cultured fibroblasts
+  aspartylglucosaminidase_activity:
+    hpo: HP:6000231
+    label: Abnormal tissue enzyme concentration or activity
+  bckdh_enzyme_activity:
+    hpo: HP:4000195
+    label: Abnormal enzyme activity in cultured fibroblasts
+  beta_galactosidase_activity:
+    hpo: HP:0004342
+    label: Abnormal galactosidase enyzme activity
+  beta_glucuronidase_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  beta_hexosaminidase_a_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  beta_hexosaminidase_b_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  beta_mannosidase_activity:
+    hpo: HP:0034725
+    label: Abnormal circulating beta-mannosidase activity
+  beta_ureidopropionase_activity:
+    hpo: HP:0034685
+    label: Abnormal liver enzyme activity or concentration
+  biotinidase_activity:
+    hpo: HP:0410144
+    label: Abnormal circulating biotinidase concentration
+  bisphosphoglycerate_mutase_activity:
+    hpo: HP:0030272
+    label: Abnormal erythrocyte enzyme concentration or activity
+  blood_base_excess:
+    hpo: HP:0004360
+    label: Abnormality of acid-base homeostasis
+  blood_bismuth:
+    hpo: HP:0001939
+    label: Abnormality of metabolism/homeostasis
+  blood_cadmium:
+    hpo: HP:0001939
+    label: Abnormality of metabolism/homeostasis
+  blood_ethylene_glycol:
+    hpo: HP:0001939
+    label: Abnormality of metabolism/homeostasis
+  blood_mercury:
+    hpo: HP:0001939
+    label: Abnormality of metabolism/homeostasis
+  blood_urea_nitrogen:
+    hpo: HP:0031970
+    label: Abnormal blood urea nitrogen concentration
+  blood_volume:
+    hpo: HP:0011104
+    label: Abnormality of blood volume homeostasis
+  body_fluid_immunoglobulin:
+    hpo: HP:0041076
+    label: Abnormal immunoglobulin level in body fluid
+  breast_milk_zinc:
+    hpo: HP:0032243
+    label: Abnormal tissue metabolite concentration
+  c27_3beta_hsd_activity:
+    hpo: HP:4000195
+    label: Abnormal enzyme activity in cultured fibroblasts
+  c_reactive_protein:
+    hpo: HP:0032436
+    label: Abnormal circulating C-reactive protein concentration
+  cact_activity:
+    hpo: HP:6000231
+    label: Abnormal tissue enzyme concentration or activity
+  calcitriol:
+    hpo: HP:0100511
+    label: Abnormality of vitamin D metabolism
+  carbamoylphosphate_synthetase_1_activity:
+    hpo: HP:0034685
+    label: Abnormal liver enzyme activity or concentration
+  carboxylesterase_1_activity:
+    hpo: HP:0034685
+    label: Abnormal liver enzyme activity or concentration
+  carboxypeptidase_n_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  cardiac_index:
+    hpo: HP:0033529
+    label: Abnormal cardiac index
+  cardiac_output:
+    hpo: HP:0033528
+    label: Abnormal cardiac output
+  catalase_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  cathepsin_d_activity:
+    hpo: HP:0034858
+    label: Abnormal leukocyte enzyme concentration or activity
+  cbs_enzyme_activity:
+    hpo: HP:4000195
+    label: Abnormal enzyme activity in cultured fibroblasts
+  cellular_cobalamin_uptake:
+    hpo: HP:0011017
+    label: Abnormal cellular physiology
+  chitotriosidase_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  cholesterol_esterification_rate:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  citrate_synthase_activity:
+    hpo: HP:0034526
+    label: Abnormal enzyme activity in muscle tissue
+  core_temperature:
+    hpo: HP:0004370
+    label: Abnormality of temperature regulation
+  cortisol:
+    hpo: HP:0011731
+    label: Abnormality of circulating cortisol level
+  cpt2_activity:
+    hpo: HP:6000231
+    label: Abnormal tissue enzyme concentration or activity
+  csf_14_3_3:
+    hpo: HP:0025456
+    label: Abnormal CSF protein concentration
+  csf_2_hydroxyglutarate:
+    hpo: HP:0500183
+    label: Abnormal CSF carboxylic acid concentration
+  csf_4_hydroxybutyrate:
+    hpo: HP:0500183
+    label: Abnormal CSF carboxylic acid concentration
+  csf_5_hydroxymethyluracil:
+    hpo: HP:0025454
+    label: Abnormal CSF metabolite concentration
+  csf_5hiaa:
+    hpo: HP:0020019
+    label: Abnormal CSF 5-hydroxyindoleacetic acid concentration
+  csf_5mthf:
+    hpo: HP:0012335
+    label: Abnormality of folate metabolism
+  csf_ace:
+    hpo: HP:0025456
+    label: Abnormal CSF protein concentration
+  csf_aica:
+    hpo: HP:0025454
+    label: Abnormal CSF metabolite concentration
+  csf_alanine:
+    hpo: HP:0500232
+    label: Abnormal CSF alanine concentration
+  csf_albumin:
+    hpo: HP:0500238
+    label: Abnormal CSF albumin concentration
+  csf_alloisoleucine:
+    hpo: HP:0025454
+    label: Abnormal CSF metabolite concentration
+  csf_alpha_aminobutyrate:
+    hpo: HP:0500247
+    label: Abnormal CSF alpha-aminobutyrate concentration
+  csf_alpha_crystallin_b:
+    hpo: HP:0025456
+    label: Abnormal CSF protein concentration
+  csf_alpha_ketoglutarate:
+    hpo: HP:0500183
+    label: Abnormal CSF carboxylic acid concentration
+  csf_ammonia:
+    hpo: HP:0025454
+    label: Abnormal CSF metabolite concentration
+  csf_amyloid_beta:
+    hpo: HP:0030860
+    label: Abnormal CSF amyloid concentration
+  csf_amyloid_beta_40:
+    hpo: HP:0025686
+    label: Abnormal amyloid beta 40 peptide CSF concentration
+  csf_amyloid_beta_42:
+    hpo: HP:0025683
+    label: Abnormal amyloid beta 42 peptide CSF concentration
+  csf_apolipoprotein_b:
+    hpo: HP:0025454
+    label: Abnormal CSF metabolite concentration
+  csf_arginine:
+    hpo: HP:0500202
+    label: Abnormal CSF arginine concentration
+  csf_argininosuccinate:
+    hpo: HP:0500184
+    label: Abnormal CSF amino acid concentration
+  csf_asparagine:
+    hpo: HP:0500205
+    label: Abnormal CSF aspartate family amino acid concentration
+  csf_aspartate:
+    hpo: HP:0500216
+    label: Abnormal CSF aspartate concentration
+  csf_aspartylglucosamine:
+    hpo: HP:0500184
+    label: Abnormal CSF amino acid concentration
+  csf_beta_alanine:
+    hpo: HP:0500184
+    label: Abnormal CSF amino acid concentration
+  csf_beta_hcg:
+    hpo: HP:0025456
+    label: Abnormal CSF protein concentration
+  csf_biopterin:
+    hpo: HP:0040207
+    label: Abnormal CSF pterin concentration
+  csf_chi3l1:
+    hpo: HP:0025456
+    label: Abnormal CSF protein concentration
+  csf_chitotriosidase:
+    hpo: HP:0025456
+    label: Abnormal CSF protein concentration
+  csf_cholestanol:
+    hpo: HP:0025454
+    label: Abnormal CSF metabolite concentration
+  csf_citrulline:
+    hpo: HP:0500245
+    label: Abnormal CSF citrulline concentration
+  csf_creatine:
+    hpo: HP:0025454
+    label: Abnormal CSF metabolite concentration
+  csf_creatinine:
+    hpo: HP:0025454
+    label: Abnormal CSF metabolite concentration
+  csf_cystathionine:
+    hpo: HP:0500184
+    label: Abnormal CSF amino acid concentration
+  csf_cystine:
+    hpo: HP:0500184
+    label: Abnormal CSF amino acid concentration
+  csf_d_glycerate:
+    hpo: HP:0500183
+    label: Abnormal CSF carboxylic acid concentration
+  csf_d_threitol:
+    hpo: HP:0025454
+    label: Abnormal CSF metabolite concentration
+  csf_dihydrobiopterin:
+    hpo: HP:0040207
+    label: Abnormal CSF pterin concentration
+  csf_dihydrothymine:
+    hpo: HP:0025454
+    label: Abnormal CSF metabolite concentration
+  csf_dihydrouracil:
+    hpo: HP:0025454
+    label: Abnormal CSF metabolite concentration
+  csf_dopa:
+    hpo: HP:0500183
+    label: Abnormal CSF carboxylic acid concentration
+  csf_dopamine:
+    hpo: HP:0012654
+    label: Abnormal CSF dopamine concentration
+  csf_epinephrine:
+    hpo: HP:0025454
+    label: Abnormal CSF metabolite concentration
+  csf_erythritol:
+    hpo: HP:0025454
+    label: Abnormal CSF metabolite concentration
+  csf_folate:
+    hpo: HP:0012335
+    label: Abnormality of folate metabolism
+  csf_fumarate:
+    hpo: HP:0025454
+    label: Abnormal CSF metabolite concentration
+  csf_gaba:
+    hpo: HP:0500183
+    label: Abnormal CSF carboxylic acid concentration
+  csf_gfap:
+    hpo: HP:0025456
+    label: Abnormal CSF protein concentration
+  csf_glucose:
+    hpo: HP:0031884
+    label: Abnormal CSF glucose concentration
+  csf_glutamate:
+    hpo: HP:0500199
+    label: Abnormal CSF glutamate concentration
+  csf_glutamine:
+    hpo: HP:0500196
+    label: Abnormal CSF glutamine concentration
+  csf_glycine:
+    hpo: HP:0500229
+    label: Abnormal CSF glycine concentration
+  csf_guanidinoacetate:
+    hpo: HP:0020004
+    label: Abnormal CSF guanidinoacetic acid concentration
+  csf_histidine:
+    hpo: HP:0500235
+    label: Abnormal CSF histidine concentration
+  csf_homocarnosine:
+    hpo: HP:0500241
+    label: Abnormal CSF homocarnosine concentration
+  csf_homovanillic_acid:
+    hpo: HP:0034200
+    label: Abnormal CSF homovanillic acid concentration
+  csf_hva:
+    hpo: HP:0034200
+    label: Abnormal CSF homovanillic acid concentration
+  csf_hydroxyproline:
+    hpo: HP:0025454
+    label: Abnormal CSF metabolite concentration
+  csf_interferon_alpha:
+    hpo: HP:0025454
+    label: Abnormal CSF metabolite concentration
+  csf_isoleucine:
+    hpo: HP:0500192
+    label: Abnormal CSF isoleucine concentration
+  csf_l_2_hydroxyglutarate:
+    hpo: HP:0500183
+    label: Abnormal CSF carboxylic acid concentration
+  csf_lactate:
+    hpo: HP:0030085
+    label: Abnormal CSF lactate concentration
+  csf_leucine:
+    hpo: HP:0500189
+    label: Abnormal CSF leucine concentration
+  csf_lysine:
+    hpo: HP:0500206
+    label: Abnormal CSF lysine concentration
+  csf_mbp:
+    hpo: HP:0025456
+    label: Abnormal CSF protein concentration
+  csf_metanephrine:
+    hpo: HP:0025454
+    label: Abnormal CSF metabolite concentration
+  csf_methionine:
+    hpo: HP:0500209
+    label: Abnormal CSF methionine concentration
+  csf_mhpg_aldehyde:
+    hpo: HP:0025454
+    label: Abnormal CSF metabolite concentration
+  csf_n_acetylaspartate:
+    hpo: HP:0025454
+    label: Abnormal CSF metabolite concentration
+  csf_n_carbamyl_beta_alanine:
+    hpo: HP:0025454
+    label: Abnormal CSF metabolite concentration
+  csf_n_carbamyl_beta_aminoisobutyrate:
+    hpo: HP:0025454
+    label: Abnormal CSF metabolite concentration
+  csf_naag:
+    hpo: HP:0025456
+    label: Abnormal CSF protein concentration
+  csf_neopterin:
+    hpo: HP:0040203
+    label: Abnormal CSF neopterin concentration
+  csf_nfl:
+    hpo: HP:0025456
+    label: Abnormal CSF protein concentration
+  csf_ornithine:
+    hpo: HP:0500243
+    label: Abnormal CSF ornithine concentration
+  csf_phenylalanine:
+    hpo: HP:0500215
+    label: Abnormal CSF phenylalanine concentration
+  csf_proline:
+    hpo: HP:0500184
+    label: Abnormal CSF amino acid concentration
+  csf_protein:
+    hpo: HP:0025456
+    label: Abnormal CSF protein concentration
+  csf_pyridoxal_phosphate:
+    hpo: HP:0025454
+    label: Abnormal CSF metabolite concentration
+  csf_ribitol:
+    hpo: HP:0025454
+    label: Abnormal CSF metabolite concentration
+  csf_ribose:
+    hpo: HP:0025454
+    label: Abnormal CSF metabolite concentration
+  csf_saccharopine:
+    hpo: HP:0500184
+    label: Abnormal CSF amino acid concentration
+  csf_sarcosine:
+    hpo: HP:0500225
+    label: Abnormal CSF serine family amino acid concentration
+  csf_sepiapterin:
+    hpo: HP:0040207
+    label: Abnormal CSF pterin concentration
+  csf_serine:
+    hpo: HP:0500226
+    label: Abnormal CSF serine concentration
+  csf_taurine:
+    hpo: HP:0025454
+    label: Abnormal CSF metabolite concentration
+  csf_tetrahydrobiopterin:
+    hpo: HP:0040207
+    label: Abnormal CSF pterin concentration
+  csf_threonine:
+    hpo: HP:0500211
+    label: Abnormal CSF threonine concentration
+  csf_thymine:
+    hpo: HP:0025454
+    label: Abnormal CSF metabolite concentration
+  csf_tryptophan:
+    hpo: HP:0500218
+    label: Abnormal CSF tryptophan concentration
+  csf_tyrosine:
+    hpo: HP:0500219
+    label: Abnormal CSF tyrosine concentration
+  csf_uracil:
+    hpo: HP:0025454
+    label: Abnormal CSF metabolite concentration
+  csf_urate:
+    hpo: HP:0500117
+    label: Abnormal CSF urate concentration
+  csf_valine:
+    hpo: HP:0500186
+    label: Abnormal CSF valine concentration
+  csf_xylitol:
+    hpo: HP:0025454
+    label: Abnormal CSF metabolite concentration
+  cystathionine_gamma_lyase_activity:
+    hpo: HP:0034685
+    label: Abnormal liver enzyme activity or concentration
+  cytochrome_b5_reductase_activity:
+    hpo: HP:0030272
+    label: Abnormal erythrocyte enzyme concentration or activity
+  d_bifunctional_protein_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  dbh_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  dhapat_activity:
+    hpo: HP:4000195
+    label: Abnormal enzyme activity in cultured fibroblasts
+  diastolic_blood_pressure:
+    hpo: HP:0030972
+    label: Abnormal systemic blood pressure
+  dienoyl_coa_reductase_activity:
+    hpo: HP:0034526
+    label: Abnormal enzyme activity in muscle tissue
+  dihydropyrimidinase_activity:
+    hpo: HP:0034685
+    label: Abnormal liver enzyme activity or concentration
+  dihydropyrimidine_dehydrogenase_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  ecg_qrs_voltage:
+    hpo: HP:0025076
+    label: Abnormal QRS voltage
+  ejection_fraction:
+    hpo: HP:0034314
+    label: Abnormal left ventricular ejection fraction
+  end_diastolic_volume:
+    hpo: HP:0033754
+    label: Abnormal left ventricular end-diastolic volume
+  enolase_activity:
+    hpo: HP:0034526
+    label: Abnormal enzyme activity in muscle tissue
+  epinephrine:
+    hpo: HP:0003117
+    label: Abnormal circulating hormone concentration
+  erythrocyte_coproporphyrin:
+    hpo: HP:0010472
+    label: Abnormal circulating porphyrin concentration
+  erythrocyte_free_porphyrin:
+    hpo: HP:0010472
+    label: Abnormal circulating porphyrin concentration
+  erythrocyte_galactitol:
+    hpo: HP:0011013
+    label: Abnormal circulating carbohydrate concentration
+  erythrocyte_galactonate:
+    hpo: HP:0004354
+    label: Abnormal circulating carboxylic acid concentration
+  erythrocyte_glutathione_peroxidase_activity:
+    hpo: HP:0030272
+    label: Abnormal erythrocyte enzyme concentration or activity
+  erythrocyte_protoporphyrin:
+    hpo: HP:0010472
+    label: Abnormal circulating porphyrin concentration
+  erythrocyte_pyruvate_kinase_activity:
+    hpo: HP:0030272
+    label: Abnormal erythrocyte enzyme concentration or activity
+  erythrocyte_sedimentation_rate:
+    hpo: HP:0025021
+    label: Abnormal erythrocyte sedimentation rate
+  erythrocyte_uroporphyrin:
+    hpo: HP:0010472
+    label: Abnormal circulating porphyrin concentration
+  erythropoietin:
+    hpo: HP:0034442
+    label: Abnormal circulating erythropoietin concentration
+  estradiol:
+    hpo: HP:0025133
+    label: Abnormal serum estradiol
+  fatty_aldehyde_dehydrogenase_activity:
+    hpo: HP:6000231
+    label: Abnormal tissue enzyme concentration or activity
+  fecal_alpha1_antitrypsin:
+    hpo: HP:0031685
+    label: Abnormal stool composition
+  fecal_bile_acids:
+    hpo: HP:0031685
+    label: Abnormal stool composition
+  fecal_calprotectin:
+    hpo: HP:0031685
+    label: Abnormal stool composition
+  fecal_coproporphyrin:
+    hpo: HP:0031685
+    label: Abnormal stool composition
+  fecal_pancreatic_elastase:
+    hpo: HP:0031685
+    label: Abnormal stool composition
+  fecal_ph:
+    hpo: HP:0032488
+    label: Abnormal fecal pH
+  fecal_protoporphyrin:
+    hpo: HP:0031685
+    label: Abnormal stool composition
+  fecal_sodium:
+    hpo: HP:0031685
+    label: Abnormal stool composition
+  ferritin_stores:
+    hpo: HP:0040133
+    label: Abnormal circulating ferritin concentration
+  ferrochelatase_activity:
+    hpo: HP:6000231
+    label: Abnormal tissue enzyme concentration or activity
+  fgf23:
+    hpo: HP:6000489
+    label: Abnormal circulating fibroblast growth factor 23 concentration
+  free_t4:
+    hpo: HP:0033076
+    label: Abnormal circulating free T4 concentration
+  fructose_1_6_bisphosphatase_activity:
+    hpo: HP:6000231
+    label: Abnormal tissue enzyme concentration or activity
+  fsh:
+    hpo: HP:0030346
+    label: Abnormal circulating follicle-stimulating hormone concentration
+  fumarate_hydratase_activity:
+    hpo: HP:0000816
+    label: Abnormality of Krebs cycle metabolism
+  g6pase_activity:
+    hpo: HP:0034685
+    label: Abnormal liver enzyme activity or concentration
+  g6pd_activity:
+    hpo: HP:0410177
+    label: Abnormal glucose-6-phosphate dehydrogenase level in blood
+  galactocerebrosidase_activity:
+    hpo: HP:6000231
+    label: Abnormal tissue enzyme concentration or activity
+  galactokinase_activity:
+    hpo: HP:0030272
+    label: Abnormal erythrocyte enzyme concentration or activity
+  galt_activity:
+    hpo: HP:0030272
+    label: Abnormal erythrocyte enzyme concentration or activity
+  gamma_glutamylcysteine_synthetase_activity:
+    hpo: HP:0030272
+    label: Abnormal erythrocyte enzyme concentration or activity
+  gamma_glutamyltransferase_activity:
+    hpo: HP:6000231
+    label: Abnormal tissue enzyme concentration or activity
+  gamt_activity:
+    hpo: HP:6000231
+    label: Abnormal tissue enzyme concentration or activity
+  gastrin:
+    hpo: HP:0500166
+    label: Abnormal circulating gastrin concentration
+  ghrelin:
+    hpo: HP:0003117
+    label: Abnormal circulating hormone concentration
+  ghrh:
+    hpo: HP:0003117
+    label: Abnormal circulating hormone concentration
+  glcnac_phosphotransferase_activity:
+    hpo: HP:0004356
+    label: Abnormality of lysosomal metabolism
+  glucocerebrosidase_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  glucose_6_phosphate_translocase_activity:
+    hpo: HP:0034685
+    label: Abnormal liver enzyme activity or concentration
+  glucose_phosphate_isomerase_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  glutaryl_coa_oxidase_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  glutathione_reductase_activity:
+    hpo: HP:0030272
+    label: Abnormal erythrocyte enzyme concentration or activity
+  glutathione_synthetase_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  glycerate_kinase_activity:
+    hpo: HP:0034685
+    label: Abnormal liver enzyme activity or concentration
+  glycerol_kinase_activity:
+    hpo: HP:4000195
+    label: Abnormal enzyme activity in cultured fibroblasts
+  glycine_cleavage_enzyme_activity:
+    hpo: HP:6000231
+    label: Abnormal tissue enzyme concentration or activity
+  glycogen_debrancher_activity:
+    hpo: HP:0034685
+    label: Abnormal liver enzyme activity or concentration
+  glycogen_phosphorylase_activity:
+    hpo: HP:0034685
+    label: Abnormal liver enzyme activity or concentration
+  glyoxalase_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  glyoxylate_reductase_activity:
+    hpo: HP:0034685
+    label: Abnormal liver enzyme activity or concentration
+  gnrh:
+    hpo: HP:0500012
+    label: Abnormal gonadotropin-releasing hormone concentration
+  hdl_cholesterol:
+    hpo: HP:0031888
+    label: Abnormal HDL cholesterol concentration
+  heart_rate:
+    hpo: HP:0030956
+    label: Abnormality of cardiovascular system electrophysiology
+  heme_oxygenase_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  heparan_alpha_glucosaminide_n_acetyltransferase_activity:
+    hpo: HP:4000195
+    label: Abnormal enzyme activity in cultured fibroblasts
+  hepatic_carnitine:
+    hpo: HP:0034644
+    label: Abnormal liver metabolite concentration
+  hepatic_igf1:
+    hpo: HP:0030352
+    label: Abnormal circulating insulin-like growth factor 1 concentration
+  hepcidin:
+    hpo: HP:0031875
+    label: Abnormal circulating hepcidin concentration
+  hexokinase_activity:
+    hpo: HP:0030272
+    label: Abnormal erythrocyte enzyme concentration or activity
+  hgprt_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  hibadh_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  hibch_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  hmg_coa_lyase_activity:
+    hpo: HP:4000195
+    label: Abnormal enzyme activity in cultured fibroblasts
+  holocarboxylase_synthetase_activity:
+    hpo: HP:4000195
+    label: Abnormal enzyme activity in cultured fibroblasts
+  hydroxyacyl_coa_dehydrogenase_activity:
+    hpo: HP:0003287
+    label: Abnormality of mitochondrial metabolism
+  hydroxyphenylpyruvate_dioxygenase_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  iduronate_sulfatase_activity:
+    hpo: HP:0034202
+    label: Abnormal iduronate sulfatase concentration
+  inhibin:
+    hpo: HP:0430147
+    label: Abnormal circulating inhibin B concentration
+  intestinal_lactase_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  intracellular_cystine:
+    hpo: HP:0011017
+    label: Abnormal cellular physiology
+  isovaleryl_coa_dehydrogenase_activity:
+    hpo: HP:4000195
+    label: Abnormal enzyme activity in cultured fibroblasts
+  itpase_activity:
+    hpo: HP:0030272
+    label: Abnormal erythrocyte enzyme concentration or activity
+  jugular_venous_pressure:
+    hpo: HP:0030847
+    label: Abnormal jugular venous pressure
+  lcat_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  ldl_cholesterol:
+    hpo: HP:0031886
+    label: Abnormal LDL cholesterol concentration
+  left_atrial_pressure:
+    hpo: HP:0025443
+    label: Abnormal cardiac atrial physiology
+  leukocyte_cystine:
+    hpo: HP:0011017
+    label: Abnormal cellular physiology
+  lh:
+    hpo: HP:0030345
+    label: Abnormal circulating luteinizing hormone concentration
+  lv_end_diastolic_diameter:
+    hpo: HP:0005162
+    label: Abnormal left ventricular function
+  lysosomal_acid_lipase_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  lysyl_hydroxylase_1_activity:
+    hpo: HP:4000195
+    label: Abnormal enzyme activity in cultured fibroblasts
+  malic_enzyme_activity:
+    hpo: HP:0003287
+    label: Abnormality of mitochondrial metabolism
+  malonyl_coa_decarboxylase_activity:
+    hpo: HP:4000195
+    label: Abnormal enzyme activity in cultured fibroblasts
+  mannosyl_oligosaccharide_glucosidase_activity:
+    hpo: HP:6000231
+    label: Abnormal tissue enzyme concentration or activity
+  mcad_activity:
+    hpo: HP:6000231
+    label: Abnormal tissue enzyme concentration or activity
+  mean_arterial_pressure:
+    hpo: HP:0030972
+    label: Abnormal systemic blood pressure
+  metabolic_rate:
+    hpo: HP:0012338
+    label: Abnormal energy expenditure
+  methionine_adenosyltransferase_activity:
+    hpo: HP:0034685
+    label: Abnormal liver enzyme activity or concentration
+  methionine_synthase_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  methylcrotonyl_coa_carboxylase_activity:
+    hpo: HP:4000195
+    label: Abnormal enzyme activity in cultured fibroblasts
+  methylglutaconyl_coa_hydratase_activity:
+    hpo: HP:6000231
+    label: Abnormal tissue enzyme concentration or activity
+  methylmalonyl_coa_mutase_activity:
+    hpo: HP:0000816
+    label: Abnormality of Krebs cycle metabolism
+  mevalonate_kinase_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  mitochondrial_atp_synthase_activity:
+    hpo: HP:0011922
+    label: Abnormal activity of mitochondrial respiratory chain
+  mitochondrial_complex_i_activity:
+    hpo: HP:0011922
+    label: Abnormal activity of mitochondrial respiratory chain
+  mitochondrial_complex_ii_activity:
+    hpo: HP:0011922
+    label: Abnormal activity of mitochondrial respiratory chain
+  mitochondrial_complex_iii_activity:
+    hpo: HP:0011922
+    label: Abnormal activity of mitochondrial respiratory chain
+  mitochondrial_complex_iv_activity:
+    hpo: HP:0011922
+    label: Abnormal activity of mitochondrial respiratory chain
+  mitochondrial_respiratory_chain_activity:
+    hpo: HP:0011922
+    label: Abnormal activity of mitochondrial respiratory chain
+  mmsdh_activity:
+    hpo: HP:4000195
+    label: Abnormal enzyme activity in cultured fibroblasts
+  muscle_carnitine:
+    hpo: HP:0034370
+    label: Abnormal muscle tissue metabolite concentration
+  muscle_caveolin_3:
+    hpo: HP:0034370
+    label: Abnormal muscle tissue metabolite concentration
+  muscle_coenzyme_q10:
+    hpo: HP:0034370
+    label: Abnormal muscle tissue metabolite concentration
+  muscle_glycogen_content:
+    hpo: HP:0012269
+    label: Abnormal muscle glycogen content
+  muscle_lactate_dehydrogenase_activity:
+    hpo: HP:0034526
+    label: Abnormal enzyme activity in muscle tissue
+  muscle_lipoic_acid:
+    hpo: HP:0034370
+    label: Abnormal muscle tissue metabolite concentration
+  myeloperoxidase_activity:
+    hpo: HP:0034858
+    label: Abnormal leukocyte enzyme concentration or activity
+  myoadenylate_deaminase_activity:
+    hpo: HP:0034526
+    label: Abnormal enzyme activity in muscle tissue
+  myocardial_contractility:
+    hpo: HP:0011025
+    label: Abnormal cardiovascular system physiology
+  myophosphorylase_activity:
+    hpo: HP:0034526
+    label: Abnormal enzyme activity in muscle tissue
+  n_acetylgalactosamine_6_sulfatase_activity:
+    hpo: HP:4000195
+    label: Abnormal enzyme activity in cultured fibroblasts
+  n_acetylglucosamine_6_sulfatase_activity:
+    hpo: HP:4000195
+    label: Abnormal enzyme activity in cultured fibroblasts
+  nags_activity:
+    hpo: HP:0034685
+    label: Abnormal liver enzyme activity or concentration
+  neuraminidase_activity:
+    hpo: HP:6000231
+    label: Abnormal tissue enzyme concentration or activity
+  norepinephrine:
+    hpo: HP:0003117
+    label: Abnormal circulating hormone concentration
+  ocrl1_activity:
+    hpo: HP:4000195
+    label: Abnormal enzyme activity in cultured fibroblasts
+  otc_activity:
+    hpo: HP:0034685
+    label: Abnormal liver enzyme activity or concentration
+  oxoprolinase_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  p5c_dehydrogenase_activity:
+    hpo: HP:6000231
+    label: Abnormal tissue enzyme concentration or activity
+  paf_acetylhydrolase_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  pah_enzyme_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  pancreatic_amylase_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  pepck_activity:
+    hpo: HP:4000195
+    label: Abnormal enzyme activity in cultured fibroblasts
+  phosphofructokinase_activity:
+    hpo: HP:0034526
+    label: Abnormal enzyme activity in muscle tissue
+  phosphoglycerate_dehydrogenase_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  phosphoglycerate_kinase_activity:
+    hpo: HP:0034526
+    label: Abnormal enzyme activity in muscle tissue
+  phosphoglycerate_mutase_activity:
+    hpo: HP:0034526
+    label: Abnormal enzyme activity in muscle tissue
+  phosphomannomutase_activity:
+    hpo: HP:6000231
+    label: Abnormal tissue enzyme concentration or activity
+  phosphomannose_isomerase_activity:
+    hpo: HP:6000231
+    label: Abnormal tissue enzyme concentration or activity
+  phosphorylase_kinase_activity:
+    hpo: HP:0034526
+    label: Abnormal enzyme activity in muscle tissue
+  phosphoserine_phosphatase_activity:
+    hpo: HP:4000195
+    label: Abnormal enzyme activity in cultured fibroblasts
+  phytanoyl_coa_hydroxylase_activity:
+    hpo: HP:4000195
+    label: Abnormal enzyme activity in cultured fibroblasts
+  pituitary_gh:
+    hpo: HP:0032367
+    label: Abnormal growth hormone level
+  plasma_12_hete:
+    hpo: HP:0011022
+    label: Abnormal circulating unsaturated fatty acid concentration
+  plasma_17_hydroxypregnenolone:
+    hpo: HP:0031187
+    label: Abnormal circulating pregnenolone concentration
+  plasma_18_hydroxycortisone:
+    hpo: HP:0020198
+    label: Abnormal circulating 18-hydroxycorticosterone level
+  plasma_1_methylhistidine:
+    hpo: HP:0033109
+    label: Abnormal circulating non-proteinogenic amino acid concentration
+  plasma_25oh_vitamin_d:
+    hpo: HP:0100511
+    label: Abnormality of vitamin D metabolism
+  plasma_27_hydroxycholesterol:
+    hpo: HP:0003107
+    label: Abnormal circulating cholesterol concentration
+  plasma_2_aminoadipate:
+    hpo: HP:0010995
+    label: Abnormal circulating dicarboxylic acid concentration
+  plasma_2_hydroxybutyrate:
+    hpo: HP:0010996
+    label: Abnormal circulating monocarboxylic acid concentration
+  plasma_3_hydroxyanthranilate:
+    hpo: HP:0033108
+    label: Abnormal circulating proteinogenic amino acid derivative concentration
+  plasma_3_hydroxybutyrate:
+    hpo: HP:0010996
+    label: Abnormal circulating monocarboxylic acid concentration
+  plasma_3_hydroxybutyrylcarnitine:
+    hpo: HP:0012071
+    label: Abnormal circulating acylcarnitine concentration
+  plasma_3_hydroxyhexadecanoylcarnitine:
+    hpo: HP:0012071
+    label: Abnormal circulating acylcarnitine concentration
+  plasma_3_hydroxyhexanoylcarnitine:
+    hpo: HP:0012071
+    label: Abnormal circulating acylcarnitine concentration
+  plasma_3_hydroxyisovalerylcarnitine:
+    hpo: HP:0012071
+    label: Abnormal circulating acylcarnitine concentration
+  plasma_3_hydroxykynurenine:
+    hpo: HP:0003312
+    label: Abnormal form of the vertebral bodies
+  plasma_3_hydroxylinoleylcarnitine:
+    hpo: HP:0012071
+    label: Abnormal circulating acylcarnitine concentration
+  plasma_3_hydroxypalmitoleylcarnitine:
+    hpo: HP:0012071
+    label: Abnormal circulating acylcarnitine concentration
+  plasma_3_ketoacyl_coa_thiolase:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  plasma_3_methyl_2_oxovalerate:
+    hpo: HP:0033435
+    label: Abnormal circulating keto acid concentration
+  plasma_3_methylhistidine:
+    hpo: HP:0033108
+    label: Abnormal circulating proteinogenic amino acid derivative concentration
+  plasma_4_hydroxybutyrate:
+    hpo: HP:0010996
+    label: Abnormal circulating monocarboxylic acid concentration
+  plasma_4_hydroxyphenylacetate:
+    hpo: HP:0010996
+    label: Abnormal circulating monocarboxylic acid concentration
+  plasma_4_hydroxyphenyllactate:
+    hpo: HP:0004354
+    label: Abnormal circulating carboxylic acid concentration
+  plasma_4_methyl_2_oxopentanoate:
+    hpo: HP:0033435
+    label: Abnormal circulating keto acid concentration
+  plasma_5_hydroxymethyluracil:
+    hpo: HP:0004353
+    label: Abnormal circulating pyrimidine concentration
+  plasma_5_methyltetrahydrofolate:
+    hpo: HP:0410216
+    label: Abnormal blood 5-methyltetrahydrofolate level
+  plasma_5_oxoproline:
+    hpo: HP:0033108
+    label: Abnormal circulating proteinogenic amino acid derivative concentration
+  plasma_7_dehydrocholesterol:
+    hpo: HP:0034934
+    label: Abnormal circulating 7-dehydrocholesterol concentration
+  plasma_8_9_cholestenol:
+    hpo: HP:0003107
+    label: Abnormal circulating cholesterol concentration
+  plasma_8_dehydrocholesterol:
+    hpo: HP:0003107
+    label: Abnormal circulating cholesterol concentration
+  plasma_ace:
+    hpo: HP:0011021
+    label: Abnormal circulating enzyme concentration
+  plasma_acetoacetate:
+    hpo: HP:0012337
+    label: Abnormal homeostasis
+  plasma_acetylcarnitine:
+    hpo: HP:0012071
+    label: Abnormal circulating acylcarnitine concentration
+  plasma_acid_phosphatase:
+    hpo: HP:0004356
+    label: Abnormality of lysosomal metabolism
+  plasma_aconitate:
+    hpo: HP:0004354
+    label: Abnormal circulating carboxylic acid concentration
+  plasma_acylcarnitine:
+    hpo: HP:0012071
+    label: Abnormal circulating acylcarnitine concentration
+  plasma_adenosylcobalamin:
+    hpo: HP:0040126
+    label: Abnormal circulating vitamin B12 concentration
+  plasma_adiponectin:
+    hpo: HP:0030684
+    label: Abnormal adiponectin level
+  plasma_adrenic_acid:
+    hpo: HP:0004359
+    label: Abnormal circulating fatty-acid concentration
+  plasma_alanine:
+    hpo: HP:0010916
+    label: Abnormal circulating alanine concentration
+  plasma_albumin:
+    hpo: HP:0012116
+    label: Abnormal circulating albumin concentration
+  plasma_aldolase:
+    hpo: HP:0012400
+    label: Abnormal circulating aldolase concentration
+  plasma_allantoin:
+    hpo: HP:0004364
+    label: Abnormal circulating nitrogen compound concentration
+  plasma_allergen_specific_ige:
+    hpo: HP:0010701
+    label: Abnormal circulating immunoglobulin concentration
+  plasma_alloisoleucine:
+    hpo: HP:0033108
+    label: Abnormal circulating proteinogenic amino acid derivative concentration
+  plasma_alpha1_antitrypsin:
+    hpo: HP:0010876
+    label: Abnormal circulating protein concentration
+  plasma_alpha_aminoadipate:
+    hpo: HP:0010995
+    label: Abnormal circulating dicarboxylic acid concentration
+  plasma_alpha_aminobutyrate:
+    hpo: HP:0033109
+    label: Abnormal circulating non-proteinogenic amino acid concentration
+  plasma_alpha_fetoprotein:
+    hpo: HP:0045056
+    label: Abnormal circulating alpha-fetoprotein concentration
+  plasma_alpha_globulin:
+    hpo: HP:0032179
+    label: Abnormal circulating globulin concentration
+  plasma_alpha_ketoglutarate:
+    hpo: HP:0004354
+    label: Abnormal circulating carboxylic acid concentration
+  plasma_alt:
+    hpo: HP:0430135
+    label: Abnormal circulating hepatic transaminase concentration
+  plasma_amh:
+    hpo: HP:0031101
+    label: Abnormal circulating antimullerian hormone concentration
+  plasma_aminoadipic_semialdehyde:
+    hpo: HP:0010995
+    label: Abnormal circulating dicarboxylic acid concentration
+  plasma_ammonia:
+    hpo: HP:0004364
+    label: Abnormal circulating nitrogen compound concentration
+  plasma_amylase:
+    hpo: HP:0410282
+    label: Abnormal circulating amylase concentration
+  plasma_androgen:
+    hpo: HP:0030347
+    label: Abnormal circulating androgen level
+  plasma_androstenedione:
+    hpo: HP:0033811
+    label: Abnormal circulating androstenedione concentration
+  plasma_anhydroglucitol:
+    hpo: HP:0011013
+    label: Abnormal circulating carbohydrate concentration
+  plasma_apolipoprotein:
+    hpo: HP:0025201
+    label: Abnormal circulating apolipoprotein concentration
+  plasma_apolipoprotein_a1:
+    hpo: HP:0025201
+    label: Abnormal circulating apolipoprotein concentration
+  plasma_apolipoprotein_a2:
+    hpo: HP:0025201
+    label: Abnormal circulating apolipoprotein concentration
+  plasma_apolipoprotein_a4:
+    hpo: HP:0025201
+    label: Abnormal circulating apolipoprotein concentration
+  plasma_apolipoprotein_b:
+    hpo: HP:0025201
+    label: Abnormal circulating apolipoprotein concentration
+  plasma_apolipoprotein_c2:
+    hpo: HP:0025201
+    label: Abnormal circulating apolipoprotein concentration
+  plasma_apolipoprotein_c3:
+    hpo: HP:0025201
+    label: Abnormal circulating apolipoprotein concentration
+  plasma_apolipoprotein_e:
+    hpo: HP:0025201
+    label: Abnormal circulating apolipoprotein concentration
+  plasma_arabinitol:
+    hpo: HP:0011013
+    label: Abnormal circulating carbohydrate concentration
+  plasma_arachidonic_acid:
+    hpo: HP:0010964
+    label: Abnormal circulating long-chain fatty-acid concentration
+  plasma_arginine:
+    hpo: HP:0010909
+    label: Abnormal circulating arginine concentration
+  plasma_argininosuccinate:
+    hpo: HP:0033109
+    label: Abnormal circulating non-proteinogenic amino acid concentration
+  plasma_asparagine:
+    hpo: HP:0500155
+    label: Abnormal circulating asparagine concentration
+  plasma_aspartate:
+    hpo: HP:0500158
+    label: Abnormal circulating aspartic acid concentration
+  plasma_aspartylglucosamine:
+    hpo: HP:0033109
+    label: Abnormal circulating non-proteinogenic amino acid concentration
+  plasma_ast:
+    hpo: HP:0430135
+    label: Abnormal circulating hepatic transaminase concentration
+  plasma_beta2_microglobulin:
+    hpo: HP:0025345
+    label: Abnormality of circulating beta-2-microglobulin level
+  plasma_beta_alanine:
+    hpo: HP:0033109
+    label: Abnormal circulating non-proteinogenic amino acid concentration
+  plasma_beta_aminoisobutyrate:
+    hpo: HP:0033109
+    label: Abnormal circulating non-proteinogenic amino acid concentration
+  plasma_beta_carotene:
+    hpo: HP:0430072
+    label: Abnormal circulating beta-carotene concentration
+  plasma_beta_ctx:
+    hpo: HP:0031424
+    label: Abnormal circulating beta-CTX concentration
+  plasma_beta_hcg:
+    hpo: HP:0010876
+    label: Abnormal circulating protein concentration
+  plasma_beta_hexosaminidase:
+    hpo: HP:0011021
+    label: Abnormal circulating enzyme concentration
+  plasma_bicarbonate:
+    hpo: HP:0032065
+    label: Abnormal serum bicarbonate concentration
+  plasma_bile_acids:
+    hpo: HP:0030984
+    label: Abnormal serum bile acid concentration
+  plasma_bile_alcohol:
+    hpo: HP:0430071
+    label: Abnormal circulating organic compound concentration
+  plasma_biliverdin:
+    hpo: HP:0010995
+    label: Abnormal circulating dicarboxylic acid concentration
+  plasma_biotin:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  plasma_bnp:
+    hpo: HP:0031138
+    label: Abnormal circulating B-type natriuretic peptide concentration
+  plasma_branched_chain_amino_acids:
+    hpo: HP:0010892
+    label: Abnormal circulating branched chain amino acid concentration
+  plasma_butyrylcarnitine:
+    hpo: HP:0012071
+    label: Abnormal circulating acylcarnitine concentration
+  plasma_c12_acylcarnitine:
+    hpo: HP:0012071
+    label: Abnormal circulating acylcarnitine concentration
+  plasma_c16_acylcarnitine:
+    hpo: HP:0012071
+    label: Abnormal circulating acylcarnitine concentration
+  plasma_c18_acylcarnitine:
+    hpo: HP:0012071
+    label: Abnormal circulating acylcarnitine concentration
+  plasma_c4_acylcarnitine:
+    hpo: HP:0012071
+    label: Abnormal circulating acylcarnitine concentration
+  plasma_c5_acylcarnitine:
+    hpo: HP:0012071
+    label: Abnormal circulating acylcarnitine concentration
+  plasma_ca125:
+    hpo: HP:0010876
+    label: Abnormal circulating protein concentration
+  plasma_ca19_9:
+    hpo: HP:0011013
+    label: Abnormal circulating carbohydrate concentration
+  plasma_calcitonin:
+    hpo: HP:0034902
+    label: Abnormal circulating calcitonin concentration
+  plasma_calcium:
+    hpo: HP:0004363
+    label: Abnormal circulating calcium concentration
+  plasma_calprotectin:
+    hpo: HP:0010876
+    label: Abnormal circulating protein concentration
+  plasma_carnitine:
+    hpo: HP:0003287
+    label: Abnormality of mitochondrial metabolism
+  plasma_carnosine:
+    hpo: HP:0500160
+    label: Abnormal circulating carnosine concentration
+  plasma_catecholamines:
+    hpo: HP:0012099
+    label: Abnormality of circulating catecholamine level
+  plasma_cathepsin_d:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  plasma_cbg:
+    hpo: HP:0010876
+    label: Abnormal circulating protein concentration
+  plasma_cd46:
+    hpo: HP:0034618
+    label: Abnormal circulating membrane cofactor protein concentration
+  plasma_cea:
+    hpo: HP:0010876
+    label: Abnormal circulating protein concentration
+  plasma_ceruloplasmin:
+    hpo: HP:0033144
+    label: Abnormal circulating ceruloplasmin concentration
+  plasma_cfhr1:
+    hpo: HP:0033298
+    label: Abnormal circulating complement factor H related protein 1 concentration
+  plasma_chi3l1:
+    hpo: HP:0010876
+    label: Abnormal circulating protein concentration
+  plasma_chloride:
+    hpo: HP:0004360
+    label: Abnormality of acid-base homeostasis
+  plasma_cholestane_triol:
+    hpo: HP:0003119
+    label: Abnormal circulating lipid concentration
+  plasma_cholestanol:
+    hpo: HP:0003107
+    label: Abnormal circulating cholesterol concentration
+  plasma_cholesterol_esters:
+    hpo: HP:0003107
+    label: Abnormal circulating cholesterol concentration
+  plasma_cholesterol_sulfate:
+    hpo: HP:0003107
+    label: Abnormal circulating cholesterol concentration
+  plasma_cholinesterase_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  plasma_chylomicron:
+    hpo: HP:0031887
+    label: Abnormal chylomicron concentration
+  plasma_chylomicrons:
+    hpo: HP:0031887
+    label: Abnormal chylomicron concentration
+  plasma_citrulline:
+    hpo: HP:0011965
+    label: Abnormal circulating citrulline concentration
+  plasma_ck_mb:
+    hpo: HP:0040081
+    label: Abnormal circulating creatine kinase concentration
+  plasma_ck_mm:
+    hpo: HP:0040081
+    label: Abnormal circulating creatine kinase concentration
+  plasma_comp:
+    hpo: HP:0010876
+    label: Abnormal circulating protein concentration
+  plasma_conjugated_bilirubin:
+    hpo: HP:0033479
+    label: Abnormal circulating bilirubin concentration
+  plasma_copper:
+    hpo: HP:0010836
+    label: Abnormal circulating copper concentration
+  plasma_corticosterone:
+    hpo: HP:0012112
+    label: Abnormal circulating corticosterone level
+  plasma_cotinine:
+    hpo: HP:0001939
+    label: Abnormality of metabolism/homeostasis
+  plasma_creatine:
+    hpo: HP:0012113
+    label: Abnormal circulating creatine concentration
+  plasma_creatine_kinase:
+    hpo: HP:0040081
+    label: Abnormal circulating creatine kinase concentration
+  plasma_creatine_kinase_bb:
+    hpo: HP:0040081
+    label: Abnormal circulating creatine kinase concentration
+  plasma_creatinine:
+    hpo: HP:0012100
+    label: Abnormal circulating creatinine concentration
+  plasma_cystatin_c:
+    hpo: HP:0032996
+    label: Abnormal cystatin C level
+  plasma_cystine:
+    hpo: HP:0010918
+    label: Abnormal circulating cysteine concentration
+  plasma_d_glycerate:
+    hpo: HP:0004354
+    label: Abnormal circulating carboxylic acid concentration
+  plasma_d_threitol:
+    hpo: HP:0011013
+    label: Abnormal circulating carbohydrate concentration
+  plasma_decadienoylcarnitine:
+    hpo: HP:0012071
+    label: Abnormal circulating acylcarnitine concentration
+  plasma_decanoylcarnitine:
+    hpo: HP:0012071
+    label: Abnormal circulating acylcarnitine concentration
+  plasma_decenoylcarnitine:
+    hpo: HP:0012071
+    label: Abnormal circulating acylcarnitine concentration
+  plasma_deoxypyridinoline:
+    hpo: HP:0033386
+    label: Abnormal circulating collagen degradation product concentration
+  plasma_deoxyuridine:
+    hpo: HP:0004353
+    label: Abnormal circulating pyrimidine concentration
+  plasma_desmosterol:
+    hpo: HP:0003107
+    label: Abnormal circulating cholesterol concentration
+  plasma_dhea:
+    hpo: HP:0500022
+    label: Abnormal circulating dehydroepiandrosterone concentration
+  plasma_dheas:
+    hpo: HP:0500022
+    label: Abnormal circulating dehydroepiandrosterone concentration
+  plasma_dihydrotestosterone:
+    hpo: HP:0030347
+    label: Abnormal circulating androgen level
+  plasma_dihydrothymine:
+    hpo: HP:0004353
+    label: Abnormal circulating pyrimidine concentration
+  plasma_dihydrouracil:
+    hpo: HP:0004353
+    label: Abnormal circulating pyrimidine concentration
+  plasma_dimethylglycine:
+    hpo: HP:0033109
+    label: Abnormal circulating non-proteinogenic amino acid concentration
+  plasma_dimethylsterol:
+    hpo: HP:0003119
+    label: Abnormal circulating lipid concentration
+  plasma_dnajb9:
+    hpo: HP:0010876
+    label: Abnormal circulating protein concentration
+  plasma_dodecanoylcarnitine:
+    hpo: HP:0012071
+    label: Abnormal circulating acylcarnitine concentration
+  plasma_dodecenoylcarnitine:
+    hpo: HP:0012071
+    label: Abnormal circulating acylcarnitine concentration
+  plasma_dopa:
+    hpo: HP:0010996
+    label: Abnormal circulating monocarboxylic acid concentration
+  plasma_dopac:
+    hpo: HP:0033405
+    label: Abnormal circulating organic amino compound concentration
+  plasma_e_selectin:
+    hpo: HP:0010876
+    label: Abnormal circulating protein concentration
+  plasma_erythritol:
+    hpo: HP:0011013
+    label: Abnormal circulating carbohydrate concentration
+  plasma_estriol:
+    hpo: HP:0025135
+    label: Abnormal serum estriol
+  plasma_estrone:
+    hpo: HP:0025138
+    label: Abnormal serum estrone
+  plasma_ethanol:
+    hpo: HP:0001939
+    label: Abnormality of metabolism/homeostasis
+  plasma_ethanolamine:
+    hpo: HP:0500249
+    label: Abnormal circulating ethanolamine concentration
+  plasma_farnesol:
+    hpo: HP:0003119
+    label: Abnormal circulating lipid concentration
+  plasma_fetuin_a:
+    hpo: HP:0033305
+    label: Abnormal circulating fetuin A concentration
+  plasma_fibronectin:
+    hpo: HP:0010876
+    label: Abnormal circulating protein concentration
+  plasma_ficolin_3:
+    hpo: HP:0010876
+    label: Abnormal circulating protein concentration
+  plasma_folate:
+    hpo: HP:0040087
+    label: Abnormal blood folate concentration
+  plasma_free_carnitine:
+    hpo: HP:0010967
+    label: Abnormal circulating carnitine concentration
+  plasma_free_fatty_acids:
+    hpo: HP:0040300
+    label: Abnormal circulating free fatty acid concentration
+  plasma_fumarate:
+    hpo: HP:0010995
+    label: Abnormal circulating dicarboxylic acid concentration
+  plasma_gaba:
+    hpo: HP:0034025
+    label: Abnormal circulating GABA concentration
+  plasma_galactitol:
+    hpo: HP:0011013
+    label: Abnormal circulating carbohydrate concentration
+  plasma_galactose:
+    hpo: HP:0011013
+    label: Abnormal circulating carbohydrate concentration
+  plasma_galectin_3:
+    hpo: HP:0010876
+    label: Abnormal circulating protein concentration
+  plasma_ggt:
+    hpo: HP:0034444
+    label: Abnormal gamma-glutamyltransferase level
+  plasma_globotriaosylceramide:
+    hpo: HP:0004343
+    label: Abnormal glycosphingolipid metabolism
+  plasma_globulin:
+    hpo: HP:0032179
+    label: Abnormal circulating globulin concentration
+  plasma_glucagon:
+    hpo: HP:0030687
+    label: Abnormal glucagon level
+  plasma_glucose:
+    hpo: HP:0011015
+    label: Abnormal blood glucose concentration
+  plasma_glucosylsphingosine:
+    hpo: HP:0011013
+    label: Abnormal circulating carbohydrate concentration
+  plasma_glutamate:
+    hpo: HP:0500148
+    label: Abnormal circulating glutamate concentration
+  plasma_glutamine:
+    hpo: HP:0010903
+    label: Abnormal circulating glutamine concentration
+  plasma_glutaric_acid:
+    hpo: HP:0010995
+    label: Abnormal circulating dicarboxylic acid concentration
+  plasma_glutarylcarnitine:
+    hpo: HP:0012071
+    label: Abnormal circulating acylcarnitine concentration
+  plasma_glutathione:
+    hpo: HP:0033109
+    label: Abnormal circulating non-proteinogenic amino acid concentration
+  plasma_glycerol:
+    hpo: HP:0031795
+    label: Abnormal circulating glycerol level
+  plasma_glycine:
+    hpo: HP:0010895
+    label: Abnormal circulating glycine concentration
+  plasma_glycolate:
+    hpo: HP:0010996
+    label: Abnormal circulating monocarboxylic acid concentration
+  plasma_glycoprotein_hormone_alpha_subunit:
+    hpo: HP:0032481
+    label: Abnormal pituitary glycoprotein hormone alpha subunit level
+  plasma_glycylproline:
+    hpo: HP:0033386
+    label: Abnormal circulating collagen degradation product concentration
+  plasma_glyoxylate:
+    hpo: HP:0010996
+    label: Abnormal circulating monocarboxylic acid concentration
+  plasma_gm_csf:
+    hpo: HP:0010876
+    label: Abnormal circulating protein concentration
+  plasma_guanidinoacetate:
+    hpo: HP:0033108
+    label: Abnormal circulating proteinogenic amino acid derivative concentration
+  plasma_guanosine:
+    hpo: HP:0004352
+    label: Abnormal circulating purine concentration
+  plasma_haptoglobin:
+    hpo: HP:0020179
+    label: Abnormal circulating haptoglobin concentration
+  plasma_hdl2a:
+    hpo: HP:0032419
+    label: Abnormal HDL2a concentration
+  plasma_hdl2b:
+    hpo: HP:0032422
+    label: Abnormal HDL2b concentration
+  plasma_hdl3a:
+    hpo: HP:0032425
+    label: Abnormal HDL3a concentration
+  plasma_hdl3b:
+    hpo: HP:0032426
+    label: Abnormal HDL3b concentration
+  plasma_hdl3c:
+    hpo: HP:0032427
+    label: Abnormal HDL3c concentration
+  plasma_heparan_sulfate:
+    hpo: HP:0410341
+    label: Abnormal circulating heparan sulfate level
+  plasma_heptacarboxylporphyrin:
+    hpo: HP:0010472
+    label: Abnormal circulating porphyrin concentration
+  plasma_hexacosanoic_acid:
+    hpo: HP:0010966
+    label: Abnormal circulating fatty-acid anion concentration
+  plasma_hexanoylcarnitine:
+    hpo: HP:0012071
+    label: Abnormal circulating acylcarnitine concentration
+  plasma_hippuric_acid:
+    hpo: HP:0004354
+    label: Abnormal circulating carboxylic acid concentration
+  plasma_histamine:
+    hpo: HP:0033405
+    label: Abnormal circulating organic amino compound concentration
+  plasma_histidine:
+    hpo: HP:0010904
+    label: Abnormal circulating histidine concentration
+  plasma_homoarginine:
+    hpo: HP:0033109
+    label: Abnormal circulating non-proteinogenic amino acid concentration
+  plasma_homocysteine:
+    hpo: HP:0010919
+    label: Abnormal circulating homocysteine concentration
+  plasma_homovanillate:
+    hpo: HP:0010996
+    label: Abnormal circulating monocarboxylic acid concentration
+  plasma_hyaluronic_acid:
+    hpo: HP:0031210
+    label: Abnormal circulating hyaluronic acid concentration
+  plasma_hydroxybutyrate:
+    hpo: HP:0010996
+    label: Abnormal circulating monocarboxylic acid concentration
+  plasma_hydroxyproline:
+    hpo: HP:0010907
+    label: Abnormal circulating proline concentration
+  plasma_iga:
+    hpo: HP:0410240
+    label: Abnormal circulating IgA concentration
+  plasma_igd:
+    hpo: HP:0410244
+    label: Abnormal circulating IgD concentration
+  plasma_ige:
+    hpo: HP:0410241
+    label: Abnormal circulating IgE concentration
+  plasma_igfals:
+    hpo: HP:0031034
+    label: Abnormal circulating insulin-like growth factor-binding protein acid-labile
+      subunit concentration
+  plasma_igg:
+    hpo: HP:0410242
+    label: Abnormal circulating IgG concentration
+  plasma_igg1:
+    hpo: HP:0410242
+    label: Abnormal circulating IgG concentration
+  plasma_igg2:
+    hpo: HP:0410242
+    label: Abnormal circulating IgG concentration
+  plasma_igg3:
+    hpo: HP:0410242
+    label: Abnormal circulating IgG concentration
+  plasma_igg4:
+    hpo: HP:0410242
+    label: Abnormal circulating IgG concentration
+  plasma_igm:
+    hpo: HP:0410243
+    label: Abnormal circulating IgM concentration
+  plasma_immunoglobulin:
+    hpo: HP:0010701
+    label: Abnormal circulating immunoglobulin concentration
+  plasma_inosine:
+    hpo: HP:0004352
+    label: Abnormal circulating purine concentration
+  plasma_insulin:
+    hpo: HP:0040214
+    label: Abnormal circulating insulin concentration
+  plasma_iron:
+    hpo: HP:0040130
+    label: Abnormal circulating iron concentration
+  plasma_isoleucine:
+    hpo: HP:0010912
+    label: Abnormal circulating isoleucine concentration
+  plasma_isovalerate:
+    hpo: HP:0033147
+    label: Abnormal circulating short-chain fatty-acid concentration
+  plasma_isovalerylcarnitine:
+    hpo: HP:0012071
+    label: Abnormal circulating acylcarnitine concentration
+  plasma_ketone_bodies:
+    hpo: HP:0001939
+    label: Abnormality of metabolism/homeostasis
+  plasma_kininogen:
+    hpo: HP:0005559
+    label: Abnormal kinin-kallikrein system component activity
+  plasma_lactate:
+    hpo: HP:0004360
+    label: Abnormality of acid-base homeostasis
+  plasma_lathosterol:
+    hpo: HP:0003107
+    label: Abnormal circulating cholesterol concentration
+  plasma_ldh:
+    hpo: HP:0045040
+    label: Abnormal circulating lactate dehydrogenase concentration
+  plasma_leucine:
+    hpo: HP:0004357
+    label: Abnormal circulating leucine concentration
+  plasma_leukotriene_c4:
+    hpo: HP:0030361
+    label: Abnormal circulating eicosanoid concentration
+  plasma_linoleylcarnitine:
+    hpo: HP:0012071
+    label: Abnormal circulating acylcarnitine concentration
+  plasma_lipoprotein:
+    hpo: HP:0010979
+    label: Abnormality of lipoprotein cholesterol concentration
+  plasma_lipoprotein_lipase:
+    hpo: HP:0033477
+    label: Abnormal circulating lipoprotein lipase concentration
+  plasma_long_chain_acylcarnitine:
+    hpo: HP:0012071
+    label: Abnormal circulating acylcarnitine concentration
+  plasma_long_chain_fatty_acid:
+    hpo: HP:0010964
+    label: Abnormal circulating long-chain fatty-acid concentration
+  plasma_lysine:
+    hpo: HP:0010908
+    label: Abnormal circulating lysine concentration
+  plasma_lyso_gb3:
+    hpo: HP:0003119
+    label: Abnormal circulating lipid concentration
+  plasma_lysophosphatidylcholine:
+    hpo: HP:0040300
+    label: Abnormal circulating free fatty acid concentration
+  plasma_lysosphingomyelin:
+    hpo: HP:0003119
+    label: Abnormal circulating lipid concentration
+  plasma_magnesium:
+    hpo: HP:0004921
+    label: Abnormal magnesium concentration
+  plasma_malonylcarnitine:
+    hpo: HP:0010966
+    label: Abnormal circulating fatty-acid anion concentration
+  plasma_manganese:
+    hpo: HP:0032096
+    label: Abnormal manganese concentration
+  plasma_mbl:
+    hpo: HP:0032304
+    label: Abnormal circulating mannose-binding protein concentration
+  plasma_mead_acid:
+    hpo: HP:0010964
+    label: Abnormal circulating long-chain fatty-acid concentration
+  plasma_medium_chain_acylcarnitine:
+    hpo: HP:0012071
+    label: Abnormal circulating acylcarnitine concentration
+  plasma_metanephrine:
+    hpo: HP:0003117
+    label: Abnormal circulating hormone concentration
+  plasma_methionine:
+    hpo: HP:0010901
+    label: Abnormal circulating methionine concentration
+  plasma_methionine_sulfoxide:
+    hpo: HP:0033108
+    label: Abnormal circulating proteinogenic amino acid derivative concentration
+  plasma_methylcobalamin:
+    hpo: HP:0040126
+    label: Abnormal circulating vitamin B12 concentration
+  plasma_methylglutarylcarnitine:
+    hpo: HP:0012071
+    label: Abnormal circulating acylcarnitine concentration
+  plasma_methylmalonylcarnitine:
+    hpo: HP:0012071
+    label: Abnormal circulating acylcarnitine concentration
+  plasma_methylsterol:
+    hpo: HP:0003119
+    label: Abnormal circulating lipid concentration
+  plasma_methylsuccinate:
+    hpo: HP:0010995
+    label: Abnormal circulating dicarboxylic acid concentration
+  plasma_mmp2:
+    hpo: HP:0010876
+    label: Abnormal circulating protein concentration
+  plasma_monomethylsterol:
+    hpo: HP:0003119
+    label: Abnormal circulating lipid concentration
+  plasma_myo_inositol:
+    hpo: HP:0011013
+    label: Abnormal circulating carbohydrate concentration
+  plasma_myoglobin:
+    hpo: HP:0010876
+    label: Abnormal circulating protein concentration
+  plasma_myristic_acid:
+    hpo: HP:0010996
+    label: Abnormal circulating monocarboxylic acid concentration
+  plasma_myristoleate:
+    hpo: HP:0010964
+    label: Abnormal circulating long-chain fatty-acid concentration
+  plasma_n_acetylaspartate:
+    hpo: HP:0033108
+    label: Abnormal circulating proteinogenic amino acid derivative concentration
+  plasma_n_acetylneuraminic_acid:
+    hpo: HP:0032243
+    label: Abnormal tissue metabolite concentration
+  plasma_n_carbamyl_beta_alanine:
+    hpo: HP:0033109
+    label: Abnormal circulating non-proteinogenic amino acid concentration
+  plasma_n_carbamyl_beta_aminoisobutyrate:
+    hpo: HP:0010996
+    label: Abnormal circulating monocarboxylic acid concentration
+  plasma_nad:
+    hpo: HP:0004352
+    label: Abnormal circulating purine concentration
+  plasma_nadh:
+    hpo: HP:0004352
+    label: Abnormal circulating purine concentration
+  plasma_neuron_specific_enolase:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  plasma_nicotinurate:
+    hpo: HP:0410205
+    label: Abnormal circulating nicotinurate concentration
+  plasma_non_hdl_cholesterol:
+    hpo: HP:0003107
+    label: Abnormal circulating cholesterol concentration
+  plasma_nonceruloplasmin_copper:
+    hpo: HP:0010836
+    label: Abnormal circulating copper concentration
+  plasma_nt_proanp:
+    hpo: HP:0010876
+    label: Abnormal circulating protein concentration
+  plasma_nt_probnp:
+    hpo: HP:0031138
+    label: Abnormal circulating B-type natriuretic peptide concentration
+  plasma_octadecanoate:
+    hpo: HP:0010964
+    label: Abnormal circulating long-chain fatty-acid concentration
+  plasma_octadecenoylcarnitine:
+    hpo: HP:0012071
+    label: Abnormal circulating acylcarnitine concentration
+  plasma_octanoylcarnitine:
+    hpo: HP:0012071
+    label: Abnormal circulating acylcarnitine concentration
+  plasma_octenoylcarnitine:
+    hpo: HP:0012071
+    label: Abnormal circulating acylcarnitine concentration
+  plasma_oleate:
+    hpo: HP:0010964
+    label: Abnormal circulating long-chain fatty-acid concentration
+  plasma_oleylcarnitine:
+    hpo: HP:0012071
+    label: Abnormal circulating acylcarnitine concentration
+  plasma_ornithine:
+    hpo: HP:0012025
+    label: Abnormal circulating ornithine concentration
+  plasma_osmolality:
+    hpo: HP:6000679
+    label: Abnormal serum osmolality
+  plasma_osteocalcin:
+    hpo: HP:0031427
+    label: Abnormal circulating osteocalcin level
+  plasma_osteopontin:
+    hpo: HP:0010876
+    label: Abnormal circulating protein concentration
+  plasma_oxalate:
+    hpo: HP:0010995
+    label: Abnormal circulating dicarboxylic acid concentration
+  plasma_paf:
+    hpo: HP:0040177
+    label: Abnormal level of platelet-activating factor
+  plasma_palmitate:
+    hpo: HP:0010964
+    label: Abnormal circulating long-chain fatty-acid concentration
+  plasma_palmitoleylcarnitine:
+    hpo: HP:0012071
+    label: Abnormal circulating acylcarnitine concentration
+  plasma_palmitoylcarnitine:
+    hpo: HP:0012071
+    label: Abnormal circulating acylcarnitine concentration
+  plasma_pancreatic_lipase:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  plasma_pancreatic_secretory_trypsin_inhibitor:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  plasma_pepsinogen_i:
+    hpo: HP:0010876
+    label: Abnormal circulating protein concentration
+  plasma_phenylalanine:
+    hpo: HP:0010893
+    label: Abnormal circulating phenylalanine concentration
+  plasma_phosphate:
+    hpo: HP:0100529
+    label: Abnormal blood phosphate concentration
+  plasma_phosphoethanolamine:
+    hpo: HP:0033405
+    label: Abnormal circulating organic amino compound concentration
+  plasma_phosphoserine:
+    hpo: HP:0033109
+    label: Abnormal circulating non-proteinogenic amino acid concentration
+  plasma_phytanic_acid:
+    hpo: HP:0010965
+    label: Abnormal circulating phytanic acid concentration
+  plasma_pinp:
+    hpo: HP:0010876
+    label: Abnormal circulating protein concentration
+  plasma_pipecolate:
+    hpo: HP:0010996
+    label: Abnormal circulating monocarboxylic acid concentration
+  plasma_pivka_ii:
+    hpo: HP:0100831
+    label: Abnormality of vitamin K metabolism
+  plasma_plasmalogen:
+    hpo: HP:0040176
+    label: Abnormal circulating phospholipid concentration
+  plasma_plasminogen:
+    hpo: HP:0010990
+    label: Abnormality of the common coagulation pathway
+  plasma_porphyrin:
+    hpo: HP:0010472
+    label: Abnormal circulating porphyrin concentration
+  plasma_potassium:
+    hpo: HP:0011042
+    label: Abnormal circulating potassium concentration
+  plasma_prealbumin:
+    hpo: HP:0033450
+    label: Abnormal circulating prealbumin concentration
+  plasma_precipitin:
+    hpo: HP:0410242
+    label: Abnormal circulating IgG concentration
+  plasma_prekallikrein:
+    hpo: HP:0010876
+    label: Abnormal circulating protein concentration
+  plasma_pristanic_acid:
+    hpo: HP:0010964
+    label: Abnormal circulating long-chain fatty-acid concentration
+  plasma_procalcitonin:
+    hpo: HP:0100530
+    label: Abnormal circulating calcium-phosphate regulating hormone concentration
+  plasma_progranulin:
+    hpo: HP:0010876
+    label: Abnormal circulating protein concentration
+  plasma_proinsulin:
+    hpo: HP:0003117
+    label: Abnormal circulating hormone concentration
+  plasma_proline:
+    hpo: HP:0010907
+    label: Abnormal circulating proline concentration
+  plasma_propionylcarnitine:
+    hpo: HP:0012071
+    label: Abnormal circulating acylcarnitine concentration
+  plasma_propylene_glycol:
+    hpo: HP:0032180
+    label: Abnormal circulating metabolite concentration
+  plasma_prostaglandin_e2:
+    hpo: HP:0011023
+    label: Abnormal circulating prostaglandin circulation
+  plasma_prostate_specific_antigen:
+    hpo: HP:0010876
+    label: Abnormal circulating protein concentration
+  plasma_pyridinoline:
+    hpo: HP:0033386
+    label: Abnormal circulating collagen degradation product concentration
+  plasma_pyrophosphate:
+    hpo: HP:0100529
+    label: Abnormal blood phosphate concentration
+  plasma_pyrroline_5_carboxylate:
+    hpo: HP:0010996
+    label: Abnormal circulating monocarboxylic acid concentration
+  plasma_pyruvate:
+    hpo: HP:0010996
+    label: Abnormal circulating monocarboxylic acid concentration
+  plasma_retinol_binding_protein:
+    hpo: HP:0031031
+    label: Abnormal circulating retinol-binding protein concentration
+  plasma_reverse_t3:
+    hpo: HP:0025120
+    label: Abnormal circulating reverse T3 concentration
+  plasma_ribitol:
+    hpo: HP:0011013
+    label: Abnormal circulating carbohydrate concentration
+  plasma_s_sulfocysteine:
+    hpo: HP:0033109
+    label: Abnormal circulating non-proteinogenic amino acid concentration
+  plasma_saccharopine:
+    hpo: HP:0033109
+    label: Abnormal circulating non-proteinogenic amino acid concentration
+  plasma_sah:
+    hpo: HP:0033109
+    label: Abnormal circulating non-proteinogenic amino acid concentration
+  plasma_sam:
+    hpo: HP:0033109
+    label: Abnormal circulating non-proteinogenic amino acid concentration
+  plasma_sarcosine:
+    hpo: HP:0010898
+    label: Abnormal circulating sarcosine concentration
+  plasma_scd163:
+    hpo: HP:0010876
+    label: Abnormal circulating protein concentration
+  plasma_sebacate:
+    hpo: HP:0010995
+    label: Abnormal circulating dicarboxylic acid concentration
+  plasma_selenium:
+    hpo: HP:0031903
+    label: Abnormal circulating selenium concentration
+  plasma_serine:
+    hpo: HP:0012278
+    label: Abnormal circulating serine concentration
+  plasma_serotonin:
+    hpo: HP:0003117
+    label: Abnormal circulating hormone concentration
+  plasma_serum_amyloid_a:
+    hpo: HP:0010876
+    label: Abnormal circulating protein concentration
+  plasma_shbg:
+    hpo: HP:0010876
+    label: Abnormal circulating protein concentration
+  plasma_short_chain_acylcarnitine:
+    hpo: HP:0012071
+    label: Abnormal circulating acylcarnitine concentration
+  plasma_sialic_acid:
+    hpo: HP:0011013
+    label: Abnormal circulating carbohydrate concentration
+  plasma_sitosterol:
+    hpo: HP:0003119
+    label: Abnormal circulating lipid concentration
+  plasma_sodium_concentration:
+    hpo: HP:0010931
+    label: Abnormal blood sodium concentration
+  plasma_sorbitol:
+    hpo: HP:0011013
+    label: Abnormal circulating carbohydrate concentration
+  plasma_specific_antibody:
+    hpo: HP:0010701
+    label: Abnormal circulating immunoglobulin concentration
+  plasma_squalene:
+    hpo: HP:0430071
+    label: Abnormal circulating organic compound concentration
+  plasma_stearoylcarnitine:
+    hpo: HP:0012071
+    label: Abnormal circulating acylcarnitine concentration
+  plasma_suberate:
+    hpo: HP:0010995
+    label: Abnormal circulating dicarboxylic acid concentration
+  plasma_succinate:
+    hpo: HP:0010995
+    label: Abnormal circulating dicarboxylic acid concentration
+  plasma_succinylacetone:
+    hpo: HP:0004354
+    label: Abnormal circulating carboxylic acid concentration
+  plasma_sulfate:
+    hpo: HP:0003111
+    label: Abnormal blood ion concentration
+  plasma_superoxide_dismutase:
+    hpo: HP:0031835
+    label: Abnormal circulating superoxide dismutase activity
+  plasma_surfactant_protein:
+    hpo: HP:0010876
+    label: Abnormal circulating protein concentration
+  plasma_t4:
+    hpo: HP:0031505
+    label: Abnormal circulating T4 concentration
+  plasma_taurine:
+    hpo: HP:0500180
+    label: Abnormal circulating amino sulfonic acid concentration
+  plasma_tenascin_c:
+    hpo: HP:0010876
+    label: Abnormal circulating protein concentration
+  plasma_tetracosanoic_acid:
+    hpo: HP:0010966
+    label: Abnormal circulating fatty-acid anion concentration
+  plasma_tetradecanoylcarnitine:
+    hpo: HP:0012071
+    label: Abnormal circulating acylcarnitine concentration
+  plasma_tetradecenoylcarnitine:
+    hpo: HP:0012071
+    label: Abnormal circulating acylcarnitine concentration
+  plasma_thallium:
+    hpo: HP:0001939
+    label: Abnormality of metabolism/homeostasis
+  plasma_thiosulfate:
+    hpo: HP:0003111
+    label: Abnormal blood ion concentration
+  plasma_threonine:
+    hpo: HP:0010900
+    label: Abnormal circulating threonine concentration
+  plasma_thrombopoietin:
+    hpo: HP:0003117
+    label: Abnormal circulating hormone concentration
+  plasma_thromboxane_b2:
+    hpo: HP:0030389
+    label: Abnormal circulating thromboxane concentration
+  plasma_thymidine:
+    hpo: HP:0004353
+    label: Abnormal circulating pyrimidine concentration
+  plasma_thymine:
+    hpo: HP:0004353
+    label: Abnormal circulating pyrimidine concentration
+  plasma_thyroglobulin:
+    hpo: HP:0025483
+    label: Abnormal circulating thyroglobulin concentration
+  plasma_thyroxine_binding_globulin:
+    hpo: HP:0034590
+    label: Abnormal circulating thyroxine-binding globulin concentration
+  plasma_tiglylcarnitine:
+    hpo: HP:0012071
+    label: Abnormal circulating acylcarnitine concentration
+  plasma_tiglylglycine:
+    hpo: HP:0004354
+    label: Abnormal circulating carboxylic acid concentration
+  plasma_total_lipids:
+    hpo: HP:0003119
+    label: Abnormal circulating lipid concentration
+  plasma_transaminases:
+    hpo: HP:0430135
+    label: Abnormal circulating hepatic transaminase concentration
+  plasma_transcobalamin_1:
+    hpo: HP:0010876
+    label: Abnormal circulating protein concentration
+  plasma_transcobalamin_2:
+    hpo: HP:0010876
+    label: Abnormal circulating protein concentration
+  plasma_triglycerides:
+    hpo: HP:0003119
+    label: Abnormal circulating lipid concentration
+  plasma_trihydroxycholestanoic_acid:
+    hpo: HP:0011013
+    label: Abnormal circulating carbohydrate concentration
+  plasma_trypsinogen:
+    hpo: HP:0010876
+    label: Abnormal circulating protein concentration
+  plasma_tryptase:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  plasma_tryptophan:
+    hpo: HP:0004365
+    label: Abnormal circulating tryptophan concentration
+  plasma_tyrosine:
+    hpo: HP:0010917
+    label: Abnormal circulating tyrosine concentration
+  plasma_unconjugated_bilirubin:
+    hpo: HP:0033479
+    label: Abnormal circulating bilirubin concentration
+  plasma_uracil:
+    hpo: HP:0004353
+    label: Abnormal circulating pyrimidine concentration
+  plasma_urate:
+    hpo: HP:0010932
+    label: Abnormal circulating nucleobase concentration
+  plasma_urocanic_acid:
+    hpo: HP:0010996
+    label: Abnormal circulating monocarboxylic acid concentration
+  plasma_uroporphyrin:
+    hpo: HP:0010472
+    label: Abnormal circulating porphyrin concentration
+  plasma_valine:
+    hpo: HP:0010914
+    label: Abnormal circulating valine concentration
+  plasma_vasoactive_intestinal_peptide:
+    hpo: HP:0003117
+    label: Abnormal circulating hormone concentration
+  plasma_vegf:
+    hpo: HP:0003117
+    label: Abnormal circulating hormone concentration
+  plasma_very_long_chain_acylcarnitine:
+    hpo: HP:0012071
+    label: Abnormal circulating acylcarnitine concentration
+  plasma_vitamin_b12:
+    hpo: HP:0040126
+    label: Abnormal circulating vitamin B12 concentration
+  plasma_vlcfa:
+    hpo: HP:0004359
+    label: Abnormal circulating fatty-acid concentration
+  plasma_vldl:
+    hpo: HP:0031889
+    label: Abnormal VLDL cholesterol concentration
+  plasma_xanthine:
+    hpo: HP:0004352
+    label: Abnormal circulating purine concentration
+  plasma_zinc:
+    hpo: HP:0008277
+    label: Abnormal blood zinc concentration
+  porphobilinogen_deaminase_activity:
+    hpo: HP:0030272
+    label: Abnormal erythrocyte enzyme concentration or activity
+  ppt1_activity:
+    hpo: HP:6000231
+    label: Abnormal tissue enzyme concentration or activity
+  progesterone:
+    hpo: HP:0031212
+    label: Abnormal circulating progesterone level
+  prolidase_activity:
+    hpo: HP:6000231
+    label: Abnormal tissue enzyme concentration or activity
+  propionyl_coa_carboxylase_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  prpp_synthetase_activity:
+    hpo: HP:0032459
+    label: Abnormal phosphoribosylpyrophosphate synthetase level
+  pth:
+    hpo: HP:0100530
+    label: Abnormal circulating calcium-phosphate regulating hormone concentration
+  ptps_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  pulmonary_artery_pressure:
+    hpo: HP:0030875
+    label: Abnormality of pulmonary circulation
+  pulmonary_capillary_wedge_pressure:
+    hpo: HP:0030875
+    label: Abnormality of pulmonary circulation
+  pulmonary_vascular_resistance:
+    hpo: HP:0030875
+    label: Abnormality of pulmonary circulation
+  pulse_pressure:
+    hpo: HP:0030850
+    label: Abnormal pulse pressure
+  pyrimidine_5_nucleotidase_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  pyruvate_carboxylase_activity:
+    hpo: HP:0000816
+    label: Abnormality of Krebs cycle metabolism
+  pyruvate_dehydrogenase_activity:
+    hpo: HP:0003287
+    label: Abnormality of mitochondrial metabolism
+  pyruvate_kinase_activity:
+    hpo: HP:0030272
+    label: Abnormal erythrocyte enzyme concentration or activity
+  renal_calcium_reabsorption:
+    hpo: HP:0003110
+    label: Abnormality of urine homeostasis
+  renin:
+    hpo: HP:0040084
+    label: Abnormal circulating renin concentration
+  resting_energy_expenditure:
+    hpo: HP:0012338
+    label: Abnormal energy expenditure
+  right_atrial_pressure:
+    hpo: HP:0025443
+    label: Abnormal cardiac atrial physiology
+  right_ventricular_systolic_pressure:
+    hpo: HP:0033118
+    label: Abnormal right ventricular function
+  sah_hydrolase_activity:
+    hpo: HP:6000231
+    label: Abnormal tissue enzyme concentration or activity
+  scot_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  sepiapterin_reductase_activity:
+    hpo: HP:4000195
+    label: Abnormal enzyme activity in cultured fibroblasts
+  serum_anion_gap:
+    hpo: HP:0031961
+    label: Abnormal serum anion gap
+  serum_osmolal_gap:
+    hpo: HP:6000679
+    label: Abnormal serum osmolality
+  sgsh_activity:
+    hpo: HP:0034858
+    label: Abnormal leukocyte enzyme concentration or activity
+  short_chain_acyl_coa_dehydrogenase_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  ssadh_activity:
+    hpo: HP:6000231
+    label: Abnormal tissue enzyme concentration or activity
+  steroid_sulfatase_activity:
+    hpo: HP:0034858
+    label: Abnormal leukocyte enzyme concentration or activity
+  sterol_27_hydroxylase_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  stool_chloride:
+    hpo: HP:0031685
+    label: Abnormal stool composition
+  stool_urobilinogen:
+    hpo: HP:0500114
+    label: Abnormal stool urobilinogen concentration
+  sucrase_isomaltase_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  sulfide_quinone_oxidoreductase_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  sulfite_oxidase_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  superoxide_dismutase_activity:
+    hpo: HP:0031835
+    label: Abnormal circulating superoxide dismutase activity
+  sweat_chloride:
+    hpo: HP:0040127
+    label: Abnormal sweat homeostasis
+  systolic_blood_pressure:
+    hpo: HP:0030972
+    label: Abnormal systemic blood pressure
+  t2_thiolase_activity:
+    hpo: HP:4000195
+    label: Abnormal enzyme activity in cultured fibroblasts
+  testosterone:
+    hpo: HP:0030087
+    label: Abnormal circulating testosterone concentration
+  three_beta_hsd_delta5_desaturase_activity:
+    hpo: HP:4000195
+    label: Abnormal enzyme activity in cultured fibroblasts
+  thymidine_phosphorylase_activity:
+    hpo: HP:6000231
+    label: Abnormal tissue enzyme concentration or activity
+  tissue_sphingomyelin:
+    hpo: HP:0034370
+    label: Abnormal muscle tissue metabolite concentration
+  tissue_tocopherol:
+    hpo: HP:0032243
+    label: Abnormal tissue metabolite concentration
+  tn_antigen_level:
+    hpo: HP:0012358
+    label: Abnormal protein O-linked glycosylation
+  total_iron_binding_capacity:
+    hpo: HP:0033212
+    label: Abnormal total iron binding capacity
+  tpp1_activity:
+    hpo: HP:6000231
+    label: Abnormal tissue enzyme concentration or activity
+  transferrin_saturation:
+    hpo: HP:0040135
+    label: Abnormal transferrin saturation
+  tsh:
+    hpo: HP:0031097
+    label: Abnormal thyroid-stimulating hormone level
+  type_2_deiodinase_activity:
+    hpo: HP:6000231
+    label: Abnormal tissue enzyme concentration or activity
+  udp_glucose_4_epimerase_activity:
+    hpo: HP:0410193
+    label: Abnormal circulating UDP glucose-4-epimerase concentration
+  ugt1a1_activity:
+    hpo: HP:6000231
+    label: Abnormal tissue enzyme concentration or activity
+  umps_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  urinary_1_methylhistidine:
+    hpo: HP:0410313
+    label: Abnormal urinary 1-methylhistidine concentration
+  urinary_2_3_dihydroxy_2_methylbutyrate:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_2_4_dihydroxybutyric_acid:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_2_4_dihydroxyglutarate:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_2_8_dihydroxyadenine:
+    hpo: HP:0033161
+    label: Abnormal urinary purine level
+  urinary_2_aminoisobutyric_acid:
+    hpo: HP:0025745
+    label: Abnormal urine amino acid level
+  urinary_2_hydroxy_3_methylvaleric_acid:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_2_hydroxybutyric_acid:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_2_hydroxyisocaproic_acid:
+    hpo: HP:0025745
+    label: Abnormal urine amino acid level
+  urinary_2_methyl_3_hydroxybutyrate:
+    hpo: HP:0025745
+    label: Abnormal urine amino acid level
+  urinary_2_methylacetoacetic_acid:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_2_methylcitrate:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_2_oxoisocaproic_acid:
+    hpo: HP:0025745
+    label: Abnormal urine amino acid level
+  urinary_2_oxovaleric_acid:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_3_4_dihydroxybutyrate:
+    hpo: HP:0010996
+    label: Abnormal circulating monocarboxylic acid concentration
+  urinary_3_6_epoxydicarboxylic_acid:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_3_aminoisobutyrate:
+    hpo: HP:0025745
+    label: Abnormal urine amino acid level
+  urinary_3_hydroxy_3_methylglutarate:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_3_hydroxyadipic_acid:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_3_hydroxybutyrate:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_3_hydroxyglutarate:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_3_hydroxyisobutyrate:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_3_hydroxykynurenine:
+    hpo: HP:0025745
+    label: Abnormal urine amino acid level
+  urinary_3_hydroxypentanoic_acid:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_3_hydroxypropionate:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_3_hydroxysebacic_acid:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_3_methyl_2_oxovaleric_acid:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_3_methylcrotonylglycine:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_3_methylhistidine:
+    hpo: HP:0410316
+    label: Abnormal urinary 3-methylhistidine level
+  urinary_4_5_dihydroxyhexanoic_acid:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_4_hydroxy_2_oxoglutarate:
+    hpo: HP:0032943
+    label: Abnormal urine pH
+  urinary_4_hydroxybutyrate:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_4_hydroxyisovaleric_acid:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_4_methyl_2_oxopentanoic_acid:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_5_hydroxyhexanoate:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_5_hydroxymethyluracil:
+    hpo: HP:0033162
+    label: Abnormal urinary pyrimidine level
+  urinary_5hiaa:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_7_biopterin:
+    hpo: HP:0040416
+    label: Abnormal urinary nitrogen compound level
+  urinary_7_hydroxyoctanoate:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_8_oxoguanosine:
+    hpo: HP:0033161
+    label: Abnormal urinary purine level
+  urinary_acetoacetate:
+    hpo: HP:0033354
+    label: Abnormal urine metabolite level
+  urinary_aconitic_acid:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_adipic_acid:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_aicar:
+    hpo: HP:0033161
+    label: Abnormal urinary purine level
+  urinary_ala:
+    hpo: HP:6000531
+    label: Abnormal urinary organic compound level
+  urinary_alloisoleucine:
+    hpo: HP:0025745
+    label: Abnormal urine amino acid level
+  urinary_alpha_ketoglutarate:
+    hpo: HP:0012401
+    label: Abnormal urine alpha-ketoglutarate concentration
+  urinary_amino_acids:
+    hpo: HP:0025745
+    label: Abnormal urine amino acid level
+  urinary_arabitol:
+    hpo: HP:0031979
+    label: Abnormal urine carbohydrate level
+  urinary_bile_acids:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_bile_alcohol:
+    hpo: HP:6000531
+    label: Abnormal urinary organic compound level
+  urinary_biliverdin:
+    hpo: HP:0033354
+    label: Abnormal urine metabolite level
+  urinary_biopterin:
+    hpo: HP:0040416
+    label: Abnormal urinary nitrogen compound level
+  urinary_butyric_acid:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_calcium:
+    hpo: HP:0011280
+    label: Abnormality of urine calcium concentration
+  urinary_catecholamines:
+    hpo: HP:0011281
+    label: Abnormality of urine catecholamine level
+  urinary_chloride:
+    hpo: HP:0012600
+    label: Abnormal urine chloride concentration
+  urinary_citrate:
+    hpo: HP:0012404
+    label: Abnormal urine citrate concentration
+  urinary_copper:
+    hpo: HP:0045036
+    label: Abnormal urinary copper concentration
+  urinary_coproporphyrin:
+    hpo: HP:6000531
+    label: Abnormal urinary organic compound level
+  urinary_creatine:
+    hpo: HP:6000531
+    label: Abnormal urinary organic compound level
+  urinary_creatinine:
+    hpo: HP:0033354
+    label: Abnormal urine metabolite level
+  urinary_cysteine:
+    hpo: HP:0025745
+    label: Abnormal urine amino acid level
+  urinary_cytidine:
+    hpo: HP:0033162
+    label: Abnormal urinary pyrimidine level
+  urinary_d_glycerate:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_d_lactate:
+    hpo: HP:0032943
+    label: Abnormal urine pH
+  urinary_d_threitol:
+    hpo: HP:0031979
+    label: Abnormal urine carbohydrate level
+  urinary_decadienoylcarnitine:
+    hpo: HP:0500170
+    label: Abnormal concentration of acylcarnitine in the urine
+  urinary_deoxyadenosine:
+    hpo: HP:0033161
+    label: Abnormal urinary purine level
+  urinary_deoxyuridine:
+    hpo: HP:0033162
+    label: Abnormal urinary pyrimidine level
+  urinary_dihydrothymine:
+    hpo: HP:0033162
+    label: Abnormal urinary pyrimidine level
+  urinary_dihydrouracil:
+    hpo: HP:0033162
+    label: Abnormal urinary pyrimidine level
+  urinary_dihydroxycholestanoic_acid:
+    hpo: HP:0031979
+    label: Abnormal urine carbohydrate level
+  urinary_dimethylglycine:
+    hpo: HP:0025745
+    label: Abnormal urine amino acid level
+  urinary_disaccharides:
+    hpo: HP:0031979
+    label: Abnormal urine carbohydrate level
+  urinary_dodecanedioic_acid:
+    hpo: HP:0032943
+    label: Abnormal urine pH
+  urinary_dolichol:
+    hpo: HP:6000531
+    label: Abnormal urinary organic compound level
+  urinary_dopamine:
+    hpo: HP:0011281
+    label: Abnormality of urine catecholamine level
+  urinary_epinephrine:
+    hpo: HP:0011281
+    label: Abnormality of urine catecholamine level
+  urinary_erythritol:
+    hpo: HP:0031979
+    label: Abnormal urine carbohydrate level
+  urinary_figlu:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_fructose:
+    hpo: HP:0031979
+    label: Abnormal urine carbohydrate level
+  urinary_fucose:
+    hpo: HP:0031979
+    label: Abnormal urine carbohydrate level
+  urinary_fumarate:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_gaba:
+    hpo: HP:0025745
+    label: Abnormal urine amino acid level
+  urinary_galactitol:
+    hpo: HP:0031979
+    label: Abnormal urine carbohydrate level
+  urinary_galactosyl_hydroxylysine:
+    hpo: HP:0033354
+    label: Abnormal urine metabolite level
+  urinary_galactosylated_oligosaccharide:
+    hpo: HP:0031979
+    label: Abnormal urine carbohydrate level
+  urinary_gamma_glutamylcysteine:
+    hpo: HP:0025745
+    label: Abnormal urine amino acid level
+  urinary_gamma_glutamylphenylalanine:
+    hpo: HP:0025745
+    label: Abnormal urine amino acid level
+  urinary_glcnac_oligosaccharide:
+    hpo: HP:0031979
+    label: Abnormal urine carbohydrate level
+  urinary_glucose_tetrasaccharide:
+    hpo: HP:0031979
+    label: Abnormal urine carbohydrate level
+  urinary_glutaconic_acid:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_glutamate:
+    hpo: HP:0025745
+    label: Abnormal urine amino acid level
+  urinary_glutamine:
+    hpo: HP:0025745
+    label: Abnormal urine amino acid level
+  urinary_glutarylglycine:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_glycerol:
+    hpo: HP:0031979
+    label: Abnormal urine carbohydrate level
+  urinary_glycine:
+    hpo: HP:0025745
+    label: Abnormal urine amino acid level
+  urinary_glycolate:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_glyoxylate:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_guanidinoacetate:
+    hpo: HP:0040418
+    label: Abnormal urine guanidinoacetic acid level
+  urinary_guanosine:
+    hpo: HP:0040423
+    label: Abnormal urinary guanosine level
+  urinary_hexacarboxylporphyrin:
+    hpo: HP:0033354
+    label: Abnormal urine metabolite level
+  urinary_hexanoic_acid:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_hexanoylglycine:
+    hpo: HP:0500254
+    label: Abnormal urine hexanoylglycine concentration
+  urinary_hippuric_acid:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_histamine:
+    hpo: HP:6000531
+    label: Abnormal urinary organic compound level
+  urinary_homogentisate:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_homovanillic_acid:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_hyaluronic_acid:
+    hpo: HP:0033354
+    label: Abnormal urine metabolite level
+  urinary_hydroxyphenyllactate:
+    hpo: HP:0025745
+    label: Abnormal urine amino acid level
+  urinary_hypoxanthine:
+    hpo: HP:0033161
+    label: Abnormal urinary purine level
+  urinary_imidodipeptides:
+    hpo: HP:0033354
+    label: Abnormal urine metabolite level
+  urinary_indican:
+    hpo: HP:0033354
+    label: Abnormal urine metabolite level
+  urinary_indoleacetate:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_inosine:
+    hpo: HP:0040421
+    label: Abnormal urinary inosine level
+  urinary_iodine:
+    hpo: HP:0025640
+    label: Abnormal urinary mineral level
+  urinary_isobutyrylglycine:
+    hpo: HP:0500256
+    label: Abnormal urine isobutyrylglycine concentration
+  urinary_isovaleric_acid:
+    hpo: HP:0032943
+    label: Abnormal urine pH
+  urinary_isovalerylglycine:
+    hpo: HP:0012073
+    label: Abnormal urinary acylglycine profile
+  urinary_ketoacids:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_kynurenine:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_l_glycerate:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_l_xylulose:
+    hpo: HP:0031979
+    label: Abnormal urine carbohydrate level
+  urinary_lysine:
+    hpo: HP:0025745
+    label: Abnormal urine amino acid level
+  urinary_magnesium:
+    hpo: HP:0012607
+    label: Abnormal urine magnesium concentration
+  urinary_malic_acid:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_malonate:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_mandelic_acid:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_manganese:
+    hpo: HP:0025640
+    label: Abnormal urinary mineral level
+  urinary_mesaconate:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_metanephrine:
+    hpo: HP:0011281
+    label: Abnormality of urine catecholamine level
+  urinary_methylmalonylcarnitine:
+    hpo: HP:0500170
+    label: Abnormal concentration of acylcarnitine in the urine
+  urinary_methylsuccinate:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_mevalonate:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_n_acetylaspartate:
+    hpo: HP:0025745
+    label: Abnormal urine amino acid level
+  urinary_n_acetylneuraminate:
+    hpo: HP:0033354
+    label: Abnormal urine metabolite level
+  urinary_n_acetyltyrosine:
+    hpo: HP:0025745
+    label: Abnormal urine amino acid level
+  urinary_n_butyrylglycine:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_n_carbamyl_beta_alanine:
+    hpo: HP:0025745
+    label: Abnormal urine amino acid level
+  urinary_n_carbamyl_beta_aminoisobutyrate:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_n_methylhistamine:
+    hpo: HP:6000531
+    label: Abnormal urinary organic compound level
+  urinary_ngal:
+    hpo: HP:0020129
+    label: Abnormal urine protein level
+  urinary_norepinephrine:
+    hpo: HP:0011281
+    label: Abnormality of urine catecholamine level
+  urinary_octanoic_acid:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_octenedioic_acid:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_organic_acids:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_orosomucoid:
+    hpo: HP:0020129
+    label: Abnormal urine protein level
+  urinary_oxalate:
+    hpo: HP:0032943
+    label: Abnormal urine pH
+  urinary_pentacarboxylporphyrin:
+    hpo: HP:0033354
+    label: Abnormal urine metabolite level
+  urinary_pge2:
+    hpo: HP:6000531
+    label: Abnormal urinary organic compound level
+  urinary_pge2_metabolite:
+    hpo: HP:6000531
+    label: Abnormal urinary organic compound level
+  urinary_phenylacetylglutamine:
+    hpo: HP:0025745
+    label: Abnormal urine amino acid level
+  urinary_phenylpropionylglycine:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_phenylpyruvate:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_phosphate:
+    hpo: HP:0012599
+    label: Abnormal urine phosphate concentration
+  urinary_phosphohydroxylysine:
+    hpo: HP:0025745
+    label: Abnormal urine amino acid level
+  urinary_phosphoserine:
+    hpo: HP:0025745
+    label: Abnormal urine amino acid level
+  urinary_pipecolic_acid:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_porphobilinogen:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_porphyrin:
+    hpo: HP:6000531
+    label: Abnormal urinary organic compound level
+  urinary_potassium:
+    hpo: HP:0012598
+    label: Abnormal urine potassium concentration
+  urinary_propionic_acid:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_propionylglycine:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_pyridinoline:
+    hpo: HP:0033354
+    label: Abnormal urine metabolite level
+  urinary_pyroglutamate:
+    hpo: HP:0025745
+    label: Abnormal urine amino acid level
+  urinary_pyrophosphate:
+    hpo: HP:0033354
+    label: Abnormal urine metabolite level
+  urinary_pyrroline_hydroxycarboxylate:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_quinolinate:
+    hpo: HP:0033162
+    label: Abnormal urinary pyrimidine level
+  urinary_ribitol:
+    hpo: HP:0031979
+    label: Abnormal urine carbohydrate level
+  urinary_ribose:
+    hpo: HP:0031979
+    label: Abnormal urine carbohydrate level
+  urinary_ribosylhistidine:
+    hpo: HP:0025745
+    label: Abnormal urine amino acid level
+  urinary_s_sulfocysteine:
+    hpo: HP:0025745
+    label: Abnormal urine amino acid level
+  urinary_saccharopine:
+    hpo: HP:0025745
+    label: Abnormal urine amino acid level
+  urinary_saicar_riboside:
+    hpo: HP:0033161
+    label: Abnormal urinary purine level
+  urinary_sarcosine:
+    hpo: HP:0025745
+    label: Abnormal urine amino acid level
+  urinary_sebacic_acid:
+    hpo: HP:0500251
+    label: Abnormal urine sebacic acid concentration
+  urinary_sedoheptulose:
+    hpo: HP:0031979
+    label: Abnormal urine carbohydrate level
+  urinary_sodium:
+    hpo: HP:0012603
+    label: Abnormal urine sodium concentration
+  urinary_suberic_acid:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_suberylglycine:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_succinate:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_succinic_acid:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_succinylacetone:
+    hpo: HP:0033354
+    label: Abnormal urine metabolite level
+  urinary_succinyladenosine:
+    hpo: HP:0033161
+    label: Abnormal urinary purine level
+  urinary_sulfate:
+    hpo: HP:0012612
+    label: Abnormal urinary sulfate concentration
+  urinary_sulfatide:
+    hpo: HP:0033354
+    label: Abnormal urine metabolite level
+  urinary_sulfite:
+    hpo: HP:0033354
+    label: Abnormal urine metabolite level
+  urinary_taurine:
+    hpo: HP:0025745
+    label: Abnormal urine amino acid level
+  urinary_thiosulfate:
+    hpo: HP:0033354
+    label: Abnormal urine metabolite level
+  urinary_threonine:
+    hpo: HP:0025745
+    label: Abnormal urine amino acid level
+  urinary_thymidine:
+    hpo: HP:0033162
+    label: Abnormal urinary pyrimidine level
+  urinary_thymine:
+    hpo: HP:0033162
+    label: Abnormal urinary pyrimidine level
+  urinary_tiglylglycine:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_trihydroxycholestanoate:
+    hpo: HP:0031979
+    label: Abnormal urine carbohydrate level
+  urinary_tyramine:
+    hpo: HP:0040416
+    label: Abnormal urinary nitrogen compound level
+  urinary_urate:
+    hpo: HP:0012610
+    label: Abnormality of urinary uric acid level
+  urinary_ureidoisobutyrate:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_ureidopropionate:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_uridine:
+    hpo: HP:0033162
+    label: Abnormal urinary pyrimidine level
+  urinary_urobilinogen:
+    hpo: HP:0032472
+    label: Abnormal urine urobilinogen level
+  urinary_uromodulin:
+    hpo: HP:0034885
+    label: Abnormal urinary uromodulin level
+  urinary_uroporphyrin:
+    hpo: HP:6000531
+    label: Abnormal urinary organic compound level
+  urinary_vanillactate:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_vanillylmandelic_acid:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_xanthurenate:
+    hpo: HP:0031980
+    label: Abnormal urine carboxylic acid level
+  urinary_xylitol:
+    hpo: HP:0031979
+    label: Abnormal urine carbohydrate level
+  urinary_zinc:
+    hpo: HP:0025640
+    label: Abnormal urinary mineral level
+  urine_bicarbonate:
+    hpo: HP:0011279
+    label: Abnormality of urine bicarbonate level
+  urine_osmolality:
+    hpo: HP:0033358
+    label: Abnormal urine osmolality
+  urine_urobilinogen:
+    hpo: HP:0032472
+    label: Abnormal urine urobilinogen level
+  urocanase_activity:
+    hpo: HP:0034685
+    label: Abnormal liver enzyme activity or concentration
+  uroporphyrinogen_decarboxylase_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity
+  uroporphyrinogen_iii_synthase_activity:
+    hpo: HP:0030272
+    label: Abnormal erythrocyte enzyme concentration or activity
+  vldl_cholesterol:
+    hpo: HP:0031889
+    label: Abnormal VLDL cholesterol concentration
+  xanthine_oxidase_activity:
+    hpo: HP:0012379
+    label: Abnormal circulating enzyme concentration or activity

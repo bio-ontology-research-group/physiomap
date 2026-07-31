@@ -1,0 +1,179 @@
+# =============================================================================
+# Multi-scale: cardiomyocyte excitation-contraction Ca2+ handling  *** DRAFT FOR REVIEW ***
+# =============================================================================
+# A subcellular/molecular vertical for calcium-induced calcium release (CICR), the
+# core of cardiac excitation-contraction (EC) coupling, lifted constitutively onto the
+# existing organ-system cardiac variable (cardiac_output / contractility). Encodes the
+# canonical EC-coupling cascade in the ventricular myocyte:
+#
+#   WITHIN-SCALE CAUSAL (subcellular Ca2+ handling):
+#       sympathetic_tone (boundary, organ_system)              # beta-adrenergic / PKA drive
+#         -> l_type_calcium_current                            # PKA phosphorylates Cav1.2 -> larger I_CaL
+#       l_type_calcium_current
+#         -> sr_calcium_release                                # trigger Ca2+ opens RyR2 (CICR, gain)
+#         -> cytosolic_calcium_transient                       # I_CaL also adds directly to cytosol
+#       sr_calcium_release
+#         -> cytosolic_calcium_transient                       # bulk of the systolic Ca2+ rise
+#       cytosolic_calcium_transient
+#         -> troponin_c_calcium_binding                        # Ca2+ binds cTnC -> thin-filament activation
+#       cytosolic_calcium_transient
+#         -> serca_uptake_rate                                 # elevated Ca2+ drives SERCA2a pumping
+#       serca_uptake_rate
+#         -> sr_calcium_load                                   # SERCA refills the SR store
+#       sr_calcium_load
+#         -> sr_calcium_release                                # higher SR load -> larger CICR (load dependence)
+#       sr_calcium_release
+#         -> sr_calcium_load                                   # release flux DEPLETES the SR store (-)
+#       cytosolic_calcium_transient
+#         -> sr_calcium_release                                # Ca2+-dependent INACTIVATION of RyR2 (-)
+#
+#   FEEDBACK LOOPS (need loop-aware comparative statics, not forward propagation):
+#       (P) Load-depletion loop (DOMINANT NEGATIVE / self-limiting — graded release):
+#           sr_calcium_load -> sr_calcium_release ("+", load-dependence)
+#           -> sr_calcium_load ("-", release empties the store). One "-" edge => negative
+#           loop. Local junctional-SR depletion ("induction decay", Cannell 2013) is the
+#           dominant beat-to-beat CICR-termination mechanism, and provides the negative
+#           counterweight to the SERCA store-replenishing loop (A).
+#       (A) SERCA refill loop (NET POSITIVE / store-replenishing):
+#           cytosolic_calcium_transient -> serca_uptake_rate -> sr_calcium_load
+#             -> sr_calcium_release -> cytosolic_calcium_transient
+#           Four "+" edges => positive loop: SERCA uptake recycles Ca2+ into the SR so it
+#           is available for the next beat. Counterbalanced on sr_calcium_load by the
+#           release-depletion edge (loop P), not left to the implicit self-loop alone.
+#       (B) RyR2 Ca-dependent-inactivation loop (SECONDARY NEGATIVE / self-limiting):
+#           cytosolic_calcium_transient -> sr_calcium_release ("-", CDI of RyR2)
+#           -> cytosolic_calcium_transient ("+"). One "-" edge => negative loop; a
+#           secondary cytosolic-side contributor to terminating release (the primary
+#           graded-release feedback is the load-depletion loop P).
+#
+#   CROSS-SCALE CONSTITUTIVE (part_of + determination; NOT causal):
+#       troponin_c_calcium_binding (subcellular) >> cardiac_output (organ_system)
+#         # thin-filament Ca2+ activation constitutes myofilament force => contractility =>
+#         # stroke volume; at fixed heart rate, cardiac output. Determination, not causation.
+#
+# SOURCES (verified):
+#   - BioModels MODEL7914464799  Shannon2004_VentricularMyocyte
+#       Shannon, Wang, Puglisi, Weber & Bers (2004) "A mathematical treatment of
+#       integrated Ca dynamics within the ventricular myocyte." Biophys J 87:3351-3371.
+#       PubMed 15347581.  -> integrated I_CaL -> RyR (CICR, SR-load-dependent) -> cytosolic
+#       Ca transient -> TnC buffering; SERCA uptake -> SR load; Ca-dependent inactivation.
+#   - BioModels MODEL0393108880  tenTusscher2004_CardiacArrhythmias ("A model for human
+#       ventricular tissue") ten Tusscher, Noble, Noble & Panfilov (2004) Am J Physiol
+#       Heart Circ Physiol 286:H1573-H1589. PubMed 14656705. -> human ventricular I_CaL,
+#       CICR, intracellular Ca dynamics & SR handling.
+#   - Bers DM, Excitation-Contraction Coupling and Cardiac Contractile Force (2nd ed,
+#       Kluwer 2001): I_CaL is the physiological trigger for SR Ca2+ release via RyR2
+#       (CICR); SR Ca2+ load sets release gain; cytosolic Ca2+ binds troponin C to
+#       activate the myofilaments; SERCA2a reuptake refills the SR. Canonical EC-coupling.
+#   - Boron & Boulpaep, Medical Physiology (cardiac muscle EC coupling): beta-adrenergic
+#       (sympathetic) stimulation -> PKA phosphorylation of L-type Ca2+ channels increases
+#       I_CaL, augmenting the Ca2+ transient and contractility (positive inotropy).
+#   - Cannell, Kong, Imtiaz & Laver (2013) "Control of SR Ca2+ Release by Stochastic RyR
+#       Gating within a 3D Model of the Cardiac Dyad and Importance of Induction Decay for
+#       CICR Termination." Biophys J 104:2149-2159. PubMed 23708355 / PMC3660628. ->
+#       release-driven local junctional-SR depletion ("induction decay") is the dominant
+#       beat-to-beat CICR-termination mechanism (sr_calcium_release -| sr_calcium_load).
+#
+# BOUNDARY NODES (existing-map ids, NOT redefined here):
+#   sympathetic_tone, cardiac_output
+# =============================================================================
+# NOTE (integration fix): the downward macro->micro causal 'driver' edge was REMOVED.
+# PhysioMap models causation WITHIN scale and cross-scale dependence as CONSTITUTIVE
+# (upward determination) only (see MULTISCALE.md). This vertical's top molecular node is
+# therefore a root, exercised by molecular/drug interventions, and lifts UP via the
+# constitutive edge(s). This keeps the combined causal+constitutive meta-graph acyclic.
+
+name: cardiomyocyte_calcium_handling
+nodes:
+- id: l_type_calcium_current
+  label: L-type (Cav1.2) sarcolemmal Ca2+ current (I_CaL)
+  scale: subcellular
+  entity_iri: GO:0086007
+  quality_iri: PATO:0000161
+- id: sr_calcium_release
+  label: sarcoplasmic-reticulum Ca2+ release flux (RyR2 / CICR)
+  scale: subcellular
+  entity_iri: GO:0005219
+  quality_iri: PATO:0000161
+- id: cytosolic_calcium_transient
+  label: cytosolic free Ca2+ transient amplitude (systolic)
+  scale: subcellular
+  entity_iri: CHEBI:29108
+  quality_iri: PATO:0000033
+- id: troponin_c_calcium_binding
+  label: cardiac troponin C Ca2+ occupancy (thin-filament activation)
+  scale: subcellular
+  entity_iri: PR:000016404
+  quality_iri: PATO:0000033
+  bearer_entity_iri: CL:0000746     # cardiac muscle cell — bearer of the troponin-C quality (structural part_of -> heart)
+- id: serca_uptake_rate
+  label: SERCA2a SR Ca2+ uptake rate
+  scale: subcellular
+  entity_iri: GO:0005388
+  quality_iri: PATO:0000161
+- id: sr_calcium_load
+  label: sarcoplasmic-reticulum Ca2+ load (diastolic store content)
+  scale: subcellular
+  entity_iri: CHEBI:29108
+  quality_iri: PATO:0000033
+causal_edges:
+- source: l_type_calcium_current
+  target: sr_calcium_release
+  sign: +
+  causal_evidence: mechanistic_model
+  mechanism: 'sarcolemmal Ca2+ entry through Cav1.2 raises dyadic-cleft Ca2+ (quality: trigger Ca2+ -> disposition: RyR2 Ca2+-sensitivity -> process: calcium-induced calcium release -> quality: SR Ca2+ release flux)'
+  evidence: 'Bers (2001) Excitation-Contraction Coupling, ch. on CICR: I_CaL is the physiological trigger that opens RyR2; BioModels MODEL7914464799 (Shannon2004_VentricularMyocyte, PubMed 15347581) and MODEL0393108880 (tenTusscher2004, PubMed 14656705). [citations PubMed-verified]'
+- source: l_type_calcium_current
+  target: cytosolic_calcium_transient
+  sign: +
+  causal_evidence: mechanistic_model
+  mechanism: 'L-type Ca2+ influx contributes a direct trans-sarcolemmal component to the rise in cytosolic free Ca2+ in addition to triggering SR release (quality: Ca2+ influx -> process: diffusion into cytosol -> quality: cytosolic [Ca2+])'
+  evidence: 'BioModels MODEL7914464799 (Shannon2004_VentricularMyocyte, PubMed 15347581): cytosolic Ca2+ balance includes the I_CaL flux term; Bers (2001). | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-059 (10.8: Cardiac Muscle Tissue): Ca++ entry through voltage-gated calcium channels in sarcolemma provides sustained depolarization plateau and longer contraction in cardiac muscle; OpenStax Anatomy & Physiology 2e §anp-107 (19.3: Cardiac Muscle and Electrical Activity): approximately 20% of the calcium required for contraction is supplied by the influx of Ca2+ through slow calcium channels during the plateau phase of the cardiac action potential [citations PubMed-verified]'
+- source: sr_calcium_release
+  target: cytosolic_calcium_transient
+  sign: +
+  causal_evidence: mechanistic_model
+  mechanism: 'RyR2 release delivers the majority of activator Ca2+ (quality: SR release flux -> process: Ca2+ efflux from SR into cytosol -> quality: systolic cytosolic [Ca2+])'
+  evidence: 'Bers (2001) Excitation-Contraction Coupling: ~70-90% of the systolic Ca2+ transient derives from SR release; BioModels MODEL7914464799 (Shannon2004, PubMed 15347581). | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-107 (19.3: Cardiac Muscle and Electrical Activity): the remaining Ca2+ for contraction is released from storage in the sarcoplasmic reticulum, constituting the major source of systolic calcium; Wong, Cells: Molecules and Mechanisms §wong-12.9 (Cell Motility - Undeclared): ''When the t-tubule is depolarized... allows [Ca2+ channels on the SR] to open. Ca2+ rushes out of the SR where it is available to troponin-c.'' [citations PubMed-verified]'
+- source: cytosolic_calcium_transient
+  target: troponin_c_calcium_binding
+  sign: +
+  causal_evidence: mechanistic_model
+  mechanism: 'rising cytosolic free Ca2+ binds the regulatory N-lobe of cardiac troponin C (quality: cytosolic [Ca2+] -> disposition: cTnC Ca2+ affinity -> process: Ca2+ binding to cTnC -> quality: fractional Ca2+ occupancy of cTnC / thin-filament activation)'
+  evidence: 'Bers (2001) Excitation-Contraction Coupling: cytosolic Ca2+ binds troponin C to activate the myofilaments; BioModels MODEL7914464799 (Shannon2004, PubMed 15347581) includes cTnC as the dominant cytosolic Ca2+ buffer / activation site. | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-107 (19.3: Cardiac Muscle and Electrical Activity): calcium ions combine with the regulatory protein troponin in the troponin-tropomyosin complex, removing inhibition of myosin cross-bridge formation with actin active sites to produce contraction; Wong, Cells: Molecules and Mechanisms §wong-12.9 (Cell Motility - Undeclared): ''When Ca2+ is available, it can bind to troponin-C, leading to a conformational change that shifts the position of tropomyosin to reveal the myosin binding site.''; Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-5.5.7 (Summary): ''Ca²⁺ binding to troponin-C triggers conformational changes that displace tropomyosin, thereby initiating contraction by allowing myosin heads to interact with actin.'' [citations PubMed-verified]'
+- source: cytosolic_calcium_transient
+  target: serca_uptake_rate
+  sign: +
+  causal_evidence: mechanistic_model
+  mechanism: 'elevated cytosolic Ca2+ raises the SERCA2a turnover (quality: cytosolic [Ca2+] -> disposition: SERCA2a Ca2+ affinity on the cytosolic face -> process: ATP-driven Ca2+ pumping into the SR -> quality: SR Ca2+ uptake rate)'
+  evidence: 'Bers (2001) Excitation-Contraction Coupling: SERCA2a uptake is steeply Ca2+ dependent and removes the bulk of cytosolic Ca2+ during relaxation; BioModels MODEL7914464799 (Shannon2004, PubMed 15347581). | textbook corroboration: Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-11.5.3 (Membrane ATPases): elevated cytoplasmic Ca2+ activates SERCA-mediated Ca2+ pumping back into the SR after muscle excitation.; Wong, Cells: Molecules and Mechanisms §wong-12.9 (Cell Motility - Undeclared): ''as cytoplasmic Ca2+ levels rise, the phospholamban releases from the Ca2+ pump and allows it to function.''; Wong, Cells: Molecules and Mechanisms §wong-4.4 (The Action Potential in Neurons): ''The increased [Ca2+]cytoplasm is taken up by the sarcoplasmic reticulum'' and Ca2+-calmodulin relieves inhibition of the Ca2+ pump, increasing Ca2+ removal when [Ca2+] rises. [citations PubMed-verified]'
+- source: serca_uptake_rate
+  target: sr_calcium_load
+  sign: +
+  causal_evidence: mechanistic_model
+  mechanism: 'SERCA2a pumps Ca2+ into the SR lumen (quality: uptake rate -> process: net Ca2+ accumulation in the SR -> quality: diastolic SR Ca2+ load)'
+  evidence: 'Bers (2001) Excitation-Contraction Coupling: SERCA2a sets steady-state SR Ca2+ content; BioModels MODEL7914464799 (Shannon2004, PubMed 15347581). | textbook corroboration: Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-11.5.3 (Membrane ATPases): SERCA transports Ca2+ from cytoplasm into the SR lumen, replenishing the SR store (actual free [Ca2+] in SR ~390 µM vs 0.1–0.2 µM in cytoplasm).; Wong, Cells: Molecules and Mechanisms §wong-4.4 (The Action Potential in Neurons): increased cytoplasmic Ca2+ is taken up by the sarcoplasmic reticulum, increasing its Ca2+ load. [citations PubMed-verified]'
+- source: sr_calcium_load
+  target: sr_calcium_release
+  sign: +
+  causal_evidence: mechanistic_model
+  mechanism: 'RyR2 release flux is steeply dependent on luminal SR Ca2+ load (quality: SR Ca2+ load -> disposition: luminal Ca2+ regulation of RyR2 gating -> process: greater fractional release per trigger -> quality: SR release flux)'
+  evidence: 'Bers (2001) Excitation-Contraction Coupling: SR Ca2+ release is a steep function of SR Ca2+ load (load-dependence of release gain); BioModels MODEL7914464799 (Shannon2004, PubMed 15347581) models load-dependent RyR release. | textbook corroboration: Wong, Cells: Molecules and Mechanisms §wong-4.4 (The Action Potential in Neurons): extra SR Ca2+ load ''leading to extra Ca2+ when it is released to trigger muscle contraction, causing stronger contractions.'' [citations PubMed-verified]'
+- source: sr_calcium_release
+  target: sr_calcium_load
+  sign: '-'
+  causal_evidence: mechanistic_model
+  mechanism: 'RyR2 release flux empties the SR lumen: efflux of Ca2+ out of the store during systole depletes the SR content (quality: SR release flux -> process: net Ca2+ loss from the SR lumen -> quality: SR Ca2+ load). Local junctional-SR depletion ("induction decay") is the dominant beat-to-beat CICR-termination mechanism.'
+  evidence: 'Cannell, Kong, Imtiaz & Laver (2013) "Control of SR Ca2+ Release by Stochastic RyR Gating... and Importance of Induction Decay for CICR Termination", Biophys J 104:2149-2159 (PubMed 23708355, PMC3660628): release-driven local SR depletion terminates the Ca2+ spark; Bers (2001) Excitation-Contraction Coupling: release flux depletes SR Ca2+ content during systole. [citations PubMed-verified]'
+- source: cytosolic_calcium_transient
+  target: sr_calcium_release
+  sign: '-'
+  causal_evidence: mechanistic_model
+  mechanism: 'rising cytosolic/dyadic Ca2+ inactivates the RyR2 release channels (quality: local cytosolic [Ca2+] -> disposition: Ca2+-dependent inactivation of RyR2 -> process: closure of release units -> quality: reduction of SR release flux). Secondary, cytosolic-side contributor to release termination; the dominant self-limiting term is the load-depletion edge sr_calcium_release -| sr_calcium_load above.'
+  evidence: 'Bers (2001) Excitation-Contraction Coupling: Ca2+-dependent inactivation of RyR2 contributes to making CICR self-limiting (graded release); BioModels MODEL7914464799 (Shannon2004, PubMed 15347581) includes Ca-dependent RyR/release inactivation gating. [citations PubMed-verified]'
+- source: troponin_c_calcium_binding
+  target: cardiac_output
+  sign: +
+  causal_evidence: mechanistic_model
+  mechanism: calcium-bound cardiac troponin C displaces tropomyosin, increases actomyosin cross-bridge recruitment and ventricular force, and thereby increases cardiac output at a fixed loading condition
+  evidence: Bers DM. Excitation-Contraction Coupling and Cardiac Contractile Force (2001); Shannon et al. 2004 (PMID 15347581); OpenStax Anatomy & Physiology 2e §19.3.

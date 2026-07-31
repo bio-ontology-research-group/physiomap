@@ -1,0 +1,171 @@
+# =============================================================================
+# Thyroid axis (HPT) and metabolic rate — PhysioMap fragment   *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Hand-encoded, single-scale (ORGAN / ORGAN_SYSTEM). Each edge sign is the sign of
+# the partial derivative of the target w.r.t. the source at steady state, all else
+# equal. ROBERT: please correct signs/edges.
+#
+# Sources for canonical signs:
+#   - HumMod (thyroid module: TSH -> T4 secretion; T4 -> peripheral T3; T4/T3 -> TSH feedback)
+#   - Degon et al. 2008, Math. Biosci. — mechanistic HPT feedback model
+#   - Eisenberg, Samuels & DiStefano 2008, Thyroid — T4/T3 distribution & deiodination
+#   - Standard endocrine physiology (Boron & Boulpaep): thyroid hormone raises metabolic
+#     rate, heart rate, cardiac output; vasodilates (lowers TPR); is thermogenic.
+#
+# HPT negative-feedback loop (net negative) is included:
+#   tsh -> free_t4 (+) -> free_t3 (+) ;  free_t4 -> tsh (-) and free_t3 -> tsh (-)
+#
+# Boundary nodes (defined in sibling fragments; referenced, NOT redefined here):
+#   heart_rate, cardiac_output, total_peripheral_resistance  (CV/renal core)
+#   metabolic_heat_production                                (thermoregulation)
+#   arterial_pco2                                            (respiratory)
+# A standalone load of this file alone will flag those as unknown — EXPECTED; they
+# resolve on merge() with the sibling fragments.
+# =============================================================================
+
+name: thyroid
+description: >-
+  DRAFT thyroid axis (hypothalamic-pituitary-thyroid, HPT) and whole-body metabolic
+  rate as a PhysioMap signed cyclic causal graph. Includes the HPT negative-feedback
+  loop and the canonical thyroid-hormone couplings into cardiovascular, thermoregulatory
+  and respiratory boundary nodes. Single-scale (Phase 1).
+
+nodes:
+  - id: pituitary_tsh_secretion
+    label: anterior-pituitary thyrotropin (TSH) secretory output (rate)
+    scale: organ_system
+    entity_iri: GO:0070460  # thyroid-stimulating hormone secretion (occurrent bears the rate)
+    quality_iri: PATO:0000161         # secretion rate
+    quality_kind: rate
+  - id: tsh
+    label: thyroid-stimulating hormone (thyrotropin)
+    scale: organ_system
+    entity_iri: PR:000016724  # thyrotropin subunit beta (TSH)
+    quality_iri: PATO:0000033         # concentration
+  - id: free_t4
+    label: free plasma thyroxine (free T4)
+    scale: organ_system
+    entity_iri: CHEBI:30660           # L-thyroxine
+    quality_iri: PATO:0000033
+  - id: free_t3
+    label: free plasma triiodothyronine (free T3)
+    scale: organ_system
+    entity_iri: CHEBI:18258           # 3,3',5-triiodo-L-thyronine
+    quality_iri: PATO:0000033
+  - id: metabolic_rate
+    label: whole-body basal/resting metabolic rate (O2 consumption)
+    scale: organ_system
+    quality_iri: PATO:0000161         # rate
+
+  # --- cellular producers (cross-scale grounding of the secreted hormones) ---
+  - id: thyrotroph_tsh_secretion
+    label: anterior-pituitary thyrotroph TSH secretion rate
+    scale: cellular
+    entity_iri: GO:0070460            # thyroid-stimulating hormone secretion
+    quality_iri: PATO:0000161
+    bearer_entity_iri: CL:0000476  # thyrotroph
+  - id: thyroid_follicular_t4_secretion
+    label: thyroid follicular cell thyroxine (T4) secretion rate
+    scale: cellular
+    entity_iri: GO:0006590            # thyroid hormone generation
+    quality_iri: PATO:0000161
+    bearer_entity_iri: CL:0002258  # thyroid follicular cell
+
+causal_edges:
+  # --- HPT axis: secretion arm ---------------------------------------------
+  - source: tsh
+    target: free_t4
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: TSH stimulates thyroidal T4 synthesis and secretion (TSH-receptor / cAMP)
+    evidence: "HumMod thyroid module (TSH -> T4 secretion rate); Degon 2008 HPT model | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-090 (17.3: Hormones): table entry 'TSH: Stimulates thyroid hormone release'; OpenStax Anatomy & Physiology 2e §anp-091 (17.4: The Pituitary Gland and Hypothalamus): 'It [TSH] triggers the secretion of thyroid hormones by the thyroid gland.'; OpenStax Anatomy & Physiology 2e §anp-092 (17.5: The Thyroid Gland): 'TSH stimulates the thyroid gland to secrete T3 and T4'; OpenStax Anatomy & Physiology 2e §anp-166 (28.5: Changes During Pregnancy, Labor, and Birth): 'Thyrotropin, in conjunction with placental hormones, increases the production of thyroid hormone, which raises the maternal metabolic rate.'; OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): 'T3 and T4 release from the thyroid gland is stimulated by thyroid-stimulating hormone (TSH)'; 'TSH binding at the receptors of the follicle of the thyroid triggers the production of T3 and T4 from a glycoprotein called thyroglobulin.'; OpenStax Biology 2e §bio-37.4 (37.4: Regulation of Hormone Production): anterior pituitary TSH stimulates the thyroid gland to produce T3 and T4 (hormonal stimulus example)"
+  - source: free_t4
+    target: free_t3
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: peripheral 5'-deiodination (D1/D2) of T4 to the active hormone T3
+    evidence: "Eisenberg/DiStefano 2008 (T4 -> T3 deiodination); HumMod peripheral conversion"
+
+  # --- HPT axis: negative feedback (net negative loop) ---------------------
+  - source: free_t4
+    target: pituitary_tsh_secretion
+    sign: "-"
+    mechanism: T4 (via pituitary D2 -> local T3) suppresses pituitary TSH secretion
+    evidence: "Degon 2008 HPT feedback; HumMod thyroid (T4 -> TSH, inhibitory) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-091 (17.4: The Pituitary Gland and Hypothalamus): 'elevated levels of thyroid hormones in the bloodstream then trigger a drop in production of TRH and subsequently TSH.'; OpenStax Anatomy & Physiology 2e §anp-092 (17.5: The Thyroid Gland): 'increasing levels of T3 and T4 decrease the production and secretion of TSH' (negative feedback); OpenStax Biology 2e §bio-37.4 (37.4: Regulation of Hormone Production): increasing blood T3/T4 inhibit both pituitary and hypothalamus signaling to thyroid — negative feedback loop"
+  - source: free_t3
+    target: pituitary_tsh_secretion
+    sign: "-"
+    causal_evidence: mechanistic_model
+    mechanism: T3 directly inhibits pituitary thyrotroph TSH secretion (TRb feedback)
+    evidence: "Degon 2008 HPT feedback; classic thyroid-hormone negative feedback | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-092 (17.5: The Thyroid Gland): 'increasing levels of T3 and T4 decrease the production and secretion of TSH' (negative feedback); OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): 'Increased T3 and T4 levels in the blood inhibit the release of TSH, which results in lower T3 and T4 release from the thyroid.'; OpenStax Biology 2e §bio-37.4 (37.4: Regulation of Hormone Production): rising T3/T4 blood concentrations inhibit both the pituitary and hypothalamus in a negative feedback loop"
+
+  # --- pituitary TSH output sets the plasma TSH level (within-scale mediation) ---
+  # Curatorial correction (Paul N. Schofield, 2026-06-11): hypothalamic/feedback drive onto plasma
+  # TSH is INDIRECT — TRH and the T4/T3 feedback act on the pituitary thyrotroph's TSH *secretory
+  # output* (`pituitary_tsh_secretion`), which then sets plasma TSH (secretion vs clearance). The
+  # thyrotroph output is linked by a typed production relation below. Routed at the
+  # macro scale, not through an unsupported direct macro-to-cell shortcut.
+  - source: pituitary_tsh_secretion
+    target: tsh
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: "anterior-pituitary TSH secretory output sets the circulating TSH concentration (mass balance: plasma [TSH] = secretion − clearance)"
+    evidence: "HumMod / Degon 2008 HPT model represent plasma TSH as the pituitary thyrotroph secretory output into the circulation. Curated by Paul N. Schofield. *** DRAFT FOR REVIEW ***"
+
+  # --- metabolic actions of thyroid hormone --------------------------------
+  - source: free_t3
+    target: metabolic_rate
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: T3 raises basal metabolic rate (Na/K-ATPase, mitochondrial uncoupling, calorigenesis)
+    evidence: "Boron & Boulpaep endocrine physiology; HumMod metabolism (T3 -> metabolic rate) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-005 (1.6: Homeostasis): 'The brain triggers the thyroid gland in the endocrine system to release thyroid hormone, which increases metabolic activity and heat production in cells throughout the body'; OpenStax Anatomy & Physiology 2e §anp-092 (17.5: The Thyroid Gland): 'T3 and T4 are often referred to as metabolic hormones because their levels influence the body's basal metabolic rate'; OpenStax Anatomy & Physiology 2e §anp-099 (17.12: Development and Aging of the Endocrine System): 'the thyroid gland produces less of the thyroid hormones, causing a gradual decrease in the basal metabolic rate'.; OpenStax Anatomy & Physiology 2e §anp-143 (24.7: Energy and Heat Balance): thyroid hormone stimulates more energy use and heat production by cells throughout the body; OpenStax Anatomy & Physiology 2e §anp-166 (28.5: Changes During Pregnancy, Labor, and Birth): 'Thyrotropin...increases the production of thyroid hormone, which raises the maternal metabolic rate.'; OpenStax Biology 2e §bio-37.2 (37.2: How Hormones Work): 'thyroid hormones act on many different tissue types, stimulating metabolic activity throughout the body.'; OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): 'T3 and T4 activate genes involved in energy production and glucose oxidation. This results in increased rates of metabolism and body heat production, which is known as the hormone's calorigenic effect.'"
+  - source: metabolic_rate
+    target: metabolic_heat_production
+    sign: "+"
+    mechanism: increased oxidative metabolism dissipates energy as heat (obligatory thermogenesis)
+    evidence: "thermoregulation: metabolic rate is the source term for metabolic heat production | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-143 (24.7: Energy and Heat Balance): 10% of daily energy expenditure is for body thermoregulation/temperature control; metabolic rate links to heat generation"
+  - source: metabolic_rate
+    target: arterial_pco2
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: higher oxidative metabolism raises CO2 production (all else equal, before ventilatory compensation)
+    evidence: "respiratory mass balance: PaCO2 ~ VCO2 / alveolar ventilation"
+
+  # --- cardiovascular actions of thyroid hormone ---------------------------
+  - source: free_t3
+    target: sa_node_automaticity     # re-routed through the explicit pacemaker mediator (G. Gkoutos curated HR model)
+    sign: "+"
+    causal_evidence: curated_mechanistic
+    mechanism: T3 positive chronotropy via SA-node automaticity (raises If/funny current, L-type Ca current, SERCA Ca cycling, Na/K-ATPase -> steeper phase-4 depolarisation); see george_heart_rate.yaml
+    evidence: "Boron & Boulpaep; clinical hyperthyroid tachycardia / hypothyroid bradycardia | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-092 (17.5: The Thyroid Gland): 'When levels of T3 and T4 hormones are excessive, this effect accelerates the heart rate' | re-routed free_t3->heart_rate through sa_node_automaticity per G. Gkoutos curated heart-rate mechanism (ECO:0000305) | opened review: Endocrinology, 'Thyroid Hormone Receptors in Control of Heart Rate' (Oxford, bqae093): T3 upregulates HCN2/HCN4 pacemaker channels and raises If (net positive chronotropy undisputed; HCN/If upregulation is necessary-but-not-sufficient — multi-channel + autonomic contributions), so held to curated_mechanistic rather than an interventional class"
+  - source: free_t3
+    target: cardiac_output
+    sign: "+"
+    mechanism: T3 positive inotropy + raised heart rate + lower afterload raise cardiac output
+    evidence: "Klein & Ojamaa 2001 NEJM 'Thyroid hormone and the cardiovascular system'"
+  - source: free_t3
+    target: total_peripheral_resistance
+    sign: "-"
+    mechanism: T3 relaxes vascular smooth muscle (direct + metabolic), lowering systemic vascular resistance
+    evidence: "Klein & Ojamaa 2001 NEJM (thyroid hormone vasodilation -> reduced SVR)"
+
+# --- cross-scale CONSTITUTIVE grounding: secreting cell ▷ macro hormone level ---
+# Production edges: the cell of origin synthesises/secretes the hormone, so its secretion
+# rate sets the macro plasma level (micro is NOT part_of the substance — production is
+# exempt from the part_of check). Schema = {micro, macro, relation, sign}; provenance is
+# recorded here as comments. free_t3 is LEFT DERIVED (it arises mostly from peripheral
+# 5'-deiodination of T4, not a single secreting cell) and metabolic_rate is LEFT DERIVED
+# (a whole-body quality). *** DRAFT FOR REVIEW ***
+production_edges:
+  # Anterior-pituitary thyrotrophs synthesise/secrete TSH (thyrotropin); their secretion
+  # rate sets plasma TSH. Boron & Boulpaep Medical Physiology (HPT axis; anterior pituitary).
+  - source: thyrotroph_tsh_secretion
+    target: pituitary_tsh_secretion
+    sign: "+"
+    production_evidence: legacy-evidence-unclassified
+  # Thyroid follicular cells synthesise/secrete thyroxine (T4); their secretion rate sets the
+  # plasma (free) T4 level. Boron & Boulpaep Medical Physiology (thyroid hormone synthesis/secretion).
+  - source: thyroid_follicular_t4_secretion
+    target: free_t4
+    sign: "+"
+    production_evidence: legacy-evidence-unclassified

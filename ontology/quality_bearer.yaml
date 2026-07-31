@@ -1,0 +1,38 @@
+# Quality -> BFO bearer category (the "OWL axiom" grounding, curated).
+#
+# A PhysioMap node is a TRAIT (E, Q): a PATO quality Q inhering in an entity E. Every PATO
+# quality is defined for EITHER a process (occurrent) OR a material entity (continuant) as its
+# bearer. This file records the required bearer category of each quality determinable, so that
+# `physiomap_core.bfo.validate_bearer` can check that a node's entity E has the BFO category the
+# quality Q demands (a "rate of a continuant" or a "concentration of a process" is inconsistent).
+#
+# Grounding: PATO already splits qualities into `process quality` (PATO:0001236 -> occurrent) and
+# `physical object quality` (PATO:0001241 -> continuant), and the validator consults that is_a
+# hierarchy as a fallback. But PATO's split is INCOMPLETE for our commonest qualities --
+# `concentration of` (PATO:0000033) and `amount` (PATO:0000070) sit under NEITHER branch, and a
+# few rate-like qualities (`flow rate`) sit under `physical object quality` -- so the explicit
+# lists below are authoritative and override the is_a fallback. The corresponding OWL axiom now
+# ships in the DL artifact (`ProcessQuality SubClassOf qualityOf only Process`); this file is what
+# the Python build checks, since that axiom is outside the EL profile ELK reasons over.
+
+# Process (occurrent) qualities: the quality inheres in a GO biological process; its bearer E must
+# be an occurrent. Kept in lock-step with `bfo.PROCESS_QUALITIES` (+ duration).
+occurrent:
+  - PATO:0000161  # rate
+  - PATO:0000044  # frequency
+  - PATO:0001574  # flow rate
+  - PATO:0002243  # fluid flow rate
+  - PATO:0001492  # growth rate
+  - PATO:0002242  # velocity
+  - PATO:0001309  # duration
+
+# Continuant (physical object) qualities: the quality inheres in a material entity; bearer E must
+# be a continuant. These are the NEITHER-branch qualities that PATO's is_a cannot place, listed
+# explicitly so the validator does not misclassify them; every other quality defaults to
+# continuant unless PATO is_a puts it under `process quality`.
+continuant:
+  - PATO:0000033  # concentration of   (a ratio quality of a portion of substance)
+  - PATO:0000070  # amount
+  - PATO:0001655  # osmolarity
+  - PATO:0001842  # acidity
+  - PATO:0001555  # has number of      (a count of a material entity)

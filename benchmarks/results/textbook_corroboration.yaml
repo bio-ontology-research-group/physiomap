@@ -1,0 +1,2140 @@
+# Auto-generated: open-textbook corroboration of existing PhysioMap edges/nodes (added provenance).
+_about: Open-textbook sections that corroborate EXISTING PhysioMap edges/nodes — additional provenance
+  (review; may be inlined into edge.evidence later). Auto-generated from the textbook extraction fan-out;
+  see textbook_extraction.md.
+edges:
+  acth->cortisol:
+  - 'OpenStax Anatomy & Physiology 2e §anp-090 (17.3: Hormones): table entry ''ACTH: Stimulates hormone
+    release by adrenal cortex'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-091 (17.4: The Pituitary Gland and Hypothalamus): ''ACTH stimulates
+    the adrenal cortex to secrete corticosteroid hormones such as cortisol.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-094 (17.7: The Adrenal Glands): ''ACTH then stimulates the
+    adrenal cortex to produce the hormone cortisol''; ''ACTH triggers the release of the glucocorticoids.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-138 (24.2: Overview of Metabolic Reactions): ''tumors of the
+    pituitary that produce adrenocorticotropic hormone (ACTH), which subsequently stimulates the adrenal
+    cortex to release excessive cortisol'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-166 (28.5: Changes During Pregnancy, Labor, and Birth): ''ACTH
+    stimulates maternal cortisol secretion, which contributes to fetal protein synthesis.'''
+  - 'OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): ''the hypothalamus triggers the
+    release of ACTH from the anterior pituitary gland. The adrenal cortex is stimulated by ACTH to release
+    steroid hormones called corticosteroids... glucocorticoids such as cortisol.'''
+  - 'OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): ''The glucocorticoids... are secreted in
+    response to ACTH and levels are regulated by negative feedback.'''
+  adh->plasma_osmolality:
+  - 'OpenStax Anatomy & Physiology 2e §anp-145 (25.2: Physical Characteristics of Urine): ADH increases
+    collecting-duct aquaporin-2 insertion, driving water reabsorption that retains free water and dilutes
+    plasma osmolality; insufficient ADH causes polyuria and failure to dilute plasma.'
+  adh->sodium_water_reabsorption:
+  - 'OpenStax Anatomy & Physiology 2e §anp-090 (17.3: Hormones): ''ADH... Stimulates water reabsorption
+    by kidneys''; also ''The hormone causes the kidneys to reabsorb more water and reduce the volume of
+    urine produced'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-091 (17.4: The Pituitary Gland and Hypothalamus): ''Its effect
+    is to increase epithelial permeability to water, allowing increased water reabsorption.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-114 (20.5: Homeostatic Regulation of the Vascular System):
+    ''ADH signals its target cells in the kidneys to reabsorb more water, thus preventing the loss of
+    additional fluid in the urine.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-148 (25.5: Microscopic Anatomy of the Kidney): ''When stimulated
+    by ADH, these [collecting duct] cells will insert aquaporin channel proteins into their membranes...
+    allowing water to pass from the duct lumen through the cells and into the interstitial spaces to be
+    recovered by the vasa recta.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-150 (25.7: Tubular Reabsorption): ADH (vasopressin) stimulates
+    insertion of aquaporin channels into apical membrane of principal cells in collecting ducts, increasing
+    water reabsorption'
+  - 'OpenStax Anatomy & Physiology 2e §anp-152 (25.9: Endocrine Regulation of Kidney Function): ''ADH...promotes
+    the recovery of water, decreases urine volume, and maintains plasma osmolarity and blood pressure...by
+    stimulating the movement of aquaporin proteins into the apical cell membrane of principal cells of
+    the collecting ducts.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-153 (Regulation of Fluid Volume and Composition): ''ADH also
+    causes activation of aquaporin channels in the collecting ducts to affect the recovery of water to
+    help restore vascular volume'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-154 (25.11: The Urinary System and Homeostasis): ''ADH stimulation
+    of aquaporin channels allows for regulation of water recovery in the collecting ducts'' (line 38);
+    ''ADH promotes water recovery by the collecting ducts by stimulating the insertion of aquaporin water
+    channels into cell membranes'' (lines 358-359)'
+  - 'OpenStax Anatomy & Physiology 2e §anp-156 (26.3: Water Balance): ''ADH also causes the epithelial
+    cells that line the renal collecting tubules to move water channel proteins, called aquaporins...
+    large increase in water passage from the urine through the walls of the collecting tubules, leading
+    to more reabsorption of water into the bloodstream.'''
+  - 'OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): ''ADH changes the kidneys to
+    become more permeable to water by temporarily inserting water channels, aquaporins, into the kidney
+    tubules. Water moves out of the kidney tubules through the aquaporins, reducing urine volume.'''
+  - 'OpenStax Biology 2e §bio-41.5 (41.5: Hormonal Control of Osmoregulatory Functions): ''It [ADH] acts
+    by inserting aquaporins in the collecting ducts and promotes reabsorption of water.'''
+  adipose_tissue_mass->leptin:
+  - 'OpenStax Anatomy & Physiology 2e §anp-098 (17.11: Organs with Secondary Endocrine Functions): ''leptin,
+    a protein manufactured by adipose cells that circulates in amounts directly proportional to levels
+    of body fat'''
+  aldosterone->renal_potassium_excretion:
+  - 'OpenStax Anatomy & Physiology 2e §anp-094 (17.7: The Adrenal Glands): ''aldosterone increases the
+    excretion of K+.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-150 (25.7: Tubular Reabsorption): the Na+/K+ ATPase pump recovers
+    Na+ while pumping K+ into forming urine; aldosterone increases this pump activity, increasing K+ secretion'
+  - 'OpenStax Anatomy & Physiology 2e §anp-152 (25.9: Endocrine Regulation of Kidney Function): ''It [aldosterone]
+    is also important in regulating K+, promoting its excretion.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-153 (Regulation of Fluid Volume and Composition): ''When aldosterone
+    causes a recovery of Na+ in the nephron, a negative electrical gradient is created that promotes the
+    secretion of K+ and Cl– into the lumen'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-154 (25.11: The Urinary System and Homeostasis): ''When Na+
+    is retained, K+ is excreted; when Na+ is lost, K+ is retained'' (line 373) — reflects ENaC-mediated
+    Na/K exchange in collecting duct driven by aldosterone'
+  - 'OpenStax Anatomy & Physiology 2e §anp-157 (26.4: Electrolyte Balance): ''aldosterone increases the
+    excretion of potassium...excess potassium is pumped into the renal filtrate for excretion from the
+    body.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-159 (26.6: Disorders of Acid-Base Balance): ''The oversecretion
+    of ACTH results in elevated aldosterone levels and an increased loss of potassium by urinary excretion.'''
+  - 'OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): ''aldosterone maintains proper
+    water balance by enhancing Na+ reabsorption and K+ secretion from extracellular fluid of the cells
+    in kidney tubules.'''
+  - 'OpenStax Biology 2e §bio-41.5 (41.5: Hormonal Control of Osmoregulatory Functions): ''the aldosterone
+    also stimulates potassium secretion concurrently with sodium reabsorption.'''
+  aldosterone->sodium_water_reabsorption:
+  - 'OpenStax Anatomy & Physiology 2e §anp-090 (17.3: Hormones): table entry ''Aldosterone: Increases
+    blood Na+ levels'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-094 (17.7: The Adrenal Glands): ''aldosterone increases the
+    excretion of K+ and the retention of Na+, which in turn increases blood volume and blood pressure.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-114 (20.5: Homeostatic Regulation of the Vascular System):
+    ''Aldosterone increases the reabsorption of sodium into the blood by the kidneys. Since water follows
+    sodium, this increases the reabsorption of water.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-116 (20.7: Development of Blood Vessels and Fetal Circulation):
+    Review question 17 confirms ''aldosterone prompts the kidneys to reabsorb sodium'' as the correct
+    answer in the renin-angiotensin-aldosterone mechanism.'
+  - 'OpenStax Anatomy & Physiology 2e §anp-147 (25.4: Gross Anatomy of the Kidney): ''The adrenal cortex
+    directly influences renal function through the production of the hormone aldosterone to stimulate
+    sodium reabsorption.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-148 (25.5: Microscopic Anatomy of the Kidney): ''Aldosterone
+    stimulates Na+ reabsorption by the kidney, which also results in water retention and increased blood
+    pressure.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-150 (25.7: Tubular Reabsorption): aldosterone stimulates principal
+    cells to manufacture luminal Na+ channels and Na+/K+ ATPase pumps in DCT/collecting duct, increasing
+    Na+ reabsorption'
+  - 'OpenStax Anatomy & Physiology 2e §anp-152 (25.9: Endocrine Regulation of Kidney Function): ''It [aldosterone]
+    promotes Na+ reabsorption by the nephron, promoting the retention of water.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-153 (Regulation of Fluid Volume and Composition): ''Aldosterone
+    stimulates the uptake of Na+ on the apical cell membrane of cells in the DCT and collecting ducts'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-154 (25.11: The Urinary System and Homeostasis): aldosterone
+    ''results in renal reabsorption of Na+ and its associated osmotic recovery of water. The reabsorption
+    of Na+ helps to raise and maintain blood pressure over a longer term'' (lines 49-50); ''Aldosterone
+    stimulates Na+ recovery by the collecting duct'' (line 345)'
+  - 'OpenStax Anatomy & Physiology 2e §anp-156 (26.3: Water Balance): ''Aldosterone increases the reabsorption
+    of sodium in the distal tubules of the nephrons in the kidneys, and water follows this reabsorbed
+    sodium back into the blood.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-157 (26.4: Electrolyte Balance): ''aldosterone increases the...reabsorption
+    of sodium in the distal tubule...Aldosterone causes an increase in blood sodium levels and blood volume.'''
+  - 'OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): ''aldosterone maintains proper
+    water balance by enhancing Na+ reabsorption''; ''The hormone aldosterone stimulates the reabsorption
+    of water and sodium ions in the kidney.'''
+  - 'OpenStax Biology 2e §bio-41.5 (41.5: Hormonal Control of Osmoregulatory Functions): ''Almost all
+    of the sodium in the blood is reclaimed by the renal tubules under the influence of aldosterone. Because
+    sodium is always reabsorbed by active transport and water follows sodium to maintain osmotic balance,
+    aldosterone manages not only sodium levels but also the water levels in body fluids.'''
+  alveolar_ventilation->arterial_pco2:
+  - 'Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-2.3.1 (Introduction): hyperventilation
+    removes CO2, driving equilibrium left and raising pH; decreased respiratory rate/lung disease raises
+    CO2 causing acidosis — confirms alveolar ventilation negatively determines arterial PaCO2.'
+  - 'OpenStax Anatomy & Physiology 2e §anp-126 (22.4: The Process of Breathing): increased ventilation
+    expels more CO2, reducing blood levels of carbon dioxide'
+  - 'OpenStax Anatomy & Physiology 2e §anp-127 (22.5: Gas Exchange): increased ventilation washes out
+    CO2, lowering PaCO2; ''Both deep and forced breathing cause the alveolar air composition to be changed
+    more rapidly … CO2 … leave the blood more quickly'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-129 (22.7: Modifications in Respiratory Functions): ''hyperventilation
+    is an increased ventilation rate... leads to abnormally low blood carbon dioxide levels'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-158 (26.5: Acid-Base Balance): exhaling more CO2 (via increased
+    ventilation rate/depth) reduces blood CO2 levels and raises pH toward normal.'
+  - 'OpenStax Anatomy & Physiology 2e §anp-159 (26.6: Disorders of Acid-Base Balance): ''Respiratory compensation
+    for metabolic acidosis increases the respiratory rate to drive off CO2 and readjust the bicarbonate
+    to carbonic acid ratio.'''
+  - 'OpenStax Biology 2e §bio-39.2 (39.2: Gas Exchange across Respiratory Surfaces): alveolar CO2 partial
+    pressure (40 mmHg) is lower than venous blood CO2 (45 mmHg); CO2 diffuses down its pressure gradient
+    from blood into alveoli and is expelled by ventilation, lowering arterial PCO2'
+  - 'OpenStax Biology 2e §bio-39.3 (39.3: Breathing): ''Alveolar ventilation prevents carbon dioxide buildup
+    in the alveoli.'' — confirming that higher alveolar ventilation reduces alveolar and thus arterial
+    CO2.'
+  alveolar_ventilation->arterial_po2:
+  - 'OpenStax Anatomy & Physiology 2e §anp-127 (22.5: Gas Exchange): increased ventilation raises alveolar
+    O2, driving diffusion into blood; ''Both deep and forced breathing cause the alveolar air composition
+    to be changed more rapidly … oxygen to enter … the blood more quickly'''
+  - 'OpenStax Biology 2e §bio-39.2 (39.2: Gas Exchange across Respiratory Surfaces): residual air in lungs
+    mixes with inspired air, affecting alveolar PO2; increased ventilation raises alveolar PO2 (alveolar
+    gas equation), driving O2 into blood'
+  angiotensin_II->adh:
+  - 'OpenStax Anatomy & Physiology 2e §anp-114 (20.5: Homeostatic Regulation of the Vascular System):
+    ''It also stimulates the release of ADH and aldosterone...'''
+  - 'OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): ''Angiotensin II in addition
+    to being a potent vasoconstrictor also causes an increase in ADH and increased thirst, both of which
+    help to raise blood pressure.'''
+  - 'OpenStax Biology 2e §bio-41.5 (41.5: Hormonal Control of Osmoregulatory Functions): ''Angiotensin
+    II also triggers the release of anti-diuretic hormone (ADH) from the hypothalamus, leading to water
+    retention in the kidneys.'''
+  angiotensin_II->aldosterone:
+  - 'OpenStax Anatomy & Physiology 2e §anp-094 (17.7: The Adrenal Glands): ''Signaling the adrenal cortex
+    to secrete aldosterone, the effects of which further contribute to fluid retention, restoring blood
+    pressure and blood volume.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-114 (20.5: Homeostatic Regulation of the Vascular System):
+    ''It also stimulates the release of ADH and aldosterone, a hormone produced by the adrenal cortex.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-148 (25.5: Microscopic Anatomy of the Kidney): ''Angiotensin
+    II also stimulates the release of the steroid hormone aldosterone from the adrenal cortex.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-150 (25.7: Tubular Reabsorption): ''Aldosterone is secreted
+    by the adrenal cortex in response to angiotensin II stimulation.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-152 (25.9: Endocrine Regulation of Kidney Function): ''Aldosterone...is
+    released from the adrenal cortex in response to angiotensin II.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-153 (Regulation of Fluid Volume and Composition): ''rise in
+    pressure is sustained by the aldosterone effects initiated by angiotensin II; this includes an increase
+    in Na+ retention and water volume'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-154 (25.11: The Urinary System and Homeostasis): ''angiotensin
+    II also stimulates the adrenal cortex to release the steroid hormone aldosterone'' (lines 47-48)'
+  - 'OpenStax Anatomy & Physiology 2e §anp-156 (26.3: Water Balance): ''angiotensin II... stimulates the
+    release of the hormone aldosterone from the adrenal glands'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-157 (26.4: Electrolyte Balance): ''Angiotensin II also signals
+    an increase in the release of aldosterone from the adrenal cortex.'''
+  - 'OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): ''Angiotensin II functions as
+    a hormone and then causes the release of the hormone aldosterone by the adrenal cortex, resulting
+    in increased Na+ reabsorption, water retention, and an increase in blood pressure.'''
+  - 'OpenStax Biology 2e §bio-41.5 (41.5: Hormonal Control of Osmoregulatory Functions): ''It [angiotensin
+    II] also triggers the release of the mineralocorticoid aldosterone from the adrenal cortex, which
+    in turn stimulates the renal tubules to reabsorb more sodium.'''
+  angiotensin_II->sodium_water_reabsorption:
+  - 'OpenStax Anatomy & Physiology 2e §anp-094 (17.7: The Adrenal Glands): ''Stimulating kidney tubules
+    to reabsorb NaCl and water, increasing blood volume.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-152 (25.9: Endocrine Regulation of Kidney Function): ''It [AngII]
+    reduces both GFR and renal blood flow, thereby limiting fluid loss and preserving blood volume'';
+    sodium retention via aldosterone stimulation.'
+  - 'OpenStax Biology 2e §bio-41.5 (41.5: Hormonal Control of Osmoregulatory Functions): aldosterone ''stimulates
+    the renal tubules to reabsorb more sodium'' triggered by Ang II; Ang II also directly decreases GFR
+    reducing filtered load.'
+  angiotensin_II->total_peripheral_resistance:
+  - 'OpenStax Anatomy & Physiology 2e §anp-094 (17.7: The Adrenal Glands): ''Initiating vasoconstriction
+    of the arterioles, decreasing blood flow.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-114 (20.5: Homeostatic Regulation of the Vascular System):
+    ''Angiotensin II is a powerful vasoconstrictor, greatly increasing blood pressure.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-148 (25.5: Microscopic Anatomy of the Kidney): ''Angiotensin
+    II is a systemic vasoconstrictor that helps to regulate blood pressure by increasing it.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-152 (25.9: Endocrine Regulation of Kidney Function): ''Angiotensin
+    II is a potent vasoconstrictor that plays an immediate role in the regulation of blood pressure. It
+    acts systemically to cause vasoconstriction.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-153 (Regulation of Fluid Volume and Composition): ''renin activity
+    leads to an almost immediate rise in blood pressure as activated angiotensin II produces vasoconstriction'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-154 (25.11: The Urinary System and Homeostasis): ''The immediate
+    and short-term effect of angiotensin II is to raise blood pressure by causing widespread vasoconstriction''
+    (lines 46-47)'
+  - 'OpenStax Anatomy & Physiology 2e §anp-157 (26.4: Electrolyte Balance): ''Angiotensin II causes vasoconstriction
+    and an increase in systemic blood pressure.'''
+  - 'OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): ''Angiotensin II in addition
+    to being a potent vasoconstrictor also causes an increase in ADH and increased thirst.'''
+  - 'OpenStax Biology 2e §bio-41.5 (41.5: Hormonal Control of Osmoregulatory Functions): ''Angiotensin
+    II raises blood pressure by constricting blood vessels.'''
+  angiotensin_II->water_intake:
+  - 'OpenStax Anatomy & Physiology 2e §anp-114 (20.5: Homeostatic Regulation of the Vascular System):
+    ''Angiotensin II also stimulates the thirst center in the hypothalamus, so an individual will likely
+    consume more fluids, again increasing blood volume and pressure.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-156 (26.3: Water Balance): ''angiotensin II... helps stimulate
+    thirst'''
+  - 'OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): ''Angiotensin II in addition
+    to being a potent vasoconstrictor also causes an increase in ADH and increased thirst, both of which
+    help to raise blood pressure.'''
+  anp->sodium_excretion:
+  - 'OpenStax Anatomy & Physiology 2e §anp-098 (17.11: Organs with Secondary Endocrine Functions): ''ANP
+    signals the kidneys to reduce sodium reabsorption, thereby decreasing the amount of water reabsorbed
+    … reducing blood volume'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-152 (25.9: Endocrine Regulation of Kidney Function): ''Natriuretic
+    hormones are peptides that stimulate the kidneys to excrete sodium...natriuretic peptides inhibit
+    both Na+ and water recovery.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-153 (Regulation of Fluid Volume and Composition): ''More Na+
+    is lost, and as water follows, total blood volume and pressure decline'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-154 (25.11: The Urinary System and Homeostasis): ''ANH is released
+    by the cardiomyocytes when blood pressure increases, causing Na+ and water loss'' (lines 369)'
+  - 'OpenStax Biology 2e §bio-41.5 (41.5: Hormonal Control of Osmoregulatory Functions): ''ANP prevents
+    sodium reabsorption by the renal tubules, decreasing water reabsorption (thus acting as a diuretic)
+    and lowering blood pressure.'''
+  antithrombin->thrombin:
+  - 'Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-7.2.5 (Glycosaminoglycans - Heteropolysaccharides
+    with Disaccharide Repeating Units): ''Heparin acts as a catalyst to accelerate the inhibition of the
+    enzyme thrombin... antithrombin III [inhibits thrombin]'' — corroborates antithrombin inhibiting thrombin
+    activity'
+  - 'OpenStax Anatomy & Physiology 2e §anp-104 (18.6: Hemostasis): ''Antithrombin inactivates factor X
+    and opposes the conversion of prothrombin (factor II) to thrombin in the common pathway'''
+  - 'Wong, Cells: Molecules and Mechanisms §wong-13.14 (Gap Junctions - Undeclared): ''Heparin... activating
+    antithrombin III, which inhibits clotting'' — corroborates antithrombin anticoagulant activity inhibiting
+    thrombin'
+  arterial_pco2->arterial_ph:
+  - 'Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-2.3.1 (Introduction): increased CO2
+    drives rightward equilibrium producing H3O+, lowering pH (respiratory acidosis); decreased CO2 shifts
+    equilibrium left, consuming H3O+ and raising pH (respiratory alkalosis) — confirms arterial PaCO2
+    negatively determines arterial pH.'
+  - 'Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-32.3 (Climate Change - Part 1 - The
+    Carbon Cycle and Carbon): The carbonic acid/bicarbonate buffering system involving CO2 and HCO3- rapidly
+    adjusts blood pH; the effective pKa is derived from the CO2/bicarbonate ratio (Henderson-Hasselbalch),
+    confirming arterial PaCO2 negatively affects arterial pH.'
+  - 'OpenStax Anatomy & Physiology 2e §anp-011 (2.5: Inorganic Compounds Essential to Human Functioning):
+    ''CO2 constantly being released into the bloodstream … Homeostatic mechanisms (along with exhaling
+    CO2 while breathing) normally keep the pH of blood within this narrow range''; ''buildup of CO2 (and
+    H+) in the bloodstream'' causes acidosis'
+  - 'OpenStax Anatomy & Physiology 2e §anp-128 (22.6: Transport of Gases): ''The greater the amount of
+    carbon dioxide in the blood, the more molecules that must be converted, which in turn generates hydrogen
+    ions and thus lowers blood pH'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-158 (26.5: Acid-Base Balance): ''When the CO2 level in the
+    blood rises...the excess CO2 reacts with water to form additional carbonic acid, lowering blood pH.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-159 (26.6: Disorders of Acid-Base Balance): ''Respiratory acidosis
+    occurs when the blood is overly acidic due to an excess of carbonic acid, resulting from too much
+    CO2 in the blood.'''
+  - 'OpenStax Biology 2e §bio-39.4 (39.4: Transport of Gases in Human Bodily Fluids): ''As the level of
+    carbon dioxide in the blood increases, more H+ is produced and the pH decreases.'' CO2 + H2O → HCO3-
+    + H+; rising PaCO2 lowers arterial pH.'
+  arterial_pco2->chemoreceptor_drive:
+  - 'OpenStax Anatomy & Physiology 2e §anp-126 (22.4: The Process of Breathing): ''as the concentration
+    of CO2 in the blood increases... the rate and depth of respiration increase'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-158 (26.5: Acid-Base Balance): ''The body regulates the respiratory
+    rate by the use of chemoreceptors, which primarily use CO2 as a signal. Peripheral blood sensors...
+    signal the brain to provide immediate adjustments to the respiratory rate if CO2 levels rise or fall.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-167 (28.6: Adjustments of the Infant at Birth and Postnatal
+    Stages): ''High carbon dioxide levels cause acidosis and stimulate the respiratory center in the brain,
+    triggering the newborn to take a breath.'''
+  arterial_ph->chemoreceptor_drive:
+  - 'OpenStax Anatomy & Physiology 2e §anp-126 (22.4: The Process of Breathing): ''When peripheral chemoreceptors
+    sense decreasing, or more acidic, pH levels, they stimulate an increase in ventilation'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-158 (26.5: Acid-Base Balance): ''Changes in the pH of CSF affect
+    the respiratory center in the medulla oblongata, which can directly modulate breathing rate to bring
+    the pH back into the normal range.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-159 (26.6: Disorders of Acid-Base Balance): respiratory compensation
+    adjusts ventilation via chemoreceptors in response to pH changes (metabolic acidosis/alkalosis compensation
+    described).'
+  - 'OpenStax Anatomy & Physiology 2e §anp-167 (28.6: Adjustments of the Infant at Birth and Postnatal
+    Stages): ''High carbon dioxide levels cause acidosis and stimulate the respiratory center in the brain''
+    — acidosis (low pH) stimulates chemoreceptors driving ventilation.'
+  arterial_ph->plasma_bicarbonate:
+  - 'OpenStax Anatomy & Physiology 2e §anp-158 (26.5: Acid-Base Balance): ''the renal system controls
+    the blood levels of bicarbonate''; renal tubular H+ secretion and HCO3- conservation increase in acidosis
+    to restore blood pH.'
+  - 'OpenStax Anatomy & Physiology 2e §anp-159 (26.6: Disorders of Acid-Base Balance): ''In cases of respiratory
+    acidosis, the kidney increases the conservation of bicarbonate and secretion of H+...These processes
+    increase the concentration of bicarbonate in the blood''; ''In cases of respiratory alkalosis, the
+    kidneys decrease the production of bicarbonate and reabsorb H+ from the tubular fluid.'''
+  arterial_po2->chemoreceptor_drive:
+  - 'OpenStax Anatomy & Physiology 2e §anp-126 (22.4: The Process of Breathing): ''If blood oxygen levels
+    become quite low—about 60 mm Hg or less—then peripheral chemoreceptors stimulate an increase in respiratory
+    activity'''
+  arterial_po2->hemoglobin_o2_saturation:
+  - 'OpenStax Anatomy & Physiology 2e §anp-128 (22.6: Transport of Gases): ''as the partial pressure of
+    oxygen increases, a proportionately greater number of oxygen molecules are bound by heme… the lower
+    the partial pressure of oxygen, the fewer oxygen molecules are bound to heme'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-129 (22.7: Modifications in Respiratory Functions): ''hemoglobin
+    saturation is lower at high altitudes compared to hemoglobin saturation at sea level'' due to lower
+    partial pressure of O2'
+  - 'OpenStax Biology 2e §bio-39.4 (39.4: Transport of Gases in Human Bodily Fluids): ''As the partial
+    pressure of oxygen increases, the hemoglobin becomes increasingly saturated with oxygen'' (oxygen
+    dissociation curve, sigmoidal).'
+  baroreceptor_firing_rate->parasympathetic_tone:
+  - 'OpenStax Anatomy & Physiology 2e §anp-114 (20.5: Homeostatic Regulation of the Vascular System):
+    ''When blood pressure rises too high, the baroreceptors fire at a higher rate and trigger parasympathetic
+    stimulation of the heart.'''
+  baroreceptor_firing_rate->sympathetic_tone:
+  - 'OpenStax Anatomy & Physiology 2e §anp-075 (13.4: Circulation and the Central Nervous System): ''Heart
+    rate increases—a reflex of the sympathetic division of the autonomic nervous system''—corroborates
+    that baroreceptor activation (in response to pressure drop) leads to sympathetic activation of heart
+    rate; when pressure drops, baroreceptors fire less, sympathetic tone rises.'
+  - 'OpenStax Anatomy & Physiology 2e §anp-114 (20.5: Homeostatic Regulation of the Vascular System):
+    ''When blood pressure rises too high, the baroreceptors fire at a higher rate...Sympathetic stimulation
+    of the peripheral arterioles will also decrease, resulting in vasodilation.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-153 (Regulation of Fluid Volume and Composition): ''If pressure
+    decreases, fewer action potentials travel to the central nervous system, resulting in more sympathetic
+    stimulation-producing vasoconstriction'''
+  blood_viscosity->total_peripheral_resistance:
+  - 'OpenStax Anatomy & Physiology 2e §anp-100 (18.2: An Overview of Blood): ''The viscosity of blood
+    has a dramatic impact on blood pressure and flow…The more viscous honey would demonstrate a greater
+    resistance to flow than the less viscous water. The same principle applies to blood.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-112 (20.3: Blood Flow, Blood Pressure, and Resistance): ''The
+    viscosity of blood is directly proportional to resistance and inversely proportional to flow; therefore,
+    any condition that causes viscosity to increase will also increase resistance and decrease flow.'''
+  blood_volume->anp:
+  - 'OpenStax Anatomy & Physiology 2e §anp-098 (17.11: Organs with Secondary Endocrine Functions): ''When
+    the body experiences an increase in blood volume or pressure, the cells of the heart''s atrial wall
+    stretch … produce and secrete … atrial natriuretic peptide (ANP)'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-114 (20.5: Homeostatic Regulation of the Vascular System):
+    ''Secreted by cells in the atria of the heart, atrial natriuretic hormone (ANH) is secreted when blood
+    volume is high enough to cause extreme stretching of the cardiac cells.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-153 (Regulation of Fluid Volume and Composition): ''Cardiomyocytes
+    of the atria also respond to greater stretch (as blood pressure rises) by secreting ANH'''
+  - 'OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): ''These cells release the hormone atrial
+    natriuretic peptide (ANP) in response to increased blood volume. High blood volume causes the cells
+    to be stretched, resulting in hormone release.'''
+  - 'OpenStax Biology 2e §bio-41.5 (41.5: Hormonal Control of Osmoregulatory Functions): ''It [ANP] is
+    released by cells in the atrium of the heart in response to high blood pressure'' (atrial stretch
+    from elevated blood volume/pressure triggers ANP release).'
+  blood_volume->venous_return:
+  - 'OpenStax Anatomy & Physiology 2e §anp-110 (19.6: Development of the Heart) — chapter review 19.4:
+    ''Venous return is determined by activity of the skeletal muscles, blood volume, and changes in peripheral
+    circulation.'' (lines 413–414).'
+  - 'OpenStax Anatomy & Physiology 2e §anp-112 (20.3: Blood Flow, Blood Pressure, and Resistance): ''As
+    blood volume decreases, pressure and flow decrease. As blood volume increases, pressure and flow increase.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-156 (26.3: Water Balance): ''Decreased blood volume resulting
+    from water loss... baroreceptors detect a decrease in blood pressure that results from decreased blood
+    volume.'''
+  calcitriol->plasma_calcium:
+  - 'OpenStax Anatomy & Physiology 2e §anp-034 (Exercise, Nutrition, Hormones, and Bone Tissue): ''calcitriol,
+    the active form of vitamin D, is produced by the kidneys and stimulates the absorption of calcium
+    and phosphate from the digestive tract''; ''vitamin D promotes intestinal absorption of calcium'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-035 (6.8: Calcium Homeostasis - Interactions of the Skeletal
+    System and Other Organ): ''vitamin D ... stimulates calcium absorption from any digested food in the
+    small intestine'' — calcitriol raises intestinal Ca2+ absorption, increasing plasma calcium.'
+  - 'OpenStax Anatomy & Physiology 2e §anp-093 (17.6: The Parathyroid Glands): ''Calcitriol then stimulates
+    increased absorption of dietary calcium by the intestines'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-098 (17.11: Organs with Secondary Endocrine Functions): ''Calcitriol
+    — Aids in the absorption of Ca2+'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-137 (23.8: Chemical Digestion and Absorption - A Closer Look):
+    ''which then facilitates intestinal calcium ion absorption'' — calcitriol raises plasma calcium by
+    increasing gut Ca absorption'
+  - 'OpenStax Anatomy & Physiology 2e §anp-144 (24.8: Nutrition and Diet) — Vitamin D ''Aids in calcium
+    absorption, promoting bone growth''; deficiency causes ''Rickets, bone pain, muscle weakness'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-153 (Regulation of Fluid Volume and Composition): ''Calcitriol
+    then stimulates the intestines to absorb more Ca++ from the diet'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-154 (25.11: The Urinary System and Homeostasis): ''Activated
+    vitamin D is important for absorption of Ca++ in the digestive tract, its reabsorption in the kidney,
+    and the maintenance of normal serum concentrations of Ca++ and phosphate'' (lines 17-19)'
+  - 'OpenStax Anatomy & Physiology 2e §anp-157 (26.4: Electrolyte Balance): ''Calcium is absorbed through
+    the intestines under the influence of activated vitamin D. A deficiency of vitamin D leads to a decrease
+    in absorbed calcium.'''
+  - 'OpenStax Biology 2e §bio-34.2 (34.2: Nutrition and Energy Production): Table 34.2 — ''Vitamin D:
+    Critical for calcium absorption for bone development and strength.'''
+  - 'OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): calcitriol ''acts on the intestines
+    to increase absorption of dietary calcium'' — increased intestinal absorption raises plasma calcium.'
+  - 'OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): ''PTH... stimulates synthesis and secretion
+    of calcitriol by the kidneys, which enhances Ca2+ absorption by the digestive system'' — calcitriol
+    raises plasma calcium via intestinal Ca2+ absorption.'
+  cardiac_output->mean_arterial_pressure:
+  - 'OpenStax Anatomy & Physiology 2e §anp-112 (20.3: Blood Flow, Blood Pressure, and Resistance): ''Any
+    factor that causes cardiac output to increase...will elevate blood pressure and promote blood flow.'''
+  - 'OpenStax Biology 2e §bio-40.4 (40.4: Blood Flow and Blood Pressure Regulation): review question states
+    high blood pressure results from ''a high cardiac output and high peripheral resistance'', confirming
+    cardiac output raises arterial pressure.'
+  cellular_potassium_uptake->plasma_potassium:
+  - 'OpenStax Anatomy & Physiology 2e §anp-157 (26.4: Electrolyte Balance): ''potassium passes through
+    the cell membrane along with glucose, decreasing the amount of potassium in the blood and IF.'''
+  chemoreceptor_drive->alveolar_ventilation:
+  - 'OpenStax Anatomy & Physiology 2e §anp-126 (22.4: The Process of Breathing): chemoreceptor stimulation
+    signals respiratory centers to contract diaphragm and intercostal muscles, increasing rate and depth
+    of respiration'
+  - 'OpenStax Anatomy & Physiology 2e §anp-158 (26.5: Acid-Base Balance): chemoreceptors signal the brain
+    to adjust respiratory rate; increasing rate/depth of respiration allows more CO2 to be exhaled.'
+  - 'OpenStax Anatomy & Physiology 2e §anp-159 (26.6: Disorders of Acid-Base Balance): ''Respiratory compensation
+    for metabolic acidosis increases the respiratory rate to drive off CO2''; respiratory rate changes
+    compensate for both acidosis and alkalosis.'
+  chemoreceptor_drive->sympathetic_tone:
+  - 'OpenStax Anatomy & Physiology 2e §anp-114 (20.5: Homeostatic Regulation of the Vascular System):
+    ''The chemoreceptors respond to increasing carbon dioxide and hydrogen ion levels (falling pH) by
+    stimulating the cardioaccelerator and vasomotor centers, increasing cardiac output and constricting
+    peripheral vessels.'''
+  core_temperature->shivering:
+  - 'OpenStax Anatomy & Physiology 2e §anp-004 (1.5: Requirements for Human Life): ''One response to cold
+    is shivering, which is random muscle movement that generates heat.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-005 (1.6: Homeostasis): ''activation of the brain''s heat-gain
+    center by exposure to cold reduces blood flow to the skin... the brain triggers an increase in random
+    signals to skeletal muscles, causing them to contract and producing shivering'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-022 (4.5: Muscle Tissue and Motion): shivering is an involuntary
+    contraction of skeletal muscles in response to perceived lower than normal body temperature'
+  - 'OpenStax Anatomy & Physiology 2e §anp-143 (24.7: Energy and Heat Balance): if temperature falls below
+    set core temperature, hypothalamus initiates shivering to generate heat'
+  - 'OpenStax Biology 2e §bio-33.3 (Homeostasis): ''vasoconstriction and shivering when the body is too
+    cold'' — hypothalamic thermoregulatory reflex.'
+  core_temperature->skin_blood_flow:
+  - 'OpenStax Anatomy & Physiology 2e §anp-003 (1.4: Functions of Human Life): ''increased body temperature
+    can cause … the dilation of blood vessels in the skin in order to decrease body temperature'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-004 (1.5: Requirements for Human Life): ''The body responds
+    to cold by reducing blood circulation to the extremities... in order to prevent blood from cooling
+    there and so that the body''s core can stay warm.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-005 (1.6: Homeostasis): ''Blood vessels in the skin begin to
+    dilate allowing more blood from the body core to flow to the surface of the skin allowing the heat
+    to radiate into the environment'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-027 (5.4: Functions of the Integumentary System): ''arterioles
+    in the dermis dilate so that excess heat carried by the blood can dissipate through the skin and into
+    the surrounding environment'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-115 (20.6: Circulatory Pathways): ''When the ambient temperature
+    is warm, more blood is diverted to the superficial veins where heat can be more easily dissipated
+    to the environment. In colder weather, there is more constriction of the superficial veins and blood
+    is diverted deeper where the body can retain more of the heat.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-143 (24.7: Energy and Heat Balance): hypothalamus initiates
+    increasing circulation to surface to allow dissipation of heat through skin when temperature too high'
+  - 'OpenStax Biology 2e §bio-33.3 (Homeostasis): ''Vasodilation brings more blood and heat to the body
+    surface, facilitating radiation and evaporative heat loss''; ''Vasoconstriction reduces blood flow
+    in peripheral blood vessels.'''
+  core_temperature->sweating:
+  - 'OpenStax Anatomy & Physiology 2e §anp-003 (1.4: Functions of Human Life): ''increased body temperature
+    can cause the responses of sweating … in order to decrease body temperature'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-004 (1.5: Requirements for Human Life): ''One of the body''s
+    responses to heat is, of course, sweating.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-005 (1.6: Homeostasis): ''As blood flow to the skin increases,
+    sweat glands are activated to increase their output'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-026 (5.3: Accessory Structures of the Skin): ''When the body
+    becomes warm, sudoriferous glands produce sweat to cool the body'' — body warmth drives eccrine sweat
+    secretion.'
+  - 'OpenStax Anatomy & Physiology 2e §anp-027 (5.4: Functions of the Integumentary System): ''If the
+    body becomes excessively warm... sweat glands will be stimulated by the sympathetic nervous system
+    to produce large amounts of sweat'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-143 (24.7: Energy and Heat Balance): hypothalamus initiates
+    sweating to allow evaporation of water on the skin when temperature is too high'
+  - 'OpenStax Biology 2e §bio-33.3 (Homeostasis): ''The hypothalamus maintains the set point for body
+    temperature through reflexes that cause vasodilation and sweating when the body is too warm.'''
+  cortisol->acth:
+  - 'OpenStax Anatomy & Physiology 2e §anp-090 (17.3: Hormones): ''glucocorticoid concentrations in the
+    blood rise, the hypothalamus and pituitary gland reduce their signaling to the adrenal glands'' —
+    glucocorticoid negative feedback on ACTH'
+  cortisol->crh:
+  - 'OpenStax Anatomy & Physiology 2e §anp-090 (17.3: Hormones): ''when glucocorticoid levels become elevated
+    by causing negative signals to the pituitary gland and hypothalamus'' — glucocorticoid negative feedback
+    on CRH'
+  cortisol->hepatic_gluconeogenesis:
+  - 'OpenStax Anatomy & Physiology 2e §anp-094 (17.7: The Adrenal Glands): ''cortisol promotes the catabolism
+    of glycogen to glucose... These raw materials can then be used to synthesize additional glucose and
+    ketones for use as body fuels.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-138 (24.2: Overview of Metabolic Reactions): ''cortisol...
+    increase blood glucose levels by gluconeogenesis (breaking down fats and proteins)'''
+  - 'OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): ''The glucocorticoids mobilize
+    lipid and protein reserves, stimulate gluconeogenesis... The glucocorticoids primarily affect glucose
+    metabolism by stimulating glucose synthesis.'''
+  - 'OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): ''The glucocorticoids stimulate the synthesis
+    of glucose and gluconeogenesis (converting a non-carbohydrate to glucose) by liver cells.'''
+  cortisol->hepatic_glucose_production:
+  - 'OpenStax Anatomy & Physiology 2e §anp-090 (17.3: Hormones): table entry ''Cortisol, corticosterone,
+    cortisone: Increase blood glucose levels'''
+  cortisol->lipolysis_rate:
+  - 'OpenStax Anatomy & Physiology 2e §anp-094 (17.7: The Adrenal Glands): ''cortisol promotes the catabolism
+    of... stored triglycerides into fatty acids and glycerol.'''
+  - 'OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): ''These hormones target the breakdown
+    of fat into fatty acids in the adipose tissue. The fatty acids are released into the bloodstream for
+    other tissues to use for ATP production.'''
+  - 'OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): ''glucocorticoids... promote the release
+    of fatty acids from adipose tissue.'''
+  cortisol->plasma_glucose:
+  - 'OpenStax Anatomy & Physiology 2e §anp-094 (17.7: The Adrenal Glands): ''their overall effect is to
+    inhibit tissue building while stimulating the breakdown of stored nutrients to maintain adequate fuel
+    supplies''; ''Adrenal hormones also have several non-stress-related functions, including the increase
+    of blood sodium and glucose levels.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-138 (24.2: Overview of Metabolic Reactions): ''cortisol...
+    its main role is to increase blood glucose levels by gluconeogenesis'''
+  - 'OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): ''These hormones increase blood glucose levels
+    to maintain levels within a normal range between meals.'''
+  crh->acth:
+  - 'OpenStax Anatomy & Physiology 2e §anp-091 (17.4: The Pituitary Gland and Hypothalamus): ''The release
+    of ACTH is regulated by the corticotropin-releasing hormone (CRH) from the hypothalamus.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-094 (17.7: The Adrenal Glands): ''Its secretion is prompted
+    when CRH from the hypothalamus triggers ACTH release from the anterior pituitary.'''
+  cytosolic_calcium_transient->serca_uptake_rate:
+  - 'Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-11.5.3 (Membrane ATPases): elevated
+    cytoplasmic Ca2+ activates SERCA-mediated Ca2+ pumping back into the SR after muscle excitation.'
+  - 'Wong, Cells: Molecules and Mechanisms §wong-12.9 (Cell Motility - Undeclared): ''as cytoplasmic Ca2+
+    levels rise, the phospholamban releases from the Ca2+ pump and allows it to function.'''
+  - 'Wong, Cells: Molecules and Mechanisms §wong-4.4 (The Action Potential in Neurons): ''The increased
+    [Ca2+]cytoplasm is taken up by the sarcoplasmic reticulum'' and Ca2+-calmodulin relieves inhibition
+    of the Ca2+ pump, increasing Ca2+ removal when [Ca2+] rises.'
+  cytosolic_calcium_transient->troponin_c_calcium_binding:
+  - 'Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-5.5.7 (Summary): ''Ca²⁺ binding to
+    troponin-C triggers conformational changes that displace tropomyosin, thereby initiating contraction
+    by allowing myosin heads to interact with actin.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-107 (19.3: Cardiac Muscle and Electrical Activity): calcium
+    ions combine with the regulatory protein troponin in the troponin-tropomyosin complex, removing inhibition
+    of myosin cross-bridge formation with actin active sites to produce contraction'
+  - 'Wong, Cells: Molecules and Mechanisms §wong-12.9 (Cell Motility - Undeclared): ''When Ca2+ is available,
+    it can bind to troponin-C, leading to a conformational change that shifts the position of tropomyosin
+    to reveal the myosin binding site.'''
+  delta_cell_somatostatin_secretion->alpha_cell_glucagon_secretion:
+  - 'OpenStax Anatomy & Physiology 2e §anp-097 (17.10: The Endocrine Pancreas): pancreatic somatostatin
+    (delta cells) inhibits glucagon release'
+  delta_cell_somatostatin_secretion->beta_cell_insulin_secretion:
+  - 'OpenStax Anatomy & Physiology 2e §anp-097 (17.10: The Endocrine Pancreas): pancreatic somatostatin
+    (delta cells) inhibits insulin release'
+  end_diastolic_volume->stroke_volume:
+  - 'OpenStax Anatomy & Physiology 2e §anp-108 (19.4: Cardiac Cycle): ''At the end of atrial systole and
+    just prior to ventricular contraction, the ventricles contain approximately 130 mL blood... Stroke
+    volume will normally be in the range of 70–80 mL... there is still 50–60 mL of blood remaining in
+    the ventricle following contraction (end systolic volume)'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-110 (19.6: Development of the Heart) — key terms: ''Frank-Starling
+    mechanism: relationship between ventricular stretch and contraction in which the force of heart contraction
+    is directly proportional to the initial length of the muscle fiber.'' (lines 178–180); chapter review:
+    ''SV is the difference between EDV and ESV.'' (line 417).'
+  - 'OpenStax Anatomy & Physiology 2e §anp-114 (20.5: Homeostatic Regulation of the Vascular System):
+    ''As blood returns to the heart more quickly, preload rises and the Frank-Starling principle tells
+    us that contraction of the cardiac muscle in the atria and ventricles will be more forceful.'''
+  endothelial_et1_secretion->vascular_smooth_muscle_tone:
+  - 'OpenStax Anatomy & Physiology 2e §anp-106 (19.2: Heart Anatomy): ''Endothelins are potent vasoconstrictors
+    and, in a normal individual, establish a homeostatic balance with other vasoconstrictors and vasodilators.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-111 (20.2: Structure and Function of Blood Vessels): endothelins
+    constrict smooth muscle in vessel walls'
+  endothelial_no_production->vascular_smooth_muscle_tone:
+  - 'OpenStax Biology 2e §bio-40.2 (Components of the Blood): ''NO is a vasodilator that relaxes the blood
+    vessels and capillaries and may help with gas exchange and the passage of red blood cells through
+    narrow vessels.'''
+  - 'OpenStax Biology 2e §bio-9.1 (9.1: Signaling Molecules and Cellular Receptors): ''one of its [NO]
+    roles is to interact with receptors in smooth muscle and induce relaxation of the tissue … Nitroglycerin
+    … acts by triggering the release of NO, which causes blood vessels to dilate (expand)'''
+  - 'Wong, Cells: Molecules and Mechanisms §wong-14.5 (Calcium Ion Signaling): ''Perhaps the best studied
+    example of NO signaling is vasodilation, in which the NOS-expressing endothelial cells of a blood
+    vessel release NO to the smooth muscle cells surrounding them.'''
+  epinephrine->heart_rate:
+  - 'OpenStax Anatomy & Physiology 2e §anp-081 (15.3: Autonomic Reflexes and Homeostasis): adrenal medullary
+    epinephrine (and norepinephrine) binds adrenergic receptors; referenced in the same passage as the
+    sympathetic control of heart rate pacemaker cells.'
+  - 'OpenStax Anatomy & Physiology 2e §anp-094 (17.7: The Adrenal Glands): ''These hormones increase the
+    heart rate, pulse, and blood pressure to prepare the body to fight the perceived threat or flee from
+    it.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-109 (19.5: Cardiac Physiology): ''The catecholamines, epinephrine
+    and NE … binding to the beta-1 receptors … The rate of depolarization is increased by this additional
+    influx of positively charged ions, so the threshold is reached more quickly.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-138 (24.2: Overview of Metabolic Reactions): ''adrenaline/epinephrine...
+    increases heart rate'''
+  - 'OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): ''Epinephrine and norepinephrine increase
+    heart rate, breathing rate, cardiac muscle contractions, blood pressure, and blood glucose levels.'''
+  epinephrine->hepatic_glycogenolysis:
+  - 'OpenStax Anatomy & Physiology 2e §anp-005 (1.6: Homeostasis): ''The brain also signals the adrenal
+    glands to release epinephrine (adrenaline), a hormone that causes the breakdown of glycogen into glucose'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-094 (17.7: The Adrenal Glands): ''Both epinephrine and norepinephrine
+    signal the liver and skeletal muscle cells to convert glycogen into glucose, resulting in increased
+    blood glucose levels.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-138 (24.2: Overview of Metabolic Reactions): ''adrenaline/epinephrine...
+    stimulates gluconeogenesis'' (catabolic role)'
+  erythropoietin->red_cell_mass:
+  - 'OpenStax Anatomy & Physiology 2e §anp-058 (10.7: Exercise and Muscle Performance): ''erythropoietin
+    (EPO), a hormone normally produced in the kidneys, which triggers the production of red blood cells'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-098 (17.11: Organs with Secondary Endocrine Functions): ''EPO
+    stimulates the production of red blood cells (erythrocytes) in the bone marrow, thereby increasing
+    oxygen delivery to tissues'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-101 (18.3: Production of the Formed Elements): ''It [EPO] prompts
+    the production of erythrocytes.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-102 (18.4: Erythrocytes): ''the kidneys secrete EPO to step
+    up the production of erythrocytes until homeostasis is achieved'' — EPO raises red cell production
+    rate.'
+  - 'OpenStax Anatomy & Physiology 2e §anp-114 (20.5: Homeostatic Regulation of the Vascular System):
+    ''EPO stimulates the production of erythrocytes within the bone marrow.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-129 (22.7: Modifications in Respiratory Functions): ''EPO stimulates
+    the production of erythrocytes, resulting in a greater number of circulating erythrocytes'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-154 (25.11: The Urinary System and Homeostasis): ''EPO is a
+    193-amino acid protein that stimulates the formation of red blood cells in the bone marrow'' (line
+    26)'
+  - 'OpenStax Biology 2e §bio-33.3 (Homeostasis): ''erythropoietin, a hormone that stimulates the production
+    of new red blood cells, is no longer released from the kidney'' when red cell mass is adequate — corroborates
+    the EPO→RBC negative-feedback loop.'
+  - 'OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): ''Erythropoietin (EPO) is a protein hormone
+    that triggers the formation of red blood cells in the bone marrow. EPO is released in response to
+    low oxygen levels.'''
+  estradiol->fsh:
+  - 'OpenStax Anatomy & Physiology 2e §anp-161 (27.3: Anatomy and Physiology of the Female Reproductive
+    System): ''high concentrations of estrogen will stimulate the hypothalamus and pituitary to reduce
+    the production of GnRH, LH, and FSH'' (negative feedback)'
+  - 'OpenStax Anatomy & Physiology 2e §anp-162 (27.4: Development of the Male and Female Reproductive
+    Systems): ''the level of estrogen...triggers negative feedback at the hypothalamus and pituitary.
+    This results in a reduction of FSH and LH''; ''Birth control pills provide constant levels of estrogen
+    and progesterone to negatively feed back on the hypothalamus and pituitary, and suppress the release
+    of FSH and LH''.'
+  - 'OpenStax Anatomy & Physiology 2e §anp-166 (28.5: Changes During Pregnancy, Labor, and Birth): ''They
+    suppress FSH and LH production, effectively preventing ovulation.'''
+  estradiol->gnrh:
+  - 'OpenStax Anatomy & Physiology 2e §anp-161 (27.3: Anatomy and Physiology of the Female Reproductive
+    System): ''high concentrations of estrogen will stimulate the hypothalamus and pituitary to reduce
+    the production of GnRH, LH, and FSH'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-162 (27.4: Development of the Male and Female Reproductive
+    Systems): ''very low concentrations of androgens or estrogens will negatively feed back onto the hypothalamus
+    and pituitary, keeping the production of GnRH, LH, and FSH low''; ''the level of estrogen in the bloodstream
+    is high enough that it triggers negative feedback at the hypothalamus and pituitary''.'
+  - 'OpenStax Biology 2e §bio-43.3 (43.3: Human Reproductive Anatomy and Gametogenesis): ''high level
+    of estrogen causes FSH and especially LH to rise rapidly'' (mid-cycle positive feedback) and ''The
+    decrease in progesterone also allows the hypothalamus to send GnRH'' (negative context when progesterone/estrogen
+    are high).'
+  estradiol->lh:
+  - 'OpenStax Anatomy & Physiology 2e §anp-161 (27.3: Anatomy and Physiology of the Female Reproductive
+    System): both negative feedback (''reduce...LH'') and positive surge (''extremely high concentrations
+    of systemic plasma estrogen trigger...secreting large amounts of LH and FSH'') — dual-mode ? edge'
+  - 'OpenStax Anatomy & Physiology 2e §anp-162 (27.4: Development of the Male and Female Reproductive
+    Systems): dual-mode described — ''the level of estrogen...triggers negative feedback at the hypothalamus
+    and pituitary. This results in a reduction of FSH and LH'' (tonic negative) AND ''the dominant follicle
+    produces more estrogen, triggering positive feedback and the LH surge that will induce ovulation''
+    (positive feedback surge).'
+  - 'OpenStax Anatomy & Physiology 2e §anp-166 (28.5: Changes During Pregnancy, Labor, and Birth): ''They
+    suppress FSH and LH production, effectively preventing ovulation.'''
+  fgf23->calcitriol:
+  - 'OpenStax Anatomy & Physiology 2e §anp-098 (17.11: Organs with Secondary Endocrine Functions): ''FGF23
+    … triggers the kidneys to inhibit the formation of calcitriol from vitamin D3'''
+  fgf23->renal_phosphate_reabsorption:
+  - 'OpenStax Anatomy & Physiology 2e §anp-098 (17.11: Organs with Secondary Endocrine Functions): ''FGF23
+    … triggers the kidneys … to increase phosphorus excretion'''
+  food_intake->body_weight:
+  - 'OpenStax Anatomy & Physiology 2e §anp-144 (24.8: Nutrition and Diet) — excess caloric intake accumulates
+    as fat: ''If an excess of 200 calories per day is ingested, one extra pound of body weight will be
+    gained every 18 days'''
+  free_t3->heart_rate:
+  - 'OpenStax Anatomy & Physiology 2e §anp-092 (17.5: The Thyroid Gland): ''When levels of T3 and T4 hormones
+    are excessive, this effect accelerates the heart rate'''
+  free_t3->metabolic_rate:
+  - 'OpenStax Anatomy & Physiology 2e §anp-005 (1.6: Homeostasis): ''The brain triggers the thyroid gland
+    in the endocrine system to release thyroid hormone, which increases metabolic activity and heat production
+    in cells throughout the body'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-092 (17.5: The Thyroid Gland): ''T3 and T4 are often referred
+    to as metabolic hormones because their levels influence the body''s basal metabolic rate'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-099 (17.12: Development and Aging of the Endocrine System):
+    ''the thyroid gland produces less of the thyroid hormones, causing a gradual decrease in the basal
+    metabolic rate''.'
+  - 'OpenStax Anatomy & Physiology 2e §anp-143 (24.7: Energy and Heat Balance): thyroid hormone stimulates
+    more energy use and heat production by cells throughout the body'
+  - 'OpenStax Anatomy & Physiology 2e §anp-166 (28.5: Changes During Pregnancy, Labor, and Birth): ''Thyrotropin...increases
+    the production of thyroid hormone, which raises the maternal metabolic rate.'''
+  - 'OpenStax Biology 2e §bio-37.2 (37.2: How Hormones Work): ''thyroid hormones act on many different
+    tissue types, stimulating metabolic activity throughout the body.'''
+  - 'OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): ''T3 and T4 activate genes involved
+    in energy production and glucose oxidation. This results in increased rates of metabolism and body
+    heat production, which is known as the hormone''s calorigenic effect.'''
+  free_t3->tsh:
+  - 'OpenStax Anatomy & Physiology 2e §anp-092 (17.5: The Thyroid Gland): ''increasing levels of T3 and
+    T4 decrease the production and secretion of TSH'' (negative feedback)'
+  - 'OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): ''Increased T3 and T4 levels
+    in the blood inhibit the release of TSH, which results in lower T3 and T4 release from the thyroid.'''
+  - 'OpenStax Biology 2e §bio-37.4 (37.4: Regulation of Hormone Production): rising T3/T4 blood concentrations
+    inhibit both the pituitary and hypothalamus in a negative feedback loop'
+  free_t4->tsh:
+  - 'OpenStax Anatomy & Physiology 2e §anp-091 (17.4: The Pituitary Gland and Hypothalamus): ''elevated
+    levels of thyroid hormones in the bloodstream then trigger a drop in production of TRH and subsequently
+    TSH.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-092 (17.5: The Thyroid Gland): ''increasing levels of T3 and
+    T4 decrease the production and secretion of TSH'' (negative feedback)'
+  - 'OpenStax Biology 2e §bio-37.4 (37.4: Regulation of Hormone Production): increasing blood T3/T4 inhibit
+    both pituitary and hypothalamus signaling to thyroid — negative feedback loop'
+  fsh->estradiol:
+  - 'OpenStax Anatomy & Physiology 2e §anp-161 (27.3: Anatomy and Physiology of the Female Reproductive
+    System): ''FSH stimulates the follicles to grow''; ''FSH stimulates the growth of a tertiary follicle,
+    and LH stimulates the production of estrogen by granulosa and theca cells'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-162 (27.4: Development of the Male and Female Reproductive
+    Systems): ''Early tertiary follicles...will be stimulated by an increase in FSH...to grow''; ''Supporting
+    granulosa and theca cells in the growing follicles produce estrogens''.'
+  - 'OpenStax Anatomy & Physiology 2e §anp-163 (28.2: Fertilization): FSH analogs support development
+    of multiple follicles in IVF, consistent with FSH driving folliculogenesis and granulosa-cell estradiol
+    production.'
+  - 'OpenStax Biology 2e §bio-43.3 (43.3: Human Reproductive Anatomy and Gametogenesis): ''In females,
+    FSH stimulates development of egg cells...Follicle cells produce the hormone inhibin...LH also plays
+    a role in...stimulation of estradiol''; ''As the follicles grow, they begin releasing estrogens.'''
+  fsh->inhibin:
+  - 'OpenStax Anatomy & Physiology 2e §anp-160 (27.2: Anatomy and Physiology of the Male Reproductive
+    System): ''FSH also stimulates the Sertoli cells to produce hormones called inhibins.'''
+  - 'OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): ''Follicle cells produce the
+    hormone inhibin, which inhibits FSH production.'' (from ovarian follicles stimulated by FSH); ''FSH
+    stimulates the maturation of sperm cells. FSH production is inhibited by the hormone inhibin, which
+    is released by the testes.'''
+  - 'OpenStax Biology 2e §bio-43.3 (43.3: Human Reproductive Anatomy and Gametogenesis): ''FSH enters
+    the testes and stimulates the Sertoli cells to begin facilitating spermatogenesis...The Sertoli cells
+    produce the hormone inhibin.'''
+  gastric_acid_secretion->gastrin:
+  - 'OpenStax Anatomy & Physiology 2e §anp-134 (23.5: The Stomach): ''Whenever pH levels drop too low,
+    cells in the stomach react by suspending HCl secretion'' — acid negative feedback on gastrin loop'
+  - 'OpenStax Biology 2e §bio-34.4 (34.4: Digestive System Regulation): ''when the stomach is emptied,
+    the acidic environment need not be maintained and a hormone called somatostatin stops the release
+    of hydrochloric acid. This is controlled by a negative feedback mechanism.'''
+  gastrin->gastric_acid_secretion:
+  - 'OpenStax Anatomy & Physiology 2e §anp-098 (17.11: Organs with Secondary Endocrine Functions): ''gastrin,
+    a peptide hormone secreted in response to stomach distention that stimulates the release of hydrochloric
+    acid'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-132 (23.3: Digestive System Processes and Regulation): ''Gastrin
+    stimulates the secretion of gastric acid by the parietal cells of the stomach mucosa'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-134 (23.5: The Stomach): hormone table — gastrin ''Increases
+    secretion by gastric glands''; text: ''gastrin … induces parietal cells to increase their production
+    of HCl'''
+  - 'OpenStax Biology 2e §bio-34.4 (34.4: Digestive System Regulation): ''Gastrin stimulates the release
+    of stomach acid, or hydrochloric acid (HCl) which aids in the digestion of the proteins'''
+  ghrelin->hypothalamic_appetite_drive:
+  - 'OpenStax Anatomy & Physiology 2e §anp-134 (23.5: The Stomach): hormone table — ghrelin ''Regulates
+    food intake, primarily by stimulating hunger and satiety'', stimulus: fasting state (levels increase
+    just prior to meals), target: hypothalamus'
+  ghrh->pituitary_gh:
+  - 'OpenStax Anatomy & Physiology 2e §anp-091 (17.4: The Pituitary Gland and Hypothalamus): ''GH levels
+    are controlled by the release of GHRH and GHIH (also known as somatostatin) from the hypothalamus.'''
+  gip->plasma_insulin:
+  - 'OpenStax Anatomy & Physiology 2e §anp-097 (17.10: The Endocrine Pancreas): GIP (glucose-dependent
+    insulinotropic peptide) is the initial trigger for insulin production and secretion by beta cells
+    following food ingestion'
+  - 'OpenStax Anatomy & Physiology 2e §anp-098 (17.11: Organs with Secondary Endocrine Functions): ''Glucose-dependent
+    insulinotropic peptide (GIP) and glucagon-like peptide 1 (GLP-1) — Stimulate beta cells of the pancreas
+    to release insulin'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-135 (23.6: The Small and Large Intestines): ''K cells [secrete]
+    the hormone glucose-dependent insulinotropic peptide, which stimulates the release of insulin'''
+  glp1->plasma_glucagon:
+  - 'OpenStax Anatomy & Physiology 2e §anp-098 (17.11: Organs with Secondary Endocrine Functions): ''reducing
+    glucagon secretion from the alpha cells'''
+  glp1->plasma_insulin:
+  - 'OpenStax Anatomy & Physiology 2e §anp-098 (17.11: Organs with Secondary Endocrine Functions): ''Other
+    hormones produced by the intestinal cells aid in glucose metabolism, such as by stimulating the pancreatic
+    beta cells to secrete insulin'''
+  gnrh->fsh:
+  - 'OpenStax Anatomy & Physiology 2e §anp-091 (17.4: The Pituitary Gland and Hypothalamus): ''GnRH stimulates
+    the anterior pituitary to secrete gonadotropins.'''''
+  - 'OpenStax Anatomy & Physiology 2e §anp-160 (27.2: Anatomy and Physiology of the Male Reproductive
+    System): GnRH binding to anterior pituitary stimulates release of FSH.'
+  - 'OpenStax Anatomy & Physiology 2e §anp-161 (27.3: Anatomy and Physiology of the Female Reproductive
+    System): ''the hypothalamus produces GnRH, a hormone that signals the anterior pituitary gland to
+    produce the gonadotropins FSH and LH'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-162 (27.4: Development of the Male and Female Reproductive
+    Systems): GnRH from hypothalamus drives LH and FSH release from anterior pituitary, which then stimulate
+    gonads to produce sex hormones in both male and female adolescents.'
+  - 'OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): ''the hypothalamus produces gonadotropin-releasing
+    hormone (GnRH), which stimulates the production and release of follicle-stimulating hormone (FSH)
+    and luteinizing hormone (LH) from the anterior pituitary gland.'''
+  - 'OpenStax Biology 2e §bio-43.3 (43.3: Human Reproductive Anatomy and Gametogenesis): ''the hypothalamus
+    sends a gonadotropin-releasing hormone (GnRH) to the anterior pituitary. This causes the release of
+    follicle stimulating hormone (FSH) and luteinizing hormone (LH) from the anterior pituitary into the
+    blood.'''
+  gnrh->lh:
+  - 'OpenStax Anatomy & Physiology 2e §anp-091 (17.4: The Pituitary Gland and Hypothalamus): ''GnRH stimulates
+    the anterior pituitary to secrete gonadotropins.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-160 (27.2: Anatomy and Physiology of the Male Reproductive
+    System): GnRH binding to anterior pituitary stimulates release of LH.'
+  - 'OpenStax Anatomy & Physiology 2e §anp-161 (27.3: Anatomy and Physiology of the Female Reproductive
+    System): ''the hypothalamus produces GnRH, a hormone that signals the anterior pituitary gland to
+    produce the gonadotropins FSH and LH'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-162 (27.4: Development of the Male and Female Reproductive
+    Systems): ''a concerted release of hormones from the hypothalamus (GnRH), the anterior pituitary (LH
+    and FSH), and the gonads...is responsible for the maturation of the reproductive systems''; ''initiation
+    of puberty is the result of...increases in either estrogen or testosterone [driven by LH/FSH increases
+    following GnRH]''.'
+  - 'OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): ''the hypothalamus produces gonadotropin-releasing
+    hormone (GnRH), which stimulates the production and release of follicle-stimulating hormone (FSH)
+    and luteinizing hormone (LH) from the anterior pituitary gland.'''
+  - 'OpenStax Biology 2e §bio-43.3 (43.3: Human Reproductive Anatomy and Gametogenesis): ''the hypothalamus
+    sends a gonadotropin-releasing hormone (GnRH) to the anterior pituitary. This causes the release of
+    follicle stimulating hormone (FSH) and luteinizing hormone (LH) from the anterior pituitary into the
+    blood.'''
+  heart_rate->cardiac_output:
+  - 'OpenStax Anatomy & Physiology 2e §anp-109 (19.5: Cardiac Physiology): ''CO = HR × SV — cardiac output
+    is heart rate multiplied by stroke volume.'''
+  - 'OpenStax Biology 2e §bio-40.4 (40.4: Blood Flow and Blood Pressure Regulation): ''cardiac output
+    can be increased by increasing heart rate, as when exercising'' — CO = HR × SV is explicitly stated.'
+  hematocrit->blood_viscosity:
+  - 'OpenStax Anatomy & Physiology 2e §anp-100 (18.2: An Overview of Blood): ''Viscosity is…influenced
+    by the presence of the plasma proteins and formed elements within the blood'' — hematocrit (formed-element
+    fraction) is the dominant determinant of whole-blood viscosity.'
+  - 'OpenStax Anatomy & Physiology 2e §anp-101 (18.3: Production of the Formed Elements): ''Synthetic
+    EPO ... can increase hematocrit for many weeks ... increased viscosity raises the resistance of the
+    blood and forces the heart to pump more powerfully.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-102 (18.4: Erythrocytes): ''polycythemia vera can dangerously
+    elevate the viscosity of blood'' — elevated hematocrit increases whole-blood viscosity.'
+  - 'OpenStax Anatomy & Physiology 2e §anp-112 (20.3: Blood Flow, Blood Pressure, and Resistance): ''The
+    two primary determinants of blood viscosity are the formed elements and plasma proteins. Since the
+    vast majority of formed elements are erythrocytes, any condition affecting erythropoiesis, such as
+    polycythemia or anemia, can alter viscosity.'''
+  hepatic_albumin_synthesis->plasma_albumin:
+  - 'OpenStax Anatomy & Physiology 2e §anp-155 (26.2: Body Fluids and Fluid Compartment): ''a decrease
+    in osmotic pressure in chronic and severe liver disease, where the liver is unable to manufacture
+    plasma proteins ... A decrease in the normal levels of plasma proteins results in a decrease of colloid
+    osmotic pressure.'''
+  - 'OpenStax Biology 2e §bio-40.2 (Components of the Blood): ''Human serum albumin is the most abundant
+    protein in human blood plasma and is synthesized in the liver.'''
+  hepatic_gluconeogenesis->plasma_glucose:
+  - 'OpenStax Anatomy & Physiology 2e §anp-139 (24.3: Carbohydrate Metabolism): ''new glucose is synthesized
+    by the liver to raise the blood concentration to normal'' — gluconeogenesis raises plasma glucose'
+  hepatic_ketogenesis->plasma_ketone_bodies:
+  - 'Wong, Cells: Molecules and Mechanisms §wong-5.7 (5.7 Starch and Glycogen Depolymerization Undeclared):
+    ''These molecules are water soluble, and transported through the bloodstream as energy sources for
+    a variety of tissues.'''
+  - 'Wong, Cells: Molecules and Mechanisms §wong-5.7 (5.7 Starch and Glycogen Depolymerization Undeclared):
+    ''acetoacetate or D-β-hydroxybutyrate... are known as ketone bodies. These molecules are water soluble,
+    and transported through the bloodstream as energy sources for a variety of tissues.'''
+  hepatic_ldl_receptor_activity->hepatocyte_cholesterol_content:
+  - 'Wong, Cells: Molecules and Mechanisms §wong-11.7 (Receptor-mediated Endocytosis - Undeclared): LDL
+    receptor-mediated endocytosis delivers LDL to lysosome → acid hydrolases liberate free cholesterol
+    and amino acids from lipoprotein → cholesterol delivered to hepatocyte'
+  hepatic_ldl_receptor_activity->ldl_cholesterol:
+  - 'OpenStax Biology 2e §bio-5.4 (5.4: Bulk Transport): Receptor-mediated endocytosis removes LDL (''bad''
+    cholesterol) from the blood via LDL receptors; in familial hypercholesterolemia, defective or absent
+    LDL receptors cause life-threatening cholesterol elevation because cells cannot clear LDL particles
+    — confirming that higher LDL-receptor activity drives lower plasma LDL concentration.'
+  - 'Wong, Cells: Molecules and Mechanisms §wong-11.7 (Receptor-mediated Endocytosis - Undeclared): LDL
+    binds LDL receptor → clathrin-coated vesicle → endosomal/lysosomal breakdown of LDL; receptor recycled
+    to plasma membrane; mechanism for hepatic LDL clearance from plasma'
+  hepatic_urea_synthesis->plasma_ammonia:
+  - 'OpenStax Anatomy & Physiology 2e §anp-141 (24.5: Protein Metabolism): ''In the urea cycle, ammonium
+    is combined with CO2, resulting in urea and water. The urea is eliminated through the kidneys in the
+    urine'' — urea synthesis removes ammonia from circulation'
+  hepcidin->ferroportin_activity:
+  - 'OpenStax Anatomy & Physiology 2e §anp-098 (17.11: Organs with Secondary Endocrine Functions): ''Hepcidins
+    block the release of iron from cells in the body, helping to regulate iron homeostasis'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-137 (23.8: Chemical Digestion and Absorption - A Closer Look):
+    ''When the body needs iron...there is increased uptake of iron from the intestine and accelerated
+    release of iron into the bloodstream'' — low body iron reduces hepcidin, releasing ferroportin-mediated
+    export (implied mechanism)'
+  il1beta->capillary_permeability:
+  - 'OpenStax Anatomy & Physiology 2e §anp-118 (21.3: Barrier Defenses and the Innate Immune Response):
+    ''injured cells, phagocytes, and basophils are sources of inflammatory mediators...Leukotrienes attract
+    neutrophils...and increase vascular permeability'' (general vascular permeability increase during
+    acute inflammation)'
+  inhibin->fsh:
+  - 'OpenStax Anatomy & Physiology 2e §anp-096 (17.9: Gonadal and Placental Hormones): ''the testes produce
+    the peptide hormone inhibin, which inhibits the secretion of FSH from the anterior pituitary gland''
+    and ''the granulosa cells of the ovarian follicles produce inhibin, which inhibits the secretion of
+    FSH.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-160 (27.2: Anatomy and Physiology of the Male Reproductive
+    System): inhibins ''function to inhibit FSH release from the pituitary.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-161 (27.3: Anatomy and Physiology of the Female Reproductive
+    System): ''inhibin, which normally participates in a negative feedback loop to the pituitary to control
+    the production of FSH''; menopausal decrease in inhibin leads to an increase in FSH'''
+  - 'OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): ''FSH production is inhibited
+    by the hormone inhibin, which is released by the testes''; ''Follicle cells produce the hormone inhibin,
+    which inhibits FSH production.'''
+  - 'OpenStax Biology 2e §bio-43.3 (43.3: Human Reproductive Anatomy and Gametogenesis): ''The Sertoli
+    cells produce the hormone inhibin, which is released into the blood when the sperm count is too high.
+    This inhibits the release of GnRH and FSH, which will cause spermatogenesis to slow down.'''
+  intracellular_calcium->mlc_phosphorylation:
+  - 'Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-11.3.4 (Lipid-Gated Ion Channels):
+    Ca2+ influx via TRPC3/TRPC6 channels in vascular smooth muscle cells leads to smooth muscle contraction
+    and vasoconstriction, consistent with the Ca2+/calmodulin-MLCK activation mechanism'
+  - 'OpenStax Anatomy & Physiology 2e §anp-060 (10.9: Smooth Muscle): ''Ca++-calmodulin complex then activates
+    an enzyme called myosin (light chain) kinase, which, in turn, activates the myosin heads by phosphorylating
+    them'''
+  - 'Wong, Cells: Molecules and Mechanisms §wong-12.7 (Actin - Myosin Structures in Muscle): ''G-protein
+    signaling cascade...can lead to activation of PLC and subsequent cleavage of PIP2 and increase in
+    cytosolic Ca2+. These changes...can also activate myosin II'' (p. 193-194).'
+  - 'Wong, Cells: Molecules and Mechanisms §wong-14.5 (Calcium Ion Signaling): ''Ca2+ release in muscle
+    cells is required to allow contraction of each sarcomere''; calmodulin conformational change upon
+    Ca2+ binding allows interaction with CaMKII and downstream kinases including MLCK.'
+  l_type_calcium_current->cytosolic_calcium_transient:
+  - 'OpenStax Anatomy & Physiology 2e §anp-059 (10.8: Cardiac Muscle Tissue): Ca++ entry through voltage-gated
+    calcium channels in sarcolemma provides sustained depolarization plateau and longer contraction in
+    cardiac muscle'
+  - 'OpenStax Anatomy & Physiology 2e §anp-107 (19.3: Cardiac Muscle and Electrical Activity): approximately
+    20% of the calcium required for contraction is supplied by the influx of Ca2+ through slow calcium
+    channels during the plateau phase of the cardiac action potential'
+  leptin->gnrh:
+  - 'OpenStax Anatomy & Physiology 2e §anp-162 (27.4: Development of the Male and Female Reproductive
+    Systems): ''Body fat, corresponding with secretion of the hormone leptin by adipose cells, appears
+    to have a strong role in determining menarche''; lean/active females show ''a delay in the onset of
+    puberty'', consistent with leptin permissively gating GnRH/reproductive axis.'
+  leptin->hypothalamic_appetite_drive:
+  - 'OpenStax Anatomy & Physiology 2e §anp-098 (17.11: Organs with Secondary Endocrine Functions): ''Binding
+    of leptin produces a feeling of satiety after a meal, thereby reducing appetite'''
+  - 'OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): ''Leptin increases the activity of anorexigenic
+    neurons and decreases that of orexigenic neurons, producing a feeling of satiety after eating, thus
+    affecting appetite and reducing the urge for further eating.'''
+  lh->estradiol:
+  - 'OpenStax Anatomy & Physiology 2e §anp-161 (27.3: Anatomy and Physiology of the Female Reproductive
+    System): ''LH also stimulates the granulosa and theca cells of the follicles to produce the sex steroid
+    hormone estradiol'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-162 (27.4: Development of the Male and Female Reproductive
+    Systems): ''During puberty, the release of LH and FSH from the anterior pituitary stimulates the gonads
+    to produce sex hormones in both male and female adolescents''; ''the dominant follicle produces more
+    estrogen, triggering positive feedback and the LH surge''.'
+  - 'OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): ''LH also plays a role in the
+    development of ova, induction of ovulation, and stimulation of estradiol and progesterone production
+    by the ovaries.'''
+  - 'OpenStax Biology 2e §bio-43.3 (43.3: Human Reproductive Anatomy and Gametogenesis): ''LH also plays
+    a role in the development of ova, induction of ovulation, and stimulation of estradiol...and progesterone
+    production by the ovaries.'''
+  lh->progesterone:
+  - 'OpenStax Anatomy & Physiology 2e §anp-161 (27.3: Anatomy and Physiology of the Female Reproductive
+    System): ''The surge of LH also stimulates a change in the granulosa and theca cells...luteinized
+    granulosa and theca cells of the corpus luteum begin to produce large amounts of the sex steroid hormone
+    progesterone'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-163 (28.2: Fertilization): LH analog triggers ovulation in
+    IVF protocol, consistent with the LH surge triggering follicle rupture and subsequent luteal progesterone
+    secretion.'
+  - 'OpenStax Biology 2e §bio-43.3 (43.3: Human Reproductive Anatomy and Gametogenesis): ''LH also plays
+    a role in...stimulation of estradiol...and progesterone production by the ovaries.'' Also: ''The corpus
+    luteum produces estrogen and progesterone.'''
+  lh->testosterone:
+  - 'OpenStax Anatomy & Physiology 2e §anp-160 (27.2: Anatomy and Physiology of the Male Reproductive
+    System): ''LH binds to receptors on Leydig cells in the testes and upregulates the production of testosterone.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-162 (27.4: Development of the Male and Female Reproductive
+    Systems): FSH and LH stimulation of the gonads leads to ''secretion of higher levels of sex hormones'';
+    ''interplay between the testes and the endocrine system precisely control the production of testosterone
+    with a negative feedback loop''.'
+  - 'OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): ''LH stimulates production of
+    the sex hormones (androgens) by the interstitial cells of the testes''; testosterone is the primary
+    androgen produced.'
+  - 'OpenStax Biology 2e §bio-43.3 (43.3: Human Reproductive Anatomy and Gametogenesis): ''LH also enters
+    the testes and stimulates the interstitial cells of Leydig to make and release testosterone into the
+    testes and the blood.'''
+  lipolysis_rate->plasma_free_fatty_acids:
+  - 'OpenStax Biology 2e §bio-7.6 (7.6: Connections of Carbohydrate, Protein, and Lipid Metabolic Pathways):
+    ''Fatty acids are catabolized in a process called beta-oxidation, which takes place in the matrix
+    of the mitochondria and converts their fatty acid chains into two-carbon units of acetyl groups.'''
+  - 'Wong, Cells: Molecules and Mechanisms §wong-5.7 (5.7 Starch and Glycogen Depolymerization Undeclared):
+    ''Hormone-sensitive lipase in adipose tissue hydrolyzes the stored fat in those cells into glycerol
+    and fatty acids... The fatty acids are secreted from the adipose cells into the bloodstream.'''
+  - 'Wong, Cells: Molecules and Mechanisms §wong-5.7 (5.7 Starch and Glycogen Depolymerization Undeclared):
+    ''The fatty acids are secreted from the adipose cells into the bloodstream.'''
+  macula_densa_nacl_signal->eg_mesangial_contraction:
+  - 'OpenStax Anatomy & Physiology 2e §anp-148 (25.5: Microscopic Anatomy of the Kidney): ''In response
+    to the concentration of Na+ in the fluid flowing past them, these cells release paracrine signals
+    [ATP and adenosine]... juxtaglomerular cell... can contract or relax in response to ATP or adenosine
+    released by the macula densa.'''
+  macula_densa_nacl_signal->jg_granular_renin_secretion:
+  - 'OpenStax Anatomy & Physiology 2e §anp-148 (25.5: Microscopic Anatomy of the Kidney): ''A second function
+    of the macula densa cells is to regulate renin release from the juxtaglomerular cells of the afferent
+    arteriole.'''
+  - 'OpenStax Biology 2e §bio-41.2 (41.2: The Kidneys and Osmoregulatory Organs): ''The JGC is an endocrine
+    structure that secretes the enzyme renin and the hormone erythropoietin. When hormones trigger the
+    macula densa cells in the DCT due to variations in blood volume, blood pressure, or electrolyte balance,
+    these cells can immediately communicate the problem to the capillaries in the afferent and efferent
+    arterioles.'' Macula densa senses luminal NaCl and signals JG granular cells to regulate renin secretion.'
+  mean_arterial_pressure->adh:
+  - 'OpenStax Anatomy & Physiology 2e §anp-153 (Regulation of Fluid Volume and Composition): ''When blood
+    volume drops 5–10 percent, causing a decrease in blood pressure, there is a rapid and significant
+    increase in ADH release from the posterior pituitary'''
+  mean_arterial_pressure->baroreceptor_firing_rate:
+  - 'OpenStax Anatomy & Physiology 2e §anp-075 (13.4: Circulation and the Central Nervous System): ''The
+    bases of the common carotids contain stretch receptors that immediately respond to the drop in blood
+    pressure upon standing... Heart rate increases—a reflex of the sympathetic division of the autonomic
+    nervous system—and this raises blood pressure.'' Confirms carotid baroreceptors respond to arterial
+    pressure changes, raising baroreceptor firing.'
+  - 'OpenStax Anatomy & Physiology 2e §anp-109 (19.5: Cardiac Physiology): ''baroreceptors are stretch
+    receptors … Rates of firing from the baroreceptors represent blood pressure … With increased pressure
+    and stretch, the rate of baroreceptor firing increases.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-114 (20.5: Homeostatic Regulation of the Vascular System):
+    ''When blood pressure increases, the baroreceptors are stretched more tightly and initiate action
+    potentials at a higher rate.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-153 (Regulation of Fluid Volume and Composition): ''blood pressure
+    can be measured... measured by baroreceptors in the aorta and carotid sinuses. When blood pressure
+    increases, baroreceptors send more frequent action potentials'''
+  - 'OpenStax Biology 2e §bio-36.2 (36.2: Somatosensation): ''Baroreceptors detect pressure changes in
+    an organ. They are found in the walls of the carotid artery and the aorta where they monitor blood
+    pressure'''
+  mean_arterial_pressure->renal_perfusion_pressure:
+  - 'OpenStax Anatomy & Physiology 2e §anp-149 (25.6: Physiology of Urine Formation): ''as long as mean
+    arterial pressure is above approximately 60 mm Hg, the pressure will be adequate to maintain glomerular
+    filtration. Blood pressures below this level will impair renal function'''
+  metabolic_heat_production->core_temperature:
+  - 'OpenStax Anatomy & Physiology 2e §anp-054 (10.3: Skeletal Muscle): ''when sustained muscle movement
+    causes body temperature to rise'' — ATP breakdown during muscle contraction produces heat that raises
+    core temperature.'
+  - 'OpenStax Anatomy & Physiology 2e §anp-143 (24.7: Energy and Heat Balance): approximately 60% of ATP
+    energy is in the form of heat used to maintain body temperature'
+  - 'OpenStax Anatomy & Physiology 2e §anp-167 (28.6: Adjustments of the Infant at Birth and Postnatal
+    Stages): brown adipose tissue mitochondria ''engage in cellular respiration reactions that produce
+    less ATP and more heat than standard cellular respiration reactions'', raising body temperature.'
+  metabolic_rate->metabolic_heat_production:
+  - 'OpenStax Anatomy & Physiology 2e §anp-143 (24.7: Energy and Heat Balance): 10% of daily energy expenditure
+    is for body thermoregulation/temperature control; metabolic rate links to heat generation'
+  norepinephrine->heart_rate:
+  - 'OpenStax Anatomy & Physiology 2e §anp-081 (15.3: Autonomic Reflexes and Homeostasis): norepinephrine
+    binds adrenergic receptors on SA-node cells, causing faster depolarization and increased heart rate.'
+  - 'OpenStax Anatomy & Physiology 2e §anp-094 (17.7: The Adrenal Glands): ''These hormones increase the
+    heart rate, pulse, and blood pressure.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-109 (19.5: Cardiac Physiology): ''NE shortens the repolarization
+    period, thus speeding the rate of depolarization and contraction, which results in an increase in
+    HR.'''
+  - 'OpenStax Biology 2e §bio-35.4 (35.4: The Peripheral Nervous System): ''The physiological effects
+    of this norepinephrine release include...increasing heart rate''.'
+  norepinephrine->total_peripheral_resistance:
+  - 'OpenStax Anatomy & Physiology 2e §anp-081 (15.3: Autonomic Reflexes and Homeostasis): norepinephrine
+    from sympathetic postganglionic fibers binds adrenergic receptors on systemic blood vessels causing
+    constriction and increased blood pressure.'
+  - 'OpenStax Anatomy & Physiology 2e §anp-094 (17.7: The Adrenal Glands): ''it triggers vasoconstriction
+    to blood vessels serving less essential organs such as the gastrointestinal tract, kidneys, and skin.'''
+  - 'OpenStax Biology 2e §bio-35.4 (35.4: The Peripheral Nervous System): sympathetic norepinephrine release
+    causes vasoconstriction, moving blood from skin to heart/muscles/brain, increasing peripheral resistance.'
+  - 'OpenStax Biology 2e §bio-41.5 (41.5: Hormonal Control of Osmoregulatory Functions): ''These hormones
+    [epinephrine and norepinephrine] function by acting directly on the smooth muscles of blood vessels
+    to constrict them.'''
+  osteoclast_activity->osteoblast_activity:
+  - 'OpenStax Anatomy & Physiology 2e §anp-031 (6.4: Bone Structure): ''Osteoclasts are continually breaking
+    down old bone while osteoblasts are continually forming new bone. The ongoing balance between osteoblasts
+    and osteoclasts is responsible for the constant but subtle reshaping of bone.'' Paget''s disease example:
+    overactive osteoclasts → osteoblasts try to compensate (coupling).'
+  pah_enzyme_activity->plasma_phenylalanine:
+  - 'OpenStax Anatomy & Physiology 2e §anp-141 (24.5: Protein Metabolism): ''People afflicted with PKU
+    lack sufficient activity of the enzyme phenylalanine hydroxylase and are therefore unable to break
+    down phenylalanine into tyrosine adequately. Because of this, levels of phenylalanine rise to toxic
+    levels in the body'''
+  - 'Wong, Cells: Molecules and Mechanisms §wong-6.7 (Amino Acid Synthesis - Undeclared): ''phenylalanine
+    oxygenase reduces phenylalanine to produce the tyrosine'' (phenylalanine consumed as substrate)'
+  pah_enzyme_activity->plasma_tyrosine:
+  - 'OpenStax Anatomy & Physiology 2e §anp-141 (24.5: Protein Metabolism): ''People afflicted with PKU
+    lack sufficient activity of the enzyme phenylalanine hydroxylase and are therefore unable to break
+    down phenylalanine into tyrosine adequately'' — PAH converts Phe to Tyr, so reduced PAH lowers plasma
+    tyrosine'
+  - 'Wong, Cells: Molecules and Mechanisms §wong-6.7 (Amino Acid Synthesis - Undeclared): ''phenylalanine
+    oxygenase reduces phenylalanine to produce the tyrosine'' (tyrosine is the product)'
+  parasympathetic_tone->heart_rate:
+  - 'OpenStax Anatomy & Physiology 2e §anp-059 (10.8: Cardiac Muscle Tissue): pacemaker cells respond
+    to ANS signals to slow down heart rate'
+  - 'OpenStax Anatomy & Physiology 2e §anp-080 (15.2: Divisions of the Autonomic Nervous System): ''the
+    other causes heart rate to decrease'' (parasympathetic division).'
+  - 'OpenStax Anatomy & Physiology 2e §anp-081 (15.3: Autonomic Reflexes and Homeostasis): ACh on muscarinic
+    receptors causes SA-node hyperpolarization, slowing heart rate to 60–80 bpm; parasympathetic system
+    is the basis of resting (parasympathetic) cardiac tone.'
+  - 'OpenStax Anatomy & Physiology 2e §anp-082 (15.4: Central Control): dorsal motor nucleus of vagus
+    nerve decreases heart rate; parasympathetic system slows heart rate from ~100 bpm to resting ~70 bpm
+    via vagal M2 muscarinic signalling at the SA node'
+  - 'OpenStax Anatomy & Physiology 2e §anp-083 (15.5: Drugs that Affect the Autonomic System): ''the autonomic
+    system does not cause the heart to beat, it just speeds it up (sympathetic) or slows it down (parasympathetic)'';
+    also confirmed in review: ''sympathetic system increases heart rate, whereas the parasympathetic system
+    decreases heart rate'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-109 (19.5: Cardiac Physiology): ''ACh slows HR by opening chemical-
+    or ligand-gated potassium ion channels to slow the rate of spontaneous depolarization … parasympathetic
+    stimulation normally slows HR.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-114 (20.5: Homeostatic Regulation of the Vascular System):
+    ''When blood pressure rises too high...trigger parasympathetic stimulation of the heart. As a result,
+    cardiac output falls.'''
+  - 'OpenStax Biology 2e §bio-33.2 (33.2: Animal Primary Tissues): ''Cardiac muscle is not under voluntary
+    control but can be influenced by the autonomic nervous system to speed up or slow down'' — parasympathetic
+    stimulation slows heart rate'
+  - 'OpenStax Biology 2e §bio-35.4 (35.4: The Peripheral Nervous System): ''Effects of acetylcholine release
+    on target organs include slowing of heart rate''.'
+  peripheral_glucose_uptake->plasma_glucose:
+  - 'OpenStax Anatomy & Physiology 2e §anp-005 (1.6: Homeostasis): ''As glucose concentration in the bloodstream
+    drops, the decrease in concentration... is detected by pancreatic alpha cells, and insulin release
+    stops'''
+  phosphoglycerate_dehydrogenase_activity->plasma_serine:
+  - Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-6.6.2 (Allosteric Regulation) — PHGDH
+    catalyzes the first step of serine synthesis; serine is the pathway end-product and allosteric feedback
+    inhibitor of PHGDH, confirming PHGDH activity drives plasma serine levels
+  - 'Wong, Cells: Molecules and Mechanisms §wong-6.7 (Amino Acid Synthesis - Undeclared): ''The synthesis
+    of serine begins with the metabolic intermediate 3-phosphoglycerate (glycolysis). Phosphoglycerate
+    dehydrogenase oxidizes it to 3-phosphohydroxypyruvate … phosphoserine phosphatase to produce serine'''
+  pituitary_gh->hepatic_glucose_production:
+  - 'OpenStax Anatomy & Physiology 2e §anp-091 (17.4: The Pituitary Gland and Hypothalamus): ''GH stimulates
+    the liver to break down glycogen to glucose, which is then deposited into the blood (diabetogenic
+    effect).'''
+  - 'OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): ''GH stimulates glycogen breakdown
+    in the liver; the glycogen is then released into the blood as glucose.'''
+  pituitary_gh->hepatic_igf1:
+  - 'OpenStax Anatomy & Physiology 2e §anp-091 (17.4: The Pituitary Gland and Hypothalamus): ''GH indirectly
+    mediates growth and protein synthesis by triggering the liver and other tissues to produce a group
+    of proteins called insulin-like growth factors (IGFs).'''
+  - 'OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): ''The indirect mechanism of GH
+    action is mediated by insulin-like growth factors (IGFs) or somatomedins, which are a family of growth-promoting
+    proteins produced by the liver.'''
+  plasma_25oh_vitamin_d->calcitriol:
+  - 'OpenStax Anatomy & Physiology 2e §anp-027 (5.4: Functions of the Integumentary System): ''The liver
+    converts cholecalciferol to calcidiol, which is then converted to calcitriol (the active chemical
+    form of the vitamin) in the kidneys'''
+  plasma_ammonia->hepatic_urea_synthesis:
+  - 'OpenStax Anatomy & Physiology 2e §anp-141 (24.5: Protein Metabolism): ''The urea cycle is a set of
+    biochemical reactions that produces urea from ammonium ions in order to prevent a toxic level of ammonium
+    in the body... ammonium ions are produced from the breakdown of amino acids... enters into the urea
+    cycle to be eliminated'''
+  plasma_bicarbonate->arterial_ph:
+  - 'Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-2.3.1 (Introduction): the effective
+    Henderson-Hasselbalch equation shows pH is determined by the CO2/HCO3- ratio; kidneys retain HCO3-
+    to compensate acidosis, raising pH — confirms plasma bicarbonate positively determines arterial pH.'
+  - 'Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-32.3 (Climate Change - Part 1 - The
+    Carbon Cycle and Carbon): The carbonic acid/bicarbonate buffering system shows that plasma HCO3- concentration
+    is a primary determinant of blood pH via the Henderson-Hasselbalch equation, confirming plasma_bicarbonate
+    positively affects arterial_ph.'
+  - 'OpenStax Anatomy & Physiology 2e §anp-011 (2.5: Inorganic Compounds Essential to Human Functioning):
+    ''Bicarbonate (HCO3–), a weak base that attracts H+. Bicarbonate accepts some of the H+ protons, thereby
+    reducing the acidity of the solution''; loss of bicarbonate via diarrhoea allows acids to build up'
+  - 'OpenStax Anatomy & Physiology 2e §anp-158 (26.5: Acid-Base Balance): bicarbonate-carbonic acid buffer;
+    the level of bicarbonate in the blood is controlled through the renal system to maintain plasma pH.'
+  - 'OpenStax Anatomy & Physiology 2e §anp-159 (26.6: Disorders of Acid-Base Balance): ''Metabolic alkalosis
+    is the opposite of metabolic acidosis. It occurs when the blood is too alkaline (pH above 7.45) due
+    to too much bicarbonate (called primary bicarbonate excess).'''
+  plasma_calcium->pth:
+  - 'OpenStax Anatomy & Physiology 2e §anp-035 (6.8: Calcium Homeostasis - Interactions of the Skeletal
+    System and Other Organ): ''When calcium is not binding to these receptors, the cells release PTH''
+    — parathyroid CaSR-mediated suppression of PTH when Ca2+ is adequate; release when Ca2+ falls.'
+  - 'OpenStax Anatomy & Physiology 2e §anp-093 (17.6: The Parathyroid Glands): ''A negative feedback loop
+    regulates the levels of PTH, with rising blood calcium levels inhibiting further release of PTH'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-099 (17.12: Development and Aging of the Endocrine System):
+    ''elevated blood calcium levels inhibit secretion of PTH'' (Chapter Review §17.5); ''reduced dietary
+    calcium levels, causing a compensatory increase in parathyroid hormone'' (aging section).'
+  - 'OpenStax Anatomy & Physiology 2e §anp-137 (23.8: Chemical Digestion and Absorption - A Closer Look):
+    ''Blood levels of ionic calcium determine the absorption of dietary calcium. When blood levels of
+    ionic calcium drop, parathyroid hormone (PTH) secreted by the parathyroid glands stimulates...'' —
+    falling plasma calcium drives PTH secretion'
+  - 'OpenStax Anatomy & Physiology 2e §anp-152 (25.9: Endocrine Regulation of Kidney Function): ''Parathyroid
+    hormone (PTH)...produced by the parathyroid glands in response to decreased circulating Ca++ levels.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-153 (Regulation of Fluid Volume and Composition): ''The parathyroid
+    glands monitor and respond to circulating levels of Ca++ in the blood. When levels drop too low, PTH
+    is released'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-157 (26.4: Electrolyte Balance): ''PTH is released from the
+    parathyroid gland in response to a decrease in the concentration of blood calcium.'''
+  - 'OpenStax Biology 2e §bio-33.3 (Homeostasis): ''If calcium levels decrease, specialized cells in the
+    parathyroid gland sense this and release parathyroid hormone (PTH).'''
+  - 'OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): ''PTH is released in response
+    to low blood Ca2+ levels''; ''PTH release is inhibited by rising blood calcium levels.'''
+  - 'OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): ''PTH increases blood calcium concentrations
+    when calcium ion levels fall below normal.'' (inverse: high calcium suppresses PTH)'
+  plasma_free_fatty_acids->hepatic_ketogenesis:
+  - 'OpenStax Anatomy & Physiology 2e §anp-142 (24.6: Metabolic States of the Body): ''fatty acids and
+    triglyceride stores are used to create ketones for the body'' during starvation.'
+  - 'OpenStax Biology 2e §bio-7.6 (7.6: Connections of Carbohydrate, Protein, and Lipid Metabolic Pathways):
+    ''The acetyl groups are picked up by CoA to form acetyl CoA that proceeds into the citric acid cycle.'''
+  - 'Wong, Cells: Molecules and Mechanisms §wong-5.7 (5.7 Starch and Glycogen Depolymerization Undeclared):
+    ''a large part of the acetyl-CoA generated by oxidation of fatty acids does not enter the TCA cycle.
+    Instead, it is converted into acetoacetate or D-beta-hydroxybutyrate.'''
+  - 'Wong, Cells: Molecules and Mechanisms §wong-5.7 (5.7 Starch and Glycogen Depolymerization Undeclared):
+    ''in liver especially, a large part of the acetyl-CoA generated by oxidation of fatty acids... is
+    converted into acetoacetate or D-β-hydroxybutyrate'' — fatty acid beta-oxidation (from plasma FFA)
+    is the substrate supply for hepatic ketogenesis.'
+  plasma_glucagon->hepatic_gluconeogenesis:
+  - 'OpenStax Anatomy & Physiology 2e §anp-097 (17.10: The Endocrine Pancreas): glucagon stimulates liver
+    to take up amino acids and convert them to glucose (gluconeogenesis)'
+  - 'OpenStax Anatomy & Physiology 2e §anp-142 (24.6: Metabolic States of the Body): ''Gluconeogenesis
+    will also begin in the liver to replace the glucose that has been used by the peripheral tissues.'''
+  plasma_glucagon->hepatic_glucose_production:
+  - 'OpenStax Anatomy & Physiology 2e §anp-090 (17.3: Hormones): ''Glucagon: Increases blood glucose levels'';
+    ''glucagon stimulates the breakdown of glycogen stores, increasing blood glucose'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-097 (17.10: The Endocrine Pancreas): glucagon stimulates hepatic
+    glycogenolysis and gluconeogenesis, raising blood glucose'
+  - 'OpenStax Anatomy & Physiology 2e §anp-138 (24.2: Overview of Metabolic Reactions): ''glucagon...
+    stimulates the breakdown of glycogen in the liver to increase blood glucose levels'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-144 (24.8: Nutrition and Diet) — glucagon released ''to turn
+    off glycogen synthesis in the liver and stimulate its breakdown into glucose'''
+  plasma_glucagon->hepatic_glycogenolysis:
+  - 'OpenStax Anatomy & Physiology 2e §anp-097 (17.10: The Endocrine Pancreas): glucagon stimulates liver
+    to convert glycogen back to glucose (glycogenolysis)'
+  - 'OpenStax Anatomy & Physiology 2e §anp-142 (24.6: Metabolic States of the Body): ''Glucagon acts upon
+    the liver cells, where it inhibits the synthesis of glycogen and stimulates the breakdown of stored
+    glycogen back into glucose.'''
+  plasma_glucose->plasma_glucagon:
+  - 'OpenStax Anatomy & Physiology 2e §anp-097 (17.10: The Endocrine Pancreas): low blood glucose stimulates
+    alpha-cell glucagon release; rising glucose inhibits further glucagon secretion (negative feedback)'
+  - 'OpenStax Anatomy & Physiology 2e §anp-142 (24.6: Metabolic States of the Body): ''In response to
+    a drop in blood glucose concentration, the hormone glucagon is released from the alpha cells of the
+    pancreas.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-144 (24.8: Nutrition and Diet) — ''Falling glucose levels trigger
+    the pancreas to release glucagon'''
+  - 'OpenStax Biology 2e §bio-33.3 (Homeostasis): ''if an animal has not eaten and blood glucose levels
+    decrease, this is sensed in another group of cells in the pancreas, and the hormone glucagon is released.'''
+  - 'OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): ''As blood glucose levels decline, alpha
+    cells release glucagon to raise the blood glucose levels.'''
+  plasma_glucose->plasma_insulin:
+  - 'OpenStax Anatomy & Physiology 2e §anp-005 (1.6: Homeostasis): ''pancreatic beta cells respond to
+    the increased level of blood glucose by releasing the hormone insulin'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-090 (17.3: Hormones): ''High blood glucose levels cause the
+    release of insulin from the pancreas'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-097 (17.10: The Endocrine Pancreas): elevated blood glucose
+    levels stimulate beta-cell insulin release (glucose-stimulated insulin secretion)'
+  - 'OpenStax Anatomy & Physiology 2e §anp-142 (24.6: Metabolic States of the Body): ''The ingestion of
+    food and the rise of glucose concentrations in the bloodstream stimulate pancreatic beta cells to
+    release insulin into the bloodstream.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-144 (24.8: Nutrition and Diet) — ''As blood glucose levels
+    rise, the pancreas releases insulin to stimulate the uptake of glucose'''
+  - 'OpenStax Biology 2e §bio-33.3 (Homeostasis): ''When an animal has eaten, blood glucose levels rise...the
+    hormone insulin is released by the endocrine system.'''
+  - 'OpenStax Biology 2e §bio-37.1 (37.1: Types of Hormones): ''They are then released in response to
+    stimuli such as high blood glucose levels in the case of insulin''; diagnostic context confirms pancreas
+    stimulated by high glucose produces insulin to decrease blood glucose levels.'
+  - 'OpenStax Biology 2e §bio-37.4 (37.4: Regulation of Hormone Production): rise in blood glucose triggers
+    pancreatic release of insulin (humoral stimulus example)'
+  - 'OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): ''When blood glucose levels rise, such as
+    after a meal, beta cells release insulin to lower blood glucose levels.'''
+  plasma_insulin->cellular_potassium_uptake:
+  - 'OpenStax Anatomy & Physiology 2e §anp-157 (26.4: Electrolyte Balance): ''When insulin is administered
+    and glucose is taken up by cells, potassium passes through the cell membrane along with glucose, decreasing
+    the amount of potassium in the blood.'''
+  plasma_insulin->hepatic_gluconeogenesis:
+  - 'OpenStax Anatomy & Physiology 2e §anp-097 (17.10: The Endocrine Pancreas): insulin inhibits gluconeogenesis
+    enzymes, reducing hepatic glucose production'
+  - 'OpenStax Anatomy & Physiology 2e §anp-142 (24.6: Metabolic States of the Body): postabsorptive state
+    — ''Glycogen and triglyceride storage slows'' (insulin drops with glucose).'
+  plasma_insulin->hepatic_glucose_production:
+  - 'OpenStax Anatomy & Physiology 2e §anp-097 (17.10: The Endocrine Pancreas): insulin inhibits enzymes
+    involved in glycogenolysis and gluconeogenesis, suppressing hepatic glucose output'
+  - 'OpenStax Anatomy & Physiology 2e §anp-138 (24.2: Overview of Metabolic Reactions): ''insulin... store
+    it in the liver and muscle as glycogen; its effect is the opposite of glucagon'''
+  plasma_insulin->hepatic_glycogenolysis:
+  - 'OpenStax Anatomy & Physiology 2e §anp-097 (17.10: The Endocrine Pancreas): insulin inhibits glycogenolysis,
+    promoting glycogen storage in liver'
+  plasma_insulin->hepatic_ketogenesis:
+  - 'OpenStax Anatomy & Physiology 2e §anp-145 (25.2: Physical Characteristics of Urine): ''without the
+    action of insulin, the cells cannot take up [glucose], so...cells are forced to use fat as their energy
+    source, and fat consumed at such a level produces excessive ketones as byproducts'' — corroborates
+    insulin suppression of ketogenesis.'
+  plasma_insulin->lipolysis_rate:
+  - 'OpenStax Anatomy & Physiology 2e §anp-142 (24.6: Metabolic States of the Body): ''Glycogen and triglyceride
+    storage slows'' as insulin drops in postabsorptive state.'
+  plasma_insulin->peripheral_glucose_uptake:
+  - 'OpenStax Anatomy & Physiology 2e §anp-005 (1.6: Homeostasis): ''insulin signals skeletal muscle fibers,
+    fat cells (adipocytes), and liver cells to take up the excess glucose'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-090 (17.3: Hormones): ''Insulin... Reduces blood glucose levels'';
+    ''insulin increases the liver''s storage of glucose as glycogen, decreasing blood glucose'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-097 (17.10: The Endocrine Pancreas): insulin facilitates glucose
+    uptake into body cells via GLUT4 translocation; skeletal muscle and adipose are primary targets'
+  - 'OpenStax Anatomy & Physiology 2e §anp-138 (24.2: Overview of Metabolic Reactions): ''insulin... promotes
+    the uptake of glucose into body cells; causes cells in muscle, adipose tissue, and liver to take up
+    glucose from the blood'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-139 (24.3: Carbohydrate Metabolism): ''Cells in the body take
+    up the circulating glucose in response to insulin'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-142 (24.6: Metabolic States of the Body): ''insulin... initiates
+    the absorption of blood glucose by liver hepatocytes, and by adipose and muscle cells.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-144 (24.8: Nutrition and Diet) — insulin ''stimulate[s] the
+    uptake of glucose by hepatocytes in the liver, muscle cells/fibers, and adipocytes'''
+  - 'OpenStax Biology 2e §bio-37.1 (37.1: Types of Hormones): ''stimulates the pancreas to produce insulin
+    to decrease blood glucose levels'' — textbook description of insulin''s glucose-lowering action via
+    peripheral uptake.'
+  - 'OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): ''beta cells release insulin to lower blood
+    glucose levels by increasing the rate of glucose uptake in most body cells.'''
+  plasma_osmolality->adh:
+  - 'OpenStax Anatomy & Physiology 2e §anp-090 (17.3: Hormones): ''If blood osmolarity is too high...
+    osmoreceptors signal the hypothalamus to release ADH'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-091 (17.4: The Pituitary Gland and Hypothalamus): ''In response
+    to high blood osmolarity... the osmoreceptors signal the posterior pituitary to release antidiuretic
+    hormone (ADH).'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-114 (20.5: Homeostatic Regulation of the Vascular System):
+    ''The primary trigger prompting the hypothalamus to release ADH is increasing osmolarity of tissue
+    fluid, usually in response to significant loss of blood volume.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-150 (25.7: Tubular Reabsorption): ''With mild dehydration,
+    plasma osmolarity rises slightly. This increase is detected by osmoreceptors in the hypothalamus,
+    which stimulates the release of ADH from the posterior pituitary.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-156 (26.3: Water Balance): ''If blood osmolality increases
+    above its ideal value, the hypothalamus transmits signals that result in... the hypothalamus of a
+    dehydrated person also releases antidiuretic hormone (ADH) through the posterior pituitary gland.'''
+  - 'OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): ''Dehydration or physiological
+    stress can cause an increase of osmolarity above 300 mOsm/L, which in turn, raises ADH secretion'';
+    osmoreceptors in hypothalamus detect rising electrolyte concentration and trigger ADH release.'
+  - 'OpenStax Biology 2e §bio-5.2 (5.2: Passive Transport): ''Osmoreceptors are specialized cells in the
+    brain that monitor solute concentration in the blood. If the solute levels increase beyond a certain
+    range, a hormone releases that slows water loss through the kidney and dilutes the blood to safer
+    levels.'' — supports osmolality-driven ADH release.'
+  plasma_osmolality->water_intake:
+  - 'OpenStax Anatomy & Physiology 2e §anp-156 (26.3: Water Balance): ''If blood osmolality increases
+    above its ideal value, the hypothalamus transmits signals that result in a conscious awareness of
+    thirst.'''
+  plasma_plasminogen->plasmin_fibrinolysis:
+  - 'OpenStax Anatomy & Physiology 2e §anp-104 (18.6: Hemostasis): ''the inactive protein plasminogen
+    is converted into the active plasmin, which gradually breaks down the fibrin of the clot'''
+  plasma_potassium->aldosterone:
+  - 'OpenStax Anatomy & Physiology 2e §anp-094 (17.7: The Adrenal Glands): ''it is released in response
+    to elevated blood K+, low blood Na+, low blood pressure, or low blood volume.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-152 (25.9: Endocrine Regulation of Kidney Function): ''Aldosterone...is
+    released from the adrenal cortex in response to angiotensin II or directly in response to increased
+    plasma K+.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-157 (26.4: Electrolyte Balance): ''Aldosterone is released
+    if blood levels of potassium increase.'''
+  - 'OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): ''Aldosterone release is stimulated
+    by a decrease in blood sodium levels, blood volume, or blood pressure, or an increase in blood potassium
+    levels.'''
+  - 'OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): ''Aldosterone release from the adrenal cortex
+    is stimulated by a decrease in blood concentrations of sodium ions, blood volume, or blood pressure,
+    or by an increase in blood potassium levels.'''
+  plasmin_fibrinolysis->fibrin_clot:
+  - 'Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-4.7.6 (Fibrinogen): plasmin cleaves
+    fibrin clots, facilitating their removal; the long flexible domain structure of fibrinogen is required
+    to be accessible to plasmin'
+  - 'OpenStax Anatomy & Physiology 2e §anp-104 (18.6: Hemostasis): ''the inactive protein plasminogen
+    is converted into the active plasmin, which gradually breaks down the fibrin of the clot'''
+  platelet_activation->thrombin:
+  - 'OpenStax Anatomy & Physiology 2e §anp-104 (18.6: Hemostasis): ''chemicals released by the platelets
+    increase the rate of these activation reactions ... factor VIII ... from the platelets and endothelial
+    cells combines with factor IX ... to form an enzyme complex that activates factor X ... leading to
+    the common pathway'''
+  - 'OpenStax Biology 2e §bio-40.2 (Components of the Blood): platelet contents ''activate other platelets
+    and also interact with other coagulation factors'' to drive coagulation cascade amplification.'
+  progesterone->gnrh:
+  - 'OpenStax Anatomy & Physiology 2e §anp-161 (27.3: Anatomy and Physiology of the Female Reproductive
+    System): ''Progesterone triggers negative feedback at the hypothalamus and pituitary, which keeps
+    GnRH, LH, and FSH secretions low'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-162 (27.4: Development of the Male and Female Reproductive
+    Systems): ''Birth control pills provide constant levels of estrogen and progesterone to negatively
+    feed back on the hypothalamus and pituitary, and suppress the release of FSH and LH, which inhibits
+    ovulation''.'
+  - 'OpenStax Anatomy & Physiology 2e §anp-166 (28.5: Changes During Pregnancy, Labor, and Birth): ''Like
+    estrogen, progesterone suppresses FSH and LH.'' (via GnRH pulse suppression)'
+  progesterone->lh:
+  - 'OpenStax Anatomy & Physiology 2e §anp-162 (27.4: Development of the Male and Female Reproductive
+    Systems): ''Birth control pills provide constant levels of estrogen and progesterone to negatively
+    feed back on the hypothalamus and pituitary, and suppress the release of FSH and LH, which inhibits
+    ovulation''.'
+  - 'OpenStax Anatomy & Physiology 2e §anp-166 (28.5: Changes During Pregnancy, Labor, and Birth): ''Like
+    estrogen, progesterone suppresses FSH and LH.'''
+  - 'OpenStax Biology 2e §bio-43.3 (43.3: Human Reproductive Anatomy and Gametogenesis): ''Progesterone
+    assists in endometrial regrowth and inhibition of FSH and LH release.'' Also: ''The progesterone...inhibits
+    the release of further FSH and LH.'''
+  - 'OpenStax Biology 2e §bio-43.5 (43.5: Human Pregnancy and Birth): ''Hormonal methods use synthetic
+    progesterone (sometimes in combination with estrogen), to inhibit the hypothalamus from releasing
+    FSH or LH, and thus prevent an egg from being available for fertilization.'''
+  pth->calcitriol:
+  - 'OpenStax Anatomy & Physiology 2e §anp-034 (Exercise, Nutrition, Hormones, and Bone Tissue): ''another
+    function of PTH is to stimulate the synthesis of vitamin D [calcitriol]'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-035 (6.8: Calcium Homeostasis - Interactions of the Skeletal
+    System and Other Organ): ''PTH stimulates the synthesis of vitamin D, which in turn, stimulates calcium
+    absorption from any digested food in the small intestine.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-093 (17.6: The Parathyroid Glands): ''PTH initiates the production
+    of the steroid hormone calcitriol...in the kidneys'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-098 (17.11: Organs with Secondary Endocrine Functions): ''the
+    kidneys also play a role in regulating blood calcium levels through the production of calcitriol from
+    vitamin D3, which is released in response to the secretion of parathyroid hormone (PTH)'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-137 (23.8: Chemical Digestion and Absorption - A Closer Look):
+    ''PTH also upregulates the activation of vitamin D in the kidney'' — PTH stimulates renal calcitriol
+    synthesis'
+  - 'OpenStax Anatomy & Physiology 2e §anp-152 (25.9: Endocrine Regulation of Kidney Function): ''PTH...stimulates
+    the hydroxylation of calcidiol to calcitriol (1,25-hydroxycholecalciferol, the active form of vitamin
+    D).'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-153 (Regulation of Fluid Volume and Composition): ''PTH also
+    stimulates the renal conversion of calcidiol into calcitriol, the active form of vitamin D'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-154 (25.11: The Urinary System and Homeostasis): ''PTH stimulates
+    the final step in the formation of active vitamin D3'' (line 361); ''Calcium recovery in the DCT is
+    influenced by PTH and active vitamin D'' (line 343)'
+  - 'OpenStax Anatomy & Physiology 2e §anp-157 (26.4: Electrolyte Balance): ''PTH also increases the gastrointestinal
+    absorption of dietary calcium by converting vitamin D into dihydroxyvitamin D (calcitriol).'''
+  - 'OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): ''PTH triggers the formation
+    of calcitriol, an active form of vitamin D, which acts on the intestines to increase absorption of
+    dietary calcium.'''
+  - 'OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): ''PTH... (3) stimulates synthesis and secretion
+    of calcitriol by the kidneys, which enhances Ca2+ absorption by the digestive system.'''
+  pth->plasma_calcium:
+  - 'OpenStax Anatomy & Physiology 2e §anp-034 (Exercise, Nutrition, Hormones, and Bone Tissue): ''PTH
+    stimulates osteoclast proliferation and activity. As a result, calcium is released from the bones
+    into the circulation, thus increasing the calcium ion concentration in the blood.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-090 (17.3: Hormones): table entry ''PTH: Increases blood Ca2+
+    levels'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-093 (17.6: The Parathyroid Glands): ''PTH secretion causes
+    the release of calcium from the bones by stimulating osteoclasts...PTH also inhibits osteoblasts...PTH
+    causes increased reabsorption of calcium...in the kidney tubules'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-099 (17.12: Development and Aging of the Endocrine System):
+    ''PTH stimulates demineralization of bones to increase blood calcium levels''.'
+  - 'OpenStax Anatomy & Physiology 2e §anp-137 (23.8: Chemical Digestion and Absorption - A Closer Look):
+    ''PTH secreted by the parathyroid glands stimulates the release of calcium ions from bone matrices
+    and increases the reabsorption of calcium by the kidneys'' — PTH raises plasma calcium via bone and
+    kidney'
+  - 'OpenStax Anatomy & Physiology 2e §anp-150 (25.7: Tubular Reabsorption): PTH induces Ca++ channel
+    insertion in DCT luminal surface and calcitriol synthesis, both of which promote calcium recovery
+    and raise plasma calcium'
+  - 'OpenStax Anatomy & Physiology 2e §anp-152 (25.9: Endocrine Regulation of Kidney Function): ''By ridding
+    the blood of phosphate, higher circulating Ca++ levels are permitted.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-153 (Regulation of Fluid Volume and Composition): ''PTH is
+    released to stimulate the DCT to reabsorb Ca++ from the forming urine'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-157 (26.4: Electrolyte Balance): ''PTH raises blood calcium
+    levels by inhibiting the loss of calcium through the kidneys'' and ''activates osteoclasts to break
+    down bone matrix and release inorganic calcium-phosphate salts.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-166 (28.5: Changes During Pregnancy, Labor, and Birth): ''increased
+    parathyroid levels mobilize calcium from maternal bones for fetal use.'''
+  - 'OpenStax Biology 2e §bio-33.3 (Homeostasis): ''The effects of PTH are to raise blood levels of [calcium]''
+    via increased intestinal absorption, renal reabsorption, and bone resorption.'
+  - 'OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): ''PTH increases Ca2+ levels by
+    targeting the skeleton, the kidneys, and the intestine.'''
+  - 'OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): ''PTH increases blood calcium concentrations
+    when calcium ion levels fall below normal.'''
+  pth->plasma_phosphate:
+  - 'OpenStax Anatomy & Physiology 2e §anp-152 (25.9: Endocrine Regulation of Kidney Function): ''It [PTH]
+    also blocks reabsorption of phosphate (PO3–), causing its loss in the urine.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-153 (Regulation of Fluid Volume and Composition): ''When Ca++
+    levels are low, PTH inhibits reabsorption of [phosphate] so that its blood level drops, allowing Ca++
+    levels to rise'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-154 (25.11: The Urinary System and Homeostasis): ''PTH... reduces
+    phosphate reabsorption, resulting in higher circulating Ca++ levels'' (lines 361-362)'
+  - 'OpenStax Anatomy & Physiology 2e §anp-157 (26.4: Electrolyte Balance): ''PTH also increases the loss
+    of phosphate through the kidneys.'''
+  red_cell_mass->hematocrit:
+  - 'OpenStax Anatomy & Physiology 2e §anp-102 (18.4: Erythrocytes): hematocrit is the packed red-cell
+    volume fraction; RBC count directly determines hematocrit.'
+  red_cell_mass->renal_tissue_oxygenation:
+  - 'OpenStax Anatomy & Physiology 2e §anp-102 (18.4: Erythrocytes): rising erythrocyte count restores
+    oxygen delivery and closes the negative-feedback loop with EPO.'
+  renal_perfusion_pressure->gfr:
+  - 'OpenStax Anatomy & Physiology 2e §anp-149 (25.6: Physiology of Urine Formation): ''Glomerular filtration
+    occurs when glomerular hydrostatic pressure exceeds the luminal hydrostatic pressure of Bowman''s
+    capsule''; GFR is set by net filtration pressure driven by glomerular capillary (perfusion-dependent)
+    hydrostatic pressure'
+  - 'OpenStax Anatomy & Physiology 2e §anp-151 (25.8: Regulation of Renal Blood Flow): ''Only a 10 mm
+    Hg pressure differential across the glomerulus is required for normal GFR, so very small changes in
+    afferent arterial pressure significantly increase or decrease GFR.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-155 (26.2: Body Fluids and Fluid Compartment): ''As hydrostatic
+    pressure in the kidneys increases, the amount of water leaving the capillaries also increases, and
+    more urine filtrate is formed.'''
+  - 'OpenStax Biology 2e §bio-41.2 (41.2: The Kidneys and Osmoregulatory Organs): ''The glomerulus forces
+    small solutes out of the blood by pressure.'' Glomerular filtration rate is driven by hydrostatic
+    pressure in the glomerular capillaries, which depends on renal perfusion pressure.'
+  - 'OpenStax Biology 2e §bio-5.2 (5.2: Passive Transport): ''blood pressure forces large amounts of water
+    and accompanying dissolved substances, or solutes, out of the blood and into the renal tubules. The
+    diffusion rate in this instance is almost totally dependent on pressure.'' — supports blood pressure
+    driving glomerular filtration (GFR).'
+  renal_perfusion_pressure->renin:
+  - 'OpenStax Anatomy & Physiology 2e §anp-098 (17.11: Organs with Secondary Endocrine Functions): ''A
+    decline in blood flow to the kidneys stimulates them to release the enzyme renin, triggering the renin-angiotensin-aldosterone
+    (RAAS) system'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-114 (20.5: Homeostatic Regulation of the Vascular System):
+    ''Specialized cells in the kidneys, called juxtaglomerular (JG) cells, respond to decreased blood
+    pressure by secreting renin into the blood.'''
+  renal_tissue_oxygenation->erythropoietin:
+  - 'OpenStax Anatomy & Physiology 2e §anp-098 (17.11: Organs with Secondary Endocrine Functions): ''the
+    kidneys produce the hormone erythropoietin (EPO) in response to low oxygen levels'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-101 (18.3: Production of the Formed Elements): ''Erythropoietin
+    (EPO) is a glycoprotein hormone secreted by the interstitial fibroblast cells of the kidneys in response
+    to low oxygen levels.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-102 (18.4: Erythrocytes): ''In a classic negative-feedback
+    loop, as oxygen saturation rises, EPO secretion falls, and vice versa'' — kidney interstitial fibroblasts
+    secrete EPO in response to hypoxemia.'
+  - 'OpenStax Anatomy & Physiology 2e §anp-129 (22.7: Modifications in Respiratory Functions): ''the kidneys
+    are stimulated to produce the hormone erythropoietin (EPO)'' in response to low tissue O2 at high
+    altitude'
+  - 'OpenStax Anatomy & Physiology 2e §anp-154 (25.11: The Urinary System and Homeostasis): ''If you move
+    to a higher altitude, the partial pressure of oxygen is lower... One way the body compensates is to
+    manufacture more red blood cells by increasing EPO production'' (lines 27-29); ''Renal failure (loss
+    of EPO production) is associated with anemia'' (lines 32-33)'
+  renin->angiotensin_II:
+  - 'OpenStax Anatomy & Physiology 2e §anp-094 (17.7: The Adrenal Glands): ''Renin then catalyzes the
+    conversion of... angiotensinogen... to... angiotensin I. Angiotensin I is converted in the lungs to
+    angiotensin II by angiotensin-converting enzyme (ACE).'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-148 (25.5: Microscopic Anatomy of the Kidney): ''Active renin...
+    cleaves several amino acids from angiotensinogen to produce angiotensin I. Angiotensin I is not biologically
+    active until converted to angiotensin II by angiotensin-converting enzyme (ACE) from the lungs.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-152 (25.9: Endocrine Regulation of Kidney Function): ''Renin
+    is an enzyme...It enzymatically converts angiotensinogen...into angiotensin I. ACE...enzymatically
+    converts inactive angiotensin I into active angiotensin II.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-154 (25.11: The Urinary System and Homeostasis): ''Renin converts
+    angiotensinogen into angiotensin I, and ACE produced in the lung converts angiotensin I into biologically
+    active angiotensin II'' (lines 45-46)'
+  - 'OpenStax Biology 2e §bio-41.5 (41.5: Hormonal Control of Osmoregulatory Functions): ''Renin acts
+    on angiotensinogen, which is made in the liver and converts it to angiotensin I. Angiotensin converting
+    enzyme (ACE) converts angiotensin I to angiotensin II.'''
+  serca_uptake_rate->sr_calcium_load:
+  - 'Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-11.5.3 (Membrane ATPases): SERCA
+    transports Ca2+ from cytoplasm into the SR lumen, replenishing the SR store (actual free [Ca2+] in
+    SR ~390 µM vs 0.1–0.2 µM in cytoplasm).'
+  - 'Wong, Cells: Molecules and Mechanisms §wong-4.4 (The Action Potential in Neurons): increased cytoplasmic
+    Ca2+ is taken up by the sarcoplasmic reticulum, increasing its Ca2+ load.'
+  shivering->metabolic_heat_production:
+  - 'OpenStax Anatomy & Physiology 2e §anp-004 (1.5: Requirements for Human Life): ''shivering, which
+    is random muscle movement that generates heat.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-005 (1.6: Homeostasis): ''The muscle contractions of shivering
+    release heat while using up ATP'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-022 (4.5: Muscle Tissue and Motion): skeletal muscles generate
+    heat as a byproduct of their contraction, thus participating in thermal homeostasis via shivering'
+  - 'OpenStax Anatomy & Physiology 2e §anp-054 (10.3: Skeletal Muscle): ''in cases of extreme cold, when
+    shivering produces random skeletal muscle contractions to generate heat'' — shivering thermogenesis
+    raises metabolic heat production.'
+  - 'OpenStax Anatomy & Physiology 2e §anp-143 (24.7: Energy and Heat Balance): shivering uses more energy
+    and generates more heat'
+  skin_blood_flow->core_temperature:
+  - 'OpenStax Anatomy & Physiology 2e §anp-027 (5.4: Functions of the Integumentary System): ''the arterioles
+    constrict to minimize heat loss... passive heat loss is prevented, and internal organs and structures
+    remain warm'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-143 (24.7: Energy and Heat Balance): increased blood circulation
+    to skin surface dissipates heat, lowering core temperature'
+  sodium_water_reabsorption->extracellular_fluid_volume:
+  - 'OpenStax Anatomy & Physiology 2e §anp-156 (26.3: Water Balance): ''water follows this reabsorbed
+    sodium back into the blood'' — renal reabsorption expands ECF/blood volume.'
+  somatostatin->pituitary_gh:
+  - 'OpenStax Anatomy & Physiology 2e §anp-090 (17.3: Hormones): ''when growth hormone-inhibiting hormone
+    (GHIH), also known as somatostatin, binds to its receptors in the pituitary gland, the level of cAMP
+    decreases, thereby inhibiting the secretion of human growth hormone'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-091 (17.4: The Pituitary Gland and Hypothalamus): ''GH levels
+    are controlled by the release of GHRH and GHIH (also known as somatostatin) from the hypothalamus.'''
+  sr_calcium_load->sr_calcium_release:
+  - 'Wong, Cells: Molecules and Mechanisms §wong-4.4 (The Action Potential in Neurons): extra SR Ca2+
+    load ''leading to extra Ca2+ when it is released to trigger muscle contraction, causing stronger contractions.'''
+  sr_calcium_release->cytosolic_calcium_transient:
+  - 'OpenStax Anatomy & Physiology 2e §anp-107 (19.3: Cardiac Muscle and Electrical Activity): the remaining
+    Ca2+ for contraction is released from storage in the sarcoplasmic reticulum, constituting the major
+    source of systolic calcium'
+  - 'Wong, Cells: Molecules and Mechanisms §wong-12.9 (Cell Motility - Undeclared): ''When the t-tubule
+    is depolarized... allows [Ca2+ channels on the SR] to open. Ca2+ rushes out of the SR where it is
+    available to troponin-c.'''
+  stroke_volume->cardiac_output:
+  - 'OpenStax Anatomy & Physiology 2e §anp-109 (19.5: Cardiac Physiology): ''CO = HR × SV — cardiac output
+    is heart rate multiplied by stroke volume.'''
+  - 'OpenStax Biology 2e §bio-40.4 (40.4: Blood Flow and Blood Pressure Regulation): ''cardiac output
+    can also be increased by increasing stroke volume, such as if the heart contracts with greater strength''.'
+  stroke_volume->pulse_pressure:
+  - 'OpenStax Anatomy & Physiology 2e §anp-112 (20.3: Blood Flow, Blood Pressure, and Resistance): ''a
+    low or narrow [pulse pressure] may occur in patients with a low stroke volume... a high or wide pulse
+    pressure is common in healthy people following strenuous exercise, when...pulse pressure...may increase...as
+    stroke volume increases.'''
+  sweating->core_temperature:
+  - 'OpenStax Anatomy & Physiology 2e §anp-004 (1.5: Requirements for Human Life): ''As sweat evaporates
+    from skin, it removes some thermal energy from the body, cooling it.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-026 (5.3: Accessory Structures of the Skin): ''Eccrine glands
+    are a primary component of thermoregulation in humans and thus help to maintain homeostasis'' — sweat
+    production lowers core temperature.'
+  - 'OpenStax Anatomy & Physiology 2e §anp-027 (5.4: Functions of the Integumentary System): ''When the
+    sweat evaporates from the skin surface, the body is cooled as body heat is dissipated'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-068 (12.2: Basic Structures and Function of the Nervous System):
+    ''When you are hot, sweating helps cool your body down. That is a homeostatic mechanism.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-143 (24.7: Energy and Heat Balance): evaporation of water (sweat)
+    takes heat from the skin, cooling it'
+  sympathetic_tone->epinephrine:
+  - 'OpenStax Anatomy & Physiology 2e §anp-080 (15.2: Divisions of the Autonomic Nervous System): sympathetic
+    preganglionic fibers project to adrenal medulla chromaffin cells, which ''release signaling molecules
+    into the bloodstream'' (epinephrine and norepinephrine).'
+  - 'OpenStax Biology 2e §bio-37.4 (37.4: Regulation of Hormone Production): sympathetic nervous system
+    directly stimulates adrenal medulla to release epinephrine and norepinephrine in response to stress
+    (neural stimulus example)'
+  sympathetic_tone->heart_rate:
+  - 'OpenStax Anatomy & Physiology 2e §anp-059 (10.8: Cardiac Muscle Tissue): pacemaker cells respond
+    to ANS signals to speed up heart rate'
+  - 'OpenStax Anatomy & Physiology 2e §anp-075 (13.4: Circulation and the Central Nervous System): orthostatic
+    reflex — ''Heart rate increases—a reflex of the sympathetic division of the autonomic nervous system—and
+    this raises blood pressure.'' Directly confirms sympathetic activation raises heart rate.'
+  - 'OpenStax Anatomy & Physiology 2e §anp-080 (15.2: Divisions of the Autonomic Nervous System): ''One
+    causes heart rate to increase'' (sympathetic division); ''the sympathetic system would increase heart
+    rate.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-081 (15.3: Autonomic Reflexes and Homeostasis): norepinephrine
+    on SA-node adrenergic receptors causes faster depolarization, increasing heart rate; sympathetic speeds
+    heart from ~100 bpm to 120–140 bpm.'
+  - 'OpenStax Anatomy & Physiology 2e §anp-082 (15.4: Central Control): preganglionic sympathetic cardiac
+    accelerator nerves increase heart rate; sympathetic activation during exercise raises heart rate to
+    120-140 bpm'
+  - 'OpenStax Anatomy & Physiology 2e §anp-083 (15.5: Drugs that Affect the Autonomic System): ''the autonomic
+    system does not cause the heart to beat, it just speeds it up (sympathetic) or slows it down (parasympathetic)'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-109 (19.5: Cardiac Physiology): ''The cardioaccelerator regions
+    stimulate activity via sympathetic stimulation … increases in physical activity … increase sympathetic
+    stimulation as needed in order to increase blood flow [and HR].'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-114 (20.5: Homeostatic Regulation of the Vascular System):
+    ''When blood pressure drops too low...trigger an increase in sympathetic stimulation of the heart,
+    causing cardiac output to increase.'''
+  - 'OpenStax Biology 2e §bio-33.2 (33.2: Animal Primary Tissues): ''Cardiac muscle is not under voluntary
+    control but can be influenced by the autonomic nervous system to speed up or slow down'' — sympathetic
+    stimulation increases heart rate'
+  - 'OpenStax Biology 2e §bio-35.4 (35.4: The Peripheral Nervous System): ''Examples of functions controlled
+    by the sympathetic nervous system include an accelerated heart rate''.'
+  sympathetic_tone->myocardial_contractility:
+  - 'OpenStax Anatomy & Physiology 2e §anp-109 (19.5: Cardiac Physiology): ''sympathetic stimulation is
+    a positive inotrope … NE … increase metabolic rate and the force of contraction.'''
+  sympathetic_tone->renin:
+  - 'OpenStax Anatomy & Physiology 2e §anp-151 (25.8: Regulation of Renal Blood Flow): ''If blood pressure
+    falls, the sympathetic nerves will also stimulate the release of renin. Additional renin increases
+    production of the powerful vasoconstrictor angiotensin II.'''
+  - 'OpenStax Biology 2e §bio-41.5 (41.5: Hormonal Control of Osmoregulatory Functions): epinephrine and
+    norepinephrine ''go one step further and trigger the renin-angiotensin-aldosterone system'' — catecholamines
+    stimulate juxtaglomerular renin release.'
+  sympathetic_tone->total_peripheral_resistance:
+  - 'OpenStax Anatomy & Physiology 2e §anp-081 (15.3: Autonomic Reflexes and Homeostasis): postganglionic
+    sympathetic fibers release norepinephrine onto adrenergic receptors in blood vessel walls → smooth-muscle
+    constriction → increased blood pressure; sympathetic system determines systemic vascular tone.'
+  - 'OpenStax Anatomy & Physiology 2e §anp-082 (15.4: Central Control): vasomotor nerves (preganglionic
+    sympathetic fibers) constrict blood vessels, raising systemic vascular resistance'
+  - 'OpenStax Anatomy & Physiology 2e §anp-083 (15.5: Drugs that Affect the Autonomic System): ''nicotine
+    will preferentially cause the vascular tone to become more sympathetic, which means blood pressure
+    will be increased'' — confirms sympathetic drive increases vascular resistance / arterial pressure'
+  - 'OpenStax Anatomy & Physiology 2e §anp-111 (20.2: Structure and Function of Blood Vessels): vasoconstriction
+    via smooth muscle contraction narrows arteriole lumen and increases blood pressure; arterioles are
+    the primary site of resistance and regulation of blood pressure'
+  sympathetic_tone->venous_return:
+  - 'OpenStax Anatomy & Physiology 2e §anp-111 (20.2: Structure and Function of Blood Vessels): vasomotor
+    center sends sympathetic stimulation to veins causing venoconstriction, increasing pressure on blood
+    and speeding return to heart'
+  testosterone->gnrh:
+  - 'OpenStax Anatomy & Physiology 2e §anp-160 (27.2: Anatomy and Physiology of the Male Reproductive
+    System): testosterone binds androgen receptors on the hypothalamus, inhibiting GnRH synthesis and
+    secretion.'
+  - 'OpenStax Anatomy & Physiology 2e §anp-162 (27.4: Development of the Male and Female Reproductive
+    Systems): ''very low concentrations of androgens or estrogens will negatively feed back onto the hypothalamus
+    and pituitary, keeping the production of GnRH, LH, and FSH low''.'
+  - 'OpenStax Biology 2e §bio-43.3 (43.3: Human Reproductive Anatomy and Gametogenesis): ''A negative
+    feedback system occurs in the male with rising levels of testosterone acting on the hypothalamus and
+    anterior pituitary to inhibit the release of GnRH, FSH, and LH.'''
+  testosterone->lh:
+  - 'OpenStax Anatomy & Physiology 2e §anp-160 (27.2: Anatomy and Physiology of the Male Reproductive
+    System): testosterone binds androgen receptors on the anterior pituitary, inhibiting LH secretion.'
+  - 'OpenStax Anatomy & Physiology 2e §anp-162 (27.4: Development of the Male and Female Reproductive
+    Systems): ''Interplay between the testes and the endocrine system precisely control the production
+    of testosterone with a negative feedback loop'' (testosterone suppresses LH via negative feedback).'
+  - 'OpenStax Biology 2e §bio-43.3 (43.3: Human Reproductive Anatomy and Gametogenesis): ''rising levels
+    of testosterone acting on the hypothalamus and anterior pituitary to inhibit the release of GnRH,
+    FSH, and LH.'''
+  th1_cell_activation->macrophage_activation:
+  - 'OpenStax Anatomy & Physiology 2e §anp-119 (21.4: The Adaptive Immune Response - T Lymphocytes and
+    Their Functional Types): ''Th1 cells secrete cytokines that regulate the immunological activity and
+    development of a variety of cells, including macrophages and other types of T cells.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-121 (21.6: The Immune Response Against Pathogens): ''infected
+    macrophages receiving cytokine signals from Th1 cells turn on special metabolic pathways'' including
+    oxidative killing of intracellular bacteria.'
+  - 'OpenStax Biology 2e §bio-42.2 (42.2: Adaptive Immune Response): ''TH1 cells secrete cytokines to
+    enhance the activities of macrophages and other T cells'' and ''stimulated T cells secrete specific
+    cytokines that send feedback to the macrophage to stimulate its digestive capabilities'''
+  thrombin->activated_protein_C:
+  - 'Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-5.03.3 (Allostery within monomeric
+    protein): thrombin binding to endothelial thrombomodulin enables it to cleave protein C, generating
+    activated protein C with anticoagulant properties'
+  thrombin->fibrin_clot:
+  - 'Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-11.1.3 (Peripheral Proteins): ''Clotting
+    is initiated when the serine protease thrombin cleaves fibrinogen to form fibrin, which self-associates
+    to form a fibrin clot'''
+  - 'Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-4.7.6 (Fibrinogen): thrombin cleaves
+    fibrinopeptides A and B from fibrinogen alpha and beta chains, exposing knob-A and knob-B sequences
+    that bind holes on adjacent fibrinogen to drive polymerization into fibrin clots'
+  - 'Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-5.03.3 (Allostery within monomeric
+    protein): thrombin is described as cleaving circulating fibrinogen into fibrin, which self-associates
+    to form a fibrin clot'
+  - 'Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-7.2.5 (Glycosaminoglycans - Heteropolysaccharides
+    with Disaccharide Repeating Units): ''thrombin, which cleaves fibrinogen and activates platelets to
+    form clots'' — corroborates thrombin promoting fibrin clot formation'
+  - 'OpenStax Anatomy & Physiology 2e §anp-104 (18.6: Hemostasis): ''thrombin converts factor I, the soluble
+    fibrinogen, into the insoluble fibrin protein strands. Factor XIII then stabilizes the fibrin clot'''
+  - 'OpenStax Biology 2e §bio-33.3 (Homeostasis): ''The final factor, a protein called thrombin, converts
+    inactive fibrinogen to fibrin'' — thrombin drives clot formation.'
+  - 'OpenStax Biology 2e §bio-40.2 (Components of the Blood): ''coagulation factors...convert fibrinogen,
+    a water-soluble protein present in blood serum into fibrin (a non-water soluble protein), causing
+    the blood to clot.'''
+  thrombin->platelet_activation:
+  - 'Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-11.1.3 (Peripheral Proteins): ''…or
+    when thrombin activates platelet receptors'' — thrombin-mediated platelet receptor activation corroborated'
+  - 'Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-7.2.5 (Glycosaminoglycans - Heteropolysaccharides
+    with Disaccharide Repeating Units): ''thrombin, which cleaves fibrinogen and activates platelets to
+    form clots'' — corroborates thrombin activating platelets'
+  - 'OpenStax Anatomy & Physiology 2e §anp-005 (1.6: Homeostasis): ''As each step of clotting occurs,
+    it stimulates the release of more clotting substances'' — positive feedback amplification of clotting
+    cascade'
+  - 'OpenStax Anatomy & Physiology 2e §anp-104 (18.6: Hemostasis): ''activated platelet level / procoagulant
+    surface ... thrombin [activates] platelets (via PAR receptors)'''
+  tissue_factor->thrombin:
+  - 'OpenStax Anatomy & Physiology 2e §anp-104 (18.6: Hemostasis): ''factor III (thromboplastin) ... This
+    enzyme complex leads to activation of factor X ... the enzyme prothrombinase converts factor II, the
+    inactive enzyme prothrombin, into the active enzyme thrombin'''
+  tnf_alpha->capillary_permeability:
+  - 'OpenStax Anatomy & Physiology 2e §anp-118 (21.3: Barrier Defenses and the Innate Immune Response):
+    ''inflammatory mediators increase the permeability of the local vasculature, causing leakage of fluid
+    into the interstitial space'' (inflammatory context corroborating microvascular leak)'
+  total_peripheral_resistance->mean_arterial_pressure:
+  - 'OpenStax Anatomy & Physiology 2e §anp-116 (20.7: Development of Blood Vessels and Fetal Circulation):
+    Chapter review §20.2 states ''in the arterial system, as resistance increases, blood pressure increases
+    and flow decreases.'''
+  - 'OpenStax Biology 2e §bio-40.3 (40.3: Mammalian Heart and Blood Vessels): ''The movement of materials
+    at the site of capillaries is regulated by vasoconstriction, narrowing of the blood vessels, and vasodilation,
+    widening of the blood vessels; this is important in the overall regulation of blood pressure.'' Also:
+    ''the smooth muscle layer helps regulate blood flow by altering vascular resistance through vasoconstriction
+    and vasodilation.'''
+  - 'OpenStax Biology 2e §bio-40.4 (40.4: Blood Flow and Blood Pressure Regulation): ''Stress triggers
+    a decrease in the diameter of the blood vessels, consequently increasing blood pressure''; review
+    question explicitly pairs high peripheral resistance with high blood pressure.'
+  tsh->free_t4:
+  - 'OpenStax Anatomy & Physiology 2e §anp-090 (17.3: Hormones): table entry ''TSH: Stimulates thyroid
+    hormone release'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-091 (17.4: The Pituitary Gland and Hypothalamus): ''It [TSH]
+    triggers the secretion of thyroid hormones by the thyroid gland.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-092 (17.5: The Thyroid Gland): ''TSH stimulates the thyroid
+    gland to secrete T3 and T4'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-166 (28.5: Changes During Pregnancy, Labor, and Birth): ''Thyrotropin,
+    in conjunction with placental hormones, increases the production of thyroid hormone, which raises
+    the maternal metabolic rate.'''
+  - 'OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): ''T3 and T4 release from the
+    thyroid gland is stimulated by thyroid-stimulating hormone (TSH)''; ''TSH binding at the receptors
+    of the follicle of the thyroid triggers the production of T3 and T4 from a glycoprotein called thyroglobulin.'''
+  - 'OpenStax Biology 2e §bio-37.4 (37.4: Regulation of Hormone Production): anterior pituitary TSH stimulates
+    the thyroid gland to produce T3 and T4 (hormonal stimulus example)'
+  venous_return->cardiac_output:
+  - 'OpenStax Anatomy & Physiology 2e §anp-112 (20.3: Blood Flow, Blood Pressure, and Resistance): ''venoconstriction
+    increases the return of blood to the heart... increases the preload or stretch of the cardiac muscle
+    and increases contraction.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-116 (20.7: Development of Blood Vessels and Fetal Circulation):
+    Chapter review §20.2 states venoconstriction and the skeletal muscle pump promote venous return to
+    the heart, implying more venous return drives cardiac output.'
+  - 'OpenStax Biology 2e §bio-40.3 (40.3: Mammalian Heart and Blood Vessels): ''The atria are the chambers
+    that receive blood, and the ventricles are the chambers that pump blood.'' Deoxygenated venous blood
+    enters the right atrium and is pumped by the right ventricle; oxygenated blood from the left atrium
+    is pumped by the left ventricle into the aorta — the cardiac cycle coordinates filling and ejection
+    so that venous inflow drives cardiac output.'
+  venous_return->end_diastolic_volume:
+  - 'OpenStax Anatomy & Physiology 2e §anp-108 (19.4: Cardiac Cycle): ''Approximately 70–80 percent of
+    ventricular filling occurs by this method'' (passive inflow from veins during diastole before atrial
+    kick)'
+  - 'OpenStax Anatomy & Physiology 2e §anp-109 (19.5: Cardiac Physiology): ''Any sympathetic stimulation
+    to the venous system will increase venous return to the heart, which contributes to ventricular filling,
+    and EDV and preload.'''
+  - 'OpenStax Anatomy & Physiology 2e §anp-110 (19.6: Development of the Heart) — chapter review 19.4:
+    ''Venous return determines preload … Preload then impacts both EDV and ESV.'' (lines 413–415).'
+  - 'OpenStax Anatomy & Physiology 2e §anp-114 (20.5: Homeostatic Regulation of the Vascular System):
+    ''As blood returns to the heart more quickly, preload rises and the Frank-Starling principle tells
+    us that contraction of the cardiac muscle in the atria and ventricles will be more forceful.'''
+  intracellular_atp->phosphofructokinase_activity:
+  - 'OpenStax Biology 2e §bio-7.2 (7.2: Glycolysis): ''it is less active when ADP levels are low and the
+    concentration of ATP is high. Thus, if there is "sufficient" ATP in the system, the pathway slows
+    down. This is a type of end product inhibition, since ATP is the end product of glucose catabolism.'''
+  plasma_lactate->hepatic_gluconeogenesis:
+  - 'OpenStax Biology 2e §bio-7.5 (7.5: Metabolism without Oxygen): ''once the lactic acid has been removed
+    from the muscle and circulated to the liver, it can be reconverted into pyruvic acid and further catabolized
+    for energy'''
+  hepatic_glycogenolysis->plasma_glucose:
+  - 'OpenStax Biology 2e §bio-7.6 (7.6: Connections of Carbohydrate, Protein, and Lipid Metabolic Pathways):
+    ''Glycogen is broken down into glucose-1-phosphate (G-1-P) and converted into glucose-6-phosphate
+    (G-6-P)...and this product enters the glycolytic pathway.'''
+  gs_adenylyl_cyclase_activity->camp_level:
+  - 'OpenStax Biology 2e §bio-37.2 (37.2: How Hormones Work): ''Adenylyl cyclase catalyzes the conversion
+    of ATP to cAMP.'''
+  - 'OpenStax Biology 2e §bio-9.2 (9.2: Propagation of the Signal): ''Cyclic AMP is synthesized by the
+    enzyme adenylyl cyclase from ATP'''
+  camp_level->pka_activity:
+  - 'OpenStax Biology 2e §bio-37.2 (37.2: How Hormones Work): ''cAMP, in turn, activates a group of proteins
+    called protein kinases, which transfer a phosphate group from ATP to a substrate molecule in a process
+    called phosphorylation.'''
+  - 'OpenStax Biology 2e §bio-9.2 (9.2: Propagation of the Signal): ''The main role of cAMP in cells is
+    to bind to and activate an enzyme called cAMP-dependent kinase (A-kinase)'''
+  - 'OpenStax Biology 2e §bio-9.3 (9.3: Response to the Signal): ''Cyclic AMP activates PKA (protein kinase
+    A)'''
+  camp_level->pde_activity:
+  - 'OpenStax Biology 2e §bio-37.2 (37.2: How Hormones Work): ''An enzyme called phosphodiesterase breaks
+    down cAMP, terminating the signal.'' (substrate-driven PDE activation implied by cAMP level)'
+  - 'OpenStax Biology 2e §bio-9.2 (9.2: Propagation of the Signal): ''Termination of the signal occurs
+    when an enzyme called phosphodiesterase converts cAMP into AMP'' (cAMP drives PDE activity)'
+  pde_activity->camp_level:
+  - 'OpenStax Biology 2e §bio-37.2 (37.2: How Hormones Work): ''cAMP is deactivated by the cytoplasmic
+    enzyme phosphodiesterase, or PDE. PDE is always present in the cell and breaks down cAMP to control
+    hormone activity, preventing overproduction of cellular products.'''
+  - 'OpenStax Biology 2e §bio-9.2 (9.2: Propagation of the Signal): ''Termination of the signal occurs
+    when an enzyme called phosphodiesterase converts cAMP into AMP'' (PDE degrades cAMP, reducing its
+    level)'
+  - 'OpenStax Biology 2e §bio-9.3 (9.3: Response to the Signal): ''Cyclic AMP (cAMP) is degraded into
+    AMP by phosphodiesterase'''
+  il1beta->core_temperature:
+  - 'OpenStax Biology 2e §bio-33.3 (Homeostasis): ''When a bacterium is destroyed by phagocytic leukocytes,
+    chemicals called endogenous pyrogens are released into the blood. These pyrogens circulate to the
+    hypothalamus and reset the thermostat. This allows the body''s temperature to increase in what is
+    commonly called a fever.'''
+  - 'OpenStax Biology 2e §bio-42.1 (42.1: Innate Immune Response): ''Cytokines also increase the core
+    body temperature, causing a fever'' — IL-1beta is a principal pro-inflammatory cytokine driving pyrogenic
+    fever.'
+  il6->core_temperature:
+  - 'OpenStax Biology 2e §bio-33.3 (Homeostasis): endogenous pyrogens released by leukocytes destroying
+    bacteria reset the hypothalamic thermostat, causing fever — corroborates IL-6 as endogenous pyrogen
+    raising core temperature.'
+  - 'OpenStax Biology 2e §bio-42.1 (42.1: Innate Immune Response): ''Cytokines also increase the core
+    body temperature, causing a fever'' — IL-6 is the principal circulating endogenous pyrogen.'
+  beta1_adrenergic_activation->gs_adenylyl_cyclase_activity:
+  - 'OpenStax Biology 2e §bio-37.2 (37.2: How Hormones Work): ''The activated G-protein in turn activates
+    a membrane-bound enzyme called adenylyl cyclase.'' (Figure 37.6 caption: ''Hormone binding to receptor
+    activates a G-protein, which in turn activates adenylyl cyclase'')'
+  plasma_calcium->plasma_calcitonin:
+  - 'OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): ''The hormone calcitonin...has
+    the opposite effect on blood calcium levels as does PTH.'' — implied: calcitonin is released in response
+    to high blood calcium.'
+  - 'OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): ''calcitonin is produced by parafollicular
+    cells of the thyroid... Calcitonin release is not controlled by TSH, but instead is released when
+    calcium ion concentrations in the blood rise.'''
+  plasma_calcitonin->plasma_calcium:
+  - 'OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): ''Calcitonin decreases blood
+    calcium levels by inhibiting osteoclasts, stimulating osteoblasts, and stimulating calcium excretion
+    by the kidneys.'''
+  - 'OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): ''The combination of these two events [inhibit
+    osteoclast activity; stimulate renal calcium excretion] lowers body fluid levels of calcium.'''
+  trh->tsh:
+  - 'OpenStax Biology 2e §bio-37.4 (37.4: Regulation of Hormone Production): hypothalamus produces hormones
+    that stimulate anterior pituitary; anterior pituitary releases TSH which stimulates thyroid to produce
+    T3/T4'
+  free_t4->trh:
+  - 'OpenStax Biology 2e §bio-37.4 (37.4: Regulation of Hormone Production): increasing blood T3/T4 inhibit
+    both pituitary and hypothalamus signaling in a negative feedback loop'
+  sympathetic_tone->norepinephrine:
+  - 'OpenStax Biology 2e §bio-37.4 (37.4: Regulation of Hormone Production): neuronal signaling from sympathetic
+    nervous system directly stimulates adrenal medulla to release epinephrine and norepinephrine'
+  anp->renin:
+  - 'OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): ''ANP also reduces the amounts of renin released
+    by the kidneys and aldosterone released by the adrenal cortex, further preventing the retention of
+    water.'''
+  - 'OpenStax Biology 2e §bio-41.5 (41.5: Hormonal Control of Osmoregulatory Functions): ''Its [ANP''s]
+    actions suppress the actions of aldosterone, ADH, and renin.'''
+  anp->aldosterone:
+  - 'OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): ''ANP also reduces the amounts of renin released
+    by the kidneys and aldosterone released by the adrenal cortex, further preventing the retention of
+    water.'''
+  - 'OpenStax Biology 2e §bio-41.5 (41.5: Hormonal Control of Osmoregulatory Functions): ''Its [ANP''s]
+    actions suppress the actions of aldosterone, ADH, and renin.'''
+  plasma_sodium_concentration->aldosterone:
+  - 'OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): ''Aldosterone release from the adrenal cortex
+    is stimulated by a decrease in blood concentrations of sodium ions, blood volume, or blood pressure,
+    or by an increase in blood potassium levels.'''
+  mean_arterial_pressure->aldosterone:
+  - 'OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): ''Aldosterone release from the adrenal cortex
+    is stimulated by a decrease in blood concentrations of sodium ions, blood volume, or blood pressure,
+    or by an increase in blood potassium levels.'''
+  epinephrine->mean_arterial_pressure:
+  - 'OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): ''Epinephrine and norepinephrine increase
+    heart rate, breathing rate, cardiac muscle contractions, blood pressure, and blood glucose levels.'''
+  - 'OpenStax Biology 2e §bio-42.4 (42.4: Disruptions in the Immune System): ''If not treated with epinephrine
+    to counter the blood pressure and breathing effects, this condition can be fatal'' — epinephrine raises
+    blood pressure in anaphylaxis'
+  arterial_ph->hemoglobin_o2_saturation:
+  - Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-5.03.4 (Summary)
+  - 'Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-5.03.7 (Summary): ''The Bohr effect,
+    where a decrease in pH shifts the binding curve to favor oxygen release, is highlighted as a critical
+    regulatory mechanism in oxygen delivery to tissues.'' Corroborates arterial_ph → hemoglobin_o2_saturation
+    (+).'
+  - 'OpenStax Biology 2e §bio-39.4 (39.4: Transport of Gases in Human Bodily Fluids): ''This increase
+    in carbon dioxide and subsequent decrease in pH reduce the affinity of hemoglobin for oxygen. The
+    oxygen dissociates from the Hb molecule, shifting the oxygen dissociation curve to the right.'' Lower
+    pH reduces Hb-O2 affinity and saturation (Bohr effect).'
+  core_temperature->hemoglobin_o2_saturation:
+  - 'OpenStax Biology 2e §bio-39.4 (39.4: Transport of Gases in Human Bodily Fluids): ''A similar shift
+    in the curve also results from an increase in body temperature. Increased temperature, such as from
+    increased activity of skeletal muscle, causes the affinity of hemoglobin for oxygen to be reduced.''
+    Higher temperature reduces Hb-O2 saturation.'
+  gfr->sodium_excretion:
+  - 'OpenStax Biology 2e §bio-41.2 (41.2: The Kidneys and Osmoregulatory Organs): ''Almost all solutes,
+    except for proteins, are filtered out into the glomerulus by a process called glomerular filtration.''
+    Higher GFR increases the filtered sodium load delivered to the tubule, raising net sodium excretion
+    when reabsorptive capacity is not proportionally increased.'
+  urea_cycle_enzyme_activity->hepatic_urea_synthesis:
+  - 'OpenStax Biology 2e §bio-41.4 (Nitrogenous Wastes): urea cycle enzymes catalyze the conversion of
+    ammonia to urea in the liver, so higher enzyme activity drives higher urea synthesis'
+  gfr->blood_urea_nitrogen:
+  - 'OpenStax Biology 2e §bio-41.4 (Nitrogenous Wastes): BUN is used as an indicator of kidney function;
+    impaired GFR reduces urea clearance and raises BUN'
+  plasma_urate->urinary_urate:
+  - 'OpenStax Biology 2e §bio-41.4 (Nitrogenous Wastes): uric acid is formed from purine breakdown; excess
+    plasma urate is excreted in urine'
+  adh->total_peripheral_resistance:
+  - 'OpenStax Biology 2e §bio-41.5 (41.5: Hormonal Control of Osmoregulatory Functions): ''ADH also acts
+    as a vasoconstrictor and increases blood pressure during hemorrhaging.'''
+  anp->adh:
+  - 'OpenStax Biology 2e §bio-41.5 (41.5: Hormonal Control of Osmoregulatory Functions): ''Its [ANP''s]
+    actions suppress the actions of aldosterone, ADH, and renin.'''
+  anp->total_peripheral_resistance:
+  - 'OpenStax Biology 2e §bio-41.5 (41.5: Hormonal Control of Osmoregulatory Functions): ''The atrial
+    natriuretic peptide (ANP) lowers blood pressure by acting as a vasodilator.'''
+  epinephrine->total_peripheral_resistance:
+  - 'OpenStax Biology 2e §bio-41.5 (41.5: Hormonal Control of Osmoregulatory Functions): ''These hormones
+    [epinephrine and norepinephrine] function by acting directly on the smooth muscles of blood vessels
+    to constrict them.'''
+  plasma_histamine->capillary_permeability:
+  - 'OpenStax Biology 2e §bio-42.1 (42.1: Innate Immune Response): ''In response to a cut, mast cells
+    secrete histamines that cause nearby capillaries to dilate'' (Figure 42.5 caption) — histamine from
+    mast cells/basophils increases microvascular permeability during inflammation.'
+  plasma_histamine->total_peripheral_resistance:
+  - 'OpenStax Biology 2e §bio-42.1 (42.1: Innate Immune Response): ''mast cells secrete histamines that
+    cause nearby capillaries to dilate'' (Figure 42.5 caption) — histamine-mediated arteriolar vasodilation
+    reduces peripheral resistance.'
+  - 'OpenStax Biology 2e §bio-42.4 (42.4: Disruptions in the Immune System): ''effects of an allergic
+    reaction range from...plummeting blood pressure'' in anaphylactic shock — histamine-driven vasodilation
+    causes the observed MAP/TPR drop'
+  dendritic_cell_activation->th1_cell_activation:
+  - 'OpenStax Biology 2e §bio-42.2 (42.2: Adaptive Immune Response): ''Whether a TH1 or a TH2 immune response
+    develops depends on the specific types of cytokines secreted by cells of the innate immune system''
+    — dendritic cells are the principal innate APCs driving TH1 polarisation'
+  treg_il10_secretion->macrophage_activation:
+  - 'OpenStax Biology 2e §bio-42.2 (42.2: Adaptive Immune Response): ''regulatory T (Treg) cells, specialized
+    lymphocytes that suppress local inflammation and inhibit the secretion of stimulatory immune factors''
+    — Treg IL-10 suppresses macrophage pro-inflammatory activity'
+  plasma_allergen_specific_ige->plasma_histamine:
+  - 'OpenStax Biology 2e §bio-42.4 (42.4: Disruptions in the Immune System): ''IgE molecules on mast cells
+    bind the antigen via their variable domains and stimulate the mast cell to release the modified amino
+    acids histamine and serotonin'' — confirms IgE-triggered mast cell degranulation releases histamine'
+  progesterone->fsh:
+  - 'OpenStax Biology 2e §bio-43.3 (43.3: Human Reproductive Anatomy and Gametogenesis): ''Progesterone
+    assists in endometrial regrowth and inhibition of FSH and LH release.'' Also: ''The progesterone facilitates
+    the regrowth of the uterine lining and inhibits the release of further FSH and LH.'''
+  - 'OpenStax Biology 2e §bio-43.5 (43.5: Human Pregnancy and Birth): ''Hormonal methods use synthetic
+    progesterone (sometimes in combination with estrogen), to inhibit the hypothalamus from releasing
+    FSH or LH, and thus prevent an egg from being available for fertilization.'''
+  plasma_beta_hcg->progesterone:
+  - 'OpenStax Biology 2e §bio-43.5 (43.5: Human Pregnancy and Birth): ''chorion begins releasing a hormone
+    called human beta chorionic gonadotropin (β-HCG) which makes its way to the corpus luteum and keeps
+    that structure active. This ensures adequate levels of progesterone that will maintain the endometrium.'''
+  arterial_pco2->hemoglobin_o2_saturation:
+  - Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-5.03.4 (Summary)
+nodes:
+  capillary_permeability:
+  - 'OpenStax Anatomy & Physiology 2e §anp-122 (21.7: Diseases Associated with Depressed or Overactive
+    Immune Responses): increased vascular permeability of nasal blood vessels mediates nasal edema in
+    type I hypersensitivity'
+  cortisol:
+  - 'OpenStax Anatomy & Physiology 2e §anp-168 (28.7: Lactation): cortisol named alongside prolactin,
+    growth hormone, and other hormones as contributing to lactation and facilitating transport of maternal
+    amino acids, fatty acids, glucose, and calcium to breast milk.'
+  epinephrine:
+  - 'OpenStax Anatomy & Physiology 2e §anp-122 (21.7: Diseases Associated with Depressed or Overactive
+    Immune Responses): epinephrine used to counteract anaphylaxis by raising blood pressure and relaxing
+    bronchial smooth muscle'
+  fecal_bile_acids:
+  - 'OpenStax Anatomy & Physiology 2e §anp-136 (23.7: Accessory Organs in Digestion- The Liver, Pancreas,
+    and Gallbladder): ''most constituents of bile are eliminated in feces'' — bile salts partially lost
+    in stool'
+  hepatic_bilirubin_conjugation:
+  - 'OpenStax Anatomy & Physiology 2e §anp-136 (23.7: Accessory Organs in Digestion- The Liver, Pancreas,
+    and Gallbladder): bilirubin from red blood cell breakdown is transported to the liver and excreted
+    in bile'
+  hepatic_ketogenesis:
+  - 'OpenStax Anatomy & Physiology 2e §anp-140 (24.4: Lipid Metabolism): excess acetyl CoA from fatty
+    acid oxidation is diverted to ketogenesis producing beta-hydroxybutyrate'
+  lipolysis_rate:
+  - 'OpenStax Anatomy & Physiology 2e §anp-140 (24.4: Lipid Metabolism): lipolysis breaks down triglycerides
+    into fatty acids and glycerol; glycerol enters glycolysis as DHAP, fatty acids undergo beta-oxidation'
+  mean_arterial_pressure:
+  - 'OpenStax Anatomy & Physiology 2e §anp-122 (21.7: Diseases Associated with Depressed or Overactive
+    Immune Responses): anaphylactic shock described as drop in blood pressure from systemic mast cell
+    degranulation'
+  osteoblast_activity:
+  - 'OpenStax Anatomy & Physiology 2e §anp-032 (6.5: Bone Formation and Development): osteoblasts produce
+    new bone tissue beneath the periosteum during appositional growth and deposit bone matrix during remodeling'
+  osteoclast_activity:
+  - 'OpenStax Anatomy & Physiology 2e §anp-032 (6.5: Bone Formation and Development): osteoclasts resorb
+    old bone lining the medullary cavity during appositional growth and remodeling'
+  pituitary_gh:
+  - 'OpenStax Anatomy & Physiology 2e §anp-168 (28.7: Lactation): ''growth hormone, cortisol, parathyroid
+    hormone, and insulin contribute to lactation, in part by facilitating the transport of maternal amino
+    acids, fatty acids, glucose, and calcium to breast milk.'''
+  plasma_albumin:
+  - 'OpenStax Anatomy & Physiology 2e §anp-113 (20.4: Capillary Exchange): plasma proteins (albumin) cannot
+    cross the capillary wall and generate blood colloidal osmotic pressure (BCOP ~25 mmHg), which drives
+    reabsorption of interstitial fluid back into capillaries'
+  plasma_allergen_specific_ige:
+  - 'OpenStax Anatomy & Physiology 2e §anp-122 (21.7: Diseases Associated with Depressed or Overactive
+    Immune Responses): allergen-specific IgE binding to mast cell surface is prerequisite for immediate
+    hypersensitivity; cross-linking triggers degranulation'
+  plasma_amylase:
+  - 'OpenStax Anatomy & Physiology 2e §anp-136 (23.7: Accessory Organs in Digestion- The Liver, Pancreas,
+    and Gallbladder): amylase is secreted in its active form by the pancreatic acini as part of pancreatic
+    juice'
+  plasma_bicarbonate:
+  - 'OpenStax Anatomy & Physiology 2e §anp-136 (23.7: Accessory Organs in Digestion- The Liver, Pancreas,
+    and Gallbladder): pancreatic bicarbonate secretion raises blood bicarbonate; ''Hydrogen ions enter
+    the blood when bicarbonate is secreted by the pancreas'''
+  plasma_bile_acids:
+  - 'OpenStax Anatomy & Physiology 2e §anp-136 (23.7: Accessory Organs in Digestion- The Liver, Pancreas,
+    and Gallbladder): bile salts are synthesised by hepatocytes and secreted; bile salt enterohepatic
+    recycling described (ileal reabsorption → hepatic portal blood → re-excretion)'
+  - 'OpenStax Biology 2e §bio-34.1 (34.1: Digestive Systems): ''Bile is produced in the liver and stored
+    and concentrated in the gallbladder. Bile contains bile salts which emulsify lipids''; when chyme
+    containing fatty acids enters the duodenum, bile is secreted from the gallbladder.'
+  - 'OpenStax Biology 2e §bio-34.3 (34.3: Digestive System Processes): ''Bile aids in the digestion of
+    lipids, primarily triglycerides by emulsification... bile salts emulsify large lipid globules into
+    small lipid globules.'''
+  plasma_free_fatty_acids:
+  - 'OpenStax Anatomy & Physiology 2e §anp-140 (24.4: Lipid Metabolism): fatty acids released from triglyceride
+    breakdown during lipolysis circulate as free fatty acids'
+  plasma_histamine:
+  - 'OpenStax Anatomy & Physiology 2e §anp-122 (21.7: Diseases Associated with Depressed or Overactive
+    Immune Responses): histamine released by mast cell granules mediates immediate hypersensitivity responses
+    including wheal and flare'
+  plasma_iga:
+  - 'OpenStax Anatomy & Physiology 2e §anp-120 (21.5: The Adaptive Immune Response - B Lymphocytes and
+    Antibodies): IgA exists as monomer in blood and dimer in mucous membrane secretions; present in breast
+    milk'
+  plasma_ige:
+  - 'OpenStax Anatomy & Physiology 2e §anp-120 (21.5: The Adaptive Immune Response - B Lymphocytes and
+    Antibodies): IgE present in lowest blood concentration due to strong Fc binding to mast cell surface
+    receptors'
+  plasma_igg:
+  - 'OpenStax Anatomy & Physiology 2e §anp-120 (21.5: The Adaptive Immune Response - B Lymphocytes and
+    Antibodies): IgG is the main antibody of secondary responses, clears pathogens from blood'
+  plasma_igm:
+  - 'OpenStax Anatomy & Physiology 2e §anp-120 (21.5: The Adaptive Immune Response - B Lymphocytes and
+    Antibodies): IgM is the first antibody produced in a primary response, activates complement cascade'
+  plasma_insulin:
+  - 'OpenStax Anatomy & Physiology 2e §anp-168 (28.7: Lactation): insulin listed as contributing to lactation
+    by facilitating transport of maternal glucose and other nutrients to breast milk.'
+  plasma_prostaglandin_e2:
+  - 'OpenStax Anatomy & Physiology 2e §anp-012 (2.6: Organic Compounds Essential to Human Functioning):
+    prostaglandins are signalling molecules derived from unsaturated fatty acids that help regulate blood
+    pressure and inflammation, and sensitize nerves to pain; omega-3 fatty acids stimulate production
+    of certain prostaglandins'
+  plasma_thrombopoietin:
+  - 'OpenStax Anatomy & Physiology 2e §anp-103 (18.5: Leukocytes and Platelets): thrombopoietin is a glycoprotein
+    secreted by the kidneys and liver that drives platelet production'
+  plasma_trypsinogen:
+  - 'OpenStax Anatomy & Physiology 2e §anp-136 (23.7: Accessory Organs in Digestion- The Liver, Pancreas,
+    and Gallbladder): trypsinogen is produced by the pancreas and activated in the duodenum by enteropeptidase'
+  pth:
+  - 'OpenStax Anatomy & Physiology 2e §anp-168 (28.7: Lactation): parathyroid hormone listed as contributing
+    to lactation via facilitation of calcium transport to breast milk.'
+  troponin_c_calcium_binding:
+  - 'Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-5.5.1 (Muscle Contraction): troponin-C
+    binds Ca2+ ions released from the sarcoplasmic reticulum, initiating the conformational cascade that
+    enables cross-bridge formation; corroborates Ca2+-binding activation role of troponin-C in striated
+    muscle'
+  - 'OpenStax Anatomy & Physiology 2e §anp-055 (10.4: Muscle Fiber Contraction and Relaxation): ''The
+    first step in the process of contraction is for Ca++ to bind to troponin so that tropomyosin can slide
+    away from the binding sites on the actin strands'' — confirms Ca²⁺–troponin binding as the thin-filament
+    activation mechanism'
+  - 'OpenStax Biology 2e §bio-38.4 (38.4: Muscle Contraction and Locomotion): ''calcium ions bind to troponin,
+    causing conformational changes in troponin that allow tropomyosin to move away from the myosin binding
+    sites on actin'' — confirms Ca2+ binding to troponin as the regulatory switch for cross-bridge formation.'
+  plasma_potassium:
+  - 'OpenStax Biology 2e §bio-5.3 (5.3: Active Transport): Na+-K+ ATPase moves K+ into cells from plasma,
+    maintaining low plasma K+ relative to intracellular K+.'
+  plasma_sodium_concentration:
+  - 'OpenStax Biology 2e §bio-5.3 (5.3: Active Transport): Na+-K+ ATPase maintains high extracellular
+    (plasma) Na+ by pumping Na+ out of cells; cells have lower Na+ concentration than extracellular fluid.'
+  mitochondrial_complex_i_activity:
+  - 'OpenStax Biology 2e §bio-7.1 (7.1: Energy in Living Systems): NAD+ (the substrate of complex I) accepts
+    electrons from organic molecules; in type 2 diabetes the oxidation efficiency of NADH is reduced,
+    impacting oxidative phosphorylation — confirming complex I NADH-oxidation activity as a physiological
+    variable.'
+  - 'OpenStax Biology 2e §bio-7.4 (7.4: Oxidative Phosphorylation): Complex I (NADH dehydrogenase, 44
+    polypeptides) receives electrons from NADH and pumps 4 H+ per electron pair across the inner mitochondrial
+    membrane'
+  mitochondrial_respiratory_chain_activity:
+  - 'OpenStax Biology 2e §bio-7.1 (7.1: Energy in Living Systems): chemiosmosis (driven by the respiratory
+    chain) generates 90% of ATP during glucose catabolism.'
+  - 'OpenStax Biology 2e §bio-7.4 (7.4: Oxidative Phosphorylation): The ETC (four protein complexes plus
+    mobile carriers Q and cytochrome c in the inner mitochondrial membrane) transfers electrons from NADH/FADH2
+    to O2, coupling redox reactions to proton pumping and ATP synthesis'
+  mitochondrial_atp_synthase_activity:
+  - 'OpenStax Biology 2e §bio-7.1 (7.1: Energy in Living Systems): oxidative phosphorylation via chemiosmosis
+    in mitochondria produces the majority of cellular ATP; ATP is the universal energy currency regenerated
+    from ADP.'
+  - 'OpenStax Biology 2e §bio-7.4 (7.4: Oxidative Phosphorylation): ATP synthase uses the proton electrochemical
+    gradient (chemiosmosis) to phosphorylate ADP; generates ~90% of aerobic ATP'
+  citrate_synthase_activity:
+  - 'OpenStax Biology 2e §bio-7.3 (7.3: Oxidation of Pyruvate and the Citric Acid Cycle): citrate synthase
+    (step 1 of TCA cycle) condenses acetyl group with oxaloacetate to form citrate; its rate is controlled
+    by ATP availability.'
+  pyruvate_dehydrogenase_activity:
+  - 'OpenStax Biology 2e §bio-7.3 (7.3: Oxidation of Pyruvate and the Citric Acid Cycle): pyruvate dehydrogenase
+    complex converts pyruvate to acetyl-CoA in a three-step process releasing CO2 and producing NADH in
+    mitochondrial matrix.'
+  mitochondrial_complex_ii_activity:
+  - 'OpenStax Biology 2e §bio-7.4 (7.4: Oxidative Phosphorylation): Complex II directly receives FADH2;
+    electrons bypass Complex I, so fewer protons are pumped and fewer ATP are produced per FADH2'
+  mitochondrial_complex_iii_activity:
+  - 'OpenStax Biology 2e §bio-7.4 (7.4: Oxidative Phosphorylation): Complex III (cytochrome oxidoreductase,
+    containing cytochrome b, Rieske Fe-S, and cytochrome c proteins) pumps protons across the inner mitochondrial
+    membrane'
+  mitochondrial_complex_iv_activity:
+  - 'OpenStax Biology 2e §bio-7.4 (7.4: Oxidative Phosphorylation): Complex IV (cytochromes c, a, a3 with
+    heme and copper ions) reduces O2 to water, removing H+ from the matrix and contributing to the ion
+    gradient'
+  gastric_acid_secretion:
+  - 'OpenStax Biology 2e §bio-34.1 (34.1: Digestive Systems): parietal cells secrete H⁺ and Cl⁻ that combine
+    to form HCl, the primary acidic component of gastric juice (stomach pH 1.5–2.5).'
+  - 'OpenStax Biology 2e §bio-34.3 (34.3: Digestive System Processes): ''The acidic environment in the
+    stomach stops the action of the amylase enzyme.'''
+  plasma_pepsinogen_i:
+  - 'OpenStax Biology 2e §bio-34.1 (34.1: Digestive Systems): ''Pepsin is secreted by the chief cells
+    in the stomach in an inactive form called pepsinogen.'''
+  gastric_emptying_rate:
+  - 'OpenStax Biology 2e §bio-34.1 (34.1: Digestive Systems): ''The movement of chyme from the stomach
+    into the small intestine is regulated by the pyloric sphincter''; gastric emptying occurs within 2–6
+    hours after a meal.'
+  pancreatic_amylase_activity:
+  - 'OpenStax Biology 2e §bio-34.1 (34.1: Digestive Systems): pancreatic juices ''contain a large variety
+    of enzymes that are required for the digestion of protein and carbohydrates''; bile produces bile
+    salts that emulsify lipids while the pancreas produces enzymes catabolizing starches.'
+  - 'OpenStax Biology 2e §bio-34.3 (34.3: Digestive System Processes): ''Pancreatic juices also contain
+    amylase, which continues the breakdown of starch and glycogen into maltose, a disaccharide.'''
+  intestinal_lactase_activity:
+  - 'OpenStax Biology 2e §bio-34.3 (34.3: Digestive System Processes): ''lactase breaks down lactose (or
+    "milk sugar") into glucose and galactose.'''
+  sucrase_isomaltase_activity:
+  - 'OpenStax Biology 2e §bio-34.3 (34.3: Digestive System Processes): ''Sucrase breaks down sucrose (or
+    "table sugar") into glucose and fructose.'''
+  trypsin_activity:
+  - 'OpenStax Biology 2e §bio-34.3 (34.3: Digestive System Processes): ''trypsin, elastase, and chymotrypsin—act
+    on the peptides reducing them to smaller peptides.'''
+  intestinal_lipid_emulsification:
+  - 'OpenStax Biology 2e §bio-34.3 (34.3: Digestive System Processes): ''By forming an emulsion, bile
+    salts increase the available surface area of the lipids manyfold.'''
+  plasma_chylomicron:
+  - 'OpenStax Biology 2e §bio-34.3 (34.3: Digestive System Processes): ''These large spheres are called
+    chylomicrons. Chylomicrons contain triglycerides, cholesterol, and other lipids... Chylomicrons enter
+    the lymphatic vessels, and then enter the blood in the subclavian vein.'''
+  intracellular_calcium:
+  - 'Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-5.5.1 (Muscle Contraction): Ca2+
+    ions released from SR serve as the trigger for sarcomere contraction by binding troponin-C; corroborates
+    cytosolic Ca2+ as the key activating signal'
+  - 'OpenStax Biology 2e §bio-35.2 (35.2: How Neurons Communicate): Ca2+ influx through presynaptic voltage-gated
+    channels drives neurotransmitter release; Ca2+ through NMDA receptors drives LTP/LTD plasticity.'
+  norepinephrine:
+  - 'OpenStax Biology 2e §bio-35.5 (35.5: Nervous System Disorders): MAO inhibitors block enzyme that
+    degrades norepinephrine, increasing synaptic norepinephrine; SSRIs and related drugs also work by
+    blocking reuptake of norepinephrine'
+  plasma_serotonin:
+  - 'OpenStax Biology 2e §bio-35.5 (35.5: Nervous System Disorders): depression hypothesis involves decreased
+    serotonin neurotransmission; SSRIs block serotonin reuptake to increase synaptic serotonin'
+  sr_calcium_release:
+  - 'Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-5.5.1 (Muscle Contraction): Ca2+
+    ions released from stores in the sarcoplasmic reticulum on neural stimulation initiate sarcomere contraction;
+    corroborates SR as the source of activating Ca2+ in striated muscle'
+  - 'OpenStax Biology 2e §bio-38.4 (38.4: Muscle Contraction and Locomotion): ''The trigger for calcium
+    release from the sarcoplasmic reticulum into the sarcoplasm is a neural signal... excitation-contraction
+    coupling is the link between the action potential generated in the sarcolemma and the start of a muscle
+    contraction.'''
+  renal_interstitial_fibroblast_epo_secretion:
+  - 'OpenStax Biology 2e §bio-41.2 (41.2: The Kidneys and Osmoregulatory Organs): ''The JGC is an endocrine
+    structure that secretes the enzyme renin and the hormone erythropoietin.'' Erythropoietin is produced
+    by the kidney (primarily by peritubular interstitial fibroblasts in the cortex/outer medulla) and
+    released in response to renal oxygen sensing.'
+  dendritic_cell_activation:
+  - 'Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-5.04.1 (Recognition and Response
+    in the Innate Immune System): dendritic cells bind PAMPs via TLRs, undergo maturation/activation,
+    and release cytokines and chemokines to control lymphocyte movement'
+  macrophage_il1beta_secretion:
+  - 'Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-5.04.3 (The Active Inflammasome):
+    inflammasome caspase-1 activates and releases IL-1beta from macrophages'
+  il1beta:
+  - 'Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-5.04.3 (The Active Inflammasome):
+    IL-1beta is a procytokine matured by caspase-1 and released from activated inflammasome-bearing cells'
+  macrophage_activation:
+  - 'Jakubowski & Flatt, Fundamentals of Biochemistry Vol I §biochem-5.04.3 (The Active Inflammasome):
+    NF-kB activation by PAMPs (Signal 1) primes macrophage pro-inflammatory cytokine gene expression including
+    IL-1beta and NLRP3'

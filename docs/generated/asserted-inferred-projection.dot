@@ -1,0 +1,7 @@
+digraph G {
+          graph [rankdir=LR, bgcolor="transparent", pad=.2]; node [shape=box, style="rounded,filled", fontname="Helvetica"];
+          A [label="asserted\ncollection(B) subclass\nhasMember some (causedBy some A)", fillcolor="#dbeafe"];
+          C [label="classified closure\nB_sub subclass B\nA subclass A_super", fillcolor="#fef3c7"];
+          E [label="entailed projections\nA -> B; A_super -> B\n(the witness member need not\nfall under B_sub)", fillcolor="#dcfce7"];
+          A -> C [label=" ELK"]; C -> E [label=" indexed candidates"];
+        }

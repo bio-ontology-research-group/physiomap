@@ -1,0 +1,153 @@
+# =============================================================================
+# Cellular scale: Bone remodeling unit (BMU)              *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Cell-cell communication within the basic multicellular unit of bone, lifted onto
+# the systemic calcium/phosphate homeostasis system.
+#
+#   CELL TYPES (cellular scale):
+#       osteoblast   (CL:0000062)  -- bone-forming cell; secretes RANKL, OPG; resorption-coupled
+#       osteoclast   (CL:0000092)  -- bone-resorbing multinucleated cell
+#       osteocyte    (CL:0000137)  -- mechanosensing, embedded; secretes sclerostin
+#
+#   CELL-CELL SIGNALS (ligand -> receptor; sign = d(target activity)/d(source signal)):
+#       osteoblast RANKL (TNFSF11) -> osteoclast RANK (TNFRSF11A)        (+) differentiation
+#       osteoblast OPG   (TNFRSF11B) -| osteoclast (decoy for RANKL)     (-) sequesters RANKL
+#       osteocyte sclerostin (SOST) -| osteoblast Wnt/LRP5/6             (-) inhibits bone formation
+#       osteoclast-derived coupling factors -> osteoblast               (+) resorption-formation coupling
+#       (sclerostin also raises osteoblast RANKL/OPG ratio -> osteoclast (+) )
+#
+#   UPWARD CONSTITUTIVE LIFT (part_of + determination; NOT causal):
+#       osteoclast bone-resorption activity (cellular) >> plasma_calcium   (organ_system, +)
+#       osteoclast bone-resorption activity (cellular) >> plasma_phosphate (organ_system, +)
+#   This anchors the BMU to the EXISTING calcium-PTH system (plasma_calcium, plasma_phosphate).
+#   WIRED IN: this fragment is composed in benchmarks/human/interventions.yaml ALONGSIDE
+#   systems/calcium_pth.yaml, so the two lift targets resolve to the existing macro nodes
+#   and the upward determination actually attaches in the runnable benchmark (composed map:
+#   151 nodes, constitutive graph stays acyclic — no cross-scale cycle).
+#
+#   PTH / systemic RANKL is a DOWNWARD (macro->micro) hormonal input -> NOT modeled as an edge
+#   (PhysioMap excludes downward causation). osteoblast_rankl and osteocyte_sclerostin are ROOTS,
+#   exercised by interventions (e.g. denosumab = anti-RANKL; romosozumab = anti-sclerostin).
+#
+#   SOURCES:
+#     - OmniPath/CellPhoneDB ligand-receptor: TNFSF11(RANKL)-TNFRSF11A(RANK) stimulation;
+#       TNFSF11(RANKL)-TNFRSF11B(OPG) decoy inhibition.
+#     - Boyce BF, Xing L. Functions of RANKL/RANK/OPG in bone modeling and remodeling.
+#       Arch Biochem Biophys. 2008;473(2):139-146. PMID:18395508.
+#     - Lacey DL et al. Osteoprotegerin ligand is a cytokine that regulates osteoclast
+#       differentiation and activation. Cell. 1998;93(2):165-176. PMID:9568710.
+#     - Simonet WS et al. Osteoprotegerin: a novel secreted protein involved in the
+#       regulation of bone density. Cell. 1997;89(2):309-319. PMID:9108485.
+#     - Li X et al. Sclerostin antagonizes Wnt signaling... J Biol Chem. 2005;280(20):19883-7.
+#       PMID:15778503. Wijenayaka AR et al. Sclerostin stimulates osteocyte RANKL... PLoS One
+#       2011;6(10):e25900. PMID:21991382.
+#     - Sims NA, Martin TJ. Coupling the activities of bone formation and resorption: a
+#       multitude of signals within the basic multicellular unit. Bonekey Rep. 2014;3:481.
+#       PMID:24466412.
+#     - BioModels: Lemaire2004 (BIOMD0000000278; J Theor Biol 2004, PMID:15234198) RANK/RANKL/OPG
+#       bone remodeling; Komarova2003 (BIOMD0000000148) osteoclast-osteoblast coupling dynamics.
+# =============================================================================
+
+name: bone_remodeling_multiscale
+
+nodes:
+- id: osteoblast_rankl
+  label: osteoblast/stromal RANKL secretion (TNFSF11)
+  scale: cellular
+  entity_iri: CL:0000062                # osteoblast
+  quality_iri: PATO:0000161             # secretion rate
+- id: osteoblast_opg
+  label: osteoblast OPG secretion (TNFRSF11B, RANKL decoy)
+  scale: cellular
+  entity_iri: CL:0000062                # osteoblast
+  quality_iri: PATO:0000161             # secretion rate
+- id: osteoblast_activity
+  label: osteoblast bone-formation activity
+  scale: cellular
+  entity_iri: GO:0043932                # ossification involved in bone remodeling
+  quality_iri: PATO:0000161
+  bearer_entity_iri: CL:0000062         # osteoblast
+  quality_kind: rate
+- id: osteoclast_activity
+  label: osteoclast bone-resorption activity
+  scale: cellular
+  entity_iri: GO:0045453                # bone resorption
+  quality_iri: PATO:0000161             # rate
+  bearer_entity_iri: CL:0000092         # osteoclast
+  quality_kind: rate
+- id: osteocyte_sclerostin
+  label: osteocyte sclerostin secretion (SOST)
+  scale: cellular
+  entity_iri: CL:0000137                # osteocyte
+  quality_iri: PATO:0000161             # secretion rate
+  # NOTE: plasma_calcium and plasma_phosphate are EXISTING macro nodes (calcium-PTH
+  # system) referenced as boundary targets of the constitutive lift; NOT redefined here.
+
+causal_edges:
+  # PTH -> osteoclast bone-resorption arm (refines lumped pth -> plasma_calcium).
+  # This relation lives with the target-owning bone-remodeling fragment so
+  # calcium/PTH-only benchmark subsets remain closed.
+- source: pth
+  target: osteoclast_activity
+  sign: "+"
+  causal_evidence: curated_mechanistic
+  mechanism: PTH (via osteoblast/osteocyte RANKL signalling to osteoclast precursors) stimulates osteoclast proliferation and activation, increasing bone-resorption activity and calcium release
+  evidence: '"cells release PTH, which stimulates osteoclast proliferation and resorption of bone by osteoclasts" — OpenStax Anatomy & Physiology 2e, section anp-035 (Calcium Homeostasis)'
+  # RANKL -> osteoclast: the master pro-osteoclastogenic signal
+- source: osteoblast_rankl
+  target: osteoclast_activity
+  sign: "+"
+  causal_evidence: perturbation
+  mechanism: >
+    RANKL (TNFSF11) binds RANK (TNFRSF11A) on osteoclast precursors -> TRAF6/NFATc1
+    -> osteoclast differentiation & activation (GO:0045672 positive regulation of
+    osteoclast differentiation)
+  evidence: 'Lacey 1998 Cell PMID:9568710; Boyce & Xing 2008 PMID:18395508; OmniPath/CellPhoneDB TNFSF11-TNFRSF11A (stimulation); BioModels Lemaire2004 BIOMD0000000278 [citations PubMed-verified]'
+  # OPG -> osteoclast: decoy receptor, sequesters RANKL (net inhibitory)
+- source: osteoblast_opg
+  target: osteoclast_activity
+  sign: "-"
+  causal_evidence: genetic_lof_gof
+  mechanism: >
+    OPG (TNFRSF11B) is a soluble decoy receptor that binds RANKL and prevents
+    RANK engagement -> reduced osteoclastogenesis (GO:0045671 negative regulation
+    of osteoclast differentiation)
+  evidence: 'Simonet 1997 Cell PMID:9108485; Boyce & Xing 2008 PMID:18395508; OmniPath/CellPhoneDB TNFSF11-TNFRSF11B (decoy/inhibition); BioModels Lemaire2004 BIOMD0000000278 [citations PubMed-verified]'
+  # sclerostin -| osteoblast: Wnt antagonism suppresses bone formation
+- source: osteocyte_sclerostin
+  target: osteoblast_activity
+  sign: "-"
+  causal_evidence: perturbation
+  mechanism: >
+    Sclerostin (SOST) binds LRP5/6 co-receptor and antagonizes canonical Wnt
+    signaling in osteoblasts -> reduced bone formation (GO:0030279 negative
+    regulation of ossification)
+  evidence: "Li 2005 J Biol Chem PMID:15778503 [citations PubMed-verified]"
+  # sclerostin -> osteoclast (indirect): raises osteocyte/osteoblast RANKL:OPG ratio
+- source: osteocyte_sclerostin
+  target: osteoblast_rankl
+  sign: "+"
+  causal_evidence: perturbation
+  mechanism: >
+    Sclerostin stimulates RANKL expression by osteocytes/osteoblasts (raises
+    RANKL:OPG ratio), promoting osteoclast formation (GO:0045672)
+  evidence: 'Wijenayaka 2011 PLoS One PMID:21991382 [citations PubMed-verified]'
+  # osteoclast -> osteoblast: resorption-formation coupling
+- source: osteoclast_activity
+  target: osteoblast_activity
+  sign: "+"
+  causal_evidence: mechanistic_model
+  mechanism: >
+    Bone resorption releases matrix-bound TGF-beta/IGF-1 and osteoclasts secrete
+    coupling factors (e.g. sphingosine-1-phosphate, CTHRC1) that recruit and
+    stimulate osteoblasts (GO:0045669 positive regulation of osteoblast differentiation)
+  evidence: 'Sims & Martin 2014 Bonekey Rep PMID:24466412; BioModels Komarova2003 BIOMD0000000148 | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-031 (6.4: Bone Structure): ''Osteoclasts are continually breaking down old bone while osteoblasts are continually forming new bone. The ongoing balance between osteoblasts and osteoclasts is responsible for the constant but subtle reshaping of bone.'' Paget''s disease example: overactive osteoclasts → osteoblasts try to compensate (coupling). [citations PubMed-verified]'
+  # osteoblast formation activity feeds RANKL/OPG production (osteoblast lineage couples back)
+- source: osteoblast_activity
+  target: osteoblast_opg
+  sign: "+"
+  causal_evidence: curated_mechanistic
+  mechanism: >
+    Mature, Wnt/beta-catenin-active osteoblasts upregulate OPG (TNFRSF11B), favoring the
+    anti-resorptive arm as bone formation proceeds
+  evidence: "Boyce & Xing 2008 PMID:18395508 (Arch Biochem Biophys — RANKL/RANK/OPG review; PubMed-verified) [citations PubMed-verified] | curated_mechanistic: Wnt/beta-catenin-driven OPG production by mature osteoblasts is established functional biology (osteoblast-specific beta-catenin perturbation evidence not directly opened this pass)"

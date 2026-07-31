@@ -1,0 +1,41 @@
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix pmo:     <https://w3id.org/physiomap/ontology#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+# SHACL shapes machine-checking the PhysioMap modelling patterns (see patterns.md).
+# Validate:  pyshacl -s rdf/shapes.ttl -df turtle rdf/physiomap.ttl
+#        or  any SHACL engine (Jena shacl, TopBraid, etc.).
+
+# P1 — a physiological variable
+pmo:VariableShape a sh:NodeShape ;
+    sh:targetClass pmo:Variable ;
+    sh:property [ sh:path rdfs:label ; sh:minCount 1 ] ;
+    sh:property [ sh:path pmo:scale ; sh:minCount 1 ; sh:maxCount 1 ;
+        sh:in ( "molecular" "subcellular" "cellular" "tissue" "organ" "organ_system" "organism" ) ] .
+
+# P2/P5 — a signed causal relation with provenance
+pmo:CausalRelationShape a sh:NodeShape ;
+    sh:targetClass pmo:CausalRelation ;
+    sh:property [ sh:path pmo:hasSource ; sh:minCount 1 ; sh:maxCount 1 ; sh:class pmo:Variable ] ;
+    sh:property [ sh:path pmo:hasTarget ; sh:minCount 1 ; sh:maxCount 1 ; sh:class pmo:Variable ] ;
+    sh:property [ sh:path pmo:sign ; sh:minCount 1 ; sh:maxCount 1 ; sh:in ( "+" "-" "?" ) ] ;
+    sh:property [ sh:path dcterms:source ; sh:minCount 1 ] ;   # provenance is mandatory
+    sh:property [ sh:path pmo:causalEvidence ;
+        sh:in ( "perturbation" "pharmacological" "genetic_lof_gof" "mendelian_randomization"
+                "mechanistic_model" "curated_mechanistic" ) ] .   # only admissible classes
+
+# P3 — a constitutive relation
+pmo:ConstitutiveRelationShape a sh:NodeShape ;
+    sh:targetClass pmo:ConstitutiveRelation ;
+    sh:property [ sh:path pmo:hasSource ; sh:minCount 1 ; sh:class pmo:Variable ] ;
+    sh:property [ sh:path pmo:hasTarget ; sh:minCount 1 ; sh:class pmo:Variable ] ;
+    sh:property [ sh:path pmo:sign ; sh:minCount 1 ; sh:in ( "+" "-" "?" ) ] .
+
+# P4 — a gain annotation always sits on a causal edge, and carries a definite sign
+pmo:GainAnnotationShape a sh:NodeShape ;
+    sh:targetSubjectsOf pmo:gainModulatedBy ;
+    sh:class pmo:CausalRelation ;                              # subject MUST be a causal edge, not a node
+    sh:property [ sh:path pmo:gainModulatedBy ; sh:minCount 1 ; sh:class pmo:Variable ] ;
+    sh:property [ sh:path pmo:gainSign ; sh:minCount 1 ; sh:maxCount 1 ; sh:in ( "+" "-" ) ] .

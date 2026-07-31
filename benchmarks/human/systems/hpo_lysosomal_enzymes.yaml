@@ -1,0 +1,284 @@
+# =============================================================================
+# Lysosomal (and lysosome-related) enzyme activities / circulating levels
+#                                    — PhysioMap fragment  *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Covers the HPO "abnormal lysosomal enzyme activity/level" gap terms used to encode
+# the lysosomal storage disorders (LSDs) and related conditions. Each term is a clean
+# single-enzyme directional quantity: a measured ENZYME ACTIVITY (catalytic activity,
+# PATO:0001414) in leukocytes / cultured fibroblasts / tissue, OR a circulating
+# protein LEVEL (concentration, PATO:0000033) in plasma/serum.
+#
+# Provenance (clinical/biochemical genetics references):
+#   - Online Metabolic & Molecular Bases of Inherited Disease (OMMBID), "Lysosomal
+#     storage disorders" chapters.
+#   - Harrison's Principles of Internal Medicine, "Lysosomal Storage Diseases".
+#   - Nelson Textbook of Pediatrics, "Mucopolysaccharidoses", "Sphingolipidoses",
+#     "Mucolipidoses", "Oligosaccharidoses".
+#   - Lehninger Principles of Biochemistry (glycosaminoglycan / sphingolipid / glycoprotein
+#     catabolism — the lysosomal hydrolase cascades).
+#   - Gene/enzyme identities cross-checked against OMIM and UniProt; protein IRIs verified
+#     against the downloaded Protein Ontology (PR.obo); cells/GO verified against CL.obo/GO.obo.
+#
+# MODELING DECISIONS
+#   - These are *primary* enzyme/level analytes. A monogenic LoF clamps the enzyme-activity
+#     node DOWN (deficiency); a few terms are the SECONDARY *rise* of a non-deficient
+#     lysosomal hydrolase or a macrophage activation marker measured as a disease biomarker
+#     (chitotriosidase, cathepsin D, the "elevated circulating beta-mannosidase /
+#     alpha-L-fucosidase / arylsulfatase / N-acetylglucosaminidase" terms). Both directions
+#     of a given analyte map to the SAME node with opposite signs.
+#   - Activity nodes: scale CELLULAR, quality PATO:0001414 (catalytic activity), with a
+#     bearer cell. Most LSD enzymes are assayed in LEUKOCYTES (CL:0000738) or cultured
+#     FIBROBLASTS (CL:0000057); macrophage-derived biomarkers (chitotriosidase, cathepsin D
+#     in activated macrophages) bear MACROPHAGE (CL:0000235). The bearer is the standard
+#     clinical assay source, not an exhaustive claim of expression.
+#   - Circulating protein LEVELS (serum beta-hexosaminidase total, plasma cathepsin D):
+#     scale ORGAN_SYSTEM, quality PATO:0000033 (concentration).
+#   - entity_iri = the human enzyme PROTEIN class in PR (Protein Ontology), verified by exact
+#     name/synonym match in PR.obo. Left null only where no clean PR class matched.
+#
+# NO CAUSAL EDGES: each analyte is a primary enzyme/level root. There is no defensible,
+# citation-backed within-scale signed edge to an EXISTING PhysioMap node (the downstream
+# substrate/storage phenotypes — GAG storage, HS/DS/KS accumulation, sphingolipid storage —
+# are not yet modeled as nodes). Per PhysioMap policy we add NO fabricated edges; these are
+# grounded ABSTAINING roots (clamped under a do() intervention). This is therefore a
+# self-contained ISLAND fragment (validate_fragment WARNs "island", which is allowed).
+# =============================================================================
+
+name: hpo_lysosomal_enzymes
+description: >-
+  DRAFT lysosomal (and lysosome-related) enzyme activity and circulating-level analytes
+  underpinning the lysosomal storage disorders (sphingolipidoses, mucopolysaccharidoses,
+  oligosaccharidoses, mucolipidoses, NCLs, Wolman/CESD) and related macrophage biomarkers.
+  Each node is a primary enzyme-activity (cellular, catalytic activity) or circulating
+  protein-level (organ_system, concentration) variable; entity IRIs are the human enzyme
+  protein classes verified against the Protein Ontology. Self-contained island (no causal
+  edges) — every node is a grounded abstaining root. Phase 1.
+
+nodes:
+  # ---- Sphingolipidoses ----
+  - id: beta_galactosidase_activity
+    label: lysosomal acid beta-galactosidase (GLB1) activity
+    scale: cellular
+    entity_iri: PR:000008016          # eukaryotic-type beta-galactosidase (syn "acid beta-galactosidase", GLB1 product)
+    quality_iri: PATO:0001414         # catalytic activity
+    bearer_entity_iri: CL:0000738     # leukocyte (standard GM1-gangliosidosis/Morquio-B assay source)
+  - id: glucocerebrosidase_activity
+    label: lysosomal acid glucocerebrosidase (GBA, glucosylceramidase) activity
+    scale: cellular
+    entity_iri: PR:000007867          # lysosomal acid glucosylceramidase (syn "beta-glucocerebrosidase")
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000738     # leukocyte (Gaucher disease assay source)
+  - id: galactocerebrosidase_activity
+    label: galactocerebrosidase (GALC, galactosylceramidase) activity
+    scale: cellular
+    entity_iri: PR:000007811          # galactocerebrosidase (syn "galactosylceramidase")
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000738     # leukocyte (Krabbe disease assay source)
+  - id: acid_ceramidase_activity
+    label: acid ceramidase (ASAH1) activity
+    scale: cellular
+    entity_iri: PR:000004336          # acid ceramidase (syn "N-acylsphingosine amidohydrolase")
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000057     # fibroblast (Farber disease assay source)
+  - id: acid_sphingomyelinase_activity
+    label: acid sphingomyelinase (SMPD1) activity
+    scale: cellular
+    entity_iri: PR:000015292          # sphingomyelin phosphodiesterase
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000738     # leukocyte (Niemann-Pick A/B assay source)
+  - id: alpha_galactosidase_a_activity
+    label: alpha-galactosidase A (GLA) activity
+    scale: cellular
+    entity_iri: PR:000008015          # alpha-galactosidase A
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000738     # leukocyte (Fabry disease assay source)
+  - id: beta_hexosaminidase_a_activity
+    label: beta-hexosaminidase A (HEXA, alpha-subunit) activity
+    scale: cellular
+    entity_iri: PR:000008524          # beta-hexosaminidase subunit alpha (HEXA; deficient in Tay-Sachs)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000738     # leukocyte
+  - id: beta_hexosaminidase_b_activity
+    label: beta-hexosaminidase B (HEXB, beta-subunit) activity
+    scale: cellular
+    entity_iri: PR:000008525          # beta-hexosaminidase subunit beta (HEXB; deficient in Sandhoff)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000738     # leukocyte
+  - id: plasma_beta_hexosaminidase
+    label: serum total beta-hexosaminidase concentration
+    scale: organ_system
+    # entity_iri omitted: serum "total hexosaminidase" is a mix of Hex A + Hex B isozymes,
+    # not a single PR protein class — left null rather than fabricated.
+    quality_iri: PATO:0000033         # concentration
+
+  # ---- Mucopolysaccharidoses (MPS) ----
+  - id: iduronate_sulfatase_activity
+    label: iduronate 2-sulfatase (IDS) activity / level
+    scale: cellular
+    entity_iri: PR:000008894          # iduronate 2-sulfatase (Hunter / MPS II)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000738     # leukocyte
+  - id: n_acetylglucosamine_6_sulfatase_activity
+    label: N-acetylglucosamine-6-sulfatase (GNS) activity
+    scale: cellular
+    entity_iri: PR:000008129          # N-acetylglucosamine-6-sulfatase (Sanfilippo D / MPS IIID)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000057     # fibroblast (assayed in cultured fibroblasts)
+  - id: n_acetylgalactosamine_6_sulfatase_activity
+    label: N-acetylgalactosamine-6-sulfatase (GALNS) activity
+    scale: cellular
+    entity_iri: PR:000007817          # N-acetylgalactosamine-6-sulfatase (Morquio A / MPS IVA)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000057     # fibroblast (assayed in cultured fibroblasts)
+  - id: arylsulfatase_b_activity
+    label: arylsulfatase B / N-acetylgalactosamine-4-sulfatase (ARSB) activity
+    scale: cellular
+    entity_iri: PR:000004322          # arylsulfatase B (Maroteaux-Lamy / MPS VI)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000738     # leukocyte
+  - id: beta_glucuronidase_activity
+    label: beta-glucuronidase (GUSB) activity
+    scale: cellular
+    entity_iri: PR:000008358          # beta-glucuronidase (Sly / MPS VII)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000738     # leukocyte
+  - id: sgsh_activity
+    label: N-sulfoglucosamine sulfohydrolase / heparan-N-sulfatase (SGSH) activity
+    scale: cellular
+    entity_iri: PR:000014803          # N-sulphoglucosamine sulphohydrolase (Sanfilippo A / MPS IIIA)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000738     # leukocyte
+  - id: alpha_n_acetylglucosaminidase_activity
+    label: alpha-N-acetylglucosaminidase (NAGLU) activity
+    scale: cellular
+    entity_iri: PR:000010962          # alpha-N-acetylglucosaminidase (Sanfilippo B / MPS IIIB)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000057     # fibroblast / tissue
+  - id: heparan_alpha_glucosaminide_n_acetyltransferase_activity
+    label: heparan-alpha-glucosaminide N-acetyltransferase (HGSNAT) activity
+    scale: cellular
+    entity_iri: PR:000008537          # heparan-alpha-glucosaminide N-acetyltransferase (Sanfilippo C / MPS IIIC)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000057     # cultured fibroblast (HPO term specifies fibroblasts)
+
+  # ---- Oligosaccharidoses / glycoproteinoses ----
+  - id: alpha_mannosidase_activity
+    label: lysosomal alpha-mannosidase (MAN2B1) activity
+    scale: cellular
+    entity_iri: PR:000010107          # lysosomal alpha-mannosidase (alpha-mannosidosis)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000738     # leukocyte
+  - id: beta_mannosidase_activity
+    label: beta-mannosidase (MANBA) activity / level
+    scale: cellular
+    entity_iri: PR:000010110          # beta-mannosidase (beta-mannosidosis)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000738     # leukocyte
+  - id: alpha_l_fucosidase_activity
+    label: tissue alpha-L-fucosidase (FUCA1) activity / level
+    scale: cellular
+    entity_iri: PR:000007697          # tissue alpha-L-fucosidase (fucosidosis)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000738     # leukocyte
+  - id: alpha_n_acetylgalactosaminidase_activity
+    label: alpha-N-acetylgalactosaminidase (NAGA) activity
+    scale: cellular
+    entity_iri: PR:000010959          # alpha-N-acetylgalactosaminidase (Schindler/Kanzaki disease)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000057     # fibroblast / tissue
+  - id: aspartylglucosaminidase_activity
+    label: aspartylglucosaminidase (AGA) activity
+    scale: cellular
+    entity_iri: PR:000003812          # N(4)-(beta-N-acetylglucosaminyl)-L-asparaginase (syn aspartylglucosaminidase; aspartylglucosaminuria)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000057     # fibroblast / tissue
+  - id: neuraminidase_activity
+    label: lysosomal sialidase / neuraminidase-1 (NEU1) activity
+    scale: cellular
+    entity_iri: PR:000011145          # sialidase-1 (syn N-acetyl-alpha-neuraminidase 1; sialidosis)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000057     # fibroblast / tissue
+  - id: mannosyl_oligosaccharide_glucosidase_activity
+    label: mannosyl-oligosaccharide glucosidase (MOGS) activity
+    scale: cellular
+    entity_iri: PR:000010518          # mannosyl-oligosaccharide glucosidase (CDG IIb / MOGS-CDG)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000057     # tissue / fibroblast
+
+  # ---- Metachromatic leukodystrophy / sulfatases ----
+  - id: arylsulfatase_a_activity
+    label: arylsulfatase A (ARSA) activity
+    scale: cellular
+    entity_iri: PR:000004321          # arylsulfatase A (metachromatic leukodystrophy)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000738     # leukocyte
+  - id: steroid_sulfatase_activity
+    label: steroid sulfatase / steryl-sulfatase (STS) activity
+    scale: cellular
+    entity_iri: PR:000015781          # steryl-sulfatase (syn "steroid sulfatase"; X-linked ichthyosis)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000738     # leukocyte
+
+  # ---- Mucolipidoses / phosphotransferase ----
+  - id: glcnac_phosphotransferase_activity
+    label: UDP-GlcNAc lysosomal-enzyme N-acetylglucosamine-1-phosphotransferase (GNPTAB) activity
+    scale: cellular
+    entity_iri: PR:000008125          # N-acetylglucosamine-1-phosphotransferase subunits alpha/beta (I-cell disease / ML II-III)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000057     # fibroblast
+
+  # ---- Lipid storage / Wolman-CESD ----
+  - id: lysosomal_acid_lipase_activity
+    label: lysosomal acid lipase (LIPA, LAL) activity
+    scale: cellular
+    entity_iri: PR:000009832          # lysosomal acid lipase/cholesteryl ester hydrolase (Wolman / CESD)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000738     # leukocyte (dried-blood-spot / leukocyte LAL assay)
+
+  # ---- Glycogen storage (Pompe) ----
+  - id: acid_alpha_glucosidase_activity
+    label: lysosomal acid alpha-glucosidase / acid maltase (GAA) activity
+    scale: cellular
+    entity_iri: PR:000007752          # lysosomal alpha-glucosidase (Pompe disease)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000738     # leukocyte (also assayed in muscle / dried blood spot)
+
+  # ---- Neuronal ceroid lipofuscinoses (NCL) ----
+  - id: ppt1_activity
+    label: palmitoyl-protein thioesterase 1 (PPT1, CLN1) activity
+    scale: cellular
+    entity_iri: PR:000013160          # palmitoyl-protein thioesterase 1 (CLN1 / infantile NCL)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000738     # leukocyte
+  - id: tpp1_activity
+    label: tripeptidyl peptidase 1 (TPP1, CLN2) activity
+    scale: cellular
+    entity_iri: PR:000016585          # tripeptidyl-peptidase 1 (CLN2 / late-infantile NCL)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000738     # leukocyte
+
+  # ---- Macrophage / aspartic-protease biomarkers ----
+  - id: chitotriosidase_activity
+    label: chitotriosidase (CHIT1) activity
+    scale: cellular
+    entity_iri: PR:000005426          # chitotriosidase-1 (activated-macrophage biomarker, elevated in Gaucher etc.)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000235     # macrophage (source of secreted chitotriosidase)
+  - id: cathepsin_d_activity
+    label: cathepsin D (CTSD) activity
+    scale: cellular
+    entity_iri: PR:000006025          # cathepsin D (CLN10 / congenital NCL; lysosomal aspartic protease)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000738     # leukocyte
+  - id: plasma_cathepsin_d
+    label: circulating (plasma) cathepsin D concentration
+    scale: organ_system
+    entity_iri: PR:000006025          # cathepsin D
+    quality_iri: PATO:0000033         # concentration
+
+# No causal_edges: each analyte is a primary enzyme/level root with no defensible,
+# citation-backed signed edge to an existing PhysioMap node (downstream storage substrates
+# are not yet modeled). Grounded abstaining roots per PhysioMap policy.
+causal_edges: []
+
+constitutive_edges: []   # none — no cross-scale lift this phase

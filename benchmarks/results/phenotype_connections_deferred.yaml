@@ -1,0 +1,333 @@
+_about: Phenotype-connection edges that are forward-sound and sign-verified but HELD OUT of the composed map. Same
+  provenance discipline as benchmarks/human/systems/phenotype_connections.yaml; recorded for selective domain review.
+deferred_cross_scale_cycle:
+- source: extracellular_fluid_volume
+  target: urinary_pge2
+  sign: '-'
+  reason: introduces a cross-scale meta-graph cycle (the sink target has an existing constitutive lift / downstream
+    edge back into the core)
+  theme: other_metabolites
+  evidence: 'Mechanism: volume contraction / dehydration / low-sodium diet induce renal COX-2 and raise urinary
+    PGE2 (PGE2 being natriuretic, this closes a counter-regulatory loop). CITATIONS (corrected after verification):
+    the proposal mis-attributed authors to PMID:26779421 — that PMID is REAL (''Physiology and pathophysiology of
+    cyclooxygenase-2 and prostaglandin E2 in the kidney'') but by Norregaard R, Kwon '
+- source: il6
+  target: csf_chi3l1
+  sign: +
+  reason: introduces a cross-scale meta-graph cycle (the sink target has an existing constitutive lift / downstream
+    edge back into the core)
+  theme: csf_markers
+  evidence: 'Mechanism: cytokine-induced astrocytic CHI3L1 transcription. Citation VERIFIED: Bonneh-Barkay et al.,
+    ''In vivo CHI3L1 (YKL-40) expression in astrocytes in acute and chronic neurological diseases'', J Neuroinflammation
+    2010;7:34, PMID 20540736 (confirmed real via PubMed; CHI3L1 in reactive astrocytes, cytokine-inducible). Same
+    sign as the curated edge il6 -> plasma_chi3l1 (+).'
+- source: tnf_alpha
+  target: csf_chi3l1
+  sign: +
+  reason: introduces a cross-scale meta-graph cycle (the sink target has an existing constitutive lift / downstream
+    edge back into the core)
+  theme: csf_markers
+  evidence: 'Mechanism: TNF-alpha (macrophage-derived cytokines) induces astrocytic YKL-40/CHI3L1 transcription.
+    Citation VERIFIED: Bonneh-Barkay et al., J Neuroinflammation 2010;7:34, PMID 20540736 (cytokines released from
+    macrophages induce YKL-40 transcription in astrocytes). Note: the map does NOT yet contain tnf_alpha -> plasma_chi3l1,
+    but TNF-alpha cytokine induction of astrocytic CHI3L1 is well-grounded'
+- source: pituitary_gh
+  target: plasma_mbl
+  sign: +
+  reason: introduces a cross-scale meta-graph cycle (the sink target has an existing constitutive lift / downstream
+    edge back into the core)
+  theme: immunoglobulins_complement
+  evidence: Sorensen, Hansen, Steffensen, Jensenius, Thiel. Hormonal regulation of mannan-binding lectin synthesis
+    in hepatocytes. Clin Exp Immunol 2006;145(1):173-182, PMID 16792688 - VERIFIED; GH 3-fold at 100 ng/mL, P=0.018,
+    additive with T3.
+- source: gfr
+  target: plasma_folate
+  sign: '-'
+  reason: introduces a cross-scale meta-graph cycle (the sink target has an existing constitutive lift / downstream
+    edge back into the core)
+  theme: vitamins_cofactors
+  evidence: 'Wang A et al., ''Reduced Kidney Function Is Associated with Increasing Red Blood Cell Folate Concentration
+    and Changes in Folate Form Distributions (NHANES 2011-2018)'', Nutrients 2022 (PMID 35268029, PMCID PMC8912286)
+    — VERIFIED real: reduced kidney function raised serum and RBC folate independent of folic-acid intake (~18,127
+    adults), demonstrating GFR''s effect on folate clearance. Corroborated by'
+deferred_feedback_axis:
+- source: calcitriol
+  target: plasma_osteocalcin
+  sign: +
+  reason: couples the delicate calcium-PTH / FGF23-klotho SCC; costs X-linked hypophosphatemic rickets (fgf23) its
+    unique top-1 backward recovery (cf. existing FGF23-klotho abstention note)
+  theme: other_endocrine_hormones
+  evidence: van Leeuwen JP, van Driel M, van den Bemd GJ, Pols HA. Vitamin D control of osteoblast function and
+    bone extracellular matrix mineralization. Crit Rev Eukaryot Gene Expr. 2001;11(1-3):199-226. PMID:11693961.
+    In-vivo VDRE occupancy on the osteocalcin promoter independently documented (Breen et al.; PMC45548). Both endpoints
+    ORGAN_SYSTEM scale; analyte is a downstream sink.
+deferred_out_of_human_systems:
+- source: erythroblast_proliferation
+  target: erythrocyte_pyruvate_kinase_activity
+  sign: +
+  reason: references a node defined only in benchmarks/multiscale/ (outside the human/systems composition); re-point
+    to a human-systems node on review
+  theme: muscle_enzymes
+  evidence: 'Mechanism: PK activity is a well-established red-cell-age marker; reticulocytes are PK-rich and reticulocytosis
+    raises measured population PK, masking PK deficiency (Beutler / Williams Hematology; reviewed in Grace & Glader,
+    PK deficiency status reports, e.g. PMC5053227). Reticulocytes'' PK-rich, high-ATP-demand phenotype documented
+    in Mentzer WC Jr, Baehner RL, Schmidt-Schoenbein H, Robinson SH, N'
+honestly_abstained_analytes:
+- analyte: carbamoylphosphate_synthetase_1_activity
+  reason: Abstain upheld. CPS1 is hormonally inducible (glucagon/cAMP + glucocorticoid enhancer; Ulbright & Snodgrass
+    1993, Heibel 2012), but the only candidate edge is ORGAN_SYSTEM (cortisol/glucagon) -> CELLULAR (CPS1 activity),
+    which is cross-scale and forbidden as a causal edge. Correctly recorded as a de
+- analyte: otc_activity
+  reason: Abstain upheld. OTC induction by glucagon+dexamethasone is real but ORGAN_SYSTEM -> CELLULAR is cross-scale;
+    cannot be a within-scale causal edge.
+- analyte: argininosuccinate_synthetase_activity
+  reason: Abstain upheld. ASS1 induction real but ORGAN_SYSTEM -> CELLULAR cross-scale; not encodable as a causal
+    edge.
+- analyte: arginase_activity
+  reason: Abstain upheld. Hepatic ARG1 induction real but ORGAN_SYSTEM -> CELLULAR cross-scale; analyte is erythrocyte/cellular-scale
+    arginase activity. Not encodable.
+- analyte: nags_activity
+  reason: Abstain upheld. NAGS regulation poorly defined; allosterically arginine-activated and diet-responsive,
+    no clean core-variable controller. Pure gene-product/allosteric activity; abstains soundly.
+- analyte: cbs_enzyme_activity
+  reason: Abstain upheld. CBS is glucocorticoid up- / insulin down-regulated in vitro (Ratnam 2002) but the only
+    edge is cross-scale (ORGAN_SYSTEM cortisol -> ORGAN CBS) and in-vivo glucocorticoid sign is conflicting (stress
+    down-regulates), so net sign would be '?'. Cross-scale + sign-ambiguous; abstaining i
+- analyte: pah_enzyme_activity
+  reason: Abstain upheld. PAH is substrate/BH4-cofactor determined with only weak glucagon responsiveness; would
+    still be cross-scale (ORGAN_SYSTEM -> ORGAN). No robust core controller; pure gene/cofactor activity.
+- analyte: bckdh_enzyme_activity
+  reason: Abstain upheld. BCKDH set by reversible phosphorylation (BDK/PPM1K) responding to dietary BCAA and energy
+    state, no clean single core variable. Sound abstain.
+- analyte: agat_activity
+  reason: Abstain upheld. AGAT/GATM feedback-repressed by creatine/ornithine, otherwise gene-determined; no core
+    controller.
+- analyte: gamt_activity
+  reason: Abstain upheld. GAMT gene-/SAM-determined; no core controller. Pure gene-product activity.
+- analyte: methionine_adenosyltransferase_activity
+  reason: Abstain upheld. MAT1A gene-/redox-determined; no clean core controller. Pure gene-product activity.
+- analyte: sah_hydrolase_activity
+  reason: Abstain upheld. AHCY gene-/product-inhibited; no core controller. Pure gene-product activity.
+- analyte: cystathionine_gamma_lyase_activity
+  reason: Abstain upheld. CTH gene-/PLP-cofactor-determined, substrate-driven flux; no core controller.
+- analyte: gamma_glutamylcysteine_synthetase_activity
+  reason: Abstain upheld. GCLC induced by NRF2-ARE oxidative stress and GSH-feedback-inhibited; no core physiological
+    variable. Stress/gene-determined.
+- analyte: glutathione_synthetase_activity
+  reason: Abstain upheld. GSS gene-determined (regulated step is GCLC, not GSS); no core controller.
+- analyte: glycine_cleavage_enzyme_activity
+  reason: Abstain upheld. GLDC/AMT/GCSH gene-/cofactor-determined; no core controller.
+- analyte: hydroxyphenylpyruvate_dioxygenase_activity
+  reason: Abstain upheld. HPD gene-determined, substrate-driven flux; no core controller.
+- analyte: oxoprolinase_activity
+  reason: Abstain upheld. OPLAH gene-determined; no core controller.
+- analyte: p5c_dehydrogenase_activity
+  reason: Abstain upheld. ALDH4A1 gene-/mitochondrial-determined; no core controller.
+- analyte: phosphoglycerate_dehydrogenase_activity
+  reason: Abstain upheld. PHGDH induced by ATF4/amino-acid-deprivation and mTOR programs, not a clean single core
+    variable in the map.
+- analyte: phosphoserine_phosphatase_activity
+  reason: Abstain upheld. PSPH gene-/ATF4-determined; no clean core controller.
+- analyte: prolidase_activity
+  reason: Abstain upheld. PEPD Mn-dependent dipeptidase, gene-determined; no core controller.
+- analyte: urocanase_activity
+  reason: Abstain upheld. UROC1 gene-determined; no core controller.
+- analyte: aspartoacylase_activity
+  reason: Abstain upheld. ASPA gene-determined (oligodendrocyte NAA hydrolysis); no core controller.
+- analyte: alpha_aminoadipic_semialdehyde_synthase_activity
+  reason: Abstain upheld. AASS gene-determined, substrate-driven lysine catabolism; no core controller.
+- analyte: csf_glutamate
+  reason: Abstain upheld. CSF glutamate set by neuronal/astrocytic glutamate-glutamine cycling, EAAT uptake, BBB
+    handling; bidirectional in HPO; no determinate-sign core controller. Has downstream edge (csf_glutamate -> intracellular_calcium).
+    Forcing a sign would risk error.
+- analyte: plasma_glutamate
+  reason: Abstain upheld. Set by hepatic/enteric transamination, glutamate-glutamine inter-organ cycle, diet; bidirectional
+    in HPO; no determinate-sign core controller.
+- analyte: plasma_aspartate
+  reason: Abstain upheld. Governed by AST transamination equilibrium; bidirectional in HPO; no determinate-sign
+    core controller. Has downstream edge to plasma_n_acetylaspartate.
+- analyte: plasma_carnosine
+  reason: Abstain upheld. Set by muscle CARNS synthesis, serum CNDP1 carnosinase degradation, diet; bidirectional
+    in HPO; no determinate-sign core controller. Has downstream edge to plasma_histidine.
+- analyte: plasma_ethanolamine
+  reason: Abstain upheld. Arises from phosphatidylethanolamine turnover and gut/microbial sources; no determinate-sign
+    core controller. Has downstream edge to plasma_phosphoethanolamine.
+- analyte: plasma_1_methylhistidine
+  reason: Abstain upheld. 1-methylhistidine not synthesized endogenously; plasma level derives from dietary anserine
+    (meat) hydrolysis (Kochlik 2018, PMID 29573154). No meat/anserine-specific core node exists; generic food_intake
+    would give a wrong/loose sign for a non-energy nutrient marker. Sound abstain.
+- analyte: urinary_2_aminoisobutyric_acid
+  reason: Abstain upheld. Beta-aminoisobutyrate from pyrimidine catabolism (DPYD) and muscle release plus renal
+    handling; no determinate-sign core controller.
+- analyte: urinary_phosphohydroxylysine
+  reason: Abstain upheld. Collagen-derived hydroxylysine metabolite set by relevant enzyme/transport gene and renal
+    handling; no core controller; no verified OBO IRI for the analyte.
+- analyte: urinary_pyrroline_hydroxycarboxylate
+  reason: Abstain upheld. Hydroxyproline/proline-metabolism intermediate set by catabolic enzyme activity and renal
+    handling; no core controller; no verified OBO IRI.
+- analyte: cathepsin_d_activity
+  reason: Considered and correctly abstained. Estrogen induces CTSD transcription only in estrogen-responsive (mammary/breast-cancer)
+    tissue via a promoter ERE, not as a systemic interventional controller of intracellular cathepsin D activity
+    across cell types. A determinate estradiol->cathepsin_d_activity ed
+- analyte: plasma_cathepsin_d
+  reason: Considered and correctly abstained. Circulating cathepsin D is a tissue-leakage/mis-secretion biomarker;
+    the documented inducers (estrogen ERE; M6P-receptor saturation causing pro-cathepsin-D hypersecretion) are tissue-restricted/oncologic
+    (breast cancer), not a clean systemic core controller. Fabri
+- analyte: steroid_sulfatase_activity
+  reason: Considered and correctly abstained. NF-kB/TNF-alpha and IGF-II induce STS only in inflammatory/cancer
+    contexts, not as a clean systemic physiological controller of leukocyte STS activity. STS activity is X-linked
+    gene-set; its downstream edge (steroid_sulfatase_activity -> plasma_dheas, -) is alread
+- analyte: lysosomal_hydrolase_activities
+  reason: Considered and correctly abstained. GNPTAB GlcNAc-1-phosphotransferase is the apex M6P-tagging gene-product
+    (I-cell disease); its control over other soluble hydrolases' compartmental activity is real but cross-compartment
+    and sign-ambiguous (tissue activity down vs circulating up). Fanning a risky_u
+- analyte: lysosomal_acid_lipase_activity
+  reason: Considered and correctly abstained. LAL/LIPA substrate supply (LDL-derived cholesteryl esters) does not
+    interventionally set LAL enzymatic activity; activity is gene-set. The product feeds SREBP/cholesterol homeostasis
+    downstream, but no core variable controls the enzyme activity itself. Sound absta
+- analyte: urinary_disaccharides
+  reason: 'WITHIN-SCALE violation (rule #4): intestinal_mucosal_permeability is ORGAN scale, urinary_disaccharides
+    is ORGAN_SYSTEM scale. A causal edge requires identical scales. The paracellular-leak mechanism (PMID 7729650,
+    Bjarnason 1995 - verified real) is biologically correct and the sign would be +, but '
+- analyte: urinary_glucose_tetrasaccharide
+  reason: 'WITHIN-SCALE violation (rule #4): hepatic_glycogen_content is ORGAN scale, urinary_glucose_tetrasaccharide
+    is ORGAN_SYSTEM scale. The mechanism (Glc4 limit-dextrin from glycogen degradation; PMID 32655139 Heiner-Fokkema
+    2020 - verified real) is sound with sign +, but the edge crosses ORGAN -> ORGAN_'
+- analyte: urinary_glucose_tetrasaccharide
+  reason: 'WITHIN-SCALE violation (rule #4): muscle_glycogen_content is TISSUE scale, urinary_glucose_tetrasaccharide
+    is ORGAN_SYSTEM scale. The Pompe-disease Glc4 mechanism (PMID 21687968 Manwaring 2012 - verified real, including
+    the ERT-lowers-Glc4 perturbation) is sound with sign +, but the edge crosses TIS'
+- analyte: dbh_activity
+  reason: 'DEFERRED (risky_upstream). DBH is genuinely a copper-dependent monooxygenase (verified: PMC6421562, JBC
+    PMID 30341172), so the mechanism is real, BUT this edge is rejected for two reasons. (1) Direction safety: dbh_activity
+    is itself an enzyme-activity SOURCE node that already drives the cardiovascu'
+- analyte: csf_amyloid_beta_42
+  reason: Deliberately NOT encoded (the proposer also omitted it). A production edge bace1->Abeta42 (+) would compete
+    with the accepted sequestration edge amyloid_protein_aggregate_amount->csf_amyloid_beta_42 (-); under a combined
+    intervention the net sign on soluble CSF Abeta42 is genuinely ambiguous. Encodi
+- analyte: plasma_cea
+  reason: 'Causal-evidence gate failure: the evidence for a determinate do(IL-6) -> plasma CEA effect is associational,
+    not interventional. WebSearch confirms serum CEA elevation is associated with smoking (dose/duration-dependent),
+    COPD, hypothyroidism, renal failure, aging and ''low-grade inflammation'' as cor'
+- analyte: alkyl_dhap_synthase_activity
+  reason: ABSTAIN UPHELD. alkyl_dhap_synthase_activity (AGPS, alkylglycerone-phosphate synthase) is a peroxisomal
+    ether-lipid/plasmalogen biosynthetic gene-product activity (RCDP3/Zellweger spectrum). Measured fibroblast activity
+    is set by the AGPS gene + peroxisome biogenesis, not by any acute hormonal/hemod
+- analyte: dhapat_activity
+  reason: ABSTAIN UPHELD. dhapat_activity (GNPAT/DHAPAT) is the peroxisomal committing step of ether-lipid synthesis
+    (RCDP2/Zellweger). Activity reports the GNPAT gene product, not an acutely regulated physiological state. No
+    within-scale CELLULAR core controller; sound parentless root.
+- analyte: erythrocyte_glutathione_peroxidase_activity
+  reason: 'ABSTAIN UPHELD, but the proposal''s stated reason is FACTUALLY CORRECTED. The proposal claimed ''there
+    is no dietary-selenium/selenoprotein core node in the vocabulary'' — this is WRONG: plasma_selenium DOES exist
+    (and secisbp2_activity). Selenium status is a genuine, classic determinant of GPX1 seleno'
+- analyte: ferrochelatase_activity
+  reason: 'ABSTAIN UPHELD. The cited PMID 19965627 (Crooks et al., Blood 2010) is REAL and confirms iron availability/Fe-S
+    cluster assembly posttranslationally stabilizes ferrochelatase. BUT: (a) plasma_iron/erythropoietic_iron_demand
+    are ORGAN_SYSTEM scale vs CELLULAR ferrochelatase_activity -> cross-scale, R'
+- analyte: fumarate_hydratase_activity
+  reason: ABSTAIN UPHELD. fumarate_hydratase_activity (FH/fumarase) is a TCA gene-product enzyme assay (FH LoF ->
+    HLRCC). Set by the FH gene, not by any core variable. plasma_fumarate/urinary_fumarate/csf_fumarate are downstream
+    CONSEQUENCES (and ORGAN_SYSTEM scale), not within-scale controllers. Sound abstai
+- analyte: hmg_coa_lyase_activity
+  reason: ABSTAIN UPHELD. hmg_coa_lyase_activity (HMGCL) is the terminal leucine-degradation/ketogenesis gene-product
+    enzyme (HMGCL deficiency/3-HMG aciduria). hepatic_ketogenesis is ORGAN scale vs CELLULAR activity (cross-scale,
+    RULE-4) AND regulates pathway FLUX, not the assayed catalytic capacity — connect
+- analyte: malic_enzyme_activity
+  reason: ABSTAIN UPHELD. malic_enzyme_activity is the MITOCHONDRIAL malic enzyme (ME2/ME3) assay. The insulin/SREBP-inducible
+    isoform is the cytosolic lipogenic ME1 — transferring that regulation onto the mitochondrial isoform would be
+    a fabricated, possibly wrong-signed edge. No within-scale core controller
+- analyte: sulfide_quinone_oxidoreductase_activity
+  reason: 'ABSTAIN UPHELD. SQOR expression is hypoxia/HIF-responsive (Marutani et al., Nat Commun 2021, 10.1038/s41467-021-23363-x
+    — NB the proposal mis-cited PMID 34031412; the correct PMID is 34035265, a minor non-load-bearing slip). But:
+    (a) it is transcriptional/expression regulation of a gene product, not'
+- analyte: t2_thiolase_activity
+  reason: ABSTAIN UPHELD. t2_thiolase_activity (ACAT1/T2 beta-ketothiolase) is a gene-product enzyme of ketolysis/isoleucine
+    catabolism (beta-ketothiolase deficiency). Downstream urinary metabolites (2-methyl-3-hydroxybutyrate, 2-methylacetoacetate,
+    C5:1/C5-OH) are CONSEQUENCES, not controllers. No within-sca
+- analyte: enolase_activity
+  reason: ABSTAIN UPHELD (no edge proposed). Skeletal-muscle beta-enolase (ENO3) activity is a pure gene-product
+    set by its own gene; the HPO term reflects ENO3 deficiency (GSD-XIII), an upstream driver already wired enolase_activity
+    -> sarcolemmal_permeability (-). T3 effects on enolase isozymes are developm
+- analyte: phosphoglycerate_kinase_activity
+  reason: ABSTAIN UPHELD (no edge proposed). PGK1 catalytic activity is a gene-product; HPO term = X-linked PGK1
+    deficiency, an upstream driver already wired -> sarcolemmal_permeability (-). No do()-able physiological controller
+    of PGK1 activity; fabricating one is worse than a sound root.
+- analyte: phosphoglycerate_mutase_activity
+  reason: ABSTAIN UPHELD (no edge proposed). PGAM2 activity is a gene-product (GSD-X), an upstream driver already
+    wired -> sarcolemmal_permeability (-). No core physiological controller; abstain keeps a sound root.
+- analyte: muscle_lactate_dehydrogenase_activity
+  reason: 'ABSTAIN UPHELD (no edge proposed). Muscle LDHA activity is a gene-product (GSD-XI), an upstream lesion
+    already wired -> skeletal_muscle_lactate (+). LDHA is a HIF-1 target, but there is no muscle-compartment tissue-hypoxia/HIF
+    core node (renal_hif2a_activity is renal/EPO-specific) and the phenotype '
+- analyte: muscle_caveolin_3
+  reason: ABSTAIN UPHELD (no edge proposed). CAV3 is a structural caveolar protein level set by its own gene (caveolinopathy/LGMD1C),
+    already wired as a driver -> sarcolemmal_permeability (-). No do()-able core controller of CAV3 protein level;
+    sound root.
+- analyte: plasma_ck_mb
+  reason: ABSTAIN UPHELD (no edge proposed). Plasma CK-MB is a multi-etiology cardiomyocyte membrane-breakdown release
+    marker. No core node represents myocardial membrane integrity / cardiac injury to drive it with a determinate
+    sign. It is correctly wired within-scale as a component of total CK (plasma_ck_mb
+- analyte: plasma_creatine_kinase_bb
+  reason: ABSTAIN UPHELD (no edge proposed). Plasma CK-BB is a brain/smooth-muscle/fetal release marker reflecting
+    membrane breakdown in CK-BB tissues; multi-etiology with no core membrane-integrity controller node in the model.
+    No sound core->analyte edge available; abstain rather than fabricate a guessed-si
+- analyte: aldehyde_dehydrogenase_activity
+  reason: ABSTAIN UPHELD. ALDH2 hepatocyte catalytic activity (CELLULAR) is a pure gene-product enzyme activity
+    set by its own gene/protein (ALDH2*2 polymorphism); no upstream core physiological controller. It is already
+    an upstream DRIVER (aldehyde_dehydrogenase_activity -> plasma_acetaldehyde, '-' confirmed
+- analyte: carboxylesterase_1_activity
+  reason: ABSTAIN UPHELD. CES1 hepatic catalytic activity (CELLULAR) is gene/protein-set with no upstream core controller;
+    already a driver (carboxylesterase_1_activity -> plasma_triglycerides, '-' confirmed). Downstream-sink connection
+    not available; abstains soundly.
+- analyte: gamma_glutamyltransferase_activity
+  reason: ABSTAIN UPHELD. The cholestasis mechanism (bile acids induce GGT) is ALREADY captured at ORGAN_SYSTEM
+    by the EXISTING edge plasma_bile_acids -> plasma_ggt ('+', confirmed in all_edges.json), and by ggt1_activity
+    -> plasma_ggt. Connecting ORGAN_SYSTEM plasma_bile_acids to the CELLULAR tissue-activity
+- analyte: ugt1a1_activity
+  reason: ABSTAIN UPHELD. UGT1A1 (CELLULAR) catalytic activity is gene-set (Gilbert/Crigler-Najjar) and induced
+    by xenobiotic nuclear receptors (CAR/PXR/AhR) — none are core physiological variables. Already an upstream driver
+    (ugt1a1_activity -> hepatic_bilirubin_conjugation, '+' confirmed). No core controlle
+- analyte: plasma_ast (Reduced AST direction)
+  reason: 'AGREE WITH PROPOSAL: the Reduced circulating AST (HP:0430136) direction has no established physiological
+    core controller (floor effect / rare GOT deficiency) and is correctly left unconnected rather than fabricated.'
+- analyte: plasma_25oh_vitamin_d
+  reason: CROSS-SCALE violation of non-negotiable Rule 4. skin_cholecalciferol_synthesis is ORGAN scale; plasma_25oh_vitamin_d
+    is ORGAN_SYSTEM scale. This is a substrate-production relation (skin produces circulating cholecalciferol that
+    is then 25-hydroxylated), which is CONSTITUTIVE/production, not a within
+- analyte: blood_bismuth
+  reason: 'ABSTAIN upheld. Bismuth is a xenobiotic with no endogenous source or homeostatic set-point; blood bismuth
+    is set entirely by exogenous exposure (Bi-containing pharmaceuticals, occupational/environmental ingestion)
+    and absorption/excretion kinetics. No core physiological do() raises/lowers it via an '
+- analyte: blood_cadmium
+  reason: ABSTAIN upheld. Cadmium is a xenobiotic; blood Cd is dominated by lifetime cumulative exposure (diet,
+    smoking) plus very slow (10-15 yr) kinetics. Impaired GFR reducing filtration of Cd-metallothionein is a minor,
+    confounded and bidirectional relation (Cd itself nephrotoxic), not the primary control
+- analyte: blood_mercury
+  reason: 'ABSTAIN upheld. Mercury is a xenobiotic toxicant with no endogenous source; blood Hg reflects recent
+    exogenous exposure (methylmercury from fish, elemental/inorganic Hg occupational/dental/environmental) and its
+    ADME. No core variable''s do() raises/lowers blood Hg via an endogenous regulator. Sound '
+- analyte: plasma_thallium
+  reason: ABSTAIN upheld. Thallium is a xenobiotic with no endogenous source; blood/plasma Tl is set solely by exogenous
+    exposure and kinetics. Tl+ mimics K+ (Na/K-ATPase, renal K handling), but that makes core variables DOWNSTREAM
+    targets of Tl toxicity, not upstream controllers of its level. No genuine core
+- analyte: adamts13_activity
+  reason: CROSS-SCALE (Rule 4 violation). thrombin is ORGAN_SYSTEM; adamts13_activity is CELLULAR. A causal edge
+    must have both endpoints at the SAME scale. The proposing agent itself flagged 'SCALE RECONCILIATION NEEDED'
+    and asked the parent to re-scale the node — i.e. the edge as written is not within-scale
+- analyte: adamts13_activity
+  reason: CROSS-SCALE (Rule 4 violation). plasmin_fibrinolysis is ORGAN_SYSTEM; adamts13_activity is CELLULAR. Same
+    scale-mismatch problem as the thrombin edge. Mechanism/citation are real (Crawley et al., Blood 2005;105(3):1085-1093,
+    PMID 15388580 verified — 'Plasmin also cleaved ADAMTS13 into similar fragme
+- analyte: adamts13_activity
+  reason: CROSS-SCALE (Rule 4 violation). il6 is ORGAN_SYSTEM; adamts13_activity is CELLULAR. Citation real (Bernardo
+    A, Ball C, Nolasco L, Moake JF, Dong JF. Blood 2004;104(1):100-106, PMID 15026315 verified — IL-6, but not IL-8
+    or TNF-alpha, inhibited ADAMTS13 cleavage of ULVWF strings under flow). Beyond t
+- analyte: plasma_prekallikrein
+  reason: ABSTENTION UPHELD (no edge emitted). Plasma prekallikrein (KLKB1) level is set by its own constitutive
+    hepatic synthesis (a cross-scale CONSTITUTIVE production lift, not causal). Inflammation-associated falls are
+    CONSUMPTION via FXII-driven contact activation, opposing in sign to any synthesis signa
+- analyte: plasma_kininogen
+  reason: ABSTENTION UPHELD (no edge emitted). Plasma HMW kininogen (KNG1) is a non-enzymatic contact-system cofactor
+    set by constitutive hepatic synthesis; inflammation effects are dominated by consumption/cleavage during contact
+    activation, and acute-phase direction reports are inconsistent. No verified cor

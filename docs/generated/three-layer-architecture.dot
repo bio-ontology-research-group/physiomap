@@ -1,0 +1,7 @@
+digraph G {
+          graph [rankdir=LR, bgcolor="transparent", pad=.2]; node [shape=box, style="rounded,filled", fontname="Helvetica", margin=.15];
+          K [label="K  OWL TBox\ntraits + source modules\nordinary relational axioms", fillcolor="#dbeafe"];
+          P [label="Pi  projection registry\nversioned binary/ternary patterns", fillcolor="#fef3c7"];
+          M [label="M  typed JSON SCM\ntraits, influences, production,\nconstitution, identities, modulation", fillcolor="#dcfce7"];
+          K -> M [label="  ELK entailment", fontname="Helvetica"]; P -> M [label="  pattern match", fontname="Helvetica"];
+        }

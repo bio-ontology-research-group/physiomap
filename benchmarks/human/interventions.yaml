@@ -1,0 +1,836 @@
+# =============================================================================
+# Human-scale PhysioMap — composed map + intervention gold set
+#                                                   *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Composes the Guyton CV/renal/RAAS core with the homeostatic-system fragments into one
+# whole-body map. Expected signs are established clinical/physiological steady-state
+# outcomes. `loop_critical` flags targets whose correct sign requires reasoning over a
+# feedback loop (naive forward propagation would be wrong).
+#
+# NOTE on scale: the composed map has one large (~31-node) whole-body homeostatic SCC;
+# predictions routed through it are solved by the conservative loop-aware engine and may
+# return '?' (honest: their sign depends on loop magnitudes). Self-contained subsystems
+# (thyroid HPT, calcium-PTH, respiratory chemoreflex, thermoregulation) keep tight SCCs
+# and are solved exactly. The focused Guyton benchmark remains the determinate-loop check.
+# =============================================================================
+
+systems:
+  - ../guyton/guyton_cv_core.yaml
+  - systems/adrenal_cortisol.yaml
+  - systems/autonomic_baroreflex.yaml
+  - systems/body_fluids_osmolality.yaml
+  - systems/calcium_pth.yaml
+  - systems/cardiac_function.yaml
+  - systems/coagulation_hemostasis.yaml
+  - systems/energy_balance_appetite.yaml
+  - systems/gi_incretin.yaml
+  - systems/glucose_insulin.yaml
+  - systems/growth_hormone_igf1.yaml
+  - systems/hematology_epo.yaml
+  - systems/inflammation_cytokine.yaml
+  - systems/iron_hepcidin.yaml
+  - systems/lipid_metabolism.yaml
+  - systems/oxygen_transport.yaml
+  - systems/potassium_homeostasis.yaml
+  - systems/reproductive_hpg.yaml
+  - systems/respiratory_acidbase.yaml
+  - systems/thermoregulation.yaml
+  - systems/thyroid.yaml
+  - systems/george_heart_rate.yaml
+  - ../multiscale/beta_adrenergic.yaml
+  - ../multiscale/bone_remodeling.yaml
+  - ../multiscale/cardiomyocyte_calcium.yaml
+  - ../multiscale/epo_jak_stat.yaml
+  - ../multiscale/hepcidin_signaling.yaml
+  - ../multiscale/insulin_signaling.yaml
+  - ../multiscale/vascular_tone.yaml
+  - ../multiscale/islet_paracrine.yaml
+  - ../multiscale/jga_cellcomm.yaml
+  - ../multiscale/endothelium_smc.yaml
+  - ../multiscale/immune_paracrine.yaml
+  - ../multiscale/erythroblastic_island.yaml
+
+interventions:
+  # --- glucose / insulin -----------------------------------------------------
+  - id: type1_diabetes
+    label: Type 1 diabetes (insulin deficiency)
+    do: {plasma_insulin: "-"}
+    expected:
+      peripheral_glucose_uptake: "-"
+      hepatic_glucose_production: "+"
+      plasma_glucose: "+"
+    loop_critical: []
+
+  - id: type2_diabetes
+    label: Insulin resistance / T2D (reduced peripheral glucose uptake)
+    do: {peripheral_glucose_uptake: "-"}
+    expected:
+      plasma_glucose: "+"
+    loop_critical: []
+
+  # --- thyroid / HPT ---------------------------------------------------------
+  - id: hyperthyroidism
+    label: Hyperthyroidism (thyroid hormone excess)
+    do: {free_t4: "+"}
+    expected:
+      free_t3: "+"
+      metabolic_rate: "+"
+      core_temperature: "+"
+      tsh: "-"
+    loop_critical: [tsh]
+
+  - id: hypothyroidism
+    label: Hypothyroidism (thyroid hormone deficiency)
+    do: {free_t4: "-"}
+    expected:
+      free_t3: "-"
+      metabolic_rate: "-"
+      core_temperature: "-"
+      tsh: "+"
+    loop_critical: [tsh]
+
+  # --- adrenal / cortisol ----------------------------------------------------
+  - id: cushings_syndrome
+    label: Cushing's syndrome (cortisol excess)
+    do: {cortisol: "+"}
+    expected:
+      hepatic_glucose_production: "+"
+      peripheral_glucose_uptake: "-"
+      plasma_glucose: "+"
+      acth: "-"
+    loop_critical: [acth]
+
+  - id: addisons_disease
+    label: Addison's disease (cortisol deficiency)
+    do: {cortisol: "-"}
+    expected:
+      hepatic_glucose_production: "-"
+      plasma_glucose: "-"
+      acth: "+"
+    loop_critical: [acth]
+
+  # --- calcium / PTH (self-contained SCC, solved exactly) --------------------
+  - id: primary_hyperparathyroidism
+    label: Primary hyperparathyroidism (autonomous PTH excess)
+    do: {pth: "+"}
+    expected:
+      plasma_calcium: "+"
+      plasma_phosphate: "-"
+      calcitriol: "+"
+    loop_critical: []
+
+  - id: hypoparathyroidism
+    label: Hypoparathyroidism (PTH deficiency)
+    do: {pth: "-"}
+    expected:
+      plasma_calcium: "-"
+      plasma_phosphate: "+"
+      calcitriol: "-"
+    loop_critical: []
+
+  # --- respiratory / acid-base (chemoreflex SCC, solved exactly) -------------
+  - id: chronic_hypoventilation
+    label: Chronic hypoventilation (respiratory acidosis)
+    do: {alveolar_ventilation: "-"}
+    expected:
+      arterial_pco2: "+"
+      arterial_ph: "-"
+      plasma_bicarbonate: "+"
+      chemoreceptor_drive: "+"
+    loop_critical: [chemoreceptor_drive]
+
+  - id: metabolic_acidosis
+    label: Primary metabolic acidosis (bicarbonate loss)
+    do: {plasma_bicarbonate: "-"}
+    expected:
+      arterial_ph: "-"
+      chemoreceptor_drive: "+"
+      alveolar_ventilation: "+"
+      arterial_pco2: "-"
+    loop_critical: [arterial_pco2, alveolar_ventilation]
+
+  # --- thermoregulation (thermo SCC, solved exactly) -------------------------
+  - id: heat_exposure
+    label: Environmental heat exposure
+    do: {core_temperature: "+"}
+    expected:
+      sweating: "+"
+      skin_blood_flow: "+"
+    loop_critical: []
+
+  - id: fever_pyrogen
+    label: Pyrogen-driven fever (raised heat production)
+    do: {metabolic_heat_production: "+"}
+    expected:
+      core_temperature: "+"
+      sweating: "+"
+      skin_blood_flow: "+"
+    loop_critical: [sweating, skin_blood_flow]
+
+  # --- hematology / EPO ------------------------------------------------------
+  - id: chronic_hypoxia_altitude
+    label: Chronic hypoxia (high-altitude exposure)
+    do: {arterial_po2: "-"}
+    expected:
+      renal_tissue_oxygenation: "-"
+      erythropoietin: "+"
+      red_cell_mass: "+"
+      hematocrit: "+"
+    loop_critical: [erythropoietin, red_cell_mass]
+
+  - id: epo_administration
+    label: Exogenous erythropoietin (doping / therapy)
+    do: {erythropoietin: "+"}
+    expected:
+      red_cell_mass: "+"
+      hematocrit: "+"
+      blood_viscosity: "+"
+    loop_critical: []
+
+  # --- body fluids / osmolality ---------------------------------------------
+  - id: siadh
+    label: SIADH (inappropriate ADH excess)
+    do: {adh: "+"}
+    expected:
+      plasma_osmolality: "-"
+      plasma_sodium_concentration: "-"
+    loop_critical: []
+
+  - id: primary_polydipsia
+    label: Primary polydipsia / acute water load
+    do: {water_intake: "+"}
+    expected:
+      plasma_osmolality: "-"
+      plasma_sodium_concentration: "-"
+    loop_critical: []
+
+  # =========================================================================
+  # NEW systems (fan-out from BioModels + literature + textbooks) — DRAFT gold
+  # =========================================================================
+  # --- Reproductive hypothalamic–pituitary–gonadal (HPG) axis ---
+  - id: primary_hypogonadism
+    label: "Primary gonadal failure (gonadal steroid/inhibin output lost)"
+    do: {estradiol: "-", testosterone: "-", inhibin: "-"}
+    expected:
+      gnrh: "+"
+      lh: "+"
+      fsh: "+"
+    loop_critical: [gnrh, lh, fsh]
+    # Loss of gonadal negative feedback disinhibits hypothalamus/pituitary, raising GnRH/LH/FSH (hypergonadotropic hypogonadism) — requires loop r
+  - id: gnrh_agonist_continuous
+    label: "Continuous GnRH-agonist (sustained GnRH drive)"
+    do: {gnrh: "+"}
+    expected:
+      lh: "+"
+      fsh: "+"
+      estradiol: "+"
+      testosterone: "+"
+    loop_critical: []
+    # Steady up-clamp of GnRH raises gonadotropins and thus gonadal steroids (static partial; clinical desensitisation is a pulsatility/dynamic ef
+  - id: hpa_stress_suppression
+    label: "Chronic stress / hypercortisolism (functional hypothalamic amenorrhea)"
+    do: {cortisol: "+"}
+    expected:
+      gnrh: "-"
+      lh: "-"
+      estradiol: "-"
+      progesterone: "-"
+    loop_critical: [estradiol, progesterone]
+    # Cortisol suppresses GnRH/LH; downstream fall in estradiol/progesterone is mediated through the gonadal cascade and feedback loop.
+  # --- Growth hormone / IGF-1 somatotropic axis ---
+  - id: gh_excess_acromegaly
+    label: "Chronic GH excess (acromegaly / GH-secreting adenoma): clamp pituitary GH high"
+    do: {pituitary_gh: "+"}
+    expected:
+      hepatic_igf1: "+"
+      somatostatin: "+"
+      hepatic_glucose_production: "+"
+      peripheral_glucose_uptake: "-"
+      metabolic_rate: "+"
+      plasma_glucose: "+"
+    loop_critical: [plasma_glucose]
+    # GH directly raises hepatic IGF-1 and drives counter-regulatory glucose actions; plasma_glucose rises only as the net comparative-static of t
+  - id: somatostatin_analog_octreotide
+    label: "Somatostatin analog (octreotide): clamp somatostatin high"
+    do: {somatostatin: "+"}
+    expected:
+      pituitary_gh: "-"
+      hepatic_igf1: "-"
+      ghrh: "-"
+    loop_critical: [hepatic_igf1, ghrh]
+    # Octreotide suppresses GH directly; the fall in hepatic IGF-1 and in GHRH follows only by propagating through the GH -> IGF-1 effector arm an
+  - id: exogenous_igf1_infusion
+    label: "Exogenous IGF-1 infusion: clamp hepatic IGF-1 high"
+    do: {hepatic_igf1: "+"}
+    expected:
+      pituitary_gh: "-"
+      ghrh: "-"
+      somatostatin: "+"
+    loop_critical: [pituitary_gh, ghrh]
+    # Canonical long-loop negative feedback: raised IGF-1 suppresses GH (pituitary + hypothalamic arms) and GHRH while raising somatostatin; the n
+  # --- Energy balance / appetite (leptin–ghrelin–hypothalamus) ---
+  - id: leptin_deficiency
+    label: "Congenital leptin deficiency (ob/ob): clamp leptin low"
+    do: {leptin: "-"}
+    expected:
+      hypothalamic_appetite_drive: "+"
+      food_intake: "+"
+      body_weight: "+"
+      adipose_tissue_mass: "+"
+      metabolic_rate: "-"
+    loop_critical: [body_weight, adipose_tissue_mass]
+    # Loss of the anorexigenic adiposity brake disinhibits appetite; intake rises and the lipostat cannot counter-regulate, so weight and fat mass
+  - id: exogenous_leptin
+    label: "Exogenous leptin administration: clamp leptin high"
+    do: {leptin: "+"}
+    expected:
+      hypothalamic_appetite_drive: "-"
+      food_intake: "-"
+      body_weight: "-"
+      adipose_tissue_mass: "-"
+      metabolic_rate: "+"
+    loop_critical: [body_weight, adipose_tissue_mass]
+    # High leptin suppresses orexigenic drive and intake while raising thermogenesis, driving negative energy balance and loss of fat/weight (lept
+  - id: caloric_restriction
+    label: "Imposed caloric restriction / fasting: clamp food_intake low"
+    do: {food_intake: "-"}
+    expected:
+      body_weight: "-"
+      adipose_tissue_mass: "-"
+      leptin: "-"
+      ghrelin: "+"
+      hypothalamic_appetite_drive: "+"
+    loop_critical: [ghrelin, hypothalamic_appetite_drive]
+    # Reduced intake lowers weight and fat, dropping leptin and (via loss of postprandial suppression) raising ghrelin, which together raise the o
+  # --- Iron homeostasis / hepcidin axis ---
+  - id: iron_hepcidin_overexpression
+    label: "Chronic hepcidin excess (e.g. hepcidin-overexpression / IRIDA-like clamp)"
+    do: {hepcidin: "+"}
+    expected:
+      ferroportin_activity: "-"
+      plasma_iron: "-"
+      transferrin_saturation: "-"
+      ferritin_stores: "+"
+      red_cell_mass: "-"
+    loop_critical: [plasma_iron, transferrin_saturation]
+    # Clamping hepcidin up degrades ferroportin, dropping plasma iron and TSAT while trapping iron as stored ferritin (iron-restricted anemia); th
+  - id: iron_erythropoietic_demand_up
+    label: "Increased erythropoietic drive (rHuEPO / stress erythropoiesis, raising erythroferrone)"
+    do: {erythropoietic_iron_demand: "+"}
+    expected:
+      hepcidin: "-"
+      ferroportin_activity: "+"
+      plasma_iron: "+"
+      transferrin_saturation: "+"
+      red_cell_mass: "+"
+    loop_critical: [plasma_iron, transferrin_saturation, red_cell_mass]
+    # Erythroferrone suppresses hepcidin, releasing ferroportin to mobilize iron into plasma for hemoglobin synthesis; the net rise in plasma iron
+  - id: iron_load
+    label: "Iron loading (e.g. transfusion / high dietary iron raising plasma iron)"
+    do: {plasma_iron: "+"}
+    expected:
+      transferrin_saturation: "+"
+      hepcidin: "+"
+      ferroportin_activity: "-"
+      ferritin_stores: "+"
+    loop_critical: [hepcidin, ferroportin_activity]
+    # Elevated plasma iron raises TSAT and hepatic stores, both of which upregulate hepcidin, which then degrades ferroportin to restrain further 
+  # --- Coagulation / hemostasis & fibrinolysis ---
+  - id: antithrombin_deficiency
+    label: "Hereditary antithrombin (AT-III) deficiency / thrombophilia"
+    do: {antithrombin: "-"}
+    expected:
+      thrombin: "+"
+      fibrin_clot: "+"
+      platelet_activation: "+"
+      plasmin_fibrinolysis: "+"
+      activated_protein_C: "+"
+      blood_viscosity: "+"
+    loop_critical: [thrombin, fibrin_clot, platelet_activation]
+    # Loss of the antithrombin brake raises steady-state thrombin; the thrombin<->platelet positive-feedback SCC amplifies it, so the net rise nee
+  - id: factor_v_leiden_apc_resistance
+    label: "Factor V Leiden (activated protein C resistance)"
+    do: {activated_protein_C: "-"}
+    expected:
+      thrombin: "+"
+      fibrin_clot: "+"
+      platelet_activation: "+"
+      plasmin_fibrinolysis: "+"
+      blood_viscosity: "+"
+    loop_critical: [thrombin, fibrin_clot, platelet_activation]
+    # Removing the APC negative-feedback arm (FVa/FVIIIa stay active) raises thrombin; the positive-feedback amplification loop determines the net
+  - id: tissue_factor_pathway_block
+    label: "Loss of tissue-factor initiation (e.g. severe extrinsic-pathway / FVII deficiency)"
+    do: {tissue_factor: "-"}
+    expected:
+      thrombin: "-"
+      fibrin_clot: "-"
+      platelet_activation: "-"
+      plasmin_fibrinolysis: "-"
+      activated_protein_C: "-"
+      blood_viscosity: "-"
+    loop_critical: []
+    # Removing TF initiation lowers thrombin generation and everything downstream; signs follow forward propagation through the initiation cascade
+  # --- Potassium homeostasis ---
+  - id: k_load
+    label: "Acute potassium load (clamp plasma K+ high)"
+    do: {plasma_potassium: "+"}
+    expected:
+      aldosterone: "+"
+      renal_potassium_excretion: "+"
+      plasma_insulin: "+"
+      cellular_potassium_uptake: "+"
+    loop_critical: []
+    # Hyperkalemia stimulates aldosterone (renal K+ excretion) and insulin (cellular K+ uptake) — both arms acting to dispose of the load; signs a
+  - id: aldosterone_deficiency
+    label: "Aldosterone deficiency / MR blockade (clamp aldosterone low)"
+    do: {aldosterone: "-"}
+    expected:
+      renal_potassium_excretion: "-"
+      plasma_potassium: "+"
+    loop_critical: [plasma_potassium]
+    # Reduced aldosterone lowers distal K+ secretion; the steady-state rise in plasma K+ is the comparative static of the K+-aldosterone negative-
+  - id: insulin_infusion
+    label: "Hyperinsulinemia (clamp plasma insulin high)"
+    do: {plasma_insulin: "+"}
+    expected:
+      cellular_potassium_uptake: "+"
+      plasma_potassium: "-"
+    loop_critical: [plasma_potassium]
+    # Insulin drives K+ into cells; the net fall in plasma K+ requires loop reasoning because plasma K+ sits inside aldosterone/insulin feedback t
+  # --- GI incretin & gastric regulation ---
+  - id: glp1_infusion
+    label: "Exogenous GLP-1 infusion (GLP-1 receptor agonist effect)"
+    do: {glp1: "+"}
+    expected:
+      plasma_insulin: "+"
+      plasma_glucagon: "-"
+      gastric_emptying_rate: "-"
+      gastric_acid_secretion: "-"
+      plasma_glucose: "-"
+    loop_critical: [plasma_glucose]
+    # GLP-1 raises insulin and lowers glucagon, slows emptying and acid; net plasma glucose falls only when the incretin-insulin / emptying loop i
+  - id: oral_glucose_load
+    label: "Oral glucose load via faster gastric emptying (OGTT-style nutrient delivery)"
+    do: {gastric_emptying_rate: "+"}
+    expected:
+      glp1: "+"
+      gip: "+"
+      plasma_insulin: "+"
+      plasma_glucagon: "-"
+    loop_critical: [plasma_insulin, plasma_glucagon]
+    # Faster emptying delivers nutrient to L/K cells raising incretins, which potentiate insulin and suppress glucagon; the insulin/glucagon net s
+  - id: hypergastrinemia
+    label: "Sustained hypergastrinemia (e.g. gastrinoma / PPI-driven gastrin rise)"
+    do: {gastrin: "+"}
+    expected:
+      gastric_acid_secretion: "+"
+    loop_critical: []
+    # Gastrin directly stimulates parietal-cell acid secretion (Boron & Boulpaep); a clean single-arm acyclic prediction with no feedback dependen
+  # --- Oxygen transport & delivery ---
+  - id: hypoxemia_low_pao2
+    label: "Hypoxemia: clamp arterial PaO2 low (e.g. high altitude / lung disease)"
+    do: {arterial_po2: "-"}
+    expected:
+      hemoglobin_o2_saturation: "-"
+      arterial_o2_content: "-"
+      oxygen_delivery: "-"
+      renal_tissue_oxygenation: "-"
+      tissue_o2_extraction: "+"
+      erythropoietin: "+"
+      red_cell_mass: "+"
+      hematocrit: "+"
+    loop_critical: [erythropoietin, red_cell_mass, hematocrit]
+    # Low PaO2 lowers SaO2/CaO2/DO2 and renal O2; the EPO negative-feedback loop then raises EPO and red-cell mass/hematocrit to defend O2 content
+  - id: anemia_low_hematocrit
+    label: "Anemia: clamp hematocrit (Hb proxy) low"
+    do: {hematocrit: "-"}
+    expected:
+      arterial_o2_content: "-"
+      oxygen_delivery: "-"
+      renal_tissue_oxygenation: "-"
+      erythropoietin: "+"
+      tissue_o2_extraction: "+"
+    loop_critical: []
+    # Lower hematocrit lowers CaO2 and DO2 and renal O2; reduced renal oxygenation raises EPO, and at fixed VO2 the extraction ratio rises (widene
+  - id: high_output_increase_co
+    label: "Raise cardiac output (e.g. exercise/high-output state)"
+    do: {cardiac_output: "+"}
+    expected:
+      oxygen_delivery: "+"
+      renal_tissue_oxygenation: "+"
+      tissue_o2_extraction: "-"
+      erythropoietin: "-"
+    loop_critical: [erythropoietin]
+    # Higher CO raises DO2 and renal tissue O2; at fixed VO2 the extraction ratio falls, and increased renal oxygenation suppresses EPO through th
+  # --- Cardiac pump function (Frank–Starling, contractility) ---
+  - id: volume_loading
+    label: "Acute volume loading (raised preload / increased venous return)"
+    do: {venous_return: "+"}
+    expected:
+      end_diastolic_volume: "+"
+      stroke_volume: "+"
+      cardiac_output: "+"
+    loop_critical: [cardiac_output]
+    # Frank-Starling: higher venous return raises EDV and stroke volume; net cardiac_output rises despite the negative afterload feedback (CO->MAP
+  - id: positive_inotrope
+    label: "Positive inotrope (e.g. beta-adrenergic / dobutamine: raised myocardial contractility)"
+    do: {myocardial_contractility: "+"}
+    expected:
+      stroke_volume: "+"
+      ejection_fraction: "+"
+      cardiac_output: "+"
+    loop_critical: [cardiac_output, stroke_volume]
+    # Increased inotropy raises stroke volume and ejection fraction directly; cardiac_output rises, but the afterload negative-feedback loop must 
+  - id: increased_afterload
+    label: "Acute pressure overload / vasoconstrictor (raised afterload via arterial pressure & resistance)"
+    do: {total_peripheral_resistance: "+"}
+    expected:
+      afterload: "+"
+      stroke_volume: "-"
+      cardiac_output: "-"
+    loop_critical: [stroke_volume, cardiac_output]
+    # Higher TPR raises afterload, which reduces stroke volume and hence cardiac output; the negative afterload->SV->CO arm is the loop-critical s
+  # --- Autonomic baroreflex detail ---
+  - id: baro_pressure_step_up
+    label: "Sustained rise in arterial pressure (baroreflex buffering)"
+    do: {mean_arterial_pressure: "+"}
+    expected:
+      baroreceptor_firing_rate: "+"
+      sympathetic_tone: "-"
+      parasympathetic_tone: "+"
+      norepinephrine: "-"
+      epinephrine: "-"
+      heart_rate: "-"
+      total_peripheral_resistance: "-"
+    loop_critical: [heart_rate, total_peripheral_resistance]
+    # Pressure up loads baroreceptors -> withdraws sympathetic, raises vagal -> reflex bradycardia and vasodilation opposing the rise (negative fe
+  - id: vagotomy_baroreflex_block
+    label: "Vagal (parasympathetic) blockade / denervation"
+    do: {parasympathetic_tone: "-"}
+    expected:
+      heart_rate: "+"
+    loop_critical: []
+    # Removing vagal cardioinhibition unmasks intrinsic/sympathetic drive, raising heart rate (atropine tachycardia).
+  # --- Acute inflammation / cytokine response ---
+  - id: endotoxin_tnf_clamp
+    label: "Endotoxin challenge: clamp TNF-alpha high (LPS-driven acute inflammation)"
+    do: {tnf_alpha: "+"}
+    expected:
+      il1beta: "+"
+      il6: "+"
+      c_reactive_protein: "+"
+      capillary_permeability: "+"
+      core_temperature: "+"
+      total_peripheral_resistance: "-"
+      cortisol: "+"
+    loop_critical: [cortisol]
+    # LPS drives TNF -> IL-1 -> IL-6 -> CRP, fever and capillary leak, septic vasodilation (TPR down); rising cytokines activate the HPA axis rais
+  - id: il6_block
+    label: "IL-6 blockade (e.g. tocilizumab): clamp IL-6 low"
+    do: {il6: "-"}
+    expected:
+      c_reactive_protein: "-"
+      core_temperature: "-"
+      crh: "-"
+    loop_critical: []
+    # IL-6 is the principal hepatic acute-phase inducer, so blocking it lowers CRP; loss of the dominant endogenous pyrogen lowers fever and reduc
+  - id: exogenous_cortisol
+    label: "Exogenous glucocorticoid: clamp cortisol high"
+    do: {cortisol: "+"}
+    expected:
+      tnf_alpha: "-"
+      il1beta: "-"
+      il6: "-"
+      c_reactive_protein: "-"
+      core_temperature: "-"
+      total_peripheral_resistance: "+"
+    loop_critical: []
+    # Glucocorticoids transrepress NF-kB, suppressing TNF/IL-1/IL-6, hence CRP and fever fall and the cytokine-driven vasodilation is relieved (TP
+  # --- Lipoprotein / cholesterol metabolism ---
+  - id: familial_hypercholesterolemia
+    label: "Familial hypercholesterolemia (LDL-receptor loss-of-function)"
+    do: {hepatic_ldl_receptor_activity: "-"}
+    expected:
+      ldl_cholesterol: "+"
+      hepatocyte_cholesterol_content: "-"
+      hepatic_cholesterol_synthesis: "+"
+    loop_critical: [hepatocyte_cholesterol_content, hepatic_cholesterol_synthesis]
+    # Loss of hepatic LDLR clearance directly raises plasma LDL; loop reasoning shows the falling hepatocyte cholesterol pool then de-represses de
+  - id: statin_therapy
+    label: "Statin (HMG-CoA reductase inhibition lowering de novo synthesis)"
+    do: {hepatic_cholesterol_synthesis: "-"}
+    expected:
+      hepatocyte_cholesterol_content: "-"
+      hepatic_ldl_receptor_activity: "+"
+      ldl_cholesterol: "-"
+    loop_critical: [hepatic_ldl_receptor_activity, ldl_cholesterol]
+    # Blocking synthesis lowers the hepatocyte regulatory cholesterol pool, which (via the Brown-Goldstein negative-feedback loop) UPREGULATES LDL
+  - id: hyperinsulinemia
+    label: "Hyperinsulinemia / insulin-resistant state (raised plasma insulin)"
+    contexts: [fed-state-hepatic-lipogenesis]
+    do: {plasma_insulin: "+"}
+    expected:
+      vldl_secretion: "+"
+      plasma_triglycerides: "+"
+      ldl_cholesterol: "+"
+    loop_critical: []
+    # In the explicitly selected fed-state hepatic-lipogenesis regime, insulin drives
+    # VLDL-triglyceride secretion, raising plasma triglycerides and feeding the VLDL->LDL cascade.
+  # --- Insulin receptor → GLUT4 signaling (molecular vertical) ---
+  - id: insulin_bolus
+    label: "exogenous insulin bolus"
+    do: {plasma_insulin: "+"}
+    expected:
+      insulin_receptor_activity: "+"
+      irs1_signaling: "+"
+      pi3k_akt_activity: "+"
+      glut4_membrane_translocation: "+"
+      peripheral_glucose_uptake: "+"
+    loop_critical: [irs1_signaling]
+    # Insulin raises receptor activity; despite the Akt->IRS-1 negative feedback the net IRS-1 change is still + because forward drive dominates a
+  - id: pi3k_inhibitor
+    label: "PI3K/Akt pathway inhibition (e.g. wortmannin)"
+    do: {pi3k_akt_activity: "-"}
+    expected:
+      glut4_membrane_translocation: "-"
+      peripheral_glucose_uptake: "-"
+      irs1_signaling: "+"
+    loop_critical: [irs1_signaling]
+    # Blocking PI3K/Akt abolishes GLUT4 exocytosis so uptake falls; removing the Akt->IRS-1 negative feedback disinhibits IRS-1, which rises (+) -
+  - id: receptor_loss
+    label: "insulin receptor loss of function"
+    do: {insulin_receptor_activity: "-"}
+    expected:
+      irs1_signaling: "-"
+      pi3k_akt_activity: "-"
+      glut4_membrane_translocation: "-"
+      peripheral_glucose_uptake: "-"
+    loop_critical: []
+    # Loss of receptor kinase collapses the entire forward cascade and glucose disposal; the negative feedback only damps the decline and cannot r
+  # --- β-adrenergic GPCR cardiac signaling (molecular vertical) ---
+  - id: iv_sympathetic_up
+    label: "Increase sympathetic tone (catecholamine surge)"
+    do: {sympathetic_tone: "+"}
+    expected:
+      beta1_adrenergic_activation: "+"
+      gs_adenylyl_cyclase_activity: "+"
+      camp_level: "+"
+      pka_activity: "+"
+      heart_rate: "+"
+      cardiac_output: "+"
+    loop_critical: [camp_level]
+    # Sympathetic NE drives beta1->Gs->AC->cAMP->PKA; net cAMP rise despite the PDE substrate-driven negative-feedback loop requires loop-aware co
+  - id: iv_pde_inhibitor
+    label: "PDE3 inhibitor (e.g. milrinone) \u2014 clamp PDE activity down"
+    do: {pde_activity: "-"}
+    expected:
+      camp_level: "+"
+      pka_activity: "+"
+      heart_rate: "+"
+      cardiac_output: "+"
+    loop_critical: [camp_level, pka_activity]
+    # Blocking cAMP hydrolysis raises cAMP and PKA at the fixed point (positive inotrope class); sign emerges only from solving the cAMP-PDE degra
+  - id: iv_camp_clamp_up
+    label: "Direct cAMP elevation (forskolin-like AC bypass) \u2014 clamp cAMP up"
+    do: {camp_level: "+"}
+    expected:
+      pka_activity: "+"
+      pde_activity: "+"
+      heart_rate: "+"
+      cardiac_output: "+"
+    loop_critical: []
+    # Clamping cAMP up directly activates PKA and (substrate-driven) PDE; the lift onto heart_rate and cardiac_output yields positive chronotropy 
+  # --- EPO receptor → JAK2/STAT5 erythropoiesis (molecular vertical) ---
+  - id: jak2_inhibition
+    label: "JAK2 kinase inhibition (do: jak2_activity down, e.g. ruxolitinib)"
+    do: {jak2_activity: "-"}
+    expected:
+      stat5_activity: "-"
+      bcl_xl_level: "-"
+      erythroid_progenitor_proliferation: "-"
+      red_cell_mass: "-"
+    loop_critical: []
+    # Blocking JAK2 abolishes downstream STAT5 signaling and the anti-apoptotic survival program, contracting erythroid output and red cell mass (
+  - id: socs_loss
+    label: "Loss of SOCS feedback (do: socs_activity down)"
+    do: {socs_activity: "-"}
+    expected:
+      jak2_activity: "+"
+      stat5_activity: "+"
+      erythroid_progenitor_proliferation: "+"
+      red_cell_mass: "+"
+    loop_critical: [jak2_activity, stat5_activity]
+    # Removing the SOCS brake disinhibits JAK2/STAT5, sustaining the proliferative signal; correctly predicting the rise of the looped nodes needs
+  # --- Cardiomyocyte excitation–contraction Ca²⁺ handling (molecular vertical) ---
+  - id: iv_sympathetic_inotropy
+    label: "Beta-adrenergic (sympathetic) stimulation: positive inotropy via I_CaL"
+    do: {sympathetic_tone: "+"}
+    expected:
+      l_type_calcium_current: "+"
+      sr_calcium_release: "+"
+      cytosolic_calcium_transient: "+"
+      troponin_c_calcium_binding: "+"
+      sr_calcium_load: "+"
+      cardiac_output: "+"
+    loop_critical: [sr_calcium_release, cytosolic_calcium_transient, sr_calcium_load]
+    # PKA-augmented I_CaL raises the Ca2+ transient and SR load; net sign across the CICR/SERCA loops (positive refill loop vs negative Ca-depende
+  - id: iv_serca_inhibition
+    label: "SERCA2a inhibition (e.g. thapsigargin / SERCA block): SR depletion"
+    do: {serca_uptake_rate: "-"}
+    expected:
+      sr_calcium_load: "-"
+      sr_calcium_release: "-"
+      cytosolic_calcium_transient: "-"
+      troponin_c_calcium_binding: "-"
+      cardiac_output: "-"
+    loop_critical: [sr_calcium_release, cytosolic_calcium_transient]
+    # Blocking reuptake empties the SR store, lowering load-dependent CICR; the transient and contractility fall once the recycling (positive refi
+  - id: iv_ical_block
+    label: "L-type Ca2+ channel block (dihydropyridine, e.g. nifedipine): negative inotropy"
+    do: {l_type_calcium_current: "-"}
+    expected:
+      sr_calcium_release: "-"
+      cytosolic_calcium_transient: "-"
+      troponin_c_calcium_binding: "-"
+      sr_calcium_load: "-"
+      cardiac_output: "-"
+    loop_critical: [sr_calcium_release, sr_calcium_load]
+    # Removing the CICR trigger reduces release and the transient; less Ca2+ to recycle drops SR load (loop), reinforcing the fall in contractilit
+  # --- Hepcidin transcription (BMP/SMAD + IL-6/STAT3) (molecular vertical) ---
+  - id: inflammation_il6
+    label: "Inflammatory IL-6/STAT3 activation"
+    do: {il6_stat3_signaling: "+"}
+    expected:
+      hepcidin_transcription: "+"
+    loop_critical: []
+    # IL-6 -> JAK1/STAT3 binds the HAMP promoter and directly raises hepcidin transcription (anemia of inflammation).
+  - id: erythroid_drive_hypoxia
+    label: "Renal hypoxia driving erythropoietic suppression of hepcidin"
+    do: {renal_tissue_oxygenation: "-"}
+    expected:
+      erythropoietin: "+"
+      erythroferrone: "+"
+      bmp_smad_signaling: "-"
+      hepcidin_transcription: "-"
+    loop_critical: [bmp_smad_signaling, hepcidin_transcription]
+    # Low renal O2 raises EPO -> ERFE, which antagonizes BMP6/SMAD signaling, so net hepcidin falls (sign flips along the multi-step suppression a
+  - id: bmp6_iron_load
+    label: "BMP6 ligand increase (hepatic iron loading signal)"
+    do: {bmp6_ligand: "+"}
+    expected:
+      bmp_smad_signaling: "+"
+      hepcidin_transcription: "+"
+    loop_critical: []
+    # Iron loading raises BMP6 -> SMAD1/5/8 -> HAMP transcription, the canonical iron-sensing feedforward.
+
+  # =========================================================================
+  # Cell-cell communication modules (cellular scale) — DRAFT gold
+  # =========================================================================
+  # --- Pancreatic islet paracrine network (alpha/beta/delta cells) ---
+  - id: do_beta_up
+    label: "Increase beta-cell insulin secretion (do)"
+    do: {beta_cell_insulin_secretion: "+"}
+    expected:
+      plasma_insulin: "+"
+      plasma_glucagon: "-"
+    loop_critical: [beta_cell_insulin_secretion, alpha_cell_glucagon_secretion]
+    # Clamping beta-cell secretion up lifts plasma_insulin directly and, via the insulin/Zn2+ paracrine brake on alpha cells, lowers glu
+  - id: do_delta_up
+    label: "Increase delta-cell somatostatin secretion (do)"
+    do: {delta_cell_somatostatin_secretion: "+"}
+    expected:
+      plasma_insulin: "-"
+      plasma_glucagon: "-"
+    loop_critical: [delta_cell_somatostatin_secretion, beta_cell_insulin_secretion, alpha_cell_glucagon_secretion]
+    # Somatostatin Gi-inhibits both beta and alpha cells, so both plasma_insulin and plasma_glucagon fall; the sign is determinate despi
+  # --- Juxtaglomerular apparatus (macula densa - granular cell - mesangium) ---
+  - id: high_distal_nacl
+    label: "Raise macula densa NaCl signal (high distal tubular NaCl delivery / loop-diuretic washout)"
+    do: {macula_densa_nacl_signal: "+"}
+    expected:
+      renin: "-"
+      gfr: "-"
+      vascular_smooth_muscle_tone: "+"
+    loop_critical: [macula_densa_nacl_signal, jg_granular_renin_secretion, eg_mesangial_contraction, renin]
+    # High luminal NaCl -> ATP/adenosine -> A1R: tonically suppresses JG renin (-) and drives afferent vasoconstriction lowering GFR (-)
+  - id: ablate_renin_secretion
+    label: "Suppress JG granular-cell renin secretion (e.g. renin-cell-specific block)"
+    do: {jg_granular_renin_secretion: "-"}
+    expected:
+      renin: "-"
+      angiotensin_II: "-"
+    loop_critical: [jg_granular_renin_secretion, renin]
+    # JG granular renin secretion constitutively determines organ-system renin (+); lowering it lowers renin and downstream angiotensin_
+  # --- Bone remodeling unit (osteoblast - osteoclast - osteocyte; RANKL/OPG) ---
+  - id: denosumab_anti_rankl
+    label: "Denosumab (anti-RANKL monoclonal): block osteoblast RANKL signaling"
+    do: {osteoblast_rankl: "-"}
+    expected:
+      plasma_calcium: "-"
+      plasma_phosphate: "-"
+    loop_critical: [osteoblast_rankl, osteoclast_activity, osteoblast_activity]
+    # Neutralizing RANKL collapses osteoclast resorption, so less mineral is liberated into plasma -> plasma_calcium and plasma_phosphat
+  - id: romosozumab_anti_sclerostin
+    label: "Romosozumab (anti-sclerostin): lower osteocyte sclerostin signal"
+    do: {osteocyte_sclerostin: "-"}
+    expected:
+      plasma_calcium: "-"
+      plasma_phosphate: "-"
+    loop_critical: [osteocyte_sclerostin, osteoblast_activity, osteoblast_rankl, osteoclast_activity]
+    # Removing sclerostin de-represses Wnt-driven osteoblast formation and lowers the RANKL:OPG ratio (less RANKL, more OPG via osteobla
+  # --- Endothelium - vascular smooth muscle paracrine (NO / ET-1 / PGI2) ---
+  - id: endothelial_dysfunction_no_loss
+    label: "Endothelial dysfunction: loss of NO production (do endothelial_no_production DOWN)"
+    do: {endothelial_no_production: "-"}
+    expected:
+      vascular_smooth_muscle_tone: "+"
+      total_peripheral_resistance: "+"
+      mean_arterial_pressure: "+"
+    loop_critical: [endothelial_no_production, vascular_smooth_muscle_tone, total_peripheral_resistance]
+    # Less endothelial NO removes a relaxing (-) input to SMC tone, so tone rises, lifting TPR and arterial pressure (hallmark of endoth
+  - id: et1_overproduction
+    label: "ET-1 overproduction (do endothelial_et1_secretion UP)"
+    do: {endothelial_et1_secretion: "+"}
+    expected:
+      vascular_smooth_muscle_tone: "+"
+      total_peripheral_resistance: "+"
+      mean_arterial_pressure: "+"
+    loop_critical: [endothelial_et1_secretion, vascular_smooth_muscle_tone]
+    # More ET-1 acts through EDNRA (+) to raise SMC contractile tone, raising peripheral resistance and arterial pressure (vasoconstrict
+  # --- Innate-adaptive immune paracrine (macrophage - Th cell - dendritic) ---
+  - id: anti_tnf_blockade
+    label: "Anti-TNF therapy (knock down macrophage TNF/pro-inflammatory output)"
+    do: {macrophage_activation: "-"}
+    expected:
+      tnf_alpha: "-"
+      il6: "-"
+    loop_critical: [macrophage_activation, dendritic_cell_activation, th1_cell_activation]
+    # Suppressing macrophage activation lowers its constitutively-lifted TNF-alpha and IL-6 output and, via the DC->Th1->macrophage ampl
+  - id: ifn_gamma_stimulation
+    label: "IFN-gamma stimulation (drive Th1 activation up)"
+    do: {th1_cell_activation: "+"}
+    expected:
+      tnf_alpha: "+"
+      il6: "+"
+    loop_critical: [th1_cell_activation, macrophage_activation, dendritic_cell_activation]
+    # Raising Th1 IFN-gamma classically activates macrophages (+), increasing lifted TNF-alpha and IL-6; the macrophage->DC->Th1 positiv
+  # --- Erythroblastic island (central macrophage - erythroblast) ---
+  - id: macrophage_depletion
+    label: "Deplete/ablate the central island macrophage (do island_macrophage_activity = down)"
+    do: {island_macrophage_activity: "-"}
+    expected:
+      erythroid_progenitor_proliferation: "-"
+      red_cell_mass: "-"
+      hematocrit: "-"
+    loop_critical: [island_macrophage_activity, erythroblast_proliferation, erythroblast_maturation]
+    # Losing the nurse macrophage withdraws SCF/VCAM1 adhesion + iron support, so progenitor proliferation and erythroblast maturation f
+  - id: macrophage_expansion
+    label: "Boost central island macrophage support (do island_macrophage_activity = up)"
+    do: {island_macrophage_activity: "+"}
+    expected:
+      erythroid_progenitor_proliferation: "+"
+      red_cell_mass: "+"
+      hematocrit: "+"
+    loop_critical: [island_macrophage_activity, erythroblast_proliferation, erythroblast_maturation]
+    # Enhanced macrophage SCF/adhesion/iron support drives the positive-feedback island loop, raising erythroblast proliferation and mat

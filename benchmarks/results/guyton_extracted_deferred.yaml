@@ -1,0 +1,215 @@
+_about: 'Guyton & Hall (11th ed.) extracted edges that are forward-sound and sign-verified but HELD OUT of the composed
+  map: each either regressed the calibrated backward-diagnosis benchmark (diagnose top3) or would form a cross-scale
+  meta-graph cycle. Recorded for domain review / selective admission. Same provenance discipline as the integrated
+  set.'
+deferred_edges:
+- source: plasma_calcium
+  target: myocardial_contractility
+  sign: +
+  reason: couples the delicate calcium-PTH / FGF23-klotho SCC into the giant homeostatic SCC, costing X-linked-hypophosphatemic-rickets
+    (fgf23) its unique top-1 recovery — deferred pending SCC refinement (cf. the existing FGF23-klotho abstention
+    note)
+  chapter: '9'
+  quote: The strength of contraction of cardiac muscle depends to a great extent on the concentration of calcium
+    ions in the extracellular fluids.
+- source: plasma_magnesium
+  target: total_peripheral_resistance
+  sign: '-'
+  reason: couples the delicate calcium-PTH / FGF23-klotho SCC into the giant homeostatic SCC, costing X-linked-hypophosphatemic-rickets
+    (fgf23) its unique top-1 recovery — deferred pending SCC refinement (cf. the existing FGF23-klotho abstention
+    note)
+  chapter: '17'
+  quote: An increase in magnesium ion concentration causes powerful vasodilation because magnesium ions inhibit
+    smooth muscle contraction.
+- source: plasma_calcium
+  target: total_peripheral_resistance
+  sign: +
+  reason: couples the delicate calcium-PTH / FGF23-klotho SCC into the giant homeostatic SCC, costing X-linked-hypophosphatemic-rickets
+    (fgf23) its unique top-1 recovery — deferred pending SCC refinement (cf. the existing FGF23-klotho abstention
+    note)
+  chapter: '17'
+  quote: An increase in calcium ion concentration causes vasoconstriction. This results from the general effect
+    of calcium to stimulate smooth muscle contraction.
+- source: pth
+  target: renal_calcium_reabsorption
+  sign: +
+  reason: couples the delicate calcium-PTH / FGF23-klotho SCC into the giant homeostatic SCC, costing X-linked-hypophosphatemic-rickets
+    (fgf23) its unique top-1 recovery — deferred pending SCC refinement (cf. the existing FGF23-klotho abstention
+    note)
+  chapter: '27'
+  quote: Its principal action in the kidneys is to increase tubular reabsorption of calcium, especially in the distal
+    tubules and perhaps also in the loops of Henle.
+- source: pth
+  target: renal_phosphate_reabsorption
+  sign: '-'
+  reason: couples the delicate calcium-PTH / FGF23-klotho SCC into the giant homeostatic SCC, costing X-linked-hypophosphatemic-rickets
+    (fgf23) its unique top-1 recovery — deferred pending SCC refinement (cf. the existing FGF23-klotho abstention
+    note)
+  chapter: '27'
+  quote: Parathyroid hormone also has other actions, including inhibition of phosphate reabsorption by the proximal
+    tubule
+- source: extracellular_fluid_volume
+  target: renal_calcium_reabsorption
+  sign: '-'
+  reason: couples the delicate calcium-PTH / FGF23-klotho SCC into the giant homeostatic SCC, costing X-linked-hypophosphatemic-rickets
+    (fgf23) its unique top-1 recovery — deferred pending SCC refinement (cf. the existing FGF23-klotho abstention
+    note)
+  chapter: '29'
+  quote: in instances of extracellular volume expansion or increased arterial pressure... there is also reduction
+    in calcium reabsorption and, consequently, increased urinary excretion of calcium
+- source: gfr
+  target: plasma_phosphate
+  sign: '-'
+  reason: couples the delicate calcium-PTH / FGF23-klotho SCC into the giant homeostatic SCC, costing X-linked-hypophosphatemic-rickets
+    (fgf23) its unique top-1 recovery — deferred pending SCC refinement (cf. the existing FGF23-klotho abstention
+    note)
+  chapter: '31'
+  quote: the rise in serum phosphate concentration that occurs as a result of decreased GFR
+- source: plasma_calcium
+  target: thrombin
+  sign: +
+  reason: backward-diagnosis regression (held for review; forward-sound but lowers diagnose top3)
+  chapter: '36'
+  quote: calcium ions are required for promotion or acceleration of all the blood-clotting reactions... in the absence
+    of calcium ions, blood clotting by either pathway does not occur.
+- source: plasma_warfarin
+  target: thrombin
+  sign: '-'
+  reason: backward-diagnosis regression (held for review; forward-sound but lowers diagnose top3)
+  chapter: '36'
+  quote: Warfarin causes this effect by competing with vitamin K for reactive sites in the enzymatic processes for
+    formation of prothrombin and the other three clotting factors
+- source: tissue_plasminogen_activator
+  target: plasmin_fibrinolysis
+  sign: +
+  reason: backward-diagnosis regression (held for review; forward-sound but lowers diagnose top3)
+  chapter: '36'
+  quote: tissue plasminogen activator (t-PA) that a few days later... eventually converts plasminogen to plasmin,
+    which in turn removes the remaining unnecessary blood clot.
+- source: leptin
+  target: sympathetic_tone
+  sign: +
+  reason: backward-diagnosis regression (held for review; forward-sound but lowers diagnose top3)
+  chapter: '71'
+  quote: (4) increased sympathetic nerve activity (through neural projections from the hypothalamus to the vasomotor
+    centers)
+- source: leptin
+  target: plasma_insulin
+  sign: '-'
+  reason: backward-diagnosis regression (held for review; forward-sound but lowers diagnose top3)
+  chapter: '71'
+  quote: (5) decreased insulin secretion by the pancreatic beta cells, which decreases energy storage
+- source: leptin
+  target: crh
+  sign: +
+  reason: backward-diagnosis regression (held for review; forward-sound but lowers diagnose top3)
+  chapter: '71'
+  quote: (3) increased production in the hypothalamus of substances, such as corticotropin-releasing hormone, that
+    decrease food intake
+- source: sympathetic_tone
+  target: skin_blood_flow
+  sign: '-'
+  reason: backward-diagnosis regression (held for review; forward-sound but lowers diagnose top3)
+  chapter: '73'
+  quote: Heat conduction to the skin by the blood is controlled by the degree of vasoconstriction of the arterioles
+    and the arteriovenous anastomoses... controlled almost entirely by the sympathetic nervous system
+- source: norepinephrine
+  target: metabolic_heat_production
+  sign: +
+  reason: backward-diagnosis regression (held for review; forward-sound but lowers diagnose top3)
+  chapter: '73'
+  quote: an increase in either sympathetic stimulation or circulating norepinephrine and epinephrine in the blood
+    can cause an immediate increase in the rate of cellular metabolism
+- source: epinephrine
+  target: metabolic_heat_production
+  sign: +
+  reason: backward-diagnosis regression (held for review; forward-sound but lowers diagnose top3)
+  chapter: '73'
+  quote: the ability of norepinephrine and epinephrine to uncouple oxidative phosphorylation, which means that excess
+    foodstuffs are oxidized and thereby release energy in the form of heat
+- source: il1beta
+  target: plasma_prostaglandin_e2
+  sign: +
+  reason: backward-diagnosis regression (held for review; forward-sound but lowers diagnose top3)
+  chapter: '73'
+  quote: interleukin-1 causes fever by first inducing the formation of one of the prostaglandins, mainly prostaglandin
+    E2
+- source: plasma_prostaglandin_e2
+  target: core_temperature
+  sign: +
+  reason: backward-diagnosis regression (held for review; forward-sound but lowers diagnose top3)
+  chapter: '73'
+  quote: prostaglandin E2, or a similar substance, which acts in the hypothalamus to elicit the fever reaction.
+    When prostaglandin formation is blocked by drugs, the fever is either completely abrogated
+- source: free_t3
+  target: ldl_cholesterol
+  sign: '-'
+  reason: backward-diagnosis regression (held for review; forward-sound but lowers diagnose top3)
+  chapter: '76'
+  quote: thyroid hormone induces increased numbers of low-density lipoprotein receptors on the liver cells, leading
+    to rapid removal of low-density lipoproteins from the plasma
+- source: free_t3
+  target: plasma_free_fatty_acids
+  sign: +
+  reason: backward-diagnosis regression (held for review; forward-sound but lowers diagnose top3)
+  chapter: '76'
+  quote: This also increases the free fatty acid concentration in the plasma and greatly accelerates the oxidation
+    of free fatty acids by the cells
+- source: free_t3
+  target: plasma_insulin
+  sign: +
+  reason: backward-diagnosis regression (held for review; forward-sound but lowers diagnose top3)
+  chapter: '76'
+  quote: increased thyroxine secretion increases the rate of glucose metabolism everywhere in the body and therefore
+    causes a corresponding need for increased insulin secretion by the pancreas
+- source: free_t3
+  target: gi_tract_motility
+  sign: +
+  reason: backward-diagnosis regression (held for review; forward-sound but lowers diagnose top3)
+  chapter: '76'
+  quote: thyroid hormone increases both the rates of secretion of the digestive juices and the motility of the gastrointestinal
+    tract
+- source: free_t3
+  target: respiratory_rate
+  sign: +
+  reason: backward-diagnosis regression (held for review; forward-sound but lowers diagnose top3)
+  chapter: '76'
+  quote: The increased rate of metabolism increases the utilization of oxygen and formation of carbon dioxide; these
+    effects activate all the mechanisms that increase the rate and depth of respiration
+- source: free_t3
+  target: myocardial_contractility
+  sign: +
+  reason: backward-diagnosis regression (held for review; forward-sound but lowers diagnose top3)
+  chapter: '76'
+  quote: The increased enzymatic activity caused by increased thyroid hormone production apparently increases the
+    strength of the heart when only a slight excess of thyroid hormone is secreted
+- source: free_t3
+  target: acth
+  sign: +
+  reason: backward-diagnosis regression (held for review; forward-sound but lowers diagnose top3)
+  chapter: '76'
+  quote: Thyroid hormone also increases the rate at which adrenal glucocorticoids are inactivated by the liver.
+    This leads to feedback increase in adrenocorticotropic hormone production by the anterior pituitary
+- source: free_t3
+  target: hypothalamic_appetite_drive
+  sign: +
+  reason: backward-diagnosis regression (held for review; forward-sound but lowers diagnose top3)
+  chapter: '76'
+  quote: thyroid hormone also increases the appetite, and this may counterbalance the change in the metabolic rate
+- source: plasma_calcium
+  target: calcitriol
+  sign: '-'
+  reason: couples the delicate calcium-PTH / FGF23-klotho SCC into the giant homeostatic SCC, costing X-linked-hypophosphatemic-rickets
+    (fgf23) its unique top-1 recovery — deferred pending SCC refinement (cf. the existing FGF23-klotho abstention
+    note)
+  chapter: '79'
+  quote: the calcium ion itself has a slight effect in preventing the conversion of 25-hydroxycholecalciferol to
+    1,25-dihydroxycholecalciferol
+- source: platelet_activation
+  target: vascular_smooth_muscle_tone
+  sign: +
+  reason: downward edge into pure constitutive-micro vascular_smooth_muscle_tone (cross-scale cycle); platelet thromboxane/serotonin
+    vasoconstriction belongs at TPR level — deferred
+  chapter: '36'
+  quote: the platelets are responsible for much of the vasoconstriction by releasing a vasoconstrictor substance,
+    thromboxane A2.

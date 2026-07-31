@@ -1,0 +1,22 @@
+========================================================================
+PhysioMap benchmark — qualitative comparative-statics signs
+========================================================================
+
+### arb_angiotensin_receptor_blocker  —  ARB — block vascular AT1 receptor (molecular drug)
+  OK  intracellular_calcium          expected=-  predicted=-
+  OK  mlc_phosphorylation            expected=-  predicted=-
+  OK  vascular_smooth_muscle_tone    expected=-  predicted=-
+   ?  total_peripheral_resistance    expected=-  predicted=?
+   -> correct=3 wrong=0 ambiguous=1   (loop-critical 0/0)
+
+### calcium_channel_blocker  —  Calcium-channel blocker — lower VSMC cytosolic Ca2+ (molecular drug)
+  OK  mlc_phosphorylation            expected=-  predicted=-
+  OK  vascular_smooth_muscle_tone    expected=-  predicted=-
+   ?  total_peripheral_resistance    expected=-  predicted=?
+   -> correct=2 wrong=0 ambiguous=1   (loop-critical 0/0)
+
+------------------------------------------------------------------------
+TOTAL  scored=5  correct=5  wrong=0  ambiguous=2
+Directional accuracy (correct / scored) = 100.0%   |  ambiguous = 2/7
+Loop-critical net signs correct = 0/0
+------------------------------------------------------------------------

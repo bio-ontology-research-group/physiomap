@@ -1,0 +1,150 @@
+rank	genes	hp_id	dir	name
+1	63	HP:0010880	+	Increased nuchal translucency
+2	47	HP:0009058	+	Increased muscle lipid content
+3	38	HP:0033098	+	Increased urinary non-proteinogenic amino acid level
+4	33	HP:0031381	-	Decreased mitogen-induced T-cell proliferation
+5	33	HP:0011106	-	Hypovolemia
+6	30	HP:0012240	+	Increased intramyocellular lipid droplets
+7	22	HP:0032653	+	Elevated lactate:pyruvate ratio
+8	16	HP:0003466	+	Paradoxical increased cortisol secretion on dexamethasone suppression test
+9	15	HP:0031382	-	Decreased anti-CD3/28-induced T-cell proliferation
+10	14	HP:0011133	+	Increased sensitivity to ionizing radiation
+11	12	HP:0006565	+	Increased hepatocellular lipid droplets
+12	11	HP:0003127	-	Hypocalciuria
+13	11	HP:0011134	-	Low-grade fever
+14	11	HP:0031402	-	Reduced antigen-specific T cell proliferation
+15	7	HP:0003527	+	Hyperprostaglandinuria
+16	7	HP:0003126	-	Low-molecular-weight proteinuria
+17	6	HP:0002731	-	Decreased T cell apoptosis
+18	6	HP:0001986	+	Hypertonic dehydration
+19	6	HP:0002972	-	Reduced delayed hypersensitivity
+20	5	HP:0003206	-	Decreased activity of NADPH oxidase
+21	5	HP:0003213	-	Deficient excision of UV-induced pyrimidine dimers in DNA
+22	5	HP:0033384	+	Elevated urinary collagen degradation products
+23	5	HP:0001722	+	High-output congestive heart failure
+24	5	HP:0004906	+	Hypernatremic dehydration
+25	5	HP:0031274	-	Hypovolemic shock
+26	5	HP:0032999	+	Increased fecal porphyrin
+27	5	HP:0040014	+	Increased mitochondrial number
+28	4	HP:0031861	-	Decreased heart rate variability
+29	4	HP:0003224	+	Increased cellular sensitivity to UV light
+30	3	HP:6000017	+	Elevated circulating sFASL concentration
+31	3	HP:0033031	+	Hyperpyrexia
+32	3	HP:0032208	+	Increased urinary type 1 collagen N-terminal telopeptide level
+33	3	HP:0003456	-	Low urinary cyclic AMP response to PTH administration
+34	3	HP:0009805	-	Low-output congestive heart failure
+35	3	HP:0003570	-	Molybdenum cofactor deficiency
+36	2	HP:0025834	-	Decreased PHA-induced T-cell proliferation
+37	2	HP:0040013	-	Decreased mitochondrial number
+38	2	HP:0012363	-	Decreased sialylation of O-linked protein glycosylation
+39	2	HP:0003514	-	Deficiency or absence of cytochrome b(-245)
+40	2	HP:0032640	+	Elevated circulating CCL18 level
+41	2	HP:0033833	+	Elevated circulating sCD25 concentration
+42	2	HP:0003575	+	Increased intracellular sodium
+43	2	HP:0031883	+	Increased proinsulin:insulin ratio
+44	2	HP:0003461	+	Increased urinary O-linked sialopeptides
+45	2	HP:0034386	-	Reduced left ventricular endsystolic diameter
+46	2	HP:0003534	-	Reduced xanthine dehydrogenase level
+47	1	HP:0031268	-	Decreased CD69 upregulation upon TCR activation
+48	1	HP:6000447	-	Decreased CSF asialotransferrin to transferrin ratio
+49	1	HP:4000057	-	Decreased FasL-mediated apoptosis
+50	1	HP:0410362	-	Decreased O-mannosyl glycans on alpha-dystroglycan
+51	1	HP:6000555	-	Decreased erythrocyte fructose-1,6-bisphosphate aldolase activity
+52	1	HP:0012348	-	Decreased galactosylation of N-linked protein glycosylation
+53	1	HP:0025808	-	Decreased natural killer cell-induced killing of target cells
+54	1	HP:0034006	-	Decreased urinary lysyl-pyridinoline-hydroxylysyl-pyridinoline ratio
+55	1	HP:0040420	-	Decreased urinary neopterin level
+56	1	HP:0034384	+	Elevated circulating insulin:C-peptide ratio
+57	1	HP:0034289	+	Elevated circulating rT3/T3 ratio
+58	1	HP:0032486	+	Elevated fecal osmolality
+59	1	HP:6000517	+	Elevated monolysocardiolipin/cardiolipin ratio
+60	1	HP:6000127	+	Elevated urinary creatine/creatinine ratio
+61	1	HP:0008158	+	Hyperapobetalipoproteinemia
+62	1	HP:0034313	+	Hyperdynamic left ventricular ejection fraction
+63	1	HP:0005976	+	Hyperkalemic metabolic acidosis
+64	1	HP:0007448	+	Hyperkeratosis over edematous areas
+65	1	HP:0007609	-	Hypoproteinemic edema
+66	1	HP:0034471	+	Increased fecal coproporphyrin III:coproporphyrin I ratio
+67	1	HP:0034472	+	Increased fecal harderoporphyrin
+68	1	HP:0031862	+	Increased heart rate variability
+69	1	HP:0032571	+	Increased oocyte death
+70	1	HP:0034449	+	Increased phytanic acid:pristanic acid ratio
+71	1	HP:0003451	+	Increased rate of premature chromosome condensation
+72	1	HP:6000330	+	Increased ratio of deoxypyridinoline to pyridinoline cross-links in urine
+73	1	HP:0010998	+	Increased susceptibility to spontaneous sister chromatid exchange
+74	1	HP:0033355	+	Increased urine deoxypyridinoline level
+75	1	HP:0033627	+	Increased urine harderoporphyrin level
+76	1	HP:6000185	-	Low tetrahydrocortisol (THF) plus 5-alpha-THF/tetrahydrocortisone (THE) ratio
+77	1	HP:0033278	-	Reduced CD95-induced lymphocyte apoptosis
+78	1	HP:0032487	-	Reduced fecal osmolality
+79	0	HP:0410356	+	Abnormal high-mannose N-glycan level
+80	0	HP:0031270	-	Decreased CD25 upregulation upon TCR activation
+81	0	HP:0025835	-	Decreased CD8+ T cell degranulation
+82	0	HP:0025833	-	Decreased PMA/ionomycin-induced T-cell proliferation
+83	0	HP:0025829	-	Decreased Th1 T cell proportion
+84	0	HP:0025832	-	Decreased Th17 T cell proportion
+85	0	HP:6000472	-	Decreased Wiskott-Aldrich syndrome protein concentration in hematopoietic cells
+86	0	HP:0020171	-	Decreased blood drug concentration
+87	0	HP:0034904	-	Decreased circulating thyrotropin releasing hormone concentration
+88	0	HP:0410353	-	Decreased complex N-glycan level
+89	0	HP:0410361	-	Decreased core 1 O-glycan level
+90	0	HP:0033507	-	Decreased esterified to free carnitine ratio
+91	0	HP:0012353	-	Decreased fucosylation of N-linked protein glycosylation
+92	0	HP:0012360	-	Decreased fucosylation of O-linked protein glycosylation
+93	0	HP:0410349	-	Decreased glycosyltransferase O-Fucosylpeptide 3-Beta-N-Acetylglucosaminyltransferase level
+94	0	HP:0033527	-	Decreased gonadotropin-stimulated testosterone-to-androstenedione ratio
+95	0	HP:0410060	-	Decreased level of D-mannose in urine
+96	0	HP:6000718	-	Decreased liver bile salt export pump expression
+97	0	HP:0032193	-	Decreased low-density lipoprotein particle size
+98	0	HP:0012356	-	Decreased mannosylation of N-linked protein glycosylation
+99	0	HP:0041095	-	Decreased middle cerebral artery pulsatility index
+100	0	HP:0410364	-	Decreased monosialylated core 1 O-glycan level
+101	0	HP:0025807	-	Decreased natural killer cell degranulation
+102	0	HP:0025846	-	Decreased natural killer cell perforin expression
+103	0	HP:0034450	-	Decreased phytanic acid:pristanic acid ratio
+104	0	HP:0410355	-	Decreased sialylated N-glycan level
+105	0	HP:0012350	-	Decreased sialylation of N-linked protein glycosylation
+106	0	HP:6000515	+	Elevated 18-hydroxycorticosterone to aldosterone ratio
+107	0	HP:6000813	+	Elevated circulating aspartate aminotransferase to alanine aminotransferase ratio
+108	0	HP:0034191	+	Elevated fetal middle cerebral artery peak systolic velocity
+109	0	HP:6001295	+	Elevated stool reducing substances
+110	0	HP:0034296	+	Elevated urine 3,5,6-trichloro-2-pyridinol level
+111	0	HP:6000888	+	Elevated urine bismuth level
+112	0	HP:6001291	+	Elevated vitamin D metabolite ratio
+113	0	HP:0003142	+	Excessive purine production
+114	0	HP:0033359	+	Hyperosthenuria
+115	0	HP:0030887	+	Increased T cell apoptosis
+116	0	HP:0025828	+	Increased Th1 T cell proportion
+117	0	HP:0025831	+	Increased Th17 T cell proportion
+118	0	HP:0020170	+	Increased blood drug concentration
+119	0	HP:0410352	+	Increased complex N-glycan level
+120	0	HP:0410360	+	Increased core 1 O-glycan level
+121	0	HP:0410365	+	Increased disialylated core 1 O-glycan level
+122	0	HP:0033506	+	Increased esterified to free carnitine ratio
+123	0	HP:0034473	+	Increased fecal heptacarboxylporphyrin
+124	0	HP:0034475	+	Increased fecal isocoproporphyrin
+125	0	HP:0034474	+	Increased fecal pentacarboxylporphyrin
+126	0	HP:0012354	+	Increased fucosylation of N-linked protein glycosylation
+127	0	HP:0012361	+	Increased fucosylation of O-linked protein glycosylation
+128	0	HP:0410368	+	Increased globoside Gb3 level
+129	0	HP:0410366	+	Increased globoside Gb4 level
+130	0	HP:0410357	+	Increased high-mannose N-glycan level
+131	0	HP:0012357	+	Increased mannosylation of N-linked protein glycosylation
+132	0	HP:0410363	+	Increased monosialylated core 1 O-glycan level
+133	0	HP:0025464	+	Increased reactive oxygen species production
+134	0	HP:0410354	+	Increased sialylated N-glycan level
+135	0	HP:0012351	+	Increased sialylation of N-linked protein glycosylation
+136	0	HP:0032211	+	Increased urinary epithelial cell count
+137	0	HP:0410350	+	Increased urinary fucosylated oligosaccharide
+138	0	HP:0410347	+	Increased urinary high-mannose-type oligosaccharide
+139	0	HP:0032068	+	Increased urinary mucus
+140	0	HP:0410348	+	Increased urinary multiantennary sialylated oligosaccharide
+141	0	HP:0410345	+	Increased urinary polyhexose
+142	0	HP:0032213	+	Increased urinary renal tubular epithelial cell count
+143	0	HP:0032212	+	Increased urinary squamous epithelial cell count
+144	0	HP:0032214	+	Increased urinary transitional epithelial cell count
+145	0	HP:0020134	+	Increased urine neutrophil count
+146	0	HP:0031483	-	Reduced contraction of the left ventricular apex
+147	0	HP:0020173	-	Reduced drug efficacy
+148	0	HP:0034528	-	Reduced fibroblast type III procollagen synthesis
+149	0	HP:0003513	-	Reduced ratio of renal calcium clearance to creatinine clearance

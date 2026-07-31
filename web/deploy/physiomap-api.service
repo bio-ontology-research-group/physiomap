@@ -1,0 +1,38 @@
+[Unit]
+# PhysioMap dynamic-knockout HTTP service (web/api.py). Loads the composed map once and answers
+# POST /knockout in ~0.1 s so the static viewer can run synthetic knockouts live.
+Description=PhysioMap knockout API
+After=network.target
+
+[Service]
+Type=simple
+# Where the repo is checked out on the server (must contain physiomap_core/, web/, benchmarks/,
+# and ontology/{partof.yaml,verified_ids.yaml} for the curation constitution + ontology gates).
+WorkingDirectory=/opt/physiomap
+# Use the project venv if present, else system python3. Deps: pydantic v2, pyyaml, networkx, numpy.
+ExecStart=/opt/physiomap/.venv/bin/python -m web.api --host 127.0.0.1 --port 8081
+# Fallback if you don't use a venv (comment the line above, uncomment this):
+# ExecStart=/usr/bin/python3 -m web.api --host 127.0.0.1 --port 8081
+Environment=PYTHONUNBUFFERED=1
+Environment=PHYSIOMAP_CURATION_DIR=/var/lib/physiomap/curation
+# Curation tokens live OUTSIDE git in this env file (chmod 600). Without it, submit/review are
+# disabled (fail-closed) — the editor still validates, but nothing can be written.
+#   PHYSIOMAP_EDIT_TOKEN=<shared curator token>
+#   PHYSIOMAP_ADMIN_TOKEN=<maintainer token>
+EnvironmentFile=-/etc/physiomap-api.env
+Restart=always
+RestartSec=3
+# Run unprivileged; bind to localhost only (nginx terminates TLS and proxies).
+User=www-data
+Group=www-data
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ReadOnlyPaths=/opt/physiomap
+# the curation store is the ONLY writable path
+StateDirectory=physiomap
+ReadWritePaths=/var/lib/physiomap
+
+[Install]
+WantedBy=multi-user.target

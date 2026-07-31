@@ -1,0 +1,355 @@
+# =============================================================================
+# Guyton cardiovascular core — PhysioMap fragment      *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Hand-encoded from the vendored Guyton source models (see SOURCES.md). Every edge
+# sign is the sign of the partial derivative of the target's defining equation w.r.t.
+# the source variable in the cited model file. ROBERT: please correct signs/edges.
+#
+# Scope (this step): single scale (ORGAN / ORGAN_SYSTEM), NO cross-scale constitutive
+# edges yet — multi-scale comes next. All within-scale causal edges; cycles included.
+#
+# The three required negative-feedback loops are present and share one big SCC:
+#   1. Pressure natriuresis : MAP -> renal_perfusion_pressure -> sodium_excretion
+#                             -> ECF volume -> blood_volume -> venous_return
+#                             -> cardiac_output -> MAP        (net negative)
+#   2. Baroreflex           : MAP -> sympathetic_tone -> TPR/CO -> MAP   (net negative)
+#   3. RAAS suppression     : renal_perfusion_pressure -> renin -> angiotensin_II
+#                             -> TPR -> MAP -> renal_perfusion_pressure  (net negative)
+# =============================================================================
+
+name: guyton_cv_core
+description: >-
+  DRAFT cardiovascular core of the Guyton circulation model as a PhysioMap signed
+  cyclic causal graph. Derived from BioModels Guyton1972 control modules + Physiome
+  circulation/kidney integrator modules (see SOURCES.md). Single-scale (Phase 1).
+
+nodes:
+  # --- RAAS hormones --------------------------------------------------------
+  - id: renin
+    label: plasma renin activity
+    scale: organ_system
+    entity_iri: CHEBI:50266
+    quality_iri: PATO:0001414          # catalytic / functional activity
+  - id: angiotensin_II
+    label: plasma angiotensin II concentration
+    scale: organ_system
+    entity_iri: CHEBI:2719
+    quality_iri: PATO:0000033          # concentration
+  - id: aldosterone
+    label: plasma aldosterone concentration
+    scale: organ_system
+    entity_iri: CHEBI:27584
+    quality_iri: PATO:0000033
+  - id: adh
+    label: antidiuretic hormone (vasopressin) concentration
+    scale: organ_system
+    entity_iri: PR:000004523  # vasopressin-neurophysin 2-copeptin (ADH/AVP precursor)
+    quality_iri: PATO:0000033
+  - id: anp
+    label: atrial natriuretic peptide concentration
+    scale: organ_system
+    entity_iri: PR:P01160             # natriuretic peptides A (human), NPPA precursor/prohormone
+    quality_iri: PATO:0000033
+
+  # --- cellular producers (cross-scale grounding of secreted hormones) ------
+  - id: zona_glomerulosa_cell_aldosterone_secretion
+    label: adrenal zona glomerulosa cell aldosterone secretion rate
+    scale: cellular
+    entity_iri: GO:0035932             # aldosterone secretion
+    quality_iri: PATO:0000161
+    bearer_entity_iri: CL:0002099  # type I cell of adrenal cortex
+  - id: magnocellular_neuron_adh_secretion
+    label: hypothalamic magnocellular neurosecretory neuron vasopressin (ADH) secretion rate
+    scale: cellular
+    entity_iri: GO:0030103             # vasopressin secretion
+    quality_iri: PATO:0000161
+    bearer_entity_iri: CL:0011003  # magnocellular neurosecretory cell
+  - id: atrial_cardiomyocyte_anp_secretion
+    label: atrial cardiomyocyte atrial natriuretic peptide secretion rate
+    scale: cellular
+    entity_iri: CL:0002129             # regular atrial cardiac myocyte
+    quality_iri: PATO:0000161          # secretion rate
+
+  # --- autonomic control ----------------------------------------------------
+  - id: sympathetic_tone
+    label: baroreflex sympathetic outflow
+    scale: organ_system
+    entity_iri: UBERON:0000013  # sympathetic nervous system
+    quality_iri: PATO:0001414
+
+  # --- renal handling -------------------------------------------------------
+  - id: renal_perfusion_pressure
+    label: renal perfusion pressure
+    scale: organ
+    entity_iri: UBERON:0002113         # kidney
+    quality_iri: PATO:0001025          # pressure (renal perfusion / hydrostatic)
+    quality_kind: intensive
+  - id: gfr
+    label: glomerular filtration rate
+    scale: organ
+    entity_iri: GO:0003094             # glomerular filtration (occurrent bears the rate)
+    quality_iri: PATO:0000161          # rate
+    quality_kind: rate
+    bearer_entity_iri: UBERON:0002113  # kidney (anatomical bearer)
+  - id: sodium_water_reabsorption
+    label: renal tubular sodium and water reabsorption
+    scale: organ
+    entity_iri: GO:0070293             # renal absorption (specialised to sodium+water; label retains the specialization, no equivalence asserted)
+    quality_iri: PATO:0000161          # rate (corrected from PATO:0001547 "quality of a gas")
+    quality_kind: rate
+  - id: sodium_excretion
+    label: urinary sodium and water excretion (pressure natriuresis)
+    scale: organ
+    entity_iri: GO:0003095  # pressure natriuresis
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0002113  # kidney
+
+  # --- fluid volumes --------------------------------------------------------
+  - id: extracellular_fluid_volume
+    label: extracellular fluid volume
+    scale: organ_system
+    quality_iri: PATO:0000918          # volume
+  - id: blood_volume
+    label: blood volume
+    scale: organ_system
+    entity_iri: UBERON:0000178
+    quality_iri: PATO:0000918
+
+  # --- hemodynamics ---------------------------------------------------------
+  - id: venous_return
+    label: venous return / mean systemic filling pressure
+    scale: organ_system
+    quality_iri: PATO:0000161
+  - id: heart_rate
+    label: heart rate
+    scale: organ
+    entity_iri: GO:0060047  # heart contraction
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0000948  # heart
+  - id: cardiac_output
+    label: cardiac output
+    scale: organ_system
+    entity_iri: GO:0008015  # blood circulation
+    quality_iri: PATO:0000161
+    bearer_entity_iri: UBERON:0000948  # heart
+  - id: total_peripheral_resistance
+    label: total peripheral resistance
+    scale: organ_system
+    entity_iri: UBERON:0002049         # vasculature
+    quality_iri: PATO:0001470
+  - id: mean_arterial_pressure
+    label: mean arterial pressure
+    scale: organ_system
+    entity_iri: UBERON:0004571         # systemic arterial system (pressure inheres in the arterial system, not the whole circulatory system)
+    quality_iri: PATO:0001595          # blood pressure
+
+causal_edges:
+  # --- RAAS cascade ---------------------------------------------------------
+  - source: renal_perfusion_pressure
+    target: renin
+    sign: "-"
+    causal_evidence: mechanistic_model
+    mechanism: renal baroreceptor + macula densa (tubuloglomerular) feedback
+    evidence: "Guyton1972_Angiotensin MODEL0911342562 (MDFLW -> ANGSCR, decreasing): higher renal/MD flow suppresses renin secretion | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-098 (17.11: Organs with Secondary Endocrine Functions): 'A decline in blood flow to the kidneys stimulates them to release the enzyme renin, triggering the renin-angiotensin-aldosterone (RAAS) system'; OpenStax Anatomy & Physiology 2e §anp-114 (20.5: Homeostatic Regulation of the Vascular System): 'Specialized cells in the kidneys, called juxtaglomerular (JG) cells, respond to decreased blood pressure by secreting renin into the blood.'"
+  - source: sympathetic_tone
+    target: renin
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: beta-adrenergic stimulation of juxtaglomerular renin release
+    evidence: "Guyton1972_Autonomics MODEL0911270005 (AU -> renin); classic sympathetic renin stimulation | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-151 (25.8: Regulation of Renal Blood Flow): 'If blood pressure falls, the sympathetic nerves will also stimulate the release of renin. Additional renin increases production of the powerful vasoconstrictor angiotensin II.'; OpenStax Biology 2e §bio-41.5 (41.5: Hormonal Control of Osmoregulatory Functions): epinephrine and norepinephrine 'go one step further and trigger the renin-angiotensin-aldosterone system' — catecholamines stimulate juxtaglomerular renin release."
+  - source: renin
+    target: angiotensin_II
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: renin cleaves angiotensinogen -> AngI -> (ACE) AngII
+    evidence: "Guyton1972_Angiotensin MODEL0911342562 (REK/ANX1 -> ANC) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-094 (17.7: The Adrenal Glands): 'Renin then catalyzes the conversion of... angiotensinogen... to... angiotensin I. Angiotensin I is converted in the lungs to angiotensin II by angiotensin-converting enzyme (ACE).'; OpenStax Anatomy & Physiology 2e §anp-148 (25.5: Microscopic Anatomy of the Kidney): 'Active renin... cleaves several amino acids from angiotensinogen to produce angiotensin I. Angiotensin I is not biologically active until converted to angiotensin II by angiotensin-converting enzyme (ACE) from the lungs.'; OpenStax Anatomy & Physiology 2e §anp-152 (25.9: Endocrine Regulation of Kidney Function): 'Renin is an enzyme...It enzymatically converts angiotensinogen...into angiotensin I. ACE...enzymatically converts inactive angiotensin I into active angiotensin II.'; OpenStax Anatomy & Physiology 2e §anp-154 (25.11: The Urinary System and Homeostasis): 'Renin converts angiotensinogen into angiotensin I, and ACE produced in the lung converts angiotensin I into biologically active angiotensin II' (lines 45-46); OpenStax Biology 2e §bio-41.5 (41.5: Hormonal Control of Osmoregulatory Functions): 'Renin acts on angiotensinogen, which is made in the liver and converts it to angiotensin I. Angiotensin converting enzyme (ACE) converts angiotensin I to angiotensin II.'"
+  - source: angiotensin_II
+    target: aldosterone
+    sign: "+"
+    mechanism: AngII stimulates adrenal aldosterone synthesis
+    evidence: "Guyton1972_Aldosterone MODEL0911376350 (ANM -> AMC) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-094 (17.7: The Adrenal Glands): 'Signaling the adrenal cortex to secrete aldosterone, the effects of which further contribute to fluid retention, restoring blood pressure and blood volume.'; OpenStax Anatomy & Physiology 2e §anp-114 (20.5: Homeostatic Regulation of the Vascular System): 'It also stimulates the release of ADH and aldosterone, a hormone produced by the adrenal cortex.'; OpenStax Anatomy & Physiology 2e §anp-148 (25.5: Microscopic Anatomy of the Kidney): 'Angiotensin II also stimulates the release of the steroid hormone aldosterone from the adrenal cortex.'; OpenStax Anatomy & Physiology 2e §anp-150 (25.7: Tubular Reabsorption): 'Aldosterone is secreted by the adrenal cortex in response to angiotensin II stimulation.'; OpenStax Anatomy & Physiology 2e §anp-152 (25.9: Endocrine Regulation of Kidney Function): 'Aldosterone...is released from the adrenal cortex in response to angiotensin II.'; OpenStax Anatomy & Physiology 2e §anp-153 (Regulation of Fluid Volume and Composition): 'rise in pressure is sustained by the aldosterone effects initiated by angiotensin II; this includes an increase in Na+ retention and water volume'; OpenStax Anatomy & Physiology 2e §anp-154 (25.11: The Urinary System and Homeostasis): 'angiotensin II also stimulates the adrenal cortex to release the steroid hormone aldosterone' (lines 47-48); OpenStax Anatomy & Physiology 2e §anp-156 (26.3: Water Balance): 'angiotensin II... stimulates the release of the hormone aldosterone from the adrenal glands'; OpenStax Anatomy & Physiology 2e §anp-157 (26.4: Electrolyte Balance): 'Angiotensin II also signals an increase in the release of aldosterone from the adrenal cortex.'; OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): 'Angiotensin II functions as a hormone and then causes the release of the hormone aldosterone by the adrenal cortex, resulting in increased Na+ reabsorption, water retention, and an increase in blood pressure.'; OpenStax Biology 2e §bio-41.5 (41.5: Hormonal Control of Osmoregulatory Functions): 'It [angiotensin II] also triggers the release of the mineralocorticoid aldosterone from the adrenal cortex, which in turn stimulates the renal tubules to reabsorb more sodium.'"
+  - source: angiotensin_II
+    target: adh
+    sign: "+"
+    mechanism: AngII stimulates ADH (vasopressin) release
+    evidence: "Guyton1972_AntidiureticHormone MODEL0911309080 | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-114 (20.5: Homeostatic Regulation of the Vascular System): 'It also stimulates the release of ADH and aldosterone...'; OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): 'Angiotensin II in addition to being a potent vasoconstrictor also causes an increase in ADH and increased thirst, both of which help to raise blood pressure.'; OpenStax Biology 2e §bio-41.5 (41.5: Hormonal Control of Osmoregulatory Functions): 'Angiotensin II also triggers the release of anti-diuretic hormone (ADH) from the hypothalamus, leading to water retention in the kidneys.'"
+  - source: angiotensin_II
+    target: total_peripheral_resistance
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: AngII-induced arteriolar vasoconstriction
+    evidence: "circulation.cellml non_renal_systemic_arterial_resistance_multiplier (ANU/ARM); Guyton circulatory dynamics | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-094 (17.7: The Adrenal Glands): 'Initiating vasoconstriction of the arterioles, decreasing blood flow.'; OpenStax Anatomy & Physiology 2e §anp-114 (20.5: Homeostatic Regulation of the Vascular System): 'Angiotensin II is a powerful vasoconstrictor, greatly increasing blood pressure.'; OpenStax Anatomy & Physiology 2e §anp-148 (25.5: Microscopic Anatomy of the Kidney): 'Angiotensin II is a systemic vasoconstrictor that helps to regulate blood pressure by increasing it.'; OpenStax Anatomy & Physiology 2e §anp-152 (25.9: Endocrine Regulation of Kidney Function): 'Angiotensin II is a potent vasoconstrictor that plays an immediate role in the regulation of blood pressure. It acts systemically to cause vasoconstriction.'; OpenStax Anatomy & Physiology 2e §anp-153 (Regulation of Fluid Volume and Composition): 'renin activity leads to an almost immediate rise in blood pressure as activated angiotensin II produces vasoconstriction'; OpenStax Anatomy & Physiology 2e §anp-154 (25.11: The Urinary System and Homeostasis): 'The immediate and short-term effect of angiotensin II is to raise blood pressure by causing widespread vasoconstriction' (lines 46-47); OpenStax Anatomy & Physiology 2e §anp-157 (26.4: Electrolyte Balance): 'Angiotensin II causes vasoconstriction and an increase in systemic blood pressure.'; OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): 'Angiotensin II in addition to being a potent vasoconstrictor also causes an increase in ADH and increased thirst.'; OpenStax Biology 2e §bio-41.5 (41.5: Hormonal Control of Osmoregulatory Functions): 'Angiotensin II raises blood pressure by constricting blood vessels.'"
+  - source: angiotensin_II
+    target: sodium_water_reabsorption
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: AngII increases proximal/distal tubular Na reabsorption
+    evidence: "kidney.cellml angiotensin_induced_Na_reabsorption_into_distal_tubules | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-094 (17.7: The Adrenal Glands): 'Stimulating kidney tubules to reabsorb NaCl and water, increasing blood volume.'; OpenStax Anatomy & Physiology 2e §anp-152 (25.9: Endocrine Regulation of Kidney Function): 'It [AngII] reduces both GFR and renal blood flow, thereby limiting fluid loss and preserving blood volume'; sodium retention via aldosterone stimulation.; OpenStax Biology 2e §bio-41.5 (41.5: Hormonal Control of Osmoregulatory Functions): aldosterone 'stimulates the renal tubules to reabsorb more sodium' triggered by Ang II; Ang II also directly decreases GFR reducing filtered load."
+
+  # --- aldosterone / ADH on tubule -----------------------------------------
+  - source: aldosterone
+    target: sodium_water_reabsorption
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: aldosterone-driven distal Na reabsorption (ENaC)
+    evidence: "Guyton1972_Electrolytes MODEL0912160001 (AMK -> Na handling); kidney.cellml Na reabsorption | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-090 (17.3: Hormones): table entry 'Aldosterone: Increases blood Na+ levels'; OpenStax Anatomy & Physiology 2e §anp-094 (17.7: The Adrenal Glands): 'aldosterone increases the excretion of K+ and the retention of Na+, which in turn increases blood volume and blood pressure.'; OpenStax Anatomy & Physiology 2e §anp-114 (20.5: Homeostatic Regulation of the Vascular System): 'Aldosterone increases the reabsorption of sodium into the blood by the kidneys. Since water follows sodium, this increases the reabsorption of water.'; OpenStax Anatomy & Physiology 2e §anp-116 (20.7: Development of Blood Vessels and Fetal Circulation): Review question 17 confirms 'aldosterone prompts the kidneys to reabsorb sodium' as the correct answer in the renin-angiotensin-aldosterone mechanism.; OpenStax Anatomy & Physiology 2e §anp-147 (25.4: Gross Anatomy of the Kidney): 'The adrenal cortex directly influences renal function through the production of the hormone aldosterone to stimulate sodium reabsorption.'; OpenStax Anatomy & Physiology 2e §anp-148 (25.5: Microscopic Anatomy of the Kidney): 'Aldosterone stimulates Na+ reabsorption by the kidney, which also results in water retention and increased blood pressure.'; OpenStax Anatomy & Physiology 2e §anp-150 (25.7: Tubular Reabsorption): aldosterone stimulates principal cells to manufacture luminal Na+ channels and Na+/K+ ATPase pumps in DCT/collecting duct, increasing Na+ reabsorption; OpenStax Anatomy & Physiology 2e §anp-152 (25.9: Endocrine Regulation of Kidney Function): 'It [aldosterone] promotes Na+ reabsorption by the nephron, promoting the retention of water.'; OpenStax Anatomy & Physiology 2e §anp-153 (Regulation of Fluid Volume and Composition): 'Aldosterone stimulates the uptake of Na+ on the apical cell membrane of cells in the DCT and collecting ducts'; OpenStax Anatomy & Physiology 2e §anp-154 (25.11: The Urinary System and Homeostasis): aldosterone 'results in renal reabsorption of Na+ and its associated osmotic recovery of water. The reabsorption of Na+ helps to raise and maintain blood pressure over a longer term' (lines 49-50); 'Aldosterone stimulates Na+ recovery by the collecting duct' (line 345); OpenStax Anatomy & Physiology 2e §anp-156 (26.3: Water Balance): 'Aldosterone increases the reabsorption of sodium in the distal tubules of the nephrons in the kidneys, and water follows this reabsorbed sodium back into the blood.'; OpenStax Anatomy & Physiology 2e §anp-157 (26.4: Electrolyte Balance): 'aldosterone increases the...reabsorption of sodium in the distal tubule...Aldosterone causes an increase in blood sodium levels and blood volume.'; OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): 'aldosterone maintains proper water balance by enhancing Na+ reabsorption'; 'The hormone aldosterone stimulates the reabsorption of water and sodium ions in the kidney.'; OpenStax Biology 2e §bio-41.5 (41.5: Hormonal Control of Osmoregulatory Functions): 'Almost all of the sodium in the blood is reclaimed by the renal tubules under the influence of aldosterone. Because sodium is always reabsorbed by active transport and water follows sodium to maintain osmotic balance, aldosterone manages not only sodium levels but also the water levels in body fluids.'"
+  - source: adh
+    target: sodium_water_reabsorption
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: ADH increases collecting-duct water reabsorption
+    evidence: "Guyton1972_AntidiureticHormone MODEL0911309080 -> renal water handling | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-090 (17.3: Hormones): 'ADH... Stimulates water reabsorption by kidneys'; also 'The hormone causes the kidneys to reabsorb more water and reduce the volume of urine produced'; OpenStax Anatomy & Physiology 2e §anp-091 (17.4: The Pituitary Gland and Hypothalamus): 'Its effect is to increase epithelial permeability to water, allowing increased water reabsorption.'; OpenStax Anatomy & Physiology 2e §anp-114 (20.5: Homeostatic Regulation of the Vascular System): 'ADH signals its target cells in the kidneys to reabsorb more water, thus preventing the loss of additional fluid in the urine.'; OpenStax Anatomy & Physiology 2e §anp-148 (25.5: Microscopic Anatomy of the Kidney): 'When stimulated by ADH, these [collecting duct] cells will insert aquaporin channel proteins into their membranes... allowing water to pass from the duct lumen through the cells and into the interstitial spaces to be recovered by the vasa recta.'; OpenStax Anatomy & Physiology 2e §anp-150 (25.7: Tubular Reabsorption): ADH (vasopressin) stimulates insertion of aquaporin channels into apical membrane of principal cells in collecting ducts, increasing water reabsorption; OpenStax Anatomy & Physiology 2e §anp-152 (25.9: Endocrine Regulation of Kidney Function): 'ADH...promotes the recovery of water, decreases urine volume, and maintains plasma osmolarity and blood pressure...by stimulating the movement of aquaporin proteins into the apical cell membrane of principal cells of the collecting ducts.'; OpenStax Anatomy & Physiology 2e §anp-153 (Regulation of Fluid Volume and Composition): 'ADH also causes activation of aquaporin channels in the collecting ducts to affect the recovery of water to help restore vascular volume'; OpenStax Anatomy & Physiology 2e §anp-154 (25.11: The Urinary System and Homeostasis): 'ADH stimulation of aquaporin channels allows for regulation of water recovery in the collecting ducts' (line 38); 'ADH promotes water recovery by the collecting ducts by stimulating the insertion of aquaporin water channels into cell membranes' (lines 358-359); OpenStax Anatomy & Physiology 2e §anp-156 (26.3: Water Balance): 'ADH also causes the epithelial cells that line the renal collecting tubules to move water channel proteins, called aquaporins... large increase in water passage from the urine through the walls of the collecting tubules, leading to more reabsorption of water into the bloodstream.'; OpenStax Biology 2e §bio-37.3 (37.3: Regulation of Body Processes): 'ADH changes the kidneys to become more permeable to water by temporarily inserting water channels, aquaporins, into the kidney tubules. Water moves out of the kidney tubules through the aquaporins, reducing urine volume.'; OpenStax Biology 2e §bio-41.5 (41.5: Hormonal Control of Osmoregulatory Functions): 'It [ADH] acts by inserting aquaporins in the collecting ducts and promotes reabsorption of water.'"
+  - source: mean_arterial_pressure
+    target: adh
+    sign: "-"
+    causal_evidence: mechanistic_model
+    mechanism: arterial/atrial baroreflex suppression of ADH at high pressure
+    evidence: "Guyton1972_AntidiureticHormone MODEL0911309080 (PA1 input, decreasing) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-153 (Regulation of Fluid Volume and Composition): 'When blood volume drops 5–10 percent, causing a decrease in blood pressure, there is a rapid and significant increase in ADH release from the posterior pituitary'"
+
+  # --- ANP negative-feedback arm -------------------------------------------
+  - source: blood_volume
+    target: anp
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: atrial stretch (raised atrial pressure) releases ANP
+    evidence: "Guyton1972_AtrialNatriureticPeptide MODEL0911272039 (PLA/PRA -> ANPC) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-098 (17.11: Organs with Secondary Endocrine Functions): 'When the body experiences an increase in blood volume or pressure, the cells of the heart's atrial wall stretch … produce and secrete … atrial natriuretic peptide (ANP)'; OpenStax Anatomy & Physiology 2e §anp-114 (20.5: Homeostatic Regulation of the Vascular System): 'Secreted by cells in the atria of the heart, atrial natriuretic hormone (ANH) is secreted when blood volume is high enough to cause extreme stretching of the cardiac cells.'; OpenStax Anatomy & Physiology 2e §anp-153 (Regulation of Fluid Volume and Composition): 'Cardiomyocytes of the atria also respond to greater stretch (as blood pressure rises) by secreting ANH'; OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): 'These cells release the hormone atrial natriuretic peptide (ANP) in response to increased blood volume. High blood volume causes the cells to be stretched, resulting in hormone release.'; OpenStax Biology 2e §bio-41.5 (41.5: Hormonal Control of Osmoregulatory Functions): 'It [ANP] is released by cells in the atrium of the heart in response to high blood pressure' (atrial stretch from elevated blood volume/pressure triggers ANP release)."
+  - source: anp
+    target: sodium_excretion
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: ANP promotes natriuresis (raises GFR, inhibits Na reabsorption)
+    evidence: "Guyton1972_AtrialNatriureticPeptide MODEL0911272039; kidney natriuretic effect | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-098 (17.11: Organs with Secondary Endocrine Functions): 'ANP signals the kidneys to reduce sodium reabsorption, thereby decreasing the amount of water reabsorbed … reducing blood volume'; OpenStax Anatomy & Physiology 2e §anp-152 (25.9: Endocrine Regulation of Kidney Function): 'Natriuretic hormones are peptides that stimulate the kidneys to excrete sodium...natriuretic peptides inhibit both Na+ and water recovery.'; OpenStax Anatomy & Physiology 2e §anp-153 (Regulation of Fluid Volume and Composition): 'More Na+ is lost, and as water follows, total blood volume and pressure decline'; OpenStax Anatomy & Physiology 2e §anp-154 (25.11: The Urinary System and Homeostasis): 'ANH is released by the cardiomyocytes when blood pressure increases, causing Na+ and water loss' (lines 369); OpenStax Biology 2e §bio-41.5 (41.5: Hormonal Control of Osmoregulatory Functions): 'ANP prevents sodium reabsorption by the renal tubules, decreasing water reabsorption (thus acting as a diuretic) and lowering blood pressure.'"
+
+  # --- fluid balance --------------------------------------------------------
+  - source: sodium_water_reabsorption
+    target: blood_volume
+    sign: "+"
+    causal_evidence: curated_mechanistic
+    mechanism: reabsorbed Na/water enter peritubular capillary blood, expanding blood volume directly (P. Schofield 2026-07-22; ECF follows by equilibration)
+    evidence: "Guyton1972_Electrolytes MODEL0912160001 (NAE/VTW); body fluid balance | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-156 (26.3: Water Balance): 'water follows this reabsorbed sodium back into the blood' — renal reabsorption expands ECF/blood volume."
+  - source: sodium_excretion
+    target: extracellular_fluid_volume
+    sign: "-"
+    causal_evidence: mechanistic_model
+    mechanism: urinary Na/water loss contracts ECF
+    evidence: "kidney.cellml urinary_excretion (actual_Na_excretion_rate, actual_urine_volume); Electrolytes balance"
+  - source: extracellular_fluid_volume
+    target: blood_volume
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: ECF expansion raises plasma/blood volume (capillary equilibrium)
+    evidence: "Guyton1972_CapillaryDynamics MODEL0912160000 (VEC -> VP); circulation total_blood_volume"
+
+  # --- hemodynamics (circulatory dynamics integrator) ----------------------
+  - source: blood_volume
+    target: venous_return
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: raised blood volume raises mean systemic filling pressure -> venous return
+    evidence: "circulation.cellml venous_blood_volume/venous_average_pressure -> rate_of_blood_flow_from_veins_to_right_atrium (QVO) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-110 (19.6: Development of the Heart) — chapter review 19.4: 'Venous return is determined by activity of the skeletal muscles, blood volume, and changes in peripheral circulation.' (lines 413–414).; OpenStax Anatomy & Physiology 2e §anp-112 (20.3: Blood Flow, Blood Pressure, and Resistance): 'As blood volume decreases, pressure and flow decrease. As blood volume increases, pressure and flow increase.'; OpenStax Anatomy & Physiology 2e §anp-156 (26.3: Water Balance): 'Decreased blood volume resulting from water loss... baroreceptors detect a decrease in blood pressure that results from decreased blood volume.'"
+  - source: venous_return
+    target: cardiac_output
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: Frank-Starling — venous return / atrial filling sets stroke volume
+    evidence: "circulation.cellml Guyton curves: right_atrial_pressure -> right/left_ventricular_output (QLO/QAO) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-112 (20.3: Blood Flow, Blood Pressure, and Resistance): 'venoconstriction increases the return of blood to the heart... increases the preload or stretch of the cardiac muscle and increases contraction.'; OpenStax Anatomy & Physiology 2e §anp-116 (20.7: Development of Blood Vessels and Fetal Circulation): Chapter review §20.2 states venoconstriction and the skeletal muscle pump promote venous return to the heart, implying more venous return drives cardiac output.; OpenStax Biology 2e §bio-40.3 (40.3: Mammalian Heart and Blood Vessels): 'The atria are the chambers that receive blood, and the ventricles are the chambers that pump blood.' Deoxygenated venous blood enters the right atrium and is pumped by the right ventricle; oxygenated blood from the left atrium is pumped by the left ventricle into the aorta — the cardiac cycle coordinates filling and ejection so that venous inflow drives cardiac output."
+  - source: sympathetic_tone
+    target: total_peripheral_resistance
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: sympathetic arteriolar vasoconstriction
+    evidence: "Guyton1972_Autonomics MODEL0911270005 (AU -> arterial resistance multiplier) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-081 (15.3: Autonomic Reflexes and Homeostasis): postganglionic sympathetic fibers release norepinephrine onto adrenergic receptors in blood vessel walls → smooth-muscle constriction → increased blood pressure; sympathetic system determines systemic vascular tone.; OpenStax Anatomy & Physiology 2e §anp-082 (15.4: Central Control): vasomotor nerves (preganglionic sympathetic fibers) constrict blood vessels, raising systemic vascular resistance; OpenStax Anatomy & Physiology 2e §anp-083 (15.5: Drugs that Affect the Autonomic System): 'nicotine will preferentially cause the vascular tone to become more sympathetic, which means blood pressure will be increased' — confirms sympathetic drive increases vascular resistance / arterial pressure; OpenStax Anatomy & Physiology 2e §anp-111 (20.2: Structure and Function of Blood Vessels): vasoconstriction via smooth muscle contraction narrows arteriole lumen and increases blood pressure; arterioles are the primary site of resistance and regulation of blood pressure"
+  - source: sympathetic_tone
+    target: heart_rate
+    sign: "+"
+    mechanism: sympathetic chronotropy
+    evidence: "Guyton1972_Autonomics MODEL0911270005 (AU -> heart rate) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-059 (10.8: Cardiac Muscle Tissue): pacemaker cells respond to ANS signals to speed up heart rate; OpenStax Anatomy & Physiology 2e §anp-075 (13.4: Circulation and the Central Nervous System): orthostatic reflex — 'Heart rate increases—a reflex of the sympathetic division of the autonomic nervous system—and this raises blood pressure.' Directly confirms sympathetic activation raises heart rate.; OpenStax Anatomy & Physiology 2e §anp-080 (15.2: Divisions of the Autonomic Nervous System): 'One causes heart rate to increase' (sympathetic division); 'the sympathetic system would increase heart rate.'; OpenStax Anatomy & Physiology 2e §anp-081 (15.3: Autonomic Reflexes and Homeostasis): norepinephrine on SA-node adrenergic receptors causes faster depolarization, increasing heart rate; sympathetic speeds heart from ~100 bpm to 120–140 bpm.; OpenStax Anatomy & Physiology 2e §anp-082 (15.4: Central Control): preganglionic sympathetic cardiac accelerator nerves increase heart rate; sympathetic activation during exercise raises heart rate to 120-140 bpm; OpenStax Anatomy & Physiology 2e §anp-083 (15.5: Drugs that Affect the Autonomic System): 'the autonomic system does not cause the heart to beat, it just speeds it up (sympathetic) or slows it down (parasympathetic)'; OpenStax Anatomy & Physiology 2e §anp-109 (19.5: Cardiac Physiology): 'The cardioaccelerator regions stimulate activity via sympathetic stimulation … increases in physical activity … increase sympathetic stimulation as needed in order to increase blood flow [and HR].'; OpenStax Anatomy & Physiology 2e §anp-114 (20.5: Homeostatic Regulation of the Vascular System): 'When blood pressure drops too low...trigger an increase in sympathetic stimulation of the heart, causing cardiac output to increase.'; OpenStax Biology 2e §bio-33.2 (33.2: Animal Primary Tissues): 'Cardiac muscle is not under voluntary control but can be influenced by the autonomic nervous system to speed up or slow down' — sympathetic stimulation increases heart rate; OpenStax Biology 2e §bio-35.4 (35.4: The Peripheral Nervous System): 'Examples of functions controlled by the sympathetic nervous system include an accelerated heart rate'."
+  - source: sympathetic_tone
+    target: cardiac_output
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: sympathetic inotropy (contractility) raises pumping effectiveness
+    evidence: "circulation.cellml pumping_effectiveness (AUH); Guyton1972_Autonomics AU"
+  - source: sympathetic_tone
+    target: venous_return
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: venoconstriction raises mean systemic filling pressure
+    evidence: "Guyton1972_Autonomics MODEL0911270005 (AU -> venous tone, VVS) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-111 (20.2: Structure and Function of Blood Vessels): vasomotor center sends sympathetic stimulation to veins causing venoconstriction, increasing pressure on blood and speeding return to heart"
+
+  # --- loop closure: baroreflex sensor -------------------------------------
+  - source: mean_arterial_pressure
+    target: sympathetic_tone
+    sign: "-"
+    causal_evidence: mechanistic_model
+    mechanism: arterial baroreceptor — rising pressure reduces sympathetic outflow
+    evidence: "Guyton1972_Autonomics MODEL0911270005 (PA baroreceptor input -> AU, decreasing)"
+
+  # --- loop closure: renal perfusion + pressure natriuresis ----------------
+  - source: mean_arterial_pressure
+    target: renal_perfusion_pressure
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: arterial pressure transmits to the renal artery
+    evidence: "circulation.cellml PA -> kidney perfusion_pressure input | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-149 (25.6: Physiology of Urine Formation): 'as long as mean arterial pressure is above approximately 60 mm Hg, the pressure will be adequate to maintain glomerular filtration. Blood pressures below this level will impair renal function'"
+  - source: renal_perfusion_pressure
+    target: gfr
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: higher perfusion -> higher glomerular pressure -> higher filtration
+    evidence: "kidney.cellml perfusion_pressure -> glomerular_pressure -> glomerular_filtration_rate | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-149 (25.6: Physiology of Urine Formation): 'Glomerular filtration occurs when glomerular hydrostatic pressure exceeds the luminal hydrostatic pressure of Bowman's capsule'; GFR is set by net filtration pressure driven by glomerular capillary (perfusion-dependent) hydrostatic pressure; OpenStax Anatomy & Physiology 2e §anp-151 (25.8: Regulation of Renal Blood Flow): 'Only a 10 mm Hg pressure differential across the glomerulus is required for normal GFR, so very small changes in afferent arterial pressure significantly increase or decrease GFR.'; OpenStax Anatomy & Physiology 2e §anp-155 (26.2: Body Fluids and Fluid Compartment): 'As hydrostatic pressure in the kidneys increases, the amount of water leaving the capillaries also increases, and more urine filtrate is formed.'; OpenStax Biology 2e §bio-41.2 (41.2: The Kidneys and Osmoregulatory Organs): 'The glomerulus forces small solutes out of the blood by pressure.' Glomerular filtration rate is driven by hydrostatic pressure in the glomerular capillaries, which depends on renal perfusion pressure.; OpenStax Biology 2e §bio-5.2 (5.2: Passive Transport): 'blood pressure forces large amounts of water and accompanying dissolved substances, or solutes, out of the blood and into the renal tubules. The diffusion rate in this instance is almost totally dependent on pressure.' — supports blood pressure driving glomerular filtration (GFR)."
+  - source: gfr
+    target: sodium_excretion
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: higher filtered Na load raises excretion
+    evidence: "kidney.cellml glomerular_filtration_rate -> distal_tubular_Na_delivery -> actual_Na_excretion_rate | textbook corroboration: OpenStax Biology 2e §bio-41.2 (41.2: The Kidneys and Osmoregulatory Organs): 'Almost all solutes, except for proteins, are filtered out into the glomerulus by a process called glomerular filtration.' Higher GFR increases the filtered sodium load delivered to the tubule, raising net sodium excretion when reabsorptive capacity is not proportionally increased."
+  - source: renal_perfusion_pressure
+    target: sodium_excretion
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: pressure natriuresis — raised pressure reduces tubular reabsorption (peritubular forces)
+    evidence: "kidney.cellml peritubular_capillary_reabsorption_factor; pressure natriuresis"
+
+quantitative_definitions:
+  - kind: product
+    result: mean_arterial_pressure
+    arguments:
+      - node: cardiac_output
+        role: factor
+        derivative_sign: "+"
+      - node: total_peripheral_resistance
+        role: factor
+        derivative_sign: "+"
+    mechanism: "mean arterial pressure = cardiac output × total peripheral resistance"
+    evidence: "Guyton circulation.cellml arterial_pressure_and_pressure_gradient; Guyton & Hall systemic pressure-flow-resistance identity"
+
+production_edges:
+  # --- typed production of secreted hormones by their cellular source processes ---
+  # These are neither constitution nor authored causal influences. The producing cell/process
+  # is not asserted part_of the hormone; the relation records production of an output.
+  #
+  # Zona glomerulosa cells of the adrenal cortex synthesise/secrete aldosterone; their
+  # secretion rate sets the plasma aldosterone level. (Guyton & Hall, Textbook of Medical
+  # Physiology — "Adrenocortical Hormones": aldosterone from the zona glomerulosa.
+  # Williams Textbook of Endocrinology — adrenal steroidogenesis.)
+  - source: zona_glomerulosa_cell_aldosterone_secretion
+    target: aldosterone
+    sign: "+"
+    production_evidence: legacy-evidence-unclassified
+  # Hypothalamic magnocellular neurosecretory neurons (supraoptic + paraventricular nuclei)
+  # synthesise vasopressin (ADH), transported down the hypothalamo-hypophyseal tract and
+  # released from the posterior pituitary; their secretion rate sets plasma ADH.
+  # (Guyton & Hall — "The Posterior Pituitary Gland and ADH"; Boron & Boulpaep, Medical
+  # Physiology — vasopressin synthesis in magnocellular neurons.)
+  - source: magnocellular_neuron_adh_secretion
+    target: adh
+    sign: "+"
+    production_evidence: legacy-evidence-unclassified
+  # Atrial cardiomyocytes secrete atrial natriuretic peptide on atrial stretch; their
+  # secretion rate sets the plasma ANP level. (Guyton & Hall — "Atrial Natriuretic Peptide";
+  # Boron & Boulpaep — ANP released by atrial myocytes.)
+  - source: atrial_cardiomyocyte_anp_secretion
+    target: anp
+    sign: "+"
+    production_evidence: legacy-evidence-unclassified

@@ -1,0 +1,117 @@
+# =============================================================================
+# Multi-scale: beta-adrenergic GPCR cardiac signaling   *** DRAFT FOR REVIEW ***
+# =============================================================================
+# A molecular/subcellular signal-transduction vertical for sympathetic catecholamine
+# control of the heart, lifted constitutively onto the existing organ-system cardiac
+# variables. Encodes the canonical Gs-coupled beta1-adrenergic cascade:
+#
+#   WITHIN-SCALE CAUSAL (subcellular signal transduction):
+#       sympathetic_tone (boundary, organ_system)        # NE release onto SA node / myocardium
+#         -> beta1_adrenergic_activation                  # agonist-occupied receptor
+#         -> gs_adenylyl_cyclase_activity                 # Gs-alpha stimulates AC
+#         -> camp_level                                   # AC: ATP -> cAMP
+#         -> pka_activity                                 # cAMP binds PKA-R, frees PKA-C
+#       camp_level -> pde_activity -> camp_level          # PDE hydrolysis negative feedback loop
+#
+#   CROSS-SCALE CONSTITUTIVE (part_of + determination; NOT causal):
+#       pka_activity (subcellular)  >> heart_rate (organ_system)        # chronotropy
+#       pka_activity (subcellular)  >> cardiac_output (organ_system)    # inotropy
+#
+# Feedback: cAMP up -> PDE flux up -> cAMP down  (substrate-driven negative feedback,
+# the cAMP buffering loop; correct net sign of camp_level under sustained AC drive needs
+# loop-aware comparative statics, not forward propagation).
+#
+# SOURCES (verified):
+#   - BioModels MODEL1006230118  Saucerman2003_CardiacMyocyte_BetaAdrenergic
+#       Saucerman, Brunton, Michailova & McCulloch (2003) "Modeling beta-adrenergic
+#       control of cardiac myocyte contractility in silico." J Biol Chem 278:47997-48003.
+#       PubMed 12972422.  -> beta1 -> Gs/AC -> cAMP -> PKA cascade + PDE feedback + inotropy.
+#   - BioModels BIOMD0000000165  Saucerman2006_PKA
+#       Saucerman, Zhang, Martin, Peng, Stenbit, Tsien & McCulloch (2006) "Systems
+#       analysis of PKA-mediated phosphorylation gradients in live cardiac myocytes."
+#       PNAS 103:12923-12928.  PubMed 16905651.  -> cAMP -> PKA activation kinetics.
+#   - Boron & Boulpaep, Medical Physiology (autonomic control of the heart):
+#       sympathetic NE -> beta1 receptors -> Gs -> AC -> cAMP -> PKA; PKA phosphorylates
+#       HCN/If, L-type Ca2+ channels, phospholamban, RyR => positive chronotropy &
+#       inotropy. PDE (PDE3/PDE4) hydrolyses cAMP (basis of inotrope pharmacology).
+#
+# BOUNDARY NODES (existing-map ids, NOT redefined here):
+#   sympathetic_tone, heart_rate, cardiac_output
+# =============================================================================
+# NOTE (integration fix): the downward macro->micro causal 'driver' edge was REMOVED.
+# PhysioMap models causation WITHIN scale and cross-scale dependence as CONSTITUTIVE
+# (upward determination) only (see MULTISCALE.md). This vertical's top molecular node is
+# therefore a root, exercised by molecular/drug interventions, and lifts UP via the
+# constitutive edge(s). This keeps the combined causal+constitutive meta-graph acyclic.
+
+name: beta_adrenergic_cardiac_signaling
+nodes:
+- id: beta1_adrenergic_activation
+  label: beta-1 adrenergic receptor activation (cardiac myocyte / SA node)
+  scale: subcellular
+  entity_iri: PR:000001239
+  quality_iri: PATO:0002354
+- id: gs_adenylyl_cyclase_activity
+  label: Gs-stimulated adenylyl cyclase activity
+  scale: subcellular
+  entity_iri: GO:0004016
+  quality_iri: PATO:0000161
+- id: camp_level
+  label: cytosolic cyclic AMP concentration
+  scale: subcellular
+  entity_iri: CHEBI:17489
+  quality_iri: PATO:0000033
+- id: pka_activity
+  label: protein kinase A (PKA) catalytic activity
+  scale: subcellular
+  entity_iri: PR:000029188  # cAMP-dependent protein kinase catalytic subunit
+  quality_iri: PATO:0001414
+  bearer_entity_iri: CL:0000746     # cardiac muscle cell
+- id: pde_activity
+  label: cyclic-nucleotide phosphodiesterase (PDE3/PDE4) activity
+  scale: subcellular
+  entity_iri: GO:0004114
+  quality_iri: PATO:0000161
+causal_edges:
+- source: beta1_adrenergic_activation
+  target: gs_adenylyl_cyclase_activity
+  sign: +
+  causal_evidence: mechanistic_model
+  mechanism: 'active beta-1 receptor catalyses GDP/GTP exchange on Gs-alpha (disposition: GEF activity -> process: G-protein activation), and Gs-alpha-GTP stimulates adenylyl cyclase -> quality: AC catalytic rate'
+  evidence: 'BioModels MODEL1006230118 Saucerman et al. 2003 J Biol Chem 278:47997 (PubMed 12972422): receptor -> Gs -> adenylyl cyclase module; Boron & Boulpaep, Medical Physiology. | textbook corroboration: OpenStax Biology 2e §bio-37.2 (37.2: How Hormones Work): ''The activated G-protein in turn activates a membrane-bound enzyme called adenylyl cyclase.'' (Figure 37.6 caption: ''Hormone binding to receptor activates a G-protein, which in turn activates adenylyl cyclase'') [citations PubMed-verified]'
+- source: gs_adenylyl_cyclase_activity
+  target: camp_level
+  sign: +
+  causal_evidence: mechanistic_model
+  mechanism: 'adenylyl cyclase (disposition: cyclase catalytic activity) runs process ATP -> 3'',5''-cyclic AMP + PPi, raising quality: cytosolic cAMP concentration'
+  evidence: 'BioModels MODEL1006230118 Saucerman et al. 2003 J Biol Chem 278:47997 (PubMed 12972422): AC production flux of cAMP; Boron & Boulpaep, Medical Physiology. | textbook corroboration: OpenStax Biology 2e §bio-37.2 (37.2: How Hormones Work): ''Adenylyl cyclase catalyzes the conversion of ATP to cAMP.''; OpenStax Biology 2e §bio-9.2 (9.2: Propagation of the Signal): ''Cyclic AMP is synthesized by the enzyme adenylyl cyclase from ATP'' [citations PubMed-verified]'
+- source: camp_level
+  target: pka_activity
+  sign: +
+  causal_evidence: mechanistic_model
+  mechanism: 'cAMP (quality: concentration) binds PKA regulatory subunits (disposition: allosteric release -> process: dissociation of catalytic subunits) -> quality: free PKA-C catalytic activity'
+  evidence: 'BioModels BIOMD0000000165 Saucerman et al. 2006 PNAS 103:12923 (PubMed 16905651): cAMP-dependent PKA activation; also MODEL1006230118 Saucerman et al. 2003 (PubMed 12972422); Boron & Boulpaep, Medical Physiology. | textbook corroboration: OpenStax Biology 2e §bio-37.2 (37.2: How Hormones Work): ''cAMP, in turn, activates a group of proteins called protein kinases, which transfer a phosphate group from ATP to a substrate molecule in a process called phosphorylation.''; OpenStax Biology 2e §bio-9.2 (9.2: Propagation of the Signal): ''The main role of cAMP in cells is to bind to and activate an enzyme called cAMP-dependent kinase (A-kinase)''; OpenStax Biology 2e §bio-9.3 (9.3: Response to the Signal): ''Cyclic AMP activates PKA (protein kinase A)'' [citations PubMed-verified]'
+- source: camp_level
+  target: pde_activity
+  sign: +
+  causal_evidence: mechanistic_model
+  mechanism: 'rising cAMP (quality: substrate concentration) increases occupancy of phosphodiesterase (disposition: hydrolase activity) -> process: cAMP hydrolysis flux -> quality: PDE turnover rate (substrate-driven; PKA also feed-forward activates PDE3/PDE4)'
+  evidence: 'BioModels MODEL1006230118 Saucerman et al. 2003 J Biol Chem 278:47997 — PDE hydrolysis of cAMP; Boron & Boulpaep, Medical Physiology (PDE3/PDE4 as cAMP-degrading enzymes underlying inotrope pharmacology). | textbook corroboration: OpenStax Biology 2e §bio-37.2 (37.2: How Hormones Work): ''An enzyme called phosphodiesterase breaks down cAMP, terminating the signal.'' (substrate-driven PDE activation implied by cAMP level); OpenStax Biology 2e §bio-9.2 (9.2: Propagation of the Signal): ''Termination of the signal occurs when an enzyme called phosphodiesterase converts cAMP into AMP'' (cAMP drives PDE activity) [citations PubMed-verified]'
+- source: pde_activity
+  target: camp_level
+  sign: '-'
+  causal_evidence: mechanistic_model
+  mechanism: 'phosphodiesterase (disposition: 3'',5''-cyclic-nucleotide hydrolase) runs process cAMP -> 5''-AMP, lowering quality: cytosolic cAMP concentration'
+  evidence: 'BioModels MODEL1006230118 Saucerman et al. 2003 J Biol Chem 278:47997 — PDE degradation flux reduces cAMP; Boron & Boulpaep, Medical Physiology. | textbook corroboration: OpenStax Biology 2e §bio-37.2 (37.2: How Hormones Work): ''cAMP is deactivated by the cytoplasmic enzyme phosphodiesterase, or PDE. PDE is always present in the cell and breaks down cAMP to control hormone activity, preventing overproduction of cellular products.''; OpenStax Biology 2e §bio-9.2 (9.2: Propagation of the Signal): ''Termination of the signal occurs when an enzyme called phosphodiesterase converts cAMP into AMP'' (PDE degrades cAMP, reducing its level); OpenStax Biology 2e §bio-9.3 (9.3: Response to the Signal): ''Cyclic AMP (cAMP) is degraded into AMP by phosphodiesterase'' [citations PubMed-verified]'
+- source: pka_activity
+  target: heart_rate
+  sign: +
+  causal_evidence: mechanistic_model
+  mechanism: PKA phosphorylation of pacemaker and calcium-handling targets increases sinoatrial firing rate and positive chronotropy
+  evidence: Saucerman et al. 2003 J Biol Chem 278:47997 (PMID 12972422); Boron & Boulpaep, Medical Physiology (beta-adrenergic cAMP/PKA control of chronotropy).
+- source: pka_activity
+  target: cardiac_output
+  sign: +
+  causal_evidence: mechanistic_model
+  mechanism: PKA phosphorylation of L-type calcium channels, phospholamban, RyR2, and contractile targets increases cardiac inotropy and thereby cardiac output
+  evidence: Saucerman et al. 2003 J Biol Chem 278:47997 (PMID 12972422); Saucerman et al. 2006 PNAS 103:12923 (PMID 16905651); Boron & Boulpaep, Medical Physiology.

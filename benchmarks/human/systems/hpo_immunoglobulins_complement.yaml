@@ -1,0 +1,165 @@
+# =============================================================================
+# Immunoglobulins & complement (lectin pathway / regulators) plasma analytes
+#                                    — PhysioMap fragment  *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Hand-encoded, single-scale (ORGAN_SYSTEM — circulating plasma/serum analytes).
+# This is an ANALYTE-INVENTORY fragment: it provides grounded nodes for the
+# HPO "abnormal circulating immunoglobulin / complement protein" quantity terms
+# so the HPO benchmark can attach a node + a PATO direction to each. ROBERT:
+# please correct nodes / IRIs / any edges.
+#
+# Provenance (textbook / DB):
+#   - Immunoglobulin classes & subclasses, plasma levels, antibody response:
+#     Janeway's Immunobiology (10th ed., "The structure of a typical antibody
+#     molecule"; "The distribution and functions of immunoglobulin classes");
+#     Harrison's Principles of Internal Medicine ("Disorders of B cells" /
+#     "Primary immunodeficiency diseases" — CVID, IgA deficiency, IgG subclass
+#     deficiency, hyper-IgM, hyper-IgE); Boron & Boulpaep Medical Physiology
+#     ("The immune system").
+#   - Complement lectin pathway recognition molecules (MBL, ficolin-3/Hakata
+#     antigen) and regulators (CD46 / membrane cofactor protein; complement
+#     factor H-related protein 1, CFHR1): Janeway's Immunobiology ("The
+#     complement system and innate immunity"); Walport NEJM 2001;344:1058
+#     (Complement, parts I & II). MBL deficiency (OMIM 614372); ficolin-3
+#     deficiency (FCN3, OMIM 613860); CD46 deficiency -> aHUS (OMIM 612922);
+#     CFHR1 copy-number variation modulates aHUS / C3 glomerulopathy.
+#
+# Entity-IRI verification (grepped against ontology/.obo_cache):
+#   - GO immunoglobulin complexes (the circulating antibody pools):
+#       GO:0019814 immunoglobulin complex                       (total Ig)
+#       GO:0042571 immunoglobulin complex, circulating          (body-fluid Ig)
+#       GO:0071736 IgG immunoglobulin complex, circulating
+#       GO:0071746 IgA immunoglobulin complex, circulating
+#       GO:0071754 IgM immunoglobulin complex, circulating
+#       GO:0071743 IgE immunoglobulin complex, circulating
+#       GO:0071739 IgD immunoglobulin complex, circulating
+#     (PR.obo has NO clean "immunoglobulin G/A/M/E/D" molecule class — only Fc
+#      receptors — so the GO complex classes are the correct entity grounding.)
+#   - GO has NO IgG1/IgG2/IgG3/IgG4 subclass complex classes -> subclass nodes
+#     leave entity_iri null (not fabricated).
+#   - Functional antibody measures (specific antibody, allergen-specific IgE,
+#     precipitin) are operationally defined assay quantities, not single
+#     molecular species -> entity_iri null.
+#   - Complement proteins (PR, species-neutral root classes, verified by name):
+#       PR:000007439 ficolin-3
+#       PR:000010220 mannose-binding protein C  (= mannan/mannose-binding lectin, MBL)
+#       PR:000001401 membrane cofactor protein  (= CD46)
+#       PR:000005379 complement factor H-related protein 1  (= CFHR1)
+#   - PATO quality: PATO:0000033 concentration for every plasma analyte.
+#
+# Edges: NONE. The directional HPO terms here are abnormal-CONCENTRATION calls on
+# distinct plasma proteins whose levels are set by B-cell/plasma-cell secretion and
+# hepatic synthesis (complement) — mechanisms not yet in the corpus. Subclass->class
+# and class->total relations are mereological (a sum), i.e. cross-scale CONSTITUTIVE
+# aggregation, NOT within-scale causal edges; encoding them as causal edges would be
+# wrong, and as constitutive aggregation they need a verified part_of mereology not
+# present here. Per PhysioMap policy we prefer NO edge over a guess: this is a
+# self-contained analyte island (validate_fragment WARNs "island" — not an error).
+# Each grounded node still serves the benchmark (it abstains rather than mispredicts).
+# =============================================================================
+
+name: hpo_immunoglobulins_complement
+description: >-
+  DRAFT analyte-inventory fragment grounding the HPO abnormal-circulating
+  immunoglobulin and complement-protein quantity terms. Provides PhysioMap nodes
+  for total immunoglobulin and the IgG/IgA/IgM/IgE/IgD classes (and IgG1-4
+  subclasses), functional antibody measures (specific antibody, allergen-specific
+  IgE, precipitin), and the lectin-pathway / complement-regulator proteins
+  ficolin-3, mannose-binding lectin (MBL), membrane cofactor protein (CD46) and
+  complement factor H-related protein 1 (CFHR1). Single-scale (ORGAN_SYSTEM,
+  plasma concentration). No causal edges (analyte island); Phase 1.
+
+nodes:
+  # ---- total / class immunoglobulin pools (GO immunoglobulin-complex classes) ----
+  - id: plasma_immunoglobulin
+    label: plasma total immunoglobulin concentration
+    scale: organ_system
+    entity_iri: GO:0019814             # immunoglobulin complex
+    quality_iri: PATO:0000033          # concentration
+  - id: body_fluid_immunoglobulin
+    label: body-fluid immunoglobulin concentration
+    scale: organ_system
+    entity_iri: GO:0042571             # immunoglobulin complex, circulating
+    quality_iri: PATO:0000033          # concentration
+  - id: plasma_igg
+    label: plasma IgG concentration
+    scale: organ_system
+    entity_iri: GO:0071736             # IgG immunoglobulin complex, circulating
+    quality_iri: PATO:0000033
+  - id: plasma_iga
+    label: plasma IgA concentration
+    scale: organ_system
+    entity_iri: GO:0071746             # IgA immunoglobulin complex, circulating
+    quality_iri: PATO:0000033
+  - id: plasma_igm
+    label: plasma IgM concentration
+    scale: organ_system
+    entity_iri: GO:0071754             # IgM immunoglobulin complex, circulating
+    quality_iri: PATO:0000033
+  - id: plasma_ige
+    label: plasma IgE concentration
+    scale: organ_system
+    entity_iri: GO:0071743             # IgE immunoglobulin complex, circulating
+    quality_iri: PATO:0000033
+  - id: plasma_igd
+    label: plasma IgD concentration
+    scale: organ_system
+    entity_iri: GO:0071739             # IgD immunoglobulin complex, circulating
+    quality_iri: PATO:0000033
+
+  # ---- IgG subclasses (no clean GO/PR subclass complex class -> entity null) ----
+  - id: plasma_igg1
+    label: plasma IgG1 concentration
+    scale: organ_system
+    quality_iri: PATO:0000033
+  - id: plasma_igg2
+    label: plasma IgG2 concentration
+    scale: organ_system
+    quality_iri: PATO:0000033
+  - id: plasma_igg3
+    label: plasma IgG3 concentration
+    scale: organ_system
+    quality_iri: PATO:0000033
+  - id: plasma_igg4
+    label: plasma IgG4 concentration
+    scale: organ_system
+    quality_iri: PATO:0000033
+
+  # ---- functional antibody measures (assay-defined; entity null, not fabricated) ----
+  - id: plasma_specific_antibody
+    label: plasma specific antibody concentration
+    scale: organ_system
+    quality_iri: PATO:0000033
+  - id: plasma_allergen_specific_ige
+    label: plasma allergen-specific IgE concentration
+    scale: organ_system
+    quality_iri: PATO:0000033
+  - id: plasma_precipitin
+    label: plasma precipitin (precipitating antibody) concentration
+    scale: organ_system
+    quality_iri: PATO:0000033
+
+  # ---- complement lectin-pathway recognition molecules & regulators (PR roots) ----
+  - id: plasma_ficolin_3
+    label: plasma ficolin-3 concentration
+    scale: organ_system
+    entity_iri: PR:000007439           # ficolin-3
+    quality_iri: PATO:0000033
+  - id: plasma_mbl
+    label: plasma mannose-binding lectin (MBL) concentration
+    scale: organ_system
+    entity_iri: PR:000010220           # mannose-binding protein C (MBL)
+    quality_iri: PATO:0000033
+  - id: plasma_cd46
+    label: plasma membrane cofactor protein (CD46) concentration
+    scale: organ_system
+    entity_iri: PR:000001401           # membrane cofactor protein (CD46)
+    quality_iri: PATO:0000033
+  - id: plasma_cfhr1
+    label: plasma complement factor H-related protein 1 (CFHR1) concentration
+    scale: organ_system
+    entity_iri: PR:000005379           # complement factor H-related protein 1
+    quality_iri: PATO:0000033
+
+causal_edges: []        # none — analyte-inventory island (see header rationale)
+constitutive_edges: []  # none — single-scale fragment (Phase 1)

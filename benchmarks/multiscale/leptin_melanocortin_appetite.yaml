@@ -1,0 +1,91 @@
+# =============================================================================
+# Multi-scale signalling import: leptin-melanocortin control of food intake
+#                                                       *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Causal-evidence-gated import. Hypothalamic melanocortin circuit. The leptin-receptor signalling
+# node is a molecular ROOT (clamped by leptin/LEPR Mendelian variants and recombinant leptin);
+# the downward macro->micro driver (leptin -> LEPR) is intentionally OMITTED (would be a
+# cross-scale causal edge). MC4R activity lifts to food_intake by determination.
+#
+#   lepr_signaling --(+)--> alpha_msh           (POMC neurons)
+#   lepr_signaling --(-)--> agrp_npy_tone       (AgRP/NPY neurons)
+#   alpha_msh      --(+)--> mc4r_activity        (alpha-MSH is the MC4R agonist)
+#   agrp_npy_tone  --(-)--> mc4r_activity        (AgRP is the MC4R inverse agonist/antagonist)
+#   mc4r_activity  ▷(-) hypothalamic_appetite_drive   (MC4R signalling -> satiety, lowers orexigenic drive)
+#
+# INTERVENTIONAL GROUNDING:
+#   - congenital leptin (LEP) deficiency -> hyperphagia/obesity, REVERSED by recombinant leptin
+#     (metreleptin) -- a clean do(); LEPR LoF likewise (genetic + pharmacological)
+#   - MC4R loss-of-function -> the commonest monogenic obesity (hyperphagia) (genetic)
+#   - setmelanotide (MC4R agonist) REDUCES food intake in POMC/LEPR deficiency (pharmacological do())
+# (Disease names without OMIM numbers by design; DRAFT for domain review.)
+#
+# BOUNDARY NODES (exist; not redefined): hypothalamic_appetite_drive
+# =============================================================================
+name: leptin_melanocortin_appetite
+nodes:
+- id: lepr_signaling
+  label: hypothalamic POMC-neuron leptin-receptor (LEPR) signalling activity
+  scale: molecular
+  entity_iri: GO:0033210        # leptin-mediated signaling pathway (process bearer)
+  quality_iri: PATO:0000161     # rate (of leptin signalling)
+  quality_kind: rate
+  bearer_entity_iri: CL:4042033 # pro-opiomelanocortin neuron
+- id: alpha_msh
+  label: hypothalamic alpha-melanocyte-stimulating hormone level
+  scale: molecular
+  entity_iri: CHEBI:195325      # alpha-melanocyte stimulating hormone
+  quality_iri: PATO:0000033     # concentration
+- id: agrp_npy_tone
+  label: AgRP/NPY orexigenic neuron tone
+  scale: molecular
+  entity_iri: PR:000003846      # agouti-related protein
+  quality_iri: PATO:0000070     # amount
+  bearer_entity_iri: CL:4072017 # agouti-related protein expressing neuron
+- id: mc4r_activity
+  label: hypothalamic melanocortin-4 receptor (MC4R) signalling activity
+  scale: molecular
+  entity_iri: PR:000001237      # melanocortin receptor 4
+  quality_iri: PATO:0001414     # catalytic activity
+  bearer_entity_iri: CL:0000540 # neuron (hypothalamic MC4R-bearing neuron)
+causal_edges:
+- source: lepr_signaling
+  target: alpha_msh
+  sign: +
+  causal_evidence: genetic_lof_gof
+  mechanism: 'leptin-activated LEPR/JAK2/STAT3 in POMC neurons drives POMC transcription and
+    alpha-MSH production (quality: LEPR signalling -> disposition: STAT3-driven POMC expression
+    -> process: POMC processing to alpha-MSH -> quality: alpha-MSH level)'
+  evidence: 'INTERVENTIONAL (genetic + pharmacological). Congenital leptin/LEPR deficiency lowers
+    melanocortin tone -> hyperphagia/obesity, reversed by recombinant leptin (metreleptin). DRAFT
+    for domain review.'
+- source: lepr_signaling
+  target: agrp_npy_tone
+  sign: '-'
+  causal_evidence: genetic_lof_gof
+  mechanism: 'leptin inhibits AgRP/NPY neurons (quality: LEPR signalling -> disposition: AgRP/NPY
+    neuron inhibition -> process: reduced AgRP/NPY release -> quality: orexigenic tone)'
+  evidence: 'INTERVENTIONAL (genetic). Leptin/LEPR deficiency disinhibits AgRP/NPY orexigenic
+    drive; recombinant leptin restores it. DRAFT for domain review.'
+- source: alpha_msh
+  target: mc4r_activity
+  sign: +
+  causal_evidence: pharmacological
+  mechanism: 'alpha-MSH is the endogenous MC4R agonist (quality: alpha-MSH level -> disposition:
+    MC4R agonist occupancy -> process: MC4R Gs activation -> quality: MC4R signalling)'
+  evidence: 'INTERVENTIONAL (pharmacological). Setmelanotide, an MC4R agonist, activates MC4R and
+    reduces food intake in POMC/LEPR deficiency. DRAFT for domain review.'
+- source: agrp_npy_tone
+  target: mc4r_activity
+  sign: '-'
+  causal_evidence: genetic_lof_gof
+  mechanism: 'AgRP is an MC4R inverse agonist/antagonist (quality: AgRP tone -> disposition:
+    competitive MC4R blockade -> process: reduced MC4R signalling -> quality: MC4R signalling)'
+  evidence: 'INTERVENTIONAL (genetic). AgRP overexpression / leptin-deficient disinhibition lowers
+    MC4R signalling and drives hyperphagia. DRAFT for domain review.'
+- source: mc4r_activity
+  target: hypothalamic_appetite_drive
+  sign: '-'
+  causal_evidence: pharmacological
+  mechanism: MC4R agonist signalling in hypothalamic neurons suppresses orexigenic appetite drive and food intake
+  evidence: Setmelanotide pharmacologically activates MC4R and reduces food intake in POMC/LEPR-pathway deficiency; primary-citation verification remains flagged in this draft fragment.

@@ -1,0 +1,83 @@
+# =============================================================================
+# Multi-scale signalling import: TSH receptor -> cAMP/PKA -> thyroid hormone synthesis
+#                                                       *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Causal-evidence-gated import. TSHR is a molecular ROOT (clamped by TSHR Mendelian variants and
+# anti-thyroid drugs). cAMP/PKA second-messenger chain drives TPO/NIS organification capacity,
+# which lifts to the existing cellular T4-secretion node by determination.
+#
+#   tshr_activation        --(+)--> follicular_camp_level
+#   follicular_camp_level  --(+)--> follicular_pka_activity
+#   follicular_pka_activity--(+)--> tpo_nis_organification_capacity
+#   tpo_nis_organification_capacity ▷(+) thyroid_follicular_t4_secretion
+#
+# INTERVENTIONAL GROUNDING:
+#   - TSHR gain-of-function -> non-autoimmune familial hyperthyroidism / toxic adenoma (genetic)
+#   - TSHR loss-of-function -> congenital hypothyroidism / TSH resistance (genetic)
+#   - thionamides (methimazole, propylthiouracil) inhibit thyroid peroxidase -> lower T4 (pharmacological)
+# (Disease names without OMIM numbers by design; DRAFT for domain review.)
+#
+# BOUNDARY NODES (exist; not redefined): thyroid_follicular_t4_secretion
+# =============================================================================
+name: tshr_thyroid_synthesis
+nodes:
+- id: tshr_activation
+  label: thyroid follicular-cell TSH receptor activation
+  scale: molecular
+  entity_iri: PR:000001677      # thyrotropin receptor
+  quality_iri: PATO:0002354     # active
+  bearer_entity_iri: CL:0002258 # thyroid follicular cell
+- id: follicular_camp_level
+  label: thyroid follicular-cell cAMP level
+  scale: subcellular
+  entity_iri: CHEBI:17489       # 3',5'-cyclic AMP
+  quality_iri: PATO:0000033     # concentration
+  bearer_entity_iri: CL:0002258
+- id: follicular_pka_activity
+  label: thyroid follicular-cell protein kinase A activity
+  scale: subcellular
+  entity_iri: PR:000029188      # cAMP-dependent protein kinase catalytic subunit
+  quality_iri: PATO:0001414
+  bearer_entity_iri: CL:0002258  # thyroid follicular cell
+- id: tpo_nis_organification_capacity
+  label: thyroid peroxidase / NIS iodide-organification capacity
+  scale: molecular
+  entity_iri: PR:000016584      # thyroid peroxidase
+  quality_iri: PATO:0000070     # amount
+  bearer_entity_iri: CL:0002258
+causal_edges:
+- source: tshr_activation
+  target: follicular_camp_level
+  sign: +
+  causal_evidence: genetic_lof_gof
+  mechanism: 'TSHR is a Gs-coupled GPCR; activation stimulates adenylyl cyclase (quality: TSHR
+    activation -> disposition: Gs/adenylyl-cyclase coupling -> process: cAMP synthesis -> quality:
+    cAMP level)'
+  evidence: 'INTERVENTIONAL (genetic). TSHR gain-of-function -> non-autoimmune familial
+    hyperthyroidism / toxic adenoma (constitutive cAMP, raised hormone); TSHR loss-of-function ->
+    congenital hypothyroidism / TSH resistance. DRAFT for domain review.'
+- source: follicular_camp_level
+  target: follicular_pka_activity
+  sign: +
+  causal_evidence: mechanistic_model
+  mechanism: 'cAMP binds PKA regulatory subunits, releasing active catalytic subunits (quality:
+    cAMP level -> disposition: PKA holoenzyme dissociation -> process: catalytic-subunit release
+    -> quality: PKA activity)'
+  evidence: 'Canonical Gs-cAMP-PKA second-messenger relation (mechanistic; encoded in standard
+    cAMP/PKA kinetic models). DRAFT for domain review.'
+- source: follicular_pka_activity
+  target: tpo_nis_organification_capacity
+  sign: +
+  causal_evidence: genetic_lof_gof
+  mechanism: 'cAMP/PKA upregulates thyroglobulin, TPO and NIS expression and iodide
+    organification (quality: PKA activity -> disposition: CREB-driven thyroid-gene transcription
+    -> process: TPO/NIS expression + iodide organification -> quality: organification capacity)'
+  evidence: 'INTERVENTIONAL. TSHR-cAMP drive sets thyroid hormone synthesis (TSHR GoF -> excess,
+    LoF -> deficiency); thionamides (methimazole, propylthiouracil) inhibit thyroid peroxidase and
+    lower T4 (pharmacological). DRAFT for domain review.'
+- source: tpo_nis_organification_capacity
+  target: thyroid_follicular_t4_secretion
+  sign: +
+  causal_evidence: pharmacological
+  mechanism: thyroid peroxidase and sodium-iodide-symporter capacity enable iodide uptake, organification, and thyroid-hormone synthesis, increasing follicular T4 secretion
+  evidence: Methimazole and propylthiouracil inhibit thyroid peroxidase and lower T4; TSHR loss/gain-of-function changes the upstream cAMP/PKA drive to the same synthesis pathway. Primary-citation verification remains flagged in this draft fragment.

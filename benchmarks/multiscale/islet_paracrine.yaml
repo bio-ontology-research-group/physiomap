@@ -1,0 +1,103 @@
+# =============================================================================
+# Pancreatic islet paracrine network (alpha / beta / delta)  *** DRAFT FOR REVIEW ***
+# =============================================================================
+# CELLULAR-scale module: the three endocrine cell types of the islet of Langerhans
+# talking to each other by paracrine signalling, lifted onto the existing humoral map.
+#
+#   CELL TYPES (nodes):
+#     alpha cell  (CL:0000171) -> glucagon       secretion rate
+#     beta  cell  (CL:0000169) -> insulin        secretion rate
+#     delta cell  (CL:0000173) -> somatostatin   secretion rate
+#
+#   CELL-CELL PARACRINE SIGNALS (ligand -> receptor; sign = d(target)/d(source) at steady state):
+#     beta  insulin/Zn2+      --|  alpha glucagon     (-)   INS->INSR / Zn2+; tonic alpha-cell brake
+#     beta  insulin           -->  delta somatostatin (+)   INS->INSR on delta cells (CONTESTED; see edge evidence)
+#     alpha glucagon          -->  beta  insulin      (+)   GCG->GCGR/GLP1R, cAMP potentiation
+#     alpha glucagon          -->  delta somatostatin (+)   GCG->GCGR on delta cells
+#     delta somatostatin      --|  alpha glucagon     (-)   SST->SSTR2 (Gi)  paracrine inhibition
+#     delta somatostatin      --|  beta  insulin      (-)   SST->SSTR (Gi/Gi)  paracrine inhibition
+#
+#   UPWARD CONSTITUTIVE LIFTS (cellular population state -> EXISTING macro humoral quality):
+#     beta  insulin secretion  >> plasma_insulin  (+)
+#     alpha glucagon secretion >> plasma_glucagon (+)
+#
+#   ROOTS: alpha and beta secretion are roots here (glucose-sensing is a downward macro->micro
+#   input we deliberately do NOT model; exercise the cells via interventions). delta is driven
+#   paracrinely. No downward causal edges (would create cross-scale meta-graph cycles).
+#
+#   SOURCES:
+#     - OmniPath intercell/ligand-receptor (consensus stimulation = receptor engagement):
+#         INS->INSR (P01308->P06213), GCG->GCGR (P01275->P47871),
+#         SST->SSTR2/4/5 (P61278->...); queried 2026-06 via omnipathdb.org/interactions.
+#     - Rorsman P & Ashcroft FM 2018, "Pancreatic beta-cell electrical activity and insulin
+#         secretion: of mice and men", Physiol Rev 98:117-214 (PMID:29212789) — islet paracrine
+#         architecture; somatostatin/insulin braking of alpha cells.
+#     - Unger RH & Cherrington AD 2012, "Glucagonocentric restructuring of diabetes",
+#         J Clin Invest 122:4-12 (PMID:22214853) — alpha-cell suppression by beta-cell products.
+#     - Boron WF & Boulpaep EL, Medical Physiology (endocrine pancreas): intra-islet paracrine
+#         hierarchy delta -| alpha,beta; insulin -| alpha.
+# =============================================================================
+
+name: islet_paracrine_multiscale
+
+nodes:
+- id: beta_cell_insulin_secretion
+  label: pancreatic beta-cell insulin secretion rate
+  scale: cellular
+  entity_iri: GO:0030073                # insulin secretion
+  quality_iri: PATO:0000161
+  bearer_entity_iri: CL:0000169  # type B pancreatic cell
+- id: alpha_cell_glucagon_secretion
+  label: pancreatic alpha-cell glucagon secretion rate
+  scale: cellular
+  entity_iri: GO:0070091                # glucagon secretion
+  quality_iri: PATO:0000161
+  bearer_entity_iri: CL:0000171  # pancreatic A cell
+- id: delta_cell_somatostatin_secretion
+  label: pancreatic delta-cell somatostatin secretion rate
+  scale: cellular
+  entity_iri: GO:0070253                # somatostatin secretion
+  quality_iri: PATO:0000161
+  bearer_entity_iri: CL:0000173  # pancreatic D cell
+
+causal_edges:                            # within-scale (cellular) cell-cell paracrine communication
+- source: beta_cell_insulin_secretion
+  target: alpha_cell_glucagon_secretion
+  sign: "-"
+  mechanism: "co-secreted insulin + Zn2+ -> alpha-cell INSR / Zn2+ action -> suppression of glucagon exocytosis (GO:0070091 glucagon secretion, negative regulation)"
+  evidence: "OmniPath INS->INSR (P01308->P06213, consensus_stimulation); Unger & Cherrington 2012 J Clin Invest PMID:22214853 [citations PubMed-verified]"
+- source: beta_cell_insulin_secretion
+  target: delta_cell_somatostatin_secretion
+  sign: "+"
+  mechanism: "beta-cell insulin -> delta-cell INSR -> stimulation of somatostatin release (GO:0070253 somatostatin secretion); CONTESTED direct paracrine link"
+  evidence: "CONTESTED sign (+). For: OmniPath INS->INSR (P01308->P06213, consensus_stimulation). AGAINST: Hauge-Evans AC, Anderson RL, Persaud SJ, Jones PM 2012, 'Delta cell secretory responses to insulin secretagogues are not mediated indirectly by insulin', Diabetologia (PMID:22526610) — coordinated delta-cell somatostatin release to secretagogues is NOT mediated by a paracrine insulin->delta action; exogenous insulin effects on somatostatin are variably reported (no effect / inhibition / stimulation). Sign retained as (+) per recent consensus but confidence LOW. [citations PubMed-verified]"
+- source: alpha_cell_glucagon_secretion
+  target: beta_cell_insulin_secretion
+  sign: "+"
+  mechanism: "alpha-cell glucagon -> beta-cell GCGR/GLP1R -> Gs/cAMP potentiation of insulin secretion (GO:0030073 insulin secretion, positive regulation)"
+  evidence: "OmniPath GCG->GCGR (P01275->P47871, consensus_stimulation) [citations PubMed-verified]"
+- source: alpha_cell_glucagon_secretion
+  target: delta_cell_somatostatin_secretion
+  sign: "+"
+  mechanism: "alpha-cell glucagon -> delta-cell GCGR -> Gs/cAMP stimulation of somatostatin release (GO:0070253 somatostatin secretion)"
+  evidence: "OmniPath GCG->GCGR (P01275->P47871, consensus_stimulation); Boron & Boulpaep Medical Physiology, endocrine pancreas"
+- source: delta_cell_somatostatin_secretion
+  target: alpha_cell_glucagon_secretion
+  sign: "-"
+  mechanism: "delta-cell somatostatin -> alpha-cell SSTR2 (Gi) -> cAMP fall -> inhibition of glucagon exocytosis (GO:0070091 glucagon secretion, negative regulation)"
+  evidence: "OmniPath SST->SSTR (P61278->P30874/P31391/P35346, consensus_stimulation = receptor engagement; SSTR is Gi-coupled inhibitory) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-097 (17.10: The Endocrine Pancreas): pancreatic somatostatin (delta cells) inhibits glucagon release [citations PubMed-verified]"
+- source: delta_cell_somatostatin_secretion
+  target: beta_cell_insulin_secretion
+  sign: "-"
+  mechanism: "delta-cell somatostatin -> beta-cell SSTR (Gi) -> cAMP fall / K+ hyperpolarization -> inhibition of insulin secretion (GO:0030073 insulin secretion, negative regulation)"
+  evidence: "OmniPath SST->SSTR (P61278->P30874/P31391/P35346, consensus_stimulation = receptor engagement; SSTR is Gi-coupled inhibitory) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-097 (17.10: The Endocrine Pancreas): pancreatic somatostatin (delta cells) inhibits insulin release [citations PubMed-verified]"
+
+production_edges:
+- source: beta_cell_insulin_secretion
+  target: plasma_insulin
+  sign: "+"
+  production_evidence: legacy-evidence-unclassified
+- source: alpha_cell_glucagon_secretion
+  target: plasma_glucagon
+  sign: "+"
+  production_evidence: legacy-evidence-unclassified

@@ -1,0 +1,406 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<sbml xmlns="http://www.sbml.org/sbml/level3/version2/core" comp:required="true" level="3" version="2" xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+  <comp:listOfExternalModelDefinitions xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+    <comp:externalModelDefinition comp:id="Aldosterone" comp:source="Aldosterone.xml"/>
+    <comp:externalModelDefinition comp:id="Angiotensin" comp:source="Angiotensin.xml"/>
+    <comp:externalModelDefinition comp:id="Body_fluids" comp:source="Body fluids.xml"/>
+    <comp:externalModelDefinition comp:id="Coordination_of_LV_and_RV_systolic_time_intervals" comp:source="Coordination of LV and RV systolic time intervals.xml"/>
+    <comp:externalModelDefinition comp:id="Diuresis" comp:source="Diuresis.xml"/>
+    <comp:externalModelDefinition comp:id="Glomerular_filtration" comp:source="Glomerular filtration.xml"/>
+    <comp:externalModelDefinition comp:id="Hormonal_system" comp:source="Hormonal system.xml"/>
+    <comp:externalModelDefinition comp:id="Left_ventricle" comp:source="Left ventricle.xml"/>
+    <comp:externalModelDefinition comp:id="Nervous_system" comp:source="Nervous system.xml"/>
+    <comp:externalModelDefinition comp:id="Neurohumoral_control" comp:source="Neurohumoral control.xml"/>
+    <comp:externalModelDefinition comp:id="Pulmonary_arteries" comp:source="Pulmonary arteries.xml"/>
+    <comp:externalModelDefinition comp:id="Pulmonary_microvessels" comp:source="Pulmonary microvessels.xml"/>
+    <comp:externalModelDefinition comp:id="Pulmonary_veins" comp:source="Pulmonary veins.xml"/>
+    <comp:externalModelDefinition comp:id="Renin" comp:source="Renin.xml"/>
+    <comp:externalModelDefinition comp:id="Right_ventricle" comp:source="Right ventricle.xml"/>
+    <comp:externalModelDefinition comp:id="Sodium" comp:source="Sodium.xml"/>
+    <comp:externalModelDefinition comp:id="Systemic_arteries" comp:source="Systemic arteries.xml"/>
+    <comp:externalModelDefinition comp:id="Systemic_microvessels" comp:source="Systemic microvessels.xml"/>
+    <comp:externalModelDefinition comp:id="Systemic_veins" comp:source="Systemic veins.xml"/>
+    <comp:externalModelDefinition comp:id="Tissue_metabolism" comp:source="Tissue metabolism.xml"/>
+  </comp:listOfExternalModelDefinitions>
+  <model id="CVS_model" metaid="cfcbe004-511d-405f-92a9-ba9d42fba22d" name="CVS model">
+    <notes>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+     <p>Added combine archive and version of the modular model with all modules included as model definitions. Extensions changed from .sbml to .xml.</p>
+  </body>
+    </notes>
+    <annotation>
+      <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+        <rdf:Description rdf:about="#cfcbe004-511d-405f-92a9-ba9d42fba22d">
+	<bqbiol:hasProperty>
+	<rdf:Bag>
+	<rdf:li rdf:resource="http://identifiers.org/mamo/OTHER"/>
+	<rdf:li rdf:resource="http://identifiers.org/mamo/MAMO_0000024"/>
+	</rdf:Bag>
+	</bqbiol:hasProperty>
+	</rdf:Description>
+	
+	
+        <dc:creator>
+          <rdf:Bag>
+            <rdf:li rdf:parseType="rdf:resource">
+              <vCard:N rdf:parseType="rdf:resource">
+                <vCard:Family>Kiselev</vCard:Family>
+                <vCard:Given>Ilya</vCard:Given>
+              </vCard:N>
+              <vCard:EMAIL>axec@biosoft.ru</vCard:EMAIL>
+              <vCard:ORG>
+                <vCard:Orgname>Sirius University of Science and Technology; Federal Research Center for Information and Computational Technologies; Biosoft.Ru, Ltd.</vCard:Orgname>
+              </vCard:ORG>
+            </rdf:li>
+            <rdf:li rdf:parseType="rdf:resource">
+              <vCard:N rdf:parseType="rdf:resource">
+                <vCard:Family>Kutumova</vCard:Family>
+                <vCard:Given>Elena</vCard:Given>
+              </vCard:N>
+              <vCard:EMAIL>elena.kutumova@biosoft.ru</vCard:EMAIL>
+              <vCard:ORG>
+                <vCard:Orgname>Sirius University of Science and Technology; Federal Research Center for Information and Computational Technologies; Biosoft.Ru, Ltd.</vCard:Orgname>
+              </vCard:ORG>
+            </rdf:li>
+            <rdf:li rdf:parseType="rdf:resource">
+              <vCard:N rdf:parseType="rdf:resource">
+                <vCard:Family>Kolpakov</vCard:Family>
+                <vCard:Given>Fedor</vCard:Given>
+              </vCard:N>
+              <vCard:EMAIL>fedor@biosoft.ru</vCard:EMAIL>
+              <vCard:ORG>
+                <vCard:Orgname>Sirius University of Science and Technology; Federal Research Center for Information and Computational Technologies; Biosoft.Ru, Ltd.</vCard:Orgname>
+              </vCard:ORG>
+            </rdf:li>
+          </rdf:Bag>
+        </dc:creator>
+        <dcterms:created>
+          <dcterms:W3CDTF>2022-01-19</dcterms:W3CDTF>
+        </dcterms:created>
+      </rdf:RDF>
+    </annotation>
+      <comp:listOfSubmodels xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+      <comp:submodel comp:id="Aldosterone" comp:modelRef="Aldosterone" comp:timeConversionFactor="timeScale_Aldosterone"/>
+      <comp:submodel comp:id="Angiotensin" comp:modelRef="Angiotensin" comp:timeConversionFactor="timeScale_Angiotensin"/>
+      <comp:submodel comp:id="Body_fluids" comp:modelRef="Body_fluids" comp:timeConversionFactor="timeScale_Body_fluids"/>
+      <comp:submodel comp:id="Coordination_of_LV_and_RV_systolic_time_intervals" comp:modelRef="Coordination_of_LV_and_RV_systolic_time_intervals"/>
+      <comp:submodel comp:id="Diuresis" comp:modelRef="Diuresis" comp:timeConversionFactor="timeScale_Diuresis"/>
+      <comp:submodel comp:id="Glomerular_filtration" comp:modelRef="Glomerular_filtration" comp:timeConversionFactor="timeScale_Glomerular_filtration"/>
+      <comp:submodel comp:id="Hormonal_system" comp:modelRef="Hormonal_system" comp:timeConversionFactor="timeScale_Hormonal_system"/>
+      <comp:submodel comp:id="Left_ventricle" comp:modelRef="Left_ventricle"/>
+      <comp:submodel comp:id="Nervous_system" comp:modelRef="Nervous_system" comp:timeConversionFactor="timeScale_Nervous_system"/>
+      <comp:submodel comp:id="Neurohumoral_control" comp:modelRef="Neurohumoral_control"/>
+      <comp:submodel comp:id="Pulmonary_arteries" comp:modelRef="Pulmonary_arteries"/>
+      <comp:submodel comp:id="Pulmonary_microvessels" comp:modelRef="Pulmonary_microvessels"/>
+      <comp:submodel comp:id="Pulmonary_veins" comp:modelRef="Pulmonary_veins"/>
+      <comp:submodel comp:id="Renin" comp:modelRef="Renin" comp:timeConversionFactor="timeScale_Renin"/>
+      <comp:submodel comp:id="Right_ventricle" comp:modelRef="Right_ventricle"/>
+      <comp:submodel comp:id="Sodium" comp:modelRef="Sodium" comp:timeConversionFactor="timeScale_Sodium"/>
+      <comp:submodel comp:id="Systemic_arteries" comp:modelRef="Systemic_arteries"/>
+      <comp:submodel comp:id="Systemic_microvessels" comp:modelRef="Systemic_microvessels"/>
+      <comp:submodel comp:id="Systemic_veins" comp:modelRef="Systemic_veins"/>
+      <comp:submodel comp:id="Tissue_metabolism" comp:modelRef="Tissue_metabolism"/>
+    </comp:listOfSubmodels>
+    <listOfParameters>
+      <parameter constant="false" id="AT1_ANGII" name="AT1_ANGII" value="0">
+        <comp:listOfReplacedElements xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+          <comp:replacedElement comp:portRef="AT1_ANGII_port" comp:submodelRef="Neurohumoral_control" metaid="Connection_AT1_ANGII_port_1"/>
+          <comp:replacedElement comp:portRef="AT1_ANGII_port" comp:submodelRef="Renin" metaid="Connection_AT1_ANGII_port_2"/>
+          <comp:replacedElement comp:portRef="AT1_ANGII_port" comp:submodelRef="Systemic_arteries" metaid="Connection_AT1_ANGII_port_3"/>
+          <comp:replacedElement comp:portRef="AT1_ANGII_port" comp:submodelRef="Aldosterone" metaid="Connection_AT1_ANGII_port_4"/>
+          <comp:replacedElement comp:portRef="AT1_ANGII_port" comp:submodelRef="Glomerular_filtration" metaid="Connection_AT1_ANGII_port_5"/>
+          <comp:replacedElement comp:portRef="AT1_ANGII_port" comp:submodelRef="Sodium" metaid="Connection_AT1_ANGII_port_6"/>
+        </comp:listOfReplacedElements>
+        <comp:replacedBy xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1" comp:portRef="AT1_ANGII_port" comp:submodelRef="Angiotensin" metaid="Connection_AT1_ANGII_port"/>
+      </parameter>
+      <parameter constant="false" id="CO" name="CO" value="0">
+        <comp:listOfReplacedElements xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+          <comp:replacedElement comp:portRef="CO_port" comp:submodelRef="Nervous_system" metaid="CONNECTION00362"/>
+        </comp:listOfReplacedElements>
+        <comp:replacedBy xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1" comp:portRef="CO_port" comp:submodelRef="Left_ventricle" metaid="CONNECTION00361"/>
+      </parameter>
+      <parameter constant="false" id="C_adh" name="C_adh" value="0">
+        <comp:listOfReplacedElements xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+          <comp:replacedElement comp:portRef="C_adh_port" comp:submodelRef="Diuresis" metaid="Connection_C_adh_port_1"/>
+          <comp:replacedElement comp:portRef="C_adh_port" comp:submodelRef="Body_fluids" metaid="Connection_C_adh_port_2"/>
+        </comp:listOfReplacedElements>
+        <comp:replacedBy xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1" comp:portRef="C_adh_port" comp:submodelRef="Hormonal_system" metaid="Connection_C_adh_port"/>
+      </parameter>
+      <parameter constant="false" id="C_al" name="C_al" value="0">
+        <comp:listOfReplacedElements xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+          <comp:replacedElement comp:portRef="C_al_port" comp:submodelRef="Sodium" metaid="Connection_C_al_port_1"/>
+        </comp:listOfReplacedElements>
+        <comp:replacedBy xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1" comp:portRef="C_al_port" comp:submodelRef="Aldosterone" metaid="Connection_C_al_port"/>
+      </parameter>
+      <parameter constant="false" id="C_anp" name="C_anp" value="0">
+        <comp:listOfReplacedElements xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+          <comp:replacedElement comp:portRef="C_anp_port" comp:submodelRef="Sodium" metaid="CONNECTION01992"/>
+        </comp:listOfReplacedElements>
+        <comp:replacedBy xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1" comp:portRef="C_anp_port" comp:submodelRef="Hormonal_system" metaid="CONNECTION01991"/>
+      </parameter>
+      <parameter constant="false" id="C_sod" name="C_sod" value="0">
+        <comp:listOfReplacedElements xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+          <comp:replacedElement comp:portRef="C_sod_port" comp:submodelRef="Hormonal_system" metaid="CONNECTION02002"/>
+        </comp:listOfReplacedElements>
+        <comp:replacedBy xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1" comp:portRef="C_sod_port" comp:submodelRef="Sodium" metaid="CONNECTION02001"/>
+      </parameter>
+      <parameter constant="false" id="Cycle_Length" name="Cycle_Length" value="0">
+        <comp:listOfReplacedElements xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+          <comp:replacedElement comp:portRef="Cycle_Length_port" comp:submodelRef="Right_ventricle" metaid="CONNECTION00242"/>
+        </comp:listOfReplacedElements>
+        <comp:replacedBy xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1" comp:portRef="Cycle_Length_port" comp:submodelRef="Left_ventricle" metaid="CONNECTION00241"/>
+      </parameter>
+      <parameter constant="false" id="DO_2" name="DO_2" value="0">
+        <comp:listOfReplacedElements xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+          <comp:replacedElement comp:portRef="DO_2_port" comp:submodelRef="Neurohumoral_control" metaid="Connection_DO_2_port_1"/>
+          <comp:replacedElement comp:portRef="DO_2_port" comp:submodelRef="Systemic_microvessels" metaid="Connection_DO_2_port_2"/>
+          <comp:replacedElement comp:portRef="DO_2_port" comp:submodelRef="Pulmonary_microvessels" metaid="Connection_DO_2_port_3"/>
+        </comp:listOfReplacedElements>
+        <comp:replacedBy xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1" comp:portRef="DO_2_port" comp:submodelRef="Tissue_metabolism" metaid="Connection_DO_2_port"/>
+      </parameter>
+      <parameter constant="false" id="F_ALVL" name="F_ALVL" value="0">
+        <comp:listOfReplacedElements xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+          <comp:replacedElement comp:portRef="F_ALVL_port" comp:submodelRef="Tissue_metabolism" metaid="CONNECTION01022"/>
+        </comp:listOfReplacedElements>
+        <comp:replacedBy xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1" comp:portRef="F_ALVL_port" comp:submodelRef="Systemic_arteries" metaid="CONNECTION01021"/>
+      </parameter>
+      <parameter constant="false" id="F_ARVR" name="F_ARVR" value="0">
+        <comp:listOfReplacedElements xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+          <comp:replacedElement comp:portRef="F_ARVR_port" comp:submodelRef="Pulmonary_veins" metaid="CONNECTION00472"/>
+        </comp:listOfReplacedElements>
+        <comp:replacedBy xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1" comp:portRef="F_ARVR_port" comp:submodelRef="Pulmonary_arteries" metaid="CONNECTION00471"/>
+      </parameter>
+      <parameter constant="false" id="F_HLAL" name="F_HLAL" value="0">
+        <comp:listOfReplacedElements xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+          <comp:replacedElement comp:portRef="F_HLAL_port" comp:submodelRef="Systemic_arteries" metaid="CONNECTION00882"/>
+        </comp:listOfReplacedElements>
+        <comp:replacedBy xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1" comp:portRef="F_HLAL_port" comp:submodelRef="Left_ventricle" metaid="CONNECTION00881"/>
+      </parameter>
+      <parameter constant="false" id="F_HRAR" name="F_HRAR" value="0">
+        <comp:listOfReplacedElements xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+          <comp:replacedElement comp:portRef="F_HRAR_port" comp:submodelRef="Pulmonary_arteries" metaid="CONNECTION00262"/>
+        </comp:listOfReplacedElements>
+        <comp:replacedBy xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1" comp:portRef="F_HRAR_port" comp:submodelRef="Right_ventricle" metaid="CONNECTION00261"/>
+      </parameter>
+      <parameter constant="false" id="F_VRHL" name="F_VRHL" value="0">
+        <comp:listOfReplacedElements xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+          <comp:replacedElement comp:portRef="F_VRHL_port" comp:submodelRef="Pulmonary_veins" metaid="CONNECTION00872"/>
+        </comp:listOfReplacedElements>
+        <comp:replacedBy xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1" comp:portRef="F_VRHL_port" comp:submodelRef="Left_ventricle" metaid="CONNECTION00871"/>
+      </parameter>
+      <parameter constant="false" id="Fi_md_sod" name="Fi_md_sod" value="0">
+        <comp:listOfReplacedElements xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+          <comp:replacedElement comp:portRef="Fi_md_sod_port" comp:submodelRef="Glomerular_filtration" metaid="Connection_Fi_md_sod_port_1"/>
+          <comp:replacedElement comp:portRef="Fi_md_sod_port" comp:submodelRef="Renin" metaid="Connection_Fi_md_sod_port_2"/>
+        </comp:listOfReplacedElements>
+        <comp:replacedBy xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1" comp:portRef="Fi_md_sod_port" comp:submodelRef="Sodium" metaid="Connection_Fi_md_sod_port"/>
+      </parameter>
+      <parameter constant="false" id="Fi_u" name="Fi_u" value="0">
+        <comp:listOfReplacedElements xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+          <comp:replacedElement comp:portRef="Fi_u_port" comp:submodelRef="Body_fluids" metaid="CONNECTION01952"/>
+        </comp:listOfReplacedElements>
+        <comp:replacedBy xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1" comp:portRef="Fi_u_port" comp:submodelRef="Diuresis" metaid="CONNECTION01951"/>
+      </parameter>
+      <parameter constant="false" id="GFR" name="GFR" value="0">
+        <comp:listOfReplacedElements xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+          <comp:replacedElement comp:portRef="GFR_port" comp:submodelRef="Diuresis" metaid="Connection_GFR_port_1"/>
+          <comp:replacedElement comp:portRef="GFR_port" comp:submodelRef="Sodium" metaid="Connection_GFR_port_2"/>
+        </comp:listOfReplacedElements>
+        <comp:replacedBy xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1" comp:portRef="GFR_port" comp:submodelRef="Glomerular_filtration" metaid="Connection_GFR_port"/>
+      </parameter>
+      <parameter constant="false" id="H" name="H" value="0">
+        <comp:listOfReplacedElements xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+          <comp:replacedElement comp:portRef="H_port" comp:submodelRef="Left_ventricle" metaid="Connection_H_port_1"/>
+          <comp:replacedElement comp:portRef="H_port" comp:submodelRef="Pulmonary_arteries" metaid="Connection_H_port_2"/>
+          <comp:replacedElement comp:portRef="H_port" comp:submodelRef="Systemic_veins" metaid="Connection_H_port_3"/>
+          <comp:replacedElement comp:portRef="H_port" comp:submodelRef="Systemic_arteries" metaid="Connection_H_port_4"/>
+          <comp:replacedElement comp:portRef="H_port" comp:submodelRef="Right_ventricle" metaid="Connection_H_port_5"/>
+          <comp:replacedElement comp:portRef="H_port" comp:submodelRef="Pulmonary_microvessels" metaid="Connection_H_port_6"/>
+          <comp:replacedElement comp:portRef="H_port" comp:submodelRef="Pulmonary_veins" metaid="Connection_H_port_7"/>
+          <comp:replacedElement comp:portRef="H_port" comp:submodelRef="Systemic_microvessels" metaid="Connection_H_port_8"/>
+        </comp:listOfReplacedElements>
+        <comp:replacedBy xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1" comp:portRef="H_port" comp:submodelRef="Neurohumoral_control" metaid="Connection_H_port"/>
+      </parameter>
+      <parameter constant="false" id="Hct" name="Hct" value="0">
+        <comp:listOfReplacedElements xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+          <comp:replacedElement comp:portRef="Hct_port" comp:submodelRef="Glomerular_filtration" metaid="Connection_Hct_port_1"/>
+        </comp:listOfReplacedElements>
+        <comp:replacedBy xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1" comp:portRef="Hct_port" comp:submodelRef="Systemic_arteries" metaid="Connection_Hct_port"/>
+      </parameter>
+      <parameter constant="false" id="LA_PULSE" name="LA_PULSE" value="0">
+        <comp:listOfReplacedElements xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+          <comp:replacedElement comp:portRef="LA_PULSE_port" comp:submodelRef="Pulmonary_veins" metaid="CONNECTION00302"/>
+        </comp:listOfReplacedElements>
+        <comp:replacedBy xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1" comp:portRef="LA_PULSE_port" comp:submodelRef="Left_ventricle" metaid="CONNECTION00301"/>
+      </parameter>
+      <parameter constant="false" id="MAP" name="MAP" value="0">
+        <comp:listOfReplacedElements xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+          <comp:replacedElement comp:portRef="MAP_port" comp:submodelRef="Glomerular_filtration" metaid="Connection_MAP_port_1"/>
+          <comp:replacedElement comp:portRef="MAP_port" comp:submodelRef="Nervous_system" metaid="Connection_MAP_port_2"/>
+        </comp:listOfReplacedElements>
+        <comp:replacedBy xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1" comp:portRef="MAP_port" comp:submodelRef="Left_ventricle" metaid="Connection_MAP_port"/>
+      </parameter>
+      <parameter constant="false" id="PRC" name="PRC" value="0">
+        <comp:listOfReplacedElements xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+          <comp:replacedElement comp:portRef="PRC_port" comp:submodelRef="Angiotensin" metaid="CONNECTION01612"/>
+        </comp:listOfReplacedElements>
+        <comp:replacedBy xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1" comp:portRef="PRC_port" comp:submodelRef="Renin" metaid="CONNECTION01611"/>
+      </parameter>
+      <parameter constant="false" id="P_AL" name="P_AL" value="0">
+        <comp:listOfReplacedElements xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+          <comp:replacedElement comp:portRef="P_AL_port" comp:submodelRef="Neurohumoral_control" metaid="Connection_P_AL_port_1"/>
+          <comp:replacedElement comp:portRef="P_AL_port" comp:submodelRef="Left_ventricle" metaid="Connection_P_AL_port_2"/>
+          <comp:replacedElement comp:portRef="P_AL_port" comp:submodelRef="Right_ventricle" metaid="Connection_P_AL_port_3"/>
+        </comp:listOfReplacedElements>
+        <comp:replacedBy xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1" comp:portRef="P_AL_port" comp:submodelRef="Systemic_arteries" metaid="Connection_P_AL_port"/>
+      </parameter>
+      <parameter constant="false" id="P_AR" name="P_AR" value="0">
+        <comp:listOfReplacedElements xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+          <comp:replacedElement comp:portRef="P_AR_port" comp:submodelRef="Right_ventricle" metaid="CONNECTION00892"/>
+        </comp:listOfReplacedElements>
+        <comp:replacedBy xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1" comp:portRef="P_AR_port" comp:submodelRef="Pulmonary_arteries" metaid="CONNECTION00891"/>
+      </parameter>
+      <parameter constant="false" id="P_VL" name="P_VL" value="0">
+        <comp:listOfReplacedElements xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+          <comp:replacedElement comp:portRef="P_VL_port" comp:submodelRef="Right_ventricle" metaid="Connection_P_VL_port_1"/>
+          <comp:replacedElement comp:portRef="P_VL_port" comp:submodelRef="Systemic_arteries" metaid="Connection_P_VL_port_2"/>
+        </comp:listOfReplacedElements>
+        <comp:replacedBy xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1" comp:portRef="P_VL_port" comp:submodelRef="Systemic_veins" metaid="Connection_P_VL_port"/>
+      </parameter>
+      <parameter constant="false" id="P_VR" name="P_VR" value="0">
+        <comp:listOfReplacedElements xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+          <comp:replacedElement comp:portRef="P_VR_port" comp:submodelRef="Left_ventricle" metaid="Connection_P_VR_port_1"/>
+          <comp:replacedElement comp:portRef="P_VR_port" comp:submodelRef="Pulmonary_arteries" metaid="Connection_P_VR_port_2"/>
+        </comp:listOfReplacedElements>
+        <comp:replacedBy xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1" comp:portRef="P_VR_port" comp:submodelRef="Pulmonary_veins" metaid="Connection_P_VR_port"/>
+      </parameter>
+      <parameter constant="false" id="P_ra" name="P_ra" value="0">
+        <comp:listOfReplacedElements xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+          <comp:replacedElement comp:portRef="P_ra_port" comp:submodelRef="Hormonal_system" metaid="CONNECTION01372"/>
+        </comp:listOfReplacedElements>
+        <comp:replacedBy xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1" comp:portRef="P_ra_port" comp:submodelRef="Nervous_system" metaid="CONNECTION01371"/>
+      </parameter>
+      <parameter constant="false" id="RA_PULSE" name="RA_PULSE" value="0">
+        <comp:listOfReplacedElements xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+          <comp:replacedElement comp:portRef="RA_PULSE_port" comp:submodelRef="Systemic_veins" metaid="CONNECTION00292"/>
+        </comp:listOfReplacedElements>
+        <comp:replacedBy xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1" comp:portRef="RA_PULSE_port" comp:submodelRef="Right_ventricle" metaid="CONNECTION00291"/>
+      </parameter>
+      <parameter constant="false" id="RSNA" name="RSNA" value="0">
+        <comp:listOfReplacedElements xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+          <comp:replacedElement comp:portRef="RSNA_port" comp:submodelRef="Sodium" metaid="Connection_RSNA_port_1"/>
+          <comp:replacedElement comp:portRef="RSNA_port" comp:submodelRef="Renin" metaid="Connection_RSNA_port_2"/>
+          <comp:replacedElement comp:portRef="RSNA_port" comp:submodelRef="Glomerular_filtration" metaid="Connection_RSNA_port_3"/>
+        </comp:listOfReplacedElements>
+        <comp:replacedBy xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1" comp:portRef="RSNA_port" comp:submodelRef="Nervous_system" metaid="Connection_RSNA_port"/>
+      </parameter>
+      <parameter constant="false" id="Systole" name="Systole" value="0">
+        <comp:listOfReplacedElements xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+          <comp:replacedElement comp:portRef="Systole_port" comp:submodelRef="Right_ventricle" metaid="Connection_Systole_port_1"/>
+          <comp:replacedElement comp:portRef="Systole_port" comp:submodelRef="Left_ventricle" metaid="Connection_Systole_port_2"/>
+        </comp:listOfReplacedElements>
+        <comp:replacedBy xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1" comp:portRef="Systole_port" comp:submodelRef="Coordination_of_LV_and_RV_systolic_time_intervals" metaid="Connection_Systole_port"/>
+      </parameter>
+      <parameter constant="false" id="Systole_L" name="Systole_L" value="0">
+        <comp:listOfReplacedElements xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+          <comp:replacedElement comp:portRef="Systole_L_port" comp:submodelRef="Coordination_of_LV_and_RV_systolic_time_intervals" metaid="CONNECTION00232"/>
+        </comp:listOfReplacedElements>
+        <comp:replacedBy xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1" comp:portRef="Systole_L_port" comp:submodelRef="Left_ventricle" metaid="CONNECTION00231"/>
+      </parameter>
+      <parameter constant="false" id="Systole_R" name="Systole_R" value="0">
+        <comp:listOfReplacedElements xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+          <comp:replacedElement comp:portRef="Systole_R_port" comp:submodelRef="Coordination_of_LV_and_RV_systolic_time_intervals" metaid="CONNECTION00252"/>
+        </comp:listOfReplacedElements>
+        <comp:replacedBy xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1" comp:portRef="Systole_R_port" comp:submodelRef="Right_ventricle" metaid="CONNECTION00251"/>
+      </parameter>
+      <parameter constant="false" id="TBW" name="TBW" value="0">
+        <comp:listOfReplacedElements xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+          <comp:replacedElement comp:portRef="TBW_port" comp:submodelRef="Sodium" metaid="CONNECTION01932"/>
+        </comp:listOfReplacedElements>
+        <comp:replacedBy xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1" comp:portRef="TBW_port" comp:submodelRef="Body_fluids" metaid="CONNECTION01931"/>
+      </parameter>
+      <parameter constant="false" id="VO_2" name="VO_2" value="0">
+        <comp:listOfReplacedElements xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+          <comp:replacedElement comp:portRef="VO_2_port" comp:submodelRef="Neurohumoral_control" metaid="CONNECTION01062"/>
+        </comp:listOfReplacedElements>
+        <comp:replacedBy xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1" comp:portRef="VO_2_port" comp:submodelRef="Tissue_metabolism" metaid="CONNECTION01061"/>
+      </parameter>
+      <parameter constant="false" id="V" name="V" value="0">
+        <comp:listOfReplacedElements xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+          <comp:replacedElement comp:portRef="V_port" comp:submodelRef="Systemic_veins" metaid="Connection_V_port_1"/>
+        </comp:listOfReplacedElements>
+        <comp:replacedBy xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1" comp:portRef="V_port" comp:submodelRef="Body_fluids" metaid="Connection_V_port"/>
+      </parameter>
+      <parameter constant="false" id="V_AL" name="V_AL" value="0">
+        <comp:listOfReplacedElements xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+          <comp:replacedElement comp:portRef="V_AL_port" comp:submodelRef="Systemic_veins" metaid="CONNECTION00332"/>
+        </comp:listOfReplacedElements>
+        <comp:replacedBy xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1" comp:portRef="V_AL_port" comp:submodelRef="Systemic_arteries" metaid="CONNECTION00331"/>
+      </parameter>
+      <parameter constant="false" id="V_AR" name="V_AR" value="0">
+        <comp:listOfReplacedElements xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+          <comp:replacedElement comp:portRef="V_AR_port" comp:submodelRef="Systemic_veins" metaid="Connection_V_AR_port_1"/>
+        </comp:listOfReplacedElements>
+        <comp:replacedBy xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1" comp:portRef="V_AR_port" comp:submodelRef="Pulmonary_arteries" metaid="Connection_V_AR_port"/>
+      </parameter>
+      <parameter constant="false" id="V_HL" name="V_HL" value="0">
+        <comp:listOfReplacedElements xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+          <comp:replacedElement comp:portRef="V_HL_port" comp:submodelRef="Systemic_veins" metaid="Connection_V_HL_port_1"/>
+        </comp:listOfReplacedElements>
+        <comp:replacedBy xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1" comp:portRef="V_HL_port" comp:submodelRef="Left_ventricle" metaid="Connection_V_HL_port"/>
+      </parameter>
+      <parameter constant="false" id="V_HR" name="V_HR" value="0">
+        <comp:listOfReplacedElements xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+          <comp:replacedElement comp:portRef="V_HR_port" comp:submodelRef="Systemic_veins" metaid="CONNECTION00312"/>
+        </comp:listOfReplacedElements>
+        <comp:replacedBy xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1" comp:portRef="V_HR_port" comp:submodelRef="Right_ventricle" metaid="CONNECTION00311"/>
+      </parameter>
+      <parameter constant="false" id="V_VR" name="V_VR" value="0">
+        <comp:listOfReplacedElements xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+          <comp:replacedElement comp:portRef="V_VR_port" comp:submodelRef="Systemic_veins" metaid="Connection_V_VR_port_1"/>
+        </comp:listOfReplacedElements>
+        <comp:replacedBy xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1" comp:portRef="V_VR_port" comp:submodelRef="Pulmonary_veins" metaid="Connection_V_VR_port"/>
+      </parameter>
+      <parameter constant="false" id="Vis" name="Vis" value="0">
+        <comp:listOfReplacedElements xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+          <comp:replacedElement comp:portRef="Vis_port" comp:submodelRef="Pulmonary_arteries" metaid="Connection_Vis_port_1"/>
+        </comp:listOfReplacedElements>
+        <comp:replacedBy xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1" comp:portRef="Vis_port" comp:submodelRef="Systemic_arteries" metaid="Connection_Vis_port"/>
+      </parameter>
+      <parameter constant="false" id="Y_ALVL" name="Y_ALVL" value="0">
+        <comp:listOfReplacedElements xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+          <comp:replacedElement comp:portRef="Y_ALVL_port" comp:submodelRef="Systemic_arteries" metaid="CONNECTION00322"/>
+        </comp:listOfReplacedElements>
+        <comp:replacedBy xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1" comp:portRef="Y_ALVL_port" comp:submodelRef="Systemic_microvessels" metaid="CONNECTION00321"/>
+      </parameter>
+      <parameter constant="false" id="Y_ARVR" name="Y_ARVR" value="0">
+        <comp:listOfReplacedElements xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+          <comp:replacedElement comp:portRef="Y_ARVR_port" comp:submodelRef="Pulmonary_arteries" metaid="CONNECTION00272"/>
+        </comp:listOfReplacedElements>
+        <comp:replacedBy xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1" comp:portRef="Y_ARVR_port" comp:submodelRef="Pulmonary_microvessels" metaid="CONNECTION00271"/>
+      </parameter>
+      <parameter constant="false" id="eta_pt_sodreab" name="eta_pt_sodreab" value="0">
+        <comp:listOfReplacedElements xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+          <comp:replacedElement comp:portRef="eta_pt_sodreab_port" comp:submodelRef="Diuresis" metaid="CONNECTION01942"/>
+        </comp:listOfReplacedElements>
+        <comp:replacedBy xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1" comp:portRef="eta_pt_sodreab_port" comp:submodelRef="Sodium" metaid="CONNECTION01941"/>
+      </parameter>
+      <parameter constant="false" id="nH" name="nH" value="0">
+        <comp:listOfReplacedElements xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1">
+          <comp:replacedElement comp:portRef="nH_port" comp:submodelRef="Right_ventricle" metaid="Connection_nH_port_1"/>
+          <comp:replacedElement comp:portRef="nH_port" comp:submodelRef="Left_ventricle" metaid="Connection_nH_port_2"/>
+        </comp:listOfReplacedElements>
+        <comp:replacedBy xmlns:comp="http://www.sbml.org/sbml/level3/version1/comp/version1" comp:portRef="nH_port" comp:submodelRef="Neurohumoral_control" metaid="Connection_nH_port"/>
+      </parameter>
+      <parameter constant="true" id="timeScale_Aldosterone" name="timeScale_Aldosterone" value="60"/>
+      <parameter constant="true" id="timeScale_Angiotensin" name="timeScale_Angiotensin" value="60"/>
+      <parameter constant="true" id="timeScale_Body_fluids" name="timeScale_Body_fluids" value="60"/>
+      <parameter constant="true" id="timeScale_Diuresis" name="timeScale_Diuresis" value="60"/>
+      <parameter constant="true" id="timeScale_Glomerular_filtration" name="timeScale_Glomerular_filtration" value="60"/>
+      <parameter constant="true" id="timeScale_Hormonal_system" name="timeScale_Hormonal_system" value="60"/>
+      <parameter constant="true" id="timeScale_Nervous_system" name="timeScale_Nervous_system" value="60"/>
+      <parameter constant="true" id="timeScale_Renin" name="timeScale_Renin" value="60"/>
+      <parameter constant="true" id="timeScale_Sodium" name="timeScale_Sodium" value="60"/>
+    </listOfParameters>
+  </model>
+</sbml>

@@ -1,0 +1,44 @@
+# =============================================================================
+# Independent validation directions for the multiplicative (gain) edges  *** DRAFT ***
+# =============================================================================
+# For each modulation "modulator scales (edge_source -> edge_target)", the INTERACTION DIRECTION
+# known independently from physiology: does raising the modulator make the edge's effect stronger
+# (amplify, +) or weaker / toward reversal (dampen, -)? Anchored to a NAMED physiological effect +
+# textbook (no fabricated PMIDs). PhysioMap derives its prediction as iota = (modulation sign mu) x
+# (base-edge sign sigma) — mu and sigma are curated in SEPARATE layers (the gain edge and the
+# additive causal edge), so iota matching the known direction is a JOINT-consistency check of both
+# layers, not a restatement of one of them.
+#
+# fields: modulator, edge_source, edge_target, expected (+|-), effect (named), ref (anchor)
+# =============================================================================
+interactions:
+  - {modulator: beta1_adrenergic_chronotropic_responsiveness, edge_source: sympathetic_tone, edge_target: heart_rate,
+     expected: "+", effect: "beta1-adrenergic sensitization of the chronotropic response", ref: "Guyton & Hall 11e, Ch. 9-10 (autonomic control of heart rate)"}
+  - {modulator: angiotensin_II, edge_source: baroreceptor_firing_rate, edge_target: sympathetic_tone,
+     expected: "-", effect: "angiotensin-II blunting / resetting of baroreflex sensitivity", ref: "Boron & Boulpaep, Medical Physiology (baroreflex resetting)"}
+  - {modulator: arterial_pco2, edge_source: arterial_po2, edge_target: hemoglobin_o2_saturation,
+     expected: "-", effect: "Bohr effect (CO2 lowers Hb-O2 affinity)", ref: "Guyton & Hall 11e, Ch. 40 (O2 transport)"}
+  - {modulator: arterial_ph, edge_source: arterial_po2, edge_target: hemoglobin_o2_saturation,
+     expected: "+", effect: "Bohr effect (alkalosis raises Hb-O2 affinity)", ref: "Guyton & Hall 11e, Ch. 40"}
+  - {modulator: core_temperature, edge_source: arterial_po2, edge_target: hemoglobin_o2_saturation,
+     expected: "-", effect: "temperature right-shift of the O2-Hb dissociation curve", ref: "Guyton & Hall 11e, Ch. 40"}
+  - {modulator: erythrocyte_23_bpg, edge_source: arterial_po2, edge_target: hemoglobin_o2_saturation,
+     expected: "-", effect: "2,3-BPG right-shift (lowers Hb-O2 affinity)", ref: "Guyton & Hall 11e, Ch. 40"}
+  - {modulator: cortisol, edge_source: plasma_glucagon, edge_target: hepatic_glucose_production,
+     expected: "+", effect: "glucocorticoid permissiveness of glucagon gluconeogenesis", ref: "Boron & Boulpaep (glucocorticoid permissive action)"}
+  - {modulator: cortisol, edge_source: epinephrine, edge_target: hepatic_glycogenolysis,
+     expected: "+", effect: "glucocorticoid permissiveness of catecholamine glycogenolysis", ref: "Boron & Boulpaep"}
+  - {modulator: cortisol, edge_source: epinephrine, edge_target: lipolysis_rate,
+     expected: "+", effect: "glucocorticoid permissiveness of catecholamine lipolysis", ref: "Boron & Boulpaep"}
+  - {modulator: cortisol, edge_source: norepinephrine, edge_target: total_peripheral_resistance,
+     expected: "+", effect: "glucocorticoid permissiveness of the catecholamine pressor response", ref: "Boron & Boulpaep (vascular permissive action)"}
+  - {modulator: free_t3, edge_source: epinephrine, edge_target: lipolysis_rate,
+     expected: "+", effect: "thyroid potentiation of catecholamine lipolysis", ref: "Guyton & Hall 11e, Ch. 76 (thyroid)"}
+  - {modulator: free_t3, edge_source: sympathetic_tone, edge_target: metabolic_rate,
+     expected: "+", effect: "thyroid potentiation of sympathetic thermogenesis", ref: "Guyton & Hall 11e, Ch. 76"}
+  - {modulator: free_t3, edge_source: sympathetic_tone, edge_target: myocardial_contractility,
+     expected: "+", effect: "thyroid beta-adrenergic sensitization of contractility", ref: "Guyton & Hall 11e, Ch. 76"}
+  - {modulator: plasma_adiponectin, edge_source: plasma_insulin, edge_target: peripheral_glucose_uptake,
+     expected: "+", effect: "adiponectin enhancement of insulin sensitivity", ref: "Boron & Boulpaep (adipokines)"}
+  - {modulator: plasma_calcium, edge_source: synaptic_acetylcholine_concentration, edge_target: postsynaptic_membrane_potential,
+     expected: "-", effect: "extracellular Ca2+ membrane-stabilization (hypocalcemia -> hyperexcitability)", ref: "Guyton & Hall 11e, Ch. 5 (membrane potentials)"}

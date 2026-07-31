@@ -1,0 +1,710 @@
+# =============================================================================
+# HPO "other_metabolites" coverage fragment        *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Author: PhysioMap HPO-coverage authoring agent (biomedical curation pass).
+# Purpose: ground the directional HPO "abnormal-quantity" gap terms in the
+#   "other_metabolites" theme as PhysioMap nodes so the HPO benchmark can map each
+#   term to a (node, sign). This is a deliberately BROAD grounding fragment: it is
+#   mostly a self-contained ISLAND of analyte/activity nodes (a grounded node with
+#   no edges legitimately abstains under comparative statics). Edges are added ONLY
+#   where a textbook/database mechanism gives a defensible interventional sign.
+#
+# Provenance (general): Boron & Boulpaep *Medical Physiology* (acid-base, electro-
+#   lytes, sweat/CFTR, energy expenditure, cardiac); Lehninger *Principles of
+#   Biochemistry* (heme/porphyrin pathway, sulfur metabolism, one-carbon/B12);
+#   Harrison's *Principles of Internal Medicine* (porphyrias, mastocytosis, lyso-
+#   somal storage); Williams *Textbook of Endocrinology*. Small-molecule entity
+#   IRIs verified by grep against the downloaded ChEBI.obo; protein/enzyme IRIs vs
+#   PR.obo; cells/organs vs CL.obo / UBERON.obo. Where an IRI could NOT be verified
+#   the field is null (never fabricated).
+#
+# Scales: plasma/serum/urine/stool/sweat analytes and vital/ECG/hemodynamic
+#   measures = organ_system (whole-body lab/vital readouts). Enzyme/transporter
+#   ACTIVITY roots = cellular, with a verified bearer_entity_iri (the cell/organ
+#   that bears the activity) where identifiable.
+#
+# PATO qualities used (verified vs PATO.obo): concentration PATO:0000033;
+#   catalytic activity PATO:0001414; rate PATO:0000161; pressure PATO:0001025;
+#   temperature PATO:0000146; volume PATO:0000918; contractility PATO:0001579;
+#   acidity PATO:0001842; diameter PATO:0001334; electric potential PATO:0001464.
+#
+# Existing nodes REUSED (no new node created): core_temperature, plasma_potassium,
+#   metabolic_rate, blood_volume, myocardial_contractility. Their HPO terms are
+#   mapped to those ids in hpo_mappings (not redefined here).
+# =============================================================================
+
+name: hpo_other_metabolites
+description: >-
+  DRAFT grounding fragment for the HPO "other_metabolites" theme: plasma/urine/stool/
+  sweat metabolite pools (porphyrins and heme-pathway intermediates, sulfur metabolites,
+  bone-turnover markers, eicosanoids, glycosphingolipids/GAGs, exogenous compounds,
+  electrolytes) plus the corresponding enzyme/transporter ACTIVITY roots and a few
+  hemodynamic/ECG/energy measures. Mostly a self-contained island; a small set of
+  heme-pathway and sulfur-pathway causal edges encode defensible enzyme->substrate/
+  product signs. Single/most-organism scale, Phase 1.
+
+nodes:
+  # ----- electrolytes / acid-base (organ_system lab readouts) -------------------
+  - id: plasma_chloride
+    label: plasma chloride concentration
+    scale: organ_system
+    entity_iri: CHEBI:17996          # chloride (ChEBI.obo verified)
+    quality_iri: PATO:0000033
+  - id: sweat_chloride
+    label: sweat chloride concentration
+    scale: organ_system
+    entity_iri: CHEBI:17996
+    quality_iri: PATO:0000033
+  - id: stool_chloride
+    label: stool (fecal) chloride concentration
+    scale: organ_system
+    entity_iri: CHEBI:17996
+    quality_iri: PATO:0000033
+  - id: fecal_sodium
+    label: fecal sodium concentration
+    scale: organ_system
+    entity_iri: CHEBI:29101          # sodium(1+) (ChEBI.obo verified)
+    quality_iri: PATO:0000033
+  - id: serum_anion_gap
+    label: serum anion gap
+    scale: organ_system
+    entity_iri: null                 # derived calculated quantity, no single entity
+    quality_iri: PATO:0000033
+  - id: fecal_ph
+    label: fecal (stool) pH
+    scale: organ_system
+    entity_iri: UBERON:0001988       # feces (bearer of the acidity)
+    quality_iri: PATO:0001842        # acidity
+
+  # ----- porphyrins / heme-pathway intermediates (organ_system pools) -----------
+  - id: plasma_porphyrin
+    label: plasma (circulating) total porphyrin concentration
+    scale: organ_system
+    entity_iri: CHEBI:8337           # porphyrin (ChEBI.obo verified)
+    quality_iri: PATO:0000033
+  - id: urinary_porphyrin
+    label: urinary total porphyrin concentration
+    scale: organ_system
+    entity_iri: CHEBI:8337
+    quality_iri: PATO:0000033
+  - id: urinary_coproporphyrin
+    label: urinary coproporphyrin concentration
+    scale: organ_system
+    entity_iri: CHEBI:23388          # coproporphyrin (ChEBI.obo verified)
+    quality_iri: PATO:0000033
+  - id: urinary_uroporphyrin
+    label: urinary uroporphyrin concentration
+    scale: organ_system
+    entity_iri: CHEBI:27259          # uroporphyrin (ChEBI.obo verified)
+    quality_iri: PATO:0000033
+  - id: urinary_pentacarboxylporphyrin
+    label: urinary pentacarboxylporphyrin concentration
+    scale: organ_system
+    entity_iri: null
+    quality_iri: PATO:0000033
+  - id: urinary_hexacarboxylporphyrin
+    label: urinary hexacarboxylporphyrin concentration
+    scale: organ_system
+    entity_iri: null
+    quality_iri: PATO:0000033
+  - id: plasma_heptacarboxylporphyrin
+    label: plasma heptacarboxylporphyrin concentration
+    scale: organ_system
+    entity_iri: null
+    quality_iri: PATO:0000033
+  - id: plasma_uroporphyrin
+    label: plasma uroporphyrin concentration
+    scale: organ_system
+    entity_iri: CHEBI:27259
+    quality_iri: PATO:0000033
+  - id: erythrocyte_protoporphyrin
+    label: erythrocyte protoporphyrin concentration
+    scale: organ_system
+    entity_iri: CHEBI:15430          # protoporphyrin (ChEBI.obo verified)
+    quality_iri: PATO:0000033
+  - id: erythrocyte_coproporphyrin
+    label: erythrocyte coproporphyrin concentration
+    scale: organ_system
+    entity_iri: CHEBI:23388
+    quality_iri: PATO:0000033
+  - id: erythrocyte_uroporphyrin
+    label: erythrocyte uroporphyrin concentration
+    scale: organ_system
+    entity_iri: CHEBI:27259
+    quality_iri: PATO:0000033
+  - id: erythrocyte_free_porphyrin
+    label: erythrocyte free porphyrin concentration
+    scale: organ_system
+    entity_iri: CHEBI:8337
+    quality_iri: PATO:0000033
+  - id: fecal_coproporphyrin
+    label: fecal (stool) coproporphyrin concentration
+    scale: organ_system
+    entity_iri: CHEBI:23388
+    quality_iri: PATO:0000033
+  - id: fecal_protoporphyrin
+    label: fecal (stool) protoporphyrin concentration
+    scale: organ_system
+    entity_iri: CHEBI:15430
+    quality_iri: PATO:0000033
+  - id: urinary_porphobilinogen
+    label: urinary porphobilinogen concentration
+    scale: organ_system
+    entity_iri: CHEBI:17381          # porphobilinogen (ChEBI.obo verified)
+    quality_iri: PATO:0000033
+  - id: urinary_ala
+    label: urinary delta-aminolevulinic acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:17549          # 5-aminolevulinic acid (ChEBI.obo verified)
+    quality_iri: PATO:0000033
+
+  # ----- bilirubin/heme degradation pools (urine/stool) -------------------------
+  - id: plasma_biliverdin
+    label: plasma (circulating) biliverdin concentration
+    scale: organ_system
+    entity_iri: CHEBI:17033          # biliverdin (ChEBI.obo verified)
+    quality_iri: PATO:0000033
+  - id: urinary_biliverdin
+    label: urinary biliverdin concentration
+    scale: organ_system
+    entity_iri: CHEBI:17033
+    quality_iri: PATO:0000033
+  - id: stool_urobilinogen
+    label: stool (fecal) urobilinogen concentration
+    scale: organ_system
+    entity_iri: CHEBI:29026          # urobilinogen (ChEBI.obo verified)
+    quality_iri: PATO:0000033
+  - id: urinary_urobilinogen
+    label: urinary urobilinogen concentration
+    scale: organ_system
+    entity_iri: CHEBI:29026
+    quality_iri: PATO:0000033
+  - id: urine_urobilinogen
+    label: urine urobilinogen concentration (decreased)
+    scale: organ_system
+    entity_iri: CHEBI:29026
+    quality_iri: PATO:0000033
+
+  # ----- sulfur metabolites (urine/plasma) --------------------------------------
+  - id: urinary_sulfite
+    label: urinary sulfite concentration
+    scale: organ_system
+    entity_iri: CHEBI:17359          # sulfite (ChEBI.obo verified)
+    quality_iri: PATO:0000033
+  - id: urinary_sulfate
+    label: urinary sulfate concentration
+    scale: organ_system
+    entity_iri: CHEBI:16189          # sulfate (ChEBI.obo verified)
+    quality_iri: PATO:0000033
+  - id: plasma_sulfate
+    label: plasma (circulating) sulfate concentration
+    scale: organ_system
+    entity_iri: CHEBI:16189
+    quality_iri: PATO:0000033
+  - id: urinary_thiosulfate
+    label: urinary thiosulfate concentration
+    scale: organ_system
+    entity_iri: CHEBI:26977          # thiosulfate (ChEBI.obo verified)
+    quality_iri: PATO:0000033
+  - id: plasma_thiosulfate
+    label: plasma (circulating) thiosulfate concentration
+    scale: organ_system
+    entity_iri: CHEBI:26977
+    quality_iri: PATO:0000033
+
+  # ----- eicosanoids / lipid mediators ------------------------------------------
+  - id: plasma_prostaglandin_e2
+    label: plasma (serum) prostaglandin E2 concentration
+    scale: organ_system
+    entity_iri: CHEBI:15551          # prostaglandin E2 (ChEBI.obo verified)
+    quality_iri: PATO:0000033
+  - id: urinary_pge2
+    label: urinary prostaglandin E2 concentration
+    scale: organ_system
+    entity_iri: CHEBI:15551
+    quality_iri: PATO:0000033
+  - id: urinary_pge2_metabolite
+    label: urinary prostaglandin E2 metabolite concentration
+    scale: organ_system
+    entity_iri: null
+    quality_iri: PATO:0000033
+  - id: plasma_thromboxane_b2
+    label: plasma (serum) thromboxane B2 concentration
+    scale: organ_system
+    entity_iri: CHEBI:28728          # thromboxane B2 (ChEBI.obo verified)
+    quality_iri: PATO:0000033
+  - id: plasma_leukotriene_c4
+    label: plasma (circulating) leukotriene C4 concentration
+    scale: organ_system
+    entity_iri: CHEBI:16978          # leukotriene C4 (ChEBI.obo verified)
+    quality_iri: PATO:0000033
+  - id: plasma_12_hete
+    label: plasma (circulating) 12-HETE concentration
+    scale: organ_system
+    entity_iri: CHEBI:19138          # 12-HETE (ChEBI.obo verified)
+    quality_iri: PATO:0000033
+  - id: plasma_paf
+    label: plasma platelet-activating factor concentration
+    scale: organ_system
+    entity_iri: null                 # PAF not matched in ChEBI.obo by exact name
+    quality_iri: PATO:0000033
+
+  # ----- glycosphingolipids / GAGs / glycoconjugates ----------------------------
+  - id: plasma_glucosylsphingosine
+    label: plasma (circulating) glucosylsphingosine concentration
+    scale: organ_system
+    entity_iri: CHEBI:4177           # D-glucosylsphingosine (stereochem-agnostic parent; beta-D anomer CHEBI:71981)
+    quality_iri: PATO:0000033
+  - id: plasma_lyso_gb3
+    label: plasma (circulating) lyso-globotriaosylsphingosine concentration
+    scale: organ_system
+    entity_iri: null
+    quality_iri: PATO:0000033
+  - id: tissue_sphingomyelin
+    label: tissue sphingomyelin concentration
+    scale: tissue
+    entity_iri: CHEBI:64583          # sphingomyelin (ChEBI.obo verified)
+    quality_iri: PATO:0000033
+  - id: plasma_heparan_sulfate
+    label: plasma (circulating) heparan sulfate concentration
+    scale: organ_system
+    entity_iri: CHEBI:28815          # heparan sulfate (ChEBI.obo verified)
+    quality_iri: PATO:0000033
+  - id: urinary_hyaluronic_acid
+    label: urinary hyaluronic acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:16336          # hyaluronic acid (ChEBI.obo verified)
+    quality_iri: PATO:0000033
+  - id: plasma_aspartylglucosamine
+    label: plasma (circulating) aspartylglucosamine concentration
+    scale: organ_system
+    entity_iri: null
+    quality_iri: PATO:0000033
+  - id: tn_antigen_level
+    label: Tn-antigen level
+    scale: organ_system
+    entity_iri: null
+    quality_iri: PATO:0000033
+  - id: plasma_sialic_acid
+    label: plasma (circulating) sialic acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:26667          # sialic acid (ChEBI.obo verified)
+    quality_iri: PATO:0000033
+  - id: plasma_n_acetylneuraminic_acid
+    label: N-acetylneuraminic acid level (fibroblasts/plasma)
+    scale: organ_system
+    entity_iri: CHEBI:17012          # N-acetylneuraminic acid (ChEBI.obo verified)
+    quality_iri: PATO:0000033
+  - id: urinary_dolichol
+    label: urinary dolichol concentration
+    scale: organ_system
+    entity_iri: CHEBI:16091          # dolichol (ChEBI.obo verified)
+    quality_iri: PATO:0000033
+
+  # ----- bone-turnover / collagen markers ---------------------------------------
+  - id: plasma_pinp
+    label: plasma (circulating) PINP (procollagen type I N-propeptide) concentration
+    scale: organ_system
+    entity_iri: null
+    quality_iri: PATO:0000033
+  - id: plasma_deoxypyridinoline
+    label: plasma (circulating) deoxypyridinoline concentration
+    scale: organ_system
+    entity_iri: CHEBI:89510          # deoxypyridinoline (ChEBI.obo verified)
+    quality_iri: PATO:0000033
+  - id: plasma_pyridinoline
+    label: plasma (circulating) pyridinoline concentration
+    scale: organ_system
+    entity_iri: CHEBI:88539          # pyridinoline (ChEBI.obo verified)
+    quality_iri: PATO:0000033
+  - id: urinary_pyridinoline
+    label: urinary pyridinoline concentration
+    scale: organ_system
+    entity_iri: CHEBI:88539
+    quality_iri: PATO:0000033
+
+  # ----- bile acids / sterol intermediates --------------------------------------
+  - id: urinary_bile_acids
+    label: urinary bile-acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:3098           # bile acid (ChEBI.obo verified)
+    quality_iri: PATO:0000033
+  - id: plasma_trihydroxycholestanoic_acid
+    label: plasma (circulating) trihydroxycholestanoic acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:18402          # 3alpha,7alpha,12alpha-trihydroxy-5beta-cholestan-26-oic acid (THCA parent; stereo forms 25R/25S)
+    quality_iri: PATO:0000033
+  - id: urinary_dihydroxycholestanoic_acid
+    label: urinary dihydroxycholestanoic acid concentration
+    scale: organ_system
+    entity_iri: CHEBI:16577          # 3alpha,7alpha-dihydroxy-5beta-cholestan-26-oic acid (DHCA parent; stereo form 25R)
+    quality_iri: PATO:0000033
+
+  # ----- amines / histamine / nicotine metabolites ------------------------------
+  - id: plasma_histamine
+    label: plasma (circulating) histamine concentration
+    scale: organ_system
+    entity_iri: CHEBI:18295          # histamine (ChEBI.obo verified)
+    quality_iri: PATO:0000033
+  - id: urinary_histamine
+    label: urinary histamine concentration
+    scale: organ_system
+    entity_iri: CHEBI:18295
+    quality_iri: PATO:0000033
+  - id: urinary_n_methylhistamine
+    label: urinary N-methylhistamine concentration
+    scale: organ_system
+    entity_iri: CHEBI:29009          # N(tele)-methylhistamine (clinical urinary histamine metabolite, HNMT product)
+    quality_iri: PATO:0000033
+  - id: plasma_cotinine
+    label: plasma cotinine concentration
+    scale: organ_system
+    entity_iri: CHEBI:68641          # (-)-cotinine (physiological nicotine metabolite; label enantiomer-unspecified)
+    quality_iri: PATO:0000033
+  - id: plasma_nicotinurate
+    label: plasma (circulating) nicotinurate concentration
+    scale: organ_system
+    entity_iri: CHEBI:7563           # N-nicotinoylglycine (= nicotinuric acid; neutral-acid form of nicotinurate)
+    quality_iri: PATO:0000033
+
+  # ----- exogenous compounds / intoxicants --------------------------------------
+  - id: plasma_ethanol
+    label: plasma (circulating) ethanol concentration
+    scale: organ_system
+    entity_iri: CHEBI:16236          # ethanol (ChEBI.obo verified)
+    quality_iri: PATO:0000033
+  - id: blood_ethylene_glycol
+    label: blood ethylene glycol concentration
+    scale: organ_system
+    entity_iri: CHEBI:30742          # ethylene glycol (ChEBI.obo verified)
+    quality_iri: PATO:0000033
+  - id: plasma_propylene_glycol
+    label: blood propylene glycol concentration
+    scale: organ_system
+    entity_iri: CHEBI:16997          # propane-1,2-diol = propylene glycol (ChEBI.obo verified)
+    quality_iri: PATO:0000033
+
+  # ----- glycerol / inositol / phospho / pyrophosphate --------------------------
+  - id: plasma_glycerol
+    label: plasma (circulating) glycerol concentration
+    scale: organ_system
+    entity_iri: CHEBI:17754          # glycerol (ChEBI.obo verified)
+    quality_iri: PATO:0000033
+  - id: urinary_glycerol
+    label: urinary glycerol concentration
+    scale: organ_system
+    entity_iri: CHEBI:17754
+    quality_iri: PATO:0000033
+  - id: plasma_myo_inositol
+    label: plasma (circulating) myo-inositol concentration
+    scale: organ_system
+    entity_iri: CHEBI:17268          # myo-inositol (ChEBI.obo verified)
+    quality_iri: PATO:0000033
+  - id: plasma_phosphoethanolamine
+    label: plasma (circulating) phosphoethanolamine concentration
+    scale: organ_system
+    entity_iri: CHEBI:36711          # phosphoethanolamine (ChEBI.obo verified)
+    quality_iri: PATO:0000033
+  - id: plasma_pyrophosphate
+    label: plasma pyrophosphate (diphosphate) concentration
+    scale: organ_system
+    entity_iri: null                 # diphosphate not matched by exact name in ChEBI.obo
+    quality_iri: PATO:0000033
+  - id: urinary_pyrophosphate
+    label: urinary pyrophosphate (diphosphate) concentration
+    scale: organ_system
+    entity_iri: null
+    quality_iri: PATO:0000033
+  - id: plasma_acetoacetate
+    label: plasma acetoacetate concentration
+    scale: organ_system
+    entity_iri: CHEBI:13705          # acetoacetate (ChEBI.obo verified)
+    quality_iri: PATO:0000033
+  - id: urinary_biopterin
+    label: urinary biopterin concentration
+    scale: organ_system
+    entity_iri: CHEBI:15373          # biopterin (ChEBI.obo verified)
+    quality_iri: PATO:0000033
+  - id: urinary_7_biopterin
+    label: urinary 7-biopterin concentration
+    scale: organ_system
+    entity_iri: null
+    quality_iri: PATO:0000033
+
+  # ----- indican (urinary indoxyl sulfate) --------------------------------------
+  - id: urinary_indican
+    label: urinary indican concentration
+    scale: organ_system
+    entity_iri: null                 # "urinary indican" = indoxyl sulfate; ChEBI:16700 "indican" is the plant glucoside (different) -> left null
+    quality_iri: PATO:0000033
+
+  # ----- tumor / pancreatic / gastric markers -----------------------------------
+  - id: plasma_ca19_9
+    label: plasma (serum) carbohydrate antigen 19-9 (CA19-9) concentration
+    scale: organ_system
+    entity_iri: null
+    quality_iri: PATO:0000033
+  - id: plasma_amylase
+    label: plasma (serum) amylase activity concentration
+    scale: organ_system
+    entity_iri: null
+    quality_iri: PATO:0000033
+  - id: plasma_pepsinogen_i
+    label: plasma (serum) pepsinogen I concentration
+    scale: organ_system
+    entity_iri: null
+    quality_iri: PATO:0000033
+  - id: plasma_acid_phosphatase
+    label: plasma (serum) acid phosphatase activity concentration
+    scale: organ_system
+    entity_iri: null
+    quality_iri: PATO:0000033
+  - id: plasma_tryptase
+    label: plasma (serum) total tryptase concentration
+    scale: organ_system
+    entity_iri: null                 # PR:000016935 is the protein; the analyte is total tryptase pool
+    quality_iri: PATO:0000033
+  - id: fecal_pancreatic_elastase
+    label: fecal pancreatic elastase concentration
+    scale: organ_system
+    entity_iri: null
+    quality_iri: PATO:0000033
+  - id: plasma_gm_csf
+    label: plasma (circulating) GM-CSF concentration
+    scale: organ_system
+    entity_iri: PR:P04141            # granulocyte-macrophage colony-stimulating factor (human, CSF2), UniProtKB:P04141
+    quality_iri: PATO:0000033
+
+  # ----- hemodynamic / cardiac / ECG measures -----------------------------------
+  - id: systolic_blood_pressure
+    label: systolic blood pressure
+    scale: organ_system
+    entity_iri: null
+    quality_iri: PATO:0001025
+  - id: diastolic_blood_pressure
+    label: diastolic blood pressure
+    scale: organ_system
+    entity_iri: null
+    quality_iri: PATO:0001025
+  - id: jugular_venous_pressure
+    label: jugular venous pressure
+    scale: organ_system
+    entity_iri: null
+    quality_iri: PATO:0001025
+  - id: cardiac_index
+    label: cardiac index (cardiac output per body surface area)
+    scale: organ_system
+    entity_iri: null
+    quality_iri: PATO:0000161
+  - id: lv_end_diastolic_diameter
+    label: left ventricular end-diastolic diameter
+    scale: organ
+    entity_iri: UBERON:0002084       # heart left ventricle (UBERON.obo verified)
+    quality_iri: PATO:0001334        # diameter
+  - id: aortic_transvalvular_gradient
+    label: aortic transvalvular pressure gradient
+    scale: organ_system
+    entity_iri: null
+    quality_iri: PATO:0001025
+  - id: ecg_qrs_voltage
+    label: ECG QRS voltage
+    scale: organ_system
+    entity_iri: null
+    quality_iri: PATO:0001464        # electric potential
+
+  # ----- energy expenditure -----------------------------------------------------
+  - id: resting_energy_expenditure
+    label: resting energy expenditure
+    scale: organ_system
+    entity_iri: null
+    quality_iri: PATO:0000161
+
+  # ----- enzyme/transporter ACTIVITY roots (cellular; bearer where verifiable) --
+  - id: methionine_synthase_activity
+    label: methionine synthase (MTR) catalytic activity
+    scale: cellular
+    entity_iri: PR:000010747         # methionine synthase (PR.obo verified)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000182    # hepatocyte (CL.obo verified)
+  - id: methylmalonyl_coa_mutase_activity
+    label: methylmalonyl-CoA mutase (MMUT) catalytic activity
+    scale: cellular
+    entity_iri: PR:000023912         # methylmalonyl-CoA mutase (PR.obo verified)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000182    # hepatocyte
+  - id: sulfite_oxidase_activity
+    label: sulfite oxidase (SUOX) catalytic activity
+    scale: cellular
+    entity_iri: PR:P51687            # sulfite oxidase, mitochondrial (human, SUOX), UniProtKB:P51687
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000182    # hepatocyte
+  - id: glyoxalase_activity
+    label: glyoxalase catalytic activity
+    scale: cellular
+    entity_iri: null
+    quality_iri: PATO:0001414
+  - id: catalase_activity
+    label: catalase (CAT) catalytic activity (erythrocyte/circulating)
+    scale: cellular
+    entity_iri: PR:000005061         # catalase (PR.obo verified)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000232    # erythrocyte
+  - id: superoxide_dismutase_activity
+    label: superoxide dismutase catalytic activity
+    scale: cellular
+    entity_iri: null                 # not matched by exact name in PR.obo
+    quality_iri: PATO:0001414
+  - id: glutathione_reductase_activity
+    label: glutathione reductase (GSR) catalytic activity (erythrocyte)
+    scale: cellular
+    entity_iri: PR:000022829         # glutathione reductase (PR.obo verified)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000232    # erythrocyte
+  - id: porphobilinogen_deaminase_activity
+    label: porphobilinogen deaminase (HMBS) catalytic activity (erythrocyte)
+    scale: cellular
+    entity_iri: PR:000008623         # porphobilinogen deaminase (PR.obo verified)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000232    # erythrocyte
+  - id: uroporphyrinogen_iii_synthase_activity
+    label: uroporphyrinogen-III synthase (UROS) catalytic activity (erythrocyte)
+    scale: cellular
+    entity_iri: PR:000017135         # uroporphyrinogen-III synthase (PR.obo verified)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000232    # erythrocyte
+  - id: uroporphyrinogen_decarboxylase_activity
+    label: uroporphyrinogen decarboxylase (UROD) catalytic activity
+    scale: cellular
+    entity_iri: PR:000017134         # uroporphyrinogen decarboxylase (PR.obo verified)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000182    # hepatocyte
+  - id: ala_dehydratase_activity
+    label: delta-aminolevulinate dehydratase (ALAD) catalytic activity (erythrocyte)
+    scale: cellular
+    entity_iri: PR:P13716            # delta-aminolevulinic acid dehydratase (human), UniProtKB:P13716
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000232    # erythrocyte
+  - id: myeloperoxidase_activity
+    label: myeloperoxidase (MPO) catalytic activity (neutrophil)
+    scale: cellular
+    entity_iri: PR:000010543         # myeloperoxidase (PR.obo verified)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000775    # neutrophil (CL.obo verified)
+  - id: heme_oxygenase_activity
+    label: heme oxygenase catalytic activity
+    scale: cellular
+    entity_iri: null                 # not matched by exact name in PR.obo
+    quality_iri: PATO:0001414
+  - id: c27_3beta_hsd_activity
+    label: C27 3beta-hydroxysteroid dehydrogenase (HSD3B7) activity (cultured fibroblasts)
+    scale: cellular
+    entity_iri: PR:Q9H2F3            # 3 beta-hydroxysteroid dehydrogenase type 7 (human), UniProtKB:Q9H2F3
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000057    # fibroblast (CL.obo verified)
+  - id: ocrl1_activity
+    label: inositol polyphosphate 5-phosphatase OCRL-1 activity (cultured fibroblasts)
+    scale: cellular
+    entity_iri: PR:Q01968            # inositol polyphosphate 5-phosphatase OCRL (human), UniProtKB:Q01968
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000057    # fibroblast
+  - id: lysyl_hydroxylase_1_activity
+    label: procollagen-lysine 2-oxoglutarate 5-dioxygenase 1 (PLOD1) activity (cultured fibroblasts)
+    scale: cellular
+    entity_iri: PR:Q02809            # procollagen-lysine,2-oxoglutarate 5-dioxygenase 1 (human), UniProtKB:Q02809
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000057    # fibroblast
+  - id: pancreatic_amylase_activity
+    label: pancreatic isoamylase catalytic activity (pancreatic acinar cell)
+    scale: cellular
+    entity_iri: PR:P04746            # pancreatic alpha-amylase (human, AMY2A), UniProtKB:P04746 (dominant secreted isozyme)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0002064    # pancreatic acinar cell (CL.obo verified)
+
+causal_edges:
+  # Heme/porphyrin biosynthetic pathway (Lehninger, "Biosynthesis of porphyrins";
+  # Harrison's, "The Porphyrias"). Pathway order:
+  #   ALA --(ALAD)--> PBG --(HMBS/PBGD)--> hydroxymethylbilane --(UROS)--> uro'gen III
+  #   --(UROD)--> copro'gen --> proto'gen --> protoporphyrin IX --(ferrochelatase)--> heme.
+  # Enzyme->substrate sign "-" (more enzyme consumes more substrate); deficiency raises
+  # the upstream substrate. These reproduce the classic porphyria marker patterns.
+  - source: ala_dehydratase_activity
+    target: urinary_ala
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: "ALAD converts delta-aminolevulinic acid to porphobilinogen; loss of activity (ALAD-deficiency porphyria) raises ALA, which spills into urine."
+    evidence: "Lehninger Principles of Biochemistry, heme biosynthesis; Harrison's PIM, The Porphyrias (ALAD deficiency: elevated urinary ALA)."
+  - source: porphobilinogen_deaminase_activity
+    target: urinary_porphobilinogen
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: "HMBS/PBGD condenses porphobilinogen into hydroxymethylbilane; deficiency (acute intermittent porphyria) causes PBG (and ALA) accumulation and urinary excretion."
+    evidence: "Harrison's PIM, The Porphyrias (acute intermittent porphyria: HMBS deficiency, elevated urinary PBG and ALA)."
+  - source: porphobilinogen_deaminase_activity
+    target: urinary_ala
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: "Block at HMBS backs up the pathway through PBG to ALA; both ALA and PBG rise in AIP."
+    evidence: "Harrison's PIM, The Porphyrias (AIP: elevated urinary ALA and PBG)."
+  - source: uroporphyrinogen_iii_synthase_activity
+    target: urinary_uroporphyrin
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: "UROS deficiency (congenital erythropoietic porphyria) shunts hydroxymethylbilane to non-physiologic uroporphyrin I isomers that accumulate and are excreted in urine."
+    evidence: "Harrison's PIM, The Porphyrias (congenital erythropoietic porphyria: massive uroporphyrin I accumulation)."
+  - source: uroporphyrinogen_iii_synthase_activity
+    target: erythrocyte_uroporphyrin
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: "In CEP the UROS block causes erythrocyte uroporphyrin I accumulation."
+    evidence: "Harrison's PIM, The Porphyrias (CEP: erythrocyte uroporphyrin elevated)."
+  - source: uroporphyrinogen_decarboxylase_activity
+    target: urinary_uroporphyrin
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: "UROD decarboxylates uroporphyrinogen III; deficiency (porphyria cutanea tarda) causes uroporphyrin (and 7-/hepta-carboxyl porphyrin) accumulation, excreted in urine."
+    evidence: "Harrison's PIM, The Porphyrias (porphyria cutanea tarda: UROD deficiency, elevated urinary uroporphyrin and heptacarboxylporphyrin)."
+  - source: uroporphyrinogen_decarboxylase_activity
+    target: plasma_heptacarboxylporphyrin
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: "UROD partial block accumulates the 7-carboxyl (heptacarboxyl) intermediate characteristic of PCT."
+    evidence: "Harrison's PIM, The Porphyrias (PCT: heptacarboxylporphyrin elevated)."
+  # Methionine synthase: B12/folate methyl trap. Loss raises homocysteine (substrate of
+  # the methionine-forming reaction backs up). Boundary ref to existing plasma_homocysteine.
+  - source: methionine_synthase_activity
+    target: plasma_homocysteine
+    sign: "-"
+    mechanism: "Methionine synthase remethylates homocysteine to methionine using 5-methyl-THF / methylcobalamin; loss of activity (cblG, MTR/MTRR defects) causes homocysteine to accumulate."
+    evidence: "Lehninger, one-carbon metabolism; Harrison's PIM, homocystinuria/cobalamin disorders (methionine synthase deficiency -> hyperhomocysteinemia)."
+  # Sulfite oxidase: terminal oxidation of sulfite to sulfate. Deficiency raises sulfite
+  # (and thiosulfate, S-sulfocysteine) and LOWERS sulfate.
+  - source: sulfite_oxidase_activity
+    target: urinary_sulfite
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: "Sulfite oxidase oxidizes sulfite to sulfate; deficiency (isolated SUOX or molybdenum-cofactor) causes sulfite accumulation and urinary excretion."
+    evidence: "Lehninger, sulfur amino-acid catabolism; Harrison's PIM, sulfite oxidase / molybdenum cofactor deficiency (elevated urinary sulfite)."
+  - source: sulfite_oxidase_activity
+    target: urinary_sulfate
+    sign: "+"
+    causal_evidence: genetic_lof_gof
+    mechanism: "Sulfate is the product of sulfite oxidase; loss of activity reduces sulfate formation, lowering urinary sulfate."
+    evidence: "Harrison's PIM, sulfite oxidase deficiency (reduced sulfate, accumulation of sulfite/thiosulfate)."
+  - source: sulfite_oxidase_activity
+    target: plasma_sulfate
+    sign: "+"
+    causal_evidence: genetic_lof_gof
+    mechanism: "Plasma sulfate is the downstream product; sulfite oxidase deficiency lowers circulating sulfate."
+    evidence: "Harrison's PIM, sulfite oxidase / molybdenum-cofactor deficiency (low sulfate)."
+  - source: sulfite_oxidase_activity
+    target: urinary_thiosulfate
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: "When sulfite oxidation is blocked, excess sulfite is diverted to thiosulfate, which rises in urine."
+    evidence: "Harrison's PIM / J Inherit Metab Dis: sulfite oxidase deficiency elevates urinary thiosulfate and S-sulfocysteine."
+  # Heme oxygenase: heme -> biliverdin. Loss reduces biliverdin formation.
+  - source: heme_oxygenase_activity
+    target: plasma_biliverdin
+    sign: "+"
+    mechanism: "Heme oxygenase opens the heme ring to biliverdin (the product); reduced activity lowers biliverdin production."
+    evidence: "Lehninger, heme catabolism (heme oxygenase -> biliverdin -> bilirubin)."

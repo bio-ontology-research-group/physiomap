@@ -1,0 +1,138 @@
+# =============================================================================
+# Phosphate homeostasis / FGF23-klotho axis — PhysioMap fragment
+# *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Hand-encoded phosphate-regulating endocrine physiology centred on the bone-
+# derived phosphatonin FGF23 and its obligate renal co-receptor alpha-klotho.
+# Every edge sign is the sign of the partial derivative of the target w.r.t. the
+# source at steady state, all else equal (interventionist semantics).
+#
+# Scope: ORGAN / ORGAN_SYSTEM scale. Within-scale signed (cyclic) causal edges.
+# This fragment EXTENDS the existing calcium_pth fragment: it references the
+# sibling-owned boundary nodes plasma_phosphate, calcitriol, pth, plasma_calcium
+# (it does NOT redefine them) and adds the FGF23 phosphaturic / calcitriol-
+# suppressing arm plus the alkaline-phosphatase mineralisation node.
+#
+# Owned new node ids: fgf23, klotho_activity, renal_phosphate_reabsorption,
+#                     alkaline_phosphatase, plasma_25oh_vitamin_d.
+#
+# Core physiology (Boron & Boulpaep, Medical Physiology Ch. 52; Williams Textbook
+# of Endocrinology, bone & mineral metabolism):
+#   FGF23 is secreted by osteocytes/osteoblasts in response to phosphate load and
+#   calcitriol; acting through renal alpha-klotho it (1) is PHOSPHATURIC
+#   (downregulates proximal-tubule NaPi-IIa/IIc cotransporters -> falls renal
+#   phosphate reabsorption) and (2) SUPPRESSES calcitriol (inhibits CYP27B1
+#   1-alpha-hydroxylase and induces CYP24A1). Reabsorbed phosphate raises plasma
+#   phosphate. This closes a negative-feedback loop with the calcium_pth fragment.
+#
+# Disorders supported (signs encoded to reproduce the clinical phenotype):
+#   - X-linked hypophosphataemic rickets (XLH; PHEX loss-of-function;
+#     OMIM #307800): reduced PHEX -> circulating FGF23 UP -> renal phosphate
+#     reabsorption DOWN -> plasma_phosphate DOWN, with INAPPROPRIATELY LOW/normal
+#     calcitriol (FGF23 -| calcitriol). Intervention = clamp fgf23 UP.
+#   - Autosomal dominant hypophosphataemic rickets (ADHR; FGF23 gain-of-function,
+#     cleavage-resistant R176/R179 mutants; OMIM #193100): circulating FGF23 UP ->
+#     plasma_phosphate DOWN. Intervention = clamp fgf23 UP.
+#   - Hypophosphatasia (HPP; ALPL loss-of-function; OMIM #146300) motivates the
+#     retained ALPL node, but the required PPi/mineralisation endpoints are not in
+#     this fragment. No ambiguous shortcut to plasma phosphate is asserted.
+# =============================================================================
+
+name: phosphate_fgf23
+description: >-
+  DRAFT phosphate homeostasis / FGF23-alpha-klotho axis as a typed PhysioMap
+  fragment. FGF23 is phosphaturic (suppresses renal
+  phosphate reabsorption) and suppresses calcitriol; extends the calcium_pth
+  fragment via the boundary nodes plasma_phosphate, calcitriol, pth,
+  plasma_calcium. Supports the renal FGF23-klotho feedback represented by
+  XLH/ADHR physiology. The ALPL and calcidiol nodes remain stable vocabulary
+  entries, but no universally signed systemic causal edge is asserted for either.
+
+nodes:
+  # --- OWNED new nodes -------------------------------------------------------
+  - id: fgf23
+    label: plasma fibroblast growth factor 23 (FGF23) concentration
+    scale: organ_system
+    entity_iri: PR:Q9GZV9             # fibroblast growth factor 23 (human), verified PRO
+    quality_iri: PATO:0000033          # concentration
+  - id: klotho_activity
+    label: renal alpha-klotho co-receptor functionality (FGF23-permissive)
+    scale: organ
+    entity_iri: PR:Q9UEF7              # klotho (human), verified PRO
+    quality_iri: PATO:0001509          # functionality of a physical entity
+  - id: renal_phosphate_reabsorption
+    label: renal proximal-tubule phosphate reabsorption rate (NaPi-IIa/IIc)
+    scale: organ
+    entity_iri: GO:0097291             # renal phosphate ion absorption
+    quality_iri: PATO:0000161          # rate
+  - id: alkaline_phosphatase
+    label: plasma tissue-non-specific alkaline phosphatase (ALPL) activity
+    scale: organ_system
+    entity_iri: PR:P05186              # tissue-nonspecific alkaline phosphatase (human)
+    quality_iri: PATO:0001414          # catalytic activity
+  - id: plasma_25oh_vitamin_d
+    label: plasma 25-hydroxyvitamin D (calcidiol) concentration
+    scale: organ_system
+    entity_iri: CHEBI:17933            # calcidiol (25-hydroxyvitamin D3)
+    quality_iri: PATO:0000033          # concentration
+
+causal_edges:
+  # --- FGF23 effector arm (the load-bearing signs of this fragment) ---------
+  - source: fgf23
+    target: renal_phosphate_reabsorption
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: FGF23 (via renal alpha-klotho) downregulates proximal-tubule NaPi-IIa/IIc cotransporters -> phosphaturia
+    evidence: "Shimada et al., J Clin Invest 2004, PMID 14966565, DOI 10.1172/JCI19081: targeted Fgf23 ablation caused increased renal phosphate reabsorption and hyperphosphatemia; Shimada et al., J Bone Miner Res 2004, PMID 15040831, DOI 10.1359/JBMR.0301264: recombinant FGF23 administration reduced renal NaPi-2a and serum phosphate."
+  - source: fgf23
+    target: calcitriol
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: FGF23 inhibits renal 1-alpha-hydroxylase (CYP27B1) and induces 24-hydroxylase (CYP24A1), lowering calcitriol
+    evidence: "Shimada et al., J Clin Invest 2004, PMID 14966565, DOI 10.1172/JCI19081: Fgf23-null mice had elevated calcitriol and renal CYP27B1 expression; Shimada et al., J Bone Miner Res 2004, PMID 15040831, DOI 10.1359/JBMR.0301264: recombinant FGF23 lowered calcitriol, suppressed CYP27B1, and induced CYP24A1."
+
+  # --- alpha-klotho as the obligate, permissive FGF23 co-receptor -----------
+  - source: klotho_activity
+    target: renal_phosphate_reabsorption
+    sign: "-"
+    causal_evidence: genetic_lof_gof
+    mechanism: alpha-klotho is the renal co-receptor that permits the FGF23-dependent reduction in NaPi-IIa/IIc-mediated phosphate reabsorption; this edge is the first-order shadow of the explicit gain modulation below
+    evidence: "Nakatani et al., FASEB J 2009, PMID 18835926, DOI 10.1096/fj.08-114397: klotho-null mice had increased renal NaPi2a and hyperphosphatemia, and recombinant FGF23 lowered phosphate in wild-type and Fgf23-null mice but not in klotho-null or double-null mice."
+
+  # --- regulators of FGF23 secretion (osteocyte/osteoblast) -----------------
+  - source: plasma_phosphate
+    target: fgf23
+    sign: "+"
+    causal_evidence: perturbation
+    mechanism: a sustained phosphate load stimulates osteocyte/osteoblast FGF23 secretion (phosphate-FGF23 feedback)
+    evidence: "Scanni et al., J Am Soc Nephrol 2014, PMID 24854273, DOI 10.1681/ASN.2013101076: prospective double-blind NaCl-controlled crossover studies in healthy volunteers showed dose-dependent plasma phosphate elevation after intravenous phosphate loading followed by increased FGF23."
+  - source: calcitriol
+    target: fgf23
+    sign: "+"
+    causal_evidence: pharmacological
+    mechanism: calcitriol stimulates osteocyte FGF23 transcription/secretion (VDR-mediated), closing a vitamin D - FGF23 negative-feedback loop
+    evidence: "Shimada et al., J Bone Miner Res 2004, PMID 15040831, DOI 10.1359/JBMR.0301264: calcitriol injection increased serum FGF23 within four hours; Georgiadou et al., In Vivo 2017, PMID 28064234, DOI 10.21873/invivo.11038: oral calcitriol administration increased circulating FGF23 in healthy adults. Saji et al., Am J Physiol Renal Physiol 2010, DOI 10.1152/ajprenal.00169.2010, demonstrated direct calcitriol regulation of bone FGF23 production."
+  # PTH -> FGF23 is intentionally not asserted: 6-hour PTH(1-34) infusion lowers
+  # FGF23, whereas later increases follow calcitriol and phosphate changes. That
+  # context-dependent total effect is not a universally positive partial derivative.
+  # Calcidiol -> calcitriol is also not asserted: direct calcifediol supplementation
+  # raises 25(OH)D without a corresponding relationship to regulated calcitriol.
+  # ALPL loss of function establishes defective local PPi/mineralisation handling,
+  # not a universally signed effect on the systemic plasma-phosphate endpoint.
+
+production_edges:
+  - source: renal_phosphate_reabsorption
+    target: plasma_phosphate
+    sign: "+"
+    production_evidence: mechanistic_model
+    mechanism: absorbed tubular phosphate is a positive return flux into the plasma phosphate pool; renal TmP/GFR constrains that flux
+    evidence: "GO:0097291 defines renal phosphate ion absorption as uptake of phosphate from nephron tubules. Scanni et al., J Am Soc Nephrol 2014, PMID 24854273, DOI 10.1681/ASN.2013101076, explicitly quantify filtered load, fractional phosphate clearance, and TmP/GFR in a controlled renal phosphate mass-balance protocol."
+
+modulation_edges:
+  - modulator: klotho_activity
+    influence_id: influence:fgf23:negative:renal_phosphate_reabsorption
+    sign: "-"
+    can_flip_sign: false
+    causal_evidence: genetic_lof_gof
+    mechanism: higher alpha-klotho functionality makes the inhibitory FGF23 coefficient more negative by enabling the FGFR-klotho signal that removes renal NaPi-IIa/IIc transporters
+    evidence: "Nakatani et al., FASEB J 2009, PMID 18835926, DOI 10.1096/fj.08-114397: recombinant FGF23 lowered serum phosphate in wild-type and Fgf23-null mice but had no phosphate-lowering effect in klotho-null or Fgf23/klotho double-null mice, directly establishing a Klotho-by-FGF23 interaction."

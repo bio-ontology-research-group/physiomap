@@ -1,0 +1,177 @@
+# =============================================================================
+# Pulmonary / right-heart hemodynamics + blood-gas pressures
+#                                    — PhysioMap fragment  *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Hand-encoded, ORGAN / ORGAN_SYSTEM scale. Each edge sign is the sign of the
+# partial derivative of the target w.r.t. the source at steady state, all else
+# equal (interventionist partial). ROBERT: please correct signs/edges/IRIs.
+#
+# Physiology / provenance (textbook + standard hemodynamics):
+#   - Boron & Boulpaep, Medical Physiology, 3rd ed., "The Heart as a Pump" and
+#     "The Microcirculation": pulmonary artery pressure (PAP), pulmonary vascular
+#     resistance (PVR), right atrial pressure (RAP, ~ central venous pressure),
+#     left atrial pressure (LAP), right ventricular systolic pressure (RVSP),
+#     and pulmonary capillary wedge pressure (PCWP, a left-atrial / LV filling
+#     surrogate).
+#   - Harrison's Principles of Internal Medicine, 21st ed., "Pulmonary
+#     Hypertension": PAP rises with PVR and with downstream (left-heart / LAP /
+#     PCWP) pressure; mean PAP = PVR x CO + PCWP (the steady-state pulmonary
+#     pressure-flow identity). RVSP approximates systolic PAP in the absence of
+#     pulmonic stenosis (echo estimate of PASP from tricuspid regurgitant jet).
+#   - Pulse pressure = systolic - diastolic arterial pressure; widens with
+#     increased stroke volume and decreased arterial compliance, narrows with
+#     reduced stroke volume (Boron & Boulpaep, "Arterial pressure"). High and Low
+#     pulse pressure map to the SAME node with opposite signs.
+#   - Cardiac index = cardiac output / body surface area: a flow rate (same PATO
+#     determinable as cardiac output, PATO:0000161). Increased cardiac index
+#     tracks increased cardiac output (Boron & Boulpaep).
+#   - Base excess (BE): the amount of strong acid/base needed to titrate blood to
+#     pH 7.40 at pCO2 40 mmHg, 37C; a metabolic acid-base index (Boron &
+#     Boulpaep, "Acid-Base Physiology"; Siggaard-Andersen). "Abnormal base
+#     excess" is a non-directional umbrella term; per task convention it is mapped
+#     as "+" to a single base-excess node (the analyte is real and groundable; the
+#     specific direction is not asserted by the HPO term).
+#
+# Boundary references to EXISTING PhysioMap nodes (verified in node_inventory.tsv):
+#   cardiac_output (organ_system, PATO:0000161), stroke_volume (organ),
+#   plasma_bicarbonate (organ_system).
+# =============================================================================
+
+name: pulmonary_bloodgas
+description: >-
+  Pulmonary and right-heart hemodynamic pressures (PAP, PVR, RAP, LAP, PCWP,
+  RVSP), systemic pulse pressure, cardiac index, and blood base excess. Covers
+  HPO directional abnormal-quantity terms for pulmonary/blood-gas hemodynamics.
+  DRAFT FOR REVIEW.
+
+nodes:
+  # --- pulmonary artery pressure (PAP) -- HP:0004890 -------------------------
+  - id: pulmonary_artery_pressure
+    label: pulmonary artery pressure
+    scale: organ
+    entity_iri: UBERON:0002012        # pulmonary artery (UBERON, name verified)
+    quality_iri: PATO:0001025         # pressure
+
+  # --- pulmonary vascular resistance (PVR) -- HP:0005317 ---------------------
+  - id: pulmonary_vascular_resistance
+    label: pulmonary vascular resistance
+    scale: organ_system
+    entity_iri: UBERON:0000102        # lung vasculature (UBERON, name verified)
+    quality_iri: PATO:0001470         # resistance to flow
+
+  # --- right atrial pressure (RAP ~ CVP) -- HP:0005168 -----------------------
+  - id: right_atrial_pressure
+    label: right atrial pressure
+    scale: organ
+    entity_iri: UBERON:0002078        # right cardiac atrium (UBERON, name verified)
+    quality_iri: PATO:0001025         # pressure
+
+  # --- pulmonary capillary wedge pressure (PCWP) -- HP:0030876 ---------------
+  - id: pulmonary_capillary_wedge_pressure
+    label: pulmonary capillary wedge pressure
+    scale: organ
+    entity_iri: UBERON:0016405        # pulmonary capillary (UBERON, name verified)
+    quality_iri: PATO:0001025         # pressure
+
+  # --- left atrial pressure (LAP) -- HP:0031299 ------------------------------
+  - id: left_atrial_pressure
+    label: left atrial pressure
+    scale: organ
+    entity_iri: UBERON:0002079        # left cardiac atrium (UBERON, name verified)
+    quality_iri: PATO:0001025         # pressure
+
+  # --- right ventricular systolic pressure (RVSP) -- HP:0033119 --------------
+  - id: right_ventricular_systolic_pressure
+    label: right ventricular systolic pressure
+    scale: organ
+    entity_iri: UBERON:0002080        # heart right ventricle (UBERON, name verified)
+    quality_iri: PATO:0001025         # pressure
+
+  # --- systemic arterial pulse pressure -- HP:0030851 (-) / HP:0030852 (+) ---
+  - id: pulse_pressure
+    label: arterial pulse pressure
+    scale: organ_system
+    entity_iri: UBERON:0004571        # systemic arterial system (as for mean_arterial_pressure)
+    quality_iri: PATO:0001025         # pressure (systolic - diastolic)
+
+  - id: blood_base_excess
+    label: blood base excess
+    scale: organ_system
+    entity_iri:                       # no single ChEBI/UBERON analyte for a titration index
+    quality_iri: PATO:0000070         # amount (titratable base, mEq/L)
+
+causal_edges:
+  # PVR raises pulmonary artery pressure (mean PAP = PVR x CO + PCWP).
+  - source: pulmonary_vascular_resistance
+    target: pulmonary_artery_pressure
+    sign: "+"
+    mechanism: >-
+      Steady-state pulmonary pressure-flow relation: mean PAP = PVR x CO + PCWP;
+      raising pulmonary vascular resistance at fixed flow and wedge pressure
+      raises pulmonary artery pressure (pre-capillary pulmonary hypertension).
+    evidence: "Harrison's Principles of Internal Medicine, 21st ed., 'Pulmonary Hypertension'; Boron & Boulpaep, Medical Physiology 3rd ed."
+
+  # Downstream (left-heart) pressure transmitted back into the pulmonary bed:
+  # PCWP is an additive term in the same identity -> raises PAP.
+  - source: pulmonary_capillary_wedge_pressure
+    target: pulmonary_artery_pressure
+    sign: "+"
+    mechanism: >-
+      mean PAP = PVR x CO + PCWP: the wedge (left-atrial) pressure is an additive
+      downstream term; elevated PCWP (post-capillary/left-heart disease) raises
+      pulmonary artery pressure for given PVR and flow.
+    evidence: "Harrison's Principles of Internal Medicine, 21st ed., 'Pulmonary Hypertension' (post-capillary PH); Boron & Boulpaep, Medical Physiology 3rd ed."
+
+  # Left atrial pressure equilibrates with the wedge pressure (PCWP is a LAP
+  # surrogate measured by occluding a pulmonary arterial branch).
+  - source: left_atrial_pressure
+    target: pulmonary_capillary_wedge_pressure
+    sign: "+"
+    mechanism: >-
+      With a static column from the wedged catheter through the pulmonary
+      capillaries to the left atrium, PCWP equilibrates with and tracks left
+      atrial pressure.
+    evidence: "Boron & Boulpaep, Medical Physiology 3rd ed., 'The Heart as a Pump' (Swan-Ganz wedge pressure)."
+
+  # RVSP ~ systolic PAP (no pulmonic stenosis): elevated PAP raises RVSP.
+  - source: pulmonary_artery_pressure
+    target: right_ventricular_systolic_pressure
+    sign: "+"
+    mechanism: >-
+      In the absence of pulmonary valve stenosis the right ventricle and
+      pulmonary artery are continuous in systole, so RV systolic pressure equals
+      systolic pulmonary artery pressure; elevated PAP raises RVSP (basis of the
+      echocardiographic TR-jet estimate of PASP from RVSP).
+    evidence: "Harrison's Principles of Internal Medicine, 21st ed., 'Pulmonary Hypertension' (echo estimation of PASP)."
+
+  # Pulmonary hypertension raises right-heart filling pressure (RV afterload ->
+  # RV failure / venous congestion -> elevated RAP).
+  - source: pulmonary_artery_pressure
+    target: right_atrial_pressure
+    sign: "+"
+    mechanism: >-
+      Sustained elevation of pulmonary artery pressure raises right ventricular
+      afterload; the failing/congested right ventricle transmits elevated filling
+      pressure backward, raising right atrial (central venous) pressure.
+    evidence: "Harrison's Principles of Internal Medicine, 21st ed., 'Pulmonary Hypertension' / 'Cor Pulmonale'; Boron & Boulpaep, Medical Physiology 3rd ed."
+
+  # Stroke volume widens pulse pressure (more ejected volume into the arterial
+  # tree per beat raises systolic relative to diastolic pressure).
+  - source: stroke_volume
+    target: pulse_pressure
+    sign: "+"
+    mechanism: >-
+      Pulse pressure = systolic - diastolic arterial pressure; for a given
+      arterial compliance, a larger ejected stroke volume per beat raises systolic
+      pressure more than diastolic, widening pulse pressure.
+    evidence: "Boron & Boulpaep, Medical Physiology 3rd ed., 'Arterial pressure' (pulse pressure ~ SV / arterial compliance). | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-112 (20.3: Blood Flow, Blood Pressure, and Resistance): 'a low or narrow [pulse pressure] may occur in patients with a low stroke volume... a high or wide pulse pressure is common in healthy people following strenuous exercise, when...pulse pressure...may increase...as stroke volume increases.'"
+
+  # Cardiac index tracks cardiac output (CI = CO / BSA).
+  - source: cardiac_output
+    target: cardiac_index
+    sign: "+"
+    mechanism: >-
+      Cardiac index is cardiac output normalized to body surface area
+      (CI = CO / BSA); at fixed body surface area cardiac index rises with
+      cardiac output.
+    evidence: "Boron & Boulpaep, Medical Physiology 3rd ed., 'The Heart as a Pump' (cardiac index definition)."

@@ -1,0 +1,7 @@
+digraph G {
+          graph [rankdir=LR, bgcolor="transparent", pad=.2]; node [shape=box, style="rounded,filled", fontname="Helvetica"];
+          Y [label="legacy YAML\n1699 nodes\n2270 causal influences\n85 production relations", fillcolor="#e5e7eb"];
+          O [label="OWL + ELK\n2378 unique witnesses", fillcolor="#dbeafe"];
+          S [label="typed SCM\n1699 nodes\n2270 causal influences\n85 production relations\n9 quantitative expressions\n100% recovered", fillcolor="#dcfce7"];
+          Y -> O [label=" generate"]; O -> S [label=" project"]; S -> Y [label=" exact adapter", style=dashed];
+        }

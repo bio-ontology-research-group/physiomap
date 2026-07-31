@@ -1,0 +1,116 @@
+# *** DRAFT FOR REVIEW *** connect-isolated round 2 (lone nodes + small islands)
+# Every edge is interventional (do() semantics); every citation was checked against
+# its real source (PubMed concordance / textbook WebSearch). nodes: [] -> reuse existing.
+# See benchmarks/results/connect_isolated_v2.md
+name: connect_isolated_v2_multi
+description: Citation-verified causal edges connecting previously-isolated nodes/islands (>=1 molecular/cellular endpoint); DRAFT.
+nodes: []
+causal_edges:
+- source: csf_glutamate
+  target: intracellular_calcium
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'extracellular/CSF glutamate concentration -> NMDA (and AMPA/KA) receptor overstimulation disposition -> excitotoxic cation-channel opening process -> cytosolic free Ca2+ (intracellular calcium) influx'
+  evidence: 'Basic Neurochemistry: Molecular, Cellular and Medical Aspects, 6th edition (Siegel et al.); (Chapter: Excitotoxic injury in Hypoxia-Ischemia); “Experiments with cortical or hippocampal cell cultures suggest that much of the neuronal death associated with brief, intense glutamate exposure is mediated by NMDA receptor activation, probably because this can induce lethal amounts of Ca2+ influx more rapidly than can AMPA/KA receptor stimulation.” | Elevated extracellular glutamate activates NMDA receptors that drive Ca2+ influx into neurons, so do(raise CSF glutamate) raises intracellular Ca2+ (sign +).'
+- source: osteoclast_activity
+  target: urinary_galactosyl_hydroxylysine
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'Osteoclastic bone resorption degrades bone-type-I collagen; galactosyl-hydroxylysine (a collagen-unique, non-reutilized hydroxylysine glycoside enriched in bone) is liberated and excreted -> higher osteoclast resorption activity -> higher galactosyl-hydroxylysine output (sign +).'
+  evidence: 'PMID 10222355; (Abstract / Conclusion); “Serum free Gal-Hyl may be useful as a serum marker of bone resorption.” | Galactosyl-hydroxylysine is a marker of (osteoclastic) bone collagen resorption, so increasing osteoclast resorption activity increases galactosyl-hydroxylysine release/excretion (sign +). [citations PubMed-verified]'
+- source: csf_nfl
+  target: macrophage_activation
+  sign: +
+  causal_evidence: genetic_lof_gof
+  mechanism: 'axonal damage releases NfL into CSF; extracellular NfL binds myeloid cells and drives microglial/macrophage activation (NfL knockout ameliorates microgliosis)'
+  evidence: 'PMID 40056413; “Secreted NfL activates microglial cells, which can be blocked with anti-NfL antibodies.” | do(raise CSF NfL) -> increased microglial/macrophage activation (+), confirmed by anti-NfL blockade and NfL KO [citations PubMed-verified]'
+- source: csf_chi3l1
+  target: macrophage_activation
+  sign: +
+  causal_evidence: genetic_lof_gof
+  mechanism: 'astrocyte-secreted CHI3L1/YKL-40 acts on microglia as an inflammatory signaling molecule; CHI3L1-blocking mAb reduces microglial M1 activation and neuroinflammation'
+  evidence: 'PMID 41573517; “H1 treatment alleviated memory impairment and reduced amyloid deposition and neuroinflammation both in Tg2576 mice and Aβ-induced BV-2 microglial cells.” | do(block CHI3L1 with mAb) -> reduced microglial neuroinflammation, so CHI3L1 -> macrophage/microglial activation (+) [citations PubMed-verified]'
+- source: macrophage_activation
+  target: csf_chitotriosidase
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'chronically/lipid-overloaded activated macrophages secrete chitotriosidase (CHIT1); the more activated the macrophage population, the higher the CSF/plasma chitotriosidase'
+  evidence: 'PMID 23525479; “Chitotriosidase (ChT) is secreted by chronically activated macrophages in Gaucher''s disease.” | do(increase macrophage activation) -> increased chitotriosidase secretion (+) [citations PubMed-verified]'
+- source: csf_alpha_crystallin_b
+  target: macrophage_activation
+  sign: '-'
+  causal_evidence: pharmacological
+  mechanism: 'extracellular alpha-B-crystallin (CRYAB/HSPB5) acts as a TLR2-dependent immunomodulator; administered CRYAB suppresses microglial activation and pro-inflammatory cytokine release'
+  evidence: 'PMID 33777038; “αB-crystallin reduced the release of typical proinflammatory cytokines at both the mRNA and protein level, inhibited microglial activation in morphology” | do(administer CRYAB) -> reduced microglial/macrophage activation (-) [citations PubMed-verified]'
+- source: urinary_pge2
+  target: jg_granular_renin_secretion
+  sign: +
+  causal_evidence: pharmacological
+  mechanism: 'renal PGE2 (tracked by urinary PGE2 excretion) -> EP2/EP4 receptor agonism on juxtaglomerular granular cells -> cAMP/PKA-driven renin granule exocytosis process -> renin secretion rate'
+  evidence: 'PMID 15985651; (Abstract); “PGE(2) rapidly stimulated renin secretion from superfused JG cells and diminished the membrane-adjacent granule pool as determined by confocal microscopy” | Applied PGE2 (do()) directly stimulates renin exocytosis in juxtaglomerular cells; urinary PGE2 indexes the renal PGE2 pool, so PGE2 -(+)-> juxtaglomerular renin secretion. [citations PubMed-verified]'
+- source: osteoblast_activity
+  target: plasma_pinp
+  sign: +
+  causal_evidence: pharmacological
+  mechanism: 'osteoblast bone-formation activity -> type-I procollagen synthesis disposition -> proteolytic cleavage of the N-terminal propeptide during collagen maturation -> circulating PINP concentration'
+  evidence: 'PMID 24599274; (Introduction); “Serum PINP concentrations reflect the integrated amount of skeletal new bone formation.” | PINP tracks osteoblastic bone formation and rises with teriparatide (do() osteoblast stimulation), so osteoblast activity -(+)-> plasma PINP. [citations PubMed-verified]'
+- source: macrophage_activation
+  target: plasma_scd163
+  sign: +
+  causal_evidence: perturbation
+  mechanism: 'quality(macrophage activation state) -> disposition(ADAM17/TACE-mediated ectodomain shedding of CD163) -> process(proteolytic cleavage and release of CD163 ectodomain) -> quality(plasma soluble CD163 concentration); LPS/inflammatory stimulation of macrophages is the do()'
+  evidence: 'PMID 39451197; “The proteolytic cleavage is enhanced by inflammatory responses or oxidative stress, resulting in the generation of sCD163 and, therefore, its release in the plasma and other tissue fluids.” | Macrophage activation/inflammatory stimulation drives CD163 shedding, so do(macrophage activation up) -> plasma sCD163 up. [citations PubMed-verified]'
+- source: macrophage_activation
+  target: plasma_galectin_3
+  sign: +
+  causal_evidence: perturbation
+  mechanism: 'quality(macrophage activation state) -> disposition(secretory capacity of activated macrophages) -> process(secretion of galectin-3) -> quality(plasma galectin-3 concentration); macrophage activation is the do()'
+  evidence: 'PMID 20425490; “In the failing or stressed heart, it has been shown that activated macrophages secrete galectin-3.” | Activated macrophages secrete galectin-3, so do(macrophage activation up) -> plasma galectin-3 up. [citations PubMed-verified]'
+- source: phospholamban_level
+  target: serca_uptake_rate
+  sign: '-'
+  causal_evidence: genetic_lof_gof
+  mechanism: 'dephosphorylated phospholamban associates with SERCA2a (inhibitory binding disposition) -> lowers SERCA2a apparent Ca2+ affinity (inhibition process) -> reduced SR Ca2+ uptake rate; PLN ablation/overexpression are clean genetic do()'
+  evidence: 'PMID 10766848; (Abstract); “Assessment of SR Ca(2+) uptake in hearts of transgenic mice indicated increases in the inhibition of the affinity of SERCA2 for Ca(2+) with increased phospholamban expression.” | Increasing phospholamban expression increases inhibition of SERCA2 Ca2+ affinity (lowers uptake), so PLN level (-)-> SERCA uptake rate. [citations PubMed-verified]'
+- source: vsm_cgmp_level
+  target: vascular_smooth_muscle_tone
+  sign: '-'
+  causal_evidence: genetic_lof_gof
+  mechanism: 'rising VSM cGMP -> activates PKG (kinase disposition) -> myosin-light-chain phosphatase activation + reduced cytosolic Ca2+ (relaxation process) -> decreased vascular smooth muscle tone'
+  evidence: 'PMID 20065162; (Abstract); “Parallel to a reduction in NO-induced cGMP accumulation, NO-induced relaxation of aortic smooth muscle was gradually lost after induction by tamoxifen.” | Smooth-muscle deletion of NO-sensitive guanylyl cyclase abolishing cGMP accumulation abolishes relaxation (raises tone), so cGMP (-)-> vascular smooth muscle tone. [citations PubMed-verified]'
+- source: plasma_anandamide
+  target: vascular_smooth_muscle_tone
+  sign: '-'
+  causal_evidence: pharmacological
+  mechanism: 'anandamide -> activates TRPV1 on perivascular sensory nerves (agonist disposition) -> CGRP release / endothelial NO-PGI2 (vasodilation process) -> reduced vascular smooth muscle tone'
+  evidence: 'PMID 15277315; (Abstract); “In an in vitro setting anandamide is also able to activate the vanilloid type 1 (TRPV1) receptor and cause vasodilation, via the release of CGRP.” | Anandamide activates TRPV1 and causes vasodilation, so anandamide (-)-> vascular smooth muscle tone. [citations PubMed-verified]'
+- source: alpha_msh
+  target: skin_melanin_content
+  sign: +
+  causal_evidence: pharmacological
+  mechanism: 'alpha-MSH binds MC1R (Gs) on melanocytes -> cAMP/PKA -> CREB -> MITF -> tyrosinase -> increased epidermal melanin (eumelanin) content'
+  evidence: 'PMID 35665216; (Abstract, Background); “The activation of melanocortin 1 receptor (MC1R) on melanocytes stimulates the production of eumelanin.” | MC1R agonism by alpha-MSH stimulates melanin (eumelanin) production, supporting do(alpha-MSH up) -> melanin up (+). [citations PubMed-verified]'
+- source: membrane_pip2_vsmc
+  target: intracellular_calcium
+  sign: +
+  causal_evidence: curated_mechanistic
+  mechanism: 'PLC hydrolyzes membrane PIP2 to IP3; IP3 binds the ER IP3 receptor and releases stored Ca2+ into the cytosol, so available PIP2 substrate sets IP3-driven cytosolic Ca2+ rise'
+  evidence: 'Alberts et al., Molecular Biology of the Cell, 6th ed.; (Chapter 15, Signaling through GPCRs / the inositol phospholipid pathway); “Phospholipase C cleaves PI(4,5)P2 to generate two second messengers, inositol 1,4,5-trisphosphate (IP3) and diacylglycerol; IP3 releases Ca2+ from the endoplasmic reticulum.” | do(increase membrane PIP2) increases cytosolic Ca2+ (+): PIP2 is the substrate whose PLC-generated IP3 releases ER Ca2+'
+- source: osteoclast_activity
+  target: plasma_hydroxyproline
+  sign: +
+  causal_evidence: pharmacological
+  mechanism: 'osteoclastic resorption proteolyzes bone type-I collagen, liberating hydroxyproline; antiresorptive drugs that lower resorption lower hydroxyproline output'
+  evidence: 'PMID 23277718; (Abstract); “Reduction in bone loss during antiresorptive treatment is demonstrated by decreased excretion of hydroxyproline post antiresorptive therapy.” | do(decrease osteoclast/bone resorption, via antiresorptive drug) decreases hydroxyproline; hence higher resorption raises hydroxyproline (+) [citations PubMed-verified]'
+- source: plasma_2_aminoadipate
+  target: beta_cell_insulin_secretion
+  sign: +
+  causal_evidence: pharmacological
+  mechanism: 'DHTKD1 loss raises plasma 2-aminoadipate; 2-AAA acts on the pancreatic beta cell -> disposition to augment insulin exocytosis -> increased insulin secretion rate (shown by 2-AAA treatment of islets/beta-cell line)'
+  evidence: 'PMID 24091325; (abstract); “2-AAA treatment enhanced insulin secretion from a pancreatic β cell line as well as murine and human islets.” | Exogenous 2-AAA (a do() on the metabolite) increases insulin secretion from beta cells/islets, supporting plasma_2_aminoadipate ->(+) beta_cell_insulin_secretion and joining the DHTKD1/2-AAA island to the glucose-insulin core. [citations PubMed-verified]'
+- source: osteoclast_activity
+  target: urinary_pyridinoline
+  sign: +
+  causal_evidence: mechanistic_model
+  mechanism: 'Pyridinoline cross-links (formed by PLOD1-dependent lysine hydroxylation) are mature collagen cross-links of bone matrix; osteoclastic bone resorption degrades type-I collagen and releases pyridinoline directly into the circulation and urine without further metabolism, so increasing osteoclast resorptive activity raises urinary pyridinoline - joining the collagen-crosslink island to the core bone-resorption hub.'
+  evidence: 'PMID 1887826; (Urinary excretion of pyridinoline crosslinks correlates with bone turnover measured on iliac crest biopsy in patients with vertebral osteoporosis, abstract); “Urinary pyridinoline crosslinks, but not hydroxyproline, correlated significantly with histologic resorption, assessed by the osteoclast surface” | Urinary pyridinoline tracks histologic osteoclastic bone resorption, supporting osteoclast_activity -> urinary_pyridinoline with sign +. [citations PubMed-verified]'

@@ -1,0 +1,40 @@
+# =============================================================================
+# E3 Part A — established clinical drug -> biomarker DIRECTIONS (gold).
+# Each entry keys on the PhysioMap enzyme/channel-activity node the drug's ChEMBL
+# mechanism-of-action target maps to, plus the clamp sign (inhibitor '-', potentiator/
+# activator '+'); the value is the directional biomarker(s) the drug is established to
+# move. Directions verified against primary literature / FDA labels (see source per
+# block). These are the determinate, on-target predictions PhysioMap's comparative-statics
+# solver makes for the auto-resolved single-target drugs (Part B = SIDEKICK feedback side
+# effects, on which the solver abstains). NB: drug inhibition of enzyme E is the same do()
+# clamp as the Mendelian LoF of E in the IEM core (E1) -- ADA and PNP inhibitors are
+# pharmacological phenocopies of ADA-/PNP-deficiency; ivacaftor (CFTR potentiator, '+')
+# INVERTS the cystic-fibrosis loss-of-function sweat-chloride direction.
+# =============================================================================
+biomarkers:
+  "hmg_coa_reductase_activity|-":          # statins (atorvastatin, simvastatin, ...)
+    ldl_cholesterol: "-"
+    source: "CTT meta-analysis PMID:21067804; FDA atorvastatin label (LDL-C -30..55%)"
+  "cftr_activity|+":                        # CFTR potentiators/correctors (ivacaftor, elexacaftor...)
+    sweat_chloride: "-"
+    source: "ivacaftor NEJM PMID:22047557 (-48 mmol/L); ELX/TEZ/IVA NEJM PMID:31624537"
+  "cftr_activity|-":                        # CFTR/CaCC inhibitors (crofelemer-direction)
+    sweat_chloride: "+"
+    source: "loss of CFTR anion conduction raises sweat [Cl-] (CF biomarker, converse of potentiators)"
+  "adenosine_deaminase_activity|-":         # pentostatin (ADA inhibitor)
+    urinary_deoxyadenosine: "+"
+    source: "ADA inhibition phenocopies ADA-SCID; dAdo/dATP accumulate, PMID:21463108"
+  "dihydropyrimidine_dehydrogenase_activity|-":  # eniluracil, gimeracil (DPD inhibitors)
+    plasma_uracil: "+"
+    source: "DPD is rate-limiting in uracil catabolism; eniluracil raises plasma uracil (Clin Cancer Res 5(2):291)"
+  "comt_activity|-":                        # COMT inhibitors (entacapone, opicapone, tolcapone)
+    plasma_metanephrine: "-"
+    source: "metanephrines ARE COMT products of catecholamines; COMT inhibition lowers them (PMID:7874370). direction-high/magnitude-med"
+  "aadc_activity|-":                        # carbidopa, benserazide (peripheral AADC/DDC inhibitors)
+    plasma_dopa: "+"
+    urinary_dopamine: "-"
+    source: "FDA carbidopa-levodopa label: raises plasma levodopa, lowers urinary dopamine/HVA"
+  "purine_nucleoside_phosphorylase_activity|-":  # forodesine (PNP inhibitor)
+    plasma_inosine: "+"
+    plasma_guanosine: "+"
+    source: "PNP inhibition phenocopies PNP deficiency; inosine/guanosine/dGuo accumulate, Blood 106(13):4253"

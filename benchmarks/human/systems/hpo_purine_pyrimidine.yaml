@@ -1,0 +1,461 @@
+# =============================================================================
+# Purine & pyrimidine metabolism — HPO biochemical-marker fragment
+#                                    — PhysioMap fragment  *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Hand-encoded coverage of the directional HPO "abnormal purine/pyrimidine metabolite
+# / enzyme activity" terms. Most nodes are biofluid metabolite POOLS (plasma/serum,
+# urine, CSF; scale organ_system) or enzyme ACTIVITY roots (scale cellular/organ with
+# a bearer cell/organ). Each node is a physiological VARIABLE = (entity, PATO quality).
+#
+# Physiology / provenance (textbooks + databases):
+#   - Lehninger Principles of Biochemistry (Nelson & Cox), "Nucleotide metabolism":
+#     PURINE catabolism  AMP/IMP -> inosine -> hypoxanthine -(XDH)-> xanthine
+#       -(XDH)-> urate -(urate oxidase, absent in humans)-> allantoin; GMP -> guanosine
+#       -> guanine -> xanthine. dAMP -> deoxyadenosine; dGMP -> deoxyguanosine.
+#     PYRIMIDINE catabolism  uracil -(DPYD)-> 5,6-dihydrouracil -(DPYS/dihydropyrimidinase)
+#       -> N-carbamoyl-beta-alanine (= 3-ureidopropionate) -(UPB1/beta-ureidopropionase)
+#       -> beta-alanine; thymine -(DPYD)-> 5,6-dihydrothymine -(DPYS)->
+#       N-carbamoyl-beta-aminoisobutyrate (= 3-ureidoisobutyrate) -(UPB1)->
+#       beta-aminoisobutyrate. De-novo pyrimidine: orotate -> OMP -(UMPS, orotidine-5'-P
+#       decarboxylase)-> UMP.
+#   - Harrison's Principles of Internal Medicine, inborn errors of purine/pyrimidine
+#     metabolism; OMIM gene-disease entries (cited per enzyme below).
+#   - HMDB / KEGG for biofluid metabolite identities; CHEBI for the chemical IRIs.
+#
+# DISORDERS this fragment is built to reproduce (the sign of the marker change):
+#   - DPD deficiency (DPYD LoF; OMIM 274270): dihydropyrimidine_dehydrogenase_activity
+#       DOWN -> plasma/urinary uracil & thymine UP (substrate accumulation).
+#   - Dihydropyrimidinase deficiency (DPYS LoF; OMIM 222748): dihydrouracil &
+#       dihydrothymine UP.
+#   - Beta-ureidopropionase deficiency (UPB1 LoF; OMIM 613161): N-carbamoyl-beta-alanine
+#       & N-carbamoyl-beta-aminoisobutyrate (ureidopropionate / ureidoisobutyrate) UP.
+#   - Xanthinuria (XDH LoF; OMIM 278300 / molybdenum-cofactor): plasma & urinary
+#       xanthine/hypoxanthine UP, urate DOWN; type II also AOX deficiency.
+#   - MNGIE (TYMP LoF; OMIM 603041): thymidine_phosphorylase_activity DOWN ->
+#       plasma & urinary thymidine & deoxyuridine UP.
+#   - ADA deficiency (SCID; OMIM 102700) / ADA2 deficiency (DADA2; OMIM 615688):
+#       adenosine_deaminase / ada2 activity DOWN; deoxyadenosine UP.
+#   - PRPS1 superactivity (OMIM 300661, gout) vs deficiency (Arts/CMTX5; OMIM 311070):
+#       prpp_synthetase_activity UP / DOWN.
+#   - APRT deficiency (OMIM 614723): 2,8-dihydroxyadenine UP (DHA urolithiasis).
+#   - ADSL (adenylosuccinate lyase) deficiency (OMIM 103050): urinary succinyladenosine
+#       (SAdo) & SAICA-riboside UP.
+#   - AICA-ribosiduria (ATIC LoF; OMIM 608688): urinary AICA-riboside (AICAR) UP.
+#   - Hereditary orotic aciduria (UMPS LoF; OMIM 258900).
+#   - P5N-1 / NT5C3A deficiency (OMIM 266120, hemolytic anemia), AK1, ITPA, AMPD1
+#     (myoadenylate deaminase deficiency, OMIM 102770) enzyme-activity roots.
+#
+# Sign discipline: more enzyme activity => LESS substrate ("-" enzyme->substrate) and
+#   MORE product ("+" enzyme->product). Edges added ONLY for the linear catabolic
+#   chains above where BOTH metabolite nodes and the enzyme node are in this fragment;
+#   biofluid pools (plasma/urine/CSF) of the SAME metabolite are NOT linked by a
+#   fabricated transport edge (renal handling sign is context-dependent) — they are
+#   left as independent groundable pools.
+#
+# Boundary refs to EXISTING corpus nodes:
+#   - plasma_xanthine            (existing: "plasma xanthine (and hypoxanthine) conc")
+#   - xanthine_oxidase_activity  (existing: "xanthine oxidoreductase (XDH/XO)")
+# Most nodes have no defensible edge into the corpus -> this is largely an ISLAND
+# fragment (validate_fragment WARNs "island", not an error). A grounded node with no
+# edge is valuable: it abstains correctly. Phase 1.
+# =============================================================================
+
+name: hpo_purine_pyrimidine
+description: >-
+  DRAFT purine and pyrimidine catabolite/biofluid-marker and enzyme-activity fragment
+  for HPO monogenic-phenotype coverage. Encodes plasma/serum, urinary and CSF pools of
+  purine (xanthine, hypoxanthine, inosine, guanosine, deoxyadenosine, allantoin,
+  2,8-dihydroxyadenine, succinyladenosine, AICA-riboside, SAICA-riboside, oxoguanosine)
+  and pyrimidine (uracil, thymine, dihydrouracil, dihydrothymine, ureidopropionate /
+  N-carbamoyl-beta-alanine, ureidoisobutyrate / N-carbamoyl-beta-aminoisobutyrate,
+  uridine, cytidine, thymidine, deoxyuridine, 5-hydroxymethyluracil) metabolites, plus
+  the enzyme-activity roots whose LoF/GoF drive them (DPYD, DPYS, UPB1, XDH/XO, AOX,
+  TYMP, ADA, ADA2, PRPS1, APRT, ATIC, UMPS, NT5C, P5N, AK1, ITPA, AMPD1). Signed edges
+  added only along the established linear catabolic chains. Single-scale pools +
+  cellular/organ enzyme roots. Phase 1, DRAFT for domain review.
+
+nodes:
+  # ---- existing corpus nodes referenced as boundaries (NOT redefined here) ----
+  # plasma_xanthine, xanthine_oxidase_activity  (see benchmarks/human/systems & inventory)
+
+  # ============================ PURINE metabolites ============================
+  # plasma pools (organ_system; PATO:0000033 concentration)
+  - id: plasma_inosine
+    label: plasma inosine concentration
+    scale: organ_system
+    entity_iri: CHEBI:17596      # inosine (CHEBI verified)
+    quality_iri: PATO:0000033
+  - id: plasma_guanosine
+    label: plasma guanosine concentration
+    scale: organ_system
+    entity_iri: CHEBI:16750      # guanosine (CHEBI verified)
+    quality_iri: PATO:0000033
+  - id: plasma_allantoin
+    label: serum allantoin concentration
+    scale: organ_system
+    entity_iri: CHEBI:15676      # allantoin (CHEBI verified)
+    quality_iri: PATO:0000033
+
+  # urinary pools (organ_system; amount excreted, PATO:0000033 conc in urine)
+  - id: urinary_hypoxanthine
+    label: urinary hypoxanthine concentration
+    scale: organ_system
+    entity_iri: CHEBI:17368      # hypoxanthine (CHEBI verified)
+    quality_iri: PATO:0000033
+  - id: urinary_inosine
+    label: urinary inosine concentration
+    scale: organ_system
+    entity_iri: CHEBI:17596
+    quality_iri: PATO:0000033
+  - id: urinary_guanosine
+    label: urinary guanosine concentration
+    scale: organ_system
+    entity_iri: CHEBI:16750
+    quality_iri: PATO:0000033
+  - id: urinary_deoxyadenosine
+    label: urinary 2'-deoxyadenosine concentration
+    scale: organ_system
+    entity_iri: CHEBI:17256      # 2'-deoxyadenosine (CHEBI verified)
+    quality_iri: PATO:0000033
+  - id: urinary_2_8_dihydroxyadenine
+    label: urinary 2,8-dihydroxyadenine concentration
+    scale: organ_system
+    entity_iri: CHEBI:183641     # 2,8-dihydroxyadenine (CHEBI verified)
+    quality_iri: PATO:0000033
+  - id: urinary_succinyladenosine
+    label: urinary succinyladenosine concentration
+    scale: organ_system
+    entity_iri: CHEBI:71169      # succinyladenosine (CHEBI verified)
+    quality_iri: PATO:0000033
+  - id: urinary_saicar_riboside
+    label: urinary succinylaminoimidazolecarboxamide riboside (SAICAr) concentration
+    scale: organ_system
+    entity_iri: null             # CHEBI "SAICAR" is the nucleotide; riboside not exactly named -> null
+    quality_iri: PATO:0000033
+  - id: urinary_aicar
+    label: urinary 5-amino-4-imidazolecarboxamide riboside (AICA-riboside) concentration
+    scale: organ_system
+    entity_iri: CHEBI:28498      # acadesine = AICA riboside (CHEBI verified)
+    quality_iri: PATO:0000033
+  - id: urinary_8_oxoguanosine
+    label: urinary 8-oxo-7,8-dihydroguanosine concentration
+    scale: organ_system
+    entity_iri: null             # no exact CHEBI name (only 8-Hydroxyguanosine tautomer) -> null
+    quality_iri: PATO:0000033
+
+  # =========================== PYRIMIDINE metabolites ==========================
+  # plasma / circulating pools
+  - id: plasma_uracil
+    label: plasma uracil concentration
+    scale: organ_system
+    entity_iri: CHEBI:17568      # uracil (CHEBI verified)
+    quality_iri: PATO:0000033
+  - id: plasma_thymine
+    label: plasma thymine concentration
+    scale: organ_system
+    entity_iri: CHEBI:17821      # thymine (CHEBI verified)
+    quality_iri: PATO:0000033
+  - id: plasma_dihydrouracil
+    label: plasma dihydrouracil concentration
+    scale: organ_system
+    entity_iri: CHEBI:15901      # 5,6-dihydrouracil (CHEBI verified)
+    quality_iri: PATO:0000033
+  - id: plasma_dihydrothymine
+    label: plasma dihydrothymine concentration
+    scale: organ_system
+    entity_iri: CHEBI:27468      # 5,6-dihydrothymine (CHEBI verified)
+    quality_iri: PATO:0000033
+  - id: plasma_n_carbamyl_beta_alanine
+    label: plasma N-carbamoyl-beta-alanine (ureidopropionate) concentration
+    scale: organ_system
+    entity_iri: CHEBI:18261      # N-carbamoyl-beta-alanine (CHEBI verified)
+    quality_iri: PATO:0000033
+  - id: plasma_n_carbamyl_beta_aminoisobutyrate
+    label: plasma N-carbamoyl-beta-aminoisobutyrate (ureidoisobutyrate) concentration
+    scale: organ_system
+    entity_iri: CHEBI:1670       # 3-ureidoisobutyric acid (CHEBI verified)
+    quality_iri: PATO:0000033
+  - id: plasma_5_hydroxymethyluracil
+    label: plasma 5-hydroxymethyluracil concentration
+    scale: organ_system
+    entity_iri: CHEBI:16964      # 5-hydroxymethyluracil (CHEBI verified)
+    quality_iri: PATO:0000033
+  - id: plasma_thymidine
+    label: plasma thymidine concentration
+    scale: organ_system
+    entity_iri: CHEBI:17748      # thymidine (CHEBI verified)
+    quality_iri: PATO:0000033
+  - id: plasma_deoxyuridine
+    label: plasma 2'-deoxyuridine concentration
+    scale: organ_system
+    entity_iri: CHEBI:16450      # 2'-deoxyuridine (CHEBI verified)
+    quality_iri: PATO:0000033
+
+  # urinary pyrimidine pools
+  - id: urinary_thymine
+    label: urinary thymine concentration
+    scale: organ_system
+    entity_iri: CHEBI:17821
+    quality_iri: PATO:0000033
+  - id: urinary_dihydrouracil
+    label: urinary dihydrouracil concentration
+    scale: organ_system
+    entity_iri: CHEBI:15901
+    quality_iri: PATO:0000033
+  - id: urinary_dihydrothymine
+    label: urinary dihydrothymine concentration
+    scale: organ_system
+    entity_iri: CHEBI:27468
+    quality_iri: PATO:0000033
+  - id: urinary_ureidopropionate
+    label: urinary 3-ureidopropionate (N-carbamoyl-beta-alanine) concentration
+    scale: organ_system
+    entity_iri: CHEBI:18261
+    quality_iri: PATO:0000033
+  - id: urinary_ureidoisobutyrate
+    label: urinary 3-ureidoisobutyrate (N-carbamoyl-beta-aminoisobutyrate) concentration
+    scale: organ_system
+    entity_iri: CHEBI:1670
+    quality_iri: PATO:0000033
+  - id: urinary_n_carbamyl_beta_alanine
+    label: urinary N-carbamoyl-beta-alanine concentration
+    scale: organ_system
+    entity_iri: CHEBI:18261
+    quality_iri: PATO:0000033
+  - id: urinary_n_carbamyl_beta_aminoisobutyrate
+    label: urinary N-carbamoyl-beta-aminoisobutyrate concentration
+    scale: organ_system
+    entity_iri: CHEBI:1670
+    quality_iri: PATO:0000033
+  - id: urinary_uridine
+    label: urinary uridine concentration
+    scale: organ_system
+    entity_iri: CHEBI:16704      # uridine (CHEBI verified)
+    quality_iri: PATO:0000033
+  - id: urinary_cytidine
+    label: urinary cytidine concentration
+    scale: organ_system
+    entity_iri: CHEBI:17562      # cytidine (CHEBI verified)
+    quality_iri: PATO:0000033
+  - id: urinary_thymidine
+    label: urinary thymidine concentration
+    scale: organ_system
+    entity_iri: CHEBI:17748
+    quality_iri: PATO:0000033
+  - id: urinary_deoxyuridine
+    label: urinary 2'-deoxyuridine concentration
+    scale: organ_system
+    entity_iri: CHEBI:16450
+    quality_iri: PATO:0000033
+  - id: urinary_5_hydroxymethyluracil
+    label: urinary 5-hydroxymethyluracil concentration
+    scale: organ_system
+    entity_iri: CHEBI:16964
+    quality_iri: PATO:0000033
+
+  # CSF pyrimidine pools
+  - id: csf_dihydrouracil
+    label: CSF dihydrouracil concentration
+    scale: organ_system
+    entity_iri: CHEBI:15901
+    quality_iri: PATO:0000033
+  - id: csf_n_carbamyl_beta_alanine
+    label: CSF N-carbamoyl-beta-alanine concentration
+    scale: organ_system
+    entity_iri: CHEBI:18261
+    quality_iri: PATO:0000033
+  - id: csf_n_carbamyl_beta_aminoisobutyrate
+    label: CSF N-carbamoyl-beta-aminoisobutyrate concentration
+    scale: organ_system
+    entity_iri: CHEBI:1670
+    quality_iri: PATO:0000033
+
+  # ============================ ENZYME ACTIVITY roots =========================
+  # (cellular/organ scale; PATO:0001414 catalytic activity; bearer cell/organ verified)
+  - id: dihydropyrimidine_dehydrogenase_activity
+    label: dihydropyrimidine dehydrogenase (DPYD) catalytic activity
+    scale: cellular
+    entity_iri: PR:Q12882        # DPYD human (PR verified)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000182   # hepatocyte (CL verified)
+  - id: dihydropyrimidinase_activity
+    label: dihydropyrimidinase (DPYS) catalytic activity
+    scale: cellular
+    entity_iri: PR:Q14117        # DPYS human (PR verified)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000182
+  - id: beta_ureidopropionase_activity
+    label: beta-ureidopropionase (UPB1) catalytic activity
+    scale: cellular
+    entity_iri: PR:Q9UBR1        # UPB1 human (PR verified)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000182
+  - id: thymidine_phosphorylase_activity
+    label: thymidine phosphorylase (TYMP) catalytic activity
+    scale: cellular
+    entity_iri: PR:P19971        # TYMP human (PR verified)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000182
+  - id: aldehyde_oxidase_activity
+    label: aldehyde oxidase (AOX1) catalytic activity
+    scale: cellular
+    entity_iri: PR:Q06278        # AOX1 human (PR verified)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000182
+  # NB: xanthine dehydrogenase (XDH) activity is NOT redefined here — it already exists
+  #     in the corpus as `xanthine_oxidase_activity` ("xanthine oxidoreductase (XDH/XO)").
+  #     HP:0003534 maps to that existing node.
+  - id: adenosine_deaminase_activity
+    label: erythrocyte adenosine deaminase (ADA) catalytic activity
+    scale: cellular
+    entity_iri: PR:P00813        # ADA human (PR verified)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000232   # erythrocyte (CL verified)
+  - id: ada2_activity
+    label: circulating adenosine deaminase 2 (ADA2/CECR1) catalytic activity
+    scale: cellular
+    entity_iri: PR:Q9NZK5        # ADA2 human (PR verified)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000576   # monocyte (CL verified)
+  - id: prpp_synthetase_activity
+    label: phosphoribosylpyrophosphate (PRPP) synthetase (PRPS1) catalytic activity
+    scale: cellular
+    entity_iri: PR:P60891        # PRPS1 human (PR verified)
+    quality_iri: PATO:0001414
+  - id: aicar_transformylase_activity
+    label: AICAR transformylase / IMP cyclohydrolase (ATIC) catalytic activity
+    scale: cellular
+    entity_iri: PR:P31939        # bifunctional purine biosynthesis protein ATIC (human), UniProt P31939
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000182
+  - id: umps_activity
+    label: UMP synthase / orotidine-5'-phosphate decarboxylase (UMPS) catalytic activity
+    scale: cellular
+    entity_iri: PR:P11172        # UMPS human (PR verified)
+    quality_iri: PATO:0001414
+  - id: pyrimidine_5_nucleotidase_activity
+    label: pyrimidine 5'-nucleotidase 1 (NT5C3A) catalytic activity
+    scale: cellular
+    entity_iri: PR:Q9H0P0        # cytosolic 5'-nucleotidase 3A (human), NT5C3A, UniProt Q9H0P0
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000232
+  - id: adenylate_kinase_activity
+    label: erythrocyte adenylate kinase 1 (AK1) catalytic activity
+    scale: cellular
+    entity_iri: PR:P00568        # AK1 human (PR verified)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000232
+  - id: itpase_activity
+    label: erythrocyte inosine triphosphate pyrophosphatase (ITPA) catalytic activity
+    scale: cellular
+    entity_iri: PR:Q9BY32        # ITPA human (PR verified)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0000232
+  - id: myoadenylate_deaminase_activity
+    label: muscle AMP deaminase 1 (AMPD1, myoadenylate deaminase) catalytic activity
+    scale: cellular
+    entity_iri: PR:P23109        # AMPD1 human (PR verified)
+    quality_iri: PATO:0001414
+    bearer_entity_iri: CL:0008002   # skeletal muscle fiber (CL verified)
+
+causal_edges:
+  # ---- pyrimidine catabolic chain: uracil -(DPYD)-> dihydrouracil -(DPYS)->
+  #      N-carbamoyl-beta-alanine -(UPB1)-> beta-alanine  (Lehninger, Nucleotide metab) ----
+  - source: dihydropyrimidine_dehydrogenase_activity
+    target: plasma_uracil
+    sign: "-"
+    mechanism: DPYD reduces uracil to 5,6-dihydrouracil; more DPYD consumes more uracil substrate.
+    evidence: "Lehninger Principles of Biochemistry (Nelson & Cox), Nucleotide metabolism; OMIM 274270 (DPD deficiency: uracil/thymine accumulate)"
+    causal_evidence: genetic_lof_gof
+  - source: dihydropyrimidine_dehydrogenase_activity
+    target: plasma_thymine
+    sign: "-"
+    mechanism: DPYD reduces thymine to 5,6-dihydrothymine; more DPYD consumes more thymine.
+    evidence: "Lehninger, Nucleotide metabolism; OMIM 274270"
+    causal_evidence: genetic_lof_gof
+  - source: dihydropyrimidine_dehydrogenase_activity
+    target: plasma_dihydrouracil
+    sign: "+"
+    mechanism: 5,6-dihydrouracil is the DPYD product from uracil.
+    evidence: "Lehninger, Nucleotide metabolism; van Kuilenburg, Biochim Biophys Acta 2006 (DPD)"
+    causal_evidence: genetic_lof_gof
+  - source: dihydropyrimidine_dehydrogenase_activity
+    target: plasma_dihydrothymine
+    sign: "+"
+    mechanism: 5,6-dihydrothymine is the DPYD product from thymine.
+    evidence: "Lehninger, Nucleotide metabolism"
+  - source: dihydropyrimidinase_activity
+    target: plasma_dihydrouracil
+    sign: "-"
+    mechanism: DPYS hydrolyses 5,6-dihydrouracil; more DPYS consumes more dihydrouracil substrate.
+    evidence: "Lehninger, Nucleotide metabolism; OMIM 222748 (dihydropyrimidinase deficiency: dihydrouracil/dihydrothymine accumulate)"
+    causal_evidence: genetic_lof_gof
+  - source: dihydropyrimidinase_activity
+    target: plasma_dihydrothymine
+    sign: "-"
+    mechanism: DPYS hydrolyses 5,6-dihydrothymine substrate.
+    evidence: "Lehninger; OMIM 222748"
+    causal_evidence: genetic_lof_gof
+  - source: dihydropyrimidinase_activity
+    target: plasma_n_carbamyl_beta_alanine
+    sign: "+"
+    mechanism: N-carbamoyl-beta-alanine (ureidopropionate) is the DPYS ring-opening product of dihydrouracil.
+    evidence: "Lehninger, Nucleotide metabolism"
+  - source: dihydropyrimidinase_activity
+    target: plasma_n_carbamyl_beta_aminoisobutyrate
+    sign: "+"
+    mechanism: N-carbamoyl-beta-aminoisobutyrate (ureidoisobutyrate) is the DPYS product of dihydrothymine.
+    evidence: "Lehninger, Nucleotide metabolism"
+  - source: beta_ureidopropionase_activity
+    target: plasma_n_carbamyl_beta_alanine
+    sign: "-"
+    mechanism: UPB1 hydrolyses N-carbamoyl-beta-alanine to beta-alanine; more UPB1 consumes more substrate.
+    evidence: "Lehninger, Nucleotide metabolism; OMIM 613161 (beta-ureidopropionase deficiency: ureidopropionate accumulates)"
+    causal_evidence: genetic_lof_gof
+  - source: beta_ureidopropionase_activity
+    target: plasma_n_carbamyl_beta_aminoisobutyrate
+    sign: "-"
+    mechanism: UPB1 hydrolyses N-carbamoyl-beta-aminoisobutyrate to beta-aminoisobutyrate.
+    evidence: "Lehninger; OMIM 613161"
+    causal_evidence: genetic_lof_gof
+
+  # ---- purine: hypoxanthine/xanthine handled by XDH (existing corpus nodes) ----
+  - source: xanthine_oxidase_activity
+    target: plasma_xanthine
+    sign: "-"
+    mechanism: XDH oxidises hypoxanthine->xanthine->urate; loss of XDH causes xanthine/hypoxanthine accumulation (xanthinuria).
+    evidence: "Harrison's Principles of Internal Medicine, purine metabolism disorders; OMIM 278300 (xanthinuria type I, XDH)"
+
+  # ---- thymidine phosphorylase (MNGIE): TYMP degrades thymidine & deoxyuridine ----
+  - source: thymidine_phosphorylase_activity
+    target: plasma_thymidine
+    sign: "-"
+    mechanism: TYMP phosphorolyses thymidine to thymine; loss of TYMP raises plasma thymidine (MNGIE).
+    evidence: "Nishino et al., Science 1999 (MNGIE = TYMP deficiency); OMIM 603041"
+    causal_evidence: genetic_lof_gof
+  - source: thymidine_phosphorylase_activity
+    target: plasma_deoxyuridine
+    sign: "-"
+    mechanism: TYMP also phosphorolyses 2'-deoxyuridine; loss raises plasma deoxyuridine (MNGIE).
+    evidence: "Nishino et al., Science 1999; OMIM 603041"
+    causal_evidence: genetic_lof_gof
+  - source: thymidine_phosphorylase_activity
+    target: urinary_thymidine
+    sign: "-"
+    mechanism: With TYMP loss, elevated circulating thymidine spills into urine.
+    evidence: "Marti et al., Ann Neurol 2002 (MNGIE biochemistry); OMIM 603041"
+    causal_evidence: genetic_lof_gof
+  - source: thymidine_phosphorylase_activity
+    target: urinary_deoxyuridine
+    sign: "-"
+    mechanism: With TYMP loss, elevated circulating deoxyuridine spills into urine.
+    evidence: "Marti et al., Ann Neurol 2002; OMIM 603041"
+    causal_evidence: genetic_lof_gof
+
+  # ---- ADA (deoxyadenosine accumulates in ADA-SCID) ----
+  - source: adenosine_deaminase_activity
+    target: urinary_deoxyadenosine
+    sign: "-"
+    mechanism: ADA deaminates (deoxy)adenosine; ADA loss causes dAdo accumulation and urinary excretion (ADA-SCID).
+    evidence: "Hershfield, Genet Med 2003 (ADA deficiency); OMIM 102700"
+    causal_evidence: genetic_lof_gof

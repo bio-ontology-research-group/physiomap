@@ -1,0 +1,85 @@
+# =============================================================================
+# Drug panel — qualitative drug-effect prediction (evaluation family 7)
+#                                                   *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Drugs act at molecular or organ targets; PhysioMap predicts the steady-state sign of
+# downstream physiological readouts/biomarkers. Scored with the unified multi-scale solver.
+# Expected signs are established clinical pharmacology. Organ targets embedded in the
+# whole-body feedback SCC return '?' (reported separately, never wrong).
+# =============================================================================
+
+multiscale: true
+
+systems:
+  - ../guyton/guyton_cv_core.yaml
+  - ../human/systems/glucose_insulin.yaml
+  - ../human/systems/thyroid.yaml
+  - ../human/systems/george_heart_rate.yaml
+  - ../human/systems/adrenal_cortisol.yaml
+  - ../human/systems/calcium_pth.yaml
+  - ../human/systems/respiratory_acidbase.yaml
+  - ../human/systems/thermoregulation.yaml
+  - ../human/systems/hematology_epo.yaml
+  - ../human/systems/body_fluids_osmolality.yaml
+  - ../multiscale/vascular_tone.yaml
+
+interventions:
+  - id: ace_inhibitor
+    label: ACE inhibitor (lower angiotensin II)
+    do: {angiotensin_II: "-"}
+    expected: {aldosterone: "-", total_peripheral_resistance: "-", mean_arterial_pressure: "-", renin: "+"}
+    loop_critical: [renin]
+
+  - id: spironolactone
+    label: Mineralocorticoid-receptor antagonist (block aldosterone)
+    do: {aldosterone: "-"}
+    expected: {sodium_water_reabsorption: "-", plasma_potassium: "+", mean_arterial_pressure: "-"}
+    loop_critical: []
+
+  - id: thiazide_diuretic
+    label: Thiazide diuretic (reduce renal Na/water reabsorption)
+    do: {sodium_water_reabsorption: "-"}
+    expected: {extracellular_fluid_volume: "-", blood_volume: "-", mean_arterial_pressure: "-", renin: "+"}
+    loop_critical: [renin]
+
+  - id: levothyroxine
+    label: Levothyroxine (thyroid hormone replacement)
+    do: {free_t4: "+"}
+    expected: {free_t3: "+", metabolic_rate: "+", tsh: "-"}
+    loop_critical: [tsh]
+
+  - id: methimazole
+    label: Antithyroid drug (lower thyroid hormone)
+    do: {free_t4: "-"}
+    expected: {free_t3: "-", metabolic_rate: "-", tsh: "+"}
+    loop_critical: [tsh]
+
+  - id: glucocorticoid
+    label: Glucocorticoid therapy (raise cortisol)
+    do: {cortisol: "+"}
+    expected: {plasma_glucose: "+", acth: "-"}
+    loop_critical: [acth]
+
+  - id: insulin_therapy
+    label: Insulin therapy
+    do: {plasma_insulin: "+"}
+    expected: {peripheral_glucose_uptake: "+", hepatic_glucose_production: "-", plasma_glucose: "-"}
+    loop_critical: []
+
+  - id: epo_therapy
+    label: Erythropoietin therapy
+    do: {erythropoietin: "+"}
+    expected: {red_cell_mass: "+", hematocrit: "+", blood_viscosity: "+"}
+    loop_critical: []
+
+  - id: teriparatide
+    label: PTH analog (raise PTH)
+    do: {pth: "+"}
+    expected: {plasma_calcium: "+", plasma_phosphate: "-", calcitriol: "+"}
+    loop_critical: []
+
+  - id: arb_molecular
+    label: ARB — block vascular AT1 receptor (molecular target)
+    do: {at1_receptor_activity: "-"}
+    expected: {intracellular_calcium: "-", mlc_phosphorylation: "-", vascular_smooth_muscle_tone: "-"}
+    loop_critical: []

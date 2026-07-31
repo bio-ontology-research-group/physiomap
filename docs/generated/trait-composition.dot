@@ -1,0 +1,7 @@
+digraph G {
+          graph [rankdir=LR, bgcolor="transparent", pad=.2]; node [shape=box, style="rounded,filled", fontname="Helvetica"];
+          T [label="All traits\n1699", fillcolor="#e5e7eb"];
+          C [label="Complete contextual traits\n1568 (92.3%)", fillcolor="#dcfce7"];
+          I [label="Incomplete primitive traits\n131 (7.7%)", fillcolor="#fee2e2"];
+          T -> C; T -> I;
+        }

@@ -1,0 +1,221 @@
+# =============================================================================
+# Acute inflammation / cytokine response — PhysioMap fragment
+#                                                      *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Hand-encoded canonical acute-inflammation physiology. Every edge sign is
+# sign(d target*/d source) at steady state, all else equal (interventionist
+# partial: does pushing source UP push target up (+) or down (-)?).
+#
+# Core structure encoded here:
+#   - Pro-inflammatory cascade:   TNF-alpha -> IL-1beta -> IL-6 -> CRP
+#                                 (TNF and IL-1 are early, synergistic, and
+#                                  drive IL-6; IL-6 is the principal hepatic
+#                                  acute-phase inducer -> C-reactive protein)
+#   - HPA anti-inflammatory NEGATIVE-FEEDBACK LOOP (the key cyclic motif):
+#       cytokines (IL-1, IL-6, TNF) -> CRH (+) -> ACTH (+) -> cortisol (+)
+#       cortisol -| TNF-alpha, IL-1beta, IL-6 (-)   (glucocorticoid suppression)
+#     i.e. inflammation drives its own brake via the HPA axis.
+#   - Pyrogenic fever:            IL-1beta, IL-6 -> core_temperature (+)
+#   - Septic vasodilation:        TNF-alpha, IL-1beta -> total_peripheral_resistance (-)
+#   - Microvascular leak:         TNF-alpha, IL-1beta -> capillary_permeability (+)
+#
+# BOUNDARY NODES referenced from the existing map (owned by sibling fragments;
+# do NOT redefine): crh, acth, cortisol (HPA / adrenal_cortisol),
+#   core_temperature (thermoregulation), total_peripheral_resistance (Guyton CV).
+#
+# SOURCES (verified):
+#   - BioModels BIOMD0000000714 — Reynolds2006: "A reduced mathematical model of
+#     the acute inflammatory response: I." Reynolds, Rubin, Clermont, Day,
+#     Vodovotz & Ermentrout, J. Theor. Biol. 242(1):220-236 (2006), PubMed 16584750.
+#     NOTE: this is a LUMPED/conceptual ODE model — its state variables are generic
+#     pro-inflammatory mediators (P, N*) and a generic anti-inflammatory mediator
+#     (C_A), NOT named cytokines (TNF/IL-1/IL-6) or cortisol individually. It is
+#     cited here only as QUALITATIVE support for the SIGNS (pro-inflammatory
+#     amplification; anti-inflammatory mediator -| pro-inflammation, i.e. the
+#     negative-feedback braking loop), never for molecular-species specificity.
+#   - BioModels BIOMD0000000151 — Singh2006: "Modeling regulatory mechanisms in
+#     IL-6 signal transduction in hepatocytes." Singh, Jayaraman & Hahn,
+#     Biotechnol. Bioeng. 95(5):850-862 (2006), PubMed 16752369. NOTE: scope is
+#     IL-6 -> gp130/JAK-STAT3 (+MAPK) intracellular signal transduction; it
+#     establishes hepatocyte IL-6 responsiveness but does not itself model CRP
+#     output. Janeway's is the primary anchor for IL-6 -> CRP.
+#   - Janeway's Immunobiology (Murphy & Weaver), ch. on innate immunity / the
+#     acute-phase response (TNF/IL-1/IL-6 cascade, CRP, endogenous pyrogens).
+#   - Boron & Boulpaep, Medical Physiology (fever, cytokine-driven HPA activation,
+#     septic vasodilation via inducible NO synthase; glucocorticoid anti-inflammation).
+#
+# Scope: single scale (ORGAN_SYSTEM / molecular cytokine mediators treated at the
+# organism circulating level). No constitutive (cross-scale) edges this fragment.
+# ROBERT: please correct signs.
+# =============================================================================
+
+name: inflammation_cytokine
+description: >-
+  DRAFT acute-inflammation / cytokine-response fragment as a PhysioMap signed
+  cyclic causal graph. Owns tnf_alpha, il6, il1beta, c_reactive_protein,
+  capillary_permeability; encodes the pro-inflammatory cascade and the cortisol
+  anti-inflammatory negative-feedback loop via the HPA axis (boundary crh, acth,
+  cortisol), pyrogenic fever onto core_temperature, and septic vasodilation onto
+  total_peripheral_resistance. Sources: BioModels Reynolds2006 (BIOMD0000000714)
+  and Singh2006 (BIOMD0000000151); Janeway's Immunobiology; Boron & Boulpaep.
+
+nodes:
+- id: tnf_alpha
+  label: circulating tumor necrosis factor alpha concentration
+  scale: organ_system
+  entity_iri: PR:000000134              # tumor necrosis factor (TNF-alpha)
+  quality_iri: PATO:0000033             # concentration
+- id: il1beta
+  label: circulating interleukin-1 beta concentration
+  scale: organ_system
+  entity_iri: PR:000001136              # interleukin-1 beta
+  quality_iri: PATO:0000033
+  quality_kind: ratio
+- id: il6
+  label: circulating interleukin-6 concentration
+  scale: organ_system
+  entity_iri: PR:000001124              # interleukin-6
+  quality_iri: PATO:0000033
+- id: c_reactive_protein
+  label: plasma C-reactive protein concentration
+  scale: organ_system
+  entity_iri: PR:000005991              # C-reactive protein
+  quality_iri: PATO:0000033
+- id: capillary_permeability
+  label: systemic capillary (microvascular) permeability
+  scale: organ_system
+  entity_iri: UBERON:0001982            # capillary
+  quality_iri: PATO:0000970             # permeability
+
+  # --- cellular producer node (constitutive grounding of a secreted substance) ---
+- id: hepatocyte_crp_secretion
+  label: hepatocyte C-reactive protein acute-phase synthesis/secretion rate
+  scale: cellular
+  entity_iri: CL:0000182                # hepatocyte (OLS4-verified)
+  quality_iri: PATO:0000161             # secretion/synthesis rate
+- id: macrophage_il1beta_secretion
+  label: activated macrophage interleukin-1 beta secretion rate
+  scale: cellular
+  entity_iri: GO:0032611                # interleukin-1 beta production
+  quality_iri: PATO:0000161
+  bearer_entity_iri: CL:0000235  # macrophage
+
+causal_edges:
+  # --- pro-inflammatory cascade --------------------------------------------
+- source: tnf_alpha
+  target: il1beta
+  sign: "+"
+  mechanism: TNF-alpha engages TNFR1 on macrophages/monocytes -> NF-kB activation -> IL-1beta transcription and release
+  evidence: "Janeway's Immunobiology (innate immunity, macrophage cytokine cascade) — primary molecular anchor [citations PubMed-verified]"
+- source: tnf_alpha
+  target: il6
+  sign: "+"
+  mechanism: TNF-alpha -> NF-kB -> IL-6 transcription in macrophages and endothelium (early-to-late cytokine relay)
+  evidence: "Janeway's Immunobiology (acute-phase cytokine cascade TNF/IL-1 -> IL-6) — primary molecular anchor [citations PubMed-verified]"
+- source: il1beta
+  target: il6
+  sign: "+"
+  mechanism: IL-1beta engages IL-1R -> MyD88/NF-kB -> IL-6 production (TNF and IL-1 synergistically induce IL-6)
+  evidence: "Janeway's Immunobiology (TNF + IL-1 -> IL-6); Boron & Boulpaep Medical Physiology (inflammatory mediators)"
+- source: il6
+  target: c_reactive_protein
+  sign: "+"
+  causal_evidence: curated_mechanistic
+  mechanism: IL-6 engages hepatocyte gp130/JAK-STAT3 to drive acute-phase gene transcription -> C-reactive protein synthesis and secretion
+  evidence: "Janeway's Immunobiology (IL-6 is the principal hepatic acute-phase inducer of CRP) — primary anchor [citations PubMed-verified] | curated interventional support: IL-6 KO markedly blunts the hepatic acute-phase response (Nemeth et al 2004, JCI, jci.org/articles/view/20945, opened; measured haptoglobin) and anti-IL-6R therapy (tocilizumab) rapidly normalizes CRP — held to curated_mechanistic (rank B) pending a CRP-specific interventional primary source"
+
+  # --- microvascular leak ---------------------------------------------------
+- source: tnf_alpha
+  target: capillary_permeability
+  sign: "+"
+  mechanism: TNF-alpha disrupts endothelial adherens/tight junctions (VE-cadherin) raising microvascular permeability
+  evidence: "Janeway's Immunobiology (TNF-alpha increases vascular permeability); Boron & Boulpaep Medical Physiology (inflammation, capillary leak) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-118 (21.3: Barrier Defenses and the Innate Immune Response): 'inflammatory mediators increase the permeability of the local vasculature, causing leakage of fluid into the interstitial space' (inflammatory context corroborating microvascular leak)"
+- source: il1beta
+  target: capillary_permeability
+  sign: "+"
+  mechanism: IL-1beta acts on endothelium to loosen interendothelial junctions, increasing fluid/protein extravasation
+  evidence: "Janeway's Immunobiology (IL-1 endothelial activation, increased permeability) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-118 (21.3: Barrier Defenses and the Innate Immune Response): 'injured cells, phagocytes, and basophils are sources of inflammatory mediators...Leukotrienes attract neutrophils...and increase vascular permeability' (general vascular permeability increase during acute inflammation)"
+
+  # --- pyrogenic fever (-> core_temperature boundary) -----------------------
+- source: il1beta
+  target: core_temperature
+  sign: "+"
+  causal_evidence: perturbation
+  mechanism: IL-1beta is an endogenous pyrogen -> hypothalamic PGE2 -> raised thermoregulatory set point (fever)
+  evidence: "Boron & Boulpaep Medical Physiology (endogenous pyrogens IL-1/IL-6/TNF -> hypothalamic PGE2 -> fever); Janeway's Immunobiology | perturbation: i.p. recombinant IL-1beta evokes fever in wild-type mice (opened PMC2192408) — controlled administration of the source raises core temperature | textbook corroboration: OpenStax Biology 2e §bio-33.3 (Homeostasis): 'When a bacterium is destroyed by phagocytic leukocytes, chemicals called endogenous pyrogens are released into the blood. These pyrogens circulate to the hypothalamus and reset the thermostat. This allows the body's temperature to increase in what is commonly called a fever.'; OpenStax Biology 2e §bio-42.1 (42.1: Innate Immune Response): 'Cytokines also increase the core body temperature, causing a fever' — IL-1beta is a principal pro-inflammatory cytokine driving pyrogenic fever."
+- source: il6
+  target: core_temperature
+  sign: "+"
+  causal_evidence: perturbation
+  mechanism: IL-6 is the principal circulating endogenous pyrogen reaching the OVLT/hypothalamus -> PGE2 -> fever
+  evidence: "Boron & Boulpaep Medical Physiology (IL-6 endogenous pyrogen -> fever); Janeway's Immunobiology (acute-phase fever) | perturbation (bidirectional): IL-6-deficient mice fail to develop fever to LPS or IL-1beta, and intracerebroventricular recombinant IL-6 restores the fever response (opened PMC2192408) — loss and rescue of IL-6 change core temperature in the asserted direction | textbook corroboration: OpenStax Biology 2e §bio-33.3 (Homeostasis): endogenous pyrogens released by leukocytes destroying bacteria reset the hypothalamic thermostat, causing fever — corroborates IL-6 as endogenous pyrogen raising core temperature.; OpenStax Biology 2e §bio-42.1 (42.1: Innate Immune Response): 'Cytokines also increase the core body temperature, causing a fever' — IL-6 is the principal circulating endogenous pyrogen."
+
+  # --- septic vasodilation (-> total_peripheral_resistance boundary) --------
+- source: tnf_alpha
+  target: total_peripheral_resistance
+  sign: "-"
+  mechanism: TNF-alpha induces endothelial/smooth-muscle iNOS -> sustained NO -> arteriolar vasodilation lowering systemic resistance (septic shock)
+  evidence: "Boron & Boulpaep Medical Physiology (cytokine-induced iNOS -> NO -> septic vasodilation) — primary anchor [citations PubMed-verified]"
+- source: il1beta
+  target: total_peripheral_resistance
+  sign: "-"
+  mechanism: IL-1beta induces iNOS and prostacyclin in vasculature -> vasodilation reducing total peripheral resistance
+  evidence: "Boron & Boulpaep Medical Physiology (inflammatory vasodilation via iNOS); Janeway's Immunobiology (systemic cytokine vasodilation in sepsis)"
+
+  # --- HPA activation (cytokines -> crh/acth boundary) ----------------------
+- source: il1beta
+  target: crh
+  sign: "+"
+  mechanism: IL-1beta acts on hypothalamic paraventricular neurons to stimulate CRH release (immune-to-HPA signaling)
+  evidence: "Boron & Boulpaep Medical Physiology (cytokine activation of the HPA axis, IL-1 -> CRH); Janeway's Immunobiology"
+- source: il6
+  target: crh
+  sign: "+"
+  mechanism: circulating IL-6 stimulates hypothalamic CRH secretion, a major driver of the inflammation-evoked HPA response
+  evidence: "Boron & Boulpaep Medical Physiology (IL-6 -> HPA activation / CRH); Janeway's Immunobiology (acute-phase HPA activation)"
+- source: tnf_alpha
+  target: pituitary_acth_secretion
+  sign: "+"
+  mechanism: TNF-alpha contributes to pituitary corticotrope ACTH release during systemic inflammation (immune-to-HPA signaling)
+  evidence: "Boron & Boulpaep Medical Physiology (pro-inflammatory cytokines activate the HPA axis at hypothalamus and pituitary)"
+
+  # --- glucocorticoid anti-inflammatory NEGATIVE FEEDBACK (loop closure) ----
+  # cortisol (boundary, driven up by the HPA activation above) suppresses the
+  # pro-inflammatory cytokines, closing the cytokine -> HPA -> cortisol -| cytokine loop.
+- source: cortisol
+  target: tnf_alpha
+  sign: "-"
+  causal_evidence: pharmacological
+  mechanism: glucocorticoid receptor transrepression of NF-kB suppresses macrophage TNF-alpha transcription
+  evidence: "Boron & Boulpaep Medical Physiology (glucocorticoid receptor transrepression of NF-kB suppresses cytokines) — primary molecular anchor [citations PubMed-verified]"
+- source: cortisol
+  target: il1beta
+  sign: "-"
+  causal_evidence: pharmacological
+  mechanism: glucocorticoids inhibit NF-kB/AP-1-driven IL-1beta transcription and promote anti-inflammatory mediators
+  evidence: "Boron & Boulpaep Medical Physiology (glucocorticoid suppression of pro-inflammatory cytokines); Janeway's Immunobiology"
+- source: cortisol
+  target: il6
+  sign: "-"
+  causal_evidence: pharmacological
+  mechanism: glucocorticoid receptor represses IL-6 gene transcription (NF-kB transrepression), damping the acute-phase response
+  evidence: "Boron & Boulpaep Medical Physiology (glucocorticoid receptor represses IL-6 transcription) — primary molecular anchor [citations PubMed-verified]"
+
+production_edges:
+  # --- PRODUCTION (cell of origin grounds a secreted substance) ----------------
+  # IL-1beta: activated macrophages/monocytes are the principal producers; the
+  # macrophage IL-1beta secretion rate sets the circulating level. Local producer node
+  # (self-contained fragment) — distinct from, but consistent with, the macrophage_activation
+  # node of benchmarks/multiscale/immune_paracrine.yaml. Janeway's Immunobiology (macrophage
+  # IL-1beta production).
+- source: macrophage_il1beta_secretion
+  target: il1beta
+  sign: "+"
+  production_evidence: legacy-evidence-unclassified
+  # C-reactive protein: hepatocytes synthesise CRP as an IL-6-driven acute-phase
+  # protein; the hepatic acute-phase synthesis rate sets plasma CRP.
+  # Janeway's Immunobiology (hepatic acute-phase CRP synthesis); Boron & Boulpaep.
+- source: hepatocyte_crp_secretion
+  target: c_reactive_protein
+  sign: "+"
+  production_evidence: legacy-evidence-unclassified

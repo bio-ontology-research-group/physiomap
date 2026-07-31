@@ -1,0 +1,111 @@
+# =============================================================================
+# Multi-scale PILOT: renal oxygen-sensing PHD/VHL -> HIF-2alpha -> EPO transcription
+#                                                       *** DRAFT FOR REVIEW ***
+# =============================================================================
+# FIRST fragment imported under the CAUSAL-EVIDENCE GATE (physiomap_core/causal_evidence.py,
+# scripts/validate_causal_evidence.py). It is a gene-regulatory / signalling module at the
+# molecular scale that gives the *mechanistic transcriptional layer* underneath the existing
+# organ-scale edge  renal_tissue_oxygenation --(-)--> erythropoietin.
+#
+# WHY THIS MODULE IS THE PILOT: every edge's sign is established by a genuine INTERVENTION
+# (do(source) -> Δtarget, everything else fixed), not by association/co-expression/binding —
+# so it both demonstrates GRN/signalling import AND stress-tests the gate:
+#
+#   PHD2 (EGLN1) activity --(-)--> HIF-2alpha activity
+#       do(): HIF prolyl-hydroxylase INHIBITOR DRUGS (roxadustat, daprodustat, vadadustat —
+#       approved) stabilise HIF and RAISE EPO in humans; and EGLN1 LOSS-OF-FUNCTION causes
+#       familial erythrocytosis type 3 (ECYT3, OMIM 609820) with high/inappropriate EPO.
+#       -> pharmacological + genetic do() both confirm PHD2 NEGATIVELY controls HIF-2alpha.
+#
+#   VHL activity --(-)--> HIF-2alpha activity
+#       do(): VHL LOSS-OF-FUNCTION (Chuvash polycythemia, VHL p.Arg200Trp; familial
+#       erythrocytosis type 2, ECYT2, OMIM 263400) stabilises HIF and RAISES EPO/red cells.
+#       -> genetic do() confirms VHL NEGATIVELY controls HIF-2alpha (E3-ligase degradation).
+#
+#   HIF-2alpha activity --(+)--> renal EPO gene transcription rate
+#       do(): EPAS1/HIF2A GAIN-OF-FUNCTION causes familial erythrocytosis type 4 (ECYT4,
+#       OMIM 611783) with elevated/inappropriate EPO; HIF-2alpha (not HIF-1alpha) is the
+#       EPO-driving isoform binding the EPO 3' hypoxia-response element.
+#       -> genetic do() confirms HIF-2alpha POSITIVELY controls EPO transcription.
+#
+#   TYPED PRODUCTION (neither constitution nor authored causal influence):
+#       renal EPO gene transcription rate (molecular) >> plasma erythropoietin (organ_system)
+#       The transcription process produces the secreted hormone; the canonical relation remains
+#       production even when its compatibility shadow is used for sign propagation.
+#
+# INTEGRATION / ACYCLICITY: the molecular nodes are ROOTS (PHD2, VHL clamped by drug/variant
+# interventions) feeding HIF-2alpha; the only cross-scale relation is typed production
+# (molecular -> organ_system). The combined operational+constitutive component graph remains
+# acyclic (cf. MULTISCALE.md). Plasma EPO and its
+# downstream physiology are untouched; this module refines HOW EPO transcription is set, and
+# is exercised by molecular (drug / monogenic) interventions that lift up to red-cell mass.
+#
+# SOURCES (interventional; verified ontology IRIs in ontology/verified_ids.yaml):
+#   - HIF prolyl-hydroxylase inhibitors (HIF-PHIs): Roxadustat phase-3 (Chen et al. 2019,
+#     NEJM 381:1011-1022, PubMed 31340089) raise endogenous EPO and haemoglobin in CKD anaemia.
+#   - EGLN1/PHD2 LoF -> ECYT3: Percy et al. 2006, PNAS 103:654-659 (PubMed 16407130); OMIM 609820.
+#   - VHL Chuvash polycythemia -> ECYT2: Ang et al. 2002, Nat Genet 32:614-621 (PubMed 12426575);
+#     OMIM 263400.
+#   - EPAS1/HIF2A GoF -> ECYT4: Percy et al. 2008, NEJM 358:162-168 (PubMed 18184961); OMIM 611783.
+#   - Mechanism / isoform specificity: Kaelin & Ratcliffe 2008, Mol Cell 30:393-402
+#     (PubMed 18498744); Haase 2013, Blood Rev 27:41-53 (PubMed 23291219).
+#
+# BOUNDARY NODES (existing-map ids, NOT redefined here):
+#   erythropoietin            (organ_system, substance PR:000007141 — production output)
+# =============================================================================
+
+name: hif_epo_oxygen_sensing
+description: >-
+  PILOT GRN/signalling import (causal-evidence-gated): renal PHD2/VHL -> HIF-2alpha -> EPO
+  transcription. Every edge is interventionally grounded (HIF-PHI drugs; EGLN1/VHL/EPAS1
+  Mendelian LoF/GoF). DRAFT for domain review.
+nodes:
+- id: renal_phd2_activity
+  label: renal interstitial fibroblast PHD2 (EGLN1) prolyl-4-hydroxylase activity
+  scale: molecular
+  entity_iri: PR:000006934      # egl nine homolog 1 (EGLN1 / PHD2)
+  quality_iri: PATO:0001414     # catalytic activity
+  bearer_entity_iri: CL:1000692 # kidney interstitial fibroblast (the renal EPO-producing cell)
+- id: renal_vhl_activity
+  label: renal interstitial fibroblast VHL E3-ligase substrate-recognition activity
+  scale: molecular
+  entity_iri: PR:000017294      # von Hippel-Lindau disease tumor suppressor
+  quality_iri: PATO:0001414     # catalytic activity (CRL2-VHL ubiquitin-ligase)
+  bearer_entity_iri: CL:1000692
+- id: renal_hif2a_activity
+  label: renal interstitial fibroblast HIF-2alpha (EPAS1) transcription-factor activity
+  scale: molecular
+  entity_iri: PR:000007106      # endothelial PAS domain-containing protein 1 (EPAS1 / HIF-2alpha)
+  quality_iri: PATO:0000161     # rate (transcription-factor activity; cf. stat5_activity convention)
+  bearer_entity_iri: CL:1000692
+- id: renal_epo_transcription_rate
+  label: renal interstitial fibroblast erythropoietin (EPO) gene transcription rate
+  scale: molecular
+  entity_iri: PR:000007141      # erythropoietin (gene product transcribed)
+  quality_iri: PATO:0000161     # rate
+  bearer_entity_iri: CL:1000692
+causal_edges:
+- source: renal_phd2_activity
+  target: renal_hif2a_activity
+  sign: '-'
+  causal_evidence: pharmacological
+  mechanism: 'O2/2-oxoglutarate-dependent PHD2 hydroxylates HIF-2alpha Pro residues, creating the VHL recognition degron (quality: PHD2 catalytic activity -> disposition: HIF-2alpha prolyl-hydroxylation / VHL-targeting -> process: CRL2-VHL ubiquitination + proteasomal degradation -> quality: reduced HIF-2alpha activity)'
+  evidence: 'INTERVENTIONAL (pharmacological + genetic). HIF prolyl-hydroxylase inhibitors (roxadustat) inhibit PHD and RAISE endogenous EPO/Hb in humans — Chen et al. 2019 NEJM 381:1011-1022, PubMed 31340089. EGLN1/PHD2 loss-of-function -> familial erythrocytosis type 3 with inappropriately high EPO — Percy et al. 2006 PNAS 103:654-659, PubMed 16407130; OMIM 609820. Mechanism: Kaelin & Ratcliffe 2008 Mol Cell 30:393-402, PubMed 18498744. [citations PubMed-verified]'
+- source: renal_vhl_activity
+  target: renal_hif2a_activity
+  sign: '-'
+  causal_evidence: genetic_lof_gof
+  mechanism: 'VHL is the substrate-recognition subunit of the CRL2 E3 ubiquitin ligase that binds hydroxylated HIF-2alpha (quality: VHL activity -> disposition: binding of prolyl- hydroxylated HIF-2alpha -> process: HIF-2alpha polyubiquitination + degradation -> quality: reduced HIF-2alpha activity)'
+  evidence: 'INTERVENTIONAL (genetic LoF). VHL loss-of-function (Chuvash polycythemia, VHL p.Arg200Trp) impairs HIF degradation and RAISES EPO/red-cell mass -> familial erythrocytosis type 2 — OMIM 263400. Mechanism: Kaelin & Ratcliffe 2008 Mol Cell 30:393-402, PubMed 18498744. [citations PubMed-verified]'
+- source: renal_hif2a_activity
+  target: renal_epo_transcription_rate
+  sign: +
+  causal_evidence: genetic_lof_gof
+  mechanism: 'stabilised HIF-2alpha dimerises with HIF-1beta/ARNT and binds the EPO 3'' hypoxia- response element (quality: HIF-2alpha activity -> disposition: HRE occupancy at the EPO locus -> process: EPO gene transcription -> quality: EPO transcription rate)'
+  evidence: 'INTERVENTIONAL (genetic GoF). EPAS1/HIF2A gain-of-function -> familial erythrocytosis type 4 with elevated/inappropriate EPO — Percy et al. 2008 NEJM 358:162-168, PubMed 18184961; OMIM 611783. HIF-2alpha (not HIF-1alpha) is the EPO-driving isoform — Haase 2013 Blood Rev 27:41-53, PubMed 23291219; Kaelin & Ratcliffe 2008. [citations PubMed-verified]'
+production_edges:
+# molecular EPO transcription rate PRODUCES the secreted hormone -> sets plasma EPO (upward only)
+- source: renal_epo_transcription_rate
+  target: erythropoietin
+  sign: +
+  production_evidence: legacy-evidence-unclassified

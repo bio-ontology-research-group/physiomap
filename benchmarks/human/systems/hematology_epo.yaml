@@ -1,0 +1,159 @@
+# =============================================================================
+# Erythropoiesis / O2-sensing (EPO) and blood rheology — PhysioMap fragment  *** DRAFT FOR REVIEW ***
+# =============================================================================
+# Hand-encoded, single-scale (ORGAN / ORGAN_SYSTEM). Each edge sign is the sign of
+# the partial derivative of the target w.r.t. the source at steady state, all else
+# equal. ROBERT: please correct signs/edges.
+#
+# Sources for canonical signs:
+#   - HumMod (red-cell mass / erythropoietin module: renal O2 -> EPO; EPO -> RBC mass;
+#     RBC mass -> hematocrit -> blood viscosity)
+#   - HIF / oxygen-sensing physiology: hypoxia stabilizes HIF (PHD/VHL), HIF drives renal
+#     peritubular EPO transcription (Semenza 2009; Haase 2013, Blood Reviews)
+#   - Boron & Boulpaep / Guyton: hematocrit -> whole-blood viscosity -> SVR; blood volume
+#
+# O2 -> EPO -> RBC -> O2 NEGATIVE-FEEDBACK LOOP (net negative) is included:
+#   renal_tissue_oxygenation --(-)--> erythropoietin --(+)--> red_cell_mass
+#     --(+)--> renal_tissue_oxygenation
+#   (one negative + two positive edges => net negative loop)
+#
+# Boundary nodes (defined in sibling fragments; referenced, NOT redefined here):
+#   arterial_po2                         (respiratory)
+#   total_peripheral_resistance          (CV/renal core)
+#   blood_volume                         (CV/renal core)
+#   renal_perfusion_pressure             (CV/renal core)
+#   cardiac_output                       (CV/renal core)
+# A standalone load of this file alone will flag those as unknown — EXPECTED; they
+# resolve on merge() with the sibling fragments.
+# =============================================================================
+
+name: hematology_epo
+description: >-
+  DRAFT erythropoiesis / renal oxygen-sensing (erythropoietin, EPO) and blood rheology
+  as a PhysioMap signed cyclic causal graph. Includes the renal-O2 -> EPO -> red-cell-mass
+  -> renal-O2 negative-feedback loop and the canonical couplings of hematocrit/viscosity
+  into vascular resistance and of red-cell mass into blood volume. Single-scale (Phase 1).
+
+nodes:
+  - id: erythropoietin
+    label: plasma erythropoietin (EPO)
+    scale: organ_system
+    entity_iri: PR:000007141  # erythropoietin
+    quality_iri: PATO:0000033         # concentration
+  - id: red_cell_mass
+    label: total circulating red cell mass
+    scale: organ_system
+    entity_iri: CL:0000232            # erythrocyte (the RBC population)
+    quality_iri: PATO:0000918         # volume (clinical "red cell mass" is a VOLUME, mL of RBCs)
+  - id: plasma_volume
+    label: plasma volume
+    scale: organ_system
+    entity_iri: UBERON:0001969        # blood plasma
+    quality_iri: PATO:0000918         # volume (a constituent of blood volume; conservation part)
+  - id: hematocrit
+    label: hematocrit (packed red cell volume fraction)
+    scale: organ_system
+    entity_iri: UBERON:0000178        # blood (bearer of the packed-cell volume-fraction)
+    quality_iri: PATO:0001019         # volume-fraction / ratio (= red-cell vol / blood vol)
+  - id: blood_viscosity
+    label: whole-blood viscosity
+    scale: organ_system
+    entity_iri: UBERON:0000178        # blood
+    quality_iri: PATO:0000992         # viscosity
+  - id: renal_tissue_oxygenation
+    label: renal cortical/peritubular tissue oxygen tension
+    scale: organ
+    quality_iri: PATO:0001931         # oxygen tension
+
+  # --- cellular producer node (constitutive grounding of a secreted substance) ---
+  - id: renal_interstitial_fibroblast_epo_secretion
+    label: kidney interstitial fibroblast erythropoietin secretion rate
+    scale: cellular
+    entity_iri: CL:1000692            # kidney interstitial fibroblast (OLS4-verified; the renal EPO-producing cell, REPC)
+    quality_iri: PATO:0000161         # secretion/synthesis rate
+
+causal_edges:
+  # --- O2 sensing -> EPO -> erythropoiesis (negative-feedback loop) ---------
+  - source: renal_tissue_oxygenation
+    target: erythropoietin
+    sign: "-"
+    causal_evidence: mechanistic_model
+    mechanism: hypoxia stabilizes HIF-2alpha (reduced PHD/VHL degradation), driving renal peritubular EPO transcription; higher tissue O2 suppresses EPO
+    evidence: "Semenza 2009; Haase 2013 Blood Reviews (HIF-driven EPO); HumMod renal O2 -> EPO | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-098 (17.11: Organs with Secondary Endocrine Functions): 'the kidneys produce the hormone erythropoietin (EPO) in response to low oxygen levels'; OpenStax Anatomy & Physiology 2e §anp-101 (18.3: Production of the Formed Elements): 'Erythropoietin (EPO) is a glycoprotein hormone secreted by the interstitial fibroblast cells of the kidneys in response to low oxygen levels.'; OpenStax Anatomy & Physiology 2e §anp-102 (18.4: Erythrocytes): 'In a classic negative-feedback loop, as oxygen saturation rises, EPO secretion falls, and vice versa' — kidney interstitial fibroblasts secrete EPO in response to hypoxemia.; OpenStax Anatomy & Physiology 2e §anp-129 (22.7: Modifications in Respiratory Functions): 'the kidneys are stimulated to produce the hormone erythropoietin (EPO)' in response to low tissue O2 at high altitude; OpenStax Anatomy & Physiology 2e §anp-154 (25.11: The Urinary System and Homeostasis): 'If you move to a higher altitude, the partial pressure of oxygen is lower... One way the body compensates is to manufacture more red blood cells by increasing EPO production' (lines 27-29); 'Renal failure (loss of EPO production) is associated with anemia' (lines 32-33)"
+  - source: erythropoietin
+    target: red_cell_mass
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: EPO promotes survival/proliferation/differentiation of erythroid progenitors (BFU-E/CFU-E), raising RBC production
+    evidence: "HumMod EPO -> RBC mass; classic erythropoiesis physiology (Boron & Boulpaep) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-058 (10.7: Exercise and Muscle Performance): 'erythropoietin (EPO), a hormone normally produced in the kidneys, which triggers the production of red blood cells'; OpenStax Anatomy & Physiology 2e §anp-098 (17.11: Organs with Secondary Endocrine Functions): 'EPO stimulates the production of red blood cells (erythrocytes) in the bone marrow, thereby increasing oxygen delivery to tissues'; OpenStax Anatomy & Physiology 2e §anp-101 (18.3: Production of the Formed Elements): 'It [EPO] prompts the production of erythrocytes.'; OpenStax Anatomy & Physiology 2e §anp-102 (18.4: Erythrocytes): 'the kidneys secrete EPO to step up the production of erythrocytes until homeostasis is achieved' — EPO raises red cell production rate.; OpenStax Anatomy & Physiology 2e §anp-114 (20.5: Homeostatic Regulation of the Vascular System): 'EPO stimulates the production of erythrocytes within the bone marrow.'; OpenStax Anatomy & Physiology 2e §anp-129 (22.7: Modifications in Respiratory Functions): 'EPO stimulates the production of erythrocytes, resulting in a greater number of circulating erythrocytes'; OpenStax Anatomy & Physiology 2e §anp-154 (25.11: The Urinary System and Homeostasis): 'EPO is a 193-amino acid protein that stimulates the formation of red blood cells in the bone marrow' (line 26); OpenStax Biology 2e §bio-33.3 (Homeostasis): 'erythropoietin, a hormone that stimulates the production of new red blood cells, is no longer released from the kidney' when red cell mass is adequate — corroborates the EPO→RBC negative-feedback loop.; OpenStax Biology 2e §bio-37.5 (37.5: Endocrine Glands): 'Erythropoietin (EPO) is a protein hormone that triggers the formation of red blood cells in the bone marrow. EPO is released in response to low oxygen levels.'"
+  - source: red_cell_mass
+    target: renal_tissue_oxygenation
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: greater red-cell mass raises blood O2-carrying capacity, increasing renal O2 delivery and tissue oxygenation -> closes the negative-feedback loop
+    evidence: "HumMod (RBC mass -> O2 content -> tissue O2); O2-content / Fick mass balance | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-102 (18.4: Erythrocytes): rising erythrocyte count restores oxygen delivery and closes the negative-feedback loop with EPO."
+
+  # --- hematology / rheology chain -----------------------------------------
+  - source: hematocrit
+    target: blood_viscosity
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: rising packed-cell fraction steeply increases whole-blood viscosity (non-linear)
+    evidence: "Guyton/Boron rheology; Pries et al. hematocrit-viscosity relation | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-100 (18.2: An Overview of Blood): 'Viscosity is…influenced by the presence of the plasma proteins and formed elements within the blood' — hematocrit (formed-element fraction) is the dominant determinant of whole-blood viscosity.; OpenStax Anatomy & Physiology 2e §anp-101 (18.3: Production of the Formed Elements): 'Synthetic EPO ... can increase hematocrit for many weeks ... increased viscosity raises the resistance of the blood and forces the heart to pump more powerfully.'; OpenStax Anatomy & Physiology 2e §anp-102 (18.4: Erythrocytes): 'polycythemia vera can dangerously elevate the viscosity of blood' — elevated hematocrit increases whole-blood viscosity.; OpenStax Anatomy & Physiology 2e §anp-112 (20.3: Blood Flow, Blood Pressure, and Resistance): 'The two primary determinants of blood viscosity are the formed elements and plasma proteins. Since the vast majority of formed elements are erythrocytes, any condition affecting erythropoiesis, such as polycythemia or anemia, can alter viscosity.'"
+
+  # --- couplings into CV / renal boundary nodes ----------------------------
+  - source: blood_viscosity
+    target: total_peripheral_resistance
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: "higher blood viscosity raises systemic vascular resistance (Poiseuille: R ~ viscosity)"
+    evidence: "Poiseuille's law; Guyton CV physiology (viscosity -> SVR) | textbook corroboration: OpenStax Anatomy & Physiology 2e §anp-100 (18.2: An Overview of Blood): 'The viscosity of blood has a dramatic impact on blood pressure and flow…The more viscous honey would demonstrate a greater resistance to flow than the less viscous water. The same principle applies to blood.'; OpenStax Anatomy & Physiology 2e §anp-112 (20.3: Blood Flow, Blood Pressure, and Resistance): 'The viscosity of blood is directly proportional to resistance and inversely proportional to flow; therefore, any condition that causes viscosity to increase will also increase resistance and decrease flow.'"
+  - source: arterial_po2
+    target: renal_tissue_oxygenation
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: higher arterial O2 tension raises renal arterial O2 content and thus tissue oxygenation
+    evidence: "O2-content / oxyhemoglobin dissociation; renal O2 delivery = flow x arterial O2 content"
+  - source: renal_perfusion_pressure
+    target: renal_tissue_oxygenation
+    sign: "+"
+    causal_evidence: mechanistic_model
+    mechanism: higher perfusion pressure raises renal blood flow and convective O2 delivery, improving tissue oxygenation
+    evidence: "renal O2 delivery = renal blood flow x arterial O2 content; Guyton renal perfusion"
+
+constitutive_edges:
+  # --- AGGREGATION (conservation): blood volume = red-cell volume + plasma volume -----------
+  # Each part contributes +; a conservation rung (Δblood_volume = Σ Δparts). NOT causal.
+  # See physiomap_core/constitution.py and ontology/partof.yaml (plasma part_of blood).
+  - micro: red_cell_mass
+    macro: blood_volume
+    relation: aggregation
+    sign: "+"
+  - micro: plasma_volume
+    macro: blood_volume
+    relation: aggregation
+    sign: "+"
+
+# --- ratio identity (measurement theory, not a causal influence) -------------------------------
+# Hematocrit is packed red-cell volume divided by total blood volume. Blood volume is separately
+# represented by the aggregation red_cell_mass + plasma_volume above.
+quantitative_definitions:
+  - kind: ratio
+    result: hematocrit
+    arguments:
+      - node: red_cell_mass       # red-cell VOLUME (clinical "red cell mass")
+        role: numerator
+        derivative_sign: "+"
+      - node: blood_volume        # total blood volume, not plasma volume alone
+        role: denominator
+        derivative_sign: "-"
+    mechanism: "hematocrit = red-cell volume / total blood volume"
+    evidence: "Guyton & Hall, Textbook of Medical Physiology (hematocrit definition)"
+
+production_edges:
+  - source: renal_interstitial_fibroblast_epo_secretion
+    target: erythropoietin
+    sign: "+"
+    production_evidence: curated_source_statement
+    mechanism: cortical peritubular kidney interstitial fibroblasts synthesize and secrete erythropoietin into the circulating pool under HIF-2alpha control
+    evidence: Boron & Boulpaep, Medical Physiology (renal EPO production by peritubular fibroblasts).
