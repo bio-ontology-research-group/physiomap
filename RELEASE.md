@@ -70,15 +70,12 @@ items.
 | `projection-traces.json` | 2,977,879 | `c56320154eabf7810fe249678d72798686b873d8703cc70d8d043340b5b46e55` |
 | `trait-classification.tsv` | 240,920 | `7a205fdce96d79b5a522c6010eaa08ab076d34965b87838cba6c36fdeff0079c` |
 
-## Minting a DOI
+## Publication status
 
-`.zenodo.json` is prepared at the repository root. After the final review and
-commit, publish with:
+The immutable `v1.1.1` tag and its complete GitHub release are public at
+<https://github.com/bio-ontology-research-group/physiomap/releases/tag/v1.1.1>.
+The release includes the canonical OWL and SCM artifacts, checksums, benchmark
+data, expert-review archive, manuscript, and supplementary material.
 
-```bash
-git tag -a v1.1.1 -m "PhysioMap 1.1.1 (PSB 2027 submission artifact)"
-git push origin v1.1.1
-```
-
-Then create the Zenodo release from the GitHub integration and record the DOI
-here and in the manuscript. These external publication steps have not been run.
+`.zenodo.json` is prepared for optional Zenodo archiving. A Zenodo DOI has not
+yet been minted.
