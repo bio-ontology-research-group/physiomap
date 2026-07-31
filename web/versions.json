@@ -3,18 +3,18 @@
  "versions": [
   {
    "data_version": "1.1.1",
-   "software_version": "1.0.0",
+   "software_version": "1.1.1",
    "file": "physiomap-1.1.1.json",
    "status": "latest",
-   "note": "MLC->tone->TPR reclassified to causal (curator P. Schofield); all interventions solve",
-   "generated": "2026-07-23"
+   "note": "Current public release",
+   "generated": "2026-07-31"
   },
   {
    "data_version": "1.1.0",
    "software_version": "1.0.0",
    "file": "physiomap-1.1.0.json",
    "status": "superseded",
-   "note": "broken: curated AT1 edge put the vascular-tone constitution vertical in the feedback loop; intervention overlays unavailable",
+   "note": "Superseded release",
    "generated": "2026-07-23"
   },
   {
@@ -22,7 +22,7 @@
    "software_version": "1.0.0",
    "file": "physiomap-1.0.0.json",
    "status": "archived",
-   "note": "PSB 2027 submission artifact (frozen)",
+   "note": "Archived release",
    "generated": "2026-07-23"
   }
  ]

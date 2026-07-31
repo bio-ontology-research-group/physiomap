@@ -27,8 +27,8 @@ deployment contract and is covered by the release gate.
    cp web/deploy/physiomap-api.service /etc/systemd/system/
    systemctl daemon-reload
    systemctl enable --now physiomap-api
-   systemctl status physiomap-api          # expect: canonical SCM: 1695 nodes
-   curl -s http://127.0.0.1:8081/health    # {"ok": true, "nodes": 1557}
+   systemctl status physiomap-api          # expect: canonical SCM: 1699 nodes
+   curl -s http://127.0.0.1:8081/health    # {"ok": true, "nodes": 1699, ...}
    ```
 
 3. **Wire nginx** (add the proxy to the existing bio2vec.net server block):

@@ -164,7 +164,7 @@
    "id": "influence:sodium_water_reabsorption:positive:blood_volume",
    "kind": "causal",
    "modulated": false,
-   "prov_source": "Other",
+   "prov_source": "Guyton core (curated)",
    "sign": "+",
    "source": "sodium_water_reabsorption",
    "target": "blood_volume"
@@ -23765,19 +23765,6 @@
    "target": "pulmonary_perfusion"
   },
   {
-   "_detail_bucket": "8",
-   "context": null,
-   "context_id": null,
-   "definitional": false,
-   "id": "influence:plasma_bradykinin:positive:endothelial_no_production",
-   "kind": "causal",
-   "modulated": false,
-   "prov_source": "Other",
-   "sign": "+",
-   "source": "plasma_bradykinin",
-   "target": "endothelial_no_production"
-  },
-  {
    "_detail_bucket": "f",
    "context": null,
    "context_id": null,
@@ -28679,6 +28666,19 @@
    "target": "urinary_pyridinoline"
   },
   {
+   "_detail_bucket": "8",
+   "context": null,
+   "context_id": null,
+   "definitional": false,
+   "id": "influence:plasma_bradykinin:positive:endothelial_no_production",
+   "kind": "causal",
+   "modulated": false,
+   "prov_source": "Molecular/cellular module",
+   "sign": "+",
+   "source": "plasma_bradykinin",
+   "target": "endothelial_no_production"
+  },
+  {
    "_detail_bucket": "7",
    "context": null,
    "context_id": null,
@@ -29420,19 +29420,6 @@
    "target": "thyroid_follicular_t4_secretion"
   },
   {
-   "_detail_bucket": "d",
-   "context": null,
-   "context_id": null,
-   "definitional": false,
-   "id": "influence:angiotensin_II:positive:at1_receptor_activity",
-   "kind": "causal",
-   "modulated": false,
-   "prov_source": "Other",
-   "sign": "+",
-   "source": "angiotensin_II",
-   "target": "at1_receptor_activity"
-  },
-  {
    "_detail_bucket": "5",
    "context": null,
    "context_id": null,
@@ -29459,6 +29446,19 @@
    "target": "mlc_phosphorylation"
   },
   {
+   "_detail_bucket": "d",
+   "context": null,
+   "context_id": null,
+   "definitional": false,
+   "id": "influence:angiotensin_II:positive:at1_receptor_activity",
+   "kind": "causal",
+   "modulated": false,
+   "prov_source": "Molecular/cellular module",
+   "sign": "+",
+   "source": "angiotensin_II",
+   "target": "at1_receptor_activity"
+  },
+  {
    "_detail_bucket": "4",
    "context": null,
    "context_id": null,
@@ -29466,7 +29466,7 @@
    "id": "influence:mlc_phosphorylation:positive:vascular_smooth_muscle_tone",
    "kind": "causal",
    "modulated": false,
-   "prov_source": "Other",
+   "prov_source": "Molecular/cellular module",
    "sign": "+",
    "source": "mlc_phosphorylation",
    "target": "vascular_smooth_muscle_tone"
@@ -29479,7 +29479,7 @@
    "id": "influence:vascular_smooth_muscle_tone:positive:total_peripheral_resistance",
    "kind": "causal",
    "modulated": false,
-   "prov_source": "Other",
+   "prov_source": "Molecular/cellular module",
    "sign": "+",
    "source": "vascular_smooth_muscle_tone",
    "target": "total_peripheral_resistance"
@@ -29515,6 +29515,7 @@
    "sign": "+"
   }
  ],
+ "data_revision": "9e4ff3dba9c9",
  "data_version": "1.1.1",
  "default_hidden_sources": [
   "IEM-enzyme connections",
@@ -29527,8 +29528,7 @@
   "SIGNOR import",
   "AOP-Wiki import"
  ],
- "generated": "2026-07-23",
- "git_commit": "8ad2084",
+ "generated": "2026-07-31",
  "interventions": [
   {
    "_intervention_bucket": "b",
@@ -30179,11 +30179,11 @@
  ],
  "modulation_edges": [
   {
-   "_detail_bucket": "1",
+   "_detail_bucket": "7",
    "can_flip_sign": false,
    "edge_source": "sympathetic_tone",
    "edge_target": "heart_rate",
-   "id": "modulation-1ada680e6eb87d24f37c",
+   "id": "modulation-fdc2476ef9f19feeaf67",
    "influence_id": "influence:sympathetic_tone:positive:heart_rate",
    "interaction_sign": "+",
    "kind": "modulation",
@@ -30193,11 +30193,11 @@
    "sign": "+"
   },
   {
-   "_detail_bucket": "9",
+   "_detail_bucket": "8",
    "can_flip_sign": true,
    "edge_source": "baroreceptor_firing_rate",
    "edge_target": "sympathetic_tone",
-   "id": "modulation-01931a2baf113788aa27",
+   "id": "modulation-059cc336646c958c0a50",
    "influence_id": "influence:baroreceptor_firing_rate:negative:sympathetic_tone",
    "interaction_sign": "-",
    "kind": "modulation",
@@ -30211,11 +30211,11 @@
    "sign": "+"
   },
   {
-   "_detail_bucket": "6",
+   "_detail_bucket": "8",
    "can_flip_sign": false,
    "edge_source": "arterial_po2",
    "edge_target": "hemoglobin_o2_saturation",
-   "id": "modulation-a10be70ae3353462fbf7",
+   "id": "modulation-83fae355d0eb93e7cfea",
    "influence_id": "influence:arterial_po2:positive:hemoglobin_o2_saturation",
    "interaction_sign": "-",
    "kind": "modulation",
@@ -30225,11 +30225,11 @@
    "sign": "-"
   },
   {
-   "_detail_bucket": "d",
+   "_detail_bucket": "a",
    "can_flip_sign": false,
    "edge_source": "arterial_po2",
    "edge_target": "hemoglobin_o2_saturation",
-   "id": "modulation-896c54a0c4e0de68d787",
+   "id": "modulation-5e4035891625cf09adcd",
    "influence_id": "influence:arterial_po2:positive:hemoglobin_o2_saturation",
    "interaction_sign": "+",
    "kind": "modulation",
@@ -30239,11 +30239,11 @@
    "sign": "+"
   },
   {
-   "_detail_bucket": "7",
+   "_detail_bucket": "6",
    "can_flip_sign": false,
    "edge_source": "arterial_po2",
    "edge_target": "hemoglobin_o2_saturation",
-   "id": "modulation-5166b2a8f804ab6dd9ff",
+   "id": "modulation-d3abc93cee07863dd9ee",
    "influence_id": "influence:arterial_po2:positive:hemoglobin_o2_saturation",
    "interaction_sign": "-",
    "kind": "modulation",
@@ -30253,26 +30253,12 @@
    "sign": "-"
   },
   {
-   "_detail_bucket": "d",
+   "_detail_bucket": "5",
    "can_flip_sign": false,
    "edge_source": "plasma_glucagon",
    "edge_target": "hepatic_glucose_production",
-   "id": "modulation-e51004b07755b458c11b",
+   "id": "modulation-6e989a44705c2e890891",
    "influence_id": "influence:plasma_glucagon:positive:hepatic_glucose_production",
-   "interaction_sign": "+",
-   "kind": "modulation",
-   "modulator": "cortisol",
-   "prov_source": "Curated modulation (gains)",
-   "regime": null,
-   "sign": "+"
-  },
-  {
-   "_detail_bucket": "2",
-   "can_flip_sign": false,
-   "edge_source": "epinephrine",
-   "edge_target": "hepatic_glycogenolysis",
-   "id": "modulation-dee5fbf3f2338dc8596e",
-   "influence_id": "influence:epinephrine:positive:hepatic_glycogenolysis",
    "interaction_sign": "+",
    "kind": "modulation",
    "modulator": "cortisol",
@@ -30284,9 +30270,9 @@
    "_detail_bucket": "f",
    "can_flip_sign": false,
    "edge_source": "epinephrine",
-   "edge_target": "lipolysis_rate",
-   "id": "modulation-9759eea8621703904f2d",
-   "influence_id": "influence:epinephrine:positive:lipolysis_rate",
+   "edge_target": "hepatic_glycogenolysis",
+   "id": "modulation-2015e73a6d0d0aa0f7f4",
+   "influence_id": "influence:epinephrine:positive:hepatic_glycogenolysis",
    "interaction_sign": "+",
    "kind": "modulation",
    "modulator": "cortisol",
@@ -30297,9 +30283,23 @@
   {
    "_detail_bucket": "2",
    "can_flip_sign": false,
+   "edge_source": "epinephrine",
+   "edge_target": "lipolysis_rate",
+   "id": "modulation-44e3d2d79b511d0f05c9",
+   "influence_id": "influence:epinephrine:positive:lipolysis_rate",
+   "interaction_sign": "+",
+   "kind": "modulation",
+   "modulator": "cortisol",
+   "prov_source": "Curated modulation (gains)",
+   "regime": null,
+   "sign": "+"
+  },
+  {
+   "_detail_bucket": "3",
+   "can_flip_sign": false,
    "edge_source": "norepinephrine",
    "edge_target": "total_peripheral_resistance",
-   "id": "modulation-52d5d0274adc486002b9",
+   "id": "modulation-6ae8f89833106a99ea2e",
    "influence_id": "influence:norepinephrine:positive:total_peripheral_resistance",
    "interaction_sign": "+",
    "kind": "modulation",
@@ -30309,11 +30309,11 @@
    "sign": "+"
   },
   {
-   "_detail_bucket": "7",
+   "_detail_bucket": "a",
    "can_flip_sign": false,
    "edge_source": "arterial_po2",
    "edge_target": "hemoglobin_o2_saturation",
-   "id": "modulation-8b4552eb83590f2aed65",
+   "id": "modulation-7294fc4ddaeabf4721fb",
    "influence_id": "influence:arterial_po2:positive:hemoglobin_o2_saturation",
    "interaction_sign": "-",
    "kind": "modulation",
@@ -30323,12 +30323,26 @@
    "sign": "-"
   },
   {
-   "_detail_bucket": "c",
+   "_detail_bucket": "e",
    "can_flip_sign": false,
    "edge_source": "epinephrine",
    "edge_target": "lipolysis_rate",
-   "id": "modulation-5ef90c8f1ad8e031afa9",
+   "id": "modulation-76da6ddfd9787f742f32",
    "influence_id": "influence:epinephrine:positive:lipolysis_rate",
+   "interaction_sign": "+",
+   "kind": "modulation",
+   "modulator": "free_t3",
+   "prov_source": "Curated modulation (gains)",
+   "regime": null,
+   "sign": "+"
+  },
+  {
+   "_detail_bucket": "9",
+   "can_flip_sign": false,
+   "edge_source": "sympathetic_tone",
+   "edge_target": "metabolic_rate",
+   "id": "modulation-652b47410814953f3a62",
+   "influence_id": "influence:sympathetic_tone:positive:metabolic_rate",
    "interaction_sign": "+",
    "kind": "modulation",
    "modulator": "free_t3",
@@ -30340,22 +30354,8 @@
    "_detail_bucket": "d",
    "can_flip_sign": false,
    "edge_source": "sympathetic_tone",
-   "edge_target": "metabolic_rate",
-   "id": "modulation-e8125b08afb1ed11dcb3",
-   "influence_id": "influence:sympathetic_tone:positive:metabolic_rate",
-   "interaction_sign": "+",
-   "kind": "modulation",
-   "modulator": "free_t3",
-   "prov_source": "Curated modulation (gains)",
-   "regime": null,
-   "sign": "+"
-  },
-  {
-   "_detail_bucket": "b",
-   "can_flip_sign": false,
-   "edge_source": "sympathetic_tone",
    "edge_target": "myocardial_contractility",
-   "id": "modulation-2b6d389a9b67ef4b43cf",
+   "id": "modulation-e68c7a418b57973f5880",
    "influence_id": "influence:sympathetic_tone:positive:myocardial_contractility",
    "interaction_sign": "+",
    "kind": "modulation",
@@ -30365,11 +30365,11 @@
    "sign": "+"
   },
   {
-   "_detail_bucket": "6",
+   "_detail_bucket": "d",
    "can_flip_sign": false,
    "edge_source": "plasma_insulin",
    "edge_target": "peripheral_glucose_uptake",
-   "id": "modulation-0b522868e705a26a8bd8",
+   "id": "modulation-37e66ca5b8f365ea6c43",
    "influence_id": "influence:plasma_insulin:positive:peripheral_glucose_uptake",
    "interaction_sign": "+",
    "kind": "modulation",
@@ -30379,11 +30379,11 @@
    "sign": "+"
   },
   {
-   "_detail_bucket": "1",
+   "_detail_bucket": "b",
    "can_flip_sign": false,
    "edge_source": "synaptic_acetylcholine_concentration",
    "edge_target": "postsynaptic_membrane_potential",
-   "id": "modulation-d3e544744c53d23b343e",
+   "id": "modulation-cc60b52e6a4b5c325cee",
    "influence_id": "influence:synaptic_acetylcholine_concentration:positive:postsynaptic_membrane_potential",
    "interaction_sign": "-",
    "kind": "modulation",
@@ -30397,7 +30397,7 @@
    "can_flip_sign": false,
    "edge_source": "fgf23",
    "edge_target": "renal_phosphate_reabsorption",
-   "id": "modulation-77f92cdddc5bec129ce7",
+   "id": "modulation-e10358eaf1246a987e09",
    "influence_id": "influence:fgf23:negative:renal_phosphate_reabsorption",
    "interaction_sign": "+",
    "kind": "modulation",
@@ -30407,11 +30407,11 @@
    "sign": "-"
   },
   {
-   "_detail_bucket": "5",
+   "_detail_bucket": "2",
    "can_flip_sign": false,
    "edge_source": "alveolar_po2",
    "edge_target": "pulmonary_vascular_resistance",
-   "id": "modulation-a2874e38908e3e4b2163",
+   "id": "modulation-4602a6117ba6df98c4a8",
    "influence_id": "influence:alveolar_po2:negative:pulmonary_vascular_resistance",
    "interaction_sign": "-",
    "kind": "modulation",
@@ -30421,11 +30421,11 @@
    "sign": "+"
   },
   {
-   "_detail_bucket": "9",
+   "_detail_bucket": "8",
    "can_flip_sign": false,
    "edge_source": "trh",
    "edge_target": "pituitary_tsh_secretion",
-   "id": "modulation-67018061ae133c47ce5c",
+   "id": "modulation-1755892f2d33dc7a65c2",
    "influence_id": "influence:trh:positive:pituitary_tsh_secretion",
    "interaction_sign": "-",
    "kind": "modulation",
@@ -30435,11 +30435,11 @@
    "sign": "-"
   },
   {
-   "_detail_bucket": "5",
+   "_detail_bucket": "2",
    "can_flip_sign": false,
    "edge_source": "crh",
    "edge_target": "pituitary_acth_secretion",
-   "id": "modulation-d53d982274ebbd2ffc05",
+   "id": "modulation-a6625262d940dd22940d",
    "influence_id": "influence:crh:positive:pituitary_acth_secretion",
    "interaction_sign": "+",
    "kind": "modulation",
@@ -30522,7 +30522,7 @@
   },
   {
    "_detail_bucket": "8",
-   "entity_iri": "CL:0002099",
+   "entity_iri": "GO:0035932",
    "id": "zona_glomerulosa_cell_aldosterone_secretion",
    "in_big_scc": true,
    "label": "adrenal zona glomerulosa cell aldosterone secretion rate",
@@ -30536,7 +30536,7 @@
   },
   {
    "_detail_bucket": "6",
-   "entity_iri": "CL:0011003",
+   "entity_iri": "GO:0030103",
    "id": "magnocellular_neuron_adh_secretion",
    "in_big_scc": false,
    "label": "hypothalamic magnocellular neurosecretory neuron vasopressin (ADH) secretion rate",
@@ -30620,7 +30620,7 @@
   },
   {
    "_detail_bucket": "b",
-   "entity_iri": "UBERON:0002113",
+   "entity_iri": "GO:0003095",
    "id": "sodium_excretion",
    "in_big_scc": true,
    "label": "urinary sodium and water excretion (pressure natriuresis)",
@@ -30676,7 +30676,7 @@
   },
   {
    "_detail_bucket": "7",
-   "entity_iri": "UBERON:0000948",
+   "entity_iri": "GO:0060047",
    "id": "heart_rate",
    "in_big_scc": true,
    "label": "heart rate",
@@ -30690,7 +30690,7 @@
   },
   {
    "_detail_bucket": "7",
-   "entity_iri": "UBERON:0000948",
+   "entity_iri": "GO:0008015",
    "id": "cardiac_output",
    "in_big_scc": true,
    "label": "cardiac output",
@@ -30788,7 +30788,7 @@
   },
   {
    "_detail_bucket": "6",
-   "entity_iri": "CL:0002136",
+   "entity_iri": "GO:0043400",
    "id": "zona_fasciculata_cortisol_secretion",
    "in_big_scc": true,
    "label": "adrenal zona fasciculata cell cortisol secretion rate",
@@ -30802,7 +30802,7 @@
   },
   {
    "_detail_bucket": "c",
-   "entity_iri": "CL:0002309",
+   "entity_iri": "GO:0051458",
    "id": "corticotroph_acth_secretion",
    "in_big_scc": true,
    "label": "anterior-pituitary corticotroph ACTH secretion rate",
@@ -30816,7 +30816,7 @@
   },
   {
    "_detail_bucket": "4",
-   "entity_iri": "CL:1001505",
+   "entity_iri": "GO:0043396",
    "id": "parvocellular_crh_secretion",
    "in_big_scc": true,
    "label": "hypothalamic parvocellular neurosecretory cell CRH secretion rate",
@@ -30984,7 +30984,7 @@
   },
   {
    "_detail_bucket": "a",
-   "entity_iri": "CHEBI:16199",
+   "entity_iri": "GO:0000050",
    "id": "hepatic_urea_synthesis",
    "in_big_scc": false,
    "label": "hepatic urea synthesis rate (urea-cycle flux)",
@@ -30998,7 +30998,7 @@
   },
   {
    "_detail_bucket": "a",
-   "entity_iri": "UBERON:0002351",
+   "entity_iri": "GO:0001981",
    "id": "baroreceptor_firing_rate",
    "in_big_scc": true,
    "label": "arterial (carotid sinus + aortic arch) baroreceptor afferent firing rate",
@@ -31054,7 +31054,7 @@
   },
   {
    "_detail_bucket": "f",
-   "entity_iri": "CL:0000336",
+   "entity_iri": "GO:0048242",
    "id": "adrenal_chromaffin_cell_epinephrine_secretion",
    "in_big_scc": true,
    "label": "adrenal medulla chromaffin cell epinephrine secretion rate",
@@ -31068,7 +31068,7 @@
   },
   {
    "_detail_bucket": "3",
-   "entity_iri": "CL:3000002",
+   "entity_iri": "GO:0048243",
    "id": "sympathetic_noradrenergic_neuron_norepinephrine_secretion",
    "in_big_scc": false,
    "label": "sympathetic postganglionic noradrenergic neuron norepinephrine secretion rate",
@@ -31320,7 +31320,7 @@
   },
   {
    "_detail_bucket": "0",
-   "entity_iri": "CL:0000446",
+   "entity_iri": "GO:0035898",
    "id": "parathyroid_chief_pth_secretion",
    "in_big_scc": true,
    "label": "parathyroid chief-cell parathyroid-hormone secretion rate",
@@ -31334,7 +31334,7 @@
   },
   {
    "_detail_bucket": "3",
-   "entity_iri": "CL:1000838",
+   "entity_iri": "GO:0036378",
    "id": "proximal_tubule_calcitriol_production",
    "in_big_scc": true,
    "label": "renal proximal-tubule-cell calcitriol (1-alpha-hydroxylase) production rate",
@@ -31530,7 +31530,7 @@
   },
   {
    "_detail_bucket": "0",
-   "entity_iri": "CL:0000182",
+   "entity_iri": "GO:0009306",
    "id": "hepatocyte_antithrombin_secretion",
    "in_big_scc": false,
    "label": "hepatocyte antithrombin (SERPINC1) synthesis/secretion rate",
@@ -31656,7 +31656,7 @@
   },
   {
    "_detail_bucket": "6",
-   "entity_iri": "CL:0005018",
+   "entity_iri": "GO:0036321",
    "id": "ghrelin_cell_ghrelin_secretion",
    "in_big_scc": false,
    "label": "gastric ghrelin-cell ghrelin secretion rate",
@@ -31670,7 +31670,7 @@
   },
   {
    "_detail_bucket": "7",
-   "entity_iri": "UBERON:0002351",
+   "entity_iri": "GO:0086015",
    "id": "sa_node_automaticity",
    "in_big_scc": true,
    "label": "sinoatrial node intrinsic pacemaker firing rate (phase-4 depolarisation / automaticity)",
@@ -31740,7 +31740,7 @@
   },
   {
    "_detail_bucket": "7",
-   "entity_iri": "UBERON:0000945",
+   "entity_iri": "GO:0001696",
    "id": "gastric_acid_secretion",
    "in_big_scc": false,
    "label": "gastric (parietal-cell) acid secretion rate",
@@ -31754,7 +31754,7 @@
   },
   {
    "_detail_bucket": "2",
-   "entity_iri": "UBERON:0000945",
+   "entity_iri": "GO:0035483",
    "id": "gastric_emptying_rate",
    "in_big_scc": false,
    "label": "gastric emptying rate (gastric -> duodenal nutrient delivery)",
@@ -31768,7 +31768,7 @@
   },
   {
    "_detail_bucket": "b",
-   "entity_iri": "CL:0000508",
+   "entity_iri": "GO:0030072",
    "id": "g_cell_gastrin_secretion",
    "in_big_scc": false,
    "label": "gastric G-cell gastrin secretion rate",
@@ -31866,7 +31866,7 @@
   },
   {
    "_detail_bucket": "6",
-   "entity_iri": "UBERON:0001134",
+   "entity_iri": "GO:0044381",
    "id": "peripheral_glucose_uptake",
    "in_big_scc": true,
    "label": "insulin-mediated peripheral (muscle/adipose) glucose uptake",
@@ -31908,7 +31908,7 @@
   },
   {
    "_detail_bucket": "3",
-   "entity_iri": "CHEBI:37845",
+   "entity_iri": "GO:0030252",
    "id": "pituitary_gh_secretion",
    "in_big_scc": true,
    "label": "anterior-pituitary growth-hormone secretory output (rate)",
@@ -31950,7 +31950,7 @@
   },
   {
    "_detail_bucket": "1",
-   "entity_iri": "CL:0002312",
+   "entity_iri": "GO:0030252",
    "id": "somatotroph_gh_secretion",
    "in_big_scc": true,
    "label": "anterior-pituitary somatotroph growth-hormone secretion rate",
@@ -31978,7 +31978,7 @@
   },
   {
    "_detail_bucket": "3",
-   "entity_iri": "CL:0002373",
+   "entity_iri": "GO:0030072",
    "id": "ghrh_neuron_ghrh_secretion",
    "in_big_scc": false,
    "label": "hypothalamic GHRH-secreting neuron GHRH secretion rate",
@@ -32020,7 +32020,7 @@
   },
   {
    "_detail_bucket": "3",
-   "entity_iri": "UBERON:0002352",
+   "entity_iri": "GO:0061337",
    "id": "av_conduction_velocity",
    "in_big_scc": false,
    "label": "atrioventricular (A-V node/bundle) conduction velocity (impulse transmission speed from atria to ventricles)",
@@ -32034,7 +32034,7 @@
   },
   {
    "_detail_bucket": "2",
-   "entity_iri": "UBERON:0001133",
+   "entity_iri": "GO:0009060",
    "id": "cardiac_muscle_metabolic_rate",
    "in_big_scc": false,
    "label": "cardiac (myocardial) muscle metabolic rate / oxygen consumption (organ)",
@@ -32048,7 +32048,7 @@
   },
   {
    "_detail_bucket": "6",
-   "entity_iri": "UBERON:0000955",
+   "entity_iri": "GO:0120275",
    "id": "cerebral_blood_flow",
    "in_big_scc": true,
    "label": "cerebral (brain) blood flow rate",
@@ -32174,7 +32174,7 @@
   },
   {
    "_detail_bucket": "d",
-   "entity_iri": "UBERON:0002116",
+   "entity_iri": "GO:0015889",
    "id": "intestinal_b12_absorption",
    "in_big_scc": false,
    "label": "intestinal (ileal) vitamin B12 absorption rate (organ)",
@@ -32300,7 +32300,7 @@
   },
   {
    "_detail_bucket": "d",
-   "entity_iri": "UBERON:0002048",
+   "entity_iri": "GO:0003017",
    "id": "pulmonary_lymph_flow",
    "in_big_scc": true,
    "label": "pulmonary lymphatic drainage flow rate (organ)",
@@ -44410,7 +44410,7 @@
   },
   {
    "_detail_bucket": "d",
-   "entity_iri": "CHEBI:43474",
+   "entity_iri": "GO:0044722",
    "id": "urinary_phosphate",
    "in_big_scc": false,
    "label": "urinary phosphate excretion rate",
@@ -44424,7 +44424,7 @@
   },
   {
    "_detail_bucket": "b",
-   "entity_iri": "CHEBI:27226",
+   "entity_iri": "GO:0015747",
    "id": "urinary_urate",
    "in_big_scc": false,
    "label": "urinary urate (uric acid) excretion rate",
@@ -44438,7 +44438,7 @@
   },
   {
    "_detail_bucket": "8",
-   "entity_iri": "CHEBI:29101",
+   "entity_iri": "GO:0035812",
    "id": "urinary_sodium",
    "in_big_scc": false,
    "label": "urinary sodium excretion rate",
@@ -44452,7 +44452,7 @@
   },
   {
    "_detail_bucket": "2",
-   "entity_iri": "CHEBI:29103",
+   "entity_iri": "GO:0036359",
    "id": "urinary_potassium",
    "in_big_scc": false,
    "label": "urinary potassium excretion rate",
@@ -44480,7 +44480,7 @@
   },
   {
    "_detail_bucket": "e",
-   "entity_iri": "CHEBI:18420",
+   "entity_iri": "GO:0015693",
    "id": "urinary_magnesium",
    "in_big_scc": false,
    "label": "urinary magnesium excretion rate",
@@ -44858,7 +44858,7 @@
   },
   {
    "_detail_bucket": "e",
-   "entity_iri": "CHEBI:30411",
+   "entity_iri": "GO:0015889",
    "id": "cellular_cobalamin_uptake",
    "in_big_scc": false,
    "label": "cellular (transcobalamin-II-mediated) cobalamin uptake rate",
@@ -45194,7 +45194,7 @@
   },
   {
    "_detail_bucket": "c",
-   "entity_iri": "CL:0000235",
+   "entity_iri": "GO:0032611",
    "id": "macrophage_il1beta_secretion",
    "in_big_scc": false,
    "label": "activated macrophage interleukin-1 beta secretion rate",
@@ -45250,7 +45250,7 @@
   },
   {
    "_detail_bucket": "b",
-   "entity_iri": "UBERON:0002107",
+   "entity_iri": "GO:0005980",
    "id": "hepatic_glycogenolysis",
    "in_big_scc": true,
    "label": "hepatic glycogenolysis rate (glycogen -> glucose-6-phosphate)",
@@ -45264,7 +45264,7 @@
   },
   {
    "_detail_bucket": "8",
-   "entity_iri": "UBERON:0002107",
+   "entity_iri": "GO:0006094",
    "id": "hepatic_gluconeogenesis",
    "in_big_scc": true,
    "label": "hepatic gluconeogenesis rate (lactate/glycerol/amino acids -> glucose-6-phosphate)",
@@ -45278,7 +45278,7 @@
   },
   {
    "_detail_bucket": "0",
-   "entity_iri": "UBERON:0002107",
+   "entity_iri": "GO:0046951",
    "id": "hepatic_ketogenesis",
    "in_big_scc": true,
    "label": "hepatic ketogenesis rate (acetyl-CoA -> acetoacetate / 3-hydroxybutyrate)",
@@ -45292,7 +45292,7 @@
   },
   {
    "_detail_bucket": "b",
-   "entity_iri": "UBERON:0001013",
+   "entity_iri": "GO:0019433",
    "id": "lipolysis_rate",
    "in_big_scc": true,
    "label": "adipose lipolysis rate (triacylglycerol -> free fatty acids + glycerol)",
@@ -45306,11 +45306,11 @@
   },
   {
    "_detail_bucket": "f",
-   "entity_iri": "UBERON:0002107",
+   "entity_iri": "PR:000007746",
    "id": "g6pase_activity",
    "in_big_scc": false,
    "label": "hepatic glucose-6-phosphatase activity (G6PC)",
-   "quality_iri": "PATO:0000161",
+   "quality_iri": "PATO:0001414",
    "scale": "organ",
    "scc": 1071,
    "source": "Curated system fragment",
@@ -46678,7 +46678,7 @@
   },
   {
    "_detail_bucket": "a",
-   "entity_iri": "CL:0000182",
+   "entity_iri": "GO:0009306",
    "id": "hepatocyte_apoe_secretion",
    "in_big_scc": false,
    "label": "hepatocyte apolipoprotein E secretion rate",
@@ -46860,7 +46860,7 @@
   },
   {
    "_detail_bucket": "f",
-   "entity_iri": "CL:1000398",
+   "entity_iri": "GO:0030214",
    "id": "lsec_ha_clearance_rate",
    "in_big_scc": false,
    "label": "liver sinusoidal endothelial cell hyaluronan clearance rate (stabilin-2-mediated endocytosis)",
@@ -46874,7 +46874,7 @@
   },
   {
    "_detail_bucket": "3",
-   "entity_iri": "PR:000013318",
+   "entity_iri": "GO:1990747",
    "id": "prss1_acinar_activity",
    "in_big_scc": false,
    "label": "pancreatic acinar cell cationic trypsinogen (PRSS1) expression and secretion rate",
@@ -46916,7 +46916,7 @@
   },
   {
    "_detail_bucket": "c",
-   "entity_iri": "PR:000007581",
+   "entity_iri": "GO:0009306",
    "id": "hepatocyte_fibronectin_secretion",
    "in_big_scc": false,
    "label": "hepatocyte plasma fibronectin (FN1) synthesis and secretion rate",
@@ -46986,7 +46986,7 @@
   },
   {
    "_detail_bucket": "a",
-   "entity_iri": "PR:O00337",
+   "entity_iri": "GO:1901642",
    "id": "cnt1_activity",
    "in_big_scc": false,
    "label": "concentrative nucleoside transporter 1 (SLC28A1/CNT1) renal reabsorption rate",
@@ -47406,7 +47406,7 @@
   },
   {
    "_detail_bucket": "8",
-   "entity_iri": "CL:0000182",
+   "entity_iri": "GO:0006509",
    "id": "hepatocyte_cd46_shedding",
    "in_big_scc": false,
    "label": "hepatocyte membrane cofactor protein (CD46) ectodomain shedding rate",
@@ -47700,7 +47700,7 @@
   },
   {
    "_detail_bucket": "c",
-   "entity_iri": "UBERON:0002107",
+   "entity_iri": "GO:0006695",
    "id": "hepatic_cholesterol_synthesis",
    "in_big_scc": false,
    "label": "hepatic de novo cholesterol synthesis (HMG-CoA reductase flux)",
@@ -47798,7 +47798,7 @@
   },
   {
    "_detail_bucket": "9",
-   "entity_iri": "CL:0000182",
+   "entity_iri": "GO:0034380",
    "id": "hepatocyte_apoa1_hdl_secretion",
    "in_big_scc": false,
    "label": "hepatocyte apoA-I / nascent-HDL synthesis-secretion rate",
@@ -47840,7 +47840,7 @@
   },
   {
    "_detail_bucket": "b",
-   "entity_iri": "CHEBI:15379",
+   "entity_iri": "GO:0015671",
    "id": "oxygen_delivery",
    "in_big_scc": true,
    "label": "systemic oxygen delivery (DO2 = CO x CaO2)",
@@ -48008,7 +48008,7 @@
   },
   {
    "_detail_bucket": "7",
-   "entity_iri": "CHEBI:27226",
+   "entity_iri": "GO:0034418",
    "id": "hepatic_urate_production",
    "in_big_scc": false,
    "label": "hepatic net urate (uric acid) production rate",
@@ -48022,7 +48022,7 @@
   },
   {
    "_detail_bucket": "1",
-   "entity_iri": "CHEBI:27226",
+   "entity_iri": "GO:0015747",
    "id": "renal_urate_excretion",
    "in_big_scc": false,
    "label": "renal urate excretion rate (net of reabsorption)",
@@ -48078,7 +48078,7 @@
   },
   {
    "_detail_bucket": "0",
-   "entity_iri": "CHEBI:17111",
+   "entity_iri": "GO:0006189",
    "id": "purine_synthesis_rate",
    "in_big_scc": false,
    "label": "de-novo purine biosynthesis rate (PRPP-amidotransferase committed step)",
@@ -48232,7 +48232,7 @@
   },
   {
    "_detail_bucket": "d",
-   "entity_iri": "CL:0000437",
+   "entity_iri": "GO:0032275",
    "id": "gonadotroph_lh_secretion",
    "in_big_scc": true,
    "label": "anterior-pituitary gonadotroph luteinizing-hormone secretion rate",
@@ -48246,7 +48246,7 @@
   },
   {
    "_detail_bucket": "1",
-   "entity_iri": "CL:0000437",
+   "entity_iri": "GO:0046884",
    "id": "gonadotroph_fsh_secretion",
    "in_big_scc": true,
    "label": "anterior-pituitary gonadotroph follicle-stimulating-hormone secretion rate",
@@ -48260,7 +48260,7 @@
   },
   {
    "_detail_bucket": "e",
-   "entity_iri": "CL:0000501",
+   "entity_iri": "GO:0035938",
    "id": "granulosa_estradiol_secretion",
    "in_big_scc": true,
    "label": "ovarian granulosa-cell estradiol secretion rate",
@@ -48274,7 +48274,7 @@
   },
   {
    "_detail_bucket": "6",
-   "entity_iri": "CL:0000175",
+   "entity_iri": "GO:0042701",
    "id": "luteal_progesterone_secretion",
    "in_big_scc": true,
    "label": "corpus-luteum luteal-cell progesterone secretion rate",
@@ -48288,7 +48288,7 @@
   },
   {
    "_detail_bucket": "a",
-   "entity_iri": "CL:0000178",
+   "entity_iri": "GO:0035936",
    "id": "leydig_testosterone_secretion",
    "in_big_scc": true,
    "label": "testicular Leydig-cell testosterone secretion rate",
@@ -48302,7 +48302,7 @@
   },
   {
    "_detail_bucket": "d",
-   "entity_iri": "CL:0000216",
+   "entity_iri": "GO:0032334",
    "id": "sertoli_inhibin_secretion",
    "in_big_scc": true,
    "label": "testicular Sertoli-cell inhibin-B secretion rate",
@@ -48316,7 +48316,7 @@
   },
   {
    "_detail_bucket": "4",
-   "entity_iri": "UBERON:0002048",
+   "entity_iri": "GO:0007585",
    "id": "alveolar_ventilation",
    "in_big_scc": true,
    "label": "alveolar ventilation (effective gas-exchanging ventilation)",
@@ -48582,7 +48582,7 @@
   },
   {
    "_detail_bucket": "8",
-   "entity_iri": "UBERON:0002049",
+   "entity_iri": "GO:0072672",
    "id": "neutrophil_extravasation",
    "in_big_scc": false,
    "label": "neutrophil extravasation rate (tissue recruitment)",
@@ -48610,7 +48610,7 @@
   },
   {
    "_detail_bucket": "3",
-   "entity_iri": "CL:0000492",
+   "entity_iri": "GO:0035710",
    "id": "helper_t_cell_activation",
    "in_big_scc": false,
    "label": "helper T cell (CD4+) activation rate",
@@ -48624,7 +48624,7 @@
   },
   {
    "_detail_bucket": "3",
-   "entity_iri": "CL:0000236",
+   "entity_iri": "GO:0042100",
    "id": "b_cell_proliferation",
    "in_big_scc": false,
    "label": "B cell proliferation rate",
@@ -48666,7 +48666,7 @@
   },
   {
    "_detail_bucket": "b",
-   "entity_iri": "UBERON:0001134",
+   "entity_iri": "GO:0003009",
    "id": "skeletal_muscle_contraction_rate",
    "in_big_scc": false,
    "label": "skeletal muscle contraction rate",
@@ -48736,7 +48736,7 @@
   },
   {
    "_detail_bucket": "8",
-   "entity_iri": "UBERON:0000995",
+   "entity_iri": "GO:0070471",
    "id": "uterine_contraction_rate",
    "in_big_scc": false,
    "label": "uterine smooth-muscle contraction rate (myometrial activity)",
@@ -48778,7 +48778,7 @@
   },
   {
    "_detail_bucket": "c",
-   "entity_iri": "UBERON:0001003",
+   "entity_iri": "GO:0042368",
    "id": "skin_cholecalciferol_synthesis",
    "in_big_scc": false,
    "label": "cutaneous cholecalciferol (vitamin D3) synthesis rate",
@@ -48848,7 +48848,7 @@
   },
   {
    "_detail_bucket": "e",
-   "entity_iri": "CL:0000100",
+   "entity_iri": "GO:0001508",
    "id": "motor_neuron_firing_rate",
    "in_big_scc": false,
    "label": "skeletal muscle motor neuron action potential firing rate",
@@ -48932,7 +48932,7 @@
   },
   {
    "_detail_bucket": "7",
-   "entity_iri": "UBERON:0001004",
+   "entity_iri": "GO:0007585",
    "id": "respiratory_rate",
    "in_big_scc": true,
    "label": "respiratory (breathing) rate",
@@ -48988,7 +48988,7 @@
   },
   {
    "_detail_bucket": "7",
-   "entity_iri": "UBERON:0000945",
+   "entity_iri": "GO:0035482",
    "id": "stomach_motility",
    "in_big_scc": false,
    "label": "gastric motility (rate of smooth-muscle contractions in stomach wall)",
@@ -49016,7 +49016,7 @@
   },
   {
    "_detail_bucket": "1",
-   "entity_iri": "UBERON:0001044",
+   "entity_iri": "GO:0046541",
    "id": "salivation_rate",
    "in_big_scc": false,
    "label": "salivation rate",
@@ -49030,7 +49030,7 @@
   },
   {
    "_detail_bucket": "0",
-   "entity_iri": "UBERON:0002185",
+   "entity_iri": "GO:0006939",
    "id": "bronchial_smooth_muscle_tone",
    "in_big_scc": false,
    "label": "bronchial smooth muscle contractile tone",
@@ -49058,7 +49058,7 @@
   },
   {
    "_detail_bucket": "5",
-   "entity_iri": "PR:000013246",
+   "entity_iri": "GO:0070459",
    "id": "pituitary_prolactin_secretion",
    "in_big_scc": true,
    "label": "anterior-pituitary lactotroph prolactin secretory output (rate)",
@@ -49086,7 +49086,7 @@
   },
   {
    "_detail_bucket": "6",
-   "entity_iri": "CL:0000570",
+   "entity_iri": "GO:0036161",
    "id": "parafollicular_cell_calcitonin_secretion",
    "in_big_scc": true,
    "label": "thyroid parafollicular cell (C cell) calcitonin secretion rate",
@@ -49100,7 +49100,7 @@
   },
   {
    "_detail_bucket": "8",
-   "entity_iri": "UBERON:0002108",
+   "entity_iri": "GO:0070588",
    "id": "intestinal_calcium_absorption",
    "in_big_scc": false,
    "label": "intestinal dietary calcium absorption rate",
@@ -49282,7 +49282,7 @@
   },
   {
    "_detail_bucket": "1",
-   "entity_iri": "UBERON:0001473",
+   "entity_iri": "GO:0003017",
    "id": "lymphatic_flow",
    "in_big_scc": false,
    "label": "lymphatic drainage flow rate",
@@ -49310,7 +49310,7 @@
   },
   {
    "_detail_bucket": "9",
-   "entity_iri": "UBERON:0001473",
+   "entity_iri": "GO:0003017",
    "id": "lymph_drainage_rate",
    "in_big_scc": false,
    "label": "systemic lymphatic drainage rate",
@@ -49352,7 +49352,7 @@
   },
   {
    "_detail_bucket": "c",
-   "entity_iri": "CL:0000546",
+   "entity_iri": "GO:0035745",
    "id": "th2_cell_activation",
    "in_big_scc": false,
    "label": "Th2 cell activation / IL-4, IL-6, IL-10 cytokine secretion rate",
@@ -49394,7 +49394,7 @@
   },
   {
    "_detail_bucket": "b",
-   "entity_iri": "CL:0000097",
+   "entity_iri": "GO:0043303",
    "id": "mast_cell_degranulation",
    "in_big_scc": false,
    "label": "mast cell degranulation rate",
@@ -49590,7 +49590,7 @@
   },
   {
    "_detail_bucket": "e",
-   "entity_iri": "UBERON:0001555",
+   "entity_iri": "GO:0030432",
    "id": "gi_tract_motility",
    "in_big_scc": false,
    "label": "gastrointestinal tract motility (contractile activity / peristalsis rate)",
@@ -49646,7 +49646,7 @@
   },
   {
    "_detail_bucket": "0",
-   "entity_iri": "UBERON:0001264",
+   "entity_iri": "GO:0015701",
    "id": "pancreatic_bicarbonate_secretion",
    "in_big_scc": false,
    "label": "pancreatic bicarbonate secretion rate",
@@ -49660,7 +49660,7 @@
   },
   {
    "_detail_bucket": "6",
-   "entity_iri": "UBERON:0001264",
+   "entity_iri": "GO:0030157",
    "id": "pancreatic_enzyme_secretion",
    "in_big_scc": false,
    "label": "pancreatic digestive enzyme secretion rate",
@@ -49702,7 +49702,7 @@
   },
   {
    "_detail_bucket": "f",
-   "entity_iri": "UBERON:0000945",
+   "entity_iri": "GO:0035482",
    "id": "gastric_motility",
    "in_big_scc": false,
    "label": "gastric smooth muscle contraction rate (motility)",
@@ -49786,7 +49786,7 @@
   },
   {
    "_detail_bucket": "7",
-   "entity_iri": "CL:0002281",
+   "entity_iri": "GO:0030072",
    "id": "s_cell_secretin_secretion",
    "in_big_scc": false,
    "label": "intestinal type-S enteroendocrine cell secretin secretion rate",
@@ -49856,7 +49856,7 @@
   },
   {
    "_detail_bucket": "5",
-   "entity_iri": "UBERON:0002110",
+   "entity_iri": "GO:0032782",
    "id": "gallbladder_bile_secretion",
    "in_big_scc": false,
    "label": "gallbladder bile secretion rate (bile salts released into intestine)",
@@ -49870,7 +49870,7 @@
   },
   {
    "_detail_bucket": "6",
-   "entity_iri": "UBERON:0001134",
+   "entity_iri": "GO:0160307",
    "id": "muscle_protein_synthesis_rate",
    "in_big_scc": false,
    "label": "skeletal muscle protein synthesis rate",
@@ -49954,7 +49954,7 @@
   },
   {
    "_detail_bucket": "0",
-   "entity_iri": "UBERON:0001911",
+   "entity_iri": "GO:0007595",
    "id": "mammary_milk_production_rate",
    "in_big_scc": false,
    "label": "mammary gland milk synthesis and secretion rate",
@@ -50304,7 +50304,7 @@
   },
   {
    "_detail_bucket": "1",
-   "entity_iri": "UBERON:0001886",
+   "entity_iri": "GO:0033326",
    "id": "csf_production_rate",
    "in_big_scc": false,
    "label": "cerebrospinal fluid production rate",
@@ -50458,7 +50458,7 @@
   },
   {
    "_detail_bucket": "3",
-   "entity_iri": "UBERON:0002048",
+   "entity_iri": "GO:0008015",
    "id": "pulmonary_perfusion",
    "in_big_scc": true,
    "label": "pulmonary capillary perfusion rate (blood flow through lung capillaries)",
@@ -50528,7 +50528,7 @@
   },
   {
    "_detail_bucket": "8",
-   "entity_iri": "UBERON:0002113",
+   "entity_iri": "GO:0070634",
    "id": "renal_tubular_ammonia_secretion",
    "in_big_scc": true,
    "label": "renal proximal tubule ammonia (NH3) secretion rate into filtrate",
@@ -50570,7 +50570,7 @@
   },
   {
    "_detail_bucket": "5",
-   "entity_iri": "CL:0000084",
+   "entity_iri": "GO:0042110",
    "id": "t_cell_activation_rate",
    "in_big_scc": false,
    "label": "T cell activation rate",
@@ -50780,7 +50780,7 @@
   },
   {
    "_detail_bucket": "5",
-   "entity_iri": "GO:0016529",
+   "entity_iri": "GO:0014808",
    "id": "skeletal_muscle_sr_calcium_release",
    "in_big_scc": false,
    "label": "skeletal-muscle sarcoplasmic-reticulum Ca2+ release flux (RyR1-mediated)",
@@ -51116,7 +51116,7 @@
   },
   {
    "_detail_bucket": "f",
-   "entity_iri": "CL:0000476",
+   "entity_iri": "GO:0070460",
    "id": "thyrotroph_tsh_secretion",
    "in_big_scc": false,
    "label": "anterior-pituitary thyrotroph TSH secretion rate",
@@ -51130,7 +51130,7 @@
   },
   {
    "_detail_bucket": "f",
-   "entity_iri": "CL:0002258",
+   "entity_iri": "GO:0006590",
    "id": "thyroid_follicular_t4_secretion",
    "in_big_scc": false,
    "label": "thyroid follicular cell thyroxine (T4) secretion rate",
@@ -51172,7 +51172,7 @@
   },
   {
    "_detail_bucket": "c",
-   "entity_iri": "CHEBI:29036",
+   "entity_iri": "GO:0060003",
    "id": "hepatic_copper_excretion",
    "in_big_scc": false,
    "label": "hepatobiliary copper excretion rate",
@@ -51242,7 +51242,7 @@
   },
   {
    "_detail_bucket": "4",
-   "entity_iri": "CHEBI:18420",
+   "entity_iri": "GO:1903830",
    "id": "renal_magnesium_reabsorption",
    "in_big_scc": false,
    "label": "renal (distal convoluted tubule) magnesium reabsorption rate",
@@ -51844,7 +51844,7 @@
   },
   {
    "_detail_bucket": "6",
-   "entity_iri": "UBERON:0004894",
+   "entity_iri": "GO:0015671",
    "id": "o2_transfer_rate",
    "in_big_scc": true,
    "label": "rate of O2 transfer across the blood-gas barrier (pulmonary capillary)",
@@ -51886,7 +51886,7 @@
   },
   {
    "_detail_bucket": "0",
-   "entity_iri": "UBERON:0016405",
+   "entity_iri": "GO:0008015",
    "id": "pulmonary_capillary_transit_time",
    "in_big_scc": true,
    "label": "red blood cell transit time in the pulmonary capillary",
@@ -52292,7 +52292,7 @@
   },
   {
    "_detail_bucket": "0",
-   "entity_iri": "CL:0002311",
+   "entity_iri": "GO:0070459",
    "id": "lactotroph_prl_secretion",
    "in_big_scc": false,
    "label": "anterior-pituitary lactotroph prolactin secretion rate",
@@ -52726,7 +52726,7 @@
   },
   {
    "_detail_bucket": "5",
-   "entity_iri": "CL:4072009",
+   "entity_iri": "GO:0014046",
    "id": "tuberoinfundibular_dopamine_tone",
    "in_big_scc": false,
    "label": "hypothalamic tuberoinfundibular (A12) dopaminergic neuron secretion rate / tone",
@@ -52852,7 +52852,7 @@
   },
   {
    "_detail_bucket": "3",
-   "entity_iri": "CL:0000617",
+   "entity_iri": "GO:0051932",
    "id": "hypothalamic_gabaergic_tone",
    "in_big_scc": false,
    "label": "hypothalamic GABAergic neuronal inhibitory tone (GnRH pulse generator)",
@@ -52866,7 +52866,7 @@
   },
   {
    "_detail_bucket": "8",
-   "entity_iri": "CL:0000617",
+   "entity_iri": "GO:0035249",
    "id": "hypothalamic_glutamatergic_tone",
    "in_big_scc": false,
    "label": "hypothalamic glutamatergic (excitatory amino acid) neuronal drive to GnRH pulse generator",
@@ -52880,7 +52880,7 @@
   },
   {
    "_detail_bucket": "b",
-   "entity_iri": "GO:0035929",
+   "entity_iri": "GO:0035942",
    "id": "zona_reticularis_dheas_secretion",
    "in_big_scc": false,
    "label": "adrenal zona reticularis cell DHEAS secretion rate",
@@ -52964,7 +52964,7 @@
   },
   {
    "_detail_bucket": "7",
-   "entity_iri": "UBERON:0002371",
+   "entity_iri": "GO:0001503",
    "id": "bone_formation_rate",
    "in_big_scc": false,
    "label": "osteoblast bone formation rate (organ-level)",
@@ -52992,7 +52992,7 @@
   },
   {
    "_detail_bucket": "8",
-   "entity_iri": "CL:0000137",
+   "entity_iri": "GO:0030072",
    "id": "osteocyte_fgf23_secretion",
    "in_big_scc": false,
    "label": "osteocyte FGF23 secretion rate",
@@ -53216,11 +53216,11 @@
   },
   {
    "_detail_bucket": "f",
-   "entity_iri": "GO:0004691",
+   "entity_iri": "PR:000029188",
    "id": "pka_activity",
    "in_big_scc": false,
    "label": "protein kinase A (PKA) catalytic activity",
-   "quality_iri": "PATO:0000161",
+   "quality_iri": "PATO:0001414",
    "scale": "subcellular",
    "scc": 1414,
    "source": "Molecular/cellular module",
@@ -53426,7 +53426,7 @@
   },
   {
    "_detail_bucket": "7",
-   "entity_iri": "CL:0000115",
+   "entity_iri": "GO:0006809",
    "id": "endothelial_no_production",
    "in_big_scc": true,
    "label": "endothelial nitric oxide (NO) production rate (eNOS/NOS3)",
@@ -53440,7 +53440,7 @@
   },
   {
    "_detail_bucket": "b",
-   "entity_iri": "CL:0000115",
+   "entity_iri": "GO:1990775",
    "id": "endothelial_et1_secretion",
    "in_big_scc": false,
    "label": "endothelial endothelin-1 (ET-1) secretion rate",
@@ -53454,7 +53454,7 @@
   },
   {
    "_detail_bucket": "0",
-   "entity_iri": "CL:0000115",
+   "entity_iri": "GO:0032310",
    "id": "endothelial_pgi2_production",
    "in_big_scc": false,
    "label": "endothelial prostacyclin (PGI2) production rate",
@@ -53482,11 +53482,11 @@
   },
   {
    "_detail_bucket": "a",
-   "entity_iri": "PR:000009744",
+   "entity_iri": "PR:O60674",
    "id": "jak2_activity",
    "in_big_scc": true,
    "label": "Janus kinase 2 (JAK2) catalytic activity",
-   "quality_iri": "PATO:0000161",
+   "quality_iri": "PATO:0001414",
    "scale": "subcellular",
    "scc": 0,
    "source": "Molecular/cellular module",
@@ -53496,7 +53496,7 @@
   },
   {
    "_detail_bucket": "c",
-   "entity_iri": "PR:000002091",
+   "entity_iri": "GO:0007259",
    "id": "stat5_activity",
    "in_big_scc": true,
    "label": "phosphorylated STAT5 transcription-factor activity",
@@ -53580,7 +53580,7 @@
   },
   {
    "_detail_bucket": "d",
-   "entity_iri": "CL:0000765",
+   "entity_iri": "GO:0043354",
    "id": "erythroblast_maturation",
    "in_big_scc": false,
    "label": "erythroblast terminal maturation / enucleation rate",
@@ -53804,7 +53804,7 @@
   },
   {
    "_detail_bucket": "0",
-   "entity_iri": "CL:0000451",
+   "entity_iri": "GO:0001773",
    "id": "dendritic_cell_activation",
    "in_big_scc": false,
    "label": "dendritic cell activation / IL-12 secretion rate",
@@ -53846,7 +53846,7 @@
   },
   {
    "_detail_bucket": "3",
-   "entity_iri": "CL:0000235",
+   "entity_iri": "GO:0042116",
    "id": "macrophage_activation",
    "in_big_scc": false,
    "label": "macrophage classical (M1) activation / pro-inflammatory cytokine secretion",
@@ -53860,7 +53860,7 @@
   },
   {
    "_detail_bucket": "5",
-   "entity_iri": "CL:0000815",
+   "entity_iri": "GO:0032613",
    "id": "treg_il10_secretion",
    "in_big_scc": false,
    "label": "regulatory T cell IL-10 secretion rate",
@@ -53888,7 +53888,7 @@
   },
   {
    "_detail_bucket": "e",
-   "entity_iri": "PR:000009454",
+   "entity_iri": "GO:0008286",
    "id": "irs1_signaling",
    "in_big_scc": false,
    "label": "insulin receptor substrate-1 tyrosine-phosphorylation / signalling activity",
@@ -53930,7 +53930,7 @@
   },
   {
    "_detail_bucket": "e",
-   "entity_iri": "CL:0000169",
+   "entity_iri": "GO:0030073",
    "id": "beta_cell_insulin_secretion",
    "in_big_scc": true,
    "label": "pancreatic beta-cell insulin secretion rate",
@@ -53944,7 +53944,7 @@
   },
   {
    "_detail_bucket": "5",
-   "entity_iri": "CL:0000171",
+   "entity_iri": "GO:0070091",
    "id": "alpha_cell_glucagon_secretion",
    "in_big_scc": true,
    "label": "pancreatic alpha-cell glucagon secretion rate",
@@ -53958,7 +53958,7 @@
   },
   {
    "_detail_bucket": "2",
-   "entity_iri": "CL:0000173",
+   "entity_iri": "GO:0070253",
    "id": "delta_cell_somatostatin_secretion",
    "in_big_scc": true,
    "label": "pancreatic delta-cell somatostatin secretion rate",
@@ -53986,7 +53986,7 @@
   },
   {
    "_detail_bucket": "c",
-   "entity_iri": "CL:0000648",
+   "entity_iri": "GO:0002001",
    "id": "jg_granular_renin_secretion",
    "in_big_scc": false,
    "label": "juxtaglomerular granular cell renin secretion rate",
@@ -54154,11 +54154,11 @@
   },
   {
    "_detail_bucket": "4",
-   "entity_iri": "GO:0004691",
+   "entity_iri": "PR:000029188",
    "id": "follicular_pka_activity",
    "in_big_scc": false,
    "label": "thyroid follicular-cell protein kinase A activity",
-   "quality_iri": "PATO:0000161",
+   "quality_iri": "PATO:0001414",
    "scale": "subcellular",
    "scc": 1445,
    "source": "Molecular/cellular module",
@@ -54250,17 +54250,17 @@
   "el_artifact": "physiomap-el.owl",
   "migration_report_approval": "approved-2026-07-11",
   "primary_kb": "physiomap.owl",
-  "primary_kb_sha256": "0ae3af3f6a171d7169ad6480c65f9179a597dd614c6f7103db7efb7a7a95bce6",
+  "primary_kb_sha256": "7e061dc61c4649a151b25e3ca9375f54959ca6dea1a8fbb10d33fda60d4640c6",
   "projection_entailments": {
    "counts": {
-    "causal-existential-v1": 2265,
-    "constitution-v1": 6,
-    "multiplicative-modulation-v1": 19,
-    "production-v1": 85,
+    "causal-collection-v2": 2269,
+    "constitution-v1": 4,
+    "multiplicative-modulation-v2": 19,
+    "production-collection-v2": 85,
     "ratio-v1": 1
    },
    "file": "projection-entailments.tsv",
-   "sha256": "0bdc06eaaabaeafc5888bce0ad7d7fceeabaaa1b6ed18cb89a0138c5320535aa"
+   "sha256": "65fd497171675ef760fc4a5fce71d1997fbfca1e187e89c692ced70b50586091"
   },
   "source_files": [
    "benchmarks/guyton/guyton_cv_core.yaml",
@@ -54422,8 +54422,8 @@
  },
  "production_edges": [
   {
-   "_detail_bucket": "5",
-   "id": "production-f63a2ed65dbc58a8d868",
+   "_detail_bucket": "7",
+   "id": "production-2914859d17f0fbc69a0a",
    "kind": "production",
    "prov_source": "Guyton core (curated)",
    "sign": "+",
@@ -54431,8 +54431,8 @@
    "target": "aldosterone"
   },
   {
-   "_detail_bucket": "6",
-   "id": "production-d80c6c5751e83516ad83",
+   "_detail_bucket": "c",
+   "id": "production-0b31bb7042d4bb68ac06",
    "kind": "production",
    "prov_source": "Guyton core (curated)",
    "sign": "+",
@@ -54440,8 +54440,8 @@
    "target": "adh"
   },
   {
-   "_detail_bucket": "e",
-   "id": "production-6670fd7631814e8724b4",
+   "_detail_bucket": "0",
+   "id": "production-31c5a2598064855b4f2e",
    "kind": "production",
    "prov_source": "Guyton core (curated)",
    "sign": "+",
@@ -54449,8 +54449,8 @@
    "target": "anp"
   },
   {
-   "_detail_bucket": "b",
-   "id": "production-a1ccdfb98198827d483a",
+   "_detail_bucket": "2",
+   "id": "production-eb4eaaae355fd6687820",
    "kind": "production",
    "prov_source": "Curated system fragment",
    "sign": "+",
@@ -54458,8 +54458,8 @@
    "target": "cortisol"
   },
   {
-   "_detail_bucket": "2",
-   "id": "production-2c9fc392e5afd8fc15f4",
+   "_detail_bucket": "a",
+   "id": "production-04e5ad461bfb263f29d6",
    "kind": "production",
    "prov_source": "Curated system fragment",
    "sign": "+",
@@ -54467,8 +54467,8 @@
    "target": "pituitary_acth_secretion"
   },
   {
-   "_detail_bucket": "6",
-   "id": "production-57d72ff7dc7a90f72b4e",
+   "_detail_bucket": "a",
+   "id": "production-dbaca32dda3cd60792e0",
    "kind": "production",
    "prov_source": "Curated system fragment",
    "sign": "+",
@@ -54476,8 +54476,8 @@
    "target": "crh"
   },
   {
-   "_detail_bucket": "2",
-   "id": "production-d87de6cd5034fc38d68d",
+   "_detail_bucket": "c",
+   "id": "production-5aff1771c449ce22e22d",
    "kind": "production",
    "prov_source": "Curated system fragment",
    "sign": "+",
@@ -54485,8 +54485,8 @@
    "target": "epinephrine"
   },
   {
-   "_detail_bucket": "f",
-   "id": "production-6d8f7e29bbf2e00fcff7",
+   "_detail_bucket": "b",
+   "id": "production-6ce45ca7c48797583748",
    "kind": "production",
    "prov_source": "Curated system fragment",
    "sign": "+",
@@ -54494,8 +54494,8 @@
    "target": "norepinephrine"
   },
   {
-   "_detail_bucket": "0",
-   "id": "production-04d91aadaca9be197b0b",
+   "_detail_bucket": "3",
+   "id": "production-27b95c909a732884f0e9",
    "kind": "production",
    "prov_source": "Curated system fragment",
    "sign": "+",
@@ -54503,8 +54503,8 @@
    "target": "pth"
   },
   {
-   "_detail_bucket": "f",
-   "id": "production-4079d2e9e193ea8a2c18",
+   "_detail_bucket": "0",
+   "id": "production-3200495ca046607ec279",
    "kind": "production",
    "prov_source": "Curated system fragment",
    "sign": "+",
@@ -54513,7 +54513,7 @@
   },
   {
    "_detail_bucket": "9",
-   "id": "production-13ab81eefd5cf67f1c20",
+   "id": "production-9f9457a902abd57bbe26",
    "kind": "production",
    "prov_source": "Curated system fragment",
    "sign": "+",
@@ -54521,8 +54521,8 @@
    "target": "antithrombin"
   },
   {
-   "_detail_bucket": "a",
-   "id": "production-808a4853bff3fd9772c1",
+   "_detail_bucket": "6",
+   "id": "production-f9e2a63c05d31114b09b",
    "kind": "production",
    "prov_source": "Curated system fragment",
    "sign": "+",
@@ -54530,8 +54530,8 @@
    "target": "leptin"
   },
   {
-   "_detail_bucket": "9",
-   "id": "production-054641fae96f3a565156",
+   "_detail_bucket": "5",
+   "id": "production-2e7c6112edc992a8474b",
    "kind": "production",
    "prov_source": "Curated system fragment",
    "sign": "+",
@@ -54539,8 +54539,8 @@
    "target": "ghrelin"
   },
   {
-   "_detail_bucket": "8",
-   "id": "production-b958dad02f10f444bad9",
+   "_detail_bucket": "a",
+   "id": "production-af2df76a3199569cbf0b",
    "kind": "production",
    "prov_source": "Curated system fragment",
    "sign": "+",
@@ -54548,8 +54548,8 @@
    "target": "gastrin"
   },
   {
-   "_detail_bucket": "9",
-   "id": "production-33c162415ec366a1b016",
+   "_detail_bucket": "1",
+   "id": "production-8dcc9f54378aa4db6fc7",
    "kind": "production",
    "prov_source": "Curated system fragment",
    "sign": "+",
@@ -54557,8 +54557,8 @@
    "target": "gip"
   },
   {
-   "_detail_bucket": "4",
-   "id": "production-7dba3532c026f7d6abf5",
+   "_detail_bucket": "8",
+   "id": "production-80fe87576a3d155dc118",
    "kind": "production",
    "prov_source": "Curated system fragment",
    "sign": "+",
@@ -54566,8 +54566,8 @@
    "target": "glp1"
   },
   {
-   "_detail_bucket": "0",
-   "id": "production-5f2dc3608d98633a57e6",
+   "_detail_bucket": "6",
+   "id": "production-d16776b65046d3d4eef7",
    "kind": "production",
    "prov_source": "Curated system fragment",
    "sign": "+",
@@ -54575,8 +54575,8 @@
    "target": "pituitary_gh_secretion"
   },
   {
-   "_detail_bucket": "f",
-   "id": "production-7f20248631e3c1989dad",
+   "_detail_bucket": "2",
+   "id": "production-c20035803015b1260a8d",
    "kind": "production",
    "prov_source": "Curated system fragment",
    "sign": "+",
@@ -54584,8 +54584,8 @@
    "target": "hepatic_igf1"
   },
   {
-   "_detail_bucket": "d",
-   "id": "production-8a3f8347891d27b8e98b",
+   "_detail_bucket": "e",
+   "id": "production-cb698e7b342a3a5e25f8",
    "kind": "production",
    "prov_source": "Curated system fragment",
    "sign": "+",
@@ -54593,8 +54593,8 @@
    "target": "ghrh"
   },
   {
-   "_detail_bucket": "4",
-   "id": "production-88b692431c27c379053a",
+   "_detail_bucket": "3",
+   "id": "production-cbc56ab2963bc32cbb93",
    "kind": "production",
    "prov_source": "Curated system fragment",
    "sign": "+",
@@ -54603,7 +54603,7 @@
   },
   {
    "_detail_bucket": "8",
-   "id": "production-1dfb0322127824cca78e",
+   "id": "production-4e392c3cc9e841247278",
    "kind": "production",
    "prov_source": "Curated system fragment",
    "sign": "+",
@@ -54611,8 +54611,8 @@
    "target": "il1beta"
   },
   {
-   "_detail_bucket": "2",
-   "id": "production-66dde9bf30985f8a2f74",
+   "_detail_bucket": "f",
+   "id": "production-4fdf88c457ccaebf54d8",
    "kind": "production",
    "prov_source": "Curated system fragment",
    "sign": "+",
@@ -54620,8 +54620,8 @@
    "target": "c_reactive_protein"
   },
   {
-   "_detail_bucket": "1",
-   "id": "production-f9edd61084a8ede8be83",
+   "_detail_bucket": "3",
+   "id": "production-30fac2c0c840d92afe0b",
    "kind": "production",
    "prov_source": "Curated system fragment",
    "sign": "+",
@@ -54629,8 +54629,8 @@
    "target": "plasma_glucose"
   },
   {
-   "_detail_bucket": "9",
-   "id": "production-5599e9ea36a5804ab0ca",
+   "_detail_bucket": "7",
+   "id": "production-f963b00eb20defc1ce69",
    "kind": "production",
    "prov_source": "Curated system fragment",
    "sign": "+",
@@ -54638,8 +54638,8 @@
    "target": "plasma_glucose"
   },
   {
-   "_detail_bucket": "0",
-   "id": "production-b8f163e6b975e0abddd4",
+   "_detail_bucket": "3",
+   "id": "production-584a87bb619eddc1a63e",
    "kind": "production",
    "prov_source": "Curated system fragment",
    "sign": "+",
@@ -54647,8 +54647,8 @@
    "target": "plasma_free_fatty_acids"
   },
   {
-   "_detail_bucket": "6",
-   "id": "production-21d86405403871916bdd",
+   "_detail_bucket": "8",
+   "id": "production-d3c8fecdad0c92fc84b7",
    "kind": "production",
    "prov_source": "Curated system fragment",
    "sign": "+",
@@ -54656,8 +54656,8 @@
    "target": "plasma_ketone_bodies"
   },
   {
-   "_detail_bucket": "e",
-   "id": "production-c53d592e09639888375c",
+   "_detail_bucket": "b",
+   "id": "production-13328091ce5ea9677a1f",
    "kind": "production",
    "prov_source": "IEM-enzyme connections",
    "sign": "+",
@@ -54665,8 +54665,8 @@
    "target": "plasma_motilin"
   },
   {
-   "_detail_bucket": "9",
-   "id": "production-7e7e4a072cfc3ccb7e5f",
+   "_detail_bucket": "5",
+   "id": "production-ea464c1076b64c52de66",
    "kind": "production",
    "prov_source": "IEM-enzyme connections",
    "sign": "+",
@@ -54674,8 +54674,8 @@
    "target": "plasma_fibronectin"
   },
   {
-   "_detail_bucket": "b",
-   "id": "production-03b26ebb9979f22ac6c7",
+   "_detail_bucket": "2",
+   "id": "production-50b380e7947d1882e868",
    "kind": "production",
    "prov_source": "IEM-enzyme connections",
    "sign": "+",
@@ -54683,8 +54683,8 @@
    "target": "carboxypeptidase_n_activity"
   },
   {
-   "_detail_bucket": "c",
-   "id": "production-c9fcae13d18bcfb16be7",
+   "_detail_bucket": "f",
+   "id": "production-3fe402993424e6c1abbf",
    "kind": "production",
    "prov_source": "IEM-enzyme connections",
    "sign": "+",
@@ -54692,8 +54692,8 @@
    "target": "plasma_cathepsin_d"
   },
   {
-   "_detail_bucket": "b",
-   "id": "production-91a1ac55f2aad37b6489",
+   "_detail_bucket": "9",
+   "id": "production-30b67e6f2f755df0135a",
    "kind": "production",
    "prov_source": "IEM-enzyme connections",
    "sign": "+",
@@ -54701,8 +54701,8 @@
    "target": "plasma_bnp"
   },
   {
-   "_detail_bucket": "d",
-   "id": "production-3350b205dc25ad7f4a2a",
+   "_detail_bucket": "e",
+   "id": "production-97d134b26fe2a1ce3445",
    "kind": "production",
    "prov_source": "IEM-enzyme connections",
    "sign": "+",
@@ -54710,8 +54710,8 @@
    "target": "plasma_ficolin_3"
   },
   {
-   "_detail_bucket": "6",
-   "id": "production-8a312a7a38a385362aa2",
+   "_detail_bucket": "a",
+   "id": "production-39ba865749a9b94db809",
    "kind": "production",
    "prov_source": "IEM-enzyme connections",
    "sign": "+",
@@ -54719,8 +54719,8 @@
    "target": "plasma_mbl"
   },
   {
-   "_detail_bucket": "8",
-   "id": "production-eabc0565c220f73a4497",
+   "_detail_bucket": "a",
+   "id": "production-8cb4ac422fc64ebc0172",
    "kind": "production",
    "prov_source": "IEM-enzyme connections",
    "sign": "+",
@@ -54728,8 +54728,8 @@
    "target": "plasma_cfhr1"
   },
   {
-   "_detail_bucket": "7",
-   "id": "production-d081d2aa0c5120a1243a",
+   "_detail_bucket": "8",
+   "id": "production-9769d98c8912b41ced1c",
    "kind": "production",
    "prov_source": "IEM-enzyme connections",
    "sign": "+",
@@ -54737,8 +54737,8 @@
    "target": "plasma_cd46"
   },
   {
-   "_detail_bucket": "2",
-   "id": "production-8b5a2065849b98fe4ae4",
+   "_detail_bucket": "8",
+   "id": "production-15c5328184534e23d980",
    "kind": "production",
    "prov_source": "IEM-enzyme connections",
    "sign": "+",
@@ -54746,8 +54746,8 @@
    "target": "plasma_ggt"
   },
   {
-   "_detail_bucket": "4",
-   "id": "production-cea428bb98466fcb13eb",
+   "_detail_bucket": "7",
+   "id": "production-9094e7c5ccc91c8f5345",
    "kind": "production",
    "prov_source": "IEM-enzyme connections",
    "sign": "+",
@@ -54755,8 +54755,8 @@
    "target": "plasma_fibrinogen"
   },
   {
-   "_detail_bucket": "9",
-   "id": "production-16eaf72227ad342e2f4b",
+   "_detail_bucket": "4",
+   "id": "production-15c0e812e2e777a12abc",
    "kind": "production",
    "prov_source": "Curated system fragment",
    "sign": "+",
@@ -54764,8 +54764,8 @@
    "target": "hdl_cholesterol"
   },
   {
-   "_detail_bucket": "4",
-   "id": "production-b8f12a80e0899baac7b2",
+   "_detail_bucket": "0",
+   "id": "production-6d0d3dc14f5e7db79c1f",
    "kind": "production",
    "prov_source": "Curated system fragment",
    "sign": "+",
@@ -54773,8 +54773,8 @@
    "target": "plasma_phosphate"
   },
   {
-   "_detail_bucket": "d",
-   "id": "production-92a7bc124f022f4e3a18",
+   "_detail_bucket": "c",
+   "id": "production-f9e80d7e34ea1fa4d459",
    "kind": "production",
    "prov_source": "Curated system fragment",
    "sign": "+",
@@ -54782,8 +54782,8 @@
    "target": "gnrh"
   },
   {
-   "_detail_bucket": "9",
-   "id": "production-855668255dd804fd7967",
+   "_detail_bucket": "1",
+   "id": "production-247ec6e49c2801c617ca",
    "kind": "production",
    "prov_source": "Curated system fragment",
    "sign": "+",
@@ -54791,8 +54791,8 @@
    "target": "pituitary_lh_secretion"
   },
   {
-   "_detail_bucket": "7",
-   "id": "production-fc2adcc98812c52d9ae5",
+   "_detail_bucket": "6",
+   "id": "production-4345c5b471996cfe4442",
    "kind": "production",
    "prov_source": "Curated system fragment",
    "sign": "+",
@@ -54800,8 +54800,8 @@
    "target": "pituitary_fsh_secretion"
   },
   {
-   "_detail_bucket": "8",
-   "id": "production-763541b039b79dbe513e",
+   "_detail_bucket": "b",
+   "id": "production-5f0b74c921699245787b",
    "kind": "production",
    "prov_source": "Curated system fragment",
    "sign": "+",
@@ -54809,8 +54809,8 @@
    "target": "estradiol"
   },
   {
-   "_detail_bucket": "2",
-   "id": "production-ed03e18c8e3d6afaa938",
+   "_detail_bucket": "9",
+   "id": "production-27ccacacdd11693260b5",
    "kind": "production",
    "prov_source": "Curated system fragment",
    "sign": "+",
@@ -54818,8 +54818,8 @@
    "target": "progesterone"
   },
   {
-   "_detail_bucket": "0",
-   "id": "production-82ebbb1e312b4c11631f",
+   "_detail_bucket": "8",
+   "id": "production-85ce794afc0005c2d386",
    "kind": "production",
    "prov_source": "Curated system fragment",
    "sign": "+",
@@ -54827,8 +54827,8 @@
    "target": "testosterone"
   },
   {
-   "_detail_bucket": "e",
-   "id": "production-be422e85bedc8fef9b07",
+   "_detail_bucket": "6",
+   "id": "production-d8fdb4ece85fcef6ca9d",
    "kind": "production",
    "prov_source": "Curated system fragment",
    "sign": "+",
@@ -54836,8 +54836,8 @@
    "target": "inhibin"
   },
   {
-   "_detail_bucket": "5",
-   "id": "production-4b5eac106a6e2425e323",
+   "_detail_bucket": "1",
+   "id": "production-7b7cec1f58a306310d80",
    "kind": "production",
    "prov_source": "Textbook extraction (A&P/Wong/Biochem)",
    "sign": "+",
@@ -54846,7 +54846,7 @@
   },
   {
    "_detail_bucket": "6",
-   "id": "production-94d4808762a5c06ac35c",
+   "id": "production-cd994a6df2ada7ec984f",
    "kind": "production",
    "prov_source": "Textbook extraction (A&P/Wong/Biochem)",
    "sign": "+",
@@ -54854,8 +54854,8 @@
    "target": "plasma_glutamate"
   },
   {
-   "_detail_bucket": "c",
-   "id": "production-94ead2e23fe21642b0f1",
+   "_detail_bucket": "b",
+   "id": "production-fccb655e2b412ede6bc6",
    "kind": "production",
    "prov_source": "Textbook extraction (A&P/Wong/Biochem)",
    "sign": "-",
@@ -54863,8 +54863,8 @@
    "target": "plasma_ammonia"
   },
   {
-   "_detail_bucket": "5",
-   "id": "production-7c0ad9daa448fc27157d",
+   "_detail_bucket": "f",
+   "id": "production-b40befe1bcb6e2c889c2",
    "kind": "production",
    "prov_source": "Textbook extraction (A&P/Wong/Biochem)",
    "sign": "-",
@@ -54872,8 +54872,8 @@
    "target": "plasma_alpha_ketoglutarate"
   },
   {
-   "_detail_bucket": "7",
-   "id": "production-cae81871e4f23944c673",
+   "_detail_bucket": "1",
+   "id": "production-f8e8af407b9d6321ebad",
    "kind": "production",
    "prov_source": "Textbook extraction (A&P/Wong/Biochem)",
    "sign": "+",
@@ -54881,8 +54881,8 @@
    "target": "plasma_secretin"
   },
   {
-   "_detail_bucket": "0",
-   "id": "production-0ef0eeccaf7e308e9661",
+   "_detail_bucket": "7",
+   "id": "production-50dfb40cb4b8aa97781c",
    "kind": "production",
    "prov_source": "Textbook extraction (A&P/Wong/Biochem)",
    "sign": "+",
@@ -54890,8 +54890,8 @@
    "target": "plasma_cck"
   },
   {
-   "_detail_bucket": "c",
-   "id": "production-1f6e504b427bd52781fa",
+   "_detail_bucket": "0",
+   "id": "production-7d8cf8e36ce6c968042a",
    "kind": "production",
    "prov_source": "Textbook extraction (A&P/Wong/Biochem)",
    "sign": "-",
@@ -54899,8 +54899,8 @@
    "target": "plasma_pyruvate"
   },
   {
-   "_detail_bucket": "a",
-   "id": "production-b50f1eed4e39941002d1",
+   "_detail_bucket": "3",
+   "id": "production-34b758f771d4c63f1708",
    "kind": "production",
    "prov_source": "Textbook extraction (A&P/Wong/Biochem)",
    "sign": "+",
@@ -54908,8 +54908,8 @@
    "target": "plasma_lactate"
   },
   {
-   "_detail_bucket": "0",
-   "id": "production-70de4c5472e216d1649f",
+   "_detail_bucket": "2",
+   "id": "production-5e9314177f1a004c16d4",
    "kind": "production",
    "prov_source": "Textbook extraction (A&P/Wong/Biochem)",
    "sign": "+",
@@ -54917,8 +54917,8 @@
    "target": "plasma_glucose"
   },
   {
-   "_detail_bucket": "0",
-   "id": "production-7ce503f95a539c465a44",
+   "_detail_bucket": "4",
+   "id": "production-b057be73192078bd3254",
    "kind": "production",
    "prov_source": "Textbook extraction (A&P/Wong/Biochem)",
    "sign": "+",
@@ -54926,8 +54926,8 @@
    "target": "plasma_galactose"
   },
   {
-   "_detail_bucket": "c",
-   "id": "production-77fd873b7cb29a4fce93",
+   "_detail_bucket": "7",
+   "id": "production-11db5d756b2922e50589",
    "kind": "production",
    "prov_source": "Textbook extraction (A&P/Wong/Biochem)",
    "sign": "+",
@@ -54935,8 +54935,8 @@
    "target": "plasma_glucose"
   },
   {
-   "_detail_bucket": "5",
-   "id": "production-48d7dfaece6c9eb77c27",
+   "_detail_bucket": "8",
+   "id": "production-34204e7c69d98d2bfc08",
    "kind": "production",
    "prov_source": "Textbook extraction (A&P/Wong/Biochem)",
    "sign": "+",
@@ -54945,7 +54945,7 @@
   },
   {
    "_detail_bucket": "b",
-   "id": "production-b88d9cd4f7cea52a9c1a",
+   "id": "production-3b2c1dcbe5e043065fe3",
    "kind": "production",
    "prov_source": "Textbook extraction (A&P/Wong/Biochem)",
    "sign": "+",
@@ -54953,8 +54953,8 @@
    "target": "il1beta"
   },
   {
-   "_detail_bucket": "f",
-   "id": "production-ba567806d57e77ca82f5",
+   "_detail_bucket": "e",
+   "id": "production-be4c7e71a8929dcbce80",
    "kind": "production",
    "prov_source": "Textbook extraction (A&P/Wong/Biochem)",
    "sign": "+",
@@ -54962,8 +54962,8 @@
    "target": "plasma_histamine"
   },
   {
-   "_detail_bucket": "e",
-   "id": "production-dfc1b07e0416af91d808",
+   "_detail_bucket": "1",
+   "id": "production-9882298549d590f40d1d",
    "kind": "production",
    "prov_source": "Curated system fragment",
    "sign": "+",
@@ -54971,8 +54971,8 @@
    "target": "pituitary_tsh_secretion"
   },
   {
-   "_detail_bucket": "8",
-   "id": "production-0e1d8ad242a6037637e8",
+   "_detail_bucket": "7",
+   "id": "production-2c96ed8a5b7ae6c7ea81",
    "kind": "production",
    "prov_source": "Curated system fragment",
    "sign": "+",
@@ -54980,8 +54980,8 @@
    "target": "free_t4"
   },
   {
-   "_detail_bucket": "3",
-   "id": "production-db7de14c131b273be413",
+   "_detail_bucket": "f",
+   "id": "production-97d7494ab99017eef79a",
    "kind": "production",
    "prov_source": "Guyton-Hall textbook",
    "sign": "+",
@@ -54990,7 +54990,7 @@
   },
   {
    "_detail_bucket": "6",
-   "id": "production-79bfcacb5876011df99f",
+   "id": "production-64bfa4a33f2f683b5383",
    "kind": "production",
    "prov_source": "Williams (endocrinology)",
    "sign": "+",
@@ -54998,8 +54998,8 @@
    "target": "pituitary_prolactin_secretion"
   },
   {
-   "_detail_bucket": "4",
-   "id": "production-3e4ff0451271dff79fb9",
+   "_detail_bucket": "f",
+   "id": "production-95cc6803efb731eebe18",
    "kind": "production",
    "prov_source": "Williams (endocrinology)",
    "sign": "+",
@@ -55007,8 +55007,8 @@
    "target": "plasma_calcitonin"
   },
   {
-   "_detail_bucket": "d",
-   "id": "production-cf5fca526dabfa8571df",
+   "_detail_bucket": "e",
+   "id": "production-19999f1f0b12158e9b00",
    "kind": "production",
    "prov_source": "Williams (endocrinology)",
    "sign": "+",
@@ -55016,8 +55016,8 @@
    "target": "plasma_melatonin"
   },
   {
-   "_detail_bucket": "3",
-   "id": "production-a221dbc16088dc60ac42",
+   "_detail_bucket": "e",
+   "id": "production-8ecd02571d41363d5bda",
    "kind": "production",
    "prov_source": "Williams (endocrinology)",
    "sign": "+",
@@ -55025,8 +55025,8 @@
    "target": "free_t3"
   },
   {
-   "_detail_bucket": "e",
-   "id": "production-6a271bc703ae95431070",
+   "_detail_bucket": "f",
+   "id": "production-d3d32e864ea9adecb8f9",
    "kind": "production",
    "prov_source": "Williams (endocrinology)",
    "sign": "+",
@@ -55034,8 +55034,8 @@
    "target": "free_t3"
   },
   {
-   "_detail_bucket": "4",
-   "id": "production-a7d0efdd5f5a8c7a6b4d",
+   "_detail_bucket": "f",
+   "id": "production-27a5c53f93227f38a184",
    "kind": "production",
    "prov_source": "Williams (endocrinology)",
    "sign": "-",
@@ -55043,8 +55043,8 @@
    "target": "free_t4"
   },
   {
-   "_detail_bucket": "f",
-   "id": "production-3a0f2024a9df74dc80d1",
+   "_detail_bucket": "0",
+   "id": "production-db65a5b3c2c04cc6e77c",
    "kind": "production",
    "prov_source": "Williams (endocrinology)",
    "sign": "-",
@@ -55052,8 +55052,8 @@
    "target": "free_t4"
   },
   {
-   "_detail_bucket": "8",
-   "id": "production-b8a0171efde889cadc02",
+   "_detail_bucket": "d",
+   "id": "production-f448b39ed34ea9a8053a",
    "kind": "production",
    "prov_source": "Williams (endocrinology)",
    "sign": "+",
@@ -55061,8 +55061,8 @@
    "target": "fgf23"
   },
   {
-   "_detail_bucket": "8",
-   "id": "production-12023380e0a5c0bb2df6",
+   "_detail_bucket": "6",
+   "id": "production-33dfede13360142722f6",
    "kind": "production",
    "prov_source": "Williams (endocrinology)",
    "sign": "+",
@@ -55070,8 +55070,8 @@
    "target": "plasma_amylin"
   },
   {
-   "_detail_bucket": "7",
-   "id": "production-97cd6fe5d8faa504ba6b",
+   "_detail_bucket": "b",
+   "id": "production-0501c6f87940f60b7377",
    "kind": "production",
    "prov_source": "Williams (endocrinology)",
    "sign": "+",
@@ -55079,8 +55079,8 @@
    "target": "plasma_androstenedione"
   },
   {
-   "_detail_bucket": "3",
-   "id": "production-64fefcaba06129ba47a5",
+   "_detail_bucket": "a",
+   "id": "production-902fa424d3861dd4be79",
    "kind": "production",
    "prov_source": "Williams (endocrinology)",
    "sign": "+",
@@ -55088,8 +55088,8 @@
    "target": "plasma_shbg"
   },
   {
-   "_detail_bucket": "a",
-   "id": "production-da5a4020edd77763a123",
+   "_detail_bucket": "3",
+   "id": "production-9ac2cc5d274596e9d1db",
    "kind": "production",
    "prov_source": "Williams (endocrinology)",
    "sign": "+",
@@ -55097,8 +55097,8 @@
    "target": "plasma_dheas"
   },
   {
-   "_detail_bucket": "8",
-   "id": "production-3c482f2a65ceb2e121e5",
+   "_detail_bucket": "1",
+   "id": "production-b380f8596157882f1a49",
    "kind": "production",
    "prov_source": "Molecular/cellular module",
    "sign": "+",
@@ -55106,8 +55106,8 @@
    "target": "red_cell_mass"
   },
   {
-   "_detail_bucket": "0",
-   "id": "production-dc7903a8476ad9d1b235",
+   "_detail_bucket": "c",
+   "id": "production-1917d271972f7f972820",
    "kind": "production",
    "prov_source": "Molecular/cellular module",
    "sign": "+",
@@ -55115,8 +55115,8 @@
    "target": "red_cell_mass"
   },
   {
-   "_detail_bucket": "1",
-   "id": "production-f833e988fd3ca4f269f3",
+   "_detail_bucket": "3",
+   "id": "production-842f4a0d30a16d05024f",
    "kind": "production",
    "prov_source": "Molecular/cellular module",
    "sign": "+",
@@ -55124,8 +55124,8 @@
    "target": "hepcidin"
   },
   {
-   "_detail_bucket": "b",
-   "id": "production-711e71ba2c924b6f68a3",
+   "_detail_bucket": "4",
+   "id": "production-1b7c7f35a50a4248918d",
    "kind": "production",
    "prov_source": "Molecular/cellular module",
    "sign": "+",
@@ -55133,8 +55133,8 @@
    "target": "erythropoietin"
   },
   {
-   "_detail_bucket": "e",
-   "id": "production-4d85b544eb480821fa51",
+   "_detail_bucket": "1",
+   "id": "production-c2bb9c30c25448b74851",
    "kind": "production",
    "prov_source": "Molecular/cellular module",
    "sign": "+",
@@ -55142,8 +55142,8 @@
    "target": "tnf_alpha"
   },
   {
-   "_detail_bucket": "3",
-   "id": "production-2d7d191eb07ac362fe0a",
+   "_detail_bucket": "1",
+   "id": "production-7e3eae8337df182bcde5",
    "kind": "production",
    "prov_source": "Molecular/cellular module",
    "sign": "+",
@@ -55151,8 +55151,8 @@
    "target": "il6"
   },
   {
-   "_detail_bucket": "0",
-   "id": "production-041c6e2ab215fc56190c",
+   "_detail_bucket": "d",
+   "id": "production-a41be6e53ddd6d5dcf8b",
    "kind": "production",
    "prov_source": "Molecular/cellular module",
    "sign": "+",
@@ -55160,8 +55160,8 @@
    "target": "plasma_insulin"
   },
   {
-   "_detail_bucket": "9",
-   "id": "production-5aca3ccf75713324cd25",
+   "_detail_bucket": "6",
+   "id": "production-cefc24fdd2d30cbce059",
    "kind": "production",
    "prov_source": "Molecular/cellular module",
    "sign": "+",
@@ -55169,8 +55169,8 @@
    "target": "plasma_glucagon"
   },
   {
-   "_detail_bucket": "d",
-   "id": "production-53367390a8089ae9d83a",
+   "_detail_bucket": "f",
+   "id": "production-6d507a470c1244c91041",
    "kind": "production",
    "prov_source": "Molecular/cellular module",
    "sign": "+",
@@ -55178,8 +55178,8 @@
    "target": "renin"
   },
   {
-   "_detail_bucket": "4",
-   "id": "production-0e7a4fe1144f5aded493",
+   "_detail_bucket": "5",
+   "id": "production-385a44f855ee0f0ba35d",
    "kind": "production",
    "prov_source": "Molecular/cellular module",
    "sign": "+",
@@ -55187,10 +55187,10 @@
    "target": "hmg_coa_reductase_activity"
   }
  ],
- "projection_version": "1.3.0",
+ "projection_version": "1.4.0",
  "quantitative_definitions": [
   {
-   "_detail_bucket": "d",
+   "_detail_bucket": "7",
    "arguments": [
     {
      "derivative_sign": "+",
@@ -55203,14 +55203,14 @@
      "role": "summand"
     }
    ],
-   "id": "expression-284c35a53ad6b8a853c5",
+   "id": "expression-982305289918da554f71",
    "kind": "aggregation",
    "origin": "derived",
    "prov_source": "Guyton core (curated)",
    "result": "blood_volume"
   },
   {
-   "_detail_bucket": "b",
+   "_detail_bucket": "6",
    "arguments": [
     {
      "derivative_sign": "+",
@@ -55223,14 +55223,14 @@
      "role": "summand"
     }
    ],
-   "id": "expression-8cedef7e71bcb0be4fd1",
+   "id": "expression-6cff4d912f4866ec8a15",
    "kind": "aggregation",
    "origin": "derived",
    "prov_source": "Curated system fragment",
    "result": "body_weight"
   },
   {
-   "_detail_bucket": "8",
+   "_detail_bucket": "c",
    "arguments": [
     {
      "derivative_sign": "+",
@@ -55243,14 +55243,14 @@
      "role": "factor"
     }
    ],
-   "id": "expression-912b4e2d349de18bf3f7",
+   "id": "expression-9f0b0e0c0652bbf769da",
    "kind": "product",
    "origin": "authored",
    "prov_source": "Guyton core (curated)",
    "result": "mean_arterial_pressure"
   },
   {
-   "_detail_bucket": "8",
+   "_detail_bucket": "c",
    "arguments": [
     {
      "derivative_sign": "+",
@@ -55263,14 +55263,14 @@
      "role": "factor"
     }
    ],
-   "id": "expression-b250d8869c7f98f7b045",
+   "id": "expression-8120fee870a0cf84682f",
    "kind": "product",
    "origin": "authored",
    "prov_source": "Guyton core (curated)",
    "result": "cardiac_output"
   },
   {
-   "_detail_bucket": "2",
+   "_detail_bucket": "6",
    "arguments": [
     {
      "derivative_sign": "+",
@@ -55283,14 +55283,14 @@
      "role": "denominator"
     }
    ],
-   "id": "expression-2c4991668e4b684395fc",
+   "id": "expression-3d0a69c4a037b23ddb68",
    "kind": "ratio",
    "origin": "authored",
    "prov_source": "Curated system fragment",
    "result": "hematocrit"
   },
   {
-   "_detail_bucket": "6",
+   "_detail_bucket": "8",
    "arguments": [
     {
      "derivative_sign": "+",
@@ -55308,14 +55308,14 @@
      "role": "argument"
     }
    ],
-   "id": "expression-2ad2240508ec28e5b3c2",
+   "id": "expression-920898f6ae158a83d4fb",
    "kind": "structural-function",
    "origin": "authored",
    "prov_source": "Curated system fragment",
    "result": "arterial_o2_content"
   },
   {
-   "_detail_bucket": "b",
+   "_detail_bucket": "9",
    "arguments": [
     {
      "derivative_sign": "+",
@@ -55328,14 +55328,14 @@
      "role": "factor"
     }
    ],
-   "id": "expression-901b389a5a28d8b18352",
+   "id": "expression-53f2279e7884592d3722",
    "kind": "product",
    "origin": "authored",
    "prov_source": "Curated system fragment",
    "result": "oxygen_delivery"
   },
   {
-   "_detail_bucket": "2",
+   "_detail_bucket": "6",
    "arguments": [
     {
      "derivative_sign": "-",
@@ -55348,14 +55348,14 @@
      "role": "argument"
     }
    ],
-   "id": "expression-2e9549a963d4e51a2c85",
+   "id": "expression-876a3668ed82c8786acd",
    "kind": "structural-function",
    "origin": "authored",
    "prov_source": "Curated system fragment",
    "result": "arterial_ph"
   },
   {
-   "_detail_bucket": "2",
+   "_detail_bucket": "5",
    "arguments": [
     {
      "derivative_sign": "+",
@@ -55368,7 +55368,7 @@
      "role": "argument"
     }
    ],
-   "id": "expression-6a0f72d1916cdf901b2b",
+   "id": "expression-bfbb7021e9935d2b3a01",
    "kind": "structural-function",
    "origin": "authored",
    "prov_source": "Textbook extraction (A&P/Wong/Biochem)",
@@ -55384,7 +55384,7 @@
   "organ_system",
   "organism"
  ],
- "software_version": "1.0.0",
+ "software_version": "1.1.1",
  "sources": [
   "Guyton core (curated)",
   "Curated system fragment",

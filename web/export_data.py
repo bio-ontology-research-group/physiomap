@@ -252,7 +252,8 @@ def _precompute_positions(pmap: PhysioMap) -> dict[str, dict[str, float]]:
     """Lay out the full graph **once** with graphviz ``sfdp`` so the viewer can use the instant
     ``preset`` layout (no in-browser force-directed pass). Returns ``node id -> {x, y}``.
 
-    The previous viewer ran ``cose`` over ~1557 nodes on every group toggle (~O(n²), >1 min). By
+    The previous viewer ran ``cose`` over about 1,700 nodes on every group toggle
+    (approximately O(n²), more than 1 min). By
     shipping stable coordinates, toggling a system just shows/hides nodes at fixed positions —
     instant. Degrades gracefully (empty dict) if ``sfdp`` is unavailable; the viewer then falls
     back to its in-browser layout. Layout is over the undirected causal+constitutive skeleton.
