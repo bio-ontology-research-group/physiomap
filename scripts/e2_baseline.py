@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
-"""E2 — naive forward propagation baseline + disagreement analysis (evaluation experiment).
+"""E2 — path baselines and gene-stratified abstention analysis.
 
-The methodological payoff: PhysioMap's comparative-statics (CS) solver is right *where naive
-pathway/network propagation is wrong, because of feedback*. For the same 183-gene IEM forward
-setup (scripts/e1b_eval), we compare per (gene, observed-HPO-node):
+For the same 183-gene IEM forward setup (scripts/e1b_eval), we compare per
+(gene, observed-HPO-node):
   * CS          = solve_multiscale(do(lesion)).predicted[node]   (feedback-aware; abstains in SCCs)
   * naive-short = sign product along the SHORTEST signed path from the clamp (feedback-blind; the
                   de-facto signed-network-propagation baseline; commits on any reachable node)
@@ -15,7 +14,9 @@ Usage:  python scripts/e2_baseline.py
 """
 from __future__ import annotations
 
+from collections import defaultdict
 import json
+from math import comb
 from pathlib import Path
 
 import networkx as nx
@@ -57,6 +58,82 @@ def naive_forward(g: nx.DiGraph, primary: dict[str, Sign], node: str) -> Sign | 
 
 def det(s):  # determinate?
     return s in (Sign.PLUS, Sign.MINUS)
+
+
+def gene_stratified_abstention_test(rows):
+    """Test whether abstention identifies path errors within genes.
+
+    The test conditions on each gene's number of shortest-path errors and
+    PhysioMap abstentions. Under the null, abstention labels are exchangeable
+    among the shortest-path predictions for that gene. The number of errors
+    assigned to abstained pairs is hypergeometric within each gene; convolution
+    gives the exact null distribution across genes without treating phenotype
+    pairs as independent.
+    """
+    strata = defaultdict(lambda: {"pairs": 0, "abstain": 0, "errors": 0,
+                                  "abstain_errors": 0})
+    for gene, _, cs, shortest, _, reference in rows:
+        if not det(shortest):
+            continue
+        stratum = strata[gene]
+        stratum["pairs"] += 1
+        error = shortest is not reference
+        abstain = not det(cs)
+        stratum["errors"] += int(error)
+        stratum["abstain"] += int(abstain)
+        stratum["abstain_errors"] += int(abstain and error)
+
+    distribution = [1.0]
+    observed = 0
+    expected = 0.0
+    informative_genes = 0
+    for stratum in strata.values():
+        n = stratum["pairs"]
+        a = stratum["abstain"]
+        e = stratum["errors"]
+        observed += stratum["abstain_errors"]
+        expected += a * e / n
+        lower = max(0, a - (n - e))
+        upper = min(a, e)
+        denominator = comb(n, a)
+        probabilities = [0.0] * (upper + 1)
+        for x in range(lower, upper + 1):
+            probabilities[x] = comb(e, x) * comb(n - e, a - x) / denominator
+        updated = [0.0] * (len(distribution) + len(probabilities) - 1)
+        for i, left in enumerate(distribution):
+            for j, right in enumerate(probabilities):
+                updated[i + j] += left * right
+        distribution = updated
+        informative_genes += int(lower < upper)
+
+    abstain_pairs = sum(s["abstain"] for s in strata.values())
+    abstain_errors = sum(s["abstain_errors"] for s in strata.values())
+    shared_pairs = sum(s["pairs"] - s["abstain"] for s in strata.values())
+    shared_errors = sum(s["errors"] - s["abstain_errors"] for s in strata.values())
+    abstain_error_rate = abstain_errors / abstain_pairs
+    shared_error_rate = shared_errors / shared_pairs
+    return {
+        "null_hypothesis": (
+            "Within each gene, PhysioMap abstention is independent of "
+            "shortest-path correctness"
+        ),
+        "path_committed_pairs": sum(s["pairs"] for s in strata.values()),
+        "genes": len(strata),
+        "genes_with_both_call_statuses": sum(
+            0 < s["abstain"] < s["pairs"] for s in strata.values()
+        ),
+        "informative_genes": informative_genes,
+        "shared_commit_pairs": shared_pairs,
+        "shared_commit_errors": shared_errors,
+        "abstention_pairs": abstain_pairs,
+        "abstention_errors": abstain_errors,
+        "abstention_error_rate": abstain_error_rate,
+        "shared_commit_error_rate": shared_error_rate,
+        "error_rate_difference": abstain_error_rate - shared_error_rate,
+        "observed_errors_in_abstention_set": observed,
+        "expected_errors_under_null": expected,
+        "exact_one_sided_p": sum(distribution[observed:]),
+    }
 
 
 def main() -> int:
@@ -118,7 +195,15 @@ def main() -> int:
     print("-" * 72)
     print(f"FEEDBACK contrast — CS abstains (?) but naive-shortest commits: {len(fb)} pairs")
     print(f"   naive-shortest accuracy on these: {fb_cor}/{len(fb)} = "
-          f"{fb_cor/len(fb):.1%}  (≈chance ⇒ naive guesses inside feedback loops)")
+          f"{fb_cor/len(fb):.1%}")
+    gene_test = gene_stratified_abstention_test(rows)
+    print("-" * 72)
+    print("GENE-STRATIFIED abstention test")
+    print(f"   genes with both call statuses: "
+          f"{gene_test['genes_with_both_call_statuses']}; informative genes: "
+          f"{gene_test['informative_genes']}")
+    print(f"   path error-rate difference: {gene_test['error_rate_difference']:.1%}")
+    print(f"   exact one-sided p = {gene_test['exact_one_sided_p']:.6g}")
     OUT_JSON.write_text(
         json.dumps(
             {
@@ -135,6 +220,7 @@ def main() -> int:
                     "naive_shortest_correct": fb_cor,
                     "naive_shortest_accuracy": fb_cor / len(fb) if fb else None,
                 },
+                "gene_stratified_abstention_test": gene_test,
             },
             indent=2,
             sort_keys=True,
@@ -172,6 +258,20 @@ def main() -> int:
                 "",
                 f"When both methods were determinate, they disagreed on **{len(dis)}** pairs "
                 f"(PhysioMap correct: {cs_right}; shortest path correct: {nv_right}).",
+                "",
+                "## Gene-stratified abstention test",
+                "",
+                f"Among shortest-path predictions, the path error rate was "
+                f"**{gene_test['abstention_error_rate']:.1%}** when PhysioMap abstained and "
+                f"**{gene_test['shared_commit_error_rate']:.1%}** when PhysioMap also returned "
+                f"a direction, a difference of **{gene_test['error_rate_difference']:.1%}**.",
+                "",
+                f"An exact within-gene conditional permutation test preserved each gene's "
+                f"numbers of path errors and PhysioMap abstentions. "
+                f"**{gene_test['genes_with_both_call_statuses']}** genes contained both call "
+                f"statuses and **{gene_test['informative_genes']}** contributed non-degenerate "
+                f"permutations; the one-sided p-value was "
+                f"**{gene_test['exact_one_sided_p']:.6g}**.",
                 "",
                 "This comparison reports selectivity and directional agreement against the "
                 "external HPOA reference; it does not establish that every abstention is "

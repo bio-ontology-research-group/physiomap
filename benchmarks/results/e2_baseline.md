@@ -16,4 +16,10 @@ PhysioMap abstained while shortest-path propagation committed on **204** pairs. 
 
 When both methods were determinate, they disagreed on **0** pairs (PhysioMap correct: 0; shortest path correct: 0).
 
+## Gene-stratified abstention test
+
+Among shortest-path predictions, the path error rate was **40.7%** when PhysioMap abstained and **0.0%** when PhysioMap also returned a direction, a difference of **40.7%**.
+
+An exact within-gene conditional permutation test preserved each gene's numbers of path errors and PhysioMap abstentions. **32** genes contained both call statuses and **15** contributed non-degenerate permutations; the one-sided p-value was **2.04762e-07**.
+
 This comparison reports selectivity and directional agreement against the external HPOA reference; it does not establish that every abstention is mathematically necessary.

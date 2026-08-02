@@ -17,6 +17,7 @@ import csv
 import json
 import tempfile
 from collections import Counter
+from math import floor, log10
 from pathlib import Path
 
 import matplotlib
@@ -74,6 +75,12 @@ def fmt_int(value: int) -> str:
 
 def macro(name: str, value: object) -> str:
     return f"\\newcommand{{\\{name}}}{{{value}}}"
+
+
+def fmt_scientific(value: float) -> str:
+    exponent = floor(log10(abs(value)))
+    coefficient = value / 10**exponent
+    return f"{coefficient:.2f}\\times 10^{{{exponent}}}"
 
 
 def build_summary() -> dict:
@@ -138,6 +145,7 @@ def render_macros(summary: dict) -> str:
     baseline = summary["baseline"]["methods"]
     diagnosis = summary["diagnosis"]
     feedback = summary["baseline"]["feedback_contrast"]
+    gene_test = summary["baseline"]["gene_stratified_abstention_test"]
     values = [
         ("PMVersion", summary["physiomap_version"]),
         ("PMTraits", fmt_int(summary["traits"])),
@@ -181,6 +189,17 @@ def render_macros(summary: dict) -> str:
         ("PMFeedbackPairs", fmt_int(feedback["pairs"])),
         ("PMFeedbackNaiveCorrect", fmt_int(feedback["naive_shortest_correct"])),
         ("PMFeedbackNaiveAccuracy", f"{100 * feedback['naive_shortest_accuracy']:.1f}\\%"),
+        ("PMGeneTestBoth", fmt_int(gene_test["genes_with_both_call_statuses"])),
+        ("PMGeneTestInformative", fmt_int(gene_test["informative_genes"])),
+        (
+            "PMAbstentionPathErrorRate",
+            f"{100 * gene_test['abstention_error_rate']:.1f}\\%",
+        ),
+        (
+            "PMSharedPathErrorRate",
+            f"{100 * gene_test['shared_commit_error_rate']:.1f}\\%",
+        ),
+        ("PMGeneAbstentionP", fmt_scientific(gene_test["exact_one_sided_p"])),
         ("PMDiagnosisGenes", fmt_int(diagnosis["genes_scored"])),
         ("PMDiagnosisPool", fmt_int(diagnosis["candidate_pool"])),
         ("PMDiagnosisTopOne", fmt_int(diagnosis["unique_top1"])),

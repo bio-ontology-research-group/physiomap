@@ -9,6 +9,23 @@
     "naive_shortest_correct": 121,
     "pairs": 204
   },
+  "gene_stratified_abstention_test": {
+    "abstention_error_rate": 0.4068627450980392,
+    "abstention_errors": 83,
+    "abstention_pairs": 204,
+    "error_rate_difference": 0.4068627450980392,
+    "exact_one_sided_p": 2.0476150483709057e-07,
+    "expected_errors_under_null": 73.0079365079365,
+    "genes": 133,
+    "genes_with_both_call_statuses": 32,
+    "informative_genes": 15,
+    "null_hypothesis": "Within each gene, PhysioMap abstention is independent of shortest-path correctness",
+    "observed_errors_in_abstention_set": 83,
+    "path_committed_pairs": 375,
+    "shared_commit_error_rate": 0.0,
+    "shared_commit_errors": 0,
+    "shared_commit_pairs": 171
+  },
   "methods": {
     "CS (PhysioMap)": {
       "abstain": 695,
