@@ -80,6 +80,13 @@ closed lesion pool. It is not an independent clinical validation.
 The complete adjudicated pair set, including the primary intervention and
 supporting HPO classes for every row, is
 [`benchmarks/results/e1b_forward_pairs.tsv`](benchmarks/results/e1b_forward_pairs.tsv).
+The gene-stratified conditional randomization analysis of whether abstention
+tracks shortest-path errors is archived at immutable revision
+[`79ff2fb`](https://github.com/bio-ontology-research-group/physiomap/tree/79ff2fb).
+That revision contains the exact
+[`scripts/e2_baseline.py`](scripts/e2_baseline.py) implementation and its
+[human-readable](benchmarks/results/e2_baseline.md) and
+[machine-readable](benchmarks/results/e2_baseline.json) results.
 
 ## Install
 
