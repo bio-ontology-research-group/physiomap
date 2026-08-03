@@ -469,10 +469,12 @@ def assign_systems(pmap: PhysioMap, node_frag: dict[str, str]) -> dict[str, str]
 
 
 def _build_date() -> str:
-    """The date the snapshot was generated (UTC, ISO yyyy-mm-dd) — a build stamp for the viewer."""
-    import datetime
-
-    return datetime.datetime.now(datetime.timezone.utc).date().isoformat()
+    """Return the versioned release date used as the reproducible snapshot stamp."""
+    citation = yaml.safe_load((ROOT / "CITATION.cff").read_text(encoding="utf-8"))
+    released = citation.get("date-released")
+    if released is None:
+        raise ValueError("CITATION.cff must define date-released")
+    return released.isoformat() if hasattr(released, "isoformat") else str(released)
 
 
 def _load_synonyms() -> dict[str, list[str]]:

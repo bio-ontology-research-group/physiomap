@@ -5,6 +5,7 @@ from pathlib import Path
 from web.export_data import (
     BOOTSTRAP_GZIP_LIMIT,
     WEB,
+    _build_date,
     load_exported_web_payload,
     split_web_payload,
     sync_web_payload,
@@ -40,6 +41,10 @@ def _toy_payload() -> dict:
         "synonyms": {}, "scales": ["organism"],
         "stats": {"n_nodes": 1, "n_causal": 1, "big_scc_size": 1},
     }
+
+
+def test_build_date_is_the_versioned_release_date():
+    assert _build_date() == "2026-07-31"
 
 
 def test_sharded_payload_is_deterministic_lossless_and_stale_checked(tmp_path: Path):
